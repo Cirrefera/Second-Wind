@@ -62,7 +62,8 @@ VALUES
 
 // D1-shaped shim over node:sqlite
 const env = {
-  X402_PAYTO_PUBLIC: "0xa395b99E69A77479e3882320bea9bFC6972EEc14",
+  // Synthetic offline-test recipient; never use as a payment destination.
+  X402_PAYTO_PUBLIC: "0x" + "1".repeat(40),
   X402_FACILITATOR_URL: "https://api.cdp.coinbase.com/platform/v2/x402",
   SW_DB: {
     prepare(sql) {

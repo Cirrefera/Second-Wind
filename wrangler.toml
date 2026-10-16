@@ -4,14 +4,10 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "public"
 
 [vars]
-# FIRST PROOF: Base Sepolia + public x402.org facilitator (no auth, valueless
-# test USDC). Promotion to mainnet is a config swap: X402_NETWORK=eip155:8453,
-# X402_FACILITATOR_URL=https://api.cdp.coinbase.com/platform/v2/x402 (CDP JWT
-# secrets). payTo confirmed by Mike 2026-07-10: the Second Wind settlement
-# wallet (already public in every discovery document — no new linkage).
+# Payment recipient is configured outside this public repository.
+# No receiving address is committed here.
 X402_NETWORK = "eip155:84532"
 X402_FACILITATOR_URL = "https://x402.org/facilitator"
-X402_PAYTO_PUBLIC = "0xa395b99E69A77479e3882320bea9bFC6972EEc14"
 
 [[d1_databases]]
 binding = "SW_DB"

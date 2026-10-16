@@ -62,7 +62,8 @@ INSERT INTO edges (from_sku, to_sku, relation, position, note) VALUES
 `);
 
 const env = {
-  X402_PAYTO_PUBLIC: "0xa395b99E69A77479e3882320bea9bFC6972EEc14",
+  // Synthetic offline-test recipient; never use as a payment destination.
+  X402_PAYTO_PUBLIC: "0x" + "1".repeat(40),
   // FIRST PROOF config: Base Sepolia + public x402.org facilitator.
   X402_NETWORK: "eip155:84532",
   X402_FACILITATOR_URL: "https://x402.org/facilitator",
