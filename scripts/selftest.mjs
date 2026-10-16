@@ -62,7 +62,7 @@ VALUES
 
 // D1-shaped shim over node:sqlite
 const env = {
-  X402_PAYTO_PUBLIC: "0xa395b99E69A77479e3882320bea9bFC6972EEc14",
+  X402_PAYTO_PUBLIC: "0x08D7870Ce7Fa3889Fb7475dF52456d053a2b4bcf",
   X402_FACILITATOR_URL: "https://api.cdp.coinbase.com/platform/v2/x402",
   SW_DB: {
     prepare(sql) {

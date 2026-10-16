@@ -25,8 +25,15 @@ export function activeNetwork(env) {
   return NETWORKS[id] || { id, label: id, usdc: "", eip712: {} };
 }
 
-export function activePayTo(env) {
-  return env.X402_PAYTO || env.X402_PAYTO_PUBLIC || "";
+export function activePayTo(env = {}) {
+  const publicAddress = env.X402_PAYTO_PUBLIC?.trim() || "";
+  const legacyAddress = env.X402_PAYTO?.trim() || "";
+  const valid = (address) => /^0x[0-9a-fA-F]{40}$/.test(address) && !/^0x0{40}$/i.test(address);
+  // Never let an old dashboard secret silently override the public recipient.
+  if (publicAddress && !valid(publicAddress)) return "";
+  if (legacyAddress && !valid(legacyAddress)) return "";
+  if (publicAddress && legacyAddress && publicAddress.toLowerCase() !== legacyAddress.toLowerCase()) return "";
+  return publicAddress || legacyAddress;
 }
 
 export function activeFacilitatorUrl(env) {

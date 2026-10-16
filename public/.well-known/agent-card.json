@@ -34,7 +34,7 @@
   "payment": {
     "rail": "x402",
     "x402Version": 2,
-    "network": "eip155:8453",
+    "requirements_url": "https://secondwindai.com/.well-known/x402",
     "asset": "USDC",
     "scheme": "exact",
     "how_to_pay": "https://secondwindai.com/llms.txt"

@@ -62,7 +62,7 @@ INSERT INTO edges (from_sku, to_sku, relation, position, note) VALUES
 `);
 
 const env = {
-  X402_PAYTO_PUBLIC: "0xa395b99E69A77479e3882320bea9bFC6972EEc14",
+  X402_PAYTO_PUBLIC: "0x08D7870Ce7Fa3889Fb7475dF52456d053a2b4bcf",
   // FIRST PROOF config: Base Sepolia + public x402.org facilitator.
   X402_NETWORK: "eip155:84532",
   X402_FACILITATOR_URL: "https://x402.org/facilitator",
@@ -249,6 +249,42 @@ check("bedrock: invoke returns completion via SigV4 fetch", run.ok === true && r
 check("bedrock: request was SigV4-signed", /AWS4-HMAC-SHA256/.test(signedAuth), signedAuth.slice(0, 40));
 const unconfigured = await invokeAgent({}, "A/B", { input: "x" });
 check("bedrock: unconfigured -> 503 (never charge)", unconfigured.ok === false && unconfigured.status === 503);
+
+// Wallet cutover: exercise the real Worker after its middleware cache is warm.
+const configuredCall = (path, overrides) => worker.fetch(
+  new Request(`https://secondwindai.com${path}`), { ...env, ...overrides }, ctx
+);
+const paidPath = "/api/x402/dynamodb-throttle-diagnostic";
+const conflictingWallet = "0x1111111111111111111111111111111111111111";
+for (const [name, overrides] of [
+  ["conflicting", { X402_PAYTO: conflictingWallet }],
+  ["missing", { X402_PAYTO_PUBLIC: "", X402_PAYTO: "" }],
+  ["malformed", { X402_PAYTO_PUBLIC: "not-an-address" }],
+  ["zero", { X402_PAYTO_PUBLIC: "0x" + "0".repeat(40) }],
+]) {
+  const response = await configuredCall(paidPath, overrides);
+  check(`wallet: ${name} configuration blocks cached paid route`, response.status === 503);
+  const proof = await (await configuredCall("/api/proof", overrides)).json();
+  check(`wallet: ${name} configuration is not reported ready`, proof.payment.payTo_configured === false);
+  for (const path of ["/.well-known/x402", "/v2/x402/discovery/resources"]) {
+    const discovery = await (await configuredCall(path, overrides)).json();
+    check(`wallet: ${name} configuration publishes no offers at ${path}`, discovery.items.length === 0);
+  }
+}
+const sameWallet = await configuredCall(paidPath, { X402_PAYTO: env.X402_PAYTO_PUBLIC.toLowerCase() });
+check("wallet: identical dual settings are accepted", sameWallet.status === 402);
+const rotated = await configuredCall(paidPath, { X402_PAYTO_PUBLIC: conflictingWallet });
+const rotatedTerms = decodePaymentRequiredHeader(rotated.headers.get("PAYMENT-REQUIRED"));
+check("wallet: rotation invalidates cached recipient", rotatedTerms.accepts[0].payTo === conflictingWallet);
+const restored = await configuredCall(paidPath, {});
+const restoredTerms = decodePaymentRequiredHeader(restored.headers.get("PAYMENT-REQUIRED"));
+check("wallet: approved recipient is restored without cache delay", restoredTerms.accepts[0].payTo === env.X402_PAYTO_PUBLIC);
+for (const path of ["/.well-known/x402", "/v2/x402/discovery/resources"]) {
+  const discovery = await (await configuredCall(path, {})).json();
+  check(`wallet: discovery matches actual challenge at ${path}`, discovery.items.every(
+    (item) => item.accepts.every((terms) => terms.payTo === restoredTerms.accepts[0].payTo)
+  ));
+}
 
 console.log(failures === 0 ? "\nALL PASS" : `\n${failures} FAILURES`);
 process.exit(failures === 0 ? 0 : 1);

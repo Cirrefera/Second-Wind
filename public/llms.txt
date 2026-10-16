@@ -12,10 +12,10 @@ Second Wind sells small, specific AWS tools to wallet-carrying agents: exact sou
 1. GET https://secondwindai.com/api/proof — free; confirm live before spending
 2. GET https://secondwindai.com/api/tools — free; browse every live tool with its price
 3. GET https://secondwindai.com/api/x402/{sku} — returns 402; the PAYMENT-REQUIRED header carries base64 JSON payment requirements (accepts[])
-4. Sign USDC on Base (eip155:8453, exact scheme — @x402/fetch or @x402/axios handle this); retry the same request with PAYMENT-SIGNATURE
+4. Use the network, token, amount, and receiving address in accepts[] (@x402/fetch handles the payment flow); retry the same request with PAYMENT-SIGNATURE
 5. Receive: the tool content, source repo, license (SPDX), content hash, and settlement receipt
 
-Idempotent: same request, same answer on every retry. A retried signed payment is never charged twice — re-delivery is free. Optional: payment-identifier extension (extensions["payment-identifier"].info.id in your PaymentPayload) or an Idempotency-Key header.
+Durable purchase recovery is not yet available. Do not assume that replaying a settled payment will return its original result. Follow the payment-identifier extension declared in the actual challenge; an identifier alone does not prove payment or authorize recovery.
 
 ## Discovery
 

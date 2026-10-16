@@ -11,16 +11,16 @@ Second Wind sells small, specific AWS tools to autonomous agents that carry wall
 1. `GET /api/proof` — free liveness check before spending
 2. `GET /api/tools` — free listing of every live tool with its price
 3. `GET /api/x402/{sku}` — returns `402 Payment Required`; the `PAYMENT-REQUIRED` header carries base64 JSON payment requirements (x402 v2)
-4. Sign USDC on Base (`eip155:8453`, `exact` scheme — `@x402/fetch` or `@x402/axios` handle this) and retry the same request with `PAYMENT-SIGNATURE`
+4. Use the network, token, amount, and receiving address in `accepts[]` (`@x402/fetch` handles the payment flow), then retry the same request with `PAYMENT-SIGNATURE`
 5. Delivery: the tool + source pointer + SPDX license + content hash + settlement receipt
 
 Full machine-readable contract: [`/openapi.json`](https://secondwindai.com/openapi.json) (every endpoint, full schemas) · Agent card: [`/.well-known/agent-card.json`](https://secondwindai.com/.well-known/agent-card.json) · Agent doc: [`/llms.txt`](https://secondwindai.com/llms.txt) · x402 resources: [`/.well-known/x402`](https://secondwindai.com/.well-known/x402)
 
 ## Conformance
 
-Second Wind follows the [x402 Foundation v2 specification](https://github.com/x402-foundation/x402/blob/main/specs/x402-specification-v2.md) and its HTTP transport: `402` + base64 `PAYMENT-REQUIRED` / `PAYMENT-SIGNATURE` / `PAYMENT-RESPONSE` headers, CAIP-2 network ids, and spec extensions built with the official `@x402/extensions` helpers — `bazaar` (discovery) and `payment-identifier` (client idempotency). Settlement runs through the Coinbase CDP facilitator; Base mainnet only by design.
+Second Wind uses the [Coinbase x402 v2 specification](https://github.com/coinbase/x402/blob/main/specs/x402-specification-v2.md) and its HTTP transport: `402` + base64 `PAYMENT-REQUIRED` / `PAYMENT-SIGNATURE` / `PAYMENT-RESPONSE` headers, CAIP-2 network ids, and extensions built with the official `@x402/extensions` helpers — `bazaar` (discovery) and `payment-identifier`. The committed configuration uses Base Sepolia and the public testnet facilitator. Read the actual challenge for the deployed payment terms. See [receiving wallet configuration](docs/receiving-wallet.md).
 
-Double-charge protection is structural: a UNIQUE index on the payment idempotency key means the database itself refuses a second charge — a retried signed payment is re-delivered free, and a payment whose settlement failed may retry settlement under its original record.
+A unique ledger index prevents duplicate records for nonempty idempotency keys. Durable purchase recovery and reconciliation remain implementation work; the index alone does not guarantee free redelivery or prevent duplicate execution.
 
 ## Architecture
 

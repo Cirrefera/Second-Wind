@@ -426,7 +426,7 @@ export async function buildOpenApi(env, origin = CANONICAL_ORIGIN) {
           in: "header",
           name: "PAYMENT-SIGNATURE",
           description:
-            "x402 v2. First call returns 402 + PAYMENT-REQUIRED header (base64 JSON). Sign USDC on Base (eip155:8453, exact scheme) and retry the same URL with PAYMENT-SIGNATURE.",
+            "x402 v2. First call returns 402 + PAYMENT-REQUIRED header (base64 JSON). Use the network, token, amount, and receiving address in accepts[]; retry the same request with PAYMENT-SIGNATURE.",
         },
       },
     },
@@ -440,8 +440,8 @@ export async function buildOpenApi(env, origin = CANONICAL_ORIGIN) {
  * [PaymentRequirements], lastUpdated, extensions}.
  */
 export async function buildX402Resources(env, origin = CANONICAL_ORIGIN) {
-  const tools = await liveStubs(env);
   const payTo = activePayTo(env);
+  const tools = payTo ? await liveStubs(env) : [];
   const net = activeNetwork(env);
 
   const items = tools.map((stub) => ({

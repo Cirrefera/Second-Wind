@@ -7,6 +7,8 @@
  * buildAcceptEntry, selectAcceptForPayload, payloadNetwork.
  */
 
+import { activePayTo } from "../../src/lib/networks.js";
+
 export const USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bda02913";
 
 export const BASE_NETWORK = {
@@ -22,7 +24,7 @@ export const BASE_NETWORK = {
 };
 
 function canonicalBasePayTo(env) {
-  return env?.X402_PAYTO || env?.X402_PAYTO_PUBLIC || null;
+  return activePayTo(env) || null;
 }
 
 /** Active rails for this env: Base or nothing. */
@@ -59,7 +61,7 @@ export function x402ConfigWarnings(env) {
   if (!env) return [];
   const warnings = [];
   if (!canonicalBasePayTo(env)) {
-    warnings.push({ code: "no_payto", message: "X402_PAYTO_PUBLIC is not set — every paid endpoint will return payment_rail_not_configured." });
+    warnings.push({ code: "no_payto", message: "Receiving wallet is missing, invalid, or conflicts with X402_PAYTO — paid endpoints are disabled." });
   }
   if (!env.X402_FACILITATOR_URL) {
     warnings.push({ code: "no_facilitator", message: "X402_FACILITATOR_URL is not set — payments cannot verify or settle." });

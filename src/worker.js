@@ -103,16 +103,19 @@ function methodForStub(stub) {
  * The payment middleware is rebuilt when the curated index changes; cached
  * per isolate for 60s so route lookups stay cheap without drifting from it.
  */
-const paymentCache = { middleware: null, expires: 0 };
+const paymentCache = { middleware: null, expires: 0, configuration: "", db: null };
 
 async function getPaymentMiddleware(env) {
   const now = Date.now();
-  if (paymentCache.middleware && now < paymentCache.expires) return paymentCache.middleware;
-
   const payTo = activePayTo(env);
   if (!payTo) return null;
 
   const net = activeNetwork(env);
+  const configuration = JSON.stringify([payTo, net.id, activeFacilitatorUrl(env)]);
+  if (paymentCache.middleware && now < paymentCache.expires &&
+      paymentCache.configuration === configuration && paymentCache.db === env.SW_DB) {
+    return paymentCache.middleware;
+  }
   const tools = await liveStubs(env);
   const routes = {};
   for (const stub of tools) {
@@ -127,8 +130,7 @@ async function getPaymentMiddleware(env) {
     }
   }
   if (Object.keys(routes).length === 0) {
-    paymentCache.middleware = "empty";
-    paymentCache.expires = now + 60_000;
+    Object.assign(paymentCache, { middleware: "empty", expires: now + 60_000, configuration, db: env.SW_DB });
     return "empty";
   }
 
@@ -160,9 +162,9 @@ async function getPaymentMiddleware(env) {
   const httpServer = new x402HTTPResourceServer(resourceServer, routes);
   // Default sync: the middleware lazily fetches the facilitator's /supported
   // kinds (with CDP auth) on the first payment-relevant request.
-  paymentCache.middleware = paymentMiddlewareFromHTTPServer(httpServer);
-  paymentCache.expires = now + 60_000;
-  return paymentCache.middleware;
+  const middleware = paymentMiddlewareFromHTTPServer(httpServer);
+  Object.assign(paymentCache, { middleware, expires: now + 60_000, configuration, db: env.SW_DB });
+  return middleware;
 }
 
 function skuFromResourceUrl(url) {
@@ -236,7 +238,7 @@ app.get("/api/proof", async (c) => {
         x402Version: 2,
         network: activeNetwork(c.env).id,
         asset: "USDC",
-        payTo_configured: Boolean(c.env.X402_PAYTO_PUBLIC || c.env.X402_PAYTO),
+        payTo_configured: Boolean(activePayTo(c.env)),
         facilitator_configured: Boolean(c.env.X402_FACILITATOR_URL),
       },
       discovery: {
