@@ -7,8 +7,8 @@ export async function onRequestGet(context) {
   const tools = items.map((i) => ({
     sku: i.sku,
     name: i.name,
-    item_type: i.item_type,
-    service: i.service_slug,
+    kind: i.kind,
+    service: i.service,
     price_usd: i.price_usd,
     summary: i.summary,
     url: `${CANONICAL_ORIGIN}/api/x402/${i.slug}`,

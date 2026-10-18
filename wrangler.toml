@@ -6,7 +6,7 @@ pages_build_output_dir = "public"
 [vars]
 # Payment recipient is configured outside this public repository.
 # No receiving address is committed here.
-X402_NETWORK = "eip155:84532"
+X402_NETWORK = "eip155:8453"
 X402_FACILITATOR_URL = "https://x402.org/facilitator"
 
 [[d1_databases]]

@@ -36,13 +36,29 @@ const specCheck = (name, schema, value) => {
 
 const db = new DatabaseSync(":memory:");
 db.exec(`
-CREATE TABLE catalog_items (
-  sku TEXT PRIMARY KEY, slug TEXT NOT NULL UNIQUE, name TEXT NOT NULL, item_type TEXT NOT NULL,
-  service_slug TEXT NOT NULL, category_slug TEXT NOT NULL, price_usd REAL NOT NULL, summary TEXT NOT NULL,
-  source_repo TEXT NOT NULL DEFAULT '', source_path TEXT NOT NULL DEFAULT '', source_url TEXT NOT NULL DEFAULT '',
-  license_spdx TEXT NOT NULL DEFAULT '', provenance TEXT NOT NULL, content_hash TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'draft', version INTEGER NOT NULL DEFAULT 1, yard_artifact_id TEXT NOT NULL DEFAULT '',
-  created_at TEXT DEFAULT '', updated_at TEXT DEFAULT '', published_at TEXT
+CREATE TABLE items (
+  sku            TEXT PRIMARY KEY,
+  slug           TEXT NOT NULL UNIQUE,
+  name           TEXT NOT NULL,
+  kind           TEXT NOT NULL CHECK (kind IN ('tool','workflow','guide','artifact','agent')),
+  service        TEXT NOT NULL DEFAULT '',
+  summary        TEXT NOT NULL,
+  guidance       TEXT NOT NULL DEFAULT '',
+  price_usd      REAL NOT NULL CHECK (price_usd > 0 AND price_usd <= 1.00),
+  invoke_kind    TEXT NOT NULL DEFAULT 'resolve' CHECK (invoke_kind IN ('resolve','bedrock','r2')),
+  invoke_key     TEXT NOT NULL DEFAULT '',
+  input_schema   TEXT NOT NULL DEFAULT '',
+  input_example  TEXT NOT NULL DEFAULT '',
+  mime_type      TEXT NOT NULL DEFAULT '',
+  source_repo    TEXT NOT NULL DEFAULT '',
+  source_path    TEXT NOT NULL DEFAULT '',
+  source_url     TEXT NOT NULL DEFAULT '',
+  license_spdx   TEXT NOT NULL DEFAULT '',
+  provenance     TEXT NOT NULL DEFAULT '',
+  content_hash   TEXT NOT NULL DEFAULT '',
+  status         TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','live','retired')),
+  version        INTEGER NOT NULL DEFAULT 1,
+  updated_at     TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
 CREATE TABLE payments (
   id TEXT PRIMARY KEY, sku TEXT NOT NULL, price_usd REAL NOT NULL, amount_usdc_micros TEXT NOT NULL,
@@ -53,11 +69,11 @@ CREATE TABLE payments (
 CREATE UNIQUE INDEX idx_payments_idem ON payments(idempotency_key) WHERE idempotency_key != '';
 CREATE TABLE deliveries (id TEXT PRIMARY KEY, payment_id TEXT NOT NULL, sku TEXT NOT NULL, content_hash TEXT NOT NULL, delivered_at TEXT DEFAULT '');
 CREATE TABLE request_log (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, sku TEXT, method TEXT, status INTEGER, ua_class TEXT, created_at TEXT DEFAULT '');
-INSERT INTO catalog_items (sku, slug, name, item_type, service_slug, category_slug, price_usd, summary, source_repo, source_path, source_url, license_spdx, provenance, content_hash, status)
+INSERT INTO items (sku, slug, name, kind, service, summary, guidance, price_usd, source_repo, source_path, source_url, license_spdx, provenance, content_hash, status)
 VALUES
- ('AWS-0571','dynamodb-throttle-diagnostic','dynamodb-throttle-diagnostic','diagnostic','dynamodb','operations/diagnostics',0.15,'ProvisionedThroughputExceededException: switch billing, shard hot keys, backoff with jitter.','awslabs/amazon-dynamodb-tools','','https://github.com/awslabs/amazon-dynamodb-tools','Apache-2.0','upstream','c3aff7883527f5bd','live'),
- ('AWS-0631','cdk-lambda','cdk-lambda','construct','lambda','compute_runtime/serverless',0.05,'CDK L2 constructs for Lambda.','aws/aws-cdk','packages/aws-cdk-lib/aws-lambda','https://github.com/aws/aws-cdk','Apache-2.0','upstream','45904f3ba8fd7f79','live'),
- ('AWS-0602','aws-s3-service-overview','aws-s3-service-overview','tool','s3','storage_data/object-storage',0.05,'held item','awslabs/mcp','src','https://github.com/awslabs/mcp','Apache-2.0','upstream','e773c3cefd69ca8c','draft');
+ ('AWS-0571','dynamodb-throttle-diagnostic','dynamodb-throttle-diagnostic','tool','dynamodb','ProvisionedThroughputExceededException: switch billing, shard hot keys, backoff with jitter.','Paid operational guidance for DynamoDB throttle triage.',0.15,'awslabs/amazon-dynamodb-tools','','https://github.com/awslabs/amazon-dynamodb-tools','Apache-2.0','upstream','c3aff7883527f5bd','live'),
+ ('AWS-0631','cdk-lambda','cdk-lambda','tool','lambda','CDK L2 constructs for Lambda.','Paid CDK Lambda construct guidance.',0.05,'aws/aws-cdk','packages/aws-cdk-lib/aws-lambda','https://github.com/aws/aws-cdk','Apache-2.0','upstream','45904f3ba8fd7f79','live'),
+ ('AWS-0602','aws-s3-service-overview','aws-s3-service-overview','tool','s3','held item','',0.05,'awslabs/mcp','src','https://github.com/awslabs/mcp','Apache-2.0','upstream','e773c3cefd69ca8c','draft');
 `);
 
 // D1-shaped shim over node:sqlite

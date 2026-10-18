@@ -6,25 +6,25 @@
  */
 
 const ITEM_COLS =
-  "sku, slug, name, item_type, service_slug, category_slug, price_usd, summary, source_repo, source_path, source_url, license_spdx, provenance, content_hash, version, updated_at";
+  "sku, slug, name, kind, service, price_usd, summary, guidance, invoke_kind, invoke_key, input_schema, input_example, mime_type, source_repo, source_path, source_url, license_spdx, provenance, content_hash, version, updated_at";
 
 export async function liveItems(env) {
   const { results } = await env.SW_DB.prepare(
-    `SELECT ${ITEM_COLS} FROM catalog_items WHERE status = 'live' ORDER BY item_type, service_slug, sku`
+    `SELECT ${ITEM_COLS} FROM items WHERE status = 'live' ORDER BY kind, service, sku`
   ).all();
   return results || [];
 }
 
 export async function liveItemBySku(env, sku) {
   return await env.SW_DB.prepare(
-    `SELECT ${ITEM_COLS} FROM catalog_items WHERE status = 'live' AND (sku = ?1 OR slug = ?1)`
+    `SELECT ${ITEM_COLS} FROM items WHERE status = 'live' AND (sku = ?1 OR slug = ?1)`
   )
     .bind(sku)
     .first();
 }
 
 export async function countLive(env) {
-  const row = await env.SW_DB.prepare("SELECT COUNT(*) AS n FROM catalog_items WHERE status = 'live'").first();
+  const row = await env.SW_DB.prepare("SELECT COUNT(*) AS n FROM items WHERE status = 'live'").first();
   return row?.n ?? 0;
 }
 

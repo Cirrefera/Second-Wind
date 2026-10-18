@@ -45,9 +45,17 @@ function deliverable(item, receipt) {
   return {
     sku: item.sku,
     name: item.name,
-    item_type: item.item_type,
-    service: item.service_slug,
+    kind: item.kind,
+    service: item.service,
     summary: item.summary,
+    guidance: item.guidance,
+    invoke: {
+      kind: item.invoke_kind,
+      key: item.invoke_key,
+      input_schema: item.input_schema,
+      input_example: item.input_example,
+      mime_type: item.mime_type,
+    },
     source: {
       repo: item.source_repo,
       path: item.source_path,
@@ -69,14 +77,14 @@ export async function onRequestGet(context) {
   }
 
   const product = {
-    kind: item.item_type,
+    kind: item.kind,
     id: item.sku,
     slug: item.slug,
     priceUsd: item.price_usd,
     description: `${item.name} — ${item.summary.slice(0, 140)}`,
     summary: item.summary,
     contentHash: item.content_hash,
-    service: item.service_slug,
+    service: item.service,
   };
   const requirements = buildProductPaymentRequirements(product, request.url, env);
   if (!requirements) {

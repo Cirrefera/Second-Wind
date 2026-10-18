@@ -48,7 +48,7 @@ function componentSchemas() {
       properties: {
         sku: { type: "string" },
         name: { type: "string" },
-        item_type: { type: "string" },
+        kind: { type: "string" },
         service: { type: "string" },
         price_usd: { type: "number" },
         summary: { type: "string" },
@@ -112,9 +112,21 @@ function componentSchemas() {
       properties: {
         sku: { type: "string" },
         name: { type: "string" },
-        item_type: { type: "string" },
+        kind: { type: "string" },
         service: { type: "string" },
         summary: { type: "string" },
+        guidance: { type: "string", description: "The paid tool content — operational guidance delivered only after settlement." },
+        invoke: {
+          type: "object",
+          description: "How to invoke the tool, when the product is executable content.",
+          properties: {
+            kind: { type: "string", enum: ["resolve", "bedrock", "r2"] },
+            key: { type: "string" },
+            input_schema: { type: "string" },
+            input_example: { type: "string" },
+            mime_type: { type: "string" },
+          },
+        },
         source: {
           type: "object",
           properties: {
@@ -255,7 +267,7 @@ export async function buildOpenApi(env, origin = CANONICAL_ORIGIN) {
         operationId: `${item.slug}_get`,
         summary: item.summary.slice(0, 120),
         description: `${item.summary} Session-less x402 paid endpoint — pay once (USDC on Base) and receive the tool. ~$${item.price_usd} USDC.`,
-        tags: ["paid", "x402", item.item_type, item.service_slug],
+        tags: ["paid", "x402", item.kind, item.service],
         "x-price-usd": item.price_usd,
         "x-payment-info": {
           rail: "x402",
@@ -369,8 +381,8 @@ export async function buildX402Resources(env, origin = CANONICAL_ORIGIN) {
     const product = {
       id: item.sku,
       slug: item.slug,
-      kind: item.item_type,
-      service: item.service_slug,
+      kind: item.kind,
+      service: item.service,
       summary: item.summary,
       contentHash: item.content_hash,
       priceUsd: item.price_usd,
@@ -385,8 +397,8 @@ export async function buildX402Resources(env, origin = CANONICAL_ORIGIN) {
       metadata: {
         sku: item.sku,
         slug: item.slug,
-        item_type: item.item_type,
-        service: item.service_slug,
+        kind: item.kind,
+        service: item.service,
         price_usd: item.price_usd,
         summary: item.summary,
       },
