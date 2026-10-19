@@ -76,11 +76,11 @@ export async function executeCode(env, code, language, grant, onProgress, option
   await reportProgress(onProgress, "start", { language: input.language }, callbackTimeout);
   let outcome;
   try {
-    const settings = { loader: env.LOADER, timeout, globalOutbound: null, bindings: {} };
+    const settings = { loader: env.LOADER, timeout, globalOutbound: null, bindings: {}, modules: options.modules || {} };
     const executor = options.executorFactory
       ? await options.executorFactory(settings)
       : new (await import("@cloudflare/codemode")).DynamicWorkerExecutor(settings);
-    const output = await executor.execute(input.code, buildProviders(env, grant), {});
+    const output = await executor.execute(input.code, options.providers || buildProviders(env, grant), {});
     if (!output || typeof output !== "object") {
       throw new Error("invalid_executor_result");
     }

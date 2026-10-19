@@ -1,0 +1,21 @@
+{
+  "observed_at_utc": "2026-10-19",
+  "source": "Live D1 console, second-wind-catalog",
+  "database_id": "db6412e2-4c9d-4b82-a93e-3b9f3708245d",
+  "snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "snapshot_hash_scope": "SHA-256 of canonicalJson(inventory) UTF-8 bytes, using gateway contracts.js",
+  "items": 157,
+  "statuses": {
+    "draft": 155,
+    "live": 1,
+    "retired": 1
+  },
+  "payload_objects": 0,
+  "legacy_hashes": {
+    "different_from_current_guidance": 151,
+    "current_guidance_prefix": 1,
+    "missing": 5
+  },
+  "eligible_for_new_publication": 0,
+  "note": "Eligibility is a release-readiness assessment, not a claim that all prose is worthless. Existing publication state was not changed. Historical hash origins remain unresolved."
+}

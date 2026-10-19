@@ -1,39 +1,31 @@
 # Second Wind
 
-**Agents stall. Second Wind gets them moving.**
+**Pay only for what you need. Prices shown are for the full product.**
 
-Second Wind sells small, specific AWS tools to autonomous agents that carry wallets. Each tool solves one small task — the exact source coordinate plus the operational knowledge to use it, distilled from AWS open-source repositories — priced at **$1.00 USDC or less**, session-less, paid via the [x402 protocol](https://github.com/x402-foundation/x402) with USDC settlement on Base.
+For products marked `pricing_mode: proportional-components`, Second Wind lets your agent test the actual product release in an isolated sandbox before choosing what to purchase. The component menu states each share and its dependencies. You review the selected files and exact amount before authorizing x402 payment.
 
-**Status: pre-launch.** The serving surface is live at **[secondwindai.com](https://secondwindai.com)**; inventory is being curated repo by repo.
+**Availability:** this component trial flow is under integration. Do not assume a product supports it: check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products without component pricing retain their stated fixed-price contract.
 
-## How it works
+## Your interaction
 
-1. `GET /api/proof` — free liveness check before spending
-2. `GET /api/tools` — free listing of every live tool with its price
-3. `GET /api/x402/{sku}` — returns `402 Payment Required`; the `PAYMENT-REQUIRED` header carries base64 JSON payment requirements (x402 v2)
-4. Sign USDC on Base (`eip155:8453`, `exact` scheme — `@x402/fetch` or `@x402/axios` handle this) and retry the same request with `PAYMENT-SIGNATURE`
-5. Delivery: the tool + source pointer + SPDX license + content hash + settlement receipt
+Discover products for free, describe your requirements, and clarify configuration through a bidirectional Cap’n Web session. For component-enabled products, test, select, review, and authorize payment. The purchased package is bound to the selected release and configuration, with a hash for verifying the delivered bytes. Keep private recovery credentials so you can reconnect and retrieve a completed purchase without buying it again.
 
-Full machine-readable contract: [`/openapi.json`](https://secondwindai.com/openapi.json) (every endpoint, full schemas) · Agent card: [`/.well-known/agent-card.json`](https://secondwindai.com/.well-known/agent-card.json) · Agent doc: [`/llms.txt`](https://secondwindai.com/llms.txt) · x402 resources: [`/.well-known/x402`](https://secondwindai.com/.well-known/x402)
+A successful sandbox execution establishes what ran in that sandbox. It does not establish that your application works in a separate AWS environment. Supported delivery languages and runtimes belong to each product’s contract; JavaScript is the current sandbox orchestration language.
 
-## Conformance
+## Interfaces and implementation
 
-Second Wind follows the [x402 Foundation v2 specification](https://github.com/x402-foundation/x402/blob/main/specs/x402-specification-v2.md) and its HTTP transport: `402` + base64 `PAYMENT-REQUIRED` / `PAYMENT-SIGNATURE` / `PAYMENT-RESPONSE` headers, CAIP-2 network ids, and spec extensions built with the official `@x402/extensions` helpers — `bazaar` (discovery) and `payment-identifier` (client idempotency). Settlement runs through the Coinbase CDP facilitator; Base mainnet only by design.
+- [Agent instructions](https://secondwindai.com/llms.txt)
+- [Live catalog](https://secondwindai.com/api/tools)
+- [HTTP API](https://secondwindai.com/openapi.json)
+- [Payment readiness](https://secondwindai.com/api/proof)
+- Cap’n Web: `https://secondwindai.com/capnp`
 
-Double-charge protection is structural: a UNIQUE index on the payment idempotency key means the database itself refuses a second charge — a retried signed payment is re-delivered free, and a payment whose settlement failed may retry settlement under its original record.
+The `secondwind-gateway` Worker hosts the shared product service behind HTTP/x402 and Cap’n Web. Pages forwards application traffic to the gateway. Sandbox execution uses isolated Dynamic Workers through its loader binding. D1 maintains purchase and recovery state.
 
-## Architecture
+## Information handling
 
-Cloudflare-first: Pages Functions serve every endpoint; a dedicated D1 database is the single runtime source of truth — the tools listing, openapi.json, and the x402 discovery documents are all generated from its live rows, never hand-maintained.
+The business event contract records identifiers, stages, selected scope, amounts, and outcomes. It excludes payment signatures, recovery tokens, and private buyer code or callback content. Trial results are stored separately for authenticated trial recovery. Do not include credentials in trial inputs; the sandbox receives no gateway secrets.
 
-## Registry
+## Product contracts
 
-Listed in the **Amazon Bedrock AgentCore Agent Registry** (registry `jaMy0SuApKYYJDTa`, record `vA5tdL2q4L8O`; record predates the Second Wind rename — update pending).
-
-## Provenance & licensing
-
-Tools derive from Apache-2.0 and MIT-0 licensed AWS ecosystem projects. Second Wind describes and links; it does not redistribute. Every delivery carries its source repo, SPDX identifier, and a content hash over exactly what a buyer receives.
-
----
-
-A **Second** family entity. Second Wind operates independently with its own domain, database, and settlement wallet.
+Use each listing’s declared deliverable, license, provenance, supported boundary, and release hash to decide whether it meets your needs. A source link alone is not a software artifact. Only the live catalog establishes what is currently offered.

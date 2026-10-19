@@ -1,3 +1,5 @@
+import {resolveIntent} from './routing.js';
+import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import { dispatchOutbox } from './telemetry.js';
 import { Hono } from "hono";
 import { newWorkersRpcResponse } from "capnweb";
@@ -64,7 +66,7 @@ export function createApp(dependencies = {}) {
   app.use("*",async(c,next)=>{
     if (c.req.method === "OPTIONS") return new Response(null,{status:204,headers:{
       "Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET, POST, HEAD, OPTIONS",
-      "Access-Control-Allow-Headers":"Content-Type, PAYMENT-SIGNATURE, X-Recovery-Token, Authorization, Idempotency-Key",
+      "Access-Control-Allow-Headers":"Content-Type, PAYMENT-SIGNATURE, X-Recovery-Token, X-Trial-Token, Authorization, Idempotency-Key",
       "Access-Control-Expose-Headers":"PAYMENT-REQUIRED, PAYMENT-RESPONSE, X-Content-Hash, X-Recovery-Token, X-Payment-Id, X-Worker-Version",
     }});
     await next();
@@ -112,8 +114,21 @@ export function createApp(dependencies = {}) {
   app.get("/llms.txt",async c=>c.text(await llmsDocument(c.env)));
   app.post("/api/resolve",async c=>{
     const body = await jsonBody(c.req.raw);
-    const matches = await searchCatalog(c.env.SW_DB,body.intent ?? body.query ?? "",body.limit ?? 10);
-    return c.json({matched:matches.length>0,status:matches.length ? "matches" : "no_match",matches});
+    return c.json(await resolveIntent(c.env,body.intent ?? body.query ?? "",body.limit ?? 10));
+  });
+  app.get('/api/products/:sku/components',async c=>c.json(await describeComponents(c.env,c.req.param('sku'))));
+  app.post('/api/trials',async c=>{
+    const b=await jsonBody(c.req.raw);
+    return c.json(await trialProduct(c.env,b.sku,b.config || {},b.input));
+  });
+  app.get('/api/trials/:id',async c=>c.json(await recoverTrial(c.env,c.req.param('id'),c.req.header('X-Trial-Token'))));
+  app.post('/api/trials/:id/selection',async c=>{
+    const b=await jsonBody(c.req.raw);
+    return c.json(await selectTrialComponents(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components));
+  });
+  app.post('/api/trials/:id/accept',async c=>{
+    const b=await jsonBody(c.req.raw);
+    return c.json(await acceptTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components,b.scope_hash));
   });
   app.post("/api/quotes",async c=>{
     const body = await jsonBody(c.req.raw);

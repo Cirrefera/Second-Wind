@@ -7,13 +7,16 @@ export const toolMethod = item => item.invoke_kind === "bedrock" ? "POST" : "GET
 export async function toolsDocument(env) {
   const items = await listCatalog(env.SW_DB);
   return {
-    service:"Second Wind", total_live:items.length,
+    service:"Second Wind",
+    introduction:"Pay only for what you need. Prices shown are for the full product. For component-enabled products, test in an isolated sandbox before choosing which components to purchase.",
+    total_live:items.length,
     payment:{rail:"x402",network:NETWORK,asset:"USDC"},
     tools:items.map(item => ({...item,url:toolUrl(item),method:toolMethod(item)})),
     discovery:{quotes:`${ORIGIN}/api/quotes`,intent:`${ORIGIN}/api/resolve`,
       capnweb:`${ORIGIN}/capnp`,openapi:`${ORIGIN}/openapi.json`},
     toolGuidance:{
-      purchase:"Request a quote or an unpaid tool URL, sign its x402 v2 requirements, and retry with PAYMENT-SIGNATURE.",
+      trial:"Check pricing_mode for proportional-components and read components_url. Complete a sandbox trial, select components, and accept the exact scope before authorizing payment. Products without this mode use their listed fixed-price contract.",
+      purchase:"For component products, acceptance creates the payment record for your selection. For fixed-price products, request a quote. Review the exact amount, sign x402 v2 requirements, and retry with PAYMENT-SIGNATURE.",
       recovery:"Save paymentId and recoveryToken. Redelivery and Cap'n Web recovery require that private token and never initiate settlement.",
       disconnect:"For response-loss recovery, choose a random 32-byte base64url X-Recovery-Token before purchase and retain the quote ID.",
       execution:"Code Mode orchestration explicitly uses JavaScript. An existing artifact's language is determined by its product contract.",
@@ -75,8 +78,13 @@ export async function openApiDocument(env) {
 
 export async function llmsDocument(env) {
   const document = await toolsDocument(env);
-  return `# Second Wind\n\nSpecific AWS products for buying agents. USDC on Base via x402 v2.\n\n`+
-    `## Discover and buy\n\n`+
+  return `# Second Wind\n\nPay only for what you need. Prices shown are for the full product. For component-enabled products, test in an isolated sandbox before choosing which components to purchase. USDC on Base via x402 v2.\n\n`+
+    `## Try and choose\n\n`+
+    `Check /api/tools for pricing_mode: proportional-components. Only those products offer component trials; other listings retain their stated fixed-price contract. Read components_url for shares, dependencies, and the maximum price.\n\n`+
+    `Use select(sku).configure(config).trial({code,language:"javascript"}) over Cap'n Web. Inspect trial.info(), save trial.recovery() privately, then call trial.selectComponents(ids). Inspect selection.info() and call selection.accept(scope_hash) with that exact hash. Acceptance prepares payment requirements; it does not charge you. Authorize payment only after reviewing your selected scope and exact amount.\n\n`+
+    `HTTP equivalents: POST /api/trials with {sku,config,input:{code,language:"javascript"}}; POST /api/trials/{id}/selection with {components}; POST /api/trials/{id}/accept with {components,scope_hash}. Use X-Trial-Token for selection, acceptance, and GET /api/trials/{id} recovery.\n\n`+
+    `Trials execute JavaScript in an isolated Dynamic Worker with scoped product access and no outbound networking. A completed trial means your test code executed successfully; it does not establish that a deployment in your AWS account works. Product language support is stated separately in its contract.\n\n`+
+    `## Fixed-price products and payment\n\n`+
     `1. GET ${ORIGIN}/api/tools and ${ORIGIN}/api/proof.\n`+
     `2. POST ${ORIGIN}/api/quotes with {"sku":"...","config":{...}} to validate configuration and pin a version, hash, and price.\n`+
     `3. Request quote.purchase.url with its declared method; sign PAYMENT-REQUIRED and retry with PAYMENT-SIGNATURE. Keep quote_id unchanged.\n`+

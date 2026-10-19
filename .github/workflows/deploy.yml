@@ -37,6 +37,9 @@ jobs:
       - name: Test the gateway commerce implementation
         working-directory: workers/gateway
         run: npm test
+      - name: Test actual isolated Dynamic Worker runtime
+        working-directory: workers/gateway
+        run: npm run test:dynamic-worker
       - name: Build the application Worker
         working-directory: workers/gateway
         run: npm run build
@@ -50,6 +53,12 @@ jobs:
       - name: Apply transactional business event outbox
         working-directory: workers/gateway
         run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0002_business_outbox.sql
+      - name: Apply component trial schema
+        working-directory: workers/gateway
+        run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0003_component_trials.sql
+      - name: Apply versioned routing manifest schema
+        working-directory: workers/gateway
+        run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0004_routing_manifests.sql
       - name: Deploy the application Worker first
         working-directory: workers/gateway
         # Wrangler preserves existing encrypted secrets. Required secret names

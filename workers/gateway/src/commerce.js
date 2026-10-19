@@ -49,6 +49,7 @@ function publicQuote(row) {
     content_hash: row.content_hash,
     content_hash_scope: snapshot.payload?.hash_scope || "execution-result",
     manifest_hash: snapshot.manifest_hash || null,
+    ...(snapshot.scope ? {scope:snapshot.scope} : {}),
     config: JSON.parse(row.config_json),
     accepts: [requirementsFor(row)],
     issued_at: row.created_at, expires_at: new Date(row.expires_at).toISOString(),
@@ -59,7 +60,11 @@ function publicQuote(row) {
   };
 }
 
-async function insertQuote(env, { sku, version, kind, amount, config, snapshot }) {
+async function insertQuote(env, { sku, version, kind, amount, config, snapshot, acceptanceKey }) {
+  if (acceptanceKey) {
+    const previous=await database(env).prepare('SELECT quote_id FROM component_acceptances WHERE acceptance_key=?1').bind(acceptanceKey).first();
+    if(previous) return publicQuote(await readQuote(env,previous.quote_id,{allowExpired:true}));
+  }
   const rail = paymentConfig(env);
   const configJson = canonicalJson(config);
   const snapshotJson = canonicalJson(snapshot);
@@ -74,13 +79,22 @@ async function insertQuote(env, { sku, version, kind, amount, config, snapshot }
     content_hash: snapshot.payload?.content_hash || "", created_at: now(),
     expires_at: Date.now() + 5 * 60_000,
   };
-  await database(env).prepare(`INSERT INTO commerce_quotes
+  const statement = database(env).prepare(`INSERT INTO commerce_quotes
     (id,sku,version,kind,amount_usdc_micros,asset,network,pay_to,config_json,
      request_hash,snapshot_json,content_hash,created_at,expires_at)
     VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14)`)
     .bind(row.id,row.sku,row.version,row.kind,row.amount_usdc_micros,row.asset,
       row.network,row.pay_to,row.config_json,row.request_hash,row.snapshot_json,
-      row.content_hash,row.created_at,row.expires_at).run();
+      row.content_hash,row.created_at,row.expires_at);
+  if(acceptanceKey) {
+    try {
+      await database(env).batch([statement,database(env).prepare('INSERT INTO component_acceptances(acceptance_key,quote_id) VALUES (?1,?2)').bind(acceptanceKey,row.id)]);
+    } catch(error) {
+      const previous=await database(env).prepare('SELECT quote_id FROM component_acceptances WHERE acceptance_key=?1').bind(acceptanceKey).first();
+      if(previous) return publicQuote(await readQuote(env,previous.quote_id,{allowExpired:true}));
+      throw error;
+    }
+  } else await statement.run();
   return publicQuote(row);
 }
 
@@ -114,6 +128,8 @@ export async function createQuote(env, sku, config = {}) {
     .bind(check.sku).first();
   if (!item) throw new CommerceError("unknown_product", 404);
   if (item.version !== check.version) throw new CommerceError("product_changed", 409);
+  const componentRelease=await db.prepare('SELECT sku FROM component_releases WHERE sku=?1 AND version=?2').bind(item.sku,item.version).first();
+  if(componentRelease) throw new CommerceError('component_selection_required',409,{trial:'/api/trials'});
   const resolved = await resolveCapability(env, item, ORIGIN);
   const object = await db.prepare(`SELECT * FROM payload_objects WHERE sku = ?1 AND version = ?2`)
     .bind(item.sku, item.version).first();
@@ -243,6 +259,7 @@ async function setFailed(db, row, code) {
 function receiptFor(row, quote, settled) {
   return {
     payment_id: row.payment_id, sku: quote.sku, version: quote.version,
+    ...(JSON.parse(quote.snapshot_json).scope ? {scope:JSON.parse(quote.snapshot_json).scope} : {}),
     protocol: "x402", network: quote.network, asset: quote.asset, pay_to: quote.pay_to,
     payer: row.payer, amount_usdc_micros: quote.amount_usdc_micros,
     tx_hash: settled.transaction, settled_at: now(),
@@ -457,6 +474,7 @@ export async function recoverGrant(env,paymentId,recoveryToken) {
   return {
     paymentId,sku:quote.sku,payer:pay.payer,txHash:pay.tx_hash,network:pay.network,
     settledAt:pay.settled_at,receipt,payload:snapshot.payload,
+    ...(snapshot.scope ? {scope:snapshot.scope} : {}),
     allowedActions:quote.kind === "execution" ? ["execute","deliver"] : ["deliver"],
     recoveryToken,
   };
@@ -546,4 +564,25 @@ export async function recoverWithWallet(env,paymentId,{challengeId,signature} = 
   ]);
   if (changes[0].meta.changes !== 1) throw new CommerceError("invalid_recovery_proof",401);
   return {paymentId,recoveryToken:token,recovery:`/api/purchases/${paymentId}/delivery`};
+}
+
+/** Internal final acceptance record. The buyer selected these exact files after trial.
+ * Existing x402 machinery signs/settles this amount; it cannot substitute full price.
+ */
+export async function createScopeQuote(env, {product,scope,files,configuration,acceptanceKey}) {
+  const content = canonicalJson(files);
+  const content_hash = await sha256(content);
+  const rail = paymentConfig(env);
+  if (scope.network !== rail.network || !sameAddress(scope.asset,rail.asset)) {
+    throw new CommerceError('scope_payment_rail_mismatch',409);
+  }
+  const resolved = {ok:true,sku:product.sku,version:product.version,files,scope,
+    content_hash,content_hash_scope:'selected-files-canonical-json'};
+  const payload = {via:'inline',guidance:content,content_hash,
+    size_bytes:new TextEncoder().encode(content).byteLength,
+    mime_type:'application/json',hash_scope:'selected-files-canonical-json'};
+  return insertQuote(env,{sku:product.sku,version:product.version,kind:'product',
+    amount:scope.amount_atomic,config:configuration,acceptanceKey,
+    snapshot:{sku:product.sku,slug:product.slug,version:product.version,
+      invoke_kind:'resolve',payload,resolved,scope,manifest_hash:scope.release_hash}});
 }

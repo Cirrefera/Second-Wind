@@ -1,3 +1,5 @@
+import {resolveIntent} from './routing.js';
+import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import { RpcTarget } from "capnweb";
 import { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
 import { executeCode, reportProgress } from "./execution.js";
@@ -69,6 +71,7 @@ export class GrantCapability extends RpcTarget {
       paymentId: grant.paymentId,
       sku: grant.sku,
       settledAt: grant.settledAt,
+      ...(grant.scope ? {scope:grant.scope} : {}),
       txHash: grant.txHash,
       network: grant.network,
       allowedActions: [...(grant.allowedActions || [])],
@@ -85,10 +88,42 @@ export class ProductService extends RpcTarget {
     this.#env = env;
   }
 
+  components(sku) { return describeComponents(this.#env,sku); }
+  async trial(sku,config,input,callback) {
+    const result=await trialProduct(this.#env,sku,config,input,callback);
+    return new TrialCapability(this.#env,result.trial_id,result.trial_token);
+  }
+  async recoverTrial(id,token) {
+    await recoverTrial(this.#env,id,token);
+    return new TrialCapability(this.#env,id,token);
+  }
   describe(sku) { return describeProduct(this.#env.SW_DB, sku); }
   describeProduct(sku) { return this.describe(sku); }
 
-  search(query, limit) { return searchCatalog(this.#env.SW_DB, query, limit); }
+  search(query, limit) {
+    return typeof query === 'string' ? searchCatalog(this.#env.SW_DB, query, limit) : this.searchIntent(query, limit);
+  }
+  async searchIntent(intent, limit, callbacks) {
+    let result=await resolveIntent(this.#env,intent,limit);
+    if(result.status==='missing_configuration' && callbacks?.clarify) {
+      let timer;
+      try {
+        const answers=await Promise.race([callbacks.clarify(result.clarifications),
+          new Promise(resolve=>{timer=setTimeout(()=>resolve(null),5000);})]);
+        if(answers && typeof answers==='object' && !Array.isArray(answers)) {
+          const patch={};
+          for(const question of result.clarifications) {
+            const field=question.field.startsWith('evidence:')?'evidence':question.field;
+            if(Object.hasOwn(answers,field)) patch[field]=answers[field];
+          }
+          result=await resolveIntent(this.#env,{...(typeof intent==='string'?{goal:intent}:intent),...patch},limit);
+        }
+      } finally {clearTimeout(timer);}
+    }
+    return {...result,candidates:result.matches.map(({routing,compatibility,score,...product})=>({
+      product:new ProductCapability(this.#env,product),compatibility,
+    }))};
+  }
   searchCatalog(query, limit) { return this.search(query, limit); }
 
   configure(sku, config, callbacks) { return clarify(this.#env.SW_DB, sku, config, callbacks); }
@@ -167,6 +202,13 @@ export class ProductCapability extends RpcTarget {
     await this.#unchanged();
     return new ProductCapability(this.#env, this.#product, result.config, result);
   }
+  components() { return describeComponents(this.#env,this.#product.sku); }
+  async trial(input,callback) {
+    await this.#unchanged();
+    if(!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'),{status:400});
+    const result=await trialProduct(this.#env,this.#product.sku,this.#config,input,callback);
+    return new TrialCapability(this.#env,result.trial_id,result.trial_token);
+  }
   configuration() { return this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}; }
   async quote() {
     await this.#unchanged();
@@ -176,5 +218,25 @@ export class ProductCapability extends RpcTarget {
       throw Object.assign(new Error('product_changed'), {status:409});
     }
     return quote;
+  }
+}
+
+export class TrialCapability extends RpcTarget {
+  #env; #id; #token;
+  constructor(env,id,token) {super();this.#env=env;this.#id=id;this.#token=token;}
+  info() {return recoverTrial(this.#env,this.#id,this.#token);}
+  recovery() {return {trial_id:this.#id,trial_token:this.#token};}
+  async selectComponents(ids) {
+    const scope=await selectTrialComponents(this.#env,this.#id,this.#token,ids);
+    return new SelectionCapability(this.#env,this.#id,this.#token,scope);
+  }
+}
+class SelectionCapability extends RpcTarget {
+  #env; #id; #token; #scope;
+  constructor(env,id,token,scope) {super();this.#env=env;this.#id=id;this.#token=token;this.#scope=scope;}
+  info() {return structuredClone(this.#scope);}
+  accept(expectedScopeHash) {
+    if(expectedScopeHash!==this.#scope.scope_hash) throw Object.assign(new Error('selection_acceptance_mismatch'),{status:409});
+    return acceptTrialSelection(this.#env,this.#id,this.#token,this.#scope.selected_components,expectedScopeHash);
   }
 }

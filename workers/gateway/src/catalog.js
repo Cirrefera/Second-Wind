@@ -4,7 +4,8 @@ const CATALOG_COLUMNS = `i.sku, i.slug, i.name, i.kind, i.service, i.summary, i.
   i.invoke_kind, i.input_schema, i.input_example, i.mime_type, i.source_repo,
   i.source_path, i.source_url, i.license_spdx, i.provenance, i.version, i.updated_at,
   i.guidance AS _guidance, po.id AS _payload_id, po.content_hash AS _payload_hash,
-  po.mime_type AS _payload_mime, po.size_bytes AS _payload_size`;
+  po.mime_type AS _payload_mime, po.size_bytes AS _payload_size,
+  EXISTS(SELECT 1 FROM component_releases cr WHERE cr.sku=i.sku AND cr.version=i.version) AS _component_pricing`;
 const CATALOG_SOURCE = `FROM items i LEFT JOIN payload_objects po
   ON po.sku = i.sku AND po.version = i.version`;
 const validators = new Map();
@@ -26,7 +27,13 @@ async function publicProduct(row) {
   if (!Number.isSafeInteger(amount) || amount <= 0 || amount > 10_000_000) {
     throw Object.assign(new Error("invalid_catalog_price"), { status: 503 });
   }
-  const { _guidance, _payload_id, _payload_hash, _payload_mime, _payload_size, ...product } = row;
+  const { _guidance, _payload_id, _payload_hash, _payload_mime, _payload_size, _component_pricing, ...product } = row;
+  if (_component_pricing) {
+    product.price_role='maximum';
+    product.pricing_mode='proportional-components';
+    product.components_url=`/api/products/${encodeURIComponent(product.sku)}/components`;
+    product.trial_url='/api/trials';
+  }
   if (_payload_id) {
     if (typeof _payload_hash !== "string" || !/^[a-f0-9]{64}$/i.test(_payload_hash)) {
       throw Object.assign(new Error("invalid_catalog_payload_hash"), { status: 503 });

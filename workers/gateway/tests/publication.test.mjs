@@ -2,6 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validatePublication,canonicalService} from '../src/publication.js';
 import {sha256,canonicalJson} from '../src/contracts.js';
+test('component publication verifies actual bytes even when supplied review hashes match',async()=>{
+ const m={schema_version:'1',sku:'A',slug:'a',version:1,product_kind:'artifact-product',release_ref:'release:1',trial_adapter:'javascript-isolate',
+ pricing:{mode:'proportional-components',max_amount_atomic:'1000000',asset:'USDC',network:'eip155:8453'},
+ components:[{id:'core',name:'Core',share_bps:10000,requires:[],files:[{path:'index.js',content:'changed',sha256:await sha256('original'),size_bytes:8,mime_type:'text/javascript'}]}]};
+ const h=await sha256(canonicalJson(m));
+ const r=await validatePublication({...item,kind:'artifact'},m,{component_payloads_verified_hash:h,sandbox_trial_verified_hash:h});
+ assert.ok(r.blockers.includes('component_file_hash_mismatch'));
+ assert.ok(r.blockers.includes('component_file_size_mismatch'));
+ delete m.components[0].files[0].content;
+ assert.ok((await validatePublication(item,m)).blockers.includes('component_file_bytes_missing'));
+});
 const item={sku:'A',slug:'a',name:'A',summary:'Operational guidance',price_usd:1,kind:'guide',service:'lambda',version:1,status:'draft',guidance:'A reviewed operational procedure',license_spdx:'MIT',provenance:'synthesized'};
 test('prose masquerading as an artifact is blocked without changing legacy hashes',async()=>{
  const input={...item,kind:'artifact',content_hash:'historical'};

@@ -94,7 +94,7 @@ export async function prepareComponentSelection(release, selectedIds, configurat
   const ids = [...selectedIds].sort();
   const amount = ids.reduce((sum,id) => sum + prices.get(id), 0n);
   const files = new Map();
-  for (const id of ids) for (const file of byId.get(id).files) files.set(file.path,file);
+  for (const id of ids) for (const file of byId.get(id).files) files.set(file.path,{path:file.path,sha256:file.sha256,size_bytes:file.size_bytes,mime_type:file.mime_type});
   const scope = {schema_version:'1',sku:release.sku,version:release.version,
     release_ref:release.release_ref,release_hash,
     configuration_hash:await sha256(canonicalJson(configuration)),

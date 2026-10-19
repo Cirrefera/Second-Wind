@@ -1,7 +1,7 @@
 import {canonicalJson,sha256} from './contracts.js';
 import {componentMenu} from './scope.js';
 
-export const VALIDATOR_VERSION = '2026-10-19.2';
+export const VALIDATOR_VERSION = '2026-10-19.3';
 export const SERVICE_ALIASES = Object.freeze({'api-gateway':'apigateway','step-functions':'states'});
 export const canonicalService = value => SERVICE_ALIASES[value] || value;
 const kinds = new Set(['guidance-product','artifact-product','executable-product','bundle']);
@@ -40,12 +40,23 @@ export async function validatePublication(item, manifest, evidence = {}) {
     if (manifest.pricing?.mode === 'proportional-components') {
       try {
         const menu = await componentMenu(manifest);
+        require(manifest.trial_adapter === 'javascript-isolate','trial_adapter_unavailable');
+        for (const component of manifest.components) for (const file of component.files) {
+          require(typeof file.content === 'string','component_file_bytes_missing');
+          if (typeof file.content === 'string') {
+            require(await sha256(file.content) === file.sha256,'component_file_hash_mismatch');
+            require(new TextEncoder().encode(file.content).byteLength === file.size_bytes,'component_file_size_mismatch');
+          }
+        }
         require(menu.max_amount_atomic === String(Math.round(item.price_usd * 1_000_000)), 'listed_maximum_mismatch');
         require(evidence.component_payloads_verified_hash === await sha256(canonicalJson(manifest)), 'component_payloads_unverified');
         require(evidence.sandbox_trial_verified_hash === await sha256(canonicalJson(manifest)), 'component_trial_unverified');
       } catch (error) { require(false, error.code || 'component_release_invalid'); }
     }
     const kind = manifest.product_kind;
+    require(!(item.kind === 'artifact' && kind !== 'artifact-product') &&
+      !(item.kind === 'guide' && kind !== 'guidance-product') &&
+      !(item.sku.startsWith('BUN-') && kind !== 'bundle'),'advertised_kind_mismatch');
     if (kind === 'guidance-product') {
       require(Boolean(item.guidance?.trim()),'guidance_missing');
       require(manifest.hash_scope === 'guidance-utf8' && manifest.content_hash === guidance_hash,'guidance_hash_mismatch');
