@@ -1,0 +1,35 @@
+{
+  "sku": "AWS-0568",
+  "status": "draft",
+  "release_ref": "sha256:38fa87168487865294e819f9a16168b7dc95e7f54bfbc3681d568f93f7b03577",
+  "content_hash": "38fa87168487865294e819f9a16168b7dc95e7f54bfbc3681d568f93f7b03577",
+  "hash_scope": "exact UTF-8 files.manifest.json bytes including final newline",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Configurable API plan with selected-feature isolation, explicit activation dependency and verification requests.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "required_files": [
+      "plan.mjs",
+      "config.schema.json",
+      "README.md"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "adapters": [
+      "javascript"
+    ]
+  },
+  "publication_blockers": [
+    "component_price_allocation_pending",
+    "immutable_delivery_store_pending",
+    "trial_fulfillment_integration_pending",
+    "publication_review_pending"
+  ],
+  "validation": {
+    "service_model": "passed",
+    "aws_deployment": "not_performed"
+  }
+}
