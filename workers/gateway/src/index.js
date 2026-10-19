@@ -1,3 +1,4 @@
+import { dispatchOutbox } from './telemetry.js';
 import { Hono } from "hono";
 import { newWorkersRpcResponse } from "capnweb";
 import { decodePaymentSignatureHeader, encodePaymentRequiredHeader, encodePaymentResponseHeader } from "@x402/core/http";
@@ -208,4 +209,10 @@ export function createApp(dependencies = {}) {
   return app;
 }
 
-export default createApp();
+const app = createApp();
+export default {
+  fetch: app.fetch,
+  async scheduled(_controller, env) {
+    await dispatchOutbox(env);
+  },
+};

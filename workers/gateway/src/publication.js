@@ -1,6 +1,6 @@
 import {canonicalJson,sha256} from './contracts.js';
 
-export const VALIDATOR_VERSION = '2026-10-19.1';
+export const VALIDATOR_VERSION = '2026-10-19.2';
 export const SERVICE_ALIASES = Object.freeze({'api-gateway':'apigateway','step-functions':'states'});
 export const canonicalService = value => SERVICE_ALIASES[value] || value;
 const kinds = new Set(['guidance-product','artifact-product','executable-product','bundle']);
@@ -30,6 +30,9 @@ export async function validatePublication(item, manifest, evidence = {}) {
     require(Boolean(manifest.mime_type),'mime_type_missing');
     require(Boolean(manifest.delivery_contract) && Boolean(manifest.validation_contract),'contracts_missing');
     require(evidence.contract_review_hash === await sha256(canonicalJson(manifest)),'advertised_contract_unreviewed');
+    // Original contribution is a reviewed product claim, not an automatic plagiarism verdict.
+    require(typeof manifest.original_contribution === 'string' && manifest.original_contribution.trim().length > 0,'original_contribution_missing');
+    require(evidence.product_review_hash === await sha256(canonicalJson(manifest)),'product_contribution_unreviewed');
     require(Boolean(manifest.origin) && Boolean(manifest.license) && evidence.license_verified === true,'license_or_origin_unverified');
     require(evidence.purchase_url_verified === true,'purchase_url_unverified');
     require(evidence.pre_settlement_ready === true,'pre_settlement_preparation_unverified');

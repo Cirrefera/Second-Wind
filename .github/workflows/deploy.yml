@@ -47,6 +47,9 @@ jobs:
         # This exact idempotent file extends the existing live items/payments
         # database. Never run the historical root migration on production.
         run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0001_commerce_repair.sql
+      - name: Apply transactional business event outbox
+        working-directory: workers/gateway
+        run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0002_business_outbox.sql
       - name: Deploy the application Worker first
         working-directory: workers/gateway
         # Wrangler preserves existing encrypted secrets. Required secret names

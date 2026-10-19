@@ -10,10 +10,15 @@ test('prose masquerading as an artifact is blocked without changing legacy hashe
 });
 test('a guidance release needs exact immutable bytes, verified license and reviewed contract',async()=>{
  const hash=await sha256(item.guidance);
- const m={schema_version:'1',sku:'A',slug:'a',version:1,product_kind:'guidance-product',service:'lambda',release_ref:'release:1',content_hash:hash,hash_scope:'guidance-utf8',mime_type:'text/markdown',delivery_contract:{type:'guidance'},validation_contract:{type:'reviewed'},origin:'Second Wind',license:'MIT',language_policy:{mode:'not-applicable'},tags:['retry-safety'],supported_boundary:'operational guidance'};
- const e={service_verified:true,contract_review_hash:await sha256(canonicalJson(m)),license_verified:true,purchase_url_verified:true,pre_settlement_ready:true,guidance_review_hash:hash,immutable_guidance_hash:hash};
+ const m={schema_version:'1',sku:'A',slug:'a',version:1,product_kind:'guidance-product',service:'lambda',release_ref:'release:1',content_hash:hash,hash_scope:'guidance-utf8',mime_type:'text/markdown',delivery_contract:{type:'guidance'},validation_contract:{type:'reviewed'},origin:'Second Wind',original_contribution:'An original operational procedure with explicit verification and recovery steps.',license:'MIT',language_policy:{mode:'not-applicable'},tags:['retry-safety'],supported_boundary:'operational guidance'};
+ const e={product_review_hash:await sha256(canonicalJson(m)),service_verified:true,contract_review_hash:await sha256(canonicalJson(m)),license_verified:true,purchase_url_verified:true,pre_settlement_ready:true,guidance_review_hash:hash,immutable_guidance_hash:hash};
  assert.equal((await validatePublication(item,m,e)).eligibility,'eligible');
  assert.equal((await validatePublication({...item,guidance:'changed'},m,e)).eligibility,'blocked');
  assert.equal((await validatePublication(item,m,{...e,license_verified:false})).eligibility,'blocked');
+ const missing={...m}; delete missing.original_contribution;
+ assert.ok((await validatePublication(item,missing,e)).blockers.includes('original_contribution_missing'));
+ assert.ok((await validatePublication(item,m,{...e,product_review_hash:undefined})).blockers.includes('product_contribution_unreviewed'));
+ const revised={...m,original_contribution:'Changed product promise'};
+ assert.ok((await validatePublication(item,revised,{...e,contract_review_hash:await sha256(canonicalJson(revised))})).blockers.includes('product_contribution_unreviewed'));
  assert.equal(canonicalService('api-gateway'),'apigateway');assert.equal(canonicalService('step-functions'),'states');
 });

@@ -122,3 +122,35 @@ Remaining work includes versioned manifest persistence, structured compatible
 candidate search, full journey telemetry/outbox integration, live resource
 verification, and production acceptance. These additions do not claim those
 pieces are implemented.
+
+### Durable commerce telemetry
+
+Migration `0002_business_outbox.sql` adds transactional triggers for quote creation,
+settlement start/pending/success/failure, receipt issuance and entitlement activation.
+No historical events are backfilled. Only allowlisted identifiers, release hashes,
+exact atomic amounts and network leave D1; payment signatures, recovery credentials,
+configuration and buyer content are excluded.
+
+The gateway scheduled handler sends up to 20 pending events per minute to the
+existing `second_wind_events` stream (`d135ad1c9f9246ae945be1d1b8277ddc`).
+The live stream was inspected on 2026-10-19: `payload` is JSON, not a string;
+`occurred_ts` is a timestamp. Retries retain the same event ID. Least-attempted
+rows are dispatched first so malformed rows cannot permanently block fresh work.
+Ingestion acknowledgements mark `sent_at`; they do not prove sink delivery.
+Concurrent dispatch or a crash before acknowledgement may resend an event.
+Consumers must deduplicate by `event_id` before counting business outcomes.
+
+Existing pipeline `secondwind_telemetry` (`c36bc1cd21814d3091f84329257b3c09`)
+passes the complete envelope to `all_events_sink`. That is the compatible raw
+landing table. Its specialized legacy projections use obsolete event names and
+price fields; do not use them to report the current commerce contract. In
+particular, the old receipt projection does not carry exact atomic prices.
+Replacement projections need a versioned SQL rollout; the existing pipeline SQL
+is immutable. Do not delete the existing raw history to change projections.
+
+Deployment applies 0002 before enabling the binding and cron. Acceptance requires
+an unfunded production quote, its matching D1 outbox row, ingestion acknowledgement,
+and the same event ID in the raw Iceberg table. Monitor pending count, oldest
+pending timestamp, attempts and last_error in D1, and failed events in Pipelines.
+This implements core commerce transitions, not the full correlated Cap'n Web
+journey. Production sink verification remains required before claiming it live.
