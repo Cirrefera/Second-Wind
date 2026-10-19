@@ -4,7 +4,10 @@ import {listCatalog} from './catalog.js';
 import {readCandidateAlignment} from './clef.js';
 
 export const ROUTING_VERSION='1';
+// Provisional local policy; this is not a calibrated confidence guarantee.
+export const CLEF_ROUTING_MIN_CONFIDENCE=0.5;
 const dimensions=['aliases','tags','taxonomy_ids','problem_family_ids','operations','environments','desired_outcomes','input_kinds','failure_signatures','languages','runtimes','required_evidence','exclusions'];
+const positiveDimensions=dimensions.filter(field=>field!=='required_evidence'&&field!=='exclusions');
 const constraints={operation:'operations',environment:'environments',desired_outcome:'desired_outcomes',input_kind:'input_kinds',failure_signature:'failure_signatures',target_language:'languages',target_runtime:'runtimes',problem_family:'problem_family_ids',taxonomy_id:'taxonomy_ids'};
 const token=/^[a-z0-9]+(?:[._:+/-][a-z0-9]+)*$/;
 const fail=code=>{throw new CommerceError(code,400);};
@@ -70,33 +73,50 @@ export async function resolveIntent(env,input,limit=10) {
   }
   const snapshot_ref='sha256:'+await sha256(canonicalJson(manifests.map(x=>[x.m.sku,x.m.version,x.hash])));
   const words=(intent.goal||'').toLowerCase().match(/[a-z0-9]+/g)||[];
-  const candidates=[];
+  const candidates=[],eligible=[];
   for(const entry of manifests) {
     const {m,product}=entry;
-    const identity=intent.sku||intent.slug||intent.alias;
-    if(identity&&![m.sku,m.slug,...m.aliases].includes(identity)) continue;
+    const identity=Boolean(intent.sku||intent.slug||intent.alias);
+    if((intent.sku&&intent.sku!==m.sku)||(intent.slug&&intent.slug!==m.slug)
+      ||(intent.alias&&!m.aliases.includes(intent.alias))) continue;
     const comparison=evaluateCompatibility(m,intent);
     if(comparison.conflicts.length) continue;
-    const text=[m.route_summary,m.slug,...m.aliases,...m.tags,...m.desired_outcomes,...m.failure_signatures].join(' ').toLowerCase();
+    const text=new Set([m.route_summary,m.slug,m.service,...positiveDimensions.flatMap(field=>m[field])]
+      .join(' ').toLowerCase().match(/[a-z0-9]+/g)||[]);
     const meaningful=words.filter(w=>w.length>2&&!['the','this','that','and','for','with','want','make','need','aws','help','product'].includes(w));
-    const score=identity?1000:new Set(meaningful.filter(w=>text.includes(w))).size;
+    const score=identity?1000:new Set(meaningful.filter(w=>text.has(w))).size;
     const structured=Object.keys(intent).some(k=>k==='service'||k==='product_kind'||Object.hasOwn(constraints,k));
+    const candidate={...entry,score,comparison};
+    if(identity||meaningful.length||structured) eligible.push(candidate);
     if(!identity && ((meaningful.length && !score) || (!meaningful.length && !structured))) continue;
-    candidates.push({...entry,score,comparison});
+    candidates.push(candidate);
   }
-  candidates.sort((a,b)=>b.score-a.score||a.m.sku.localeCompare(b.m.sku));
-  const compatible=candidates.filter(x=>x.comparison.compatible);
-  const selected=(compatible.length?compatible:candidates).slice(0,limit);
-  const status=!candidates.length?'no_match':!compatible.length?'missing_configuration':compatible.length===1?'match':'multiple_candidates';
+  const order=(a,b)=>b.score-a.score||a.m.sku.localeCompare(b.m.sku);
+  candidates.sort(order);eligible.sort(order);
+  let compatible=candidates.filter(x=>x.comparison.compatible);
+  let ranked=compatible.length?compatible:candidates,alignment;
+  // Read at most 20 candidates without hard conflicts before lexical pruning
+  // and the result limit. Missing configuration still blocks a complete match.
+  if(env.CLEF_ROUTING_ENABLED==='true'&&eligible.length) {
+    const pool=eligible.slice(0,20);
+    try {
+      alignment=await readCandidateAlignment(env.AI,intent,pool.map(x=>x.m),snapshot_ref);
+      const reading=alignment.readings.candidate;
+      const chosen=reading.confidence>=CLEF_ROUTING_MIN_CONFIDENCE
+        ?pool.find((entry,index)=>reading.choice===`candidate_${index}`):undefined;
+      if(chosen) {
+        compatible=chosen.comparison.compatible?[chosen,...compatible.filter(entry=>entry!==chosen)]:[];
+        ranked=chosen.comparison.compatible?compatible:[chosen];
+      }
+    } catch { alignment={status:'unavailable'}; }
+  }
+  const selected=ranked.slice(0,limit);
+  const status=!ranked.length?'no_match':!compatible.length?'missing_configuration':compatible.length===1?'match':'multiple_candidates';
   const result={status,matched:compatible.length>0,snapshot_ref,compatibility_scope:'declared structured requirements',matches:selected.map(({product,m,comparison,score})=>({...product,routing:m,compatibility:comparison,score})),clarifications:[]};
   if(status==='missing_configuration') {
     const missing=[...new Set(selected.flatMap(x=>x.comparison.missing))];
     result.clarifications=missing.map(field=>({field,question:field==='target_language'?'What programming language do you want the product delivered in?':`Please supply ${field}.`}));
   }
-  // Optional reading annotates compatible candidates; it never changes eligibility.
-  if(env.CLEF_ROUTING_ENABLED==='true'&&compatible.length>1&&compatible.length<=20) {
-    try { result.alignment=await readCandidateAlignment(env.AI,intent,compatible.map(x=>x.m),snapshot_ref); }
-    catch { result.alignment={status:'unavailable'}; }
-  }
+  if(alignment) result.alignment=alignment;
   return result;
 }

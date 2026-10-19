@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {prepare} from '../../../products/agent-state-dynamodb-manifest/plan.mjs';
+import '../../../products/agent-state-dynamodb-manifest/scripts/plan.test.mjs';
 const optional=['status-index','expiry','recovery','change-stream'];
 test('DynamoDB package preserves the boundary of every component combination',()=>{
  for(let mask=0;mask<16;mask++) {

@@ -4,10 +4,12 @@
   "service_api_version": "2012-08-10",
   "component_combinations": 16,
   "validated_operation_inputs": 80,
+  "validated_partial_response_shapes": 32,
   "result": "passed",
   "source_hashes": {
-    "plan.mjs": "f84e62719e0f4435ea5bed86700d32d0a10844bf6395df1e49508fc0430ef3fa",
-    "config.schema.json": "8adbbee4a0ca6ec8614c6f77e44dbdae7706c1eebb1073a6d2f5e00a31ae8e00"
+    "plan.mjs": "a53715080c2a42d2394160ef4db961c4f3da4d8f35108f7c63840870caa58941",
+    "config.schema.json": "8adbbee4a0ca6ec8614c6f77e44dbdae7706c1eebb1073a6d2f5e00a31ae8e00",
+    "scripts/validate-aws.py": "8b2bed7081bc28783ed98867a2f6ffa3986c58e69a759d743bbd6d8309f2e6c4"
   },
-  "scope": "AWS SDK parameter shape validation; no AWS deployment or service calls performed"
+  "scope": "AWS SDK input and partial output shape validation only; no response matcher, AWS deployment or service calls performed"
 }

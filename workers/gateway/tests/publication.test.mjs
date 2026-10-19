@@ -33,3 +33,45 @@ test('a guidance release needs exact immutable bytes, verified license and revie
  assert.ok((await validatePublication(item,revised,{...e,contract_review_hash:await sha256(canonicalJson(revised))})).blockers.includes('product_contribution_unreviewed'));
  assert.equal(canonicalService('api-gateway'),'apigateway');assert.equal(canonicalService('step-functions'),'states');
 });
+
+async function reviewedGuidance(itemPatch={},manifestPatch={}) {
+ const candidate={...item,...itemPatch},hash=await sha256(candidate.guidance);
+ const manifest={schema_version:'1',sku:candidate.sku,slug:candidate.slug,version:candidate.version,
+  product_kind:'guidance-product',service:'lambda',release_ref:'release:1',content_hash:hash,
+  hash_scope:'guidance-utf8',mime_type:'text/markdown',delivery_contract:{type:'guidance'},
+  validation_contract:{type:'reviewed'},origin:'Second Wind',original_contribution:'An original reviewed operational procedure.',
+  license:'MIT',language_policy:{mode:'not-applicable'},tags:['retry-safety'],supported_boundary:'operational guidance',...manifestPatch};
+ const review=await sha256(canonicalJson(manifest));
+ const evidence={product_review_hash:review,service_verified:true,contract_review_hash:review,
+  license_verified:true,purchase_url_verified:true,pre_settlement_ready:true,guidance_review_hash:hash,
+  immutable_guidance_hash:hash,language_adapters_verified:true};
+ return validatePublication(candidate,manifest,evidence);
+}
+
+test('review hashes cannot approve a missing SKU or invalid product version',async()=>{
+ assert.equal((await reviewedGuidance()).eligibility,'eligible');
+ for(const [patch,blocker] of [[{sku:''},'sku_missing'],[{sku:undefined},'sku_missing'],[{version:0},'version_invalid'],[{version:1.5},'version_invalid']]) {
+  const result=await reviewedGuidance(patch);
+  assert.equal(result.eligibility,'blocked');
+  assert.ok(result.blockers.includes(blocker),blocker);
+ }
+});
+
+test('review hashes cannot approve blank or malformed required release metadata',async()=>{
+ const cases=[
+  [{release_ref:' '},'immutable_release_missing'],
+  [{mime_type:{}},'mime_type_missing'],
+  [{delivery_contract:{}},'contracts_missing'],
+  [{validation_contract:[]},'contracts_missing'],
+  [{origin:true},'license_or_origin_unverified'],
+  [{license:[]},'license_or_origin_unverified'],
+  [{language_policy:{mode:'configured',adapters:[''],explicit_selection:true}},'language_adapters_missing'],
+  [{tags:['']},'routing_contract_missing'],
+  [{supported_boundary:true},'routing_contract_missing'],
+ ];
+ for(const [patch,blocker] of cases) {
+  const result=await reviewedGuidance({},patch);
+  assert.equal(result.eligibility,'blocked',JSON.stringify(patch));
+  assert.ok(result.blockers.includes(blocker),blocker);
+ }
+});

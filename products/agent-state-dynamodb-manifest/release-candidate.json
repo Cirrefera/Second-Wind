@@ -1,8 +1,8 @@
 {
   "sku": "AWS-0568",
   "status": "draft",
-  "release_ref": "sha256:38fa87168487865294e819f9a16168b7dc95e7f54bfbc3681d568f93f7b03577",
-  "content_hash": "38fa87168487865294e819f9a16168b7dc95e7f54bfbc3681d568f93f7b03577",
+  "release_ref": "sha256:c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
+  "content_hash": "c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
   "hash_scope": "exact UTF-8 files.manifest.json bytes including final newline",
   "origin": "Second Wind",
   "license": "Apache-2.0",
@@ -17,7 +17,7 @@
   },
   "language_policy": {
     "mode": "configured",
-    "explicit_selection": true,
+    "explicit_selection": false,
     "adapters": [
       "javascript"
     ]
@@ -26,7 +26,9 @@
     "component_price_allocation_pending",
     "immutable_delivery_store_pending",
     "trial_fulfillment_integration_pending",
-    "publication_review_pending"
+    "publication_review_pending",
+    "catalog_contract_and_provenance_review_pending",
+    "explicit_language_selection_integration_pending"
   ],
   "validation": {
     "service_model": "passed",
