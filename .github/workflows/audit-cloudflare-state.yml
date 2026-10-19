@@ -64,6 +64,64 @@ jobs:
           q "TELEMETRY_TABLES" "SELECT type,name,sql FROM sqlite_schema WHERE lower(name) LIKE '%basin%' OR lower(name) LIKE '%event%' OR lower(name) LIKE '%telemetry%' OR lower(name) LIKE '%session%' ORDER BY type,name;"
           q "ITEM_FTS" "SELECT type,name,sql FROM sqlite_schema WHERE lower(name) LIKE '%fts%' ORDER BY type,name;"
 
+      - name: Payload integrity without exposing paid content
+        working-directory: workers/gateway
+        run: |
+          set -euo pipefail
+          W=./node_modules/.bin/wrangler
+          "$W" d1 execute second-wind-catalog --remote --json --command "SELECT sku,slug,status,kind,service,invoke_kind,guidance,content_hash,input_schema,input_example,mime_type,source_repo,source_path,source_url,license_spdx,provenance,version FROM items ORDER BY sku;" > /tmp/items-private.json
+          node <<'NODE'
+          const fs = require('fs');
+          const crypto = require('crypto');
+          const raw = JSON.parse(fs.readFileSync('/tmp/items-private.json','utf8'));
+          const rows = raw[0]?.results || [];
+          const metrics = rows.map(r => {
+            const text = String(r.guidance || '');
+            const actual = crypto.createHash('sha256').update(Buffer.from(text,'utf8')).digest('hex');
+            const words = (text.trim().match(/\S+/g)||[]).length;
+            return {
+              sku:r.sku, slug:r.slug, status:r.status, kind:r.kind, service:r.service,
+              invoke_kind:r.invoke_kind, version:r.version,
+              chars:text.length, bytes:Buffer.byteLength(text,'utf8'), words,
+              lines:text ? text.split(/\r?\n/).length : 0,
+              code_fences:(text.match(/```/g)||[]).length,
+              has_wire:/\bwire\b|implementation|install|configure/i.test(text),
+              has_gotcha:/gotcha|caveat|failure|avoid|warning/i.test(text),
+              has_input_schema:Boolean(r.input_schema),
+              has_input_example:Boolean(r.input_example),
+              has_mime:Boolean(r.mime_type),
+              source_complete:Boolean(r.source_repo && r.source_url && r.license_spdx && r.provenance),
+              stored_hash:Boolean(r.content_hash) ? String(r.content_hash).toLowerCase() : '',
+              actual_hash:actual,
+              hash_matches:Boolean(r.content_hash) && String(r.content_hash).toLowerCase() === actual
+            };
+          });
+          const sorted=a=>[...a].sort((x,y)=>x-y);
+          const median=a=>{const b=sorted(a);return b.length?b[Math.floor(b.length/2)]:0};
+          const summary={
+            rows:metrics.length,
+            hashes:{matches:metrics.filter(x=>x.hash_matches).length,mismatches:metrics.filter(x=>x.stored_hash && !x.hash_matches).length,missing:metrics.filter(x=>!x.stored_hash).length},
+            words:{min:Math.min(...metrics.map(x=>x.words)),median:median(metrics.map(x=>x.words)),max:Math.max(...metrics.map(x=>x.words))},
+            structural:{
+              with_code_fences:metrics.filter(x=>x.code_fences>=2).length,
+              with_input_schema:metrics.filter(x=>x.has_input_schema).length,
+              with_input_example:metrics.filter(x=>x.has_input_example).length,
+              with_mime:metrics.filter(x=>x.has_mime).length,
+              source_complete:metrics.filter(x=>x.source_complete).length
+            },
+            artifact_rows:{
+              total:metrics.filter(x=>x.kind==='artifact').length,
+              with_code_fences:metrics.filter(x=>x.kind==='artifact'&&x.code_fences>=2).length,
+              with_input_schema:metrics.filter(x=>x.kind==='artifact'&&x.has_input_schema).length,
+              invoke_r2:metrics.filter(x=>x.kind==='artifact'&&x.invoke_kind==='r2').length
+            },
+            live:metrics.filter(x=>x.status==='live'),
+            shortest:metrics.sort((a,b)=>a.words-b.words).slice(0,20).map(({actual_hash,stored_hash,...x})=>x),
+            hash_mismatch_rows:metrics.filter(x=>x.stored_hash&&!x.hash_matches).map(({actual_hash,stored_hash,...x})=>x)
+          };
+          console.log(JSON.stringify(summary,null,2));
+          NODE
+
       - name: R2 and Basin control-plane probes
         working-directory: workers/gateway
         run: |
