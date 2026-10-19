@@ -40,9 +40,6 @@ jobs:
       - name: Test actual isolated Dynamic Worker runtime
         working-directory: workers/gateway
         run: npm run test:dynamic-worker
-      - name: Test actual product choices in sandbox
-        working-directory: workers/gateway
-        run: npm run test:product-sandbox
       - name: Build the application Worker
         working-directory: workers/gateway
         run: npm run build
@@ -62,15 +59,6 @@ jobs:
       - name: Apply versioned routing manifest schema
         working-directory: workers/gateway
         run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0004_routing_manifests.sql
-      - name: Apply selected-product sandbox evidence schema
-        working-directory: workers/gateway
-        run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0005_selected_sandbox.sql
-      - name: Apply publication approval guard
-        working-directory: workers/gateway
-        run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0006_publication_guard.sql
-      - name: Verify current live products have reviewed routing
-        working-directory: workers/gateway
-        run: node scripts/stage-reviewed-routing.mjs --check
       - name: Deploy the application Worker first
         working-directory: workers/gateway
         # Wrangler preserves existing encrypted secrets. Required secret names

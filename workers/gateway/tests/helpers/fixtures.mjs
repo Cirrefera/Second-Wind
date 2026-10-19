@@ -25,7 +25,6 @@ export class MemoryR2 {
 
   async put(key, value, options = {}) {
     this.writes.push(key);
-    if(options.onlyIf instanceof Headers && options.onlyIf.get("If-None-Match")==="*" && this.objects.has(key)) return null;
     if (this.failedWrites.has(key)) throw new Error("fixture_r2_write_failed");
     const bytes = typeof value === "string"
       ? new TextEncoder().encode(value)

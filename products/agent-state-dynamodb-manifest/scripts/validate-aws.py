@@ -27,7 +27,7 @@ report = {
     'sku': 'AWS-0568', 'botocore_version': botocore.__version__,
     'service_api_version': model.api_version, 'component_combinations': len(plans),
     'validated_operation_inputs': count, 'result': 'passed',
-    'source_hashes': {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ['plan.mjs','planner.mjs','config.schema.json', *sorted(str(p.relative_to(root)) for p in (root/'features').glob('*.mjs'))]},
+    'source_hashes': {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ['plan.mjs','config.schema.json']},
     'scope': 'AWS SDK parameter shape validation; no AWS deployment or service calls performed',
 }
 (root/'validation.json').write_text(json.dumps(report,indent=2)+'\n')

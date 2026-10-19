@@ -1,5 +1,5 @@
 import {resolveIntent} from './routing.js';
-import {describeComponents,testTrialSelection,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
+import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import { RpcTarget } from "capnweb";
 import { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
 import { executeCode, reportProgress } from "./execution.js";
@@ -88,7 +88,6 @@ export class ProductService extends RpcTarget {
     this.#env = env;
   }
 
-  purchaseOptions(sku) { return this.components(sku); }
   components(sku) { return describeComponents(this.#env,sku); }
   async trial(sku,config,input,callback) {
     const result=await trialProduct(this.#env,sku,config,input,callback);
@@ -203,7 +202,6 @@ export class ProductCapability extends RpcTarget {
     await this.#unchanged();
     return new ProductCapability(this.#env, this.#product, result.config, result);
   }
-  purchaseOptions() { return this.components(); }
   components() { return describeComponents(this.#env,this.#product.sku); }
   async trial(input,callback) {
     await this.#unchanged();
@@ -228,7 +226,6 @@ export class TrialCapability extends RpcTarget {
   constructor(env,id,token) {super();this.#env=env;this.#id=id;this.#token=token;}
   info() {return recoverTrial(this.#env,this.#id,this.#token);}
   recovery() {return {trial_id:this.#id,trial_token:this.#token};}
-  selectScope(ids) { return this.selectComponents(ids); }
   async selectComponents(ids) {
     const scope=await selectTrialComponents(this.#env,this.#id,this.#token,ids);
     return new SelectionCapability(this.#env,this.#id,this.#token,scope);
@@ -238,7 +235,6 @@ class SelectionCapability extends RpcTarget {
   #env; #id; #token; #scope;
   constructor(env,id,token,scope) {super();this.#env=env;this.#id=id;this.#token=token;this.#scope=scope;}
   info() {return structuredClone(this.#scope);}
-  test(input,callback) { return testTrialSelection(this.#env,this.#id,this.#token,this.#scope.selected_components,this.#scope.scope_hash,input,callback); }
   accept(expectedScopeHash) {
     if(expectedScopeHash!==this.#scope.scope_hash) throw Object.assign(new Error('selection_acceptance_mismatch'),{status:409});
     return acceptTrialSelection(this.#env,this.#id,this.#token,this.#scope.selected_components,expectedScopeHash);

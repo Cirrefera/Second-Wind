@@ -22,24 +22,14 @@ Authoritative API: https://developers.cloudflare.com/workers-ai/models/clef-flas
 
 ## Publication checks
 
-The validator checks product file bytes against SHA-256 and byte length, and verifies the supported trial adapter. Review attestations remain necessary for original contribution, licensing and product quality; they do not replace byte verification. Reports are read-only and do not authorize promotion. `publication-process.md` defines the trusted operator boundary and the prepared D1 approval guard. No publication approvals have been issued.
+The validator now checks inline component bytes against SHA-256 and byte length, and verifies the supported trial adapter. Review attestations remain necessary for original contribution, licensing and product quality; they do not replace byte verification. Reports are read-only and do not authorize promotion.
 
 ## Structured routing integration
 
-Migration `0004_routing_manifests.sql` adds immutable per-SKU/version routing records. GitHub preparation applied migrations 0003–0005 on October 19. `live-routing-2026-10-19.json` describes the unchanged live release as guidance, with its limitations stated explicitly. The preparation workflow verifies its exact guidance hash before inserting this routing record. It changes no product content or publication status. The DynamoDB planner has separate version 2 routing metadata; that product remains draft. The deployment workflow checks live routing coverage before switching the Worker.
+The prepared `0004_routing_manifests.sql` migration adds immutable per-SKU/version routing records. It inserts no products or metadata. Reviewed manifests must be loaded before deploying the new resolver; no current product has been silently assigned a manifest.
 
 HTTP `/api/resolve` and Cap’n Web `searchIntent(intent, limit, callbacks)` use the same structured resolver. `search(structuredIntent)` also uses it. Legacy `search(string)` retains its array-returning lexical discovery contract. Candidates from `searchIntent` include product capabilities; optional clarification callbacks request missing language/evidence. Compatibility covers explicitly declared structured requirements, not an unobserved external deployment.
 
 Clef annotations are enabled only with `CLEF_ROUTING_ENABLED=true` and an AI binding. The default remains off until live inference and evaluation are verified. A reading cannot reintroduce an excluded product or select a different product version. Provider failure leaves the deterministic candidate results available.
 
-## GitHub verification and remaining release work
-
-GitHub Actions run 39255635047 passed the gateway tests, build, both real Dynamic Worker integrations, all 16 supported planner choices, 80 AWS SDK shape checks, and reproducible packaging. Those sandbox tests made no AWS calls. Search/configure/trial inspection was verified in one Cap’n Web HTTP batch. Selected product tests and explicit acceptance remain separate decisions.
-
-`production-baseline-2026-10-19.json` records a subsequent read-only GitHub check. Production remains on Worker version `f25ead1b-a5fe-461d-88d2-b5d8cca91dcd` and source `82fe671add6468176134a344d38d2cbc3686b90e`. Discovery and existing Cap’n Web selection respond. Recipient readiness remains false. No funded canary has run.
-
-Draft storage preparation was blocked by R2 HTTP 403 / provider code 10000 using the GitHub credential. At that check, payload_objects, component_releases and product_routing_manifests were empty. The additive schemas had been applied, but no product status or historical purchase changed. The GitHub credential needs object access to the existing payload bucket before preparation can complete. Draft storage is now an explicit verification-workflow input rather than an automatic retry on every PR update.
-
-`aws-0568-pricing.md` records the draft allocation and full-product maximum. Exact chosen files run in the existing isolated sandbox and are hash-bound before acceptance. Publication still needs immutable production storage, production trial acceptance, licensing and product review, an expected verified recipient, and an approved funded canary. Trial abuse budgets and retention cleanup, live Clef evaluation, and Basin/Iceberg arrival and longitudinal reporting remain unfinished.
-
-This PR stays draft. Deployment uses the existing GitHub workflow. No new application Worker, Cloudflare Artifacts dependency, product promotion, or mainnet settlement was introduced. MCP registry listings remain deferred until the core purchase experience is ready.
+Deployment remains pending inventory completion and acceptance testing. This branch must stay draft; the production workflow has not been run.

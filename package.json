@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Second Wind — original AWS products for autonomous agents. Pay only for what you need.",
+  "description": "Second Wind — the exact AWS tool an agent needs from GitHub, without downloading all the bullshit. x402 USDC on Base.",
   "dependencies": {
     "@x402/evm": "^2.17.0",
     "@x402/extensions": "^2.17.0",

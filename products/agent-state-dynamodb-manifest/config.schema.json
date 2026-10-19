@@ -1,11 +1,9 @@
 {
  "$schema":"https://json-schema.org/draft/2020-12/schema",
  "type":"object","additionalProperties":false,
- "required":["table_name","features","language","runtime"],
+ "required":["table_name","components"],
  "properties":{
   "table_name":{"type":"string","pattern":"^[A-Za-z0-9_.-]{3,255}$"},
-  "language":{"const":"javascript"},
-  "runtime":{"const":"nodejs22"},
-  "features":{"type":"array","minItems":1,"maxItems":5,"uniqueItems":true,"contains":{"const":"table"},"items":{"enum":["table","status-index","expiry","recovery","change-stream"]}}
+  "components":{"type":"array","minItems":1,"maxItems":5,"uniqueItems":true,"contains":{"const":"table"},"items":{"enum":["table","status-index","expiry","recovery","change-stream"]}}
  }
 }

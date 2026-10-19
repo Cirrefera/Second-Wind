@@ -1,12 +1,10 @@
 // Versioned commerce event contract. Only explicitly selected fields leave D1.
 export const EVENT_CONTRACT_VERSION = '1';
 export const EVENT_REGISTRY = Object.freeze({
-  'release.published':'release',
   'trial.started':'trial',
   'trial.completed':'trial',
   'trial.failed':'trial',
   'scope.selected':'scope',
-  'scope.tested':'scope',
   'scope.accepted':'scope',
   'quote.created': 'quote',
   'payment.settlement_started': 'payment',
@@ -17,7 +15,7 @@ export const EVENT_REGISTRY = Object.freeze({
   'entitlement.activated': 'entitlement',
 });
 const fields = new Set(['payment_id','quote_id','sku','product_version_ref',
-  'artifact_hash','exact_amount_atomic','payment_network','trial_id','release_hash','scope_hash','selected_share_bps','test_code_hash','sandbox_passed']);
+  'artifact_hash','exact_amount_atomic','payment_network','trial_id','release_hash','scope_hash','selected_share_bps']);
 
 export function streamEvent(row) {
   if (!Object.hasOwn(EVENT_REGISTRY, row.event_type)) throw new Error('unknown_event_type');

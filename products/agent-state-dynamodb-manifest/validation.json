@@ -6,13 +6,8 @@
   "validated_operation_inputs": 80,
   "result": "passed",
   "source_hashes": {
-    "plan.mjs": "1b9be90e2dd218e5eddb45afe5b4be97b8eb1d25da76bbf5b07ea5da5fb51304",
-    "planner.mjs": "7c663dabcc375c8134d97ac39926f8b994310244b85e7425cbc50cab8f048238",
-    "config.schema.json": "3f91ab8f14864f928cc95d05395f5ca60349b31853890cf32c57d7ed34397ed7",
-    "features/change-stream.mjs": "68c1c7acad06a41df8db9823d8c1178aa53a75f770e7b6e033d35b70f2ec3fce",
-    "features/expiry.mjs": "4b1c2bd9f2396c995b954601125ae1323bf74dd31b50af46ed14cb33e1d9b8d9",
-    "features/recovery.mjs": "1481fa76cb8749516793bedf24de42b1f875563d59bfcf083e6ac76c12947037",
-    "features/status-index.mjs": "2c6026f51671722d8db484644a5244f737880e137677d150792d0bec3de831fb"
+    "plan.mjs": "f84e62719e0f4435ea5bed86700d32d0a10844bf6395df1e49508fc0430ef3fa",
+    "config.schema.json": "8adbbee4a0ca6ec8614c6f77e44dbdae7706c1eebb1073a6d2f5e00a31ae8e00"
   },
   "scope": "AWS SDK parameter shape validation; no AWS deployment or service calls performed"
 }

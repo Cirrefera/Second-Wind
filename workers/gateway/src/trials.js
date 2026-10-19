@@ -1,7 +1,6 @@
 import {checkConfiguration,describeProduct} from './catalog.js';
 import {canonicalJson,sha256,randomToken,validToken,CommerceError} from './contracts.js';
-import {componentMenu,prepareComponentSelection,assembledEntrypoint,selectionConfiguration,selectedPackageFiles} from './scope.js';
-import {readStoredPackage} from './release-storage.js';
+import {componentMenu,prepareComponentSelection} from './scope.js';
 import {executeCode,validateExecutionInput} from './execution.js';
 import {createScopeQuote} from './commerce.js';
 
@@ -21,20 +20,12 @@ async function releaseFor(env,sku) {
   if(release.sku!==product.sku || release.version!==product.version
       || menu.max_amount_atomic!==product.price_usdc_micros) fail('component_release_identity_mismatch',503);
   if(release.trial_adapter!=='javascript-isolate') fail('unsupported_trial_adapter',409);
-  if(release.storage) {
-    const stored=new Map((await readStoredPackage(env,release.storage)).map(f=>[f.path,f.content]));
-    for(const c of release.components) for(const f of c.files) {
-      if(f.content!==stored.get(f.path)) fail('release_storage_mismatch',503);
-    }
-  }
   const files=new Map();
   for(const component of release.components) for(const file of component.files) {
     if(typeof file.content!=='string' || await sha256(file.content)!==file.sha256
         || new TextEncoder().encode(file.content).byteLength!==file.size_bytes) fail('component_payload_invalid',503);
     files.set(file.path,file);
   }
-  const generated=assembledEntrypoint(release,release.components.map(c=>c.id));
-  if(generated) files.set(generated.path,generated);
   return {product,release,menu,files};
 }
 export async function describeComponents(env,sku) {
@@ -60,7 +51,7 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
     configuration:async()=>check.config,
     readFile:async(path)=>{if(!files.has(path)) fail('trial_file_not_found',404);return files.get(path).content;},
   };
-  const modules=Object.fromEntries([...files].filter(([path])=>/\.m?js$/.test(path)).map(([path,file])=>['product/'+path,{js:file.content}]));
+  const modules=Object.fromEntries([...files].filter(([path])=>/\.m?js$/.test(path)).map(([path,file])=>['product/'+path,file.content]));
   const result=await executeCode(env,execution.code,execution.language,null,callback,{...options,providers,modules});
   const status=result.ok?'completed':'failed';
   await env.SW_DB.prepare('UPDATE component_trials SET status=?1,result_json=?2 WHERE id=?3 AND status=\'running\'')
@@ -88,8 +79,7 @@ export async function recoverTrial(env,id,token) {
 export async function selectTrialComponents(env,id,token,ids) {
   const {row,release}=await readTrial(env,id,token);
   if(row.status!=='completed') fail('trial_not_completed',409);
-  const configuration=selectionConfiguration(release,ids,JSON.parse(row.config_json));
-  const scope=await prepareComponentSelection(release,ids,configuration);
+  const scope=await prepareComponentSelection(release,ids,JSON.parse(row.config_json));
   await env.SW_DB.prepare('INSERT INTO component_selections(trial_id,scope_hash,scope_json,created_at) VALUES (?1,?2,?3,?4) ON CONFLICT DO NOTHING')
     .bind(id,scope.scope_hash,canonicalJson(scope),new Date().toISOString()).run();
   // Public selection exposes file identities, not an extra copy of file content.
@@ -98,39 +88,11 @@ export async function selectTrialComponents(env,id,token,ids) {
 export async function acceptTrialSelection(env,id,token,ids,expectedScopeHash) {
   const {row,release,product,files}=await readTrial(env,id,token);
   if(row.status!=='completed') fail('trial_not_completed',409);
-  const configuration=selectionConfiguration(release,ids,JSON.parse(row.config_json));
+  const configuration=JSON.parse(row.config_json);
   const scope=await prepareComponentSelection(release,ids,configuration);
   if(scope.scope_hash!==expectedScopeHash) fail('selection_acceptance_mismatch',409);
   const selected=await env.SW_DB.prepare('SELECT scope_hash FROM component_selections WHERE trial_id=?1 AND scope_hash=?2').bind(id,scope.scope_hash).first();
   if(!selected) fail('selection_required',409);
-  const selectedFiles=selectedPackageFiles(release,scope);
-  if(release.assembly) {
-    const tested=await env.SW_DB.prepare('SELECT package_hash FROM selection_validations WHERE trial_id=?1 AND scope_hash=?2 AND passed=1').bind(id,scope.scope_hash).first();
-    if(!tested || tested.package_hash!==await sha256(canonicalJson(selectedFiles))) fail('selected_product_test_required',409);
-  }
+  const selectedFiles=scope.files.map(file=>({path:file.path,content:files.get(file.path).content}));
   return createScopeQuote(env,{product,scope,configuration,files:selectedFiles,acceptanceKey:`${id}:${scope.scope_hash}`});
-}
-
-export async function testTrialSelection(env,id,token,ids,expectedScopeHash,input,callback,options={}) {
-  const {row,release}=await readTrial(env,id,token);
-  if(row.status!=='completed') fail('trial_not_completed',409);
-  const configuration=selectionConfiguration(release,ids,JSON.parse(row.config_json));
-  const scope=await prepareComponentSelection(release,ids,configuration);
-  if(scope.scope_hash!==expectedScopeHash) fail('selection_acceptance_mismatch',409);
-  const selected=await env.SW_DB.prepare('SELECT scope_hash FROM component_selections WHERE trial_id=?1 AND scope_hash=?2').bind(id,scope.scope_hash).first();
-  if(!selected) fail('selection_required',409);
-  const execution=validateExecutionInput(input?.code,input?.language);
-  const code_hash=await sha256(execution.code);
-  const previous=await env.SW_DB.prepare('SELECT * FROM selection_validations WHERE trial_id=?1 AND scope_hash=?2 AND code_hash=?3').bind(id,scope.scope_hash,code_hash).first();
-  if(previous) return {scope_hash:scope.scope_hash,package_hash:previous.package_hash,code_hash,result:JSON.parse(previous.result_json),replayed:true};
-  const selectedFiles=selectedPackageFiles(release,scope),files=new Map(selectedFiles.map(f=>[f.path,f.content]));
-  const package_hash=await sha256(canonicalJson(selectedFiles));
-  const result=await executeCode(env,execution.code,execution.language,null,callback,{...options,
-    modules:Object.fromEntries([...files].filter(([path])=>/\.m?js$/.test(path)).map(([path,content])=>['product/'+path,{js:content}])),
-    providers:{configuration:async()=>configuration,scope:async()=>scope,
-      readFile:async path=>{if(!files.has(path)) fail('trial_file_not_found',404);return files.get(path);}}});
-  await env.SW_DB.prepare(`INSERT INTO selection_validations(trial_id,scope_hash,code_hash,package_hash,result_json,passed,created_at)
-    VALUES (?1,?2,?3,?4,?5,?6,?7) ON CONFLICT DO NOTHING`)
-    .bind(id,scope.scope_hash,code_hash,package_hash,canonicalJson(result),result.ok?1:0,new Date().toISOString()).run();
-  return {scope_hash:scope.scope_hash,package_hash,code_hash,result,evidence_kind:'buyer_sandbox_execution'};
 }

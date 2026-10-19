@@ -2,13 +2,11 @@ import {canonicalJson,sha256} from './contracts.js';
 
 export const CLEF_MODEL = '@cf/cloudflare/clef-flash';
 export const CLEF_CONTRACT_VERSION = '1';
-export const CLEF_TIMEOUT_MS = 5000;
 const probability = x => Number.isFinite(x) && x >= 0 && x <= 1;
 
 /** A typed reading of supplied evidence. Never a release approval or payment authority. */
-export async function readChoices(ai, {state, questions, snapshot_ref}, {timeout_ms = CLEF_TIMEOUT_MS} = {}) {
+export async function readChoices(ai, {state, questions, snapshot_ref}) {
   if (!ai?.run) throw new Error('clef_not_configured');
-  if (!Number.isInteger(timeout_ms) || timeout_ms < 1 || timeout_ms > 30000) throw new Error('invalid_clef_timeout');
   if (typeof snapshot_ref !== 'string' || !snapshot_ref.trim()) throw new Error('snapshot_required');
   const entries = Object.entries(questions || {});
   if (!entries.length || entries.length > 64) throw new Error('invalid_questions');
@@ -21,16 +19,7 @@ export async function readChoices(ai, {state, questions, snapshot_ref}, {timeout
   const request={model:'clef-flash',state,questions};
   const encoded=canonicalJson(request);
   if (new TextEncoder().encode(encoded).byteLength > 48000) throw new Error('clef_context_too_large');
-  // Bound the caller's wait. The binding may still finish inference after the
-  // deadline; this does not claim provider cancellation or avoided billing.
-  let timer;
-  let response;
-  try {
-    response=await Promise.race([
-      Promise.resolve().then(()=>ai.run(CLEF_MODEL,request)),
-      new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('clef_timeout')),timeout_ms);}),
-    ]);
-  } finally { clearTimeout(timer); }
+  const response=await ai.run(CLEF_MODEL,request);
   if (!response || !['clef-flash',CLEF_MODEL].includes(response.model)
       || !response.answers || Object.keys(response.answers).length !== entries.length) throw new Error('invalid_clef_response');
   const readings={};

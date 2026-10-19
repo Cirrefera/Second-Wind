@@ -3,20 +3,6 @@ import assert from 'node:assert/strict';
 import {readChoices,readInventoryKind,readJourneyPattern,readCandidateAlignment,inventoryQuestions,CLEF_MODEL} from '../src/clef.js';
 const keys=Object.keys(inventoryQuestions().advertised_kind.criteria);
 const answer=()=>({model:'clef-flash',answers:{advertised_kind:{type:'choice',choice:'unknown',confidence:1,probabilities:Object.fromEntries(keys.map(k=>[k,k==='unknown'?1:0]))}}});
-test('reader bounds stalled inference and ignores late results',async()=>{
- let finish;
- const input={state:{},questions:inventoryQuestions(),snapshot_ref:'inventory:1'};
- const reading=readChoices({run:()=>new Promise(resolve=>{finish=resolve;})},input,{timeout_ms:10});
- await assert.rejects(reading,/clef_timeout/);
- finish(answer());
- await assert.rejects(reading,/clef_timeout/);
- assert.equal((await readChoices({run:async()=>answer()},input,{timeout_ms:100})).evidence_kind,'model_reading');
- let calls=0;
- for(const timeout_ms of [0,-1,Infinity,30001,1.5]) {
-  await assert.rejects(readChoices({run:()=>{calls++;}},input,{timeout_ms}),/invalid_clef_timeout/);
- }
- assert.equal(calls,0);
-});
 test('Clef classifies only explicit options, binds snapshot and excludes unrelated private fields',async()=>{
  let request;
  const ai={run:async(model,input)=>{assert.equal(model,CLEF_MODEL);request=input;return answer();}};
