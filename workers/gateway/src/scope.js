@@ -40,6 +40,15 @@ export async function validateComponentRelease(release) {
       paths.set(file.path, identity);
     }
   }
+  if (release.assembly) {
+    const a=release.assembly;
+    if(a.kind!=='javascript-feature-plan-v1' || a.entrypoint!=='plan.mjs' || a.core!=='planner.mjs'
+      || a.selection_field!=='features' || !Array.isArray(a.features)
+      || a.features.length>99 || new Set(a.features.map(f=>f.id)).size!==a.features.length
+      || paths.has(a.entrypoint) || !paths.has(a.core)
+      || a.features.some(f=>!byId.has(f.id)||!byId.get(f.id).files.some(file=>file.path===f.path)
+        || !/^features\/[a-z0-9-]+\.mjs$/.test(f.path))) fail('invalid_product_assembly');
+  }
   if (total !== 10000) fail('component_shares_must_total_100_percent');
   const visiting = new Set(), visited = new Set();
   function visit(id) {
@@ -76,6 +85,7 @@ export async function componentMenu(release) {
   const prices = allocate(release);
   return {sku:release.sku, version:release.version, release_ref:release.release_ref,
     release_hash, ...release.pricing,
+    options:release.components.map(c => ({id:c.id,name:c.name,amount_atomic:prices.get(c.id).toString(),requires:[...c.requires]})),
     components:release.components.map(c => ({id:c.id,name:c.name,share_bps:c.share_bps,
       amount_atomic:prices.get(c.id).toString(),requires:[...c.requires]}))};
 }
@@ -95,6 +105,11 @@ export async function prepareComponentSelection(release, selectedIds, configurat
   const amount = ids.reduce((sum,id) => sum + prices.get(id), 0n);
   const files = new Map();
   for (const id of ids) for (const file of byId.get(id).files) files.set(file.path,{path:file.path,sha256:file.sha256,size_bytes:file.size_bytes,mime_type:file.mime_type});
+  if(release.assembly) {
+    const generated=assembledEntrypoint(release,ids);
+    files.set(generated.path,{path:generated.path,sha256:await sha256(generated.content),
+      size_bytes:new TextEncoder().encode(generated.content).byteLength,mime_type:'text/javascript'});
+  }
   const scope = {schema_version:'1',sku:release.sku,version:release.version,
     release_ref:release.release_ref,release_hash,
     configuration_hash:await sha256(canonicalJson(configuration)),
@@ -110,4 +125,23 @@ export async function verifyComponentSelection(release, scope, configuration) {
   const expected = await prepareComponentSelection(release, scope?.selected_components, configuration);
   if (canonicalJson(scope) !== canonicalJson(expected)) fail('component_selection_changed');
   return expected;
+}
+
+/** Deterministic entry point for the files chosen through the existing purchase flow. */
+export function assembledEntrypoint(release,ids) {
+  const a=release.assembly;
+  if(!a) return null;
+  const features=a.features.filter(f=>ids.includes(f.id));
+  const imports=features.map((f,i)=>`import {feature as f${i}} from ${JSON.stringify('./'+f.path)};`);
+  return {path:a.entrypoint,content:[`import {prepareWith} from './planner.mjs';`,...imports,
+    `export const prepare=config=>prepareWith(config,[${features.map((_,i)=>'f'+i).join(',')}]);`,''].join('\n')};
+}
+export function selectionConfiguration(release,ids,configuration) {
+  return release.assembly ? {...configuration,features:[...ids].sort()} : configuration;
+}
+export function selectedPackageFiles(release,scope) {
+  const available=new Map(release.components.flatMap(c=>c.files).map(f=>[f.path,f]));
+  const generated=assembledEntrypoint(release,scope.selected_components);
+  if(generated) available.set(generated.path,generated);
+  return scope.files.map(file=>({path:file.path,content:available.get(file.path)?.content}));
 }

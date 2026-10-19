@@ -1,3 +1,4 @@
+import {storePackage} from './release-storage.js';
 import { x402ResourceServer, HTTPFacilitatorClient } from "@x402/core/server";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { createFacilitatorConfig } from "@coinbase/x402";
@@ -578,9 +579,7 @@ export async function createScopeQuote(env, {product,scope,files,configuration,a
   }
   const resolved = {ok:true,sku:product.sku,version:product.version,files,scope,
     content_hash,content_hash_scope:'selected-files-canonical-json'};
-  const payload = {via:'inline',guidance:content,content_hash,
-    size_bytes:new TextEncoder().encode(content).byteLength,
-    mime_type:'application/json',hash_scope:'selected-files-canonical-json'};
+  const payload = await storePackage(env,files);
   return insertQuote(env,{sku:product.sku,version:product.version,kind:'product',
     amount:scope.amount_atomic,config:configuration,acceptanceKey,
     snapshot:{sku:product.sku,slug:product.slug,version:product.version,

@@ -8,15 +8,15 @@ export async function toolsDocument(env) {
   const items = await listCatalog(env.SW_DB);
   return {
     service:"Second Wind",
-    introduction:"Pay only for what you need. Prices shown are for the full product. For component-enabled products, test in an isolated sandbox before choosing which components to purchase.",
+    introduction:"Pay only for what you need. Prices shown are for the full product. Where trials are available, test the actual product in an isolated sandbox, then choose what you need.",
     total_live:items.length,
     payment:{rail:"x402",network:NETWORK,asset:"USDC"},
     tools:items.map(item => ({...item,url:toolUrl(item),method:toolMethod(item)})),
     discovery:{quotes:`${ORIGIN}/api/quotes`,intent:`${ORIGIN}/api/resolve`,
       capnweb:`${ORIGIN}/capnp`,openapi:`${ORIGIN}/openapi.json`},
     toolGuidance:{
-      trial:"Check pricing_mode for proportional-components and read components_url. Complete a sandbox trial, select components, and accept the exact scope before authorizing payment. Products without this mode use their listed fixed-price contract.",
-      purchase:"For component products, acceptance creates the payment record for your selection. For fixed-price products, request a quote. Review the exact amount, sign x402 v2 requirements, and retry with PAYMENT-SIGNATURE.",
+      trial:"Read purchase_options_url for the product’s supported choices and dependencies. Complete a sandbox trial, choose what you need, and accept the exact scope before authorizing payment. Products without this mode use their listed fixed-price contract.",
+      purchase:"For products with scope-based pricing, acceptance prepares the exact purchase. For fixed-price products, request a quote. Review the exact amount, sign x402 v2 requirements, and retry with PAYMENT-SIGNATURE.",
       recovery:"Save paymentId and recoveryToken. Redelivery and Cap'n Web recovery require that private token and never initiate settlement.",
       disconnect:"For response-loss recovery, choose a random 32-byte base64url X-Recovery-Token before purchase and retain the quote ID.",
       execution:"Code Mode orchestration explicitly uses JavaScript. An existing artifact's language is determined by its product contract.",
@@ -63,6 +63,18 @@ export async function openApiDocument(env) {
     "/api/purchases/{paymentId}/recover":{post:{summary:"Exchange a wallet-signed challenge for a new recovery token",
       parameters:[{in:"path",name:"paymentId",required:true,schema:{type:"string"}}],responses:{"200":ok("New token"),"401":ok("Invalid proof")}}},
   };
+  for(const [path,method,summary] of [
+    ['/api/products/{sku}/options','get','Free product choices, dependencies and exact prices'],
+    ['/api/trials','post','Test the real product before payment'],
+    ['/api/trials/{id}','get','Recover a private trial result'],
+    ['/api/trials/{id}/selection','post','Choose what the product must include'],
+    ['/api/trials/{id}/selection/test','post','Test the exact chosen product in an isolated sandbox'],
+    ['/api/trials/{id}/accept','post','Accept the tested product and prepare payment requirements']]) {
+    const parameter=path.includes('{id}')?'id':path.includes('{sku}')?'sku':null;
+    paths[path]={[method]:{summary,responses:{'200':ok('Product result'),'400':ok('Input requirements'),'409':ok('Product or trial state requires review')},
+      ...(parameter?{parameters:[{in:'path',name:parameter,required:true,schema:{type:'string'}}]}:{}),
+      ...(path.includes('{id}')?{security:[{TrialToken:[]}]}:{})}};
+  }
   for (const item of tools) {
     const operation = {summary:item.name,description:item.summary,responses,
       parameters:[{in:"query",name:"quote_id",schema:{type:"string"}},
@@ -73,16 +85,16 @@ export async function openApiDocument(env) {
   }
   return {openapi:"3.1.0",info:{title:"Second Wind",version:"2.0.0",
     description:"One product service for HTTP/x402 and Cap'n Web. Quotes pin content and price; private purchase credentials enable free recovery."},
-    servers:[{url:ORIGIN}],paths,components:{securitySchemes:{RecoveryToken:{type:"apiKey",in:"header",name:"X-Recovery-Token"}}}};
+    servers:[{url:ORIGIN}],paths,components:{securitySchemes:{TrialToken:{type:"apiKey",in:"header",name:"X-Trial-Token"},RecoveryToken:{type:"apiKey",in:"header",name:"X-Recovery-Token"}}}};
 }
 
 export async function llmsDocument(env) {
   const document = await toolsDocument(env);
-  return `# Second Wind\n\nPay only for what you need. Prices shown are for the full product. For component-enabled products, test in an isolated sandbox before choosing which components to purchase. USDC on Base via x402 v2.\n\n`+
+  return `# Second Wind\n\nPay only for what you need. Prices shown are for the full product. Where trials are available, test the actual product in an isolated sandbox, then choose what you need. USDC on Base via x402 v2.\n\n`+
     `## Try and choose\n\n`+
-    `Check /api/tools for pricing_mode: proportional-components. Only those products offer component trials; other listings retain their stated fixed-price contract. Read components_url for shares, dependencies, and the maximum price.\n\n`+
-    `Use select(sku).configure(config).trial({code,language:"javascript"}) over Cap'n Web. Inspect trial.info(), save trial.recovery() privately, then call trial.selectComponents(ids). Inspect selection.info() and call selection.accept(scope_hash) with that exact hash. Acceptance prepares payment requirements; it does not charge you. Authorize payment only after reviewing your selected scope and exact amount.\n\n`+
-    `HTTP equivalents: POST /api/trials with {sku,config,input:{code,language:"javascript"}}; POST /api/trials/{id}/selection with {components}; POST /api/trials/{id}/accept with {components,scope_hash}. Use X-Trial-Token for selection, acceptance, and GET /api/trials/{id} recovery.\n\n`+
+    `Check /api/tools for trial_url and purchase_options_url. Only those listings offer product trials; other listings retain their stated fixed-price contract. Review the product’s choices, dependencies, and maximum price.\n\n`+
+    `Use select(sku).configure(config).trial({code,language:"javascript"}) over Cap'n Web. Inspect trial.info(), save trial.recovery() privately, then call trial.selectScope(ids). Inspect selection.info(), run selection.test({code,language:"javascript"}) against the chosen product, evaluate the result, and call selection.accept(scope_hash) with that exact hash. Acceptance prepares payment requirements; it does not charge you. Authorize payment only after reviewing your selected scope and exact amount.\n\n`+
+    `HTTP equivalents: POST /api/trials with {sku,config,input:{code,language:"javascript"}}; POST /api/trials/{id}/selection with {selection:ids}; POST /api/trials/{id}/accept with {selection:ids,scope_hash}. Test the chosen product with POST /api/trials/{id}/selection/test and {selection:ids,scope_hash,input:{code,language:"javascript"}}. Use X-Trial-Token for selection, testing, acceptance, and GET /api/trials/{id} recovery.\n\n`+
     `Trials execute JavaScript in an isolated Dynamic Worker with scoped product access and no outbound networking. A completed trial means your test code executed successfully; it does not establish that a deployment in your AWS account works. Product language support is stated separately in its contract.\n\n`+
     `## Fixed-price products and payment\n\n`+
     `1. GET ${ORIGIN}/api/tools and ${ORIGIN}/api/proof.\n`+
@@ -92,7 +104,7 @@ export async function llmsDocument(env) {
     `Supply a cryptographically random 32-byte base64url X-Recovery-Token before the first paid attempt if a disconnected response must be recoverable immediately.\n`+
     `A completed retry requires the same private token. Never treat a payment ID or on-chain signature as a recovery secret.\n\n`+
     `## Cap'n Web\n\n${ORIGIN}/capnp supports HTTP batch and bidirectional WebSocket RPC. `+
-    `Free methods: describe, search, select, configure, quote. select(sku) returns a product capability; pipeline select(sku).configure(config).quote(). configure accepts an optional buyer callback with clarify(questions). getGrant(paymentId,recoveryToken) and recoverSession(paymentId,recoveryToken) `+
+    `Free methods: describe, search, select, configure, quote. select(sku) returns a product capability; pipeline select(sku).configure(config).trial(input) for trial products, or select(sku).configure(config).quote() for fixed-price products. configure accepts an optional buyer callback with clarify(questions). getGrant(paymentId,recoveryToken) and recoverSession(paymentId,recoveryToken) `+
     `return purchase-scoped capabilities with info() and deliver(). Execution grants can replay their one purchased invocation with execute(invocationId,code,"javascript",callback). `+
     `New transport sessions reacquire capabilities from D1; promise pipelining does not make a disconnected session durable.\n\n`+
     `## Recovery\n\nGET ${ORIGIN}/api/purchases/{paymentId}/delivery with X-Recovery-Token is free. `+

@@ -5,6 +5,7 @@ export const EVENT_REGISTRY = Object.freeze({
   'trial.completed':'trial',
   'trial.failed':'trial',
   'scope.selected':'scope',
+  'scope.tested':'scope',
   'scope.accepted':'scope',
   'quote.created': 'quote',
   'payment.settlement_started': 'payment',
@@ -15,7 +16,7 @@ export const EVENT_REGISTRY = Object.freeze({
   'entitlement.activated': 'entitlement',
 });
 const fields = new Set(['payment_id','quote_id','sku','product_version_ref',
-  'artifact_hash','exact_amount_atomic','payment_network','trial_id','release_hash','scope_hash','selected_share_bps']);
+  'artifact_hash','exact_amount_atomic','payment_network','trial_id','release_hash','scope_hash','selected_share_bps','test_code_hash','sandbox_passed']);
 
 export function streamEvent(row) {
   if (!Object.hasOwn(EVENT_REGISTRY, row.event_type)) throw new Error('unknown_event_type');

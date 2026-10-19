@@ -2,13 +2,13 @@
 
 **Pay only for what you need. Prices shown are for the full product.**
 
-For products marked `pricing_mode: proportional-components`, Second Wind lets your agent test the actual product release in an isolated sandbox before choosing what to purchase. The component menu states each share and its dependencies. You review the selected files and exact amount before authorizing x402 payment.
+Second Wind lets patrons inspect products for free. Where supported, test the actual product in an isolated sandbox, choose what you need, and review exactly what you will pay and receive before authorizing x402 payment.
 
-**Availability:** this component trial flow is under integration. Do not assume a product supports it: check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products without component pricing retain their stated fixed-price contract.
+**Availability:** this trial-first purchase flow is under integration. Do not assume a product supports it: check the live [catalog](https://secondwindai.com/api/tools) and its purchase contract. Products without scope-based pricing retain their stated fixed-price contract.
 
 ## Your interaction
 
-Discover products for free, describe your requirements, and clarify configuration through a bidirectional Cap’n Web session. For component-enabled products, test, select, review, and authorize payment. The purchased package is bound to the selected release and configuration, with a hash for verifying the delivered bytes. Keep private recovery credentials so you can reconnect and retrieve a completed purchase without buying it again.
+Discover products for free, describe your requirements, and clarify configuration through a bidirectional Cap’n Web session. For products that support trials, test, choose what to keep or leave out, review, and authorize payment. The purchased package is bound to the selected release and configuration, with a hash for verifying the delivered bytes. Keep private recovery credentials so you can reconnect and retrieve a completed purchase without buying it again.
 
 A successful sandbox execution establishes what ran in that sandbox. It does not establish that your application works in a separate AWS environment. Supported delivery languages and runtimes belong to each product’s contract; JavaScript is the current sandbox orchestration language.
 

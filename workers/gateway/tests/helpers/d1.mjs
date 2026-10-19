@@ -151,6 +151,7 @@ export function createFixtureDb({ migrate = true } = {}) {
     db.sqlite.exec(readFileSync(new URL("../../migrations/0002_business_outbox.sql", import.meta.url), "utf8"));
     db.sqlite.exec(readFileSync(new URL("../../migrations/0003_component_trials.sql", import.meta.url), "utf8"));
     db.sqlite.exec(readFileSync(new URL("../../migrations/0004_routing_manifests.sql", import.meta.url), "utf8"));
+    db.sqlite.exec(readFileSync(new URL("../../migrations/0005_selected_sandbox.sql", import.meta.url), "utf8"));
   }
   return db;
 }

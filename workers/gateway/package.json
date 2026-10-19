@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test --test-isolation=none tests/*.test.mjs",
     "build": "esbuild src/index.js --bundle --format=esm --platform=browser --conditions=workerd,worker,browser --external:cloudflare:* --external:node:* --outfile=dist/worker.js",
-    "test:dynamic-worker": "node tests/dynamic-worker.integration.mjs"
+    "test:dynamic-worker": "node tests/dynamic-worker.integration.mjs",
+    "test:product-sandbox": "node tests/product-sandbox.integration.mjs"
   },
   "dependencies": {
     "@cfworker/json-schema": "4.1.1",

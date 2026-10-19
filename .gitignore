@@ -10,3 +10,5 @@ public/_worker.js
 workers/gateway/dist/
 # local dev secrets
 .dev.vars
+
+workers/gateway/review-output/

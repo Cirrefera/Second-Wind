@@ -1,0 +1,56 @@
+name: Verify Second Wind
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: second-wind-verify-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: workers/gateway/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: workers/gateway
+      - run: npm test && npm run build && npm run test:dynamic-worker && npm run test:product-sandbox
+        working-directory: workers/gateway
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install botocore==1.43.114
+      - run: python products/agent-state-dynamodb-manifest/scripts/validate-aws.py
+      - run: node products/agent-state-dynamodb-manifest/scripts/package.mjs
+      - name: Reproducible release bytes and evidence
+        run: git diff --exit-code -- products/agent-state-dynamodb-manifest
+  production-read-only:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --no-audit --no-fund
+        working-directory: workers/gateway
+      - name: Inspect public service and existing Cloudflare state
+        working-directory: workers/gateway
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/verify-production.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: second-wind-production-baseline
+          path: workers/gateway/review-output/production-baseline.json
+          retention-days: 7

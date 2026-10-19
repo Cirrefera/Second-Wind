@@ -33,6 +33,8 @@ async function publicProduct(row) {
     product.pricing_mode='proportional-components';
     product.components_url=`/api/products/${encodeURIComponent(product.sku)}/components`;
     product.trial_url='/api/trials';
+    product.purchase_options_url=`/api/products/${encodeURIComponent(product.sku)}/options`;
+    product.purchase_mode='trial-first';
   }
   if (_payload_id) {
     if (typeof _payload_hash !== "string" || !/^[a-f0-9]{64}$/i.test(_payload_hash)) {

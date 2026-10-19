@@ -1,5 +1,5 @@
 import {resolveIntent} from './routing.js';
-import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
+import {describeComponents,testTrialSelection,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import { dispatchOutbox } from './telemetry.js';
 import { Hono } from "hono";
 import { newWorkersRpcResponse } from "capnweb";
@@ -116,6 +116,7 @@ export function createApp(dependencies = {}) {
     const body = await jsonBody(c.req.raw);
     return c.json(await resolveIntent(c.env,body.intent ?? body.query ?? "",body.limit ?? 10));
   });
+  app.get('/api/products/:sku/options',async c=>c.json(await describeComponents(c.env,c.req.param('sku'))));
   app.get('/api/products/:sku/components',async c=>c.json(await describeComponents(c.env,c.req.param('sku'))));
   app.post('/api/trials',async c=>{
     const b=await jsonBody(c.req.raw);
@@ -124,11 +125,15 @@ export function createApp(dependencies = {}) {
   app.get('/api/trials/:id',async c=>c.json(await recoverTrial(c.env,c.req.param('id'),c.req.header('X-Trial-Token'))));
   app.post('/api/trials/:id/selection',async c=>{
     const b=await jsonBody(c.req.raw);
-    return c.json(await selectTrialComponents(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components));
+    return c.json(await selectTrialComponents(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.selection ?? b.components));
+  });
+  app.post('/api/trials/:id/selection/test',async c=>{
+    const b=await jsonBody(c.req.raw);
+    return c.json(await testTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.selection ?? b.components,b.scope_hash,b.input));
   });
   app.post('/api/trials/:id/accept',async c=>{
     const b=await jsonBody(c.req.raw);
-    return c.json(await acceptTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components,b.scope_hash));
+    return c.json(await acceptTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.selection ?? b.components,b.scope_hash));
   });
   app.post("/api/quotes",async c=>{
     const body = await jsonBody(c.req.raw);
