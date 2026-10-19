@@ -122,3 +122,38 @@ test("bidirectional progress callbacks cross a real RPC session, and reconnect r
   assert.equal(calls.settle.length, 1);
   recoveredGrant[Symbol.dispose]();
 });
+
+test('free product selection, configuration and quote pipeline in one HTTP round trip', async t => {
+ const {env,item}=fixture(t);
+ const realFetch=globalThis.fetch; let trips=0;
+ globalThis.fetch=async(input,init)=>{trips++;return newHttpBatchRpcResponse(new Request(input,init),new ProductService(env));};
+ try {
+  const client=newHttpBatchRpcSession('https://secondwindai.com/capnp');
+  const quote=await client.select(item.sku).configure({}).quote();
+  assert.equal(quote.sku,item.sku); assert.equal(trips,1);
+ } finally {globalThis.fetch=realFetch;}
+});
+
+test('buyer answers the exact language question over bidirectional RPC before a quote',async t=>{
+ const {env,item,db}=fixture(t);
+ db.sqlite.prepare('UPDATE items SET input_schema=? WHERE sku=?').run(JSON.stringify({type:'object',required:['language'],properties:{language:{enum:['python']}},additionalProperties:false}),item.sku);
+ const channel=new MessageChannel();
+ const server=newMessagePortRpcSession(channel.port1,new ProductService(env));
+ const client=newMessagePortRpcSession(channel.port2);
+ t.after(()=>{client[Symbol.dispose]();server[Symbol.dispose]();channel.port1.close();channel.port2.close();});
+ let questions;
+ class Buyer extends RpcTarget {clarify(q){questions=q;return {language:'python'};}}
+ const configured=await client.select(item.sku).configure({},new Buyer());
+ assert.equal(questions[0].question,'What programming language do you want the product delivered in?');
+ assert.equal((await configured.quote()).config.language,'python');
+ configured[Symbol.dispose]();
+});
+
+test('selected capabilities reject catalog changes and incomplete configuration',async t=>{
+ const {env,item,db}=fixture(t); const service=new ProductService(env);
+ const product=await service.select(item.sku);
+ await assert.rejects(product.quote(),/incomplete_configuration/);
+ const configured=await product.configure({});
+ db.sqlite.prepare('UPDATE items SET guidance=? WHERE sku=?').run('changed deliverable',item.sku);
+ await assert.rejects(configured.quote(),/product_changed/);
+});

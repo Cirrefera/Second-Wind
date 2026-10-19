@@ -90,3 +90,8 @@ test("catalog search treats wildcards literally and never returns draft or retir
   assert.equal(all.length, 2);
   assert.ok(all.every((item) => !Object.hasOwn(item, "guidance")));
 });
+
+test('slug search finds a product without requiring its display name', async t => {
+ const {db,item}=fixture(t,{slug:'unique-slug-search-marker'});
+ assert.deepEqual((await searchCatalog(db,'unique-slug-search-marker')).map(x=>x.sku),[item.sku]);
+});

@@ -33,3 +33,11 @@ required = ["X402_PAY_TO", "CDP_FACILITATOR_KEY"]
 
 [version_metadata]
 binding = "CF_VERSION_METADATA"
+
+# Existing structured business stream; D1 outbox is the retry authority.
+[[pipelines]]
+binding = "BUSINESS_EVENTS"
+stream = "d135ad1c9f9246ae945be1d1b8277ddc"
+
+[triggers]
+crons = ["* * * * *"]

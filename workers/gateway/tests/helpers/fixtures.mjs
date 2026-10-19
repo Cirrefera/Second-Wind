@@ -138,6 +138,7 @@ export function fixtureEnv(db) {
   return {
     SW_DB: db,
     X402_PAY_TO: RECIPIENT,
+    X402_EXPECTED_PAY_TO: RECIPIENT,
     PAYLOADS: new MemoryR2(),
     DELIVERIES: new MemoryR2(),
   };

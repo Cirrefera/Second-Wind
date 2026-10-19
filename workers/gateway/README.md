@@ -91,3 +91,66 @@ cd ../..
 The exact migration above is additive and rerunnable against the existing catalog. Do not apply the historical root baseline, drop tables, truncate history or promote all drafts. The workflow serializes releases, tags the gateway version with the Git commit, and deploys the gateway before Pages. Required access is existing Worker deployment, Pages deployment/binding update and D1 SQL execution; no manual zone route is part of this procedure.
 
 Record the commit, bundle hash, Worker version, Pages deployment ID and test results for each release. Check public-domain discovery,402 challenge, both Cap'n Web transports and authenticated recovery after deployment. `/health` and `/api/proof` are not proof that a real purchase passed; a funded live purchase and receipt/hash verification are a separate gate. Publish only individually validated products after that gate. MPP, Basin streaming and automatic refunds are not implemented by this repair.
+
+### Buyer capability and publication checks (pending production verification)
+
+Existing `search`, `describe`, `configure`, `quote`, and aliases are retained.
+`select(sku)` returns a session-local product capability supporting `info()`,
+`compatibility(config)`, `configure(config, callbacks?)`, `configuration()`, and
+`quote()`. A caller may pipeline `select(sku).configure(config).quote()`.
+`callbacks.clarify(questions)` returns a JSON object of answers; one round is
+bounded to 16 questions and 10 seconds. Incomplete or invalid answers cannot
+produce a quote. Product changes invalidate selected capabilities. Payment
+still requires a separately authorized x402 signature.
+
+Set `X402_EXPECTED_PAY_TO` independently to the verified merchant recipient.
+A mismatch fails payment configuration. `/api/proof` separately exposes
+`payment_recipient_configured` and `payment_recipient_verified`; without the
+expected-recipient assertion it reports degraded readiness. This is a
+configuration assertion, not proof of wallet control or a funded canary.
+Known zero/dead destinations are rejected.
+
+`src/publication.js` validates a release manifest against preparation evidence.
+It never promotes a SKU or alters historical content hashes. Run the inventory
+report with `node scripts/audit-inventory.mjs inventory.json report.csv`.
+Reports without release evidence fail closed. The validator is not yet wired
+into an authenticated publication transaction; it must not be represented as
+an enforced production publication gate. License and contract attestations
+must come from a trusted preparation process, never from buyer input.
+
+Remaining work includes versioned manifest persistence, structured compatible
+candidate search, full journey telemetry/outbox integration, live resource
+verification, and production acceptance. These additions do not claim those
+pieces are implemented.
+
+### Durable commerce telemetry
+
+Migration `0002_business_outbox.sql` adds transactional triggers for quote creation,
+settlement start/pending/success/failure, receipt issuance and entitlement activation.
+No historical events are backfilled. Only allowlisted identifiers, release hashes,
+exact atomic amounts and network leave D1; payment signatures, recovery credentials,
+configuration and buyer content are excluded.
+
+The gateway scheduled handler sends up to 20 pending events per minute to the
+existing `second_wind_events` stream (`d135ad1c9f9246ae945be1d1b8277ddc`).
+The live stream was inspected on 2026-10-19: `payload` is JSON, not a string;
+`occurred_ts` is a timestamp. Retries retain the same event ID. Least-attempted
+rows are dispatched first so malformed rows cannot permanently block fresh work.
+Ingestion acknowledgements mark `sent_at`; they do not prove sink delivery.
+Concurrent dispatch or a crash before acknowledgement may resend an event.
+Consumers must deduplicate by `event_id` before counting business outcomes.
+
+Existing pipeline `secondwind_telemetry` (`c36bc1cd21814d3091f84329257b3c09`)
+passes the complete envelope to `all_events_sink`. That is the compatible raw
+landing table. Its specialized legacy projections use obsolete event names and
+price fields; do not use them to report the current commerce contract. In
+particular, the old receipt projection does not carry exact atomic prices.
+Replacement projections need a versioned SQL rollout; the existing pipeline SQL
+is immutable. Do not delete the existing raw history to change projections.
+
+Deployment applies 0002 before enabling the binding and cron. Acceptance requires
+an unfunded production quote, its matching D1 outbox row, ingestion acknowledgement,
+and the same event ID in the raw Iceberg table. Monitor pending count, oldest
+pending timestamp, attempts and last_error in D1, and failed events in Pipelines.
+This implements core commerce transitions, not the full correlated Cap'n Web
+journey. Production sink verification remains required before claiming it live.
