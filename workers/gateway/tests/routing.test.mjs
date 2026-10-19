@@ -69,3 +69,17 @@ test('HTTP and capability search use the same compatibility results; Clef cannot
  const http=await response.json(),rpc=await new ProductService(env).search(intent);
  assert.equal(http.status,'no_match');assert.deepEqual(http.matches,rpc.matches);assert.equal(calls,0);
 });
+
+test('reviewed legacy route describes guidance and refuses executable promises',async t=>{
+ const {readFile}=await import('node:fs/promises');
+ const {manifest:m}=JSON.parse(await readFile(new URL('../review/live-routing-2026-10-19.json',import.meta.url),'utf8'));
+ assert.deepEqual(validateRoutingManifest(m),[]);
+ const db=createFixtureDb();t.after(()=>db.close());
+ insertItem(db,{sku:m.sku,slug:m.slug,service:m.service,version:m.version,kind:'tool'});
+ await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)').bind(m.sku,m.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
+ const env={SW_DB:db};
+ const result=await resolveIntent(env,{alias:'powertools-idempotency',product_kind:'guidance-product'});
+ assert.equal(result.status,'match');assert.equal(result.matches[0].routing.product_kind,'guidance-product');
+ for(const intent of [{product_kind:'executable-product'},{operation:'aws-deployment'},{desired_outcome:'exactly-once'},{target_language:'python'}])
+  assert.equal((await resolveIntent(env,{alias:'powertools-idempotency',...intent})).status,'no_match');
+});

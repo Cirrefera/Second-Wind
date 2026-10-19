@@ -1,0 +1,194 @@
+{
+  "observed_at": "2026-10-19T12:58:22.130Z",
+  "source_commit": "7ef95819d0d0514428d6af2c71f98b7da00c6a5a",
+  "public": {
+    "/health": {
+      "status": 200,
+      "deployment": {
+        "id": "f25ead1b-a5fe-461d-88d2-b5d8cca91dcd",
+        "tag": "82fe671add6468176134a344d38d2cbc3686b90e",
+        "timestamp": "2026-10-19T07:09:54.528929Z"
+      }
+    },
+    "/api/proof": {
+      "status": 503,
+      "state": "degraded",
+      "tools_live": 1,
+      "dependencies": {
+        "database": true,
+        "commerce_schema": true,
+        "payload_store": true,
+        "delivery_store": true
+      },
+      "recipient_configured": false,
+      "recipient_verified": false,
+      "facilitator_configured": true
+    },
+    "/api/tools": {
+      "status": 200,
+      "products": [
+        {
+          "sku": "SW-PT-0006",
+          "version": 1,
+          "kind": "tool",
+          "price_usdc_micros": "100000",
+          "hash": "62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe",
+          "hash_scope": "guidance-utf8",
+          "purchase_mode": "fixed-price"
+        }
+      ]
+    },
+    "/openapi.json": {
+      "status": 200
+    },
+    "/.well-known/x402": {
+      "status": 200
+    },
+    "/v2/x402/discovery/resources": {
+      "status": 200
+    },
+    "/llms.txt": {
+      "status": 200,
+      "approved_price_language": false
+    },
+    "capnweb": {
+      "status": "verified",
+      "sku": "SW-PT-0006",
+      "version": 1,
+      "hash": "62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe"
+    }
+  },
+  "cloudflare": {
+    "bindings": [
+      {
+        "name": "BUSINESS_EVENTS",
+        "type": "pipelines"
+      },
+      {
+        "name": "CANONICAL_ORIGIN",
+        "type": "plain_text"
+      },
+      {
+        "name": "CDP_FACILITATOR_KEY",
+        "type": "secret_text"
+      },
+      {
+        "name": "CF_VERSION_METADATA",
+        "type": "version_metadata"
+      },
+      {
+        "name": "CODEMODE_BACKEND_URL",
+        "type": "secret_text"
+      },
+      {
+        "name": "DELIVERIES",
+        "type": "r2_bucket"
+      },
+      {
+        "name": "LOADER",
+        "type": "worker_loader"
+      },
+      {
+        "name": "PAYLOADS",
+        "type": "r2_bucket"
+      },
+      {
+        "name": "SW_DB",
+        "type": "d1"
+      },
+      {
+        "name": "X402_NETWORK",
+        "type": "plain_text"
+      },
+      {
+        "name": "X402_PAY_TO",
+        "type": "secret_text"
+      }
+    ],
+    "compatibility_date": "2026-10-18",
+    "deployments": [
+      {
+        "id": "3626c8da-f38c-4f6b-b1a2-660250ee913f",
+        "created_on": "2026-10-19T07:09:55.057101Z",
+        "versions": [
+          {
+            "version_id": "f25ead1b-a5fe-461d-88d2-b5d8cca91dcd",
+            "percentage": 100
+          }
+        ]
+      },
+      {
+        "id": "aec88318-5449-4410-8110-7b3cb5056733",
+        "created_on": "2026-10-19T04:53:45.211906Z",
+        "versions": [
+          {
+            "version_id": "ba3f51da-ac24-42ee-b2bd-8c52cb081c9e",
+            "percentage": 100
+          }
+        ]
+      }
+    ],
+    "inventory": [
+      {
+        "status": "draft",
+        "kind": "artifact",
+        "count": 51
+      },
+      {
+        "status": "draft",
+        "kind": "guide",
+        "count": 38
+      },
+      {
+        "status": "draft",
+        "kind": "tool",
+        "count": 66
+      },
+      {
+        "status": "live",
+        "kind": "tool",
+        "count": 1
+      },
+      {
+        "status": "retired",
+        "kind": "tool",
+        "count": 1
+      }
+    ],
+    "payload_objects": [
+      {
+        "count": 0
+      }
+    ],
+    "component_releases": [
+      {
+        "count": 0
+      }
+    ],
+    "product_routing_manifests": [
+      {
+        "count": 0
+      }
+    ],
+    "selection_validations": [
+      {
+        "count": 0
+      }
+    ],
+    "release_approvals": "not_deployed",
+    "outbox": []
+  },
+  "limitations": [
+    "Read-only check: no funds, settlements, catalog promotions or infrastructure mutations.",
+    "R2 object counts and hashes, Basin/Iceberg arrival, live Clef and funded commerce require separate evidence."
+  ],
+  "github_workflow_run": 39256203500,
+  "r2_preparation": {
+    "status": "blocked",
+    "http_status": 403,
+    "provider_codes": [
+      10000
+    ],
+    "github_job": 118072178302
+  }
+}

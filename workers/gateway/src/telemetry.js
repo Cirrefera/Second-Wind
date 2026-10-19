@@ -1,6 +1,7 @@
 // Versioned commerce event contract. Only explicitly selected fields leave D1.
 export const EVENT_CONTRACT_VERSION = '1';
 export const EVENT_REGISTRY = Object.freeze({
+  'release.published':'release',
   'trial.started':'trial',
   'trial.completed':'trial',
   'trial.failed':'trial',

@@ -3,6 +3,11 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      prepare_draft_release:
+        description: 'Store the tested AWS-0568 draft after R2 access is configured'
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -58,7 +63,7 @@ jobs:
           retention-days: 7
   prepare-draft-release:
     needs: acceptance
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feat/proportional-product-scope'
+    if: github.event_name == 'workflow_dispatch' && inputs.prepare_draft_release && github.ref == 'refs/heads/feat/proportional-product-scope'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     concurrency:
@@ -77,3 +82,21 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: node scripts/stage-draft-release.mjs
+  prepare-reviewed-routing:
+    needs: acceptance
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'feat/proportional-product-scope'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --no-audit --no-fund
+        working-directory: workers/gateway
+      - name: Bind truthful routing to the unchanged live guidance release
+        working-directory: workers/gateway
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/stage-reviewed-routing.mjs
