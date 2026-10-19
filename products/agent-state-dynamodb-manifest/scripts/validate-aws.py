@@ -12,11 +12,15 @@ import botocore.validate
 
 root = Path(__file__).resolve().parent.parent
 code = """
-import {prepare} from './plan.mjs';
+import {prepare} from './planner.mjs';
 const optional=['status-index','expiry','recovery','change-stream'];
-console.log(JSON.stringify(Array.from({length:16},(_,mask)=>prepare({table_name:'agent-state-test',components:['table',...optional.filter((_,i)=>mask&(1<<i))]}))));
+const modules=await Promise.all(optional.map(async id=>(await import('./features/'+id+'.mjs')).feature));
+console.log(JSON.stringify(Array.from({length:16},(_,mask)=>{const features=modules.filter((_,i)=>mask&(1<<i));return prepare({language:'javascript',table_name:'agent-state-test'},features);})));
 """
 plans = json.loads(subprocess.check_output(['node','--input-type=module','-e',code], cwd=root, text=True))
+python_report = json.loads(subprocess.check_output(['python','scripts/variants.py'], cwd=root, text=True))
+assert plans == python_report['selections'], 'language_variants_disagree'
+plans += python_report['selections']
 model = botocore.session.get_session().get_service_model('dynamodb')
 count = 0
 response_count = 0
@@ -36,9 +40,12 @@ for plan in plans:
         response_count += 1
 report = {
     'sku': 'AWS-0568', 'botocore_version': botocore.__version__,
-    'service_api_version': model.api_version, 'component_combinations': len(plans),
+    'service_api_version': model.api_version, 'component_combinations_per_language': 16,
+    'languages': ['javascript', 'python'], 'validated_plans': len(plans),
     'validated_operation_inputs': count, 'validated_partial_response_shapes': response_count, 'result': 'passed',
-    'source_hashes': {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ['plan.mjs','config.schema.json','scripts/validate-aws.py']},
+    'source_hashes': {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest() for path in
+                      [root/'planner.mjs',root/'planner.py',root/'selection.schema.json',root/'scripts/variants.py',root/'scripts/validate-aws.py',
+                       *sorted((root/'features').glob('*.mjs')),*sorted((root/'features').glob('*.py'))]},
     'scope': 'AWS SDK input and partial output shape validation only; no response matcher, AWS deployment or service calls performed',
 }
 (root/'validation.json').write_text(json.dumps(report,indent=2)+'\n')

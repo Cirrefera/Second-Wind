@@ -1,6 +1,7 @@
 import {resolveIntent} from './routing.js';
 import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import { RpcTarget } from "capnweb";
+import {createJourneyContext,enqueueObservation} from './telemetry.js';
 import { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
 import { executeCode, reportProgress } from "./execution.js";
 import {
@@ -11,12 +12,16 @@ import {
 export { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
 export { executeCode, validateExecutionInput } from "./execution.js";
 
-export function quoteProduct(env, sku, config) {
-  return createQuote(env, sku, config);
+function operationJourney(journey) {
+  return createJourneyContext({journey_id:journey?.journey_id,transport:journey?.transport});
 }
 
-export function deliverProduct(env, grant) {
-  return deliverGrant(env, grant);
+export function quoteProduct(env, sku, config, options) {
+  return createQuote(env, sku, config, options);
+}
+
+export function deliverProduct(env, grant, options) {
+  return deliverGrant(env, grant, options);
 }
 
 async function withProgress(callback, operation, task) {
@@ -36,11 +41,13 @@ async function withProgress(callback, operation, task) {
 export class GrantCapability extends RpcTarget {
   #env;
   #grant;
+  #journey;
 
-  constructor(env, grant) {
+  constructor(env, grant, journey) {
     super();
     this.#env = env;
     this.#grant = grant;
+    this.#journey=journey;
   }
 
   async execute(invocationId, code, language, onProgress) {
@@ -49,10 +56,12 @@ export class GrantCapability extends RpcTarget {
       throw Object.assign(new Error("execution_not_entitled"), { status: 403 });
     }
     // Commerce owns scope, remaining units and invocation replay after reconnect.
-    return withProgress(onProgress, "recovery", () => executeGrantedInvocation(
+    const result=await withProgress(onProgress, "recovery", () => executeGrantedInvocation(
       this.#env, grant, { invocationId, code, language },
       () => executeCode(this.#env, code, language, grant, onProgress),
     ));
+    await enqueueObservation(this.#env,'recovery.result_recovered',{journey:operationJourney(this.#journey),payload:{payment_id:grant.paymentId,sku:grant.sku}});
+    return result;
   }
 
   async deliver(onProgress) {
@@ -60,7 +69,7 @@ export class GrantCapability extends RpcTarget {
     if (!grant.allowedActions?.includes("deliver")) {
       throw Object.assign(new Error("delivery_not_entitled"), { status: 403 });
     }
-    return withProgress(onProgress, "delivery", () => deliverProduct(this.#env, grant));
+    return withProgress(onProgress, "delivery", () => deliverProduct(this.#env, grant,{journey:operationJourney(this.#journey)}));
   }
 
   async info() {
@@ -82,31 +91,44 @@ export class GrantCapability extends RpcTarget {
 /** Both names are retained so existing agents can migrate without route drift. */
 export class ProductService extends RpcTarget {
   #env;
+  #journey;
 
-  constructor(env) {
+  constructor(env, journey) {
     super();
     this.#env = env;
+    this.#journey=createJourneyContext({...journey,transport:journey?.transport || 'rpc'});
   }
 
   components(sku) { return describeComponents(this.#env,sku); }
   async trial(sku,config,input,callback) {
-    const result=await trialProduct(this.#env,sku,config,input,callback);
-    return new TrialCapability(this.#env,result.trial_id,result.trial_token);
+    const result=await trialProduct(this.#env,sku,config,input,callback,{journey:operationJourney(this.#journey)});
+    return new TrialCapability(this.#env,result.trial_id,result.trial_token,this.#journey);
   }
   async recoverTrial(id,token) {
-    await recoverTrial(this.#env,id,token);
-    return new TrialCapability(this.#env,id,token);
+    await recoverTrial(this.#env,id,token,{journey:operationJourney(this.#journey)});
+    return new TrialCapability(this.#env,id,token,this.#journey);
   }
-  describe(sku) { return describeProduct(this.#env.SW_DB, sku); }
+  async describe(sku) {
+    const product=await describeProduct(this.#env.SW_DB,sku);
+    await enqueueObservation(this.#env,'discovery.described',{journey:operationJourney(this.#journey),payload:{sku:product.sku,product_version_ref:product.version}});
+    return product;
+  }
   describeProduct(sku) { return this.describe(sku); }
 
-  search(query, limit) {
-    return typeof query === 'string' ? searchCatalog(this.#env.SW_DB, query, limit) : this.searchIntent(query, limit);
+  async search(query, limit) {
+    if(typeof query!=='string') return this.searchIntent(query,limit);
+    const journey=operationJourney(this.#journey);
+    await enqueueObservation(this.#env,'discovery.searched',{journey});
+    const products=await searchCatalog(this.#env.SW_DB,query,limit);
+    await enqueueObservation(this.#env,'discovery.resolved',{journey,payload:{candidate_product_ids:products.map(p=>p.sku),result_count:products.length,resolution_status:products.length?'multiple_candidates':'no_match'}});
+    return products;
   }
   async searchIntent(intent, limit, callbacks) {
-    let result=await resolveIntent(this.#env,intent,limit);
+    const journey=operationJourney(this.#journey);
+    let result=await resolveIntent(this.#env,intent,limit,{journey});
     if(result.status==='missing_configuration' && callbacks?.clarify) {
       let timer;
+      await enqueueObservation(this.#env,'clarification.requested',{journey,payload:{clarification_count:result.clarifications.length}});
       try {
         const answers=await Promise.race([callbacks.clarify(result.clarifications),
           new Promise(resolve=>{timer=setTimeout(()=>resolve(null),5000);})]);
@@ -116,37 +138,46 @@ export class ProductService extends RpcTarget {
             const field=question.field.startsWith('evidence:')?'evidence':question.field;
             if(Object.hasOwn(answers,field)) patch[field]=answers[field];
           }
-          result=await resolveIntent(this.#env,{...(typeof intent==='string'?{goal:intent}:intent),...patch},limit);
+          await enqueueObservation(this.#env,'clarification.responded',{journey,payload:{response_status:'received'}});
+          result=await resolveIntent(this.#env,{...(typeof intent==='string'?{goal:intent}:intent),...patch},limit,{journey});
+        } else {
+          await enqueueObservation(this.#env,'clarification.responded',{journey,payload:{response_status:answers===null?'timeout':'invalid'}});
         }
+      } catch(error) {
+        await enqueueObservation(this.#env,'clarification.responded',{journey,payload:{response_status:'failed'}});
+        throw error;
       } finally {clearTimeout(timer);}
     }
     return {...result,candidates:result.matches.map(({routing,compatibility,score,...product})=>({
-      product:new ProductCapability(this.#env,product),compatibility,
+      product:new ProductCapability(this.#env,product,undefined,undefined,this.#journey),compatibility,
     }))};
   }
   searchCatalog(query, limit) { return this.search(query, limit); }
 
-  configure(sku, config, callbacks) { return clarify(this.#env.SW_DB, sku, config, callbacks); }
+  configure(sku, config, callbacks) { return clarify(this.#env, sku, config, callbacks,operationJourney(this.#journey)); }
 
   async select(sku) {
-    return new ProductCapability(this.#env, await describeProduct(this.#env.SW_DB, sku));
+    const product=await describeProduct(this.#env.SW_DB,sku);
+    await enqueueObservation(this.#env,'selection.product_selected',{journey:operationJourney(this.#journey),payload:{sku:product.sku,product_version_ref:product.version,selected_product_ids:[product.sku]}});
+    return new ProductCapability(this.#env,product,undefined,undefined,this.#journey);
   }
   checkConfiguration(sku, config) { return this.configure(sku, config); }
 
-  quote(sku, config) { return createQuote(this.#env, sku, config); }
+  quote(sku, config) { return createQuote(this.#env, sku, config,{journey:operationJourney(this.#journey)}); }
   quoteProduct(sku, config) { return this.quote(sku, config); }
 
   recoveryChallenge(paymentId) {
-    return createRecoveryChallenge(this.#env, paymentId);
+    return createRecoveryChallenge(this.#env, paymentId,{journey:operationJourney(this.#journey)});
   }
 
   recoverWithWallet(paymentId, proof) {
-    return recoverWithWallet(this.#env, paymentId, proof);
+    return recoverWithWallet(this.#env, paymentId, proof,{journey:operationJourney(this.#journey)});
   }
 
   async getGrant(paymentId, recoveryToken) {
     const grant = await recoverGrant(this.#env, paymentId, recoveryToken);
-    return new GrantCapability(this.#env, grant);
+    await enqueueObservation(this.#env,'recovery.grant_recovered',{journey:operationJourney(this.#journey),payload:{payment_id:grant.paymentId,sku:grant.sku}});
+    return new GrantCapability(this.#env, grant,this.#journey);
   }
 
   async recoverSession(paymentId, recoveryToken) {
@@ -154,11 +185,17 @@ export class ProductService extends RpcTarget {
   }
 }
 
-async function clarify(db, sku, config, callbacks) {
-  let result = await checkConfiguration(db, sku, config);
+async function clarify(env, sku, config, callbacks, journey) {
+  const checked=async value=>{
+    const result=await checkConfiguration(env.SW_DB,sku,value);
+    await enqueueObservation(env,'configuration.checked',{journey:operationJourney(journey),payload:{sku:result.sku,product_version_ref:result.version,configuration_status:result.ok?'complete':'incomplete',missing_count:result.missing.length,error_count:result.errors.length}});
+    return result;
+  };
+  let result = await checked(config);
   if (result.ok || !result.missing.length || !callbacks) return result;
   if (result.missing.length > 16) throw Object.assign(new Error('too_many_clarifications'), {status:400});
   let timer;
+  await enqueueObservation(env,'clarification.requested',{journey,payload:{sku:result.sku,clarification_count:result.missing.length}});
   try {
     const answers = await Promise.race([
       callbacks.clarify(result.missing),
@@ -168,6 +205,7 @@ async function clarify(db, sku, config, callbacks) {
     if (!answers || Array.isArray(answers) || typeof answers !== 'object') {
       throw Object.assign(new Error('invalid_clarification_response'), {status:400});
     }
+    await enqueueObservation(env,'clarification.responded',{journey,payload:{sku:result.sku,response_status:'received'}});
     const patch = {};
     for (const question of result.missing) {
       // Nested schema pointers require an explicit reconfigure.
@@ -175,20 +213,23 @@ async function clarify(db, sku, config, callbacks) {
         patch[question.field] = answers[question.field];
       }
     }
-    return checkConfiguration(db, sku, {...result.config, ...patch});
+    return checked({...result.config, ...patch});
+  } catch(error) {
+    await enqueueObservation(env,'clarification.responded',{journey,payload:{sku:result.sku,response_status:error.message==='clarification_timeout'?'timeout':error.message==='invalid_clarification_response'?'invalid':'failed'}});
+    throw error;
   } finally { clearTimeout(timer); }
 }
 
 /** Selected public product authority, never a repository or storage capability. */
 export class ProductCapability extends RpcTarget {
-  #env; #product; #config; #check;
-  constructor(env, product, config, check) {
-    super(); this.#env = env; this.#product = product; this.#config = config; this.#check = check;
+  #env; #product; #config; #check; #journey;
+  constructor(env, product, config, check,journey) {
+    super(); this.#env = env; this.#product = product; this.#config = config; this.#check = check;this.#journey=journey;
   }
   info() { return this.#product; }
   async compatibility(config = this.#config) {
     await this.#unchanged();
-    return checkConfiguration(this.#env.SW_DB, this.#product.sku, config);
+    return clarify(this.#env, this.#product.sku, config,null,operationJourney(this.#journey));
   }
   async #unchanged() {
     const current = await describeProduct(this.#env.SW_DB, this.#product.sku);
@@ -198,22 +239,27 @@ export class ProductCapability extends RpcTarget {
   }
   async configure(config, callbacks) {
     await this.#unchanged();
-    const result = await clarify(this.#env.SW_DB, this.#product.sku, config, callbacks);
+    const result = await clarify(this.#env, this.#product.sku, config, callbacks,operationJourney(this.#journey));
     await this.#unchanged();
-    return new ProductCapability(this.#env, this.#product, result.config, result);
+    return new ProductCapability(this.#env, this.#product, result.config, result,this.#journey);
   }
-  components() { return describeComponents(this.#env,this.#product.sku); }
+  async components() {
+    await this.#unchanged();
+    const menu=await describeComponents(this.#env,this.#product.sku);
+    await this.#unchanged();
+    return menu;
+  }
   async trial(input,callback) {
     await this.#unchanged();
     if(!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'),{status:400});
-    const result=await trialProduct(this.#env,this.#product.sku,this.#config,input,callback);
-    return new TrialCapability(this.#env,result.trial_id,result.trial_token);
+    const result=await trialProduct(this.#env,this.#product.sku,this.#config,input,callback,{journey:operationJourney(this.#journey)});
+    return new TrialCapability(this.#env,result.trial_id,result.trial_token,this.#journey);
   }
   configuration() { return this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}; }
   async quote() {
     await this.#unchanged();
     if (!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'), {status:400});
-    const quote = await createQuote(this.#env, this.#product.sku, this.#config);
+    const quote = await createQuote(this.#env, this.#product.sku, this.#config,{journey:operationJourney(this.#journey)});
     if (quote.version !== this.#product.version || quote.content_hash !== this.#product.content_hash) {
       throw Object.assign(new Error('product_changed'), {status:409});
     }
@@ -222,21 +268,21 @@ export class ProductCapability extends RpcTarget {
 }
 
 export class TrialCapability extends RpcTarget {
-  #env; #id; #token;
-  constructor(env,id,token) {super();this.#env=env;this.#id=id;this.#token=token;}
-  info() {return recoverTrial(this.#env,this.#id,this.#token);}
+  #env; #id; #token; #journey;
+  constructor(env,id,token,journey) {super();this.#env=env;this.#id=id;this.#token=token;this.#journey=journey;}
+  info() {return recoverTrial(this.#env,this.#id,this.#token,{journey:operationJourney(this.#journey)});}
   recovery() {return {trial_id:this.#id,trial_token:this.#token};}
   async selectComponents(ids) {
     const scope=await selectTrialComponents(this.#env,this.#id,this.#token,ids);
-    return new SelectionCapability(this.#env,this.#id,this.#token,scope);
+    return new SelectionCapability(this.#env,this.#id,this.#token,scope,this.#journey);
   }
 }
 class SelectionCapability extends RpcTarget {
-  #env; #id; #token; #scope;
-  constructor(env,id,token,scope) {super();this.#env=env;this.#id=id;this.#token=token;this.#scope=scope;}
+  #env; #id; #token; #scope; #journey;
+  constructor(env,id,token,scope,journey) {super();this.#env=env;this.#id=id;this.#token=token;this.#scope=scope;this.#journey=journey;}
   info() {return structuredClone(this.#scope);}
   accept(expectedScopeHash) {
     if(expectedScopeHash!==this.#scope.scope_hash) throw Object.assign(new Error('selection_acceptance_mismatch'),{status:409});
-    return acceptTrialSelection(this.#env,this.#id,this.#token,this.#scope.selected_components,expectedScopeHash);
+    return acceptTrialSelection(this.#env,this.#id,this.#token,this.#scope.selected_components,expectedScopeHash,{journey:operationJourney(this.#journey)});
   }
 }

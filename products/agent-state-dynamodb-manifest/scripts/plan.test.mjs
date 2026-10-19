@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {prepare} from '../plan.mjs';
+import './variants.test.mjs';
 
 const optional=['status-index','expiry','recovery','change-stream'];
 

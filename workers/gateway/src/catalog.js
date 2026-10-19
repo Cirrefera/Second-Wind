@@ -5,7 +5,10 @@ const CATALOG_COLUMNS = `i.sku, i.slug, i.name, i.kind, i.service, i.summary, i.
   i.source_path, i.source_url, i.license_spdx, i.provenance, i.version, i.updated_at,
   i.guidance AS _guidance, po.id AS _payload_id, po.content_hash AS _payload_hash,
   po.mime_type AS _payload_mime, po.size_bytes AS _payload_size,
-  EXISTS(SELECT 1 FROM component_releases cr WHERE cr.sku=i.sku AND cr.version=i.version) AS _component_pricing`;
+  EXISTS(SELECT 1 FROM component_releases cr WHERE cr.sku=i.sku AND cr.version=i.version
+    AND json_type(cr.manifest_json,'$.components')='array'
+    AND json_array_length(cr.manifest_json,'$.components')>0) AS _component_pricing,
+  (SELECT cr.manifest_json FROM component_releases cr WHERE cr.sku=i.sku AND cr.version=i.version) AS _release_manifest`;
 const CATALOG_SOURCE = `FROM items i LEFT JOIN payload_objects po
   ON po.sku = i.sku AND po.version = i.version`;
 const validators = new Map();
@@ -27,12 +30,20 @@ async function publicProduct(row) {
   if (!Number.isSafeInteger(amount) || amount <= 0 || amount > 10_000_000) {
     throw Object.assign(new Error("invalid_catalog_price"), { status: 503 });
   }
-  const { _guidance, _payload_id, _payload_hash, _payload_mime, _payload_size, _component_pricing, ...product } = row;
+  const { _guidance, _payload_id, _payload_hash, _payload_mime, _payload_size, _component_pricing, _release_manifest, ...product } = row;
+  let release;
+  if (_release_manifest) {
+    try { release=JSON.parse(_release_manifest); }
+    catch { throw Object.assign(new Error('invalid_release_manifest'),{status:503}); }
+    if (release.language_policy) product.language_policy=release.language_policy;
+  }
   if (_component_pricing) {
     product.price_role='maximum';
     product.pricing_mode='proportional-components';
     product.components_url=`/api/products/${encodeURIComponent(product.sku)}/components`;
     product.trial_url='/api/trials';
+    product.pricing_status=release?.pricing ? 'configured' : 'not_configured';
+    if (!release?.pricing) product.price_role='historical-unconfirmed';
   }
   if (_payload_id) {
     if (typeof _payload_hash !== "string" || !/^[a-f0-9]{64}$/i.test(_payload_hash)) {
@@ -165,24 +176,29 @@ export async function checkConfiguration(db, sku, config) {
   }
 
   let errors = [];
+  if (product.language_policy?.mode === 'configured') {
+    const adapters=product.language_policy.adapters;
+    if (!Object.hasOwn(cfg,'language')) errors.push({code:'required',field:'language',message:'Choose the delivery language explicitly.'});
+    else if (!Array.isArray(adapters) || !adapters.includes(cfg.language)) errors.push({code:'unsupported_delivery_language',field:'language',message:'The requested delivery language has no verified adapter for this release.'});
+  }
   if (product.input_schema) {
     try {
       const result = schemaValidator(product.input_schema).validate(cfg);
       if (!result.valid) {
-        errors = (result.errors || []).slice(0, 30).map(error => ({
+        errors.push(...(result.errors || []).slice(0, 30).map(error => ({
           code: error.keyword,
           field: error.keyword === "required"
             ? error.error.match(/required property "(.+)"\./)?.[1] || error.instanceLocation
             : error.instanceLocation,
           message: error.error,
-        }));
+        })));
       }
     } catch {
       // Invalid or unsupported schemas are catalog defects, never a bypass.
-      errors = [{ code: "catalog_schema_invalid", message: "This product's input contract cannot be validated." }];
+      errors.push({ code: "catalog_schema_invalid", message: "This product's input contract cannot be validated." });
     }
   }
-  const missing = errors.filter(error => error.code === "required").map(error => ({
+  const missing = errors.filter((error,index)=>error.code === 'required' && errors.findIndex(other=>other.code==='required'&&other.field===error.field)===index).map(error => ({
     field: error.field,
     question: error.field === "language" ? "What programming language do you want the product delivered in?"
       : `Missing required field: ${error.field}`,

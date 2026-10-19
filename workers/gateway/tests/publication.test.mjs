@@ -12,6 +12,8 @@ test('component publication verifies actual bytes even when supplied review hash
  assert.ok(r.blockers.includes('component_file_size_mismatch'));
  delete m.components[0].files[0].content;
  assert.ok((await validatePublication(item,m)).blockers.includes('component_file_bytes_missing'));
+ delete m.pricing;
+ assert.ok((await validatePublication(item,m)).blockers.includes('commercial_component_allocation_missing'));
 });
 const item={sku:'A',slug:'a',name:'A',summary:'Operational guidance',price_usd:1,kind:'guide',service:'lambda',version:1,status:'draft',guidance:'A reviewed operational procedure',license_spdx:'MIT',provenance:'synthesized'};
 test('prose masquerading as an artifact is blocked without changing legacy hashes',async()=>{

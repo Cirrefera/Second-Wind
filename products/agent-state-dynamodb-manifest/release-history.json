@@ -79,5 +79,90 @@
       "release-candidate.json": "f3f1ffa2595a0694468228148a4ea6b9b7279cddb4af38edc130d346275773e1",
       "validation.json": "5b6c7b2257a88cac09265cd0700804b609c999af96aa9c80c303f67c3c7442fa"
     }
+  },
+  {
+    "source_repository_commit": "7929bb0196accaa88d24ccddb2d8d9a9440e1b0f",
+    "note": "Preserved local v1 draft metadata before original modular v2 preparation; never published. Exact old source bytes remain in this repository commit. Legacy catalog hashes remain separate.",
+    "files": {
+      "files.manifest.json": {
+        "schema_version": "1",
+        "sku": "AWS-0568",
+        "product_kind": "artifact-product",
+        "required_files": [
+          {
+            "path": "plan.mjs",
+            "sha256": "a53715080c2a42d2394160ef4db961c4f3da4d8f35108f7c63840870caa58941",
+            "size_bytes": 4038
+          },
+          {
+            "path": "config.schema.json",
+            "sha256": "8adbbee4a0ca6ec8614c6f77e44dbdae7706c1eebb1073a6d2f5e00a31ae8e00",
+            "size_bytes": 424
+          },
+          {
+            "path": "README.md",
+            "sha256": "f774f28638c1307388a8e60d2ddcd68f4a2c1ce36098c0a2250b4d87960df941",
+            "size_bytes": 4573
+          }
+        ]
+      },
+      "release-candidate.json": {
+        "sku": "AWS-0568",
+        "status": "draft",
+        "release_ref": "sha256:c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
+        "content_hash": "c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
+        "hash_scope": "exact UTF-8 files.manifest.json bytes including final newline",
+        "origin": "Second Wind",
+        "license": "Apache-2.0",
+        "original_contribution": "Configurable API plan with selected-feature isolation, explicit activation dependency and verification requests.",
+        "delivery_contract": {
+          "kind": "file-package",
+          "required_files": [
+            "plan.mjs",
+            "config.schema.json",
+            "README.md"
+          ]
+        },
+        "language_policy": {
+          "mode": "configured",
+          "explicit_selection": false,
+          "adapters": [
+            "javascript"
+          ]
+        },
+        "publication_blockers": [
+          "component_price_allocation_pending",
+          "immutable_delivery_store_pending",
+          "trial_fulfillment_integration_pending",
+          "publication_review_pending",
+          "catalog_contract_and_provenance_review_pending",
+          "explicit_language_selection_integration_pending"
+        ],
+        "validation": {
+          "service_model": "passed",
+          "aws_deployment": "not_performed"
+        }
+      },
+      "validation.json": {
+        "sku": "AWS-0568",
+        "botocore_version": "1.43.114",
+        "service_api_version": "2012-08-10",
+        "component_combinations": 16,
+        "validated_operation_inputs": 80,
+        "validated_partial_response_shapes": 32,
+        "result": "passed",
+        "source_hashes": {
+          "plan.mjs": "a53715080c2a42d2394160ef4db961c4f3da4d8f35108f7c63840870caa58941",
+          "config.schema.json": "8adbbee4a0ca6ec8614c6f77e44dbdae7706c1eebb1073a6d2f5e00a31ae8e00",
+          "scripts/validate-aws.py": "8b2bed7081bc28783ed98867a2f6ffa3986c58e69a759d743bbd6d8309f2e6c4"
+        },
+        "scope": "AWS SDK input and partial output shape validation only; no response matcher, AWS deployment or service calls performed"
+      }
+    },
+    "metadata_file_sha256": {
+      "files.manifest.json": "c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
+      "release-candidate.json": "908b6f63c96d286951066a026b0977854654332993a1d089a5dcded894febf47",
+      "validation.json": "6d61cfe12dc3a6b5e0318ce2d314520f23e916177b87e66bf537269fde5c7942"
+    }
   }
 ]

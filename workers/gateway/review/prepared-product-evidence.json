@@ -1,0 +1,186 @@
+{
+  "schema_version": "1",
+  "observed_date": "2026-10-19",
+  "scope": "Local actual-source preparation with exact inline payload bytes. No cloud credentials, store writes, publication approvals, price allocations, live inference, AWS calls or payment operations.",
+  "generator_sha256": "591b9869c6509e9b7cae36c3fe934e9fc14e56c7fd46c70ef56fd0b32cf9f300",
+  "preparation_source_sha256": "672b3b2d32a4cb74e9cc4e0fac6db67c865c91d18300f0a2ab03b20ca0884e3f",
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "source_inspection_sha256": "7cc9cae571bb587ab0afbf06c47c1f46c54c2b72ad68b95452a1097590d9db12",
+  "source_inspection_counts": {
+    "records": 157,
+    "repositories": 18,
+    "repositories_inspected": 18,
+    "source_paths_found": 86,
+    "source_paths_not_found": 5
+  },
+  "products": [
+    {
+      "product": "agent-state-dynamodb-manifest",
+      "sku": "AWS-0568",
+      "version": 2,
+      "status": "draft",
+      "input_file_sha256": "c3175bc06049cc88b3b2d521dda74ac51be91e216dcd38db573cc9aef83d1ff4",
+      "canonical_input_sha256": "b13277821281b47a46d0a8842e7bcd9f657a229b62396b86f8d5471bd9797394",
+      "validation_file_sha256": "022bfb17c2cdf78fc06f38f8dbc65d344d31a4226d63420c99dea3ad4eac3869",
+      "validation": {
+        "sku": "AWS-0568",
+        "botocore_version": "1.43.114",
+        "service_api_version": "2012-08-10",
+        "component_combinations_per_language": 16,
+        "languages": [
+          "javascript",
+          "python"
+        ],
+        "validated_plans": 32,
+        "validated_operation_inputs": 160,
+        "validated_partial_response_shapes": 64,
+        "result": "passed",
+        "source_hashes": {
+          "planner.mjs": "c8c7a61b7287ce99547abbfa96706430b4268c6f94843c162d551854bb54cb9c",
+          "planner.py": "e79d64a7c2680aaf4c0a3471b9417e290233a59188a8384470a33960ff4de7d7",
+          "selection.schema.json": "1ae694fb12ef37f985e2972abb07cf8c01268b3b68a304918e44e364c6312106",
+          "scripts/variants.py": "26d1ac8a45424fa8a71a0be6f7989baf11bb7bafe0d3091c3f933968b187c101",
+          "scripts/validate-aws.py": "a67fcdee9c46c187407c25df561f8befcb81a8bc4104f37cbd6fb6500dc817a7",
+          "features/change-stream.mjs": "086410727f47e332fcf38987ba26069b4d1f6a19719d64b31e0c68581cd803c2",
+          "features/expiry.mjs": "44f7373cf604ff7cdc72252d4908f3588cc37ce283899e5e30bfc86d9ad12ce8",
+          "features/recovery.mjs": "1a2a45974703441e55e830f79d318423228d15ad5f8cfd0715eba3cbd42333b2",
+          "features/status-index.mjs": "f58bf13cd9ffb80e4b9d3bc9b0d7558990a4f7d2eaee9b106b819430c2ee36d8",
+          "features/change_stream.py": "cd9e43955b6d92961b5eaa065823fbc0848396cfcb5f96d0618d99ea35c56286",
+          "features/expiry.py": "1d662ec1e68872b77dd4b6e12625ba3237ece5e8237691a686aa97393518ae91",
+          "features/recovery.py": "c66827757c37be4bc1c49d449f427be4d1981e051f5c5f3df739d28800fc1024",
+          "features/status_index.py": "2d7112a3274d00fecc1eac9a5ebb361afc7779cbb48052d0e065e81f9f6a391f"
+        },
+        "scope": "AWS SDK input and partial output shape validation only; no response matcher, AWS deployment or service calls performed"
+      },
+      "preparation": {
+        "sku": "AWS-0568",
+        "version": 2,
+        "manifest_hash": "7fe870b9f233db1e39ff80d6a90b29e694d2821db8e1206702e4be57fa2bf85a",
+        "routing_hash": "8b35f3d9507b0dda77fb132071c87355b12c236cf68ca41753dcc16b7907d624",
+        "input_object": {
+          "r2_key": "release-inputs/AWS-0568/2/7fe870b9f233db1e39ff80d6a90b29e694d2821db8e1206702e4be57fa2bf85a/b13277821281b47a46d0a8842e7bcd9f657a229b62396b86f8d5471bd9797394.json",
+          "content_hash": "b13277821281b47a46d0a8842e7bcd9f657a229b62396b86f8d5471bd9797394",
+          "size_bytes": 107052,
+          "mime_type": "application/json",
+          "stored_verified": false
+        },
+        "source_ready": true,
+        "source_blockers": [],
+        "payload": {
+          "r2_bucket": "secondwind-payloads",
+          "r2_key": "releases/AWS-0568/2/57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10",
+          "content_hash": "57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10",
+          "size_bytes": 30018,
+          "mime_type": "application/json",
+          "stored_verified": false
+        },
+        "review_objects": [],
+        "publication": {
+          "sku": "AWS-0568",
+          "slug": "agent-state-dynamodb-manifest",
+          "status": "draft",
+          "validator_version": "2026-10-19.5",
+          "eligibility": "blocked",
+          "blockers": [
+            "canonical_service_unverified",
+            "advertised_contract_unreviewed",
+            "product_contribution_unreviewed",
+            "license_or_origin_unverified",
+            "purchase_url_unverified",
+            "pre_settlement_preparation_unverified",
+            "commercial_component_allocation_missing",
+            "release_validation_missing",
+            "language_adapters_unverified",
+            "routing_review_missing",
+            "component_price_allocation_pending",
+            "trusted_product_and_contract_reviews_pending",
+            "trusted_license_and_provenance_review_pending",
+            "publication_approval_pending"
+          ],
+          "guidance_hash": "ab03d40d1bd73d1697af9409e2407a131b0b130219ed9ef102a6de858af3d53b",
+          "legacy_hash": "99264137b57258f5",
+          "legacy_hash_status": "different_from_guidance",
+          "manifest_hash": "7fe870b9f233db1e39ff80d6a90b29e694d2821db8e1206702e4be57fa2bf85a"
+        }
+      }
+    },
+    {
+      "product": "lambda-powertools-idempotency",
+      "sku": "SW-PT-0006",
+      "version": 2,
+      "status": "draft",
+      "input_file_sha256": "7ffd25647813b7332a7521dcfbdb1b2717e7bdefebd66b432369fd62b21fd823",
+      "canonical_input_sha256": "5349427b6f644883bb44c145a3d04813bf8907eba4ecfd5a6a38eed2bc30dab9",
+      "validation_file_sha256": "2f88620e794f05883445ef85dccc4e8c87b1b9c838724f97a50316c76e7ed257",
+      "validation": {
+        "sku": "SW-PT-0006",
+        "version": 2,
+        "result": "passed",
+        "tests": 7,
+        "language": "python",
+        "python_version": "3.12.14",
+        "dependencies": {
+          "aws-lambda-powertools": "3.36.0",
+          "boto3": "1.43.114",
+          "botocore": "1.43.114"
+        },
+        "source_hashes": {
+          "example.py": "0cd6a2d0e0951a22212f2732867bc291d7db7f97c5be677c27551496c310d946",
+          "requirements.txt": "0da11025a3dae01b790394146e4e5df2d211d635f688fcf7939de96b49104c87",
+          "scripts/example_test.py": "797ef02e3844e0d559f30771104d8237a112e1e95d6335fe2a2af9df7d076071"
+        },
+        "scope": "Actual Powertools decorator and DynamoDB persistence adapter with deterministic fake I/O. No AWS deployment, network calls, payment processor or external exactly-once guarantee."
+      },
+      "preparation": {
+        "sku": "SW-PT-0006",
+        "version": 2,
+        "manifest_hash": "3e6dab8fbaeb251796d2421c7d4e95b47e3bddf18ca625f65370522e31ad1852",
+        "routing_hash": "eaf39ed776304a1eeb6029bd2613dbed2a768220ecbd7cf14c2ae46890a23478",
+        "input_object": {
+          "r2_key": "release-inputs/SW-PT-0006/2/3e6dab8fbaeb251796d2421c7d4e95b47e3bddf18ca625f65370522e31ad1852/5349427b6f644883bb44c145a3d04813bf8907eba4ecfd5a6a38eed2bc30dab9.json",
+          "content_hash": "5349427b6f644883bb44c145a3d04813bf8907eba4ecfd5a6a38eed2bc30dab9",
+          "size_bytes": 53940,
+          "mime_type": "application/json",
+          "stored_verified": false
+        },
+        "source_ready": true,
+        "source_blockers": [],
+        "payload": {
+          "r2_bucket": "secondwind-payloads",
+          "r2_key": "releases/SW-PT-0006/2/80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+          "content_hash": "80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+          "size_bytes": 9572,
+          "mime_type": "text/markdown; charset=utf-8",
+          "stored_verified": false
+        },
+        "review_objects": [],
+        "publication": {
+          "sku": "SW-PT-0006",
+          "slug": "lambda-powertools-idempotency",
+          "status": "draft",
+          "validator_version": "2026-10-19.5",
+          "eligibility": "blocked",
+          "blockers": [
+            "canonical_service_unverified",
+            "advertised_contract_unreviewed",
+            "product_contribution_unreviewed",
+            "license_or_origin_unverified",
+            "purchase_url_unverified",
+            "pre_settlement_preparation_unverified",
+            "guidance_quality_unreviewed",
+            "immutable_guidance_release_unverified",
+            "language_adapters_unverified",
+            "routing_review_missing",
+            "trusted_guidance_and_contract_reviews_pending",
+            "trusted_license_and_provenance_review_pending",
+            "publication_approval_pending"
+          ],
+          "guidance_hash": "80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+          "legacy_hash": "62a28a512af90491",
+          "legacy_hash_status": "different_from_guidance",
+          "manifest_hash": "3e6dab8fbaeb251796d2421c7d4e95b47e3bddf18ca625f65370522e31ad1852"
+        }
+      }
+    }
+  ]
+}

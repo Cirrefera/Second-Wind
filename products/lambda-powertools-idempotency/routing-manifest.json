@@ -1,0 +1,64 @@
+{
+  "schema_version": "1",
+  "product_id": "SW-PT-0006",
+  "sku": "SW-PT-0006",
+  "slug": "lambda-powertools-idempotency",
+  "version": 2,
+  "release_ref": "sha256:80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+  "service": "lambda",
+  "product_kind": "guidance-product",
+  "route_summary": "Configure Python Lambda Powertools DynamoDB idempotency to deduplicate completed retries, reject changed payment payloads and reason about uncertain external side effects.",
+  "supported_boundary": "Guidance and tested Python 3.12/Powertools 3.36.0 wiring for a single decoded JSON payment event per Lambda invocation and an existing DynamoDB persistence table. Requires a buyer-supplied payment function with durable downstream idempotency. Does not implement a payment processor, cross-service atomicity, authentication, SQS batch handling, AWS deployment or other language adapters.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-idempotency-guidance"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "idempotency",
+    "duplicate-payments",
+    "dynamodb"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda",
+    "aws.powertools.idempotency"
+  ],
+  "problem_family_ids": [
+    "duplicate-side-effects"
+  ],
+  "operations": [
+    "configure-idempotency"
+  ],
+  "environments": [
+    "aws-lambda"
+  ],
+  "desired_outcomes": [
+    "deduplicate-retries"
+  ],
+  "input_kinds": [
+    "json-event"
+  ],
+  "failure_signatures": [
+    "duplicate-charge",
+    "duplicate-invocation"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.12"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "exactly-once-external-payment",
+    "payment-processing",
+    "typescript",
+    "javascript",
+    "java",
+    "dotnet",
+    "sqs-batch",
+    "event-authentication",
+    "aws-deployment"
+  ]
+}

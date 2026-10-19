@@ -4,10 +4,12 @@ import {readChoices,readInventoryKind,readJourneyPattern,readCandidateAlignment,
 import {canonicalJson,sha256} from '../src/contracts.js';
 import {resolveIntent} from '../src/routing.js';
 import {createFixtureDb,insertItem} from './helpers/d1.mjs';
+import {EVENT_REGISTRY} from '../src/telemetry.js';
 const keys=Object.keys(inventoryQuestions().advertised_kind.criteria);
 const answer=()=>({model:'clef-flash',answers:{advertised_kind:{type:'choice',choice:'unknown',confidence:1,probabilities:Object.fromEntries(keys.map(k=>[k,k==='unknown'?1:0]))}}});
 const choiceResponse=(questions,values={})=>({model:'clef-flash',answers:Object.fromEntries(Object.entries(questions).map(([id,q])=>{
- const value=Object.hasOwn(values,id)?values[id]:{choice:'unknown',confidence:1};
+ const value=Object.hasOwn(values,id)?values[id]:q.type==='noul'?{noul:1}:{choice:'unknown',confidence:1};
+ if(q.type==='noul') return [id,{type:'noul',...value}];
  return [id,{type:'choice',...value,probabilities:value.probabilities||Object.fromEntries(Object.keys(q.criteria).map(k=>[k,k===value.choice?1:0]))}];
 }))});
 test('reader bounds stalled inference and ignores late results',async()=>{
@@ -165,6 +167,44 @@ test('contradictory and incomplete journey snapshots retain the recorded sequenc
  }
 });
 
+test('journey diagnostics accept actual registry events and only typed public status fields',async()=>{
+ const events=[
+  {event_type:'discovery.resolved',payload:{resolution_status:'no_match',goal:'private',configuration:{token:'private'}}},
+  {event_type:'clarification.responded',payload:{response_status:'received',answer:'private'}},
+  {event_type:'configuration.checked',configuration_status:'incomplete',configuration:'private'},
+  {event_type:'delivery.prepared',payload:{delivery_id:'private',body:'private'}},
+  {event_type:'receipt.issued',payload:{receipt:'private'}},
+  {event_type:'discovery.resolved',resolution_status:'private'},
+ ];
+ let sent;
+ const result=await readJourneyPattern({run:async(model,input)=>{sent=input;return choiceResponse(input.questions);}},events,'eval:observed-journey');
+ assert.deepEqual(sent.state,[
+  {event_type:'discovery.resolved',resolution_status:'no_match'},
+  {event_type:'clarification.responded',response_status:'received'},
+  {event_type:'configuration.checked',configuration_status:'incomplete'},
+  {event_type:'delivery.prepared'},{event_type:'receipt.issued'},{event_type:'discovery.resolved'},
+ ]);
+ assert.ok(!JSON.stringify(sent).includes('private'));
+ assert.match(sent.questions.pattern.criteria['catalog-coverage-gap'],/discovery\.resolved with resolution_status no_match/);
+ assert.match(sent.questions.pattern.criteria['clarification-open'],/clarification\.responded with response_status received/);
+ assert.match(sent.questions.pattern.criteria['delivery-response-prepared'],/does not prove client receipt/);
+ assert.match(sent.questions.pattern.criteria['receipt-issued'],/does not prove delivery preparation/);
+ assert.equal(result.readings.pattern.choice,'unknown');
+ const registryEvents=Object.keys(EVENT_REGISTRY).map(event_type=>({event_type,payload:{raw:'private'}}));
+ await readJourneyPattern({run:async(model,input)=>{assert.deepEqual(input.state,registryEvents.map(({event_type})=>({event_type})));return choiceResponse(input.questions);}},registryEvents,'eval:registry');
+});
+
+test('receipt observations never fabricate a delivery preparation event for the diagnostic reader',async()=>{
+ for(const event_type of ['receipt.issued','delivery.prepared']) {
+  const choice=event_type==='receipt.issued'?'receipt-issued':'delivery-response-prepared';
+  const reading=await readJourneyPattern({run:async(model,input)=>{
+   assert.deepEqual(input.state,[{event_type}]);
+   return choiceResponse(input.questions,{pattern:{choice,confidence:1}});
+  }},[{event_type,body:'private'}],'eval:receipt-preparation');
+  assert.equal(reading.readings.pattern.choice,choice);
+ }
+});
+
 test('candidate options describe their own supplied identity, scope and exclusions',async()=>{
  const candidates=[
   {sku:'RETRY-GUIDE',release_ref:'release:guide',route_summary:'Written guidance for duplicate Lambda events',
@@ -187,8 +227,38 @@ test('candidate options describe their own supplied identity, scope and exclusio
  assert.ok(!JSON.stringify(sent).includes('private'));
  assert.match(sent.questions.candidate.criteria.unknown,/evidence is insufficient/);
  assert.equal(result.readings.candidate.choice,'unknown');
+ assert.deepEqual(result.readings.answer_exists,{noul:1});
+ assert.equal(sent.questions.answer_exists.type,'noul');
+ assert.match(sent.questions.answer_exists.criteria.false,/keyword overlap/);
+ assert.match(sent.questions.answer_exists.instructions,/Missing configuration is a clarification/);
  assert.equal(result.request_hash,await sha256(canonicalJson(sent)));
  assert.equal(result.questions_hash,await sha256(canonicalJson(sent.questions)));
+});
+
+test('candidate alignment validates independent Noul answers in the same model call',async()=>{
+ const candidates=[{sku:'RETRY',release_ref:'release:one',route_summary:'Duplicate Lambda event handling',
+  supported_boundary:'Retry safety only',exclusions:['exactly-once-external-effects']}];
+ let calls=0;
+ for(const noul of [0,0.2,0.5,1]) {
+  const result=await readCandidateAlignment({run:async(model,input)=>{
+   calls++;assert.equal(model,CLEF_MODEL);
+   assert.deepEqual(Object.keys(input.questions),['answer_exists','candidate']);
+   return choiceResponse(input.questions,{answer_exists:{noul}});
+  }},{goal:'Exactly-once Lambda external effects'},candidates,'eval:noul');
+  assert.deepEqual(result.readings.answer_exists,{noul});
+ }
+ assert.equal(calls,4);
+ for(const noul of [-0.01,1.01,NaN,Infinity,'0',null,undefined]) {
+  await assert.rejects(readCandidateAlignment({run:async(model,input)=>choiceResponse(input.questions,{answer_exists:{noul}})},
+   {goal:'Retry safety'},candidates,'eval:noul-invalid'),/invalid_clef_response/);
+ }
+ for(const change of [answer=>delete answer.type,answer=>{answer.type='choice';},answer=>delete answer.noul]) {
+  await assert.rejects(readCandidateAlignment({run:async(model,input)=>{
+   const response=choiceResponse(input.questions);change(response.answers.answer_exists);return response;
+  }},{goal:'Retry safety'},candidates,'eval:noul-invalid'),/invalid_clef_response/);
+ }
+ await assert.rejects(readChoices({run:()=>{throw new Error('must not run');}},
+  {state:{},questions:{exists:{type:'noul',instructions:'Exists?'}},snapshot_ref:'choice-only'}),/invalid_choice_contract/);
 });
 
 test('unknown, low-confidence and failed candidate readings preserve deterministic fallback',async t=>{

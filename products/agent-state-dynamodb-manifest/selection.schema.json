@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["language", "table_name"],
+  "properties": {
+    "language": {"enum": ["javascript", "python"]},
+    "table_name": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{3,255}$"}
+  }
+}

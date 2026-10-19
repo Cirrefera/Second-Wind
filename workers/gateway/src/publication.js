@@ -1,7 +1,7 @@
 import {canonicalJson,sha256} from './contracts.js';
 import {componentMenu} from './scope.js';
 
-export const VALIDATOR_VERSION = '2026-10-19.4';
+export const VALIDATOR_VERSION = '2026-10-19.5';
 export const SERVICE_ALIASES = Object.freeze({'api-gateway':'apigateway','step-functions':'states'});
 export const canonicalService = value => SERVICE_ALIASES[value] || value;
 const kinds = new Set(['guidance-product','artifact-product','executable-product','bundle']);
@@ -43,6 +43,7 @@ export async function validatePublication(item, manifest, evidence = {}) {
     require(isText(manifest.origin) && isText(manifest.license) && evidence.license_verified === true,'license_or_origin_unverified');
     require(evidence.purchase_url_verified === true,'purchase_url_unverified');
     require(evidence.pre_settlement_ready === true,'pre_settlement_preparation_unverified');
+    if (manifest.components?.length && manifest.pricing?.mode !== 'proportional-components') require(false,'commercial_component_allocation_missing');
     if (manifest.pricing?.mode === 'proportional-components') {
       try {
         const menu = await componentMenu(manifest);

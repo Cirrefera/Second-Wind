@@ -26,6 +26,7 @@ export class MemoryR2 {
   async put(key, value, options = {}) {
     this.writes.push(key);
     if (this.failedWrites.has(key)) throw new Error("fixture_r2_write_failed");
+    if (options.onlyIf?.etagDoesNotMatch === '*' && this.objects.has(key)) return null;
     const bytes = typeof value === "string"
       ? new TextEncoder().encode(value)
       : value instanceof Uint8Array

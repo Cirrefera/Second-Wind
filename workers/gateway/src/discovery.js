@@ -1,11 +1,14 @@
 import { listCatalog } from "./catalog.js";
 import { NETWORK, USDC, ORIGIN, paymentConfig } from "./contracts.js";
+import {enqueueObservation} from './telemetry.js';
 
 export const toolUrl = item => `${ORIGIN}/api/x402/${encodeURIComponent(item.slug || item.sku)}`;
 export const toolMethod = item => item.invoke_kind === "bedrock" ? "POST" : "GET";
 
-export async function toolsDocument(env) {
+export async function toolsDocument(env,{journey}={}) {
   const items = await listCatalog(env.SW_DB);
+  if(journey) await enqueueObservation(env,'discovery.described',{journey,
+    payload:{result_count:items.length,candidate_product_ids:items.slice(0,50).map(item=>item.sku)}});
   return {
     service:"Second Wind",
     introduction:"Pay only for what you need. Prices shown are for the full product. Where a product supports selection, test it in the sandbox and choose what you need before authorizing the exact price.",
@@ -24,25 +27,27 @@ export async function toolsDocument(env) {
   };
 }
 
-export async function resourcesDocument(env) {
-  const document = await toolsDocument(env);
+export async function resourcesDocument(env,options) {
+  const document = await toolsDocument(env,options);
   let payTo;
   try { payTo = paymentConfig(env).payTo; } catch { /* mark unavailable below */ }
   return {
     x402Version:2, payment_configured:Boolean(payTo),
     items:document.tools.map(item => ({
       resource:item.url,type:"http",x402Version:2,
-      accepts:payTo ? [{scheme:"exact",network:NETWORK,asset:USDC,payTo,
+      accepts:payTo && item.pricing_status!=='not_configured' ? [{scheme:"exact",network:NETWORK,asset:USDC,payTo,
         amount:item.price_usdc_micros,maxTimeoutSeconds:300,extra:{name:"USD Coin",version:"2"}}] : [],
       description:item.summary,sku:item.sku,method:item.method,
+      ...(item.pricing_mode ? {pricing_mode:item.pricing_mode,pricing_status:item.pricing_status,
+        price_role:item.price_role,components_url:item.components_url,trial_url:item.trial_url} : {}),
       content_hash:item.content_hash,content_hash_scope:item.content_hash_scope,version:item.version,
       lastUpdated:Math.floor(Date.parse(item.updated_at)/1000),
     })),
   };
 }
 
-export async function openApiDocument(env) {
-  const tools = (await toolsDocument(env)).tools;
+export async function openApiDocument(env,options) {
+  const tools = (await toolsDocument(env,options)).tools;
   const ok = description => ({description});
   const responses = {"200":ok("Purchased content, receipt, and private recovery token"),
     "402":ok("x402 v2 PAYMENT-REQUIRED or PAYMENT-RESPONSE"),
@@ -76,8 +81,8 @@ export async function openApiDocument(env) {
     servers:[{url:ORIGIN}],paths,components:{securitySchemes:{RecoveryToken:{type:"apiKey",in:"header",name:"X-Recovery-Token"}}}};
 }
 
-export async function llmsDocument(env) {
-  const document = await toolsDocument(env);
+export async function llmsDocument(env,options) {
+  const document = await toolsDocument(env,options);
   return `# Second Wind\n\nPay only for what you need. Prices shown are for the full product. Where a product supports selection, test it in the sandbox and choose what you need before authorizing the exact price. USDC on Base via x402 v2.\n\n`+
     `## Try and choose\n\n`+
     `Check /api/tools for pricing_mode: proportional-components. Only those products offer selection through a sandbox trial; other listings retain their stated fixed-price contract. Read components_url for available selections, shares, dependencies, and the maximum price.\n\n`+

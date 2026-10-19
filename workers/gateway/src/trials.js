@@ -1,8 +1,9 @@
 import {checkConfiguration,describeProduct} from './catalog.js';
 import {canonicalJson,sha256,randomToken,validToken,CommerceError} from './contracts.js';
-import {componentMenu,prepareComponentSelection} from './scope.js';
+import {trialMenu,prepareComponentSelection} from './scope.js';
 import {executeCode,validateExecutionInput} from './execution.js';
 import {createScopeQuote} from './commerce.js';
+import {enqueueObservation,observeExpiredTrial} from './telemetry.js';
 
 const fail=(code,status=400)=>{throw new CommerceError(code,status);};
 
@@ -16,9 +17,10 @@ async function releaseFor(env,sku) {
   if(new TextEncoder().encode(row.manifest_json).byteLength>750000) fail('component_release_too_large',503);
   const release=JSON.parse(row.manifest_json);
   if(await sha256(canonicalJson(release))!==row.manifest_hash) fail('component_release_hash_mismatch',503);
-  const menu=await componentMenu(release);
+  if(!Array.isArray(release.components) || !release.components.length) fail('component_trial_not_available',409);
+  const menu=await trialMenu(release);
   if(release.sku!==product.sku || release.version!==product.version
-      || menu.max_amount_atomic!==product.price_usdc_micros) fail('component_release_identity_mismatch',503);
+      || (menu.pricing_status!=='not_configured' && menu.max_amount_atomic!==product.price_usdc_micros)) fail('component_release_identity_mismatch',503);
   if(release.trial_adapter!=='javascript-isolate') fail('unsupported_trial_adapter',409);
   const files=new Map();
   for(const component of release.components) for(const file of component.files) {
@@ -40,10 +42,13 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
   const execution=validateExecutionInput(input?.code,input?.language);
   const id=`trial_${crypto.randomUUID()}`,token=randomToken();
   const created_at=new Date().toISOString(),expires_at=Date.now()+3600000;
-  await env.SW_DB.prepare(`INSERT INTO component_trials
+  const statement=env.SW_DB.prepare(`INSERT INTO component_trials
     (id,token_hash,sku,version,release_hash,config_json,status,created_at,expires_at)
     VALUES (?1,?2,?3,?4,?5,?6,'running',?7,?8)`)
-    .bind(id,await sha256(token),product.sku,product.version,menu.release_hash,canonicalJson(check.config),created_at,expires_at).run();
+    .bind(id,await sha256(token),product.sku,product.version,menu.release_hash,canonicalJson(check.config),created_at,expires_at);
+  await statement.run();
+  if(options.journey) await enqueueObservation(env,'journey.linked',
+    {journey:options.journey,payload:{trial_id:id}});
   // Only explicit trial operations cross into the isolated Worker. No quote,
   // payment, grant, storage, gateway secret or network capability is provided.
   const providers={
@@ -66,13 +71,17 @@ async function readTrial(env,id,token) {
   const row=await env.SW_DB.prepare('SELECT * FROM component_trials WHERE id=?1 AND token_hash=?2')
     .bind(id,await sha256(token)).first();
   if(!row) fail('trial_unauthorized',401);
-  if(row.expires_at<Date.now()) fail('trial_expired',409);
+  if(row.expires_at<Date.now()) {
+    await observeExpiredTrial(env,id);
+    fail('trial_expired',409);
+  }
   const current=await releaseFor(env,row.sku);
   if(current.product.version!==row.version || current.menu.release_hash!==row.release_hash) fail('trial_release_changed',409);
   return {row,...current};
 }
-export async function recoverTrial(env,id,token) {
+export async function recoverTrial(env,id,token,{journey}={}) {
   const {row}=await readTrial(env,id,token);
+  if(journey) await enqueueObservation(env,'recovery.trial_recovered',{journey,payload:{trial_id:row.id,sku:row.sku}});
   return {trial_id:row.id,status:row.status,release_hash:row.release_hash,
     result:row.result_json?JSON.parse(row.result_json):null};
 }
@@ -85,7 +94,7 @@ export async function selectTrialComponents(env,id,token,ids) {
   // Public selection exposes file identities, not an extra copy of file content.
   return scope;
 }
-export async function acceptTrialSelection(env,id,token,ids,expectedScopeHash) {
+export async function acceptTrialSelection(env,id,token,ids,expectedScopeHash,{journey}={}) {
   const {row,release,product,files}=await readTrial(env,id,token);
   if(row.status!=='completed') fail('trial_not_completed',409);
   const configuration=JSON.parse(row.config_json);
@@ -94,5 +103,5 @@ export async function acceptTrialSelection(env,id,token,ids,expectedScopeHash) {
   const selected=await env.SW_DB.prepare('SELECT scope_hash FROM component_selections WHERE trial_id=?1 AND scope_hash=?2').bind(id,scope.scope_hash).first();
   if(!selected) fail('selection_required',409);
   const selectedFiles=scope.files.map(file=>({path:file.path,content:files.get(file.path).content}));
-  return createScopeQuote(env,{product,scope,configuration,files:selectedFiles,acceptanceKey:`${id}:${scope.scope_hash}`});
+  return createScopeQuote(env,{product,scope,configuration,files:selectedFiles,acceptanceKey:`${id}:${scope.scope_hash}`,journey});
 }

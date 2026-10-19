@@ -1,34 +1,50 @@
 # Agent state DynamoDB request package
 
-Prepare exact AWS API inputs for an agent/session table and the optional features you select. This is an original Second Wind package for draft SKU `AWS-0568`; it is not published or priced for component purchasing yet.
+Prepare exact AWS API inputs for a new agent/session table and the optional features you select. This original Second Wind draft for `AWS-0568` version 2 contains working JavaScript and Python planners. Every request must explicitly select `language`; missing and unsupported languages fail. No other delivery language is implemented. This offline request planner does not create a table, invoke AWS, or establish that a deployment succeeded.
+
+The `table` component includes the planner, configuration schema, instructions, and license. Each optional component supplies a separate module in both supported languages and requires `table`. A base-only package runs without optional modules. Your saved configuration contains only language and table name; the separately selected feature modules determine the plan. This lets you test the full product, select a smaller file set, and reuse the same configuration. No component price allocation has been supplied; commercial selection must remain blocked until the real allocation is recorded.
+
+JavaScript (tested with Node.js 24):
 
 ```javascript
-import {prepare} from './plan.mjs';
+import {prepare} from './planner.mjs';
+import {feature as expiry} from './features/expiry.mjs';
 const plan = prepare({
-  table_name:'agent-state-example',
-  components:['table','status-index','expiry','recovery','change-stream']
-});
+  language:'javascript',
+  table_name:'agent-state-example'
+}, [expiry]);
 ```
 
-The table uses string `agent_id` and `session_id` keys, on-demand billing, and the AWS managed DynamoDB KMS key. The optional status index projects keys only, limiting copied data. `expires_at` is an item attribute containing Unix epoch seconds; enabling TTL does not populate it or enforce immediate application expiration. Recovery enables point-in-time backups. Change streams include both old and new item images; choose that component only when those images are appropriate for the workload.
+Python (tested with Python 3.12):
 
-`prepare` returns JSON. Each step's `input` belongs to its named AWS operation. The whole plan is not a CreateTable request. Wait for ACTIVE before applying follow-up operations. The returned verification requests describe expected final state, including the table keys and attribute types, KMS encryption, and the selected index or stream. These are declarative expectations for a caller to check, not an implemented response validator. In `checks`, dotted keys locate response fields, nested objects specify required fields, and arrays are compared without order: match attributes by `AttributeName`, keys by `KeyType`, and indexes by `IndexName`. Ignore additional AWS response fields such as counters and ARNs. Asynchronous enablement may require polling. The supplied 600-second wait budget applies only to initial table activation; callers must choose a separate bounded policy for TTL and backup verification. A client applying the plan must enforce the supplied wait budget and stop on unexpected AWS errors. The module itself never calls AWS, spends funds, or claims that a table exists.
+```python
+from planner import prepare
+from features.expiry import feature as expiry
+plan = prepare({
+    'language': 'python',
+    'table_name': 'agent-state-example',
+}, [expiry])
+```
 
-The status index is a simple access pattern, not a tenant authorization boundary. Common status values can concentrate index traffic; assess workload cardinality before deployment. Existing-table migration, globally replicated tables, IAM role creation, and customer-managed KMS keys are outside this version's scope. AWS charges for resources you create are separate from the product purchase.
+Optional module names are `status-index.mjs` / `status_index.py`, `expiry.mjs` / `expiry.py`, `recovery.mjs` / `recovery.py`, and `change-stream.mjs` / `change_stream.py`. Import each chosen module's `feature` and pass those modules as the second argument. Use `prepare(config)` for a base-only table. Output `components` records exactly the module IDs used. Order does not change the generated plan. Unsupported, duplicate or malformed modules fail. `selection.schema.json` describes the saved configuration. `plan.mjs` and `config.schema.json` retain the earlier local API for historical compatibility; they are excluded from the new delivered package.
 
-After an interrupted application, compare DescribeTable, DescribeTimeToLive and DescribeContinuousBackups with your chosen plan. Do not delete or recreate a table automatically. A name collision needs inspection; it is not successful recovery evidence.
+The table uses string `agent_id` and `session_id` keys, on-demand billing, and the AWS managed DynamoDB KMS key. `status-index` adds a GSI keyed by string `status` and `session_id`, projecting keys only. `expiry` enables TTL for `expires_at` through **UpdateTimeToLive** after table activation. TTL does not populate item expiration values, delete immediately, or enforce application access rules. `recovery` enables point-in-time recovery through **UpdateContinuousBackups** after activation. `change-stream` enables old and new item images in CreateTable; assess whether exposing these images fits your workload.
 
-Delivery consists of the JavaScript planner, JSON configuration schema, and these usage instructions. Only JavaScript orchestration is implemented. The planner does not implement an explicit language-selection flow; the draft candidate records that integration as pending. Other languages can consume the generated AWS API JSON, but no alternative language adapter is claimed.
+Each step's `input` belongs to its named AWS operation. The whole plan is not a CreateTable request. Wait for ACTIVE before follow-up operations. The initial activation wait budget is 600 seconds with 5-second polling. A caller must enforce that budget, stop on unexpected errors, and choose a separate bounded verification policy for asynchronous TTL and backup enablement.
 
-## Sources and validation
+The generated `verification` requests declare expected table keys, attribute types, KMS encryption, and selected optional features. They are expectations, not an implemented response matcher. Dotted keys identify response fields; objects specify required fields; compare attribute arrays by `AttributeName`, keys by `KeyType`, and indexes by `IndexName`, independent of order. Additional AWS fields such as counters and ARNs are not part of the checks.
 
-Written by Second Wind under the repository's Apache-2.0 license. AWS API documentation supplies interface definitions; no AWS guide is repackaged as the product.
+The status index is an access pattern rather than a tenant authorization boundary. Common status values can concentrate index traffic. Existing-table migration, global tables, IAM role creation, and customer-managed KMS keys are outside this release. AWS charges for resources a buyer creates are separate from the product purchase. After an interrupted application, inspect DescribeTable, DescribeTimeToLive and DescribeContinuousBackups. Never automatically delete or recreate an existing table; a name collision does not prove successful recovery.
+
+## Sources and verification
+
+This is original Second Wind code under the included Apache-2.0 license. AWS documentation defines the interfaces. No upstream DynamoDB Tools source is included, and the historical catalog attribution is retained only in source history; it is not assigned to this replacement.
 
 - https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html
 - https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html
 - https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTimeToLive.html
 - https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateContinuousBackups.html
 
-Run `node --test scripts/plan.test.mjs` from this directory. Tests verify all 16 selection boundaries, invalid inputs including sparse component arrays, stable output, operation ordering, and the declared final-state expectations. Reproduce AWS model validation with botocore 1.43.114 available to Python: `python scripts/validate-aws.py`, then regenerate draft file hashes with `node scripts/package.mjs`. AWS service-model shape validation is separate from an actual AWS deployment. No AWS deployment has been performed for this package.
+Run `node --test scripts/plan.test.mjs`. Both real variants execute all 16 feature selections, reject invalid input and unsupported language, and produce equal operation inputs. Tests materialize a base-only package to verify absent optional source files do not prevent execution. With botocore 1.43.114 installed, run `python scripts/validate-aws.py` for AWS-owned model validation of 160 operation inputs and 64 partial response shapes across both variants. These checks do not call AWS. Run `node scripts/package.mjs /path/to/inventory-reverified-2026-10-19.json` to reproduce the complete inline release input.
 
-`release-candidate.json` is draft packaging metadata, not a gateway publication manifest or an immutable R2 delivery receipt. The catalog's historical upstream attribution does not establish provenance for this original replacement; publication requires a separate reviewed contract and provenance decision. `release-history.json` retains the prior local draft metadata and its repository reference.
+`release-input.json` includes actual deliverable bytes, source history, a gateway manifest, routing metadata, and unpriced components. It is a local preparation input, not publication approval or an R2 upload receipt. `release-history.json` retains prior metadata and repository references. The new candidate remains draft until missing commercial inputs and trusted product, source, license, and publication reviews are supplied.

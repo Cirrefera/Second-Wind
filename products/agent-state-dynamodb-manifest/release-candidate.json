@@ -1,37 +1,302 @@
 {
+  "schema_version": "1",
   "sku": "AWS-0568",
-  "status": "draft",
-  "release_ref": "sha256:c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
-  "content_hash": "c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
-  "hash_scope": "exact UTF-8 files.manifest.json bytes including final newline",
+  "slug": "agent-state-dynamodb-manifest",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "service": "dynamodb",
+  "release_ref": "sha256:57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10",
+  "content_hash": "57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
   "origin": "Second Wind",
   "license": "Apache-2.0",
-  "original_contribution": "Configurable API plan with selected-feature isolation, explicit activation dependency and verification requests.",
+  "original_contribution": "Independent modular JavaScript and Python API planners, explicit language selection, selected-feature isolation, activation dependencies and final-state verification requests.",
   "delivery_contract": {
     "kind": "file-package",
-    "required_files": [
-      "plan.mjs",
-      "config.schema.json",
-      "README.md"
-    ]
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "javascript": "planner.mjs",
+      "python": "planner.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "none"
+  },
+  "validation_contract": {
+    "kind": "offline-model-and-behavior-validation",
+    "languages": [
+      "javascript",
+      "python"
+    ],
+    "component_combinations_per_language": 16,
+    "aws_model": "botocore 1.43.114 DynamoDB 2012-08-10",
+    "aws_deployment": "not-performed",
+    "response_matcher": "not-implemented"
   },
   "language_policy": {
     "mode": "configured",
-    "explicit_selection": false,
+    "explicit_selection": true,
+    "configuration_field": "language",
     "adapters": [
-      "javascript"
+      "javascript",
+      "python"
     ]
   },
+  "tags": [
+    "dynamodb",
+    "agent-state",
+    "session-state",
+    "request-planning"
+  ],
+  "supported_boundary": "Offline request planning for a new DynamoDB agent/session table using string keys, on-demand billing and AWS managed KMS, with separately selected status index, TTL, recovery and streams. No AWS execution, response matcher, existing-table migration, IAM provisioning, global tables, customer-managed KMS or immediate TTL deletion.",
+  "required_files": [
+    {
+      "path": "planner.mjs",
+      "sha256": "c8c7a61b7287ce99547abbfa96706430b4268c6f94843c162d551854bb54cb9c",
+      "size_bytes": 2633,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "planner.py",
+      "sha256": "e79d64a7c2680aaf4c0a3471b9417e290233a59188a8384470a33960ff4de7d7",
+      "size_bytes": 3057,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "1ae694fb12ef37f985e2972abb07cf8c01268b3b68a304918e44e364c6312106",
+      "size_bytes": 309,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "README.md",
+      "sha256": "ab03d40d1bd73d1697af9409e2407a131b0b130219ed9ef102a6de858af3d53b",
+      "size_bytes": 5924,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "features/status-index.mjs",
+      "sha256": "f58bf13cd9ffb80e4b9d3bc9b0d7558990a4f7d2eaee9b106b819430c2ee36d8",
+      "size_bytes": 648,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/status_index.py",
+      "sha256": "2d7112a3274d00fecc1eac9a5ebb361afc7779cbb48052d0e065e81f9f6a391f",
+      "size_bytes": 794,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "features/expiry.mjs",
+      "sha256": "44f7373cf604ff7cdc72252d4908f3588cc37ce283899e5e30bfc86d9ad12ce8",
+      "size_bytes": 428,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/expiry.py",
+      "sha256": "1d662ec1e68872b77dd4b6e12625ba3237ece5e8237691a686aa97393518ae91",
+      "size_bytes": 521,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "features/recovery.mjs",
+      "sha256": "1a2a45974703441e55e830f79d318423228d15ad5f8cfd0715eba3cbd42333b2",
+      "size_bytes": 508,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/recovery.py",
+      "sha256": "c66827757c37be4bc1c49d449f427be4d1981e051f5c5f3df739d28800fc1024",
+      "size_bytes": 597,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "features/change-stream.mjs",
+      "sha256": "086410727f47e332fcf38987ba26069b4d1f6a19719d64b31e0c68581cd803c2",
+      "size_bytes": 253,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/change_stream.py",
+      "sha256": "cd9e43955b6d92961b5eaa065823fbc0848396cfcb5f96d0618d99ea35c56286",
+      "size_bytes": 293,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "components": [
+    {
+      "id": "table",
+      "name": "Agent session table",
+      "requires": [],
+      "files": [
+        {
+          "path": "planner.mjs",
+          "content": "/** Original Second Wind planner. Imports only the feature modules bought by the caller. */\nconst optional = ['status-index','expiry','recovery','change-stream'];\nexport function prepare(config, features = []) {\n  if (!config || Array.isArray(config) || typeof config !== 'object') throw new Error('configuration_required');\n  if (Object.keys(config).some(key => !['language','table_name'].includes(key))) throw new Error('unknown_configuration_field');\n  if (config.language !== 'javascript') throw new Error(config.language ? 'unsupported_language' : 'explicit_language_required');\n  if (typeof config.table_name !== 'string' || !/^[A-Za-z0-9_.-]{3,255}$/.test(config.table_name)) throw new Error('invalid_table_name');\n  if (!Array.isArray(features) || [...features].some(feature => !feature || !optional.includes(feature.id) || typeof feature.apply !== 'function')\n      || new Set(features.map(feature => feature.id)).size !== features.length) throw new Error('invalid_feature_modules');\n  const implementations = new Map(features.map(feature => [feature.id,feature]));\n  const selected = ['table',...implementations.keys()];\n  const TableName = config.table_name;\n  const input = {TableName,BillingMode:'PAY_PER_REQUEST',\n    AttributeDefinitions:[{AttributeName:'agent_id',AttributeType:'S'},{AttributeName:'session_id',AttributeType:'S'}],\n    KeySchema:[{AttributeName:'agent_id',KeyType:'HASH'},{AttributeName:'session_id',KeyType:'RANGE'}],\n    SSESpecification:{Enabled:true,SSEType:'KMS'}};\n  const steps = [{id:'create',operation:'CreateTable',input},\n    {id:'active',operation:'DescribeTable',input:{TableName},depends_on:['create'],wait_for:{path:'Table.TableStatus',equals:'ACTIVE',timeout_seconds:600,poll_seconds:5}}];\n  const checks = {'Table.TableStatus':'ACTIVE','Table.TableName':TableName,\n    'Table.BillingModeSummary.BillingMode':'PAY_PER_REQUEST',\n    'Table.AttributeDefinitions':input.AttributeDefinitions.map(value => ({...value})),\n    'Table.KeySchema':input.KeySchema.map(value => ({...value})),\n    'Table.SSEDescription.Status':'ENABLED','Table.SSEDescription.SSEType':'KMS'};\n  const verification = [{operation:'DescribeTable',input:{TableName},checks}];\n  for (const id of optional) if (implementations.has(id)) implementations.get(id).apply({TableName,input,steps,checks,verification});\n  return {schema_version:'1',sku:'AWS-0568',target:'aws-dynamodb-api',components:[...selected].sort(),steps,verification,\n    execution:'buyer-controlled',recovery:'Inspect existing table configuration after a lost response. Do not treat a name collision as proof that the intended table was created.'};\n}\n",
+          "sha256": "c8c7a61b7287ce99547abbfa96706430b4268c6f94843c162d551854bb54cb9c",
+          "size_bytes": 2633,
+          "mime_type": "text/javascript"
+        },
+        {
+          "path": "planner.py",
+          "content": "\"\"\"Original Second Wind planner. No SDK, subprocess, credentials or network calls.\"\"\"\nimport re\n\nOPTIONAL = ('status-index', 'expiry', 'recovery', 'change-stream')\n\n\ndef prepare(config, features=()):\n    if not isinstance(config, dict):\n        raise ValueError('configuration_required')\n    if set(config) - {'language', 'table_name'}:\n        raise ValueError('unknown_configuration_field')\n    if config.get('language') != 'python':\n        raise ValueError('unsupported_language' if config.get('language') else 'explicit_language_required')\n    table_name = config.get('table_name')\n    if not isinstance(table_name, str) or re.fullmatch(r'[A-Za-z0-9_.-]{3,255}', table_name) is None:\n        raise ValueError('invalid_table_name')\n    if not isinstance(features, (list, tuple)) or any(not isinstance(feature, dict) or feature.get('id') not in OPTIONAL or not callable(feature.get('apply')) for feature in features):\n        raise ValueError('invalid_feature_modules')\n    implementations = {feature['id']: feature['apply'] for feature in features}\n    if len(implementations) != len(features):\n        raise ValueError('invalid_feature_modules')\n    selected = ['table', *implementations]\n    request = {'TableName': table_name, 'BillingMode': 'PAY_PER_REQUEST',\n               'AttributeDefinitions': [{'AttributeName': 'agent_id', 'AttributeType': 'S'}, {'AttributeName': 'session_id', 'AttributeType': 'S'}],\n               'KeySchema': [{'AttributeName': 'agent_id', 'KeyType': 'HASH'}, {'AttributeName': 'session_id', 'KeyType': 'RANGE'}],\n               'SSESpecification': {'Enabled': True, 'SSEType': 'KMS'}}\n    steps = [{'id': 'create', 'operation': 'CreateTable', 'input': request},\n             {'id': 'active', 'operation': 'DescribeTable', 'input': {'TableName': table_name}, 'depends_on': ['create'],\n              'wait_for': {'path': 'Table.TableStatus', 'equals': 'ACTIVE', 'timeout_seconds': 600, 'poll_seconds': 5}}]\n    checks = {'Table.TableStatus': 'ACTIVE', 'Table.TableName': table_name, 'Table.BillingModeSummary.BillingMode': 'PAY_PER_REQUEST',\n              'Table.AttributeDefinitions': [dict(value) for value in request['AttributeDefinitions']],\n              'Table.KeySchema': [dict(value) for value in request['KeySchema']],\n              'Table.SSEDescription.Status': 'ENABLED', 'Table.SSEDescription.SSEType': 'KMS'}\n    verification = [{'operation': 'DescribeTable', 'input': {'TableName': table_name}, 'checks': checks}]\n    state = {'TableName': table_name, 'input': request, 'steps': steps, 'checks': checks, 'verification': verification}\n    for name in OPTIONAL:\n        if name in implementations:\n            implementations[name](state)\n    return {'schema_version': '1', 'sku': 'AWS-0568', 'target': 'aws-dynamodb-api', 'components': sorted(selected),\n            'steps': steps, 'verification': verification, 'execution': 'buyer-controlled',\n            'recovery': 'Inspect existing table configuration after a lost response. Do not treat a name collision as proof that the intended table was created.'}\n",
+          "sha256": "e79d64a7c2680aaf4c0a3471b9417e290233a59188a8384470a33960ff4de7d7",
+          "size_bytes": 3057,
+          "mime_type": "text/x-python"
+        },
+        {
+          "path": "selection.schema.json",
+          "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\"language\", \"table_name\"],\n  \"properties\": {\n    \"language\": {\"enum\": [\"javascript\", \"python\"]},\n    \"table_name\": {\"type\": \"string\", \"pattern\": \"^[A-Za-z0-9_.-]{3,255}$\"}\n  }\n}\n",
+          "sha256": "1ae694fb12ef37f985e2972abb07cf8c01268b3b68a304918e44e364c6312106",
+          "size_bytes": 309,
+          "mime_type": "application/json"
+        },
+        {
+          "path": "README.md",
+          "content": "# Agent state DynamoDB request package\n\nPrepare exact AWS API inputs for a new agent/session table and the optional features you select. This original Second Wind draft for `AWS-0568` version 2 contains working JavaScript and Python planners. Every request must explicitly select `language`; missing and unsupported languages fail. No other delivery language is implemented. This offline request planner does not create a table, invoke AWS, or establish that a deployment succeeded.\n\nThe `table` component includes the planner, configuration schema, instructions, and license. Each optional component supplies a separate module in both supported languages and requires `table`. A base-only package runs without optional modules. Your saved configuration contains only language and table name; the separately selected feature modules determine the plan. This lets you test the full product, select a smaller file set, and reuse the same configuration. No component price allocation has been supplied; commercial selection must remain blocked until the real allocation is recorded.\n\nJavaScript (tested with Node.js 24):\n\n```javascript\nimport {prepare} from './planner.mjs';\nimport {feature as expiry} from './features/expiry.mjs';\nconst plan = prepare({\n  language:'javascript',\n  table_name:'agent-state-example'\n}, [expiry]);\n```\n\nPython (tested with Python 3.12):\n\n```python\nfrom planner import prepare\nfrom features.expiry import feature as expiry\nplan = prepare({\n    'language': 'python',\n    'table_name': 'agent-state-example',\n}, [expiry])\n```\n\nOptional module names are `status-index.mjs` / `status_index.py`, `expiry.mjs` / `expiry.py`, `recovery.mjs` / `recovery.py`, and `change-stream.mjs` / `change_stream.py`. Import each chosen module's `feature` and pass those modules as the second argument. Use `prepare(config)` for a base-only table. Output `components` records exactly the module IDs used. Order does not change the generated plan. Unsupported, duplicate or malformed modules fail. `selection.schema.json` describes the saved configuration. `plan.mjs` and `config.schema.json` retain the earlier local API for historical compatibility; they are excluded from the new delivered package.\n\nThe table uses string `agent_id` and `session_id` keys, on-demand billing, and the AWS managed DynamoDB KMS key. `status-index` adds a GSI keyed by string `status` and `session_id`, projecting keys only. `expiry` enables TTL for `expires_at` through **UpdateTimeToLive** after table activation. TTL does not populate item expiration values, delete immediately, or enforce application access rules. `recovery` enables point-in-time recovery through **UpdateContinuousBackups** after activation. `change-stream` enables old and new item images in CreateTable; assess whether exposing these images fits your workload.\n\nEach step's `input` belongs to its named AWS operation. The whole plan is not a CreateTable request. Wait for ACTIVE before follow-up operations. The initial activation wait budget is 600 seconds with 5-second polling. A caller must enforce that budget, stop on unexpected errors, and choose a separate bounded verification policy for asynchronous TTL and backup enablement.\n\nThe generated `verification` requests declare expected table keys, attribute types, KMS encryption, and selected optional features. They are expectations, not an implemented response matcher. Dotted keys identify response fields; objects specify required fields; compare attribute arrays by `AttributeName`, keys by `KeyType`, and indexes by `IndexName`, independent of order. Additional AWS fields such as counters and ARNs are not part of the checks.\n\nThe status index is an access pattern rather than a tenant authorization boundary. Common status values can concentrate index traffic. Existing-table migration, global tables, IAM role creation, and customer-managed KMS keys are outside this release. AWS charges for resources a buyer creates are separate from the product purchase. After an interrupted application, inspect DescribeTable, DescribeTimeToLive and DescribeContinuousBackups. Never automatically delete or recreate an existing table; a name collision does not prove successful recovery.\n\n## Sources and verification\n\nThis is original Second Wind code under the included Apache-2.0 license. AWS documentation defines the interfaces. No upstream DynamoDB Tools source is included, and the historical catalog attribution is retained only in source history; it is not assigned to this replacement.\n\n- https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html\n- https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html\n- https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTimeToLive.html\n- https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateContinuousBackups.html\n\nRun `node --test scripts/plan.test.mjs`. Both real variants execute all 16 feature selections, reject invalid input and unsupported language, and produce equal operation inputs. Tests materialize a base-only package to verify absent optional source files do not prevent execution. With botocore 1.43.114 installed, run `python scripts/validate-aws.py` for AWS-owned model validation of 160 operation inputs and 64 partial response shapes across both variants. These checks do not call AWS. Run `node scripts/package.mjs /path/to/inventory-reverified-2026-10-19.json` to reproduce the complete inline release input.\n\n`release-input.json` includes actual deliverable bytes, source history, a gateway manifest, routing metadata, and unpriced components. It is a local preparation input, not publication approval or an R2 upload receipt. `release-history.json` retains prior metadata and repository references. The new candidate remains draft until missing commercial inputs and trusted product, source, license, and publication reviews are supplied.\n",
+          "sha256": "ab03d40d1bd73d1697af9409e2407a131b0b130219ed9ef102a6de858af3d53b",
+          "size_bytes": 5924,
+          "mime_type": "text/plain; charset=utf-8"
+        },
+        {
+          "path": "LICENSE",
+          "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "mime_type": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "id": "status-index",
+      "name": "Status lookup index",
+      "requires": [
+        "table"
+      ],
+      "files": [
+        {
+          "path": "features/status-index.mjs",
+          "content": "export const feature = {id:'status-index',apply({input,checks}) {\n  input.AttributeDefinitions.push({AttributeName:'status',AttributeType:'S'});\n  input.GlobalSecondaryIndexes=[{IndexName:'status-index',KeySchema:[{AttributeName:'status',KeyType:'HASH'},{AttributeName:'session_id',KeyType:'RANGE'}],Projection:{ProjectionType:'KEYS_ONLY'}}];\n  checks['Table.AttributeDefinitions']=input.AttributeDefinitions.map(value=>({...value}));\n  checks['Table.GlobalSecondaryIndexes']=[{IndexName:'status-index',IndexStatus:'ACTIVE',KeySchema:input.GlobalSecondaryIndexes[0].KeySchema.map(value=>({...value})),Projection:{ProjectionType:'KEYS_ONLY'}}];\n}};\n",
+          "sha256": "f58bf13cd9ffb80e4b9d3bc9b0d7558990a4f7d2eaee9b106b819430c2ee36d8",
+          "size_bytes": 648,
+          "mime_type": "text/javascript"
+        },
+        {
+          "path": "features/status_index.py",
+          "content": "def apply(state):\n    request, checks = state['input'], state['checks']\n    request['AttributeDefinitions'].append({'AttributeName': 'status', 'AttributeType': 'S'})\n    request['GlobalSecondaryIndexes'] = [{'IndexName': 'status-index', 'KeySchema': [{'AttributeName': 'status', 'KeyType': 'HASH'}, {'AttributeName': 'session_id', 'KeyType': 'RANGE'}], 'Projection': {'ProjectionType': 'KEYS_ONLY'}}]\n    checks['Table.AttributeDefinitions'] = [dict(value) for value in request['AttributeDefinitions']]\n    checks['Table.GlobalSecondaryIndexes'] = [{'IndexName': 'status-index', 'IndexStatus': 'ACTIVE', 'KeySchema': [dict(value) for value in request['GlobalSecondaryIndexes'][0]['KeySchema']], 'Projection': {'ProjectionType': 'KEYS_ONLY'}}]\n\n\nfeature = {'id': 'status-index', 'apply': apply}\n",
+          "sha256": "2d7112a3274d00fecc1eac9a5ebb361afc7779cbb48052d0e065e81f9f6a391f",
+          "size_bytes": 794,
+          "mime_type": "text/x-python"
+        }
+      ]
+    },
+    {
+      "id": "expiry",
+      "name": "Item expiration",
+      "requires": [
+        "table"
+      ],
+      "files": [
+        {
+          "path": "features/expiry.mjs",
+          "content": "export const feature = {id:'expiry',apply({TableName,steps,verification}) {\n  steps.push({id:'expiry',operation:'UpdateTimeToLive',input:{TableName,TimeToLiveSpecification:{AttributeName:'expires_at',Enabled:true}},depends_on:['active']});\n  verification.push({operation:'DescribeTimeToLive',input:{TableName},checks:{'TimeToLiveDescription.TimeToLiveStatus':'ENABLED','TimeToLiveDescription.AttributeName':'expires_at'}});\n}};\n",
+          "sha256": "44f7373cf604ff7cdc72252d4908f3588cc37ce283899e5e30bfc86d9ad12ce8",
+          "size_bytes": 428,
+          "mime_type": "text/javascript"
+        },
+        {
+          "path": "features/expiry.py",
+          "content": "def apply(state):\n    name = state['TableName']\n    state['steps'].append({'id': 'expiry', 'operation': 'UpdateTimeToLive', 'input': {'TableName': name, 'TimeToLiveSpecification': {'AttributeName': 'expires_at', 'Enabled': True}}, 'depends_on': ['active']})\n    state['verification'].append({'operation': 'DescribeTimeToLive', 'input': {'TableName': name}, 'checks': {'TimeToLiveDescription.TimeToLiveStatus': 'ENABLED', 'TimeToLiveDescription.AttributeName': 'expires_at'}})\n\n\nfeature = {'id': 'expiry', 'apply': apply}\n",
+          "sha256": "1d662ec1e68872b77dd4b6e12625ba3237ece5e8237691a686aa97393518ae91",
+          "size_bytes": 521,
+          "mime_type": "text/x-python"
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "name": "Point in time recovery",
+      "requires": [
+        "table"
+      ],
+      "files": [
+        {
+          "path": "features/recovery.mjs",
+          "content": "export const feature = {id:'recovery',apply({TableName,steps,verification}) {\n  steps.push({id:'recovery',operation:'UpdateContinuousBackups',input:{TableName,PointInTimeRecoverySpecification:{PointInTimeRecoveryEnabled:true}},depends_on:['active']});\n  verification.push({operation:'DescribeContinuousBackups',input:{TableName},checks:{'ContinuousBackupsDescription.ContinuousBackupsStatus':'ENABLED','ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus':'ENABLED'}});\n}};\n",
+          "sha256": "1a2a45974703441e55e830f79d318423228d15ad5f8cfd0715eba3cbd42333b2",
+          "size_bytes": 508,
+          "mime_type": "text/javascript"
+        },
+        {
+          "path": "features/recovery.py",
+          "content": "def apply(state):\n    name = state['TableName']\n    state['steps'].append({'id': 'recovery', 'operation': 'UpdateContinuousBackups', 'input': {'TableName': name, 'PointInTimeRecoverySpecification': {'PointInTimeRecoveryEnabled': True}}, 'depends_on': ['active']})\n    state['verification'].append({'operation': 'DescribeContinuousBackups', 'input': {'TableName': name}, 'checks': {'ContinuousBackupsDescription.ContinuousBackupsStatus': 'ENABLED', 'ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus': 'ENABLED'}})\n\n\nfeature = {'id': 'recovery', 'apply': apply}\n",
+          "sha256": "c66827757c37be4bc1c49d449f427be4d1981e051f5c5f3df739d28800fc1024",
+          "size_bytes": 597,
+          "mime_type": "text/x-python"
+        }
+      ]
+    },
+    {
+      "id": "change-stream",
+      "name": "Old and new item stream",
+      "requires": [
+        "table"
+      ],
+      "files": [
+        {
+          "path": "features/change-stream.mjs",
+          "content": "export const feature = {id:'change-stream',apply({input,checks}) {\n  input.StreamSpecification={StreamEnabled:true,StreamViewType:'NEW_AND_OLD_IMAGES'};\n  checks['Table.StreamSpecification']={StreamEnabled:true,StreamViewType:'NEW_AND_OLD_IMAGES'};\n}};\n",
+          "sha256": "086410727f47e332fcf38987ba26069b4d1f6a19719d64b31e0c68581cd803c2",
+          "size_bytes": 253,
+          "mime_type": "text/javascript"
+        },
+        {
+          "path": "features/change_stream.py",
+          "content": "def apply(state):\n    state['input']['StreamSpecification'] = {'StreamEnabled': True, 'StreamViewType': 'NEW_AND_OLD_IMAGES'}\n    state['checks']['Table.StreamSpecification'] = {'StreamEnabled': True, 'StreamViewType': 'NEW_AND_OLD_IMAGES'}\n\n\nfeature = {'id': 'change-stream', 'apply': apply}\n",
+          "sha256": "cd9e43955b6d92961b5eaa065823fbc0848396cfcb5f96d0618d99ea35c56286",
+          "size_bytes": 293,
+          "mime_type": "text/x-python"
+        }
+      ]
+    }
+  ],
+  "trial_adapter": "javascript-isolate",
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language",
+      "table_name"
+    ],
+    "properties": {
+      "language": {
+        "enum": [
+          "javascript",
+          "python"
+        ]
+      },
+      "table_name": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_.-]{3,255}$"
+      }
+    }
+  },
+  "status": "draft",
   "publication_blockers": [
     "component_price_allocation_pending",
-    "immutable_delivery_store_pending",
-    "trial_fulfillment_integration_pending",
-    "publication_review_pending",
-    "catalog_contract_and_provenance_review_pending",
-    "explicit_language_selection_integration_pending"
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
   ],
   "validation": {
     "service_model": "passed",
+    "javascript_and_python_variants": "passed",
     "aws_deployment": "not_performed"
   }
 }

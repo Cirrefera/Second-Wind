@@ -2,14 +2,29 @@
   "sku": "AWS-0568",
   "botocore_version": "1.43.114",
   "service_api_version": "2012-08-10",
-  "component_combinations": 16,
-  "validated_operation_inputs": 80,
-  "validated_partial_response_shapes": 32,
+  "component_combinations_per_language": 16,
+  "languages": [
+    "javascript",
+    "python"
+  ],
+  "validated_plans": 32,
+  "validated_operation_inputs": 160,
+  "validated_partial_response_shapes": 64,
   "result": "passed",
   "source_hashes": {
-    "plan.mjs": "a53715080c2a42d2394160ef4db961c4f3da4d8f35108f7c63840870caa58941",
-    "config.schema.json": "8adbbee4a0ca6ec8614c6f77e44dbdae7706c1eebb1073a6d2f5e00a31ae8e00",
-    "scripts/validate-aws.py": "8b2bed7081bc28783ed98867a2f6ffa3986c58e69a759d743bbd6d8309f2e6c4"
+    "planner.mjs": "c8c7a61b7287ce99547abbfa96706430b4268c6f94843c162d551854bb54cb9c",
+    "planner.py": "e79d64a7c2680aaf4c0a3471b9417e290233a59188a8384470a33960ff4de7d7",
+    "selection.schema.json": "1ae694fb12ef37f985e2972abb07cf8c01268b3b68a304918e44e364c6312106",
+    "scripts/variants.py": "26d1ac8a45424fa8a71a0be6f7989baf11bb7bafe0d3091c3f933968b187c101",
+    "scripts/validate-aws.py": "a67fcdee9c46c187407c25df561f8befcb81a8bc4104f37cbd6fb6500dc817a7",
+    "features/change-stream.mjs": "086410727f47e332fcf38987ba26069b4d1f6a19719d64b31e0c68581cd803c2",
+    "features/expiry.mjs": "44f7373cf604ff7cdc72252d4908f3588cc37ce283899e5e30bfc86d9ad12ce8",
+    "features/recovery.mjs": "1a2a45974703441e55e830f79d318423228d15ad5f8cfd0715eba3cbd42333b2",
+    "features/status-index.mjs": "f58bf13cd9ffb80e4b9d3bc9b0d7558990a4f7d2eaee9b106b819430c2ee36d8",
+    "features/change_stream.py": "cd9e43955b6d92961b5eaa065823fbc0848396cfcb5f96d0618d99ea35c56286",
+    "features/expiry.py": "1d662ec1e68872b77dd4b6e12625ba3237ece5e8237691a686aa97393518ae91",
+    "features/recovery.py": "c66827757c37be4bc1c49d449f427be4d1981e051f5c5f3df739d28800fc1024",
+    "features/status_index.py": "2d7112a3274d00fecc1eac9a5ebb361afc7779cbb48052d0e065e81f9f6a391f"
   },
   "scope": "AWS SDK input and partial output shape validation only; no response matcher, AWS deployment or service calls performed"
 }

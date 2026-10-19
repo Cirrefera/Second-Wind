@@ -1,0 +1,4100 @@
+{
+  "schema_version": "1",
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "held_file_sha256": "7a7dbacbc702a1fabe82d9b551d27b80bcc0403b70a19c64a05ac415315a3622",
+  "source_cache_sha256": "bd05519dd79983ebabec60cec90d3f782c9508e09e4ae0e9d04884a1b3fdb1e0",
+  "generator_sha256": "275d76b9c7f8a0c9f99f3c876d68e8733764a04a0421d922eb7ceccee7ec7d88",
+  "scope": "Complete held corpus plus pinned public upstream tree inspection. A found source path is not a delivered product, applicable license determination, publication approval, or an external execution result.",
+  "counts": {
+    "records": 157,
+    "repositories": 18,
+    "repositories_inspected": 18,
+    "source_paths_found": 86,
+    "source_paths_not_found": 5
+  },
+  "records": [
+    {
+      "sku": "AWS-0550",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "1e9833d7b6638a97",
+      "guidance_sha256": "1e289e0a3c7b5fe2a6dcd4d8d1f4c2b5a55603201daf5a80ebf05e3f3f4af0ba",
+      "guidance_size_bytes": 501,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/logger",
+      "pointer_inspection": {
+        "path": "packages/logger",
+        "status": "found",
+        "git_object_sha": "a0753f3a25531195ac8ac1507e6de560183af4b7",
+        "object_type": "tree",
+        "descendant_file_count": 52,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/logger"
+      },
+      "other_pointer_fields": {
+        "npm": "@aws-lambda-powertools/logger"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0551",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "025e3aa117709dc1",
+      "guidance_sha256": "540205898da01c5529626f9455fc76d50088f5d3945b588485aede1cd9714c04",
+      "guidance_size_bytes": 460,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/tracer",
+      "pointer_inspection": {
+        "path": "packages/tracer",
+        "status": "found",
+        "git_object_sha": "62887562ff19d8d0f107a1af39090dceeb2585f0",
+        "object_type": "tree",
+        "descendant_file_count": 32,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/tracer"
+      },
+      "other_pointer_fields": {
+        "npm": "@aws-lambda-powertools/tracer"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0552",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "a27e44cd933cb900",
+      "guidance_sha256": "98cd392150e7e1bd2d39e0bc634e7d3be591d1fcf0917f7002d13079d0675c7d",
+      "guidance_size_bytes": 497,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/metrics",
+      "pointer_inspection": {
+        "path": "packages/metrics",
+        "status": "found",
+        "git_object_sha": "6b8226a120c86ad0b669297558a9b2bc9a2ca08a",
+        "object_type": "tree",
+        "descendant_file_count": 42,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/metrics"
+      },
+      "other_pointer_fields": {
+        "npm": "@aws-lambda-powertools/metrics"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0553",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "add62134c7d1a048",
+      "guidance_sha256": "9c5f15dd46bcaf91991197affa9a9b505b2571eb8787334221f13cca72b70a8f",
+      "guidance_size_bytes": 517,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/idempotency",
+      "pointer_inspection": {
+        "path": "packages/idempotency",
+        "status": "found",
+        "git_object_sha": "f432393f23f3c55c1e2c21786175be6dcb5b9ade",
+        "object_type": "tree",
+        "descendant_file_count": 49,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/idempotency"
+      },
+      "other_pointer_fields": {
+        "npm": "@aws-lambda-powertools/idempotency"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0554",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "eea372ed7729585a",
+      "guidance_sha256": "763b408cb115a8301d53d26e1718bf49ee97e3c532e810353e95492ecf0dc16f",
+      "guidance_size_bytes": 482,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/parameters",
+      "pointer_inspection": {
+        "path": "packages/parameters",
+        "status": "found",
+        "git_object_sha": "c0dc8f25bdc5f2c2e7c94fb482cc9ca3bf40d869",
+        "object_type": "tree",
+        "descendant_file_count": 68,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/parameters"
+      },
+      "other_pointer_fields": {
+        "npm": "@aws-lambda-powertools/parameters"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0555",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "bb45752ec283933d",
+      "guidance_sha256": "05f8283c156a91b86015d987d6b96b436166760471e9423ad807e587449c0e35",
+      "guidance_size_bytes": 478,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/batch",
+      "pointer_inspection": {
+        "path": "packages/batch",
+        "status": "found",
+        "git_object_sha": "5776cbf0a1ac2a381cf9aa76b80f4d88be9746b2",
+        "object_type": "tree",
+        "descendant_file_count": 43,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/batch"
+      },
+      "other_pointer_fields": {
+        "npm": "@aws-lambda-powertools/batch"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0556",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "ff79b5aef740cf07",
+      "guidance_sha256": "9d3120d4b6c71e7fe5608a3928f427ce1fbd3961c46fce80500ac1d13c95c090",
+      "guidance_size_bytes": 578,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": "src/cdk-lib/bedrock/agents",
+      "pointer_inspection": {
+        "path": "src/cdk-lib/bedrock/agents",
+        "status": "found",
+        "git_object_sha": "e8e00e3904bfd539d456790228901fa538e246ec",
+        "object_type": "tree",
+        "descendant_file_count": 11,
+        "url": "https://github.com/awslabs/generative-ai-cdk-constructs/tree/2cbb52febd5e076bdd7c1f08782c9811d32363b4/src/cdk-lib/bedrock/agents"
+      },
+      "other_pointer_fields": {
+        "npm": "@cdklabs/generative-ai-cdk-constructs"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0557",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "01730c5041e562ee",
+      "guidance_sha256": "a14d56430b955410e565ed40dc9dc2e1f15e29b53516d37c1117cfc4ca3d16e8",
+      "guidance_size_bytes": 564,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": "src/cdk-lib/bedrock/knowledge-bases",
+      "pointer_inspection": {
+        "path": "src/cdk-lib/bedrock/knowledge-bases",
+        "status": "found",
+        "git_object_sha": "c07d9d154dbfa580c7cc11a55c7d8c15e482b489",
+        "object_type": "tree",
+        "descendant_file_count": 6,
+        "url": "https://github.com/awslabs/generative-ai-cdk-constructs/tree/2cbb52febd5e076bdd7c1f08782c9811d32363b4/src/cdk-lib/bedrock/knowledge-bases"
+      },
+      "other_pointer_fields": {
+        "npm": "@cdklabs/generative-ai-cdk-constructs"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0558",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "e2244121be34864e",
+      "guidance_sha256": "30fa83b9a92c16e0149b309433f7c29f0c6cd999a0572a885e1c5df9b1066d80",
+      "guidance_size_bytes": 513,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": "src/cdk-lib/sagemaker",
+      "pointer_inspection": {
+        "path": "src/cdk-lib/sagemaker",
+        "status": "not_found_in_pinned_tree",
+        "git_object_sha": null,
+        "object_type": null,
+        "descendant_file_count": 0,
+        "url": "https://github.com/awslabs/generative-ai-cdk-constructs/tree/2cbb52febd5e076bdd7c1f08782c9811d32363b4/src/cdk-lib/sagemaker"
+      },
+      "other_pointer_fields": {
+        "npm": "@cdklabs/generative-ai-cdk-constructs"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0559",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "10577b6e7d6c7376",
+      "guidance_sha256": "bfe168c51232b15cb3a56b5552e14d92a9889568a5097e7f2929c558206cc2d9",
+      "guidance_size_bytes": 520,
+      "source_repository": "cdklabs/cdk-monitoring-constructs",
+      "source_revision": "4182ef425d1d396bdae536a767eaaba394268e54",
+      "source_error": null,
+      "structured_pointer": "lib",
+      "pointer_inspection": {
+        "path": "lib",
+        "status": "found",
+        "git_object_sha": "3173451f9823b0a1b8bdf179b25d4b1b2ef27afe",
+        "object_type": "tree",
+        "descendant_file_count": 217,
+        "url": "https://github.com/cdklabs/cdk-monitoring-constructs/tree/4182ef425d1d396bdae536a767eaaba394268e54/lib"
+      },
+      "other_pointer_fields": {
+        "npm": "cdk-monitoring-constructs"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0560",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "5e0925156a2cf66f",
+      "guidance_sha256": "b8f083be12d4ca38f8b115b2b9eaaa4e97601e5dddf138095f78763500e0dcf7",
+      "guidance_size_bytes": 584,
+      "source_repository": "aws-samples/aws-cdk-examples",
+      "source_revision": "f2f3a2a97cb75e45021544d55324718f68280fb2",
+      "source_error": null,
+      "structured_pointer": "typescript/api-cors-lambda-crud-dynamodb",
+      "pointer_inspection": {
+        "path": "typescript/api-cors-lambda-crud-dynamodb",
+        "status": "found",
+        "git_object_sha": "9aee9d8f8061cf6edab55ba6cc0ecc1461924495",
+        "object_type": "tree",
+        "descendant_file_count": 13,
+        "url": "https://github.com/aws-samples/aws-cdk-examples/tree/f2f3a2a97cb75e45021544d55324718f68280fb2/typescript/api-cors-lambda-crud-dynamodb"
+      },
+      "other_pointer_fields": {
+        "npm": "aws-cdk-examples"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0561",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "a7b9a50889273401",
+      "guidance_sha256": "ef17c802d9e763aa309ff0afc22742cc09c52bf76d43aa36a394cd763dc49003",
+      "guidance_size_bytes": 626,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": "src/cdk-lib/bedrock/guardrails",
+      "pointer_inspection": {
+        "path": "src/cdk-lib/bedrock/guardrails",
+        "status": "found",
+        "git_object_sha": "61ce58bcfd601a7879a32578c3949dd830bbd7fc",
+        "object_type": "tree",
+        "descendant_file_count": 4,
+        "url": "https://github.com/awslabs/generative-ai-cdk-constructs/tree/2cbb52febd5e076bdd7c1f08782c9811d32363b4/src/cdk-lib/bedrock/guardrails"
+      },
+      "other_pointer_fields": {
+        "npm": "@cdklabs/generative-ai-cdk-constructs"
+      },
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0562",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "bca0ffdf6d4b0752",
+      "guidance_sha256": "e1d20423b4eeb2f00572d8a8023c7e60edc5ed21fa0bd625fdf5f815781432de",
+      "guidance_size_bytes": 388,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0563",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "758f070af9f06483",
+      "guidance_sha256": "0c4cd9d5d4c2d18412695345442a5ff5ccfa6151991746a654eb9930c25496ee",
+      "guidance_size_bytes": 393,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0564",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "3fb7debcfdef2148",
+      "guidance_sha256": "a5ce5eb4cf3febe19b61714a51ae39d15c277f1fe045d3f08f633223ed303291",
+      "guidance_size_bytes": 381,
+      "source_repository": "awslabs/amazon-dynamodb-tools",
+      "source_revision": "106fa1e03d250da115efa71b5203618fcb9bd218",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0565",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "3310e0fc1ed10e24",
+      "guidance_sha256": "32e691f223ae3d046a091764d6267542f97139023cecaf98d781100333b1e101",
+      "guidance_size_bytes": 314,
+      "source_repository": "aws-samples/aws-cdk-examples",
+      "source_revision": "f2f3a2a97cb75e45021544d55324718f68280fb2",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0566",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "faa7e0a0fe6fefdf",
+      "guidance_sha256": "043d61a28019638764dc3f98da3c9a728dba20f34fe6506b20e1a143873464ad",
+      "guidance_size_bytes": 313,
+      "source_repository": "awslabs/amazon-dynamodb-tools",
+      "source_revision": "106fa1e03d250da115efa71b5203618fcb9bd218",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0567",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "766c14a03fed5d28",
+      "guidance_sha256": "f5c51aeb688b119e7edacf41349a0eef4c8a9afa7bbf8cb170562f50a1957379",
+      "guidance_size_bytes": 334,
+      "source_repository": "aws-samples/aws-cdk-examples",
+      "source_revision": "f2f3a2a97cb75e45021544d55324718f68280fb2",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0568",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "99264137b57258f5",
+      "guidance_sha256": "591cd2e92adbe19f7109862d4bde762983b897bfcf371301bfceff085823ea81",
+      "guidance_size_bytes": 298,
+      "source_repository": "awslabs/amazon-dynamodb-tools",
+      "source_revision": "106fa1e03d250da115efa71b5203618fcb9bd218",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "original_local_modular_planners_and_self_contained_release_input",
+      "remaining_product_input": [
+        "commercial_component_allocation",
+        "trusted_publication_reviews"
+      ]
+    },
+    {
+      "sku": "AWS-0569",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "b9902da1158727b3",
+      "guidance_sha256": "49482a14d9c0dc220a91c5564f975416aa7d4ae64f5456bad6382aaa82ed7d5e",
+      "guidance_size_bytes": 315,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0570",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "a1a52d361a364e7a",
+      "guidance_sha256": "fe4dd2d26ba231d3081600fb73c9fe2cc6b99b51e17bb78ec4922cefb7d850ad",
+      "guidance_size_bytes": 324,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0571",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "c3aff7883527f5bd",
+      "guidance_sha256": "a0f048dfc96b71c014dbf18591edf1525566c45147df728effebea6d81caefa8",
+      "guidance_size_bytes": 366,
+      "source_repository": "awslabs/amazon-dynamodb-tools",
+      "source_revision": "106fa1e03d250da115efa71b5203618fcb9bd218",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0572",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "c27a3c30e902b17e",
+      "guidance_sha256": "17c8b41ba49b0906b0f8602756de71a8e2024b51d415a40ff7b96c816c230070",
+      "guidance_size_bytes": 375,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0573",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "2d36fe5d76a57cba",
+      "guidance_sha256": "e5d0189b13a095f51ac2836a934ba587cbac9da6b705907dd88062bd7172f849",
+      "guidance_size_bytes": 349,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0574",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "d633b5482093a2fe",
+      "guidance_sha256": "ca6fe321e5f36275dc872c3358151d855e49ce5d0bb8ba1efed1861c22cdaa44",
+      "guidance_size_bytes": 301,
+      "source_repository": "aws-samples/aws-cdk-examples",
+      "source_revision": "f2f3a2a97cb75e45021544d55324718f68280fb2",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0575",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "e180670912c0eec9",
+      "guidance_sha256": "70931d60bc3dd742a6ba39c2634ff56c0025f3b40034b3e5dbf7e2d9e32ec9fd",
+      "guidance_size_bytes": 307,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0576",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "07bcfd4ddecb7f7b",
+      "guidance_sha256": "d4b816912a0e12dbd7fb86aa42b2e813b40bcc809a7f4831c4f921359910da76",
+      "guidance_size_bytes": 297,
+      "source_repository": "awslabs/amazon-dynamodb-tools",
+      "source_revision": "106fa1e03d250da115efa71b5203618fcb9bd218",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0577",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "2749cff5bda0901d",
+      "guidance_sha256": "0f1d2e326c8c524f522cacb5baca44a0c8346695853166e0a475f503650e10f1",
+      "guidance_size_bytes": 391,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0578",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "dec5fbeb5d6490d1",
+      "guidance_sha256": "439f5a3a2bb098583ca63aecd78547f5144ed5dc18b03b97e223e91ff879eadd",
+      "guidance_size_bytes": 369,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0579",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "ad22a6e8ec2b4673",
+      "guidance_sha256": "a0bf8f7bd493317a4889bde287b04efebb8bdfb1d0a5e8edf67c46a7e6347ed1",
+      "guidance_size_bytes": 377,
+      "source_repository": "cdklabs/generative-ai-cdk-constructs",
+      "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0580",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "bfe2165dfb82fcb2",
+      "guidance_sha256": "eafd8288f5905d7d066a634649b49a4a8d46c2fadb55f66480ba2bbc81e7d216",
+      "guidance_size_bytes": 1007,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-core/src/sagemaker/core/exceptions.py",
+      "pointer_inspection": {
+        "path": "sagemaker-core/src/sagemaker/core/exceptions.py",
+        "status": "found",
+        "git_object_sha": "b4bb517f03d8dafa88661f4ba38907a8bef5b2b8",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-core/src/sagemaker/core/exceptions.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0581",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "aa783605ef19d10f",
+      "guidance_sha256": "370d0354210ed984db87f5b81b09ece57c77f533039cf0e5318c989590313e9b",
+      "guidance_size_bytes": 963,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-core/src/sagemaker/core/resources.py",
+      "pointer_inspection": {
+        "path": "sagemaker-core/src/sagemaker/core/resources.py",
+        "status": "found",
+        "git_object_sha": "dc44a8923c29d94792de1fe32f0d487bf7b0afc2",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-core/src/sagemaker/core/resources.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0582",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "73a5dde637918a82",
+      "guidance_sha256": "3ce74ff1e336385e3cab5854732d52694913405193d416ffa897dbf9843a6676",
+      "guidance_size_bytes": 894,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-core/src/sagemaker/core/exceptions.py",
+      "pointer_inspection": {
+        "path": "sagemaker-core/src/sagemaker/core/exceptions.py",
+        "status": "found",
+        "git_object_sha": "b4bb517f03d8dafa88661f4ba38907a8bef5b2b8",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-core/src/sagemaker/core/exceptions.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0583",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "15cf472028c5a3dc",
+      "guidance_sha256": "2f5ca115113575e699b82e25b88958bda5cd6e05e77a14b90f5b0bc738428b1c",
+      "guidance_size_bytes": 962,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-core/src/sagemaker/core/resources.py",
+      "pointer_inspection": {
+        "path": "sagemaker-core/src/sagemaker/core/resources.py",
+        "status": "found",
+        "git_object_sha": "dc44a8923c29d94792de1fe32f0d487bf7b0afc2",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-core/src/sagemaker/core/resources.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0584",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "389403f8a52e479d",
+      "guidance_sha256": "e977449bbb2f19cb4b9107adc0795072b2f08b4057329712d580d991541744fc",
+      "guidance_size_bytes": 1021,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-core/src/sagemaker/core/exceptions.py",
+      "pointer_inspection": {
+        "path": "sagemaker-core/src/sagemaker/core/exceptions.py",
+        "status": "found",
+        "git_object_sha": "b4bb517f03d8dafa88661f4ba38907a8bef5b2b8",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-core/src/sagemaker/core/exceptions.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0585",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "e7b5a7985d3402fe",
+      "guidance_sha256": "b10fd50818ee7f00588c5799fd6e129071060429246b662f07847912d9b0f43c",
+      "guidance_size_bytes": 900,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-core/src/sagemaker/core/resources.py",
+      "pointer_inspection": {
+        "path": "sagemaker-core/src/sagemaker/core/resources.py",
+        "status": "found",
+        "git_object_sha": "dc44a8923c29d94792de1fe32f0d487bf7b0afc2",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-core/src/sagemaker/core/resources.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0586",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "35f80e4cfaef5139",
+      "guidance_sha256": "2461f8f32bdfa91709bbb6e6082ec2924eb579109f2746698823827683d66ce1",
+      "guidance_size_bytes": 1011,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-train/src/sagemaker/train",
+      "pointer_inspection": {
+        "path": "sagemaker-train/src/sagemaker/train",
+        "status": "found",
+        "git_object_sha": "424654527e2f93f21fc0d0f093ed4aeb5e66a7df",
+        "object_type": "tree",
+        "descendant_file_count": 120,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-train/src/sagemaker/train"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0587",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "7ee626fdac22b3c2",
+      "guidance_sha256": "b756519e0180fde768deec54a945046fee680494cd3751be76c4e707e7592805",
+      "guidance_size_bytes": 948,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-train/src/sagemaker/train",
+      "pointer_inspection": {
+        "path": "sagemaker-train/src/sagemaker/train",
+        "status": "found",
+        "git_object_sha": "424654527e2f93f21fc0d0f093ed4aeb5e66a7df",
+        "object_type": "tree",
+        "descendant_file_count": 120,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-train/src/sagemaker/train"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0588",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "64fdb9cd3d7a7acb",
+      "guidance_sha256": "89f617c3fabca888e2788f28bf065d7da219f53f9d5d597c6bf24eddcd9a9d3f",
+      "guidance_size_bytes": 992,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": "sagemaker-train/src/sagemaker/train",
+      "pointer_inspection": {
+        "path": "sagemaker-train/src/sagemaker/train",
+        "status": "found",
+        "git_object_sha": "424654527e2f93f21fc0d0f093ed4aeb5e66a7df",
+        "object_type": "tree",
+        "descendant_file_count": 120,
+        "url": "https://github.com/aws/sagemaker-python-sdk/tree/9e503c90a65d0c1119512b18098491b4582e6896/sagemaker-train/src/sagemaker/train"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0592",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "f06dcc60ce2a3501",
+      "guidance_sha256": "0e5e20dc3e19de3ac86b9744509a7ab6a04dea83f539e732fd802d899de33440",
+      "guidance_size_bytes": 473,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0593",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "76165f5c22c2f217",
+      "guidance_sha256": "9c03f9b19032f15a39b88f4cb07ba349e00dbf1f8a29d5178b467d54b9f34e00",
+      "guidance_size_bytes": 747,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0594",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "440d6d8ea31c5a03",
+      "guidance_sha256": "ba5c4921320332997bcb9b20ec08b9f004fa51ef2e343349a148b46a51132601",
+      "guidance_size_bytes": 715,
+      "source_repository": "aws/sagemaker-python-sdk",
+      "source_revision": "9e503c90a65d0c1119512b18098491b4582e6896",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0595",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "1c37bcbfb941c6c1",
+      "guidance_sha256": "33b0ccecd8a4f020cfe958b6c97e9d5d7e1aba98a8dfef6206c3ec484929cef3",
+      "guidance_size_bytes": 1229,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/idempotency/src/errors.ts",
+      "pointer_inspection": {
+        "path": "packages/idempotency/src/errors.ts",
+        "status": "found",
+        "git_object_sha": "e4759d1d465b750fe7fb83150810b12434d36902",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/idempotency/src/errors.ts"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0596",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "472dac97b85ef04f",
+      "guidance_sha256": "826e9ae5d51ba4843ed0c1cb9f1358c693c5c3c31f423529b44f47e34ce8a264",
+      "guidance_size_bytes": 1090,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/idempotency/src/errors.ts",
+      "pointer_inspection": {
+        "path": "packages/idempotency/src/errors.ts",
+        "status": "found",
+        "git_object_sha": "e4759d1d465b750fe7fb83150810b12434d36902",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/idempotency/src/errors.ts"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0597",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "da56f2de064a9891",
+      "guidance_sha256": "d304dd2ee85dec5689cfff2044e69ce313528181031e0c062ccd2804654b98cf",
+      "guidance_size_bytes": 1119,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/idempotency/src/errors.ts",
+      "pointer_inspection": {
+        "path": "packages/idempotency/src/errors.ts",
+        "status": "found",
+        "git_object_sha": "e4759d1d465b750fe7fb83150810b12434d36902",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/idempotency/src/errors.ts"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0598",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "e41d187498353b97",
+      "guidance_sha256": "af1a1454902a613e4533829995e62401caa18e38405c6e03d1363e12cc8c7059",
+      "guidance_size_bytes": 1000,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/idempotency/src/errors.ts",
+      "pointer_inspection": {
+        "path": "packages/idempotency/src/errors.ts",
+        "status": "found",
+        "git_object_sha": "e4759d1d465b750fe7fb83150810b12434d36902",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/idempotency/src/errors.ts"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0599",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "87718b2400daffdd",
+      "guidance_sha256": "81639916771f6c3911aff6244b1504515dcc12950193513ba223a1acf5ca35a6",
+      "guidance_size_bytes": 1315,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/event-handler/src/bedrock-agent/BedrockAgentFunctionResolver.ts",
+      "pointer_inspection": {
+        "path": "packages/event-handler/src/bedrock-agent/BedrockAgentFunctionResolver.ts",
+        "status": "found",
+        "git_object_sha": "e3a7d3accb631c72ef7556e2d12e307109d35abb",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/event-handler/src/bedrock-agent/BedrockAgentFunctionResolver.ts"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0600",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "54ac5f9039d6398b",
+      "guidance_sha256": "c7d6153c35998827debab0228f4c73789f51c731229c9a9298a9066efb83b5e8",
+      "guidance_size_bytes": 1245,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/parameters/src/errors.ts",
+      "pointer_inspection": {
+        "path": "packages/parameters/src/errors.ts",
+        "status": "found",
+        "git_object_sha": "7a78c9a5b2395b8c03786c0ce5728adf27a57bfc",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/parameters/src/errors.ts"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0601",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "3f5dcf357fe43e89",
+      "guidance_sha256": "475fbb5dc2c6aaf4464a2e394dffc7e7dfb97e2bfcf011a3df58b05a59176da6",
+      "guidance_size_bytes": 1176,
+      "source_repository": "aws-powertools/powertools-lambda-typescript",
+      "source_revision": "04cbf311a2738cba84c1c83053e347dffda2c9bc",
+      "source_error": null,
+      "structured_pointer": "packages/batch/src/BasePartialBatchProcessor.ts",
+      "pointer_inspection": {
+        "path": "packages/batch/src/BasePartialBatchProcessor.ts",
+        "status": "found",
+        "git_object_sha": "3c1dec8d1a7bc953f166041b8ee51319ea811681",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/04cbf311a2738cba84c1c83053e347dffda2c9bc/packages/batch/src/BasePartialBatchProcessor.ts"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0602",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "e773c3cefd69ca8c",
+      "guidance_sha256": "4fedd678592361721b22003d02d39fc297301599f133bd1c9f7531383965107b",
+      "guidance_size_bytes": 250,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0603",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "c6a3615a53c7ac0a",
+      "guidance_sha256": "051c84351d9f5200e002232707dadb7e5603c3febda865e9e407aa7a44db7213",
+      "guidance_size_bytes": 249,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0604",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "e856f8d4664a3e1f",
+      "guidance_sha256": "4e87fccd5223d2cb4fbc48967374de3fdc94a71f7bf9d5e0bb265c40ccdb4707",
+      "guidance_size_bytes": 262,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0605",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "d83e94d4ae44fc37",
+      "guidance_sha256": "9ba206ae1d6c94dc2c09004f4355c773c887a3bee4120d5a0c63bdf8cf672818",
+      "guidance_size_bytes": 276,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0606",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "981a40ce40cecaed",
+      "guidance_sha256": "dcbc19ccece206cb627a289ea576688a3874b6c05379dc93dde386fddd937c88",
+      "guidance_size_bytes": 304,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0607",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "d288a2f80f0ac795",
+      "guidance_sha256": "bf015354c157bc8b4d42f4dfb893abdc9ba9693d6e2f123bc752ede8cdf57360",
+      "guidance_size_bytes": 282,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0608",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "c5a141b0dec1cf29",
+      "guidance_sha256": "674fe412224947ff5c2382894861dbb141a1b15f0e6229bfd2d3b7972e7f89dc",
+      "guidance_size_bytes": 289,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0609",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "212f3c79f0f966ac",
+      "guidance_sha256": "2e6b2d625c8ebc82d0dfd3ef7bb1717830186911571984b6912496fa7bf8b02e",
+      "guidance_size_bytes": 292,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0610",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "ed9bcc26d20e012b",
+      "guidance_sha256": "27bfa9935edc8794aee2d7136dcf0eca9de052455b881c8055a7e42453ad816f",
+      "guidance_size_bytes": 308,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0611",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "3a6572c055147e20",
+      "guidance_sha256": "c9a74d3bea8d74f068c4ab45dd9cd94583f086506e4ea882f81220c8f4d4cbcb",
+      "guidance_size_bytes": 264,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0612",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "8d30d21902255710",
+      "guidance_sha256": "f569f85b81397a0d0f9402bdeaccbeae5690d596489bb020f65d4cab3c2a55b6",
+      "guidance_size_bytes": 305,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0613",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "f0e111052ab9ec21",
+      "guidance_sha256": "672b36f6450dbbd8edcc51caf3fbd57ff4a53d851b48589b27799cbd7c570d79",
+      "guidance_size_bytes": 276,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0614",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "640f0e58aaefe515",
+      "guidance_sha256": "3d011d699efc170a8f1a2d8f7513ffa067e35b9ab1de4c96a8f2cbe8e136df0b",
+      "guidance_size_bytes": 287,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0615",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "bfeeafaad1177a09",
+      "guidance_sha256": "c7368a473c6b8f95e2800ef502992b741324775455e9ea636586adafb3eea631",
+      "guidance_size_bytes": 264,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0616",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "0b0c1342514f530c",
+      "guidance_sha256": "30a0eecaffddba2f41ca84bc27f945fd9e5a83baa04b43eb7fbc162ec38e55bd",
+      "guidance_size_bytes": 299,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0617",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "22a437e0a5b023f4",
+      "guidance_sha256": "5326b48ecf09f5d73ecccd88d79d6c663d6958ad0d950c6d1a7f21368e97f215",
+      "guidance_size_bytes": 272,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0618",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "c1a4ca950ac2dbbe",
+      "guidance_sha256": "b32db2ad9efd1f269bb82bd2e12f654e7e3956f1feb1dd4b01989be3c7947f95",
+      "guidance_size_bytes": 282,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0619",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "3b49e30dd7fcb200",
+      "guidance_sha256": "8392cf2d4e13cecf520d9e7606999fa138f54c1cad83b213771a270151d24167",
+      "guidance_size_bytes": 288,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0620",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "6668f668f62fde97",
+      "guidance_sha256": "6a1e960f8c679e3199f003d5af97cb53cf96982a164fd113b745482e7505f264",
+      "guidance_size_bytes": 285,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0621",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "b8b99026b896f6da",
+      "guidance_sha256": "30c3f82585b4520320b19e77b4122070e6a71dfd89ffd78e248470a7484f833b",
+      "guidance_size_bytes": 257,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0622",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "fe6b5067aeb0e9b2",
+      "guidance_sha256": "2def352b6fa62cd77d9c5019e3b0047145ffd9711261bf7320f76b2d6c14fb94",
+      "guidance_size_bytes": 255,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0623",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "d0419732d983dd3f",
+      "guidance_sha256": "91c24b7695c0c242f9ad0c0f54a580f391bb08e43abf219cd0459a69c5747793",
+      "guidance_size_bytes": 241,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0624",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "c65790ef7f10130d",
+      "guidance_sha256": "52cf72a3d91108fd7bcb14456972909bcf45c95bd292ba80ae0a9bd43247cf35",
+      "guidance_size_bytes": 284,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0625",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "2db3f73688eac642",
+      "guidance_sha256": "1598e92816e1a1a355aa2395833b7072a7678afabd6c82f2680c4b20111163da",
+      "guidance_size_bytes": 324,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0626",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "d2359c3ccb7667d4",
+      "guidance_sha256": "d3d56964729f6c99fedc0c9bc4c15975381a96ba2b9b327f7e0ac4efcd8941f8",
+      "guidance_size_bytes": 287,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0627",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "494fbc19ed7a1a9c",
+      "guidance_sha256": "18c9d8ee8c8852c932413c337b980c00de54513fcbeb80599c16e2b7f7a22efe",
+      "guidance_size_bytes": 300,
+      "source_repository": "awslabs/mcp",
+      "source_revision": "d534d0fa3c06838336ac1ed64e7114db0ba85e6f",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0629",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "3025250677e5f1f4",
+      "guidance_sha256": "904c6d085cbe94ed2ed2c2836bfb0677a0108c6ad96a81d48a62cb645528dc88",
+      "guidance_size_bytes": 412,
+      "source_repository": "aws-cloudformation/cfn-lint",
+      "source_revision": "be66fb3e224b41c85065cb3002ad0b24e31db535",
+      "source_error": null,
+      "structured_pointer": "src/cfnlint",
+      "pointer_inspection": {
+        "path": "src/cfnlint",
+        "status": "found",
+        "git_object_sha": "4c926e79a46f6181c21bc8de1dba39b8763f9c74",
+        "object_type": "tree",
+        "descendant_file_count": 730,
+        "url": "https://github.com/aws-cloudformation/cfn-lint/tree/be66fb3e224b41c85065cb3002ad0b24e31db535/src/cfnlint"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0630",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "171a5e61862903af",
+      "guidance_sha256": "0fe910ac8dfaa5a55e1201afb5314e504588360ec6d64e06c463d4f953b30cd6",
+      "guidance_size_bytes": 300,
+      "source_repository": "aws/aws-sdk-ruby",
+      "source_revision": "69105086f3cb602591fe991fe1f5e512ac03c91e",
+      "source_error": null,
+      "structured_pointer": "gems/aws-sdk-core",
+      "pointer_inspection": {
+        "path": "gems/aws-sdk-core",
+        "status": "found",
+        "git_object_sha": "5c1c21e7869c4e2dbcdfbcbd887933878c2aca69",
+        "object_type": "tree",
+        "descendant_file_count": 502,
+        "url": "https://github.com/aws/aws-sdk-ruby/tree/69105086f3cb602591fe991fe1f5e512ac03c91e/gems/aws-sdk-core"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0631",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "45904f3ba8fd7f79",
+      "guidance_sha256": "5efa831da1791d3a579b2a608b5ed57a9e00249f328344412a5c5dcc63e13bf3",
+      "guidance_size_bytes": 360,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-lambda",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-lambda",
+        "status": "found",
+        "git_object_sha": "fce613d3663dea8af246e8953aa96d735e70f0df",
+        "object_type": "tree",
+        "descendant_file_count": 78,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-lambda"
+      },
+      "other_pointer_fields": {
+        "module": "aws-lambda"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0632",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "bb878c00f5397e60",
+      "guidance_sha256": "63b749813785d8e73601076edd2ecb45d8e12803e4451ec87dda7dc668192b7b",
+      "guidance_size_bytes": 351,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-lambda-nodejs",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-lambda-nodejs",
+        "status": "found",
+        "git_object_sha": "2556a27f40e3ab6542b27a58aeaba58fdebbb647",
+        "object_type": "tree",
+        "descendant_file_count": 30,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-lambda-nodejs"
+      },
+      "other_pointer_fields": {
+        "module": "aws-lambda-nodejs"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0633",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "9973769694905d1c",
+      "guidance_sha256": "86d023f472107d64c9244f6bf06ee16bbfa190df1687842dbce510bcc49e70b9",
+      "guidance_size_bytes": 349,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-lambda-event-sources",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-lambda-event-sources",
+        "status": "found",
+        "git_object_sha": "d408fbb27857ada6288b16c2d38e92d81647af3b",
+        "object_type": "tree",
+        "descendant_file_count": 27,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-lambda-event-sources"
+      },
+      "other_pointer_fields": {
+        "module": "aws-lambda-event-sources"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0634",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "31f1fce531d35096",
+      "guidance_sha256": "152469983c013b01a11b777e23bdf307e2056a4888fcc47b945c2098fadd2ffd",
+      "guidance_size_bytes": 352,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-dynamodb",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-dynamodb",
+        "status": "found",
+        "git_object_sha": "3cbd548023ccf2b59b8deef652712adbccc59448",
+        "object_type": "tree",
+        "descendant_file_count": 28,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-dynamodb"
+      },
+      "other_pointer_fields": {
+        "module": "aws-dynamodb"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0635",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "0d372a9623db1329",
+      "guidance_sha256": "3f760b973ffe55cf47cdcb81c96dd3376e8ce9bca72854a31588e9b4e8f72781",
+      "guidance_size_bytes": 345,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-s3",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-s3",
+        "status": "found",
+        "git_object_sha": "065c879bb566833e3d671444f4f873fbf115549c",
+        "object_type": "tree",
+        "descendant_file_count": 32,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-s3"
+      },
+      "other_pointer_fields": {
+        "module": "aws-s3"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0636",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "b86e39ac97ece2f5",
+      "guidance_sha256": "f23459a31a3237efebac23dd106a4bf6089a0c8d660752cff80b420dd1fcc43c",
+      "guidance_size_bytes": 345,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-s3-deployment",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-s3-deployment",
+        "status": "found",
+        "git_object_sha": "ea7fbe2fce4b77e4479255aebe147dd05001e466",
+        "object_type": "tree",
+        "descendant_file_count": 16,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-s3-deployment"
+      },
+      "other_pointer_fields": {
+        "module": "aws-s3-deployment"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0637",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "3fe48b5dc0160473",
+      "guidance_sha256": "06274980dedd19d43f77d1eed52a3d70a6a8583dac94d5f23d92f0555aa9f4b7",
+      "guidance_size_bytes": 333,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-bedrock",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-bedrock",
+        "status": "found",
+        "git_object_sha": "85a4c7b41c0d9932d1d39e958601c850061d84c0",
+        "object_type": "tree",
+        "descendant_file_count": 8,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-bedrock"
+      },
+      "other_pointer_fields": {
+        "module": "aws-bedrock"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0638",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "331166111005ce97",
+      "guidance_sha256": "75455fdc2f147b1eb6a7831f7cb29b32e38b20119c98e7072911c47efd2de5e1",
+      "guidance_size_bytes": 318,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-bedrockagentcore",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-bedrockagentcore",
+        "status": "found",
+        "git_object_sha": "036feced404692a827cd3fc4af535cf4ce7039ac",
+        "object_type": "tree",
+        "descendant_file_count": 105,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-bedrockagentcore"
+      },
+      "other_pointer_fields": {
+        "module": "aws-bedrockagentcore"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0639",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "84d4949f35ad8e9a",
+      "guidance_sha256": "994e75fc5eea3a217781f2e3d727f14e8c9ab498fc65aed1a2276000733ac817",
+      "guidance_size_bytes": 348,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-apigateway",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-apigateway",
+        "status": "found",
+        "git_object_sha": "d41ebc56f76965f18798b31431d306f3be6f2c0c",
+        "object_type": "tree",
+        "descendant_file_count": 76,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-apigateway"
+      },
+      "other_pointer_fields": {
+        "module": "aws-apigateway"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0640",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "f2c4b03f16d1ed43",
+      "guidance_sha256": "26e3492ce0d2496a6eceb990a317a382aa377889182ec0022ff02fa25b79d1bc",
+      "guidance_size_bytes": 326,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-apigatewayv2",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-apigatewayv2",
+        "status": "found",
+        "git_object_sha": "00963b604ac9fe1bf92275c37d4171e551563ed5",
+        "object_type": "tree",
+        "descendant_file_count": 46,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-apigatewayv2"
+      },
+      "other_pointer_fields": {
+        "module": "aws-apigatewayv2"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0641",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "70c26c283297484b",
+      "guidance_sha256": "4c833c4066755f849d17630e5ed918b10a0f30d898e61509917c4a1631f1ef71",
+      "guidance_size_bytes": 346,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-apigatewayv2-integrations",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-apigatewayv2-integrations",
+        "status": "found",
+        "git_object_sha": "222b0543fa527431736c69ef1afeaf7a0ce8b079",
+        "object_type": "tree",
+        "descendant_file_count": 31,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-apigatewayv2-integrations"
+      },
+      "other_pointer_fields": {
+        "module": "aws-apigatewayv2-integrations"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0642",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "c84097131a722436",
+      "guidance_sha256": "93c492cdbdc45503b8833654cb77d96f6af734830d5a9d60bd3de15b582f4719",
+      "guidance_size_bytes": 352,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-iam",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-iam",
+        "status": "found",
+        "git_object_sha": "f023db4cdf4eb71abb54da96f84cae0030b5ac1b",
+        "object_type": "tree",
+        "descendant_file_count": 69,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-iam"
+      },
+      "other_pointer_fields": {
+        "module": "aws-iam"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0643",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "8176e3a9a85479aa",
+      "guidance_sha256": "70db5aaccc80aea291a9d03281167039a88fa773519b8b9a98a2333de0a17014",
+      "guidance_size_bytes": 293,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-kms",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-kms",
+        "status": "found",
+        "git_object_sha": "7d3e69f7751b83f04fde95cf7edbe0b26506992d",
+        "object_type": "tree",
+        "descendant_file_count": 17,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-kms"
+      },
+      "other_pointer_fields": {
+        "module": "aws-kms"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0644",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "71e86efa35a35674",
+      "guidance_sha256": "f26d9619858770096b87d63825d8d5a81080677088983c9d96eb5e63ce8bbbc5",
+      "guidance_size_bytes": 372,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-secretsmanager",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-secretsmanager",
+        "status": "found",
+        "git_object_sha": "63195df93a78d934f5b0c3cb61f10b19e5c156d2",
+        "object_type": "tree",
+        "descendant_file_count": 14,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-secretsmanager"
+      },
+      "other_pointer_fields": {
+        "module": "aws-secretsmanager"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0645",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "fa82548eed6f21c7",
+      "guidance_sha256": "741a748770be6b4b5b85095ed6b1b8dbce316c83d43a381203f079327378538a",
+      "guidance_size_bytes": 325,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-ssm",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-ssm",
+        "status": "found",
+        "git_object_sha": "7628bd604cc2348ee03801b5d56367c2586178fd",
+        "object_type": "tree",
+        "descendant_file_count": 11,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-ssm"
+      },
+      "other_pointer_fields": {
+        "module": "aws-ssm"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0646",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "d6b87f9eaceb2771",
+      "guidance_sha256": "fc484d075b9dca0801037f70d2c5e029cf82ad6f02a40677258e65326ff1d08d",
+      "guidance_size_bytes": 317,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-sqs",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-sqs",
+        "status": "found",
+        "git_object_sha": "2bf6aa5055fe220b26aacf1d1388c8995d29e22e",
+        "object_type": "tree",
+        "descendant_file_count": 11,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-sqs"
+      },
+      "other_pointer_fields": {
+        "module": "aws-sqs"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0647",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "b064a24909195368",
+      "guidance_sha256": "4d9e128e60d110b2755fd54571af0401643fa04034cab464c16e60254c8c6bfb",
+      "guidance_size_bytes": 294,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-sns",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-sns",
+        "status": "found",
+        "git_object_sha": "8635f63c7e2f83f6430de47368101410503c93b7",
+        "object_type": "tree",
+        "descendant_file_count": 15,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-sns"
+      },
+      "other_pointer_fields": {
+        "module": "aws-sns"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0648",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "461880dbbae8009d",
+      "guidance_sha256": "1d2487f1f2c91637d6ec587ccaa336429b04ef6c752672850305f83d66869f66",
+      "guidance_size_bytes": 339,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-events",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-events",
+        "status": "found",
+        "git_object_sha": "35c54641ea625849886dade7fa55b81985c628bf",
+        "object_type": "tree",
+        "descendant_file_count": 28,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-events"
+      },
+      "other_pointer_fields": {
+        "module": "aws-events"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0649",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "e08350ee8c5c6c91",
+      "guidance_sha256": "88d4bd5239d83fce73f4660b62b7a11432a4e0ce852ec6b307078cec076e9846",
+      "guidance_size_bytes": 319,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-events-targets",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-events-targets",
+        "status": "found",
+        "git_object_sha": "6642e47f4310a6e36b5e1a5fbffb33bbab0b1f3e",
+        "object_type": "tree",
+        "descendant_file_count": 49,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-events-targets"
+      },
+      "other_pointer_fields": {
+        "module": "aws-events-targets"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0650",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "183525fefbfb4b65",
+      "guidance_sha256": "37ecec1e380094eea4c3680628bf16280ab426ba7bbbe729147be3d4efd9d240",
+      "guidance_size_bytes": 365,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-stepfunctions",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-stepfunctions",
+        "status": "found",
+        "git_object_sha": "1a9caedc1c27efa82e0fbeed042b3d27ec6edfdb",
+        "object_type": "tree",
+        "descendant_file_count": 66,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-stepfunctions"
+      },
+      "other_pointer_fields": {
+        "module": "aws-stepfunctions"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0651",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "e0b1fde358493854",
+      "guidance_sha256": "1c133dca3224170df5207802cc67266d2efb38456d03fa89b9bc4e5198a171e9",
+      "guidance_size_bytes": 369,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-stepfunctions-tasks",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-stepfunctions-tasks",
+        "status": "found",
+        "git_object_sha": "d8777d8c6e2d7cb6e35f662777bdfb6f11017de7",
+        "object_type": "tree",
+        "descendant_file_count": 143,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-stepfunctions-tasks"
+      },
+      "other_pointer_fields": {
+        "module": "aws-stepfunctions-tasks"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0652",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "e4e83302151c24b1",
+      "guidance_sha256": "948d37c34020b1521fe357e6be6c077b92981c2dc257099c9f802fb0b079cf56",
+      "guidance_size_bytes": 329,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-cloudwatch",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-cloudwatch",
+        "status": "found",
+        "git_object_sha": "36dca73a6f7bddd1ff6e2ed4319527d2ebc89fed",
+        "object_type": "tree",
+        "descendant_file_count": 45,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-cloudwatch"
+      },
+      "other_pointer_fields": {
+        "module": "aws-cloudwatch"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0653",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "a46d6da2e7158098",
+      "guidance_sha256": "021049e9de058e1a35011f74da86314b70db48f98c34172d149e8ba2971216bc",
+      "guidance_size_bytes": 308,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-logs",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-logs",
+        "status": "found",
+        "git_object_sha": "21036089c1067ddb370e2437c7c07fb31c3f8946",
+        "object_type": "tree",
+        "descendant_file_count": 31,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-logs"
+      },
+      "other_pointer_fields": {
+        "module": "aws-logs"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0654",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "fbf49c9faa05174d",
+      "guidance_sha256": "b0ed96c9a1beb2741a4ee0a227b25af757acc1650397da521491f314cbe7250b",
+      "guidance_size_bytes": 315,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-cognito",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-cognito",
+        "status": "found",
+        "git_object_sha": "90dbb4b5d9e32fad5ebd90095ecd41fb74a742b9",
+        "object_type": "tree",
+        "descendant_file_count": 36,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-cognito"
+      },
+      "other_pointer_fields": {
+        "module": "aws-cognito"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0655",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "3fe7ba6f0b156e01",
+      "guidance_sha256": "c39377afa7b405fbed369ab8ad0c5a869b60baeb515f5dfe5056f2254653ae06",
+      "guidance_size_bytes": 333,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-ecs",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-ecs",
+        "status": "found",
+        "git_object_sha": "2fe4db90647ffc5ec0ea7f45b23273e3c8dae0cd",
+        "object_type": "tree",
+        "descendant_file_count": 89,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-ecs"
+      },
+      "other_pointer_fields": {
+        "module": "aws-ecs"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0656",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "f82217655aa23071",
+      "guidance_sha256": "70a719703e3e5b8e8d9b6813746bd7217299111da22447f1ec5b0534c717f0c6",
+      "guidance_size_bytes": 368,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-ecs-patterns",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-ecs-patterns",
+        "status": "found",
+        "git_object_sha": "8e772608a3ed082a3587755cf3d57ea03ebddf7d",
+        "object_type": "tree",
+        "descendant_file_count": 38,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-ecs-patterns"
+      },
+      "other_pointer_fields": {
+        "module": "aws-ecs-patterns"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0657",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "61b74cb82654ff17",
+      "guidance_sha256": "06e41d99712f7bce6e3e0977085790db354a63095b98435a61d579bda596f37d",
+      "guidance_size_bytes": 336,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-eks",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-eks",
+        "status": "found",
+        "git_object_sha": "c991a3b9a6ef1b67a865adb6586a8cce849d49b9",
+        "object_type": "tree",
+        "descendant_file_count": 111,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-eks"
+      },
+      "other_pointer_fields": {
+        "module": "aws-eks"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0658",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "0ea9db49a40e66fe",
+      "guidance_sha256": "a7751cfe59d97ef78af1c2244d319f6ceb1678073471ad4311b0a6557f5bb416",
+      "guidance_size_bytes": 323,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-rds",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-rds",
+        "status": "found",
+        "git_object_sha": "09572fd1f41a64a77006fd920ebe3053e8245c33",
+        "object_type": "tree",
+        "descendant_file_count": 48,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-rds"
+      },
+      "other_pointer_fields": {
+        "module": "aws-rds"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0659",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "4440610fa51b7c06",
+      "guidance_sha256": "30e89f24ecde74442593a3af436c748d53e2698671290ffa1492b464bf11cf77",
+      "guidance_size_bytes": 346,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-elasticache",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-elasticache",
+        "status": "found",
+        "git_object_sha": "0cab5fa95d3915bc27dfc328faa6cdb10d140b62",
+        "object_type": "tree",
+        "descendant_file_count": 4,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-elasticache"
+      },
+      "other_pointer_fields": {
+        "module": "aws-elasticache"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0660",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "c6b4dcc94e19ca86",
+      "guidance_sha256": "ec28ce07925fb3cb30ee8818c740da9d0b6930ff56ae8810ed595aad186495ce",
+      "guidance_size_bytes": 318,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-kinesis",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-kinesis",
+        "status": "found",
+        "git_object_sha": "31924fbbcf62c49478776f4720a7879470f14d91",
+        "object_type": "tree",
+        "descendant_file_count": 11,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-kinesis"
+      },
+      "other_pointer_fields": {
+        "module": "aws-kinesis"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0661",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "ae7ff0d5e9fa5c82",
+      "guidance_sha256": "c98a356ca57479e4ef723d2b2d5903d231df66070c1a1e9641a194173ebfb2ed",
+      "guidance_size_bytes": 365,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-cloudfront",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-cloudfront",
+        "status": "found",
+        "git_object_sha": "bb03eeb420ebb1930418afed56b67cf5d86c04fc",
+        "object_type": "tree",
+        "descendant_file_count": 52,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-cloudfront"
+      },
+      "other_pointer_fields": {
+        "module": "aws-cloudfront"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0662",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "560e364e89cf4a0d",
+      "guidance_sha256": "a873534dc7fd7092bb650e723a1d518198ee2650f07075bd96da95872b70459e",
+      "guidance_size_bytes": 319,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-cloudtrail",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-cloudtrail",
+        "status": "found",
+        "git_object_sha": "99b346b1e31c246ff3be564b097a465af8ee3cfa",
+        "object_type": "tree",
+        "descendant_file_count": 9,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-cloudtrail"
+      },
+      "other_pointer_fields": {
+        "module": "aws-cloudtrail"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0663",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "56c327db159a7c6a",
+      "guidance_sha256": "e19692205e4453986702ccf39425ec4622415c89bfb5604fde927a35eeb87bac",
+      "guidance_size_bytes": 302,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-backup",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-backup",
+        "status": "found",
+        "git_object_sha": "7ee2fb475806561674d185e21e20d83d0a9c974d",
+        "object_type": "tree",
+        "descendant_file_count": 14,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-backup"
+      },
+      "other_pointer_fields": {
+        "module": "aws-backup"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0664",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "870007d2605bc494",
+      "guidance_sha256": "6f988dd1fdbf7de1d7b4254d90b0482c7fba30b60507daad58aa15dfc0da5fd8",
+      "guidance_size_bytes": 313,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-ec2",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-ec2",
+        "status": "found",
+        "git_object_sha": "37e41c2ff6b61310bf8858329793954bbf5b3ee6",
+        "object_type": "tree",
+        "descendant_file_count": 91,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-ec2"
+      },
+      "other_pointer_fields": {
+        "module": "aws-ec2"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0665",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "525f16dc603e312e",
+      "guidance_sha256": "9a48758d4b143b34261e5748704ab513efd050efc6a35d171bb8335c1eb4ae5d",
+      "guidance_size_bytes": 311,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-ecr",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-ecr",
+        "status": "found",
+        "git_object_sha": "2e226b27f6eb761e77feb53715c166c22eba97f3",
+        "object_type": "tree",
+        "descendant_file_count": 13,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-ecr"
+      },
+      "other_pointer_fields": {
+        "module": "aws-ecr"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0666",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "437997c0f080cfaa",
+      "guidance_sha256": "84e17a93e72ba1863d5a90c53f0adcead12708d8c7f19fc93f98caf6ebc8c54f",
+      "guidance_size_bytes": 290,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-athena",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-athena",
+        "status": "found",
+        "git_object_sha": "d562369f9a1db57eb7e117c287556c8b90d1eec6",
+        "object_type": "tree",
+        "descendant_file_count": 4,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-athena"
+      },
+      "other_pointer_fields": {
+        "module": "aws-athena"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0667",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "c7f12102e7205f3b",
+      "guidance_sha256": "60f524f4cb1e14d5327eeb220b742bc11145eb20abe739d7cb9a57b16bd995bf",
+      "guidance_size_bytes": 277,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-glue",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-glue",
+        "status": "found",
+        "git_object_sha": "65b87cfbd828958d6d8705141af249ea904a897a",
+        "object_type": "tree",
+        "descendant_file_count": 63,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-glue"
+      },
+      "other_pointer_fields": {
+        "module": "aws-glue"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0668",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "14896539e9167eec",
+      "guidance_sha256": "1620830dff0fa7eb549856d3390e85b0bd81cca086a3393782d615f9816490a8",
+      "guidance_size_bytes": 391,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-cognito-identitypool",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-cognito-identitypool",
+        "status": "found",
+        "git_object_sha": "4a85980b9863fb27da619cc7495a298827946741",
+        "object_type": "tree",
+        "descendant_file_count": 7,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-cognito-identitypool"
+      },
+      "other_pointer_fields": {
+        "module": "aws-cognito-identitypool"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0669",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "a37605222d9bab73",
+      "guidance_sha256": "e18002a449ee4e8190f8dd1faa15edcbc1632408ba62804d695c46d89782ad78",
+      "guidance_size_bytes": 358,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-codebuild",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-codebuild",
+        "status": "found",
+        "git_object_sha": "203429f8c487de78ba7600d4af95b530b9ffb255",
+        "object_type": "tree",
+        "descendant_file_count": 53,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-codebuild"
+      },
+      "other_pointer_fields": {
+        "module": "aws-codebuild"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0670",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "88caf316c46c1ead",
+      "guidance_sha256": "7f1692efa878d1d42be29d76b828573616b0928400a3880c210ba4eecf647ec8",
+      "guidance_size_bytes": 322,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-codepipeline",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-codepipeline",
+        "status": "found",
+        "git_object_sha": "13caba03a63e44d31b61d67e911f1b6ddc83bc5f",
+        "object_type": "tree",
+        "descendant_file_count": 28,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-codepipeline"
+      },
+      "other_pointer_fields": {
+        "module": "aws-codepipeline"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0671",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "c563d070131c8395",
+      "guidance_sha256": "8ae589158a9d981f0fc4a1f685aea9384a5d460a022d2b29e521a57b64cea1a6",
+      "guidance_size_bytes": 336,
+      "source_repository": "aws/aws-cdk",
+      "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "source_error": null,
+      "structured_pointer": "packages/aws-cdk-lib/aws-codepipeline-actions",
+      "pointer_inspection": {
+        "path": "packages/aws-cdk-lib/aws-codepipeline-actions",
+        "status": "found",
+        "git_object_sha": "25aafc88dcab2cd7010c83f8f6fe2e248c71b167",
+        "object_type": "tree",
+        "descendant_file_count": 72,
+        "url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-codepipeline-actions"
+      },
+      "other_pointer_fields": {
+        "module": "aws-codepipeline-actions"
+      },
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0672",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "5c5df6844d1ade57",
+      "guidance_sha256": "96fce713cbbb0062c9179c6d66678cd9f6f563d83761cbb379d59fc4e6722e3e",
+      "guidance_size_bytes": 402,
+      "source_repository": "aws/chalice",
+      "source_revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+      "source_error": null,
+      "structured_pointer": "src/chalice",
+      "pointer_inspection": {
+        "path": "src/chalice",
+        "status": "not_found_in_pinned_tree",
+        "git_object_sha": null,
+        "object_type": null,
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819/src/chalice"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0673",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "620f02260b42749e",
+      "guidance_sha256": "a9c3210be7c2717333fd4b990fa8ab1e8beb010fa39438c4320d4e816325feea",
+      "guidance_size_bytes": 392,
+      "source_repository": "aws/chalice",
+      "source_revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+      "source_error": null,
+      "structured_pointer": "chalice/policy.py",
+      "pointer_inspection": {
+        "path": "chalice/policy.py",
+        "status": "found",
+        "git_object_sha": "b44608b942880bce03a71d4e432386db2a0ca93c",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819/chalice/policy.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0674",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "c83e5d6d5ddfe8d7",
+      "guidance_sha256": "65adf6e43dcc5bf4fa1bea000ae06859b54a179024787caeef819b642f4dab41",
+      "guidance_size_bytes": 397,
+      "source_repository": "aws/chalice",
+      "source_revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+      "source_error": null,
+      "structured_pointer": "chalice/local.py",
+      "pointer_inspection": {
+        "path": "chalice/local.py",
+        "status": "found",
+        "git_object_sha": "2a3f277f0bf390d40c83c05fdab85ba5286298e3",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819/chalice/local.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0675",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "9dba0f88141b59b2",
+      "guidance_sha256": "f2eb2def45e14e21697fdedb18a2e37c85073706146bb9376b2d5a33f844def8",
+      "guidance_size_bytes": 493,
+      "source_repository": "aws/chalice",
+      "source_revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+      "source_error": null,
+      "structured_pointer": "chalice/deploy/deployer.py",
+      "pointer_inspection": {
+        "path": "chalice/deploy/deployer.py",
+        "status": "found",
+        "git_object_sha": "99eb1d02f9ffbb501abbdbde41e10d3156c096c2",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819/chalice/deploy/deployer.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0676",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "96d113193dedaafb",
+      "guidance_sha256": "f608af8234fbc259575a344ccb129806749938827e59471759f38509732e0457",
+      "guidance_size_bytes": 375,
+      "source_repository": "claudiajs/claudia",
+      "source_revision": "9d68ed4c62e123279b14b31b7dfbc34710f40689",
+      "source_error": null,
+      "structured_pointer": "src/commands/create.js",
+      "pointer_inspection": {
+        "path": "src/commands/create.js",
+        "status": "found",
+        "git_object_sha": "100a8229946bae280f88741f7b78142474d52c90",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/claudiajs/claudia/tree/9d68ed4c62e123279b14b31b7dfbc34710f40689/src/commands/create.js"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0677",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "d8eab4dfbe8a45f1",
+      "guidance_sha256": "c611a6b5ee07ea42c1af618381e7dca03d86f764e6d34cc2e5393653b434dd5f",
+      "guidance_size_bytes": 425,
+      "source_repository": "claudiajs/claudia",
+      "source_revision": "9d68ed4c62e123279b14b31b7dfbc34710f40689",
+      "source_error": null,
+      "structured_pointer": "src/util/convert-api-gw-proxy-request.js",
+      "pointer_inspection": {
+        "path": "src/util/convert-api-gw-proxy-request.js",
+        "status": "not_found_in_pinned_tree",
+        "git_object_sha": null,
+        "object_type": null,
+        "descendant_file_count": 0,
+        "url": "https://github.com/claudiajs/claudia/tree/9d68ed4c62e123279b14b31b7dfbc34710f40689/src/util/convert-api-gw-proxy-request.js"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0678",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "838eaf134ff69934",
+      "guidance_sha256": "74e0460cce3d39019d6d7780a8715c8064d597d1cce8bcaf6acd794f48b81226",
+      "guidance_size_bytes": 319,
+      "source_repository": "marcel/aws-s3",
+      "source_revision": "c4a99b34618ecc2990305fb52c685a9b0b7b8389",
+      "source_error": null,
+      "structured_pointer": "lib/aws/s3.rb",
+      "pointer_inspection": {
+        "path": "lib/aws/s3.rb",
+        "status": "found",
+        "git_object_sha": "e6c23f5ff1ac0c2d77185fc3a268771409d06f9a",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/marcel/aws-s3/tree/c4a99b34618ecc2990305fb52c685a9b0b7b8389/lib/aws/s3.rb"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0679",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "ca0d11e5b926e6ec",
+      "guidance_sha256": "b2aa1ecc6a31c55afb38e23c206d698bea9d9c9d649d44417e1b725f54e672e1",
+      "guidance_size_bytes": 360,
+      "source_repository": "minio/minio",
+      "source_revision": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+      "source_error": null,
+      "structured_pointer": "docs/docker/",
+      "pointer_inspection": {
+        "path": "docs/docker",
+        "status": "found",
+        "git_object_sha": "cf85f4754790032641d785312c543df6519dd511",
+        "object_type": "tree",
+        "descendant_file_count": 1,
+        "url": "https://github.com/minio/minio/tree/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/docs/docker"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0680",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "b67cc9bf3c1604c2",
+      "guidance_sha256": "7008a0ba6d85cbca07708dff236a5460c45025adfe6d35e4b7341080d9cd4613",
+      "guidance_size_bytes": 433,
+      "source_repository": "minio/minio",
+      "source_revision": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+      "source_error": null,
+      "structured_pointer": "docs/bucket-versioning/README.md",
+      "pointer_inspection": {
+        "path": "docs/bucket-versioning/README.md",
+        "status": "not_found_in_pinned_tree",
+        "git_object_sha": null,
+        "object_type": null,
+        "descendant_file_count": 0,
+        "url": "https://github.com/minio/minio/tree/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/docs/bucket-versioning/README.md"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "AWS-0681",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "be46f8d555035947",
+      "guidance_sha256": "ff1754a5a71184b8173e38190775fbc40f2f9444b5d4d0694aac2f0ba737703b",
+      "guidance_size_bytes": 401,
+      "source_repository": "aws/aws-sdk-pandas",
+      "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+      "source_error": null,
+      "structured_pointer": "awswrangler/athena/_read.py",
+      "pointer_inspection": {
+        "path": "awswrangler/athena/_read.py",
+        "status": "found",
+        "git_object_sha": "1a81b47c0491027dda468ab3ea270a11c59cf265",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/athena/_read.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0682",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "d502535aa0794984",
+      "guidance_sha256": "e0ba138b3d191003d08cd89fa498af89a21c8ba0595219dae569bd916eb643eb",
+      "guidance_size_bytes": 392,
+      "source_repository": "aws/aws-sdk-pandas",
+      "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+      "source_error": null,
+      "structured_pointer": "awswrangler/s3/_read_parquet.py",
+      "pointer_inspection": {
+        "path": "awswrangler/s3/_read_parquet.py",
+        "status": "found",
+        "git_object_sha": "04325877bf12731e57b3572ceb1a284ff0c659e9",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/s3/_read_parquet.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0683",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "8ea894163d97aaea",
+      "guidance_sha256": "eded43d9e3b6ec59866112b67a61b7612fa9a472804cf4fce877e13d34efe3e9",
+      "guidance_size_bytes": 389,
+      "source_repository": "aws/aws-sdk-pandas",
+      "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+      "source_error": null,
+      "structured_pointer": "awswrangler/catalog/_get.py",
+      "pointer_inspection": {
+        "path": "awswrangler/catalog/_get.py",
+        "status": "found",
+        "git_object_sha": "b5fc5a443bf3089dff0f0973eb9df6de21966087",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/catalog/_get.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0684",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "40c5df76e96692a7",
+      "guidance_sha256": "eecb492ac23a92cde29aabed1605de9443dfc8cd3bf6533dcb1dd609c014ea0b",
+      "guidance_size_bytes": 398,
+      "source_repository": "aws/aws-sdk-pandas",
+      "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+      "source_error": null,
+      "structured_pointer": "awswrangler/redshift/_utils.py",
+      "pointer_inspection": {
+        "path": "awswrangler/redshift/_utils.py",
+        "status": "found",
+        "git_object_sha": "c5f3b9c024c1060f91b283d8a0f60db9605a54aa",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/redshift/_utils.py"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0685",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "e2f1d811441fd213",
+      "guidance_sha256": "9f89b3ab74449c80924f43d592d6182e1832902ac516163c50613587342a1cb1",
+      "guidance_size_bytes": 434,
+      "source_repository": "aws-samples/amazon-bedrock-samples",
+      "source_revision": "b5ad367ad897dc8dbb9af0f671b58129d4e19672",
+      "source_error": null,
+      "structured_pointer": "agents-and-function-calling/bedrock-agents/features-examples/",
+      "pointer_inspection": {
+        "path": "agents-and-function-calling/bedrock-agents/features-examples",
+        "status": "found",
+        "git_object_sha": "c2da9fcacae4a45ffdb2c3441219f6b7f34c396e",
+        "object_type": "tree",
+        "descendant_file_count": 114,
+        "url": "https://github.com/aws-samples/amazon-bedrock-samples/tree/b5ad367ad897dc8dbb9af0f671b58129d4e19672/agents-and-function-calling/bedrock-agents/features-examples"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0686",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "44d552d8ab3c1936",
+      "guidance_sha256": "f4da49c0503011647c146ce8705e5b2efec9aedbc9ac709691c7c22dc0b007a7",
+      "guidance_size_bytes": 414,
+      "source_repository": "aws-samples/amazon-bedrock-samples",
+      "source_revision": "b5ad367ad897dc8dbb9af0f671b58129d4e19672",
+      "source_error": null,
+      "structured_pointer": "rag-solutions/",
+      "pointer_inspection": {
+        "path": "rag-solutions",
+        "status": "not_found_in_pinned_tree",
+        "git_object_sha": null,
+        "object_type": null,
+        "descendant_file_count": 0,
+        "url": "https://github.com/aws-samples/amazon-bedrock-samples/tree/b5ad367ad897dc8dbb9af0f671b58129d4e19672/rag-solutions"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0687",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "artifact",
+      "legacy_content_hash": "6d31a537a30db145",
+      "guidance_sha256": "557225d11e07dfbbb9d5617bca899fb63ad6aa3d00b6a255a1bbf87b14f2b0d6",
+      "guidance_size_bytes": 400,
+      "source_repository": "aws-samples/amazon-bedrock-samples",
+      "source_revision": "b5ad367ad897dc8dbb9af0f671b58129d4e19672",
+      "source_error": null,
+      "structured_pointer": "introduction-to-bedrock/",
+      "pointer_inspection": {
+        "path": "introduction-to-bedrock",
+        "status": "found",
+        "git_object_sha": "98649d2b450b21702d04f6d20095860e7256d05e",
+        "object_type": "tree",
+        "descendant_file_count": 54,
+        "url": "https://github.com/aws-samples/amazon-bedrock-samples/tree/b5ad367ad897dc8dbb9af0f671b58129d4e19672/introduction-to-bedrock"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "remaining_product_input": [
+        "curated_runnable_product_files",
+        "dependency_and_build_manifest",
+        "original_product_contribution",
+        "file_license_and_notice_mapping",
+        "meaningful_validation"
+      ]
+    },
+    {
+      "sku": "AWS-0688",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "856f9832d186fa43",
+      "guidance_sha256": "1d8be8a86c6d2a50267eb567358cb4aaa87554250e25e5dd31cd00c2d26aa4ae",
+      "guidance_size_bytes": 437,
+      "source_repository": "aws/bedrock-agentcore-sdk-python",
+      "source_revision": "b70e0b709f6c8ec897b28fe873c3364e17f5cfec",
+      "source_error": null,
+      "structured_pointer": "src/bedrock_agentcore/",
+      "pointer_inspection": {
+        "path": "src/bedrock_agentcore",
+        "status": "found",
+        "git_object_sha": "4ebaa9d8f5499c9feb506e805f87b00f902845c4",
+        "object_type": "tree",
+        "descendant_file_count": 144,
+        "url": "https://github.com/aws/bedrock-agentcore-sdk-python/tree/b70e0b709f6c8ec897b28fe873c3364e17f5cfec/src/bedrock_agentcore"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0689",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "a8cf3b11991b77bd",
+      "guidance_sha256": "1ce75ba5b0eb6eebee6ba97f2dcbe46dbceca6e6e67e1b63c7346cd16b90c6d3",
+      "guidance_size_bytes": 380,
+      "source_repository": "aws/bedrock-agentcore-sdk-python",
+      "source_revision": "b70e0b709f6c8ec897b28fe873c3364e17f5cfec",
+      "source_error": null,
+      "structured_pointer": "src/bedrock_agentcore/memory/",
+      "pointer_inspection": {
+        "path": "src/bedrock_agentcore/memory",
+        "status": "found",
+        "git_object_sha": "9550889a0e2c2fac2a5b70b2dfa7aa400550ba4b",
+        "object_type": "tree",
+        "descendant_file_count": 26,
+        "url": "https://github.com/aws/bedrock-agentcore-sdk-python/tree/b70e0b709f6c8ec897b28fe873c3364e17f5cfec/src/bedrock_agentcore/memory"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0690",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "8db58bea0b49a17b",
+      "guidance_sha256": "b1cfef5f95b8d0ffd6cebd25b7980be58169c9594b5afb42b4352783ff21e39e",
+      "guidance_size_bytes": 404,
+      "source_repository": "aws/bedrock-agentcore-sdk-python",
+      "source_revision": "b70e0b709f6c8ec897b28fe873c3364e17f5cfec",
+      "source_error": null,
+      "structured_pointer": "src/bedrock_agentcore/runtime/",
+      "pointer_inspection": {
+        "path": "src/bedrock_agentcore/runtime",
+        "status": "found",
+        "git_object_sha": "c71d141491b608e1157fd88321ec14ffca401863",
+        "object_type": "tree",
+        "descendant_file_count": 15,
+        "url": "https://github.com/aws/bedrock-agentcore-sdk-python/tree/b70e0b709f6c8ec897b28fe873c3364e17f5cfec/src/bedrock_agentcore/runtime"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "remaining_product_input": [
+        "reviewed_guidance_or_execution_contract",
+        "actual_promised_invocation_or_workflow",
+        "dependency_and_validation_contract"
+      ]
+    },
+    {
+      "sku": "AWS-0691",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "guide",
+      "legacy_content_hash": "76924b79f729f8ad",
+      "guidance_sha256": "d8aefdc62012acf82e8981bbc2a3b00838bf47308682f73c3d54a2d21ff57d29",
+      "guidance_size_bytes": 452,
+      "source_repository": "aws/bedrock-agentcore-sdk-python",
+      "source_revision": "b70e0b709f6c8ec897b28fe873c3364e17f5cfec",
+      "source_error": null,
+      "structured_pointer": "src/bedrock_agentcore/tools/",
+      "pointer_inspection": {
+        "path": "src/bedrock_agentcore/tools",
+        "status": "found",
+        "git_object_sha": "10e3d89a4117b2a5302459b40084648a73829b99",
+        "object_type": "tree",
+        "descendant_file_count": 5,
+        "url": "https://github.com/aws/bedrock-agentcore-sdk-python/tree/b70e0b709f6c8ec897b28fe873c3364e17f5cfec/src/bedrock_agentcore/tools"
+      },
+      "other_pointer_fields": {},
+      "observed_deliverable": "existing_guidance_requires_substantive_source_and_quality_review",
+      "remaining_product_input": [
+        "verified_claim_to_source_mapping",
+        "original_guidance_quality_review"
+      ]
+    },
+    {
+      "sku": "BUN-AGENTCORE",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "54e0b01840815e01",
+      "guidance_sha256": "b922a3d04737e72d1535e26a385f2078c9661d6e8e8ea6539e5b9a299bd1a80d",
+      "guidance_size_bytes": 602,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-API-GATEWAY",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "e4044dfcc3f84cf4",
+      "guidance_sha256": "7e56f3b011df0f42882bb2f4aedf55b6f705307a58de21e5b18567088ca36f0b",
+      "guidance_size_bytes": 522,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-ATHENA",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "15e69e0c64755903",
+      "guidance_sha256": "55c111ef3d86642feef257b8150c46abcffc52bc3e1f77ada5af72740933f2c1",
+      "guidance_size_bytes": 507,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-BEDROCK",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "c3e9201cc3fa4e8a",
+      "guidance_sha256": "d14ecc1114d545b21638c61aa2bddec644d4d88ec1e943922144bd21324a656f",
+      "guidance_size_bytes": 548,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-DYNAMODB",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "7e4ff4b22a8faf35",
+      "guidance_sha256": "12a99a62c544f74fd6351ed3ce8ff4c696ffef1a1d0e5c192855f8853c21b4ef",
+      "guidance_size_bytes": 539,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-ECS",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "c81132bd92e29142",
+      "guidance_sha256": "4af467b66d459a27c8b19962e79a9f6d2b16c11103dff691aa28bb0d1116367d",
+      "guidance_size_bytes": 504,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-EVENTS",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "cbdf7aa30d571185",
+      "guidance_sha256": "4c7d7a1ac3f776851531b2923bbdba14e2fc5356a81dad71ba94d801f20dfc9b",
+      "guidance_size_bytes": 507,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-GLUE",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "baaed153992dcd72",
+      "guidance_sha256": "b4e9631338b6fc14446b3b9a294c6f4e8f5758368fd246287c287094b371f2f0",
+      "guidance_size_bytes": 505,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-LAMBDA",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "52753796252e2806",
+      "guidance_sha256": "6aca28c78b1b63d27447a84a1cf4af594a37874823e716840219fb6894810cf1",
+      "guidance_size_bytes": 750,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-S3",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "323192f7ff3156eb",
+      "guidance_sha256": "aebb2f800f3baea57d187ae33eec0183554fce9f18b940d53d1093f80e010674",
+      "guidance_size_bytes": 543,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-SAGEMAKER",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "d6036b14d83b1caa",
+      "guidance_sha256": "5c1b006a5806ba88f78f00aae5f11a87fa6b4723bcd2f467f3e84885efd5b055",
+      "guidance_size_bytes": 612,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "BUN-STEP-FUNCTIONS",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "ae57c773852d44a8",
+      "guidance_sha256": "4f2ff2fd3b8c4ad3bca1ed7916d6940507442f739b87753ec6a6dcc7d6fd34f3",
+      "guidance_size_bytes": 515,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "unassembled_bundle_contract",
+      "remaining_product_input": [
+        "exact_versioned_member_releases",
+        "member_entitlements_and_provenance"
+      ]
+    },
+    {
+      "sku": "SW-PT-0006",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "live",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "62a28a512af90491",
+      "guidance_sha256": "62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe",
+      "guidance_size_bytes": 5333,
+      "source_repository": "aws-powertools/powertools-lambda-python",
+      "source_revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "historical_guidance_preserved_and_corrected_python_guidance_draft",
+      "remaining_product_input": [
+        "trusted_guidance_and_publication_reviews"
+      ]
+    },
+    {
+      "sku": "SW-RR-0001",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "",
+      "guidance_sha256": "cba90876a7d15f088b82d8a73a49bde61d8dcdb6c7bc5485db0c95a7ded54755",
+      "guidance_size_bytes": 442,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "execution_promise_without_implementation",
+      "remaining_product_input": [
+        "actual_callable_implementation",
+        "validated_input_and_output_contract",
+        "failure_and_idempotency_behavior"
+      ]
+    },
+    {
+      "sku": "SW-RR-0002",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "",
+      "guidance_sha256": "13b093bc8d679a02cfd158be921dee955f9320ca3f7aa163d87726bdf06746b2",
+      "guidance_size_bytes": 512,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "execution_promise_without_implementation",
+      "remaining_product_input": [
+        "actual_callable_implementation",
+        "validated_input_and_output_contract",
+        "failure_and_idempotency_behavior"
+      ]
+    },
+    {
+      "sku": "SW-RR-0003",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "",
+      "guidance_sha256": "8f65f3a61269c13f3d2123fbb6dd091145c323d00b90e47df58ab3e75acec6b6",
+      "guidance_size_bytes": 499,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "execution_promise_without_implementation",
+      "remaining_product_input": [
+        "actual_callable_implementation",
+        "validated_input_and_output_contract",
+        "failure_and_idempotency_behavior"
+      ]
+    },
+    {
+      "sku": "SW-RR-0004",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "",
+      "guidance_sha256": "b4920cff0afd382f9d719158930c165cd2c4a50e7026addd60816e688565bafe",
+      "guidance_size_bytes": 395,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "execution_promise_without_implementation",
+      "remaining_product_input": [
+        "actual_callable_implementation",
+        "validated_input_and_output_contract",
+        "failure_and_idempotency_behavior"
+      ]
+    },
+    {
+      "sku": "SW-RR-0005",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "draft",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "",
+      "guidance_sha256": "4ed9fb13a73ab453d6db895ca99cb409aa06a0be2354abed118d7627851d2f3d",
+      "guidance_size_bytes": 512,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "execution_promise_without_implementation",
+      "remaining_product_input": [
+        "actual_callable_implementation",
+        "validated_input_and_output_contract",
+        "failure_and_idempotency_behavior"
+      ]
+    },
+    {
+      "sku": "SW-TEST-0001",
+      "version_in_snapshot": 1,
+      "status_in_snapshot": "retired",
+      "kind_in_snapshot": "tool",
+      "legacy_content_hash": "proof0001proof01",
+      "guidance_sha256": "3142abbd915e0be85fd934ce8b2331689e98e29ca2190bce548dabc93f2e8b44",
+      "guidance_size_bytes": 231,
+      "source_repository": "",
+      "source_revision": null,
+      "source_error": null,
+      "structured_pointer": null,
+      "pointer_inspection": null,
+      "other_pointer_fields": {},
+      "observed_deliverable": "retired_historical_record",
+      "remaining_product_input": []
+    }
+  ]
+}

@@ -7,13 +7,15 @@ const digestPattern = /^[a-f0-9]{64}$/;
 /** Release-owned prices and payload identities. Buyer input is component IDs only.
  * 10,000 basis points = the whole product. Never count lines, bytes or tokens.
  */
-export async function validateComponentRelease(release) {
+export async function validateComponentRelease(release, {allowUnpriced = false} = {}) {
+  const priced = release?.pricing !== undefined && release?.pricing !== null;
+  if (!priced && !allowUnpriced) fail('pricing_not_configured');
   if (!release || release.schema_version !== '1' || !release.sku || !release.release_ref
       || !Number.isSafeInteger(release.version) || release.version < 1
-      || release.pricing?.mode !== 'proportional-components'
-      || typeof release.pricing.max_amount_atomic !== 'string'
-      || !/^[1-9][0-9]{0,15}$/.test(release.pricing.max_amount_atomic)
-      || !release.pricing.asset || !release.pricing.network
+      || (priced && (release.pricing.mode !== 'proportional-components'
+        || typeof release.pricing.max_amount_atomic !== 'string'
+        || !/^[1-9][0-9]{0,15}$/.test(release.pricing.max_amount_atomic)
+        || !release.pricing.asset || !release.pricing.network))
       || !Array.isArray(release.components) || !release.components.length
       || release.components.length > 100) fail('invalid_component_release');
   const byId = new Map();
@@ -21,12 +23,13 @@ export async function validateComponentRelease(release) {
   let total = 0;
   for (const component of release.components) {
     if (!keyPattern.test(component.id || '') || byId.has(component.id)
-        || !Number.isSafeInteger(component.share_bps) || component.share_bps < 1
-        || component.share_bps > 10000 || !component.name?.trim()
+        || (priced && (!Number.isSafeInteger(component.share_bps) || component.share_bps < 1
+          || component.share_bps > 10000))
+        || (!priced && component.share_bps !== undefined) || !component.name?.trim()
         || !Array.isArray(component.requires) || new Set(component.requires).size !== component.requires.length
         || !Array.isArray(component.files) || !component.files.length) fail('invalid_component');
     byId.set(component.id, component);
-    total += component.share_bps;
+    if (priced) total += component.share_bps;
     const localPaths = new Set();
     for (const file of component.files) {
       if (typeof file.path !== 'string' || file.path.length > 256
@@ -40,7 +43,7 @@ export async function validateComponentRelease(release) {
       paths.set(file.path, identity);
     }
   }
-  if (total !== 10000) fail('component_shares_must_total_100_percent');
+  if (priced && total !== 10000) fail('component_shares_must_total_100_percent');
   const visiting = new Set(), visited = new Set();
   function visit(id) {
     if (!byId.has(id)) fail('unknown_component_dependency');
@@ -51,7 +54,16 @@ export async function validateComponentRelease(release) {
     visiting.delete(id); visited.add(id);
   }
   for (const id of byId.keys()) visit(id);
-  return {byId, release_hash: await sha256(canonicalJson(release))};
+  return {byId, release_hash: await sha256(canonicalJson(release)), priced};
+}
+
+/** File and dependency inspection is available before commercial allocation. */
+export async function trialMenu(release) {
+  const {release_hash, priced} = await validateComponentRelease(release, {allowUnpriced:true});
+  if (priced) return componentMenu(release);
+  return {sku:release.sku,version:release.version,release_ref:release.release_ref,
+    release_hash,pricing_status:'not_configured',
+    components:release.components.map(c=>({id:c.id,name:c.name,requires:[...c.requires]}))};
 }
 
 /** Allocate indivisible atomic units once per complete release, never per retry.

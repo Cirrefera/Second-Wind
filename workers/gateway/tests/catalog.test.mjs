@@ -4,6 +4,7 @@ import { describeProduct, searchCatalog, checkConfiguration } from "../src/catal
 import { createQuote } from "../src/commerce.js";
 import { createFixtureDb, insertItem } from "./helpers/d1.mjs";
 import { fixtureEnv, sha256 } from "./helpers/fixtures.mjs";
+import {canonicalJson} from '../src/contracts.js';
 
 function fixture(t, overrides) {
   const db = createFixtureDb();
@@ -94,4 +95,19 @@ test("catalog search treats wildcards literally and never returns draft or retir
 test('slug search finds a product without requiring its display name', async t => {
  const {db,item}=fixture(t,{slug:'unique-slug-search-marker'});
  assert.deepEqual((await searchCatalog(db,'unique-slug-search-marker')).map(x=>x.sku),[item.sku]);
+});
+
+test('release language adapters require an explicit supported choice and never loosen the input schema',async t=>{
+ const {db,item,env}=fixture(t,{input_schema:JSON.stringify({type:'object',required:['table_name'],properties:{table_name:{type:'string'},language:{enum:['javascript','python']}}})});
+ const release={language_policy:{mode:'configured',explicit_selection:true,adapters:['javascript']}};
+ db.sqlite.prepare('INSERT INTO component_releases VALUES (?,?,?,?)').run(item.sku,item.version,canonicalJson(release),sha256(canonicalJson(release)));
+ const absent=await checkConfiguration(db,item.sku,{table_name:'example'});
+ assert.equal(absent.ok,false);assert.deepEqual(absent.missing,[{field:'language',question:'What programming language do you want the product delivered in?'}]);
+ assert.equal((await checkConfiguration(db,item.sku,{table_name:'example',language:'python'})).errors[0].code,'unsupported_delivery_language');
+ assert.equal((await checkConfiguration(db,item.sku,{language:'javascript'})).ok,false);
+ const config={table_name:'example',language:'javascript'};
+ assert.equal((await checkConfiguration(db,item.sku,config)).ok,true);
+ // A non-component release still uses the original quote path.
+ assert.deepEqual((await createQuote(env,item.sku,config)).config,config);
+ assert.doesNotMatch(JSON.stringify(await describeProduct(db,item.sku)),/manifest_json|adapters_verified/);
 });

@@ -2,10 +2,14 @@ import {canonicalJson,sha256,CommerceError} from './contracts.js';
 import {canonicalService} from './publication.js';
 import {listCatalog} from './catalog.js';
 import {readCandidateAlignment} from './clef.js';
+import {createJourneyContext,publicIntentDimensions,enqueueObservation} from './telemetry.js';
 
 export const ROUTING_VERSION='1';
 // Provisional local policy; this is not a calibrated confidence guarantee.
 export const CLEF_ROUTING_MIN_CONFIDENCE=0.5;
+// Cookbook-inspired local thresholds; neither has been calibrated on live labels.
+export const CLEF_ROUTING_EXISTS_MIN=0.7;
+export const CLEF_ROUTING_EXISTS_ABSENT=0.35;
 const dimensions=['aliases','tags','taxonomy_ids','problem_family_ids','operations','environments','desired_outcomes','input_kinds','failure_signatures','languages','runtimes','required_evidence','exclusions'];
 const positiveDimensions=dimensions.filter(field=>field!=='required_evidence'&&field!=='exclusions');
 const constraints={operation:'operations',environment:'environments',desired_outcome:'desired_outcomes',input_kind:'input_kinds',failure_signature:'failure_signatures',target_language:'languages',target_runtime:'runtimes',problem_family:'problem_family_ids',taxonomy_id:'taxonomy_ids'};
@@ -50,13 +54,20 @@ export function evaluateCompatibility(manifest,input) {
   if(intent.service&&manifest.service!==intent.service) conflicts.push('service');
   if(intent.product_kind&&manifest.product_kind!==intent.product_kind) conflicts.push('product_kind');
   for(const [key,field] of Object.entries(constraints)) if(intent[key]&&!manifest[field].includes(intent[key])) conflicts.push(key);
+  // Flat manifest arrays do not express adapter/runtime pairs. Reject the
+  // demonstrated JavaScript/Python mismatch without inferring a missing choice
+  // or imposing a language relation on unknown runtime families.
+  const runtimeLanguage=/^nodejs\d+(?:\.x)?$/.test(intent.target_runtime||'')?'javascript'
+    :/^python\d+(?:\.\d+)?$/.test(intent.target_runtime||'')?'python':undefined;
+  if(runtimeLanguage&&['javascript','python'].includes(intent.target_language)
+      &&intent.target_language!==runtimeLanguage) conflicts.push('runtime_language');
   for(const value of Object.values(intent).filter(v=>typeof v==='string')) if(manifest.exclusions.includes(value)) conflicts.push('explicit_exclusion');
   for(const field of manifest.required_evidence) if(!intent.evidence?.includes(field)) missing.push(`evidence:${field}`);
   if(manifest.language_policy==='explicit'&&!intent.target_language) missing.push('target_language');
   return {compatible:!conflicts.length&&!missing.length,conflicts:[...new Set(conflicts)],missing};
 }
 
-export async function resolveIntent(env,input,limit=10) {
+export async function resolveIntent(env,input,limit=10,{journey}={}) {
   const intent=intentValue(input);
   if(!Number.isInteger(limit)||limit<1||limit>50) fail('invalid_search_limit');
   const products=await listCatalog(env.SW_DB),bySku=new Map(products.map(p=>[p.sku,p]));
@@ -72,6 +83,9 @@ export async function resolveIntent(env,input,limit=10) {
     manifests.push({m,product,hash:row.manifest_hash});
   }
   const snapshot_ref='sha256:'+await sha256(canonicalJson(manifests.map(x=>[x.m.sku,x.m.version,x.hash])));
+  const observation=journey?createJourneyContext({journey_id:journey.journey_id,transport:journey.transport}):undefined;
+  const public_intent=observation?publicIntentDimensions(intent,manifests.map(entry=>entry.m)):undefined;
+  if(observation) await enqueueObservation(env,'discovery.searched',{journey:observation,payload:{public_intent}});
   const words=(intent.goal||'').toLowerCase().match(/[a-z0-9]+/g)||[];
   const candidates=[],eligible=[];
   for(const entry of manifests) {
@@ -101,10 +115,19 @@ export async function resolveIntent(env,input,limit=10) {
     const pool=eligible.slice(0,20);
     try {
       alignment=await readCandidateAlignment(env.AI,intent,pool.map(x=>x.m),snapshot_ref);
+      alignment.candidate_scope={evaluated_count:pool.length,eligible_count:eligible.length,complete:pool.length===eligible.length};
       const reading=alignment.readings.candidate;
-      const chosen=reading.confidence>=CLEF_ROUTING_MIN_CONFIDENCE
+      const exists=alignment.readings.answer_exists.noul;
+      const chosen=exists>=CLEF_ROUTING_EXISTS_MIN&&reading.confidence>=CLEF_ROUTING_MIN_CONFIDENCE
         ?pool.find((entry,index)=>reading.choice===`candidate_${index}`):undefined;
-      if(chosen) {
+      if(exists<CLEF_ROUTING_EXISTS_ABSENT) {
+        alignment.negative_scope='evaluated_candidates_only';
+        // A confident negative reading is different from an unavailable provider.
+        // The model has no evidence about candidates outside the bounded pool.
+        const excluded=new Set(pool);
+        compatible=compatible.filter(entry=>!excluded.has(entry));
+        ranked=compatible.length?compatible:candidates.filter(entry=>!excluded.has(entry));
+      } else if(chosen) {
         compatible=chosen.comparison.compatible?[chosen,...compatible.filter(entry=>entry!==chosen)]:[];
         ranked=chosen.comparison.compatible?compatible:[chosen];
       }
@@ -118,5 +141,7 @@ export async function resolveIntent(env,input,limit=10) {
     result.clarifications=missing.map(field=>({field,question:field==='target_language'?'What programming language do you want the product delivered in?':`Please supply ${field}.`}));
   }
   if(alignment) result.alignment=alignment;
+  if(observation) await enqueueObservation(env,'discovery.resolved',{journey:observation,payload:{public_intent,
+    candidate_product_ids:result.matches.map(product=>product.sku),result_count:result.matches.length,resolution_status:result.status}});
   return result;
 }

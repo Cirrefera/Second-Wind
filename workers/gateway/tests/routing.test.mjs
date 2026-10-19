@@ -6,6 +6,12 @@ import {resolveIntent,validateRoutingManifest} from '../src/routing.js';
 import {ProductService} from '../src/product-service.js';
 import {createApp} from '../src/index.js';
 import {RpcTarget,newHttpBatchRpcSession,newMessagePortRpcSession} from 'capnweb';
+import {createJourneyContext} from '../src/telemetry.js';
+import {loadRoutingEvaluation,evaluateRouting,cloudflareEvaluationAi} from '../scripts/evaluate-routing.mjs';
+const routingResponse=(input,{choice='candidate_0',confidence=1,exists=1}={})=>({model:'clef-flash',answers:{
+ answer_exists:{type:'noul',noul:exists},candidate:{type:'choice',choice,confidence,
+ probabilities:Object.fromEntries(Object.keys(input.questions.candidate.criteria).map(key=>[key,key===choice?1:0]))},
+}});
 const manifest=item=>({schema_version:'1',product_id:'lambda-retry',sku:item.sku,slug:item.slug,version:item.version,
  release_ref:'release:one',service:'lambda',product_kind:'artifact-product',route_summary:'Lambda duplicate processing idempotency',
  supported_boundary:'Duplicate event handling in Lambda',aliases:['retry-safety'],tags:['idempotency','duplicate-processing'],
@@ -17,6 +23,63 @@ async function fixture(t,patch={}){
  await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)').bind(item.sku,item.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
  return {env:{SW_DB:db},item,m,db};
 }
+test('shared resolver observations record only reviewed public dimensions, including no-match operations',async t=>{
+ const {env,db}=await fixture(t),journey=createJourneyContext({transport:'rpc'});
+ const intent={goal:'quantum gardening private-payment-token',target_language:'javascript',
+  taxonomy_id:'private.account-id',evidence:['private-evidence']};
+ const baseline=await resolveIntent(env,intent);
+ for(let index=0;index<2;index++) assert.deepEqual(await resolveIntent(env,intent,10,{journey}),baseline);
+ const rows=db.sqlite.prepare("SELECT event_type,payload FROM business_event_outbox WHERE event_type LIKE 'discovery.%' ORDER BY rowid").all();
+ assert.equal(rows.length,4);
+ const observations=rows.map(row=>({type:row.event_type,...JSON.parse(row.payload)}));
+ assert.deepEqual(observations.map(row=>row.type),['discovery.searched','discovery.resolved','discovery.searched','discovery.resolved']);
+ assert.ok(observations.every(row=>row.journey_id===journey.journey_id&&row.transport==='rpc'));
+ assert.ok(observations.every(row=>JSON.stringify(row.public_intent)==='{"target_language":"javascript"}'));
+ assert.equal(observations[0].observation_id,observations[1].observation_id);
+ assert.equal(observations[2].observation_id,observations[3].observation_id);
+ assert.notEqual(observations[0].observation_id,observations[2].observation_id);
+ assert.notEqual(observations[0].observation_id,journey.observation_id);
+ for(const result of [observations[1],observations[3]]) {
+  assert.deepEqual(result.candidate_product_ids,[]);assert.equal(result.result_count,0);assert.equal(result.resolution_status,'no_match');
+ }
+ assert.ok(!JSON.stringify(observations).includes('private'));
+});
+
+test('optional discovery observation storage failure preserves routing results',async t=>{
+ const {env,db,item}=await fixture(t),intent={sku:item.sku,target_language:'javascript'};
+ const baseline=await resolveIntent(env,intent);
+ db.sqlite.exec('DROP TABLE business_event_outbox');
+ assert.deepEqual(await resolveIntent(env,intent,10,{journey:createJourneyContext()}),baseline);
+});
+test('fixed evaluation corpus accepts exact real draft metadata and preserves labeled deterministic and typed-fixture behavior',async()=>{
+ const source=await loadRoutingEvaluation();
+ assert.deepEqual(source.sources.map(({item})=>[item.sku,item.version,item.status]),[['AWS-0568',2,'draft'],['SW-PT-0006',2,'draft']]);
+ assert.equal(source.corpus.cases.length,34);
+ assert.deepEqual([...new Set(source.corpus.cases.map(example=>example.category))].sort(),
+  ['ambiguous','exact-match','hard-conflict','hard-negative','identity-conflict','missing-language','multi-candidate','no-match','semantic-recall','structured-match']);
+ let calls=0;
+ const deterministic=await evaluateRouting({ai:{run:()=>{calls++;throw new Error('must not call');}}});
+ assert.equal(calls,0);assert.equal(deterministic.model_calls,0);
+ assert.equal(deterministic.completed,34);assert.equal(deterministic.passed,34);
+ assert.equal(deterministic.semantic_accuracy_measured,false);assert.equal(deterministic.thresholds.calibrated,false);
+ assert.equal(deterministic.target_comparison.false_match_cases,6);
+ const scripted=await evaluateRouting({mode:'fixture'});
+ assert.equal(scripted.completed,34);assert.equal(scripted.passed,34);assert.equal(scripted.model_calls,24);
+ assert.equal(scripted.semantic_accuracy_measured,false);assert.equal(scripted.thresholds.calibrated,false);
+ assert.equal(scripted.target_comparison.false_match_cases,0);
+ assert.equal(scripted.target_comparison.missed_match_cases,0);
+ for(const example of scripted.cases.filter(example=>['hard-conflict','identity-conflict'].includes(example.category)))
+  assert.equal(example.model_calls,0,example.id);
+ const negative=scripted.cases.find(example=>example.id==='guide-external-exactly-once');
+ assert.equal(negative.observed.status,'no_match');assert.equal(negative.alignment.negative_scope,'evaluated_candidates_only');
+ const pending=scripted.cases.find(example=>example.id==='guidance-semantic-missing-language');
+ assert.deepEqual(pending.observed,{status:'missing_configuration',products:[{sku:'SW-PT-0006',version:2}],clarifications:['target_language']});
+ assert.equal(scripted.cases.find(example=>example.id==='two-compatible-candidates').observed.status,'multiple_candidates');
+ assert.equal(scripted.cases.find(example=>example.id==='ambiguous-language-only').alignment.readings.candidate.confidence,0);
+ assert.deepEqual((await loadRoutingEvaluation()).sources,source.sources);
+ await assert.rejects(evaluateRouting({mode:'live'}),/live_evaluation_ai_required/);
+ assert.throws(()=>cloudflareEvaluationAi({account:'',token:''}),/required for --live/);
+});
 test('unavailable Clef preserves deterministic candidates and status',async t=>{
  const {env,db}=await fixture(t);
  const item=insertItem(db,{sku:'SECOND',slug:'second',service:'lambda'}),m=manifest(item);
@@ -33,6 +96,54 @@ test('unavailable Clef preserves deterministic candidates and status',async t=>{
  const {alignment,...unchanged}=result;
  assert.deepEqual(unchanged,baseline);
 });
+test('confident semantic absence vetoes keyword matches while unavailable and uncertain readings retain fallback',async t=>{
+ const {env}=await fixture(t),intent={goal:'Lambda idempotency exactly once external effects',target_language:'javascript'};
+ const baseline=await resolveIntent(env,intent);assert.equal(baseline.status,'match');
+ let calls=0;
+ for(const choice of ['unknown','candidate_0']) for(const exists of [0,0.349,0.35,0.69]) {
+  const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>{
+   calls++;return routingResponse(input,{choice,exists});
+  }}},intent);
+  if(exists<0.35) {
+   assert.equal(result.status,'no_match');assert.equal(result.matched,false);
+   assert.deepEqual(result.matches,[]);assert.deepEqual(result.clarifications,[]);
+  } else {
+   const {alignment,...fallback}=result;assert.deepEqual(fallback,baseline);
+  }
+  assert.equal(result.alignment.readings.answer_exists.noul,exists);
+ }
+ assert.equal(calls,8);
+});
+
+test('semantic promotion requires both positive existence and Choice confidence',async t=>{
+ const {env}=await fixture(t),intent={goal:'avoid repeated work',target_language:'javascript'};
+ assert.equal((await resolveIntent(env,intent)).status,'no_match');
+ for(const [exists,confidence,status] of [[0.69,1,'no_match'],[0.7,0.49,'no_match'],[0.7,0.5,'match']]) {
+  const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>routingResponse(input,{exists,confidence})}},intent);
+  assert.equal(result.status,status);
+ }
+});
+
+test('HTTP and Cap\'n Web distinguish explicit no-match from provider unavailability',async t=>{
+ const {env}=await fixture(t),intent={goal:'Lambda duplicate processing external effects',target_language:'javascript'};
+ const baseline=await resolveIntent(env,intent);assert.equal(baseline.status,'match');
+ const app=createApp(),realFetch=globalThis.fetch;
+ globalThis.fetch=async(input,init)=>app.fetch(new Request(input,init),env,{waitUntil(){}});
+ env.CLEF_ROUTING_ENABLED='true';
+ try {
+  for(const available of [true,false]) {
+   env.AI={run:async(model,input)=>{if(!available) throw new Error('unavailable');return routingResponse(input,{choice:'unknown',exists:0.01});}};
+   const response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent})}),env,{waitUntil(){}});
+   assert.equal(response.status,200);const http=await response.json();
+   const rpc=await newHttpBatchRpcSession('https://secondwindai.com/capnp').searchIntent(intent);
+   const {candidates,...rpcResult}=rpc;assert.deepEqual(rpcResult,http);
+   assert.equal(http.status,available?'no_match':'match');assert.equal(candidates.length,available?0:1);
+   if(!available) assert.deepEqual(http.alignment,{status:'unavailable'});
+   for(const candidate of candidates) candidate.product[Symbol.dispose]();
+  }
+ } finally {globalThis.fetch=realFetch;}
+});
 test('a valid complete Clef choice ranks an eligible product without reintroducing conflicts',async t=>{
  const {env,db}=await fixture(t);
  for(const [sku,patch] of [['SECOND',{}],['PYTHON',{languages:['python']}],['MISSING',{required_evidence:['event-sample']}]]) {
@@ -44,7 +155,7 @@ test('a valid complete Clef choice ranks an eligible product without reintroduci
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
   request=input;const keys=Object.keys(input.questions.candidate.criteria);
   const index=input.state.candidates.findIndex(candidate=>candidate.sku===chosenSku),choice=`candidate_${index}`;
-  return {model:'clef-flash',answers:{candidate:{type:'choice',choice,confidence:1,
+  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice,confidence:1,
    probabilities:Object.fromEntries(keys.map(key=>[key,key===choice?1:0]))}}};
  }};
  const result=await resolveIntent(env,intent),{alignment,...unchanged}=result;
@@ -80,7 +191,7 @@ test('HTTP and actual Cap\'n Web routing apply Clef ranking before the requested
     requests.push(input);
     if(mode==='provider-failure') throw new Error('provider_unavailable');
     const choice=selected||mode==='low-confidence'?'candidate_1':'unknown',keys=Object.keys(input.questions.candidate.criteria);
-    return {model:'clef-flash',answers:{candidate:{type:'choice',choice,confidence:mode==='low-confidence'?0.49:1,
+    return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice,confidence:mode==='low-confidence'?0.49:1,
      probabilities:Object.fromEntries(keys.map(key=>[key,key===choice?1:0]))}}};
    }};
    const response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
@@ -116,7 +227,7 @@ test('confident semantic routing can surface only the exact eligible product whi
  for(const [choice,confidence] of [['candidate_0',0.5],['candidate_0',0.49],['unknown',1]]) {
   let calls=0;
   env.AI={run:async()=>{
-   calls++;return {model:'clef-flash',answers:{candidate:{type:'choice',choice,confidence,
+   calls++;return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice,confidence,
     probabilities:{unknown:choice==='unknown'?1:0,candidate_0:choice==='candidate_0'?1:0}}}};
   }};
   const result=await resolveIntent(env,intent),{alignment,...withoutReading}=result;
@@ -134,7 +245,7 @@ test('Clef choices preserve missing language while explicit conflicts stay model
  const {env,item}=await fixture(t);let calls=0;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
   calls++;assert.equal(input.state.candidates.length,1);
-  return {model:'clef-flash',answers:{candidate:{type:'choice',choice:'candidate_0',confidence:1,
+  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_0',confidence:1,
    probabilities:{unknown:0,candidate_0:1}}}};
  }};
  assert.equal((await resolveIntent(env,{sku:item.sku,target_language:'javascript'})).status,'match');
@@ -154,7 +265,7 @@ test('semantic pending choice asks exact language over HTTP and Cap\'n Web befor
  const seen=[];
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
   seen.push(input.state.intent);
-  return {model:'clef-flash',answers:{candidate:{type:'choice',choice:'candidate_0',confidence:1,
+  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_0',confidence:1,
    probabilities:{unknown:0,candidate_0:1}}}};
  }};
  const app=createApp(),response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
@@ -193,7 +304,7 @@ test('semantic pending choice asks exact language over HTTP and Cap\'n Web befor
 test('uninformative evidence-only and stopword intents remain model-free no matches',async t=>{
  const {env}=await fixture(t,{language_policy:'not-applicable',languages:[]});let calls=0;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async()=>{
-  calls++;return {model:'clef-flash',answers:{candidate:{type:'choice',choice:'candidate_0',confidence:1,
+  calls++;return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_0',confidence:1,
    probabilities:{unknown:0,candidate_0:1}}}};
  }};
  for(const intent of [{evidence:[]},{evidence:['event-sample']},{goal:'help with the product'}]) {
@@ -214,7 +325,7 @@ test('Clef input is bounded to twenty eligible candidates before result limiting
  let request;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
   request=input;const keys=Object.keys(input.questions.candidate.criteria);
-  return {model:'clef-flash',answers:{candidate:{type:'choice',choice:'candidate_19',confidence:1,
+  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_19',confidence:1,
    probabilities:Object.fromEntries(keys.map(key=>[key,key==='candidate_19'?1:0]))}}};
  }};
  const result=await resolveIntent(env,intent,1);
@@ -222,6 +333,16 @@ test('Clef input is bounded to twenty eligible candidates before result limiting
  assert.deepEqual(request.state.candidates.map(candidate=>candidate.sku),baseline.matches.slice(0,20).map(product=>product.sku));
  assert.equal(result.matches.length,1);assert.equal(result.matches[0].sku,baseline.matches[19].sku);
  assert.equal(result.matches[0].version,baseline.matches[19].version);
+ assert.deepEqual(result.alignment.candidate_scope,{evaluated_count:20,eligible_count:22,complete:false});
+ env.AI={run:async(model,input)=>routingResponse(input,{choice:'unknown',exists:0})};
+ const absent=await resolveIntent(env,intent,50);
+ assert.equal(absent.status,'multiple_candidates');
+ assert.deepEqual(absent.matches.map(product=>product.sku),baseline.matches.slice(20).map(product=>product.sku));
+ assert.equal(absent.alignment.negative_scope,'evaluated_candidates_only');
+ const partial=await resolveIntent(env,{goal:'avoid repeated work',target_language:'javascript'},50);
+ assert.equal(partial.status,'no_match');
+ assert.equal(partial.alignment.candidate_scope.complete,false);
+ assert.equal(partial.alignment.negative_scope,'evaluated_candidates_only');
 });
 test('structured constraints beat exact identity and lexical similarity',async t=>{
  const {env,item}=await fixture(t);
@@ -232,6 +353,21 @@ test('structured constraints beat exact identity and lexical similarity',async t
   assert.equal(r.status,'no_match');assert.equal(r.matches.length,0);
  }
  await assert.rejects(resolveIntent(env,{goal:'idempotency',invented_constraint:'value'}),/unsupported_intent_field/);
+});
+test('explicit JavaScript and Python runtime choices must agree without inferring missing language',async t=>{
+ const {env,item}=await fixture(t,{languages:['javascript','python'],runtimes:['nodejs24','python3.12','custom-runtime']});
+ let calls=0;env.CLEF_ROUTING_ENABLED='true';
+ env.AI={run:async(model,input)=>{calls++;return routingResponse(input);}};
+ for(const [target_language,target_runtime] of [['javascript','python3.12'],['python','nodejs24']])
+  assert.equal((await resolveIntent(env,{sku:item.sku,target_language,target_runtime})).status,'no_match');
+ assert.equal(calls,0);
+ for(const [target_language,target_runtime] of [['javascript','nodejs24'],['python','python3.12'],['python','custom-runtime']])
+  assert.equal((await resolveIntent(env,{sku:item.sku,target_language,target_runtime})).status,'match');
+ for(const target_runtime of ['nodejs24','python3.12']) {
+  const result=await resolveIntent(env,{sku:item.sku,target_runtime});
+  assert.equal(result.status,'missing_configuration');
+  assert.deepEqual(result.clarifications,[{field:'target_language',question:'What programming language do you want the product delivered in?'}]);
+ }
 });
 test('every supplied identity must match its own namespace',async t=>{
  const {env,item}=await fixture(t);
