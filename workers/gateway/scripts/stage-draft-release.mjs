@@ -9,6 +9,12 @@ const account=process.env.CLOUDFLARE_ACCOUNT_ID,token=process.env.CLOUDFLARE_API
 if(!account||!token) throw Error('cloudflare_credentials_unavailable');
 const base=`https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(account)}`;
 const auth={Authorization:`Bearer ${token}`};
+async function apiFailure(label,response) {
+ // Report only status and numeric provider codes; response bodies can contain private data.
+ let codes=[];
+ try {codes=(await response.json()).errors?.map(e=>e.code).filter(c=>Number.isInteger(c))||[];}catch{}
+ return Error(`${label}:status=${response.status}:codes=${codes.join(',')||'none'}`);
+}
 async function query(sql,params=[]) {
  const r=await fetch(base+'/d1/database/db6412e2-4c9d-4b82-a93e-3b9f3708245d/query',{method:'POST',headers:{...auth,'Content-Type':'application/json'},body:JSON.stringify({sql,params}),signal:AbortSignal.timeout(30000)});
  const data=await r.json();if(!r.ok||!data.success) throw Error('draft_database_operation_failed');
@@ -29,8 +35,8 @@ if(before.ok) {
  if(await sha256(await before.arrayBuffer())!==release.storage.content_hash) throw Error('immutable_object_conflict');
 }else if(before.status===404){
  const put=await fetch(base+objectPath,{method:'PUT',headers:{...auth,'Content-Type':'application/json','If-None-Match':'*'},body:payload,signal:AbortSignal.timeout(30000)});
- if(!put.ok&&put.status!==412) throw Error('immutable_object_upload_failed');
-}else throw Error('immutable_object_read_failed');
+ if(!put.ok&&put.status!==412) throw await apiFailure('immutable_object_upload_failed',put);
+}else throw await apiFailure('immutable_object_read_failed',before);
 const verify=await fetch(base+objectPath,{headers:auth,signal:AbortSignal.timeout(20000)});
 if(!verify.ok||await sha256(await verify.arrayBuffer())!==release.storage.content_hash) throw Error('immutable_object_verification_failed');
 const manifestHash=await sha256(canonicalJson(release)),routingHash=await sha256(canonicalJson(routing));
