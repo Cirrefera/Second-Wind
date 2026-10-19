@@ -16,6 +16,22 @@ async function fixture(t){
  await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)').bind(item.sku,item.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
  return {env:{SW_DB:db},item,m,db};
 }
+test('unavailable Clef preserves deterministic candidates and status',async t=>{
+ const {env,db}=await fixture(t);
+ const item=insertItem(db,{sku:'SECOND',slug:'second',service:'lambda'}),m=manifest(item);
+ await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)').bind(item.sku,item.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
+ const intent={goal:'Lambda idempotency',target_language:'javascript'};
+ const baseline=await resolveIntent(env,intent);
+ assert.equal(baseline.matches.length,2);
+ let calls=0;
+ env.CLEF_ROUTING_ENABLED='true';
+ env.AI={run:async()=>{calls++;throw new Error('provider_unavailable');}};
+ const result=await resolveIntent(env,intent);
+ assert.equal(calls,1);
+ assert.deepEqual(result.alignment,{status:'unavailable'});
+ const {alignment,...unchanged}=result;
+ assert.deepEqual(unchanged,baseline);
+});
 test('structured constraints beat exact identity and lexical similarity',async t=>{
  const {env,item}=await fixture(t);
  for(const fields of [{target_language:'python'},{service:'s3'},{input_kind:'csv'},{target_runtime:'python3'}]) {
