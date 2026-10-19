@@ -1,4 +1,5 @@
 import {canonicalJson,sha256} from './contracts.js';
+import {componentMenu} from './scope.js';
 
 export const VALIDATOR_VERSION = '2026-10-19.2';
 export const SERVICE_ALIASES = Object.freeze({'api-gateway':'apigateway','step-functions':'states'});
@@ -36,6 +37,14 @@ export async function validatePublication(item, manifest, evidence = {}) {
     require(Boolean(manifest.origin) && Boolean(manifest.license) && evidence.license_verified === true,'license_or_origin_unverified');
     require(evidence.purchase_url_verified === true,'purchase_url_unverified');
     require(evidence.pre_settlement_ready === true,'pre_settlement_preparation_unverified');
+    if (manifest.pricing?.mode === 'proportional-components') {
+      try {
+        const menu = await componentMenu(manifest);
+        require(menu.max_amount_atomic === String(Math.round(item.price_usd * 1_000_000)), 'listed_maximum_mismatch');
+        require(evidence.component_payloads_verified_hash === await sha256(canonicalJson(manifest)), 'component_payloads_unverified');
+        require(evidence.sandbox_trial_verified_hash === await sha256(canonicalJson(manifest)), 'component_trial_unverified');
+      } catch (error) { require(false, error.code || 'component_release_invalid'); }
+    }
     const kind = manifest.product_kind;
     if (kind === 'guidance-product') {
       require(Boolean(item.guidance?.trim()),'guidance_missing');
