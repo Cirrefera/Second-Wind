@@ -1,0 +1,84 @@
+name: Audit Cloudflare State
+on:
+  push:
+    branches:
+      - audit/cloudflare-state-20261019
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: workers/gateway/package-lock.json
+      - name: Install locked Cloudflare tooling
+        working-directory: workers/gateway
+        run: npm ci --no-audit --no-fund
+
+      - name: D1 database metadata
+        working-directory: workers/gateway
+        run: |
+          echo '=== D1 INFO ==='
+          ./node_modules/.bin/wrangler d1 info second-wind-catalog --json || true
+
+      - name: D1 schema and inventory audit
+        working-directory: workers/gateway
+        run: |
+          W=./node_modules/.bin/wrangler
+          DB=second-wind-catalog
+          q () {
+            echo
+            echo "=== $1 ==="
+            "$W" d1 execute "$DB" --remote --json --command "$2" || true
+          }
+          q "TABLES_AND_VIEWS" "SELECT type,name FROM sqlite_schema WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' ORDER BY type,name;"
+          q "ITEM_COLUMNS" "PRAGMA table_info(items);"
+          q "STATUS_COUNTS" "SELECT status,COUNT(*) AS n FROM items GROUP BY status ORDER BY status;"
+          q "KIND_COUNTS" "SELECT status,kind,COUNT(*) AS n FROM items GROUP BY status,kind ORDER BY status,kind;"
+          q "SERVICE_COUNTS" "SELECT status,service,COUNT(*) AS n FROM items GROUP BY status,service ORDER BY status,n DESC;"
+          q "CATALOG_COMPLETENESS" "SELECT status,COUNT(*) AS n,SUM(slug='') AS missing_slug,SUM(name='') AS missing_name,SUM(summary='') AS missing_summary,SUM(guidance='') AS missing_guidance,SUM(source_repo='') AS missing_source_repo,SUM(source_url='') AS missing_source_url,SUM(license_spdx='') AS missing_license,SUM(provenance='') AS missing_provenance,SUM(mime_type='') AS missing_mime_type,SUM(content_hash='') AS missing_item_hash FROM items GROUP BY status ORDER BY status;"
+          q "SLUG_VALIDITY" "SELECT COUNT(*) AS invalid_slug_count FROM items WHERE slug='' OR slug!=lower(slug) OR slug GLOB '*[^a-z0-9-]*' OR slug LIKE '-%' OR slug LIKE '%-' OR slug LIKE '%--%';"
+          q "INVALID_SLUG_ROWS" "SELECT sku,slug,status FROM items WHERE slug='' OR slug!=lower(slug) OR slug GLOB '*[^a-z0-9-]*' OR slug LIKE '-%' OR slug LIKE '%-' OR slug LIKE '%--%' ORDER BY sku LIMIT 200;"
+          q "INVENTORY_ROWS" "SELECT sku,slug,status,kind,service,invoke_kind,version,LENGTH(summary) AS summary_chars,LENGTH(guidance) AS guidance_chars,source_repo,source_path,license_spdx,mime_type FROM items ORDER BY status,service,sku;"
+          q "PAYLOAD_OBJECTS" "SELECT COUNT(*) AS n,COALESCE(SUM(size_bytes),0) AS total_bytes,COUNT(DISTINCT sku) AS skus,COUNT(DISTINCT r2_bucket) AS buckets FROM payload_objects;"
+          q "PAYLOADS_BY_BUCKET" "SELECT r2_bucket,COUNT(*) AS n,COALESCE(SUM(size_bytes),0) AS bytes,COUNT(DISTINCT sku) AS skus FROM payload_objects GROUP BY r2_bucket ORDER BY r2_bucket;"
+          q "PAYLOAD_ROWS" "SELECT id,sku,version,r2_bucket,r2_key,content_hash,size_bytes,mime_type,created_at FROM payload_objects ORDER BY sku,version;"
+          q "LIVE_PAYLOAD_COVERAGE" "SELECT COUNT(*) AS live_items,SUM(CASE WHEN po.id IS NOT NULL THEN 1 ELSE 0 END) AS live_with_r2_payload,SUM(CASE WHEN po.id IS NULL AND i.guidance!='' THEN 1 ELSE 0 END) AS live_inline_guidance,SUM(CASE WHEN po.id IS NULL AND i.guidance='' THEN 1 ELSE 0 END) AS live_without_payload FROM items i LEFT JOIN payload_objects po ON po.sku=i.sku AND po.version=i.version WHERE i.status='live';"
+          q "DRAFT_PAYLOAD_COVERAGE" "SELECT COUNT(*) AS draft_items,SUM(CASE WHEN po.id IS NOT NULL THEN 1 ELSE 0 END) AS drafts_with_r2_payload,SUM(CASE WHEN po.id IS NULL AND i.guidance!='' THEN 1 ELSE 0 END) AS drafts_inline_guidance,SUM(CASE WHEN po.id IS NULL AND i.guidance='' THEN 1 ELSE 0 END) AS drafts_without_payload FROM items i LEFT JOIN payload_objects po ON po.sku=i.sku AND po.version=i.version WHERE i.status='draft';"
+          q "EDGE_COUNTS" "SELECT COUNT(*) AS edges,COUNT(DISTINCT from_sku) AS source_skus,COUNT(DISTINCT to_sku) AS target_skus FROM edges;"
+          q "EDGE_RELATIONS" "SELECT relation,COUNT(*) AS n FROM edges GROUP BY relation ORDER BY n DESC,relation;"
+          q "CATEGORY_SERVICE_PROMOTION_COUNTS" "SELECT (SELECT COUNT(*) FROM categories) AS categories,(SELECT COUNT(*) FROM services) AS services,(SELECT COUNT(*) FROM promotions) AS promotions;"
+          q "COMMERCE_COUNTS" "SELECT (SELECT COUNT(*) FROM payments) AS payments,(SELECT COUNT(*) FROM deliveries) AS deliveries,(SELECT COUNT(*) FROM delivery_grants) AS delivery_grants,(SELECT COUNT(*) FROM commerce_quotes) AS commerce_quotes,(SELECT COUNT(*) FROM commerce_purchases) AS commerce_purchases,(SELECT COUNT(*) FROM commerce_recovery_challenges) AS recovery_challenges;"
+          q "PAYMENT_STATUS" "SELECT status,COUNT(*) AS n FROM payments GROUP BY status ORDER BY status;"
+          q "PURCHASE_STATUS" "SELECT status,COUNT(*) AS n FROM commerce_purchases GROUP BY status ORDER BY status;"
+          q "REQUEST_LOG" "SELECT COUNT(*) AS rows,MIN(created_at) AS oldest,MAX(created_at) AS newest FROM request_log;"
+          q "REQUEST_LOG_RECENT" "SELECT path,method,status,ua_class,COUNT(*) AS n FROM request_log WHERE created_at >= datetime('now','-1 day') GROUP BY path,method,status,ua_class ORDER BY n DESC LIMIT 50;"
+          q "TELEMETRY_TABLES" "SELECT type,name,sql FROM sqlite_schema WHERE lower(name) LIKE '%basin%' OR lower(name) LIKE '%event%' OR lower(name) LIKE '%telemetry%' OR lower(name) LIKE '%session%' ORDER BY type,name;"
+          q "ITEM_FTS" "SELECT type,name,sql FROM sqlite_schema WHERE lower(name) LIKE '%fts%' ORDER BY type,name;"
+
+      - name: R2 and Basin control-plane probes
+        working-directory: workers/gateway
+        run: |
+          set +e
+          W=./node_modules/.bin/wrangler
+          echo '=== R2 BUCKET LIST ==='
+          "$W" r2 bucket list
+          echo '=== R2 CATALOG: secondwind-payloads ==='
+          "$W" r2 bucket catalog get secondwind-payloads
+          echo '=== R2 CATALOG: secondwind-deliveries ==='
+          "$W" r2 bucket catalog get secondwind-deliveries
+          echo '=== R2 CATALOG: secondwind-catalog ==='
+          "$W" r2 bucket catalog get secondwind-catalog
+          echo '=== BASIN PIPELINES LIST ==='
+          "$W" pipelines list
+          echo '=== BASIN STREAMS LIST ==='
+          "$W" streams list
+          exit 0
