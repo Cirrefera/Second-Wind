@@ -6,6 +6,7 @@ import {canonicalJson,sha256,USDC,NETWORK} from '../src/contracts.js';
 import {trialProduct,selectTrialComponents,acceptTrialSelection,recoverTrial} from '../src/trials.js';
 import {createQuote,purchase,recoverGrant,deliverGrant} from '../src/commerce.js';
 import {ProductService} from '../src/product-service.js';
+import {newHttpBatchRpcSession,newHttpBatchRpcResponse} from 'capnweb';
 async function fixture(t){
  const db=createFixtureDb();t.after(()=>db.close());const item=insertItem(db,{price_usd:10});const env=fixtureEnv(db);
  const component=async(id,bps,content)=>({id,name:id,share_bps:bps,requires:[],files:[{path:id+'.js',content,sha256:await sha256(content),size_bytes:Buffer.byteLength(content),mime_type:'text/javascript'}]});
@@ -17,6 +18,21 @@ async function fixture(t){
 }
 const input={code:'return await codemode.readFile("core.js")',language:'javascript'};
 const executorFactory=()=>({execute:async(code,tools)=>({result:{observed:await tools.readFile('core.js')}})});
+test('trial recovery, component selection and scope inspection pipeline in one HTTP batch without payment',async t=>{
+ const {env,item,db}=await fixture(t);
+ const trial=await trialProduct(env,item.sku,{},input,null,{executorFactory});
+ const realFetch=globalThis.fetch;let trips=0;
+ globalThis.fetch=async(url,init)=>{trips++;return newHttpBatchRpcResponse(new Request(url,init),new ProductService(env));};
+ try {
+  const client=newHttpBatchRpcSession('https://secondwindai.com/capnp');
+  const scope=await client.recoverTrial(trial.trial_id,trial.trial_token).selectComponents(['core']).info();
+  assert.equal(trips,1);
+  assert.equal(scope.amount_atomic,'3000000');
+  assert.deepEqual(scope.selected_components,['core']);
+  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM commerce_quotes').get().n,0);
+  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM payments').get().n,0);
+ } finally {globalThis.fetch=realFetch;}
+});
 test('trial and selection work with no payment configuration; sandbox sees only trial providers',async t=>{
  const {db,item,env}=await fixture(t);delete env.X402_PAY_TO;delete env.X402_EXPECTED_PAY_TO;
  const trial=await trialProduct(env,item.sku,{},input,null,{executorFactory:settings=>{
