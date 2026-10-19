@@ -5,7 +5,7 @@ import { ProductService } from "./product-service.js";
 import { describeProduct, searchCatalog, checkConfiguration } from "./catalog.js";
 import { createQuote, createExecutionQuote, readQuote, purchase, recoverGrant, deliverGrant,
   createRecoveryChallenge, recoverWithWallet } from "./commerce.js";
-import { CommerceError, NETWORK, ORIGIN, paymentConfig, requirementsFor } from "./contracts.js";
+import { CommerceError, NETWORK, ORIGIN, paymentConfig, paymentReadiness, requirementsFor } from "./contracts.js";
 import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument } from "./discovery.js";
 
 async function jsonBody(request) {
@@ -95,9 +95,10 @@ export function createApp(dependencies = {}) {
     } catch { /* explicit degraded state */ }
     try { paymentConfig(c.env); recipient = true; } catch { /* explicit below */ }
     try { const value = JSON.parse(c.env.CDP_FACILITATOR_KEY); key = Boolean(value.id && value.privateKey); } catch { /* below */ }
-    const ready = db && commerce && recipient && key;
+    const recipientReadiness = paymentReadiness(c.env);
+    const ready = db && commerce && recipient && key && recipientReadiness.payment_recipient_verified;
     return c.json({service:"Second Wind",status:ready ? "ready" : "degraded",tools_live,
-      payment:{rail:"x402",x402Version:2,network:NETWORK,asset:"USDC",payTo_configured:recipient,facilitator_configured:key},
+      payment:{rail:"x402",x402Version:2,network:NETWORK,asset:"USDC",payTo_configured:recipient,...recipientReadiness,facilitator_configured:key},
       dependencies:{database:db,commerce_schema:commerce,payload_store:Boolean(c.env.PAYLOADS),delivery_store:Boolean(c.env.DELIVERIES)},
       discovery:{tools:`${ORIGIN}/api/tools`,openapi:`${ORIGIN}/openapi.json`,x402_resources:`${ORIGIN}/v2/x402/discovery/resources`},
       note:"Configuration readiness does not assert that a live purchase test has passed."},ready ? 200 : 503);

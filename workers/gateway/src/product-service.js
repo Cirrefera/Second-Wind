@@ -91,7 +91,11 @@ export class ProductService extends RpcTarget {
   search(query, limit) { return searchCatalog(this.#env.SW_DB, query, limit); }
   searchCatalog(query, limit) { return this.search(query, limit); }
 
-  configure(sku, config) { return checkConfiguration(this.#env.SW_DB, sku, config); }
+  configure(sku, config, callbacks) { return clarify(this.#env.SW_DB, sku, config, callbacks); }
+
+  async select(sku) {
+    return new ProductCapability(this.#env, await describeProduct(this.#env.SW_DB, sku));
+  }
   checkConfiguration(sku, config) { return this.configure(sku, config); }
 
   quote(sku, config) { return createQuote(this.#env, sku, config); }
@@ -112,5 +116,65 @@ export class ProductService extends RpcTarget {
 
   async recoverSession(paymentId, recoveryToken) {
     return this.getGrant(paymentId, recoveryToken);
+  }
+}
+
+async function clarify(db, sku, config, callbacks) {
+  let result = await checkConfiguration(db, sku, config);
+  if (result.ok || !result.missing.length || !callbacks) return result;
+  if (result.missing.length > 16) throw Object.assign(new Error('too_many_clarifications'), {status:400});
+  let timer;
+  try {
+    const answers = await Promise.race([
+      callbacks.clarify(result.missing),
+      new Promise((_, reject) => { timer = setTimeout(() => reject(
+        Object.assign(new Error('clarification_timeout'), {status:408})), 10000); }),
+    ]);
+    if (!answers || Array.isArray(answers) || typeof answers !== 'object') {
+      throw Object.assign(new Error('invalid_clarification_response'), {status:400});
+    }
+    const patch = {};
+    for (const question of result.missing) {
+      // Nested schema pointers require an explicit reconfigure.
+      if (/^[A-Za-z][A-Za-z0-9_]*$/.test(question.field) && Object.hasOwn(answers, question.field)) {
+        patch[question.field] = answers[question.field];
+      }
+    }
+    return checkConfiguration(db, sku, {...result.config, ...patch});
+  } finally { clearTimeout(timer); }
+}
+
+/** Selected public product authority, never a repository or storage capability. */
+export class ProductCapability extends RpcTarget {
+  #env; #product; #config; #check;
+  constructor(env, product, config, check) {
+    super(); this.#env = env; this.#product = product; this.#config = config; this.#check = check;
+  }
+  info() { return this.#product; }
+  async compatibility(config = this.#config) {
+    await this.#unchanged();
+    return checkConfiguration(this.#env.SW_DB, this.#product.sku, config);
+  }
+  async #unchanged() {
+    const current = await describeProduct(this.#env.SW_DB, this.#product.sku);
+    if (JSON.stringify(current) !== JSON.stringify(this.#product)) {
+      throw Object.assign(new Error('product_changed'), {status:409});
+    }
+  }
+  async configure(config, callbacks) {
+    await this.#unchanged();
+    const result = await clarify(this.#env.SW_DB, this.#product.sku, config, callbacks);
+    await this.#unchanged();
+    return new ProductCapability(this.#env, this.#product, result.config, result);
+  }
+  configuration() { return this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}; }
+  async quote() {
+    await this.#unchanged();
+    if (!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'), {status:400});
+    const quote = await createQuote(this.#env, this.#product.sku, this.#config);
+    if (quote.version !== this.#product.version || quote.content_hash !== this.#product.content_hash) {
+      throw Object.assign(new Error('product_changed'), {status:409});
+    }
+    return quote;
   }
 }

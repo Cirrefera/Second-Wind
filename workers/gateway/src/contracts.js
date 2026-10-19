@@ -42,8 +42,11 @@ export function paymentConfig(env) {
   }
   const payTo = values[0];
   if (typeof payTo !== "string" || !/^0x[0-9a-fA-F]{40}$/.test(payTo)
-      || /^0x0{40}$/i.test(payTo)) {
+      || isBurnAddress(payTo)) {
     throw new CommerceError("payment_rail_not_configured", 503);
+  }
+  if (env.X402_EXPECTED_PAY_TO && !sameAddress(payTo, env.X402_EXPECTED_PAY_TO)) {
+    throw new CommerceError("payment_recipient_unverified", 503);
   }
   if (env.X402_NETWORK && env.X402_NETWORK !== NETWORK) {
     throw new CommerceError("unsupported_payment_network", 503);
@@ -62,4 +65,24 @@ export function requirementsFor(quote) {
 export function sameAddress(left, right) {
   return typeof left === "string" && typeof right === "string"
     && left.toLowerCase() === right.toLowerCase();
+}
+
+// Known burn destinations are never valid merchant recipients.
+export function isBurnAddress(address) {
+  return typeof address === "string" && [
+    "0x0000000000000000000000000000000000000000",
+    "0x000000000000000000000000000000000000dead",
+    "0x0000000000000000000000000000000000000001",
+    "0xdead000000000000000042069420694206942069",
+  ].includes(address.toLowerCase());
+}
+
+export function paymentReadiness(env) {
+  let configured = false;
+  try { paymentConfig({ ...env, X402_EXPECTED_PAY_TO: undefined }); configured = true; } catch {}
+  let verified = false;
+  if (configured && env.X402_EXPECTED_PAY_TO) {
+    try { paymentConfig(env); verified = true; } catch {}
+  }
+  return { payment_recipient_configured: configured, payment_recipient_verified: verified };
 }

@@ -84,7 +84,7 @@ export async function llmsDocument(env) {
     `Supply a cryptographically random 32-byte base64url X-Recovery-Token before the first paid attempt if a disconnected response must be recoverable immediately.\n`+
     `A completed retry requires the same private token. Never treat a payment ID or on-chain signature as a recovery secret.\n\n`+
     `## Cap'n Web\n\n${ORIGIN}/capnp supports HTTP batch and bidirectional WebSocket RPC. `+
-    `Free methods: describe, search, configure, quote. getGrant(paymentId,recoveryToken) and recoverSession(paymentId,recoveryToken) `+
+    `Free methods: describe, search, select, configure, quote. select(sku) returns a product capability; pipeline select(sku).configure(config).quote(). configure accepts an optional buyer callback with clarify(questions). getGrant(paymentId,recoveryToken) and recoverSession(paymentId,recoveryToken) `+
     `return purchase-scoped capabilities with info() and deliver(). Execution grants can replay their one purchased invocation with execute(invocationId,code,"javascript",callback). `+
     `New transport sessions reacquire capabilities from D1; promise pipelining does not make a disconnected session durable.\n\n`+
     `## Recovery\n\nGET ${ORIGIN}/api/purchases/{paymentId}/delivery with X-Recovery-Token is free. `+

@@ -79,7 +79,7 @@ export async function searchCatalog(db, query = "", limit = 10) {
     `SELECT ${CATALOG_COLUMNS} ${CATALOG_SOURCE}
      WHERE i.status = 'live'
        AND (i.name LIKE ?1 ESCAPE '\\' OR i.summary LIKE ?1 ESCAPE '\\'
-         OR i.service LIKE ?1 ESCAPE '\\' OR i.sku LIKE ?1 ESCAPE '\\')
+         OR i.slug LIKE ?1 ESCAPE '\\' OR i.service LIKE ?1 ESCAPE '\\' OR i.sku LIKE ?1 ESCAPE '\\')
      ORDER BY i.kind, i.service, i.sku LIMIT ?2`,
   ).bind(`%${escaped}%`, limit).all();
   return Promise.all((rows.results || []).map(publicProduct));
@@ -177,7 +177,7 @@ export async function checkConfiguration(db, sku, config) {
   }
   const missing = errors.filter(error => error.code === "required").map(error => ({
     field: error.field,
-    question: error.field === "language" ? "What supported language should this product use?"
+    question: error.field === "language" ? "What programming language do you want the product delivered in?"
       : `Missing required field: ${error.field}`,
   }));
   return {
