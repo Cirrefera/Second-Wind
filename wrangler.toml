@@ -1,15 +1,10 @@
 name = "second-wind"
-compatibility_date = "2026-06-01"
+compatibility_date = "2026-10-18"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "public"
 
-[vars]
-# Payment recipient is configured outside this public repository.
-# No receiving address is committed here.
-X402_NETWORK = "eip155:8453"
-X402_FACILITATOR_URL = "https://x402.org/facilitator"
-
-[[d1_databases]]
-binding = "SW_DB"
-database_name = "second-wind-catalog"
-database_id = "db6412e2-4c9d-4b82-a93e-3b9f3708245d"
+# Pages is only the public ingress and static-asset host. The gateway owns all
+# application bindings and payment configuration; secrets stay on that Worker.
+[[services]]
+binding = "GATEWAY"
+service = "secondwind-gateway"

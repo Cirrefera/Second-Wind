@@ -1,29 +1,10 @@
 /**
- * Proxy /capnp to the unified secondwind-gateway Worker.
- * The Worker serves Cap'n Web via newWorkersRpcResponse at /capnp.
- * Supports both HTTP batch (POST) and WebSocket upgrade.
+ * Compatibility adapter for a file-routed Pages build. Return the service
+ * binding Response unchanged so Cap'n Web WebSocket upgrades are preserved.
+ * Production dispatch lives in src/worker.js (Pages advanced mode).
  */
-const WORKER_URL = "https://secondwind-gateway.mchayes89.workers.dev";
+import pagesWorker from "../src/worker.js";
 
-export async function onRequest(context) {
-  const { request } = context;
-  const url = new URL(request.url);
-  const workerUrl = `${WORKER_URL}/capnp${url.search}`;
-  
-  try {
-    const response = await fetch(workerUrl, {
-      method: request.method,
-      headers: request.headers,
-      body: request.body,
-    });
-    return new Response(response.body, {
-      status: response.status,
-      headers: response.headers,
-    });
-  } catch (e) {
-    return new Response(
-      JSON.stringify({ error: "worker_unreachable" }),
-      { status: 502, headers: { "Content-Type": "application/json" } }
-    );
-  }
+export function onRequest({ request, env }) {
+  return pagesWorker.fetch(request, env);
 }

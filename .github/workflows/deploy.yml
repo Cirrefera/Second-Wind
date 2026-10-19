@@ -1,26 +1,56 @@
-name: Deploy Cloudflare Pages
+name: Deploy Second Wind
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+# Prevent two releases from interleaving their migration and deployment steps.
+concurrency:
+  group: second-wind-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-      - run: npm install --no-audit --no-fund
-      - name: Self-test (spec conformance, both suites)
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            workers/gateway/package-lock.json
+      - name: Install locked Pages dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install locked gateway dependencies and deployment tools
+        working-directory: workers/gateway
+        run: npm ci --no-audit --no-fund
+      - name: Test legacy utilities and actual Pages ingress
         run: npm run selftest
-      - name: Build gatekeeper worker
+      - name: Test the gateway commerce implementation
+        working-directory: workers/gateway
+        run: npm test
+      - name: Build the application Worker
+        working-directory: workers/gateway
+        run: npm run build
+      - name: Build the Pages ingress
         run: npm run build:worker
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy public --project-name=second-wind
+      - name: Apply the additive commerce schema
+        working-directory: workers/gateway
+        # This exact idempotent file extends the existing live items/payments
+        # database. Never run the historical root migration on production.
+        run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0001_commerce_repair.sql
+      - name: Deploy the application Worker first
+        working-directory: workers/gateway
+        # Wrangler preserves existing encrypted secrets. Required secret names
+        # are declared in wrangler.toml; values never enter this workflow.
+        run: ./node_modules/.bin/wrangler deploy --tag "$GITHUB_SHA"
+      - name: Deploy Pages with the private gateway binding
+        run: ./workers/gateway/node_modules/.bin/wrangler pages deploy public --project-name=second-wind --branch=main

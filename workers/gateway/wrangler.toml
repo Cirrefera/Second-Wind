@@ -1,23 +1,35 @@
 name = "secondwind-gateway"
-main = "src/index.js"
+main = "dist/worker.js"
+no_bundle = true
 compatibility_date = "2026-10-18"
 compatibility_flags = ["nodejs_compat"]
+workers_dev = true
 
-# Unified Second Wind application worker (2026-10-18 consolidation):
-# HTTP/x402 + Cap'n Web + in-worker Code Mode execution, one product service.
-# Secrets (set at deploy, never in git):
-#   wrangler secret put X402_PAY_TO        — treasury address receiving USDC
-#   wrangler secret put CDP_FACILITATOR_KEY — CDP secret API key JSON
+# The only application Worker. Existing payment secrets remain configured on it:
+# X402_PAY_TO and CDP_FACILITATOR_KEY. Deployments must never recreate or print them.
 
-# worker_loaders binding: isolated Code Mode execution per request (zero DOs).
 [[worker_loaders]]
 binding = "LOADER"
 
-# D1: durable purchase records — capability reissue after disconnect, no re-charge.
 [[d1_databases]]
 binding = "SW_DB"
 database_name = "second-wind-catalog"
 database_id = "db6412e2-4c9d-4b82-a93e-3b9f3708245d"
 
+[[r2_buckets]]
+binding = "PAYLOADS"
+bucket_name = "secondwind-payloads"
+
+[[r2_buckets]]
+binding = "DELIVERIES"
+bucket_name = "secondwind-deliveries"
+
 [vars]
 X402_NETWORK = "eip155:8453"
+CANONICAL_ORIGIN = "https://secondwindai.com"
+
+[secrets]
+required = ["X402_PAY_TO", "CDP_FACILITATOR_KEY"]
+
+[version_metadata]
+binding = "CF_VERSION_METADATA"

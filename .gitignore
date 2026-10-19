@@ -7,5 +7,6 @@ cdp-credentials.local.json
 
 # build artifact (rebuilt by CI before deploy)
 public/_worker.js
+workers/gateway/dist/
 # local dev secrets
 .dev.vars

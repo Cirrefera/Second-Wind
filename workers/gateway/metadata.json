@@ -1,1 +1,19 @@
-{"bindings": [{"name": "LOADER", "type": "worker_loader"}, {"name": "SW_DB", "type": "d1", "id": "db6412e2-4c9d-4b82-a93e-3b9f3708245d"}], "compatibility_date": "2026-10-18", "compatibility_flags": ["nodejs_compat"], "main_module": "worker.js", "placement_mode": "smart", "vars": {"X402_NETWORK": "eip155:8453"}, "workers_dev": true}
+{
+  "main_module": "worker.js",
+  "compatibility_date": "2026-10-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "bindings": [
+    { "name": "LOADER", "type": "worker_loader" },
+    {
+      "name": "SW_DB",
+      "type": "d1",
+      "id": "db6412e2-4c9d-4b82-a93e-3b9f3708245d"
+    },
+    { "name": "PAYLOADS", "type": "r2_bucket", "bucket_name": "secondwind-payloads" },
+    { "name": "DELIVERIES", "type": "r2_bucket", "bucket_name": "secondwind-deliveries" },
+    { "name": "X402_NETWORK", "type": "plain_text", "text": "eip155:8453" },
+    { "name": "CANONICAL_ORIGIN", "type": "plain_text", "text": "https://secondwindai.com" },
+    { "name": "CF_VERSION_METADATA", "type": "version_metadata" }
+  ],
+  "keep_bindings": ["secret_text", "secret_key"]
+}
