@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
 import {readChoices,readInventoryKind,readJourneyPattern,readCandidateAlignment,inventoryQuestions,CLEF_MODEL} from '../src/clef.js';
 import {canonicalJson,sha256} from '../src/contracts.js';
 import {resolveIntent} from '../src/routing.js';
@@ -130,6 +131,50 @@ test('response maps, model identity, answer ownership and primitive choices are 
  }
 });
 
+test('a pinned Jev reader preserves native model identity and the unchanged candidate questions',async()=>{
+ const candidates=[{sku:'RETRY',release_ref:'release:one',route_summary:'Duplicate event handling',
+  supported_boundary:'Retry safety only',exclusions:['exactly-once-external-effects']}];
+ const intent={goal:'Retry safety',target_language:'python'};
+ let cloudflareRequest,jevRequest;
+ await readCandidateAlignment({run:async(model,input)=>{
+  assert.equal(model,CLEF_MODEL);cloudflareRequest=input;return choiceResponse(input.questions);
+ }},intent,candidates,'same-snapshot');
+ const model='jev-1.14.0';
+ const reading=await readCandidateAlignment({provider:'typesafe-live',model,run:async(requested,input)=>{
+  assert.equal(requested,model);jevRequest=input;
+  return {...choiceResponse(input.questions,{answer_exists:{noul:0.78}}),model};
+ }},intent,candidates,'same-snapshot');
+ assert.deepEqual(jevRequest,{...cloudflareRequest,model});
+ assert.equal(reading.model,model);
+ assert.equal(reading.request_hash,await sha256(canonicalJson(jevRequest)));
+ assert.equal(reading.questions_hash,await sha256(canonicalJson(cloudflareRequest.questions)));
+ assert.deepEqual(reading.readings.answer_exists,{noul:0.78});
+ assert.equal(reading.readings.candidate.choice,'unknown');
+});
+
+test('Jev pins are captured before inference and cannot accept Cloudflare aliases or another version',async()=>{
+ const input={state:{},questions:inventoryQuestions(),snapshot_ref:'jev-pin:1'},model='jev-1.14.0';
+ for(const returned of ['clef-flash',CLEF_MODEL,'jev-latest','jev-1.13.0']) {
+  await assert.rejects(readChoices({model,run:async()=>({...answer(),model:returned})},input),/invalid_clef_response/);
+ }
+ let calls=0;
+ for(const invalid of ['',null,{},'jev-latest','jev-1.14',CLEF_MODEL]) {
+  await assert.rejects(readChoices({model:invalid,run:()=>{calls++;}},input),/invalid_clef_model/);
+ }
+ assert.equal(calls,0);
+ let finish,begin;
+ const started=new Promise(resolve=>{begin=resolve;});
+ const ai={model,run:(requested,body)=>{
+  assert.equal(requested,model);assert.equal(body.model,model);begin();
+  return new Promise(resolve=>{finish=resolve;});
+ }};
+ const pending=readChoices(ai,input);
+ await started;
+ ai.model='jev-1.13.0';
+ finish({...answer(),model});
+ assert.equal((await pending).model,model);
+});
+
 // These fixtures evaluate local uncertainty/evidence handling with supplied
 // distributions. They do not measure the live model's semantic accuracy.
 test('ambiguous and contradictory listing evidence retains split probabilities and unknown readings',async t=>{
@@ -233,6 +278,40 @@ test('candidate options describe their own supplied identity, scope and exclusio
  assert.match(sent.questions.answer_exists.instructions,/Missing configuration is a clarification/);
  assert.equal(result.request_hash,await sha256(canonicalJson(sent)));
  assert.equal(result.questions_hash,await sha256(canonicalJson(sent.questions)));
+});
+
+test('routing questions keep identity, required actions, and independent tasks coherent for the frozen regression intents',async()=>{
+ const corpus=JSON.parse(await readFile(new URL('./fixtures/routing-evaluation.json',import.meta.url),'utf8'));
+ const ids=['exact-identity-wrong-goal','prompt-text-cannot-grant-execution','two-pending-candidates'];
+ const candidates=[{sku:'SW-PT-0006',release_ref:'release:guide',route_summary:'Lambda idempotency guidance',
+  supported_boundary:'Written guidance for duplicate events',exclusions:['aws-deployment','payment-processing']}];
+ let calls=0;
+ for(const id of ids) {
+  const example=corpus.cases.find(example=>example.id===id);
+  assert.ok(example,id);
+  const result=await readCandidateAlignment({model:'jev-1.14.0',run:async(model,input)=>{
+   calls++;assert.deepEqual(input.state.intent,example.intent);
+   const {candidate,answer_exists}=input.questions;
+   assert.equal(candidate.type,'choice');assert.equal(answer_exists.type,'noul');
+   assert.match(candidate.instructions,/tasks actually requested in intent\.goal/);
+   assert.match(candidate.instructions,/required deliverables or actions/);
+   assert.match(candidate.criteria.candidate_0.instructions,/required deliverable or action/);
+   assert.match(candidate.criteria.candidate_0.instructions,/Exact identity or a related topic alone does not establish support/);
+   assert.match(answer_exists.instructions,/task actually requested in intent\.goal/);
+   assert.match(answer_exists.instructions,/Exact product identity alone does not establish goal support/);
+   assert.doesNotMatch(answer_exists.instructions,/goal or exact/);
+   assert.match(answer_exists.instructions,/Missing configuration is a clarification/);
+   assert.match(answer_exists.criteria.true,/one of several independent tasks/);
+   assert.match(answer_exists.criteria.true,/do not detach a topic from its required action/);
+   assert.match(answer_exists.criteria.false,/does not satisfy a request to perform an explicitly excluded execution or deployment action/);
+   assert.match(candidate.criteria.unknown,/evidence is insufficient/);
+   return {...choiceResponse(input.questions,{answer_exists:{noul:0.5}}),model};
+  }},example.intent,candidates,`regression:${id}`);
+  // Scripted readings verify the request contract, not the model's accuracy.
+  assert.equal(result.readings.candidate.choice,'unknown');
+  assert.equal(result.readings.answer_exists.noul,0.5);
+ }
+ assert.equal(calls,ids.length);
 });
 
 test('candidate alignment validates independent Noul answers in the same model call',async()=>{

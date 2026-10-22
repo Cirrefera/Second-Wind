@@ -84,6 +84,15 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
       throw new CommerceError('routing_manifest_invalid',503);
     manifests.push({m,product,hash:row.manifest_hash});
   }
+  // A reviewed record for a different product does not establish compatibility
+  // for an explicitly requested live version whose record is absent or stale.
+  if(intent&&(intent.sku||intent.slug)) {
+    const requested=products.find(product=>(!intent.sku||product.sku===intent.sku)
+      &&(!intent.slug||product.slug===intent.slug));
+    if(requested&&!manifests.some(entry=>entry.product.sku===requested.sku))
+      throw new CommerceError('routing_not_configured',503,
+        {reason:'version_matched_routing_manifest_missing'});
+  }
   if(!manifests.length) {
     if(typeof input==='string') {
       const matches=await searchCatalog(env.SW_DB,input,limit);
@@ -109,6 +118,7 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
   const public_intent=observation?publicIntentDimensions(intent,manifests.map(entry=>entry.m)):undefined;
   if(observation) await enqueueObservation(env,'discovery.searched',{journey:observation,payload:{public_intent}});
   const words=(intent.goal||'').toLowerCase().match(/[a-z0-9]+/g)||[];
+  const meaningful=words.filter(w=>w.length>2&&!['the','this','that','and','for','with','want','make','need','aws','help','product'].includes(w));
   const candidates=[],eligible=[];
   for(const entry of manifests) {
     const {m,product}=entry;
@@ -119,7 +129,6 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
     if(comparison.conflicts.length) continue;
     const text=new Set([m.route_summary,m.slug,m.service,...positiveDimensions.flatMap(field=>m[field])]
       .join(' ').toLowerCase().match(/[a-z0-9]+/g)||[]);
-    const meaningful=words.filter(w=>w.length>2&&!['the','this','that','and','for','with','want','make','need','aws','help','product'].includes(w));
     const score=identity?1000:new Set(meaningful.filter(w=>text.has(w))).size;
     const structured=Object.keys(intent).some(k=>k==='service'||k==='product_kind'||Object.hasOwn(constraints,k));
     const candidate={...entry,score,comparison};
@@ -133,7 +142,9 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
   let ranked=compatible.length?compatible:candidates,alignment;
   // Read at most 20 candidates without hard conflicts before lexical pruning
   // and the result limit. Missing configuration still blocks a complete match.
-  if(env.CLEF_ROUTING_ENABLED==='true'&&eligible.length) {
+  // Exact identities and supplied structured constraints are already checked
+  // in code. A semantic reading is useful only for an informative stated goal.
+  if(env.CLEF_ROUTING_ENABLED==='true'&&meaningful.length&&eligible.length) {
     const pool=eligible.slice(0,20);
     try {
       alignment=await readCandidateAlignment(env.AI,intent,pool.map(x=>x.m),snapshot_ref);
@@ -150,8 +161,16 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
         compatible=compatible.filter(entry=>!excluded.has(entry));
         ranked=compatible.length?compatible:candidates.filter(entry=>!excluded.has(entry));
       } else if(chosen) {
-        compatible=chosen.comparison.compatible?[chosen,...compatible.filter(entry=>entry!==chosen)]:[];
-        ranked=chosen.comparison.compatible?compatible:[chosen];
+        if(chosen.comparison.compatible) {
+          compatible=[chosen,...compatible.filter(entry=>entry!==chosen)];
+          ranked=compatible;
+        } else {
+          // A relative preference does not reject other pending candidates.
+          // Preserve them when all results still need buyer configuration.
+          const pending=compatible.length?[]:candidates.filter(entry=>entry!==chosen);
+          compatible=[];
+          ranked=[chosen,...pending];
+        }
       }
     } catch { alignment={status:'unavailable'}; }
   }
