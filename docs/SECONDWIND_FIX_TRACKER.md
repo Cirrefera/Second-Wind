@@ -6,7 +6,22 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
-## Batch 02 current result
+## Consolidated result — October 22, 2026
+
+**The remaining in-scope application work is merged into one `main` and deployed.** The owner explicitly authorized consolidation and merge. That authorization supersedes the earlier draft/merge-approval notes preserved below as historical evidence.
+
+- PR #5 and all PR #7 commits are merged. Release commit: `548bcc204d59785951da11e85943607d5e62d9fd`; integration head: `57636d4c84e0a9a96ed078d86413d4e526447106`; identical reviewed/merged tree: `6c5cd346c5f5e491973da1e68294c11d63de78ca`.
+- [Combined-head PR verification](https://github.com/Cirrefera/Second-Wind/actions/runs/39858026572) and [production deployment/acceptance](https://github.com/Cirrefera/Second-Wind/actions/runs/39858195268) both succeeded. Production acceptance returned `accepted: true` at **2026-10-22 21:33:58 UTC (5:33:58 p.m. EDT)** for that exact merge.
+- Gateway version: `b761dab0-61e2-4549-ae59-8d0003cef876`. Pages deployment: `b6fb9357-1f1c-4064-9617-5eb04424e26e`. `/health` and `/api/proof` return 200; readiness is `ready` with the independently verified existing recipient.
+- Live inventory remains **one product**, SW-PT-0006 v1, 100,000 atomic USDC units ($0.10), hash `62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe`. No candidate was activated and no funded purchase was performed.
+- **COMPLETE:** FIX-01, FIX-02, FIX-03, FIX-05, FIX-06, FIX-28. **BLOCKED on external administrative configuration:** FIX-04. **READY for remaining work:** FIX-07 through FIX-27, excluding the completed IDs above. All 28 stable IDs remain below.
+- FIX-07 has a deployed compatibility repair: free-text lookup still finds the live product; structured intent truthfully returns `routing_not_configured` until reviewed version-matched routing records exist. Full structured-routing acceptance remains open.
+- Source product trials, scope selection, R2 delivery, release preparation, routing, and journey events are now consolidated with the accepted payment/recovery controls. Their presence in the release does not activate draft products or establish live telemetry sink verification.
+- Four older owner fix branches already had no unique commits outside main. The temporary audit workflow and PR #1's unrelated third-party README advertisement were excluded. The only remaining open PR at final inventory was PR #1; no owner application PR remains outstanding.
+
+See [CONSOLIDATION_STATUS.md](CONSOLIDATION_STATUS.md) for the complete consolidation evidence and practical remaining work. The next queued three IDs are **FIX-07, FIX-08, FIX-13**. The original assembled-payload definition is settled; do not request that policy decision or the already supplied recipient again.
+
+## Batch 02 result before consolidation (historical)
 
 Selected IDs: **FIX-04, FIX-05, FIX-06**. Branch: `fix/batch-02-release-controls-content-review`. Review: [draft PR #7](https://github.com/Cirrefera/Second-Wind/pull/7).
 
@@ -18,7 +33,7 @@ Selected IDs: **FIX-04, FIX-05, FIX-06**. Branch: `fix/batch-02-release-controls
 
 All FIX-01 through FIX-28 entries remain visible. FIX-01–03 retain their completed release acceptance. Apart from the selected items and newly recorded integration item, the backlog remains queued; historical evidence has not been relabeled as fresh verification.
 
-## Current released application result (batch 01)
+## Previous released application result (batch 01, historical)
 
 **FIX-01, FIX-02, and FIX-03 are COMPLETE.** The owner confirmed the GitHub recipient secret and explicitly authorized merging and deploying PR #6. PR #6 merged at `2026-10-22T16:44:30Z`; GitHub deployed and accepted release `048f08853e863391cf8652cafdd464140e810616` at approximately **12:45 p.m. EDT on October 22, 2026**.
 
@@ -111,13 +126,13 @@ Add checks for expected deployment identity, /health, /api/proof, and payment di
 
 - Priority: **P1**
 - Status: **BLOCKED**
-- Evidence: Current main is unprotected; repository rulesets are empty; only the unrelated existing github-pages environment is configured. Main has no PR trigger. The isolated change adds a secret-free PR verification job and restricts the production job to this repository's main push/manual dispatch with a production environment and job-scoped concurrency.
-- Dependencies: Owner authorization and an administrative surface to apply the concrete main protection, main-only production environment, and deployment-credential scope. Then exact reviewed-head merge/release authorization and acceptance. The connector does not expose writes for protections, environment policies, or Actions secrets.
+- Evidence: PR verification and main-only production workflow controls are merged and deployed in `548bcc204d59785951da11e85943607d5e62d9fd`. Post-merge main still reports `protected: false`; rulesets are empty. The automatically created `production` environment has no protection rules or deployment branch policy. Credential scoping has not been independently confirmed.
+- Dependencies: The owner authorized consolidation/merge, and exact-commit production acceptance succeeded. The remaining dependency is an administrative surface capable of applying/readback of repository protections, environment branch policy, and credential scope; the current connector has no such write operations.
 - Acceptance criteria: the intended checks run before merge, required protections are documented and applied when authorized, and production deployment is constrained to the approved release path. YAML alone is not evidence of externally enforced protection.
 - Implementation location: `.github/workflows/verify.yml`; `.github/workflows/deploy.yml`; `docs/FIX04_RELEASE_CONTROLS.md`.
-- Verification: Node v24.19.0; 76/76 gateway, 32/32 release acceptance, 21/21 actual Pages ingress, 55 utility assertions, both builds, actionlint v1.7.12, and diff check pass. Independent source review found no blocking defect. Actual deployment expression evaluated across 72 combinations: only intended main push/dispatch allowed (2 allowed, 70 rejected). No live negative deployment was attempted.
-- Release state: Workflow implementation published on the isolated batch branch in `42494048f132f11b53640ddae0d2590f56e7c844`; local/remote tree match `d65328ab304039f75932118b992930fd530fe4d2`. External settings and production remain unchanged. PR/CI evidence is recorded in the batch-02 section when available.
-- Remaining blocker: Apply/read back the proposed settings and environment credential scope with owner authorization; then merge/release the reviewed batch and pass production acceptance. Older branch workflows must not retain unrestricted repository/organization deployment-token access.
+- Verification: Combined-head CI and production release both passed 174 gateway tests, 32 release tests, 21 Pages tests, 55 utility assertions, all 16 actual Dynamic Worker packages, and both builds. Workflow lint passed. External settings remain explicitly unfulfilled.
+- Release state: Source controls are merged and deployed. Exact release evidence is in docs/CONSOLIDATION_STATUS.md; no further merge authorization is needed for this completed consolidation.
+- Remaining blocker: Apply/read back the prepared external main/environment protections and environment credential scope. Source workflow conditions alone do not enforce repository administration settings.
 
 Original bounded scope:
 
@@ -128,14 +143,14 @@ Add appropriate PR verification, required checks, and production branch/environm
 ### FIX-05 — Define original assembled payloads and their source provenance
 
 - Priority: **P1**
-- Status: **READY_FOR_RELEASE**
+- Status: **COMPLETE**
 - Evidence: The owner clarified on October 22 that publicly sourced information is combined in an original manner to form the product's original content. The original contribution is the useful selection, synthesis, arrangement, adaptation, and integration embodied in the assembled payload. Public source inputs are compatible with this model. Prior public-byte/hash observations are retained as distribution evidence, not a finding that source provenance invalidates originality.
-- Dependencies: Owner product-policy input is satisfied. Merge the prepared documentation with PR #7. Existing original-contribution/product/contract/license checks provide the publication contract; genuine review authentication and integration into the live publication path remain FIX-08, with product-specific reviews under their existing IDs.
+- Dependencies: Owner product-policy input and documentation merge are satisfied. Genuine trusted publication and per-product approvals remain FIX-08/10/11.
 - Acceptance criteria: Product documentation and publication-review guidance consistently define the original assembled payload; source provenance and applicable attribution/license requirements are recorded separately; the existing release checks require a described and reviewed original contribution; existing bought versions remain intact. No secrecy choice or owner policy reconfirmation is required.
 - Implementation location: `README.md`; `SPEC.md`; `docs/FIX05_CONTENT_POLICY_REVIEW.md`; tracker and continuation prompt. Runtime/schema changes are unnecessary for this clarification; existing publication.js and draft release-preparation.js contain the relevant contribution/review fields.
 - Verification: Source inspection confirms nonempty `original_contribution`, manifest-bound product/contract review hashes, and separate origin/license evidence. Existing publication tests cover absent contribution, absent product review, and changed contribution without renewed review. Independent review confirms no privacy or originality-scoring mechanism is needed. Documentation consistency and diff checks pass. Main contains the validator/tests; its production activation integration is not claimed complete.
-- Release state: Owner policy recorded and bounded documentation correction prepared on the batch-02 branch. Awaiting PR merge; no product activation, payload rewrite, price change, source-history rewrite, or application deployment was performed.
-- Remaining blocker: No outstanding owner content-policy decision. Documentation merge remains pending with PR #7; production publication enforcement and actual product approval retain their existing FIX-08/10/11 scope.
+- Release state: The owner-defined original assembled-payload policy is merged through PR #5, including all PR #7 commits, in `548bcc204d59785951da11e85943607d5e62d9fd`. Existing product versions and public history remain intact.
+- Remaining blocker: None for this policy/documentation item. Product publication and trusted review verification retain their existing FIX-08/10/11 scope.
 
 Clarified bounded scope:
 
@@ -150,8 +165,8 @@ Second Wind combines publicly sourced material into original, useful assembled p
 - Acceptance criteria: an exact-commit verification record and a clear merge/release readiness assessment exist. Do not merge automatically.
 - Implementation location: `docs/FIX06_PR5_VERIFICATION.md`; exact draft tests/scripts/review inputs were inspected and executed without editing PR #5.
 - Verification: 146/146 gateway tests, 55 utility assertions, 21/21 Pages tests, both builds, all 16 actual local Dynamic Worker feature selections, 32 plans/160 AWS input shapes/64 partial output shapes, Powertools 7/7, deterministic and scripted routing 34/34 each, reproducible source preparations. The planner test command reports 11 executions with four repeated imported tests; the report avoids claiming 11 distinct cases. No live inference/AWS/deployment/payment calls.
-- Release state: Assessment complete; PR #5 remains open/draft and unchanged. Local results are not current-head GitHub CI and do not mean the combined source or release is ready. Direct deployment of this older draft would omit accepted FIX-01–03 protections.
-- Remaining blocker: None for this assessment's acceptance. Two demonstrated integration conflicts are FIX-28. Routing manifests, genuine publication reviews/commercial allocation, and sink verification remain FIX-07/08/10/11/13/14. FIX-05 now records the owner-defined original assembled-payload policy.
+- Release state: The original exact-head assessment remains complete as historical evidence. Its integration findings were resolved by FIX-28; PR #5 and PR #7 are now merged and the combined source is accepted in production.
+- Remaining blocker: None for this assessment. Current combined-source/CI/deployment evidence is in docs/CONSOLIDATION_STATUS.md. Product, routing, and telemetry readiness remain their explicit backlog items.
 
 Original bounded scope:
 
@@ -163,13 +178,13 @@ Reproduce the relevant checks on the exact current head, compare it with product
 
 - Priority: **P1**
 - Status: **READY**
-- Evidence: Audit reports migration creates an empty routing-manifest table and draft resolver depends on these records. Current production still runs main.
-- Dependencies: FIX-06 exact-head assessment; reviewed version-matched product routing manifests before resolver rollout.
+- Evidence: Migration 0004 and the resolver are now deployed. A real post-release string query for lambda finds SW-PT-0006 v1. A structured SKU/language intent returns HTTP 503 routing_not_configured with version_matched_routing_manifest_missing; no reviewed routing record was fabricated or registered.
+- Dependencies: The merged resolver and completed FIX-06/28 provide the source baseline. Full structured matching still requires reviewed manifests bound to intended live product versions.
 - Acceptance criteria: representative supported queries find the intended products after the proposed rollout, and missing or incompatible configurations produce truthful responses.
-- Implementation location: workers/gateway/src/routing.js; migrations/0004_routing_manifests.sql in PR #5
-- Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
-- Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
+- Implementation location: workers/gateway/src/routing.js; migrations/0004_routing_manifests.sql; existing live product routing registration
+- Verification: The integrated routing suite passed 26 tests, including missing/stale manifests, legacy free-text lookup, HTTP/capability agreement, and zero model calls on the compatibility path. Actual custom-domain free lookup passed after deployment. Complete structured-routing acceptance remains pending.
+- Release state: A deliberate metadata-search compatibility path is deployed. Structured routing availability is reported truthfully; the remaining manifest registration/coverage work is not complete.
+- Remaining blocker: Prepare/review/register the intended version-matched routing manifests and verify representative structured queries and release coverage.
 
 Original bounded scope:
 
@@ -181,13 +196,13 @@ Ensure reviewed manifests exist for intended live products before switching the 
 
 - Priority: **P1**
 - Status: **READY**
-- Evidence: Audit found staged publication code; evidence hashes alone cannot authenticate approval. Not revalidated in this batch.
+- Evidence: Preparation, staging, activation, payload verification, and immutable registration code are now merged. Matching evidence hashes still do not independently authenticate a reviewer or publication approval.
 - Dependencies: FIX-06; genuine authenticated reviews, immutable payload evidence, and authorization before production registration/activation.
 - Acceptance criteria: unreviewed or inconsistent releases cannot become live; existing bought versions remain deliverable; buyer-supplied data cannot manufacture publication approval. Distinguish evidence hashes from independently authenticated human or organizational approvals.
-- Implementation location: Publication modules/tests and preparation/stage/activate paths in PR #5
-- Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
-- Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
+- Implementation location: workers/gateway/src/publication.js and release-preparation.js, their tests, and the actual trusted operator publication path
+- Verification: Integrated preparation/staging/immutability regressions passed and both real source preparations reproduced. Genuine production review authentication and actual controlled publication remain unverified.
+- Release state: Publication implementation is part of the consolidated source. No draft product registration or activation was performed by the merge/deployment.
+- Remaining blocker: Verify and enforce genuine trusted review authority and the actual operator-controlled publication path before activating products.
 
 Original bounded scope:
 
@@ -202,7 +217,7 @@ Validate the actual publication path, including preparation, staging, activation
 - Acceptance criteria: every intended product has an evidence-backed status and a specific remaining work item. Do not promote drafts in bulk.
 - Implementation location: workers/gateway/review/corpus-source-inspection.json in PR #5; per-SKU tracker children to create
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -215,13 +230,13 @@ Create explicit child backlog entries for each unfinished SKU or release. Each c
 
 - Priority: **P2**
 - Status: **READY**
-- Evidence: Candidate source is reported prepared; commercial allocation and genuine approvals remain unverified. No activation authorized.
+- Evidence: The actual AWS-0568 v2 source preparation reproduced with payload hash `57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10`. The release is source-ready; commercial component allocation and genuine review inputs still block publication.
 - Dependencies: FIX-08; owner-supplied component allocation and genuine product/source/language/publication reviews.
 - Acceptance criteria: required product inputs and genuine approvals are present, exact deliverable bytes are verified, and staging/activation status is accurately recorded. Do not invent missing component prices or approve the product yourself.
-- Implementation location: AWS-0568 package and review evidence in PR #5
-- Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
-- Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
+- Implementation location: products/agent-state-dynamodb-manifest and workers/gateway/review evidence on consolidated main
+- Verification: All 16 actual Dynamic Worker packages and independent JavaScript/Python planner selections passed. Source-preparation evidence reproduced byte-for-byte; no AWS API call was made.
+- Release state: Source package and preparation path are merged; candidate remains unpublished.
+- Remaining blocker: Complete the existing component allocation and genuine product/source/language/publication reviews under FIX-08 before authorized activation.
 
 Original bounded scope:
 
@@ -231,13 +246,13 @@ Review the actual prepared package, supported languages, component dependencies,
 
 - Priority: **P2**
 - Status: **READY**
-- Evidence: Replacement source is reported prepared; publication readiness and actual review evidence remain unverified.
+- Evidence: The actual SW-PT-0006 v2 source preparation reproduced with payload hash `80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf`. Existing live v1 metadata/hash/price remained unchanged after deployment.
 - Dependencies: FIX-08; genuine source/license/contract/validation/publication review; retain v1 buyer access.
 - Acceptance criteria: the new release meets its declared contract and review requirements while historical purchases continue to resolve to the correct version. Do not equate source readiness with publication approval.
-- Implementation location: SW-PT-0006 replacement package and historical version records in PR #5
-- Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
-- Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
+- Implementation location: products/lambda-powertools-idempotency and its historical release records on consolidated main
+- Verification: Integrated tests confirm source preparation, staged v2 bytes, immutable registration, and preserved v1 delivery. Preparation evidence reproduced byte-for-byte; the live catalog still advertises v1.
+- Release state: Replacement source is merged; v2 is not activated.
+- Remaining blocker: Complete genuine source/license/contract/validation/publication review and controlled activation while retaining v1 purchased access.
 
 Original bounded scope:
 
@@ -247,12 +262,12 @@ Review the corrected guidance, actual example, supported versions, source/licens
 
 - Priority: **P2**
 - Status: **READY**
-- Evidence: Optional live Clef flag remains disabled in draft. Fixture success is not live model quality. No live calls made.
+- Evidence: Optional Clef source is merged but no AI binding or enabling flag was added. Deterministic checks remain authoritative; no live inference was used.
 - Dependencies: Owner direction on optional assistance, reproducible fixtures and deterministic baseline; separately authorized live evaluation and reviewed calibration before enabling.
 - Acceptance criteria: fixture and deterministic results are reproducible; live evaluation and threshold calibration are separately documented if authorized. Keep live assistance disabled until its dependencies and acceptance criteria are met.
-- Implementation location: workers/gateway/src/routing.js and routing fixtures in PR #5
+- Implementation location: workers/gateway/src/routing.js, clef.js, and existing routing fixtures on main
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Optional source is present but remains disabled. No live model calibration or enablement is claimed.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -268,7 +283,7 @@ Keep deterministic compatibility checks authoritative. Verify typed responses, f
 - Acceptance criteria: current payment and receipt events appear in the intended projections with correct amounts, identifiers, and network fields.
 - Implementation location: workers/gateway/src/telemetry.js; current pipeline SQL; draft telemetry-review.md
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -286,7 +301,7 @@ Update or version the specialized projections to match the actual emitter. Prese
 - Acceptance criteria: delivery evidence exists, duplicate events do not inflate business metrics, and operational alerts identify stuck or failing dispatch. An ingestion acknowledgement alone does not count as sink verification.
 - Implementation location: D1 business_event_outbox; telemetry dispatch; ingestion/raw/specialized sinks
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -302,7 +317,7 @@ Trace the same event ID from the D1 outbox through ingestion to the raw and spec
 - Acceptance criteria: an unrelated caller cannot monopolize recovery issuance, while expiry, wallet ownership verification, one-time use, and retained-token recovery continue to work.
 - Implementation location: workers/gateway/src/commerce.js recovery challenge paths; recovery tests
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -320,7 +335,7 @@ Implement a bounded challenge and throttling design that preserves legitimate re
 - Acceptance criteria: operators can identify the purchase, obtain trustworthy settlement evidence, and resolve entitlement state without a duplicate transfer. Automated reconciliation must be supported by verified external evidence.
 - Implementation location: workers/gateway/src/commerce.js; settlement/reconciliation operations documentation
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -336,7 +351,7 @@ Document and, where appropriate, implement the operator workflow for settlements
 - Acceptance criteria: intended public operations and their meaningful schemas are represented and checked against implementation. Remove any unsupported claim that the document is complete.
 - Implementation location: workers/gateway/src/discovery.js OpenAPI generator; HTTP/Cap’n Web contract
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -352,7 +367,7 @@ Reconcile OpenAPI with actual routes, methods, inputs, outputs, authentication, 
 - Acceptance criteria: emitted behavior and documentation agree. Keep core x402 transport, optional extensions, and external Bazaar indexing as separate verification questions.
 - Implementation location: README.md; actual gateway challenge generation; x402 discovery
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -370,7 +385,7 @@ Either implement the intended extensions in the active path and validate them ag
 - Acceptance criteria: one authoritative contract matches the application and the chosen commercial policy. Do not change historical quotes, receipts, or purchased prices to resolve a documentation mismatch.
 - Implementation location: README.md; SPEC.md; gateway documentation and validators
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -386,7 +401,7 @@ Update stale descriptions of Pages Functions, the old payment gatekeeper, recove
 - Acceptance criteria: the runbook is reproducible and does not omit required schema changes. Document rollback limitations for migrations and immutable releases.
 - Implementation location: workers/gateway/README.md; .github/workflows/deploy.yml; rollback runbook
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -402,7 +417,7 @@ Make manual instructions match the approved workflow’s migration order, build 
 - Acceptance criteria: the appropriate strong authentication and recovery arrangements are confirmed. Account-owner interaction must be recorded as a specific blocker when required.
 - Implementation location: Cloudflare administrative account authentication settings
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -420,7 +435,7 @@ Recheck the current state. Prepare or perform the authorized enrollment/enforcem
 - Acceptance criteria: authoritative signing and registrar DS publication validate correctly. Do not mark the item complete merely because a dashboard toggle is enabled.
 - Implementation location: Cloudflare DNSSEC and registrar DS settings
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -436,7 +451,7 @@ Recheck the registrar and zone state, then prepare or perform the supported DNSS
 - Acceptance criteria: the chosen TLS and HTTPS policy is verified on the custom domain without breaking supported agent clients. Introduce HSTS only after confirming the required HTTPS behavior. Do not enable preload automatically.
 - Implementation location: Cloudflare TLS/HTTPS/HSTS settings; actual Pages/Worker transport
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -452,7 +467,7 @@ Review minimum TLS, origin validation mode, HTTPS behavior, and HSTS against the
 - Acceptance criteria: DNS records match actual mail use. Do not invent a provider or deploy deny-all sending policies before accounting for legitimate senders.
 - Implementation location: Domain MX/SPF/DKIM/DMARC and provider settings
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -470,7 +485,7 @@ Configure the appropriate provider records and authentication policy, or an expl
 - Acceptance criteria: required ingress remains usable, unnecessary exposure is addressed when authorized, and abuse controls do not break legitimate machine clients. Do not treat wildcard CORS or disabled Bot Fight Mode as an automatic vulnerability.
 - Implementation location: Cloudflare Worker/Pages routes, previews, workers.dev, edge rate/abuse controls
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -486,7 +501,7 @@ Review workers.dev, preview URLs, custom-domain routing, rate controls, and rele
 - Acceptance criteria: intentional resources are documented and operational; obsolete resources are corrected or retired with authorization. Preserve required raw history.
 - Implementation location: Cloudflare debug pipeline and ingestion resources
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -502,7 +517,7 @@ Recheck the failed debug pipeline and the unauthenticated ingestion stream that 
 - Acceptance criteria: actionable monitoring and ownership exist, with sensitive data excluded. Do not duplicate an existing monitoring system merely because one Cloudflare logging setting is unset.
 - Implementation location: Existing runtime/error/readiness/purchase/outbox monitoring
 - Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Unchanged by batch 01; no source/merge/deployment/production completion claimed.
+- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
 - Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
 
 Original bounded scope:
@@ -512,18 +527,18 @@ Determine whether existing monitoring covers application errors, degraded paymen
 ### FIX-28 — Integrate the draft with the accepted main release
 
 - Priority: **P1**
-- Status: **READY**
-- Evidence: `git merge-tree --write-tree a853b9edbdb00be21b7ba157e7deb3ed36782643 8711cdcf2dc31b16dc599da6db7cd0afd783a537` returns exit 1 with content conflicts in `workers/gateway/src/commerce.js` and `workers/gateway/src/discovery.js`; generated conflict tree `8f795d3d3877c080903f448f49ebcf0e3d99cea9`. This was recorded during FIX-06, not resolved in batch 02.
-- Dependencies: Fresh refs, completed FIX-06 assessment, preservation of accepted FIX-01–03 and any subsequently accepted FIX-04 workflow changes. Keep product/publication prerequisites independent from source integration.
+- Status: **COMPLETE**
+- Evidence: The integration commit `57636d4c84e0a9a96ed078d86413d4e526447106` has original PR #5 head `8711cdcf2dc31b16dc599da6db7cd0afd783a537` and PR #7 head `b812a981432d49d95d02d4e68565c2a49c32314f` as parents. Both and accepted main are ancestors of merged release `548bcc204d59785951da11e85943607d5e62d9fd`; reviewed and merged trees match `6c5cd346c5f5e491973da1e68294c11d63de78ca`.
+- Dependencies: Completed assessment, integration review, combined-source checks, current-head GitHub CI, owner merge authorization, and exact-commit production acceptance are satisfied.
 - Acceptance criteria: a reviewed combined source commit resolves the demonstrated conflicts, retains accepted payment configuration/recovery/release controls and intended draft delivery/events, and passes both sets of relevant regressions/builds. Record new exact-head CI; do not equate conflict resolution with product/publication approval or automatic deployment.
-- Implementation location: Existing draft branch integration; primarily commerce.js/discovery.js and resulting workflow/test reconciliation.
-- Verification: Not implemented or tested as combined source. Exact-head individual results and conflict reproduction are in `docs/FIX06_PR5_VERIFICATION.md`.
-- Release state: No merge, branch update, or production action for PR #5 occurred in batch 02.
-- Remaining blocker: Select this bounded implementation work in a subsequent batch and verify the combined result; no additional owner input presumed for isolated preparation.
+- Implementation location: commerce.js/discovery.js/README conflict resolution; first-delivery journey regressions; resolver rollout compatibility; reconciled verification/deployment workflows.
+- Verification: 174/174 gateway, 32/32 release, 21/21 Pages, 55 utility assertions, all 16 actual Dynamic Worker packages, planner/preparation checks, both builds, actionlint and diff checks pass. PR CI run 39858026572 and production run 39858195268 succeeded; public health/readiness/free resolver behavior independently checked.
+- Release state: PR #5 and PR #7 are merged. Consolidated release `548bcc204d59785951da11e85943607d5e62d9fd` is deployed and accepted; no owner application PR remains outstanding.
+- Remaining blocker: None for integration. Remaining product, routing, telemetry, recovery, and external administration work retains its own IDs.
 
 Bounded scope:
 
-Reconcile the demonstrated source conflicts against the then-current accepted main. Preserve both the fenced prepared-state recovery/private-token/uncertainty rules and applicable draft delivery/event changes. Preserve readiness imports and draft observations. Never resolve by replacing accepted main with the older draft head. No catalog activation, model enablement, new architecture, or automatic merge/deployment is included.
+Reconcile the demonstrated source conflicts against the then-current accepted main. Preserve both the fenced prepared-state recovery/private-token/uncertainty rules and applicable draft delivery/event changes. Preserve readiness imports and draft observations. Never resolve by replacing accepted main with the older draft head. The later owner request explicitly authorized consolidation and merge through the existing GitHub deployment path. Catalog activation and model enablement remain separate product/rollout work.
 
 ## Batch 01 implementation and verification
 
@@ -609,7 +624,7 @@ The known pre-batch code is `82fe671add6468176134a344d38d2cbc3686b90e`; known de
 
 If the authorized code release needs reversal, prepare a GitHub reversal PR for this batch's implementation changes and deploy the reviewed reversal through the normal GitHub path. Retain the independently approved merchant configuration and existing credentials. Do not blindly restore the previously invalid recipient setting. A reversal of the recovery patch restores the old stuck-preparation behavior, so preserve affected rows for subsequent safe recovery. Run the reviewed acceptance checker against the exact reversal commit and both deployments; an upload alone is not rollback acceptance. No automatic rollback or reversal is executed by the new checker.
 
-## Batch 02 implementation and verification
+## Batch 02 implementation and verification (historical)
 
 ### Outcome and source identity
 
@@ -651,26 +666,26 @@ The approved merchant address and existing successful payment configuration are 
 
 ## Next batch selection
 
-After completing any newly authorized blocked actions, the next three queued actionable P1 IDs by the established priority/ID order are **FIX-07, FIX-08, and FIX-13**. FIX-06's assessment dependency is now satisfied. FIX-07/08 source preparation may proceed in isolation, but production rollout of the draft also requires FIX-28 integration and the existing product inputs. FIX-13 must inspect the current emitter/sink contract before any authorized pipeline change. Keep FIX-04 visible as blocked on external settings/release and FIX-05 as READY_FOR_RELEASE for the adopted policy/documentation. Do not silently claim production publication enforcement or substitute a fourth selected implementation item.
+Work from the consolidated `main`, not the pre-integration draft head. The next three queued actionable P1 IDs are **FIX-07, FIX-08, and FIX-13** under the existing priority/ID order. FIX-07's compatibility repair is already deployed; finish reviewed routing coverage. FIX-08 addresses genuine trusted publication, not another decision about whether public sources can form original content. FIX-13 checks actual event fields and live sink schemas before a projection change.
+
+FIX-04 remains visible as blocked on external administrative settings only. FIX-05 and FIX-28 are complete. The consolidation authorization has been executed; do not ask to merge PR #5 or PR #7 again. Do not equate the remaining catalog/product work with unmerged source branches.
 
 ## Ready-to-paste continuation prompt
 
-Continue the existing Second Wind remediation in batches of exactly three stable IDs. Fetch current main, the batch-02 branch/PR, and PR #5 before editing. Use parallel agents for independent selected work. Finish the existing application within its existing architecture.
+```text
+Continue Second Wind from Cirrefera/Second-Wind main and docs/SECONDWIND_FIX_TRACKER.md. Read docs/CONSOLIDATION_STATUS.md for current evidence. Refresh refs because subsequent commits may contain documentation-only evidence.
 
-Repository: https://github.com/Cirrefera/Second-Wind
-Canonical tracker: docs/SECONDWIND_FIX_TRACKER.md. Draft batch PR: https://github.com/Cirrefera/Second-Wind/pull/7. The latest batch-02 tracker/review evidence is on fix/batch-02-release-controls-content-review until PR #7 is merged; main may still contain the batch-01 record. Do not overwrite the newer handoff with the older main copy.
+The owner authorized merging all remaining in-scope work. PR #5 and PR #7 are merged. Consolidated application release: 548bcc204d59785951da11e85943607d5e62d9fd. Integration head: 57636d4c84e0a9a96ed078d86413d4e526447106. Verified and merged tree: 6c5cd346c5f5e491973da1e68294c11d63de78ca. Prior draft head 8711cdcf2dc31b16dc599da6db7cd0afd783a537 and PR #7 head b812a981432d49d95d02d4e68565c2a49c32314f are ancestors. Do not deploy or re-merge an old isolated draft.
 
-Starting/last checked main: a853b9edbdb00be21b7ba157e7deb3ed36782643.
-Released application: 048f08853e863391cf8652cafdd464140e810616, gateway 0187ab0f-9daa-4eb2-b1dd-0fb2d19e1936, Pages 71cbb351-482d-42d8-be44-1f69497dcbcd; accepted GitHub run 39816488828. FIX-01/02/03 remain COMPLETE. The owner approved the existing merchant and release inputs; do not request recipient input again. Funded-purchase verification remains false.
+GitHub verification run 39858026572/job 120101203757 and production run 39858195268/job 120101770147 both succeeded. Combined checks: 174 gateway, 32 release, 21 Pages, 55 utility assertions, 16 actual Dynamic Worker packages, both builds; source-preparation evidence reproduced exactly. Production acceptance identified gateway b761dab0-61e2-4549-ae59-8d0003cef876 and Pages b6fb9357-1f1c-4064-9617-5eb04424e26e at the exact release commit. Health/proof 200 and readiness ready. One live product remains SW-PT-0006 v1 at 0.10 USDC with unchanged hash. No funded purchase or candidate activation was performed.
 
-Batch-02 workflow implementation: 42494048f132f11b53640ddae0d2590f56e7c844, verified tree d65328ab304039f75932118b992930fd530fe4d2. FIX-04 adds the secret-free PR check Verify application and the production job guard/environment, preserving release preflight and acceptance. Local tests: 76 gateway, 32 release, 21 Pages, 55 utility assertions, both builds; actionlint and 72-case event matrix pass. GitHub run 39824436671 on head bee0227a5b5db623aadae55a1ebb4cead901e7c7 checked out test merge e9d77c65bb97aeec1a4b782d337fd45b0ebc7d76; both have tree 707ba29d52489436851eddabd813a0731cfad9e3. Its Verify application job 119983862990 completed successfully with all tests/builds; check source GitHub Actions app 15368. Enclosing run metadata was still in_progress at the evidence revision, so fetch current run/check state and final PR head. Subsequent evidence edits are documentation-only. FIX-04 remains BLOCKED until exact prepared main/environment protections and environment credential scope are applied/read back with owner authorization, then reviewed merge/release is authorized and accepted. Detailed settings are in docs/FIX04_RELEASE_CONTROLS.md; source YAML alone is not external enforcement. The connector lacks those settings/secret write operations.
+COMPLETE: FIX-01,02,03,05,06,28. FIX-04 source controls are deployed; external settings remain BLOCKED. Main is still unprotected, rulesets empty, and production environment has no branch/protection policy; credential scoping unverified. The connector lacks administrative writes. Existing recipient is already supplied and independently verified; do not request it again.
 
-FIX-05 is READY_FOR_RELEASE with owner policy input satisfied. Second Wind combines publicly sourced information in an original manner: its selection, synthesis, organization, adaptation, and integration form the original assembled payload that the buyer purchases. README, SPEC, docs/FIX05_CONTENT_POLICY_REVIEW.md, and this handoff now reflect that model. The earlier public-service versus private-original A/B framing was incorrect; do not ask for that choice again. Existing original_contribution, product/contract review hashes, and separate provenance/license checks already express the policy. Main has the validator/tests; actual trusted live activation integration remains FIX-08. Exact v1 bytes and the v2 candidate have been publicly available; that is distribution evidence, not a finding against original composition. Preserve public history, source attribution, and bought versions.
+The product definition is settled: publicly sourced information is selected, combined, structured, adapted, and integrated into original useful assembled payloads. The assembled product is what the buyer purchases. Original contribution and source provenance/licensing are separate review dimensions. Do not reopen the incorrect public-service/private-original A/B choice.
 
-FIX-06 is COMPLETE as an assessment of exact PR #5 head 8711cdcf2dc31b16dc599da6db7cd0afd783a537, tree f7aebfa09422e061fba558a817af258c9ba08c06. Reproduced 146 gateway tests, 55 utility assertions, 21 Pages tests, both builds, 16 actual local Dynamic Worker combinations, 32 plans/160 AWS inputs/64 partial shapes, Powertools 7/7, deterministic/scripted routing 34/34 each, source-preparation evidence. No exact-head GitHub CI exists; no live inference or funded commerce was tested. Read docs/FIX06_PR5_VERIFICATION.md for commands and distinctions.
+Select the next three IDs: FIX-07, FIX-08, FIX-13. FIX-07: preserve deployed free-text catalog compatibility while preparing/reviewing/registering version-matched structured routing. Structured intent currently truthfully returns routing_not_configured. FIX-08: verify genuine trusted review authority and the actual controlled publication path. FIX-13: reconcile emitter fields and actual live projections while preserving raw history. Fully prepare authorized work before requesting any specific missing input; do not invent reviews, commercial allocations, or enable optional inference.
 
-New FIX-28 (P1 READY) records demonstrated draft/main conflicts in commerce.js and discovery.js. It is not implemented. The isolated draft predates accepted readiness/recovery/release fixes; never deploy it directly over main. Resolve and verify combined source only when FIX-28 is selected. Product publication and model enabling remain separate dependencies.
+Two v2 candidates are source-ready but unpublished: AWS-0568 requires component allocation and genuine reviews; SW-PT-0006 v2 requires genuine reviews while preserving v1 purchases. The historical 157-record inventory is not proof that 157 products are finished. Keep all 28 fix IDs and product-specific work visible. PR #1 is an unrelated third-party README advertisement, not application routing; the temporary audit branch adds no serving functionality. Both were excluded from consolidation.
 
-Next queued batch: select exactly FIX-07, FIX-08, FIX-13 under priority/ID order, unless the owner directs completion of a specific blocked action first. FIX-07: prepare/revalidate version-matched routing manifests and rollout prerequisites. FIX-08: verify and enforce genuine trusted publication/immutable registration, respecting the adopted original assembled-payload policy and pending product inputs. FIX-13: reconcile actual event fields with current projections, preserving raw history; live pipeline changes need authorization. Draft production rollout also depends on FIX-28. Complete independent preparation for any blocked selected item; do not substitute a fourth implementation task.
-
-Preserve the single gateway, thin Pages ingress, D1 commerce authority, R2 payload/receipt storage, private recovery credentials, original purchase/language handshake, deterministic routing authority, and no recurring autonomous monitors. Settling/uncertain payments must never be blindly retried. Keep all FIX-01 through FIX-28 entries and their evidence visible. Respect any later owner policy, scope, or release authorization rather than asking again. Return six sections: batch outcome; complete backlog; exact source/PR/local/CI/staging/production evidence; concrete remaining decisions/actions; next three IDs; self-contained next-model prompt.
+Preserve the single gateway, thin Pages ingress, shared HTTP/x402 and Cap'n Web service, D1 commerce authority, R2 exact payload/receipt storage, immutable quotes and bought versions, explicit delivery-language handshake, deterministic routing authority, and private recovery credentials. Unknown settlement outcomes must never be blindly retried. Finish the existing build without redesign, new unrelated features, or recurring autonomous monitors. Report exact source/CI/deployed evidence and update the canonical tracker with completed work, remaining blockers, and next three IDs.
+```

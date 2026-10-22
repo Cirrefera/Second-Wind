@@ -1,29 +1,44 @@
-# FIX-06 — Draft PR #5 exact-commit verification
+# FIX-06 — PR #5 verification and consolidation outcome
 
-Observed October 22, 2026; final ref check at approximately 1:26 p.m. EDT (17:26 UTC).
+## Current consolidation outcome
 
-## Outcome
+**The PR #5 and PR #7 work is merged, deployed, and accepted.** The commerce and discovery conflicts found in the original assessment were resolved during consolidation, with the accepted FIX-01–03 behavior retained and the integrated source verified. FIX-06 remains **COMPLETE** as an assessment; its earlier draft-only result is preserved below as historical evidence.
 
-**The exact current draft head passes its existing offline verification, but PR #5 is not ready to merge or release.** The verification/assessment required by FIX-06 is complete. It does not authorize or establish integration, deployment, product publication, live model quality, or funded commerce success.
+| Consolidation evidence | Result |
+| --- | --- |
+| Integration head | `57636d4c84e0a9a96ed078d86413d4e526447106` |
+| Integration tree | `6c5cd346c5f5e491973da1e68294c11d63de78ca` |
+| Merged main/release commit | [`548bcc204d59785951da11e85943607d5e62d9fd`](https://github.com/Cirrefera/Second-Wind/commit/548bcc204d59785951da11e85943607d5e62d9fd) |
+| PR verification | [Run 39858026572](https://github.com/Cirrefera/Second-Wind/actions/runs/39858026572) — success |
+| Production deployment and acceptance | [Run 39858195268](https://github.com/Cirrefera/Second-Wind/actions/runs/39858195268) — success; acceptance returned `accepted: true` at `2026-10-22T21:33:58Z` (5:33:58 p.m. EDT on October 22) |
+| Integrated verification | **174 gateway tests, 32 release tests, 21 Pages tests, 55 utility assertions, all 16 actual local Dynamic Worker feature packages, and both builds pass** |
 
-The head's reported 146-test result was reproduced, together with the additional product, Dynamic Worker, routing-fixture, source-preparation and build checks below. A read-only merge simulation against current `main` has two content conflicts, in commerce and discovery. Resolution must preserve the accepted FIX-01–03 release and then rerun tests on the actual combined commit. That integration work has not been performed under this assessment.
+The release source now includes the preparation/activation module. Actual authenticated publication and real product approvals remain **FIX-08/10/11**; no products were activated by this release. The accepted deployment does not establish funded commerce success or live model quality. See [the current consolidation status](CONSOLIDATION_STATUS.md) for the complete release record and remaining work.
 
-## Exact identities
+## Historical assessment outcome — 1:26 p.m. EDT
+
+The remainder records the isolated assessment performed on October 22, 2026, with its final ref check at approximately 1:26 p.m. EDT (17:26 UTC). Commit identities, test counts, and blocker observations in these historical sections apply to that earlier head and comparison, not to the consolidated release above.
+
+**The then-current draft head passed its existing offline verification, but at that time PR #5 was not ready to merge or release.** The verification/assessment required by FIX-06 was complete. That isolated assessment did not establish integration, deployment, product publication, live model quality, or funded commerce success.
+
+The head's reported 146-test result was reproduced, together with the additional product, Dynamic Worker, routing-fixture, source-preparation and build checks below. A read-only merge simulation against the then-current `main` found two content conflicts, in commerce and discovery. That assessment left integration for a separate implementation step; the later consolidation resolved it and verified the actual combined source as recorded above.
+
+## Historical exact identities
 
 | Object | Observed identity |
 | --- | --- |
-| [PR #5](https://github.com/Cirrefera/Second-Wind/pull/5) | Open, draft, not merged |
+| [PR #5](https://github.com/Cirrefera/Second-Wind/pull/5) at assessment | Open, draft, not merged at that time |
 | Draft branch | `feat/proportional-product-scope` |
 | Verified draft commit | `8711cdcf2dc31b16dc599da6db7cd0afd783a537` |
 | Verified draft tree | `f7aebfa09422e061fba558a817af258c9ba08c06` |
-| Current main used for comparison | `a853b9edbdb00be21b7ba157e7deb3ed36782643` |
-| Accepted application release | `048f08853e863391cf8652cafdd464140e810616` |
+| Then-current main used for comparison | `a853b9edbdb00be21b7ba157e7deb3ed36782643` |
+| Accepted application release at assessment | `048f08853e863391cf8652cafdd464140e810616` |
 | Actual common ancestor of draft/main | `82fe671add6468176134a344d38d2cbc3686b90e` |
 | Divergence | 13 draft-only commits; 5 main-only commits |
 
-The GitHub connector and local fetched refs agreed. A final connector check still returned the same PR #5 head and draft status. No repository `AGENTS.md` was present in the verified tree, and no parent-directory `AGENTS.md` applied to the isolated checkout.
+The GitHub connector and local fetched refs agreed. The final connector check for that assessment returned the same PR #5 head and draft status. No repository `AGENTS.md` was present in the verified tree, and no parent-directory `AGENTS.md` applied to the isolated checkout.
 
-## Reproduced verification
+## Historical reproduced verification
 
 Environment: Node `v24.19.0`, npm `11.9.0`, Python `3.12.14`. Both repository lockfiles were installed with `npm ci --ignore-scripts --no-audit --no-fund`. A separate temporary Python virtual environment installed the candidate's pinned requirements: Powertools `3.36.0`, boto3 `1.43.114`, botocore `1.43.114`.
 
@@ -53,15 +68,15 @@ Product validation scripts write evidence files. They were run against copies of
 
 Source preparation returned payload hashes `57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10` for AWS-0568 v2 and `80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf` for SW-PT-0006 v2, with `publication: blocked` for both. Passing local source/staging fixtures does not create production R2 objects or genuine publication approvals.
 
-## CI distinction
+## Historical CI distinction
 
 GitHub's exact-head PR workflow-run query returned `workflow_runs: []`. Its combined-status query returned `statuses: []`. The exact commit's [check-runs endpoint](https://api.github.com/repos/Cirrefera/Second-Wind/commits/8711cdcf2dc31b16dc599da6db7cd0afd783a537/check-runs) returned `total_count: 0`.
 
-The results above are fresh **local exact-head evidence**, not GitHub CI evidence. The draft workflow only triggers on main pushes or manual dispatch. It was not dispatched to obtain tests, because it also contains production mutations.
+The historical results in this section are **local exact-head evidence**, not GitHub CI evidence for that earlier draft. The later integrated PR and release CI results are recorded above. The draft workflow only triggers on main pushes or manual dispatch. It was not dispatched to obtain tests, because it also contains production mutations.
 
-## Integration and release blockers
+## Blockers observed during the historical assessment
 
-### 1. Demonstrated source conflicts with the accepted release
+### 1. Source conflicts observed then — subsequently resolved
 
 Reproduction in an isolated checkout with both immutable commits fetched:
 
@@ -74,17 +89,17 @@ The command returns exit status `1` with content conflicts in:
 - `workers/gateway/src/commerce.js`: the accepted release moves prepared-purchase settlement into fenced recovery/settlement helpers, while the draft modifies the earlier inline settlement/delivery path to carry journey observations. A correct integration must preserve prepared-state recovery, private-token authentication, one-owner settlement, uncertainty handling, and the draft's applicable delivery/event changes.
 - `workers/gateway/src/discovery.js`: accepted readiness imports and draft observation imports overlap. Both required behaviors must survive resolution.
 
-The generated conflict tree was `8f795d3d3877c080903f448f49ebcf0e3d99cea9`. `git merge-tree` writes Git objects but does not merge a branch, update the index, or alter working files. No conflict was resolved in this task and no combined-source test result is claimed.
+The generated conflict tree was `8f795d3d3877c080903f448f49ebcf0e3d99cea9`. `git merge-tree` writes Git objects but does not merge a branch, update the index, or alter working files. No conflict was resolved during the original assessment. The subsequent consolidation resolved these conflicts and verified the combined source; its separate results appear above.
 
-**Suggested new stable backlog item:** Integrate PR #5 with the accepted main release while preserving FIX-01–03; resolve the demonstrated conflicts, verify both sets of regressions and release controls on the resulting exact commit, and retain separate product-publication prerequisites. This is additional implementation beyond FIX-06's verification/assessment scope. Parent should allocate the next unused stable ID.
+**Subsequent disposition:** This integration work was tracked separately as **FIX-28** and was completed in the accepted consolidation recorded above. The original conflict evidence is retained for reproducibility; it is no longer an unresolved integration blocker. Product-publication prerequisites remain separate.
 
-### 2. The draft head is older than FIX-01–03
+### 2. The historical draft head predates FIX-01–03
 
-Its isolated tree lacks the accepted interrupted-purchase regression file and release-acceptance scripts; it still has the older payment-readiness contract and old required-secret declaration. These are comparisons between the two current trees, not a claim that Git would automatically delete the newer files during a real merge. Non-conflicting main changes can be retained by normal integration. Direct deployment of this old head would omit accepted protections, so the draft must not replace the accepted main code.
+Its isolated tree lacks the accepted interrupted-purchase regression file and release-acceptance scripts; it still has the older payment-readiness contract and old required-secret declaration. These were comparisons between the two assessed trees, not a claim that Git would automatically delete the newer files during a real merge. Non-conflicting main changes can be retained by normal integration. Direct deployment of this old head would omit accepted protections, so the draft must not replace the accepted main code.
 
-### 3. Existing catalog, routing and publication prerequisites remain
+### 3. Other prerequisites recorded at assessment
 
-These issues are already represented in the canonical backlog and are not new discoveries requiring duplicate IDs:
+The following records preserve what the original assessment found and the existing backlog IDs. They are not a fresh postdeployment inventory; use [CONSOLIDATION_STATUS.md](CONSOLIDATION_STATUS.md) and the canonical tracker for their current disposition. No duplicate IDs were needed:
 
 - **FIX-07:** Migration `0004_routing_manifests.sql` creates an empty versioned table. The structured resolver selects from that table. Reviewed matching manifests must exist for the intended rollout. The draft workflow already includes migrations 0003 and 0004; they are not missing from that workflow.
 - **FIX-08, FIX-10 and FIX-11:** Local source preparations correctly remain publication-blocked. AWS-0568 commercial allocation and genuine review/registration inputs remain unresolved.
@@ -92,15 +107,15 @@ These issues are already represented in the canonical backlog and are not new di
 - **FIX-13 and FIX-14:** Local emitter/outbox fixtures do not prove arrival in the actual raw and specialized sinks.
 - **FIX-05 follow-up:** The owner subsequently clarified that the original product is the useful combination, synthesis, structure, and adaptation of publicly sourced material. The adopted policy is recorded in `docs/FIX05_CONTENT_POLICY_REVIEW.md`; no A/B policy choice remains outstanding. This does not change the exact-head test results above.
 
-## Scope limits
+## Scope of the original assessment
 
-No GitHub writes, merge, deployment, migration, live Cloudflare inference, production D1/R2 mutation, product publication, quote, purchase, funds transfer, or AWS service call occurred. Public package downloads were used only to install locked/pinned local verification dependencies. PR #5 and its source commit remain unchanged.
+The original isolated assessment performed no GitHub writes, merge, deployment, migration, live Cloudflare inference, production D1/R2 mutation, product publication, quote, purchase, funds transfer, or AWS service call. Public package downloads were used only to install locked/pinned local verification dependencies. That assessment left PR #5 and its source commit unchanged. The separately authorized consolidation later merged and deployed the combined source as recorded at the top of this document.
 
-## Primary source references
+## Historical assessment source references
 
 - [Exact verified draft tree](https://github.com/Cirrefera/Second-Wind/tree/8711cdcf2dc31b16dc599da6db7cd0afd783a537)
 - [Draft workflow](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/.github/workflows/deploy.yml)
 - [Draft review instructions](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/workers/gateway/review/README.md)
 - [Actual Dynamic Worker integration test](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/workers/gateway/tests/dynamic-worker.integration.mjs)
-- [Accepted application release](https://github.com/Cirrefera/Second-Wind/commit/048f08853e863391cf8652cafdd464140e810616)
+- [Application release accepted before the assessment](https://github.com/Cirrefera/Second-Wind/commit/048f08853e863391cf8652cafdd464140e810616)
 - [Canonical tracker at assessed main](https://github.com/Cirrefera/Second-Wind/blob/a853b9edbdb00be21b7ba157e7deb3ed36782643/docs/SECONDWIND_FIX_TRACKER.md)
