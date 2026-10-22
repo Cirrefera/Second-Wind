@@ -1,6 +1,6 @@
 # Second Wind — consolidated application and remaining work
 
-The consolidation record below describes the accepted `548bcc2` release. The owner's subsequent TypeSafe skill/Jev routing work is recorded separately in [JEV_ROUTING_EVALUATION.md](JEV_ROUTING_EVALUATION.md), including real API results, source changes, and the remaining semantic/production prerequisites. Consult that report and the [canonical tracker](SECONDWIND_FIX_TRACKER.md) for follow-up release evidence.
+The consolidation record below describes the accepted `548bcc2` release. The owner's subsequent TypeSafe skill/Jev routing work was merged in [PR #8](https://github.com/Cirrefera/Second-Wind/pull/8) and deployed as accepted application release `dadca82c5cf43ef6be0ebb62b3553e41b46198b8`. [JEV_ROUTING_EVALUATION.md](JEV_ROUTING_EVALUATION.md) records the real API results, source changes, GitHub verification, production acceptance, and remaining semantic/production prerequisites. Consult that report and the [canonical tracker](SECONDWIND_FIX_TRACKER.md) for the later release evidence.
 
 Verified October 22, 2026. Production acceptance returned `accepted: true` at **21:33:58 UTC / 5:33:58 p.m. EDT**.
 

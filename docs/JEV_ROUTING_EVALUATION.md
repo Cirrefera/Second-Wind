@@ -6,7 +6,35 @@ This work starts from consolidated main `c8b8991393ba3a304adb44726dabe5f57b6551c
 
 ## Source and release status
 
-The follow-up is prepared on `fix/jev-structured-routing-20261022`. Local verification is complete; GitHub verification, merge, and production acceptance remain pending at this source revision. The previously accepted application is `548bcc204d59785951da11e85943607d5e62d9fd`. A later evidence update must record exact identities before claiming this follow-up deployed.
+**[PR #8](https://github.com/Cirrefera/Second-Wind/pull/8) is merged and the follow-up application release is accepted in production.** The owner's consolidation authorization was carried through the existing GitHub verification and deployment workflow. Optional production model assistance remains disabled.
+
+| Evidence | Identity / result |
+| --- | --- |
+| Reviewed source commit | `448daac64eb58ba70b46a884868e9bf98892d931` |
+| Local, published, CI test-merge, and released tree | `3f69ab4ea93f37d3270a5ccfc8ea1576925aeb01` |
+| GitHub CI checkout | `30085fb612e62c2360c4eec9a502bfe8e76a7595`, matching tree above |
+| Pull-request verification | [Run 39867861178](https://github.com/Cirrefera/Second-Wind/actions/runs/39867861178), job `120134502329`: completed/success; check from GitHub Actions app `15368` for the exact source head |
+| Merged application release | `dadca82c5cf43ef6be0ebb62b3553e41b46198b8` |
+| Production verification and deployment | [Run 39868083324](https://github.com/Cirrefera/Second-Wind/actions/runs/39868083324), job `120135263361`: completed/success |
+| Accepted at | October 22, 2026, **22:53:39 UTC / 6:53:39 p.m. EDT** |
+| Gateway version | `7bd4c4bf-8f77-45e9-af17-9428bf95419c` |
+| Pages deployment | `6c883a05-6f82-479b-8d8b-77b582791ecc` |
+
+Both GitHub runs passed **198 gateway tests, 32 release-acceptance tests, 21 Pages ingress tests, the legacy utility checks, all 16 actual Dynamic Worker feature selections, and both builds**. The production workflow also passed release-input preflight, all four existing additive migrations, both deployments, and release acceptance. The accepted record is:
+
+```json
+{
+  "accepted": true,
+  "expected_commit": "dadca82c5cf43ef6be0ebb62b3553e41b46198b8",
+  "gateway_version": "7bd4c4bf-8f77-45e9-af17-9428bf95419c",
+  "pages_deployment": "6c883a05-6f82-479b-8d8b-77b582791ecc",
+  "origin": "https://secondwindai.com",
+  "live_products": 1,
+  "funded_purchase_verified": false
+}
+```
+
+The live catalog still contains one product. The follow-up performs no candidate registration/activation and adds no inference flag, production model credential, or new binding. A later documentation-only commit records this acceptance without changing the released application identity above.
 
 ## Skill and question design
 
