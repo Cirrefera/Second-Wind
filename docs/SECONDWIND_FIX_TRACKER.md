@@ -10,6 +10,8 @@ Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
 - Selected IDs for batch 01: **FIX-01, FIX-02, FIX-03**. No fourth implementation item is authorized in this run.
 - Working branch: `fix/batch-01-payment-recovery-release`.
+- Published implementation commit: `248fb4d70db4afbc2b53313096d3121eef5ab54e`; verified tree: `32584acbfde5159db13078142d0ae0fd9a3685ae`. The local staged tree exactly matched the GitHub tree before the commit was created.
+- Reviewable draft PR: https://github.com/Cirrefera/Second-Wind/pull/6 (open, draft, unmerged). Subsequent batch-01 edits to this tracker contain handoff metadata only; the implementation/test/workflow files remain those tested at the commit above.
 - Starting main and observed production commit: `82fe671add6468176134a344d38d2cbc3686b90e`.
 - Separate draft PR #5: `feat/proportional-product-scope` at `8711cdcf2dc31b16dc599da6db7cd0afd783a537`.
 - All fetched branches were checked for an existing canonical tracker/handoff and repository AGENTS.md; none was present. Starting checkout was clean.
@@ -507,7 +509,7 @@ Environment: Node v24.19.0; repository lockfiles unchanged; dependencies install
 | `npm run build` (`workers/gateway`) | Pass; 1011.2 KiB as reported by esbuild |
 | Workflow YAML and ordered steps | Parse passes; preflight before mutations; acceptance after both deployments |
 | `git diff --check` | Pass |
-| Independent selected-code review | No concrete remaining blocker in the ownership/retry logic; release/configuration review recorded in handoff |
+| Independent selected-code review | No concrete remaining blocker in the ownership/retry logic; independent release/configuration review also found no blocker |
 
 The release-test subprocess was denied in the restricted sandbox; the identical offline command passed with permitted subprocess execution. No network or payment access was needed for those tests. This is local verification, not GitHub Actions evidence, staging acceptance, or production verification.
 
@@ -537,3 +539,37 @@ If the authorized code release needs reversal, prepare a GitHub reversal PR for 
 ## Next batch selection
 
 Next selected IDs: **FIX-04, FIX-05, FIX-06**. They are the first three actionable P1 items. FIX-04 can implement PR verification and prepare protections; applying external protections needs the proper authorization. FIX-05 can verify current exposure and prepare a concrete policy decision; enforcement depends on the owner's policy. FIX-06 can independently test the exact draft head and assess integration without merging it. FIX-07/08 depend on that draft assessment, while later telemetry and catalog items remain queued.
+
+## Ready-to-paste continuation prompt
+
+Continue the existing Second Wind repair in batches of exactly three stable backlog IDs. Do not restart the audit or redesign the application.
+
+Repository: https://github.com/Cirrefera/Second-Wind
+Canonical tracker: docs/SECONDWIND_FIX_TRACKER.md
+Working branch: fix/batch-01-payment-recovery-release
+Verified implementation commit: 248fb4d70db4afbc2b53313096d3121eef5ab54e
+Verified implementation tree: 32584acbfde5159db13078142d0ae0fd9a3685ae
+Current batch draft PR: https://github.com/Cirrefera/Second-Wind/pull/6
+This tracker may be on a later documentation-only handoff commit. Fetch and inspect the branch head; preserve that tracker update instead of resetting the branch to the implementation commit.
+
+Production/main was last observed at 82fe671add6468176134a344d38d2cbc3686b90e. Separate draft PR #5 remains feat/proportional-product-scope at 8711cdcf2dc31b16dc599da6db7cd0afd783a537. Inspect current refs before editing, preserve unrelated changes, and do not merge the whole draft to obtain a fix.
+
+Batch 01 outcomes: FIX-01 BLOCKED overall, with code locally verified but independently verified Base-mainnet recipient and authorized configuration/release still missing. FIX-02 and FIX-03 READY_FOR_RELEASE. No merge/deployment, secret change, funded canary, product publication, production migration or buyer-data mutation was performed. Local verification: 76 gateway tests, 32 release tests, 21 actual Pages ingress tests, 55 legacy assertions, both builds, workflow YAML/order validation, and diff whitespace check passed. These are local results, not current-head CI or production evidence.
+
+Select exactly FIX-04, FIX-05, and FIX-06 next.
+
+FIX-04 — Enforce PR verification and production release boundaries. Inspect the current workflows and external GitHub protection state. Add the intended PR verification and explicit production branch/environment constraints. Ensure manual dispatch cannot deploy an unintended branch to production. Prepare required-status-check/ruleset/environment changes, applying them only when authorized. Acceptance: intended checks run before merge, protections are documented/applied when authorized, and production release is constrained to the approved path. Preserve FIX-03’s preflight and acceptance; do not run the deployment workflow from this feature branch merely to obtain a test result.
+
+FIX-05 — Resolve public-source and paid-content boundary. Reconfirm current exposure: audit found public SW-PT-0006 v1 guidance at 5,333 bytes and SHA-256 62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe, matching live metadata. Produce concrete policy choices/effects for the owner and enforce the selected policy when that decision is available. Acceptance: publication behavior and claims match the chosen exclusive-content versus packaging/provenance/automation/delivery model, while existing buyers keep exact purchased versions. Evidence gathering is actionable now; final policy enforcement needs the owner’s decision. Do not invent that decision, delete history, make the repository private, or claim public history became confidential.
+
+FIX-06 — Verify exact current head of draft PR #5. Fetch the current head, run its relevant checks in an isolated checkout/worktree, compare it against production and the batch-01 fixes, and record exact commit/results plus integration/release blockers. Acceptance: reproducible exact-commit verification and a clear merge/release readiness assessment. Prior author-reported 146-test results are historical, not current CI evidence. Do not restore superseded code or merge automatically. Record newly demonstrated defects under new stable backlog IDs rather than expanding this item silently.
+
+Authorization continues to cover inspection, isolated code changes, tests, tracker updates, and reviewable branches/draft PRs. It does not authorize transfer of funds, changing the merchant recipient, production secrets/settings, merging/deploying, product publication, or rewriting public history. Reuse any later explicit authorization. Finish all independent preparation before asking only for a concrete remaining action.
+
+FIX-01 release inputs remain specific: independently verify the current Base-mainnet receiving address; configure Worker X402_EXPECTED_PAY_TO and any explicitly approved correction to X402_PAY_TO; configure matching GitHub secret X402_EXPECTED_PAY_TO; preserve facilitator credentials and unrelated bindings. The live encrypted recipient’s precise defect is unknown, and the historical Sepolia approval is not current mainnet verification. Staging secret versions is not deployment; inherited bindings come from the latest uploaded Worker version, so preserve/recheck the recorded staging source before GitHub release.
+
+Preserve the existing single gateway, thin Pages ingress, D1 purchase authority, R2 payload/receipt storage, private-token recovery, and the existing purchase/language handshake. The API-only homepage 404 and GitHub Pages upload method are intentional. Settling/uncertain states are never blindly retried; a lost acknowledgement plus unreadable settlement claim requires explicit reconciliation. Authenticated pre-settlement cleanup does not imply external side effects were undone.
+
+Keep every FIX-01 through FIX-27 entry visible with priority, status, evidence, dependencies, acceptance, implementation, verification and blocker. Do not reset/renumber/delete entries or equate prepared source with production completion. Work only on the selected three implementation IDs; if blocked, finish independent work, record the exact blocker, and continue the other selected IDs without substituting a fourth.
+
+Return the same six sections: batch outcome; complete updated backlog; exact branch/commit/PR plus local/CI/staging/production verification; concrete unresolved inputs/approvals; next three actionable IDs; and a self-contained next-model prompt filled with actual results.
