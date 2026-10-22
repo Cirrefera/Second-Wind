@@ -34,6 +34,8 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Test legacy utilities and actual Pages ingress
         run: npm run selftest
+      - name: Test release acceptance failure paths
+        run: npm run test:release
       - name: Test the gateway commerce implementation
         working-directory: workers/gateway
         run: npm test
@@ -42,6 +44,11 @@ jobs:
         run: npm run build
       - name: Build the Pages ingress
         run: npm run build:worker
+      - name: Validate release acceptance inputs before deployment
+        env:
+          # Independent operator-reviewed expectation; never inferred from discovery.
+          X402_EXPECTED_PAY_TO: ${{ secrets.X402_EXPECTED_PAY_TO }}
+        run: node scripts/release-acceptance.mjs --check-inputs
       - name: Apply the additive commerce schema
         working-directory: workers/gateway
         # This exact idempotent file extends the existing live items/payments
@@ -56,4 +63,10 @@ jobs:
         # are declared in wrangler.toml; values never enter this workflow.
         run: ./node_modules/.bin/wrangler deploy --tag "$GITHUB_SHA"
       - name: Deploy Pages with the private gateway binding
-        run: ./workers/gateway/node_modules/.bin/wrangler pages deploy public --project-name=second-wind --branch=main
+        run: ./workers/gateway/node_modules/.bin/wrangler pages deploy public --project-name=second-wind --branch=main --commit-hash "$GITHUB_SHA"
+      - name: Accept the deployed production release
+        env:
+          X402_EXPECTED_PAY_TO: ${{ secrets.X402_EXPECTED_PAY_TO }}
+        # Read-only Pages identity and custom-domain health/readiness/discovery.
+        # A failed check fails this release; it never creates a purchase or rolls back automatically.
+        run: npm run accept:release

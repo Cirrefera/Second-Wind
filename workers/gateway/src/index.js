@@ -6,7 +6,7 @@ import { ProductService } from "./product-service.js";
 import { describeProduct, searchCatalog, checkConfiguration } from "./catalog.js";
 import { createQuote, createExecutionQuote, readQuote, purchase, recoverGrant, deliverGrant,
   createRecoveryChallenge, recoverWithWallet } from "./commerce.js";
-import { CommerceError, NETWORK, ORIGIN, paymentConfig, paymentReadiness, requirementsFor } from "./contracts.js";
+import { CommerceError, NETWORK, ORIGIN, paymentReadiness, requirementsFor } from "./contracts.js";
 import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument } from "./discovery.js";
 
 async function jsonBody(request) {
@@ -86,7 +86,7 @@ export function createApp(dependencies = {}) {
     network:NETWORK,surfaces:["http-x402:/api/x402/{sku}","http-x402:/rpc","capnweb:/capnp"],do_free:true,
     deployment:c.env.CF_VERSION_METADATA || null}));
   app.get("/api/proof",async c=>{
-    let db = false,commerce = false,recipient = false,key = false;
+    let db = false,commerce = false,key = false;
     let tools_live = null;
     try {
       const count = await c.env.SW_DB.prepare("SELECT COUNT(*) AS count FROM items WHERE status='live'").first();
@@ -94,12 +94,16 @@ export function createApp(dependencies = {}) {
       await c.env.SW_DB.prepare("SELECT payment_id FROM commerce_purchases LIMIT 1").first();
       commerce = true;
     } catch { /* explicit degraded state */ }
-    try { paymentConfig(c.env); recipient = true; } catch { /* explicit below */ }
     try { const value = JSON.parse(c.env.CDP_FACILITATOR_KEY); key = Boolean(value.id && value.privateKey); } catch { /* below */ }
     const recipientReadiness = paymentReadiness(c.env);
-    const ready = db && commerce && recipient && key && recipientReadiness.payment_recipient_verified;
+    // Preserve this legacy field's mismatch behavior; the explicit fields below
+    // distinguish a valid address from an independently verified recipient.
+    const legacyRecipientConfigured = recipientReadiness.payment_recipient_configured
+      && ["unverified", "verified"].includes(recipientReadiness.payment_recipient_status);
+    const ready = db && commerce && key && recipientReadiness.payment_recipient_verified;
     return c.json({service:"Second Wind",status:ready ? "ready" : "degraded",tools_live,
-      payment:{rail:"x402",x402Version:2,network:NETWORK,asset:"USDC",payTo_configured:recipient,...recipientReadiness,facilitator_configured:key},
+      payment:{rail:"x402",x402Version:2,network:NETWORK,asset:"USDC",
+        payTo_configured:legacyRecipientConfigured,...recipientReadiness,facilitator_configured:key},
       dependencies:{database:db,commerce_schema:commerce,payload_store:Boolean(c.env.PAYLOADS),delivery_store:Boolean(c.env.DELIVERIES)},
       discovery:{tools:`${ORIGIN}/api/tools`,openapi:`${ORIGIN}/openapi.json`,x402_resources:`${ORIGIN}/v2/x402/discovery/resources`},
       note:"Configuration readiness does not assert that a live purchase test has passed."},ready ? 200 : 503);
