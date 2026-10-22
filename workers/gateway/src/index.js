@@ -1,9 +1,11 @@
-import { dispatchOutbox } from './telemetry.js';
+import {resolveIntent} from './routing.js';
+import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
+import { dispatchOutbox,createJourneyContext,enqueueObservation } from './telemetry.js';
 import { Hono } from "hono";
 import { newWorkersRpcResponse } from "capnweb";
 import { decodePaymentSignatureHeader, encodePaymentRequiredHeader, encodePaymentResponseHeader } from "@x402/core/http";
 import { ProductService } from "./product-service.js";
-import { describeProduct, searchCatalog, checkConfiguration } from "./catalog.js";
+import { describeProduct } from "./catalog.js";
 import { createQuote, createExecutionQuote, readQuote, purchase, recoverGrant, deliverGrant,
   createRecoveryChallenge, recoverWithWallet } from "./commerce.js";
 import { CommerceError, NETWORK, ORIGIN, paymentReadiness, requirementsFor } from "./contracts.js";
@@ -64,13 +66,16 @@ export function createApp(dependencies = {}) {
   app.use("*",async(c,next)=>{
     if (c.req.method === "OPTIONS") return new Response(null,{status:204,headers:{
       "Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET, POST, HEAD, OPTIONS",
-      "Access-Control-Allow-Headers":"Content-Type, PAYMENT-SIGNATURE, X-Recovery-Token, Authorization, Idempotency-Key",
-      "Access-Control-Expose-Headers":"PAYMENT-REQUIRED, PAYMENT-RESPONSE, X-Content-Hash, X-Recovery-Token, X-Payment-Id, X-Worker-Version",
+      "Access-Control-Allow-Headers":"Content-Type, PAYMENT-SIGNATURE, X-Recovery-Token, X-Trial-Token, Authorization, Idempotency-Key, X-Journey-Id",
+      "Access-Control-Expose-Headers":"PAYMENT-REQUIRED, PAYMENT-RESPONSE, X-Content-Hash, X-Recovery-Token, X-Payment-Id, X-Worker-Version, X-Journey-Id",
     }});
+    const journey=createJourneyContext({journey_id:c.req.header("X-Journey-Id"),transport:"http"});
+    c.set("journey",journey);
     await next();
     if (c.res.status === 101 || c.res.webSocket) return;
     c.header("Access-Control-Allow-Origin","*");
-    c.header("Access-Control-Expose-Headers","PAYMENT-REQUIRED, PAYMENT-RESPONSE, X-Content-Hash, X-Recovery-Token, X-Payment-Id, X-Worker-Version");
+    c.header("X-Journey-Id",journey.journey_id);
+    c.header("Access-Control-Expose-Headers","PAYMENT-REQUIRED, PAYMENT-RESPONSE, X-Content-Hash, X-Recovery-Token, X-Payment-Id, X-Worker-Version, X-Journey-Id");
     if (c.env.CF_VERSION_METADATA?.id) c.header("X-Worker-Version",c.env.CF_VERSION_METADATA.id);
     c.header("Cache-Control","private, no-store");
   });
@@ -108,24 +113,41 @@ export function createApp(dependencies = {}) {
       discovery:{tools:`${ORIGIN}/api/tools`,openapi:`${ORIGIN}/openapi.json`,x402_resources:`${ORIGIN}/v2/x402/discovery/resources`},
       note:"Configuration readiness does not assert that a live purchase test has passed."},ready ? 200 : 503);
   });
-  app.get("/api/tools",async c=>c.json(await toolsDocument(c.env)));
+  app.get("/api/tools",async c=>c.json(await toolsDocument(c.env,{journey:c.get("journey")})));
   app.all("/api/catalog",c=>c.redirect(`/api/tools${new URL(c.req.url).search}`,308));
-  app.get("/openapi.json",async c=>c.json(await openApiDocument(c.env)));
+  app.get("/openapi.json",async c=>c.json(await openApiDocument(c.env,{journey:c.get("journey")})));
   for (const path of ["/.well-known/x402","/v2/x402/discovery/resources","/discovery/resources"])
-    app.get(path,async c=>c.json(await resourcesDocument(c.env)));
-  app.get("/llms.txt",async c=>c.text(await llmsDocument(c.env)));
+    app.get(path,async c=>c.json(await resourcesDocument(c.env,{journey:c.get("journey")})));
+  app.get("/llms.txt",async c=>c.text(await llmsDocument(c.env,{journey:c.get("journey")})));
   app.post("/api/resolve",async c=>{
     const body = await jsonBody(c.req.raw);
-    const matches = await searchCatalog(c.env.SW_DB,body.intent ?? body.query ?? "",body.limit ?? 10);
-    return c.json({matched:matches.length>0,status:matches.length ? "matches" : "no_match",matches});
+    return c.json(await resolveIntent(c.env,body.intent ?? body.query ?? "",body.limit ?? 10,{journey:c.get("journey")}));
+  });
+  app.get('/api/products/:sku/components',async c=>{
+    const menu=await describeComponents(c.env,c.req.param('sku'));
+    await enqueueObservation(c.env,'discovery.described',{journey:c.get('journey'),payload:{sku:menu.sku,product_version_ref:menu.version}});
+    return c.json(menu);
+  });
+  app.post('/api/trials',async c=>{
+    const b=await jsonBody(c.req.raw);
+    return c.json(await trialProduct(c.env,b.sku,b.config || {},b.input,null,{journey:c.get("journey")}));
+  });
+  app.get('/api/trials/:id',async c=>c.json(await recoverTrial(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),{journey:c.get('journey')})));
+  app.post('/api/trials/:id/selection',async c=>{
+    const b=await jsonBody(c.req.raw);
+    return c.json(await selectTrialComponents(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components));
+  });
+  app.post('/api/trials/:id/accept',async c=>{
+    const b=await jsonBody(c.req.raw);
+    return c.json(await acceptTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components,b.scope_hash,{journey:c.get("journey")}));
   });
   app.post("/api/quotes",async c=>{
     const body = await jsonBody(c.req.raw);
-    return c.json(await createQuote(c.env,body.sku,body.config || {}));
+    return c.json(await createQuote(c.env,body.sku,body.config || {},{journey:c.get("journey")}));
   });
   app.post("/api/configure",async c=>{
     const body = await jsonBody(c.req.raw);
-    return c.json(await checkConfiguration(c.env.SW_DB,body.sku,body.config || {}));
+    return c.json(await new ProductService(c.env,c.get("journey")).configure(body.sku,body.config || {}));
   });
 
   async function paid(c,isRpc = false) {
@@ -138,8 +160,8 @@ export function createApp(dependencies = {}) {
       requestData = body.code !== undefined ? {code:body.code,language:body.language,
         ...(body.invocationId ? {invocationId:body.invocationId} : {})} : body.config || {};
       if (!quoteId) {
-        if (body.sku) quoteId = (await createQuote(c.env,body.sku,requestData)).quoteId;
-        else quoteId = (await createExecutionQuote(c.env,requestData)).quoteId;
+        if (body.sku) quoteId = (await createQuote(c.env,body.sku,requestData,{journey:c.get("journey")})).quoteId;
+        else quoteId = (await createExecutionQuote(c.env,requestData,{journey:c.get("journey")})).quoteId;
       }
       route = "/rpc";
     } else {
@@ -153,7 +175,7 @@ export function createApp(dependencies = {}) {
         if (product.invoke_kind === "bedrock" && c.req.method !== "POST") {
           throw new CommerceError("method_not_allowed",405,{hint:"Use POST with the product's input schema."});
         }
-        quoteId = (await createQuote(c.env,key,requestData)).quoteId;
+        quoteId = (await createQuote(c.env,key,requestData,{journey:c.get("journey")})).quoteId;
       }
       route = `/api/x402/${encodeURIComponent(key)}`;
     }
@@ -172,7 +194,7 @@ export function createApp(dependencies = {}) {
     } else if (quote.kind === "product" && body.config === undefined) requestData = JSON.parse(quote.config_json);
     if (!paymentPayload) return challenge(c,quote,route);
     const pending = purchase(c.env,{quoteId,paymentPayload,requestData,
-      recoveryToken:recoveryToken(c.req.raw,body)},dependencies);
+      recoveryToken:recoveryToken(c.req.raw,body),journey:c.get("journey")},dependencies);
     try { c.executionCtx.waitUntil(pending.catch(()=>{})); } catch { /* local fetch has no context */ }
     const response = await pending;
     c.header("PAYMENT-RESPONSE",encodePaymentResponseHeader(response.paymentResponse));
@@ -189,10 +211,11 @@ export function createApp(dependencies = {}) {
   app.get("/api/x402/:key",c=>paid(c));
   app.post("/api/x402/:key",c=>paid(c));
   app.get("/api/x402/:key/artifact",c=>paid(c));
-  app.all("/capnp",c=>newWorkersRpcResponse(c.req.raw,new ProductService(c.env)));
+  app.all("/capnp",c=>newWorkersRpcResponse(c.req.raw,new ProductService(c.env,{...c.get("journey"),transport:"rpc"})));
   app.get("/api/purchases/:paymentId/delivery",async c=>{
     const grant = await recoverGrant(c.env,c.req.param("paymentId"),recoveryToken(c.req.raw));
-    const body = await deliverGrant(c.env,grant);
+    await enqueueObservation(c.env,"recovery.grant_recovered",{journey:c.get("journey"),payload:{payment_id:grant.paymentId,sku:grant.sku}});
+    const body = await deliverGrant(c.env,grant,{journey:c.get("journey")});
     c.header("PAYMENT-RESPONSE",encodePaymentResponseHeader(grant.receipt.facilitator_response));
     c.header("X-Content-Hash",body.content_hash);
     if (new URL(c.req.url).searchParams.get("format") === "artifact") {
@@ -203,10 +226,10 @@ export function createApp(dependencies = {}) {
     return c.json(body);
   });
   app.post("/api/purchases/:paymentId/recovery-challenge",async c=>
-    c.json(await createRecoveryChallenge(c.env,c.req.param("paymentId"))));
+    c.json(await createRecoveryChallenge(c.env,c.req.param("paymentId"),{journey:c.get("journey")})));
   app.post("/api/purchases/:paymentId/recover",async c=>{
     const body = await jsonBody(c.req.raw);
-    return c.json(await recoverWithWallet(c.env,c.req.param("paymentId"),body));
+    return c.json(await recoverWithWallet(c.env,c.req.param("paymentId"),body,{journey:c.get("journey")}));
   });
   app.all("*",c=>c.json({error:c.req.method === "GET" || c.req.method === "HEAD" ? "unknown_path" : "method_not_allowed",
     tools:"/api/tools",openapi:"/openapi.json"},c.req.method === "GET" || c.req.method === "HEAD" ? 404 : 405));

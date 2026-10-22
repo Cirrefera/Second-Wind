@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "sku": "SW-PT-0006",
+  "slug": "lambda-powertools-idempotency",
+  "version": 2,
+  "product_kind": "guidance-product",
+  "service": "lambda",
+  "release_ref": "sha256:80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+  "content_hash": "80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+  "hash_scope": "guidance-utf8",
+  "mime_type": "text/markdown; charset=utf-8",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Corrected operational decision guide and independently tested Python wiring with business-field validation, durable downstream-key handoff, payload mismatch behavior and explicit post-effect failure/expiry boundaries.",
+  "delivery_contract": {
+    "kind": "guidance",
+    "format": "UTF-8 Markdown including complete Python example",
+    "language": "python",
+    "external_execution": "buyer-controlled"
+  },
+  "validation_contract": {
+    "kind": "offline-real-library-tests",
+    "cases": 7,
+    "dependencies": {
+      "aws-lambda-powertools": "3.36.0",
+      "boto3": "1.43.114",
+      "botocore": "1.43.114"
+    },
+    "scope": "Actual Powertools decorator and DynamoDB persistence adapter with deterministic fake I/O. No AWS deployment, network calls, payment processor or external exactly-once guarantee."
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "lambda",
+    "powertools",
+    "idempotency",
+    "duplicate-payments",
+    "dynamodb"
+  ],
+  "supported_boundary": "Guidance and tested Python 3.12/Powertools 3.36.0 wiring for a single decoded JSON payment event per Lambda invocation and an existing DynamoDB persistence table. Requires a buyer-supplied payment function with durable downstream idempotency. Does not implement a payment processor, cross-service atomicity, authentication, SQS batch handling, AWS deployment or other language adapters.",
+  "status": "draft",
+  "publication_blockers": [
+    "trusted_guidance_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ]
+}

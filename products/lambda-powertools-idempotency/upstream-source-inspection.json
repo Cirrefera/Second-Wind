@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+  "files": [
+    {
+      "repository": "aws-powertools/powertools-lambda-python",
+      "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+      "path": "aws_lambda_powertools/utilities/idempotency/config.py",
+      "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/aws_lambda_powertools/utilities/idempotency/config.py",
+      "sha256": "87c52b68c6dec08dfd2a820887b16907f7d7b48bffbf45a3375511b6f2df7894",
+      "size_bytes": 2868,
+      "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+    },
+    {
+      "repository": "aws-powertools/powertools-lambda-python",
+      "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+      "path": "aws_lambda_powertools/utilities/idempotency/persistence/dynamodb.py",
+      "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/aws_lambda_powertools/utilities/idempotency/persistence/dynamodb.py",
+      "sha256": "db6396e3e1378e754c6450396c75c8d7c263b9a6680919cccc2134aafce4a50b",
+      "size_bytes": 13908,
+      "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+    },
+    {
+      "repository": "aws-powertools/powertools-lambda-python",
+      "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+      "path": "examples/idempotency/src/working_with_idempotency_key_required.py",
+      "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/examples/idempotency/src/working_with_idempotency_key_required.py",
+      "sha256": "c8038833d099ed2367c7871c40c3f4294b1cdb622801b4c973c2d476de656dea",
+      "size_bytes": 579,
+      "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+    },
+    {
+      "repository": "aws-powertools/powertools-lambda-python",
+      "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+      "path": "examples/idempotency/src/working_with_validation_payload.py",
+      "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/examples/idempotency/src/working_with_validation_payload.py",
+      "sha256": "cf68489cae37807602184bf118e7df9cf18ce6d053ad17873b83e80e696ee8a4",
+      "size_bytes": 1651,
+      "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+    }
+  ],
+  "upstream_root_license": [
+    {
+      "path": "LICENSE",
+      "git_blob_sha": "fcdede53dc874fea9b000af8165310f6f5d0f5a3",
+      "sha256": "bcc1d2d9e0609b03d420c3dbecb438a7b89bfc53d54176ab56301ab1f96b4f0a",
+      "size_bytes": 951,
+      "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/LICENSE",
+      "content": "MIT No Attribution\n\nCopyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+    }
+  ],
+  "scope": "Source/interface evidence, not a licensing approval or proof of external execution."
+}

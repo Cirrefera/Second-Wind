@@ -4,6 +4,7 @@ import { createFacilitatorConfig } from "@coinbase/x402";
 import { verifyMessage } from "viem";
 import { checkConfiguration } from "./catalog.js";
 import { resolveCapability } from "../../../src/lib/curation.js";
+import { enqueueObservation } from "./telemetry.js";
 import {
   CommerceError, NETWORK, ORIGIN, FACILITATOR, canonicalJson, sha256,
   randomToken, validToken, paymentConfig, requirementsFor, sameAddress,
@@ -52,6 +53,7 @@ function publicQuote(row) {
     content_hash: row.content_hash,
     content_hash_scope: snapshot.payload?.hash_scope || "execution-result",
     manifest_hash: snapshot.manifest_hash || null,
+    ...(snapshot.scope ? {scope:snapshot.scope} : {}),
     config: JSON.parse(row.config_json),
     accepts: [requirementsFor(row)],
     issued_at: row.created_at, expires_at: new Date(row.expires_at).toISOString(),
@@ -62,7 +64,11 @@ function publicQuote(row) {
   };
 }
 
-async function insertQuote(env, { sku, version, kind, amount, config, snapshot }) {
+async function insertQuote(env, { sku, version, kind, amount, config, snapshot, acceptanceKey, journey }) {
+  if (acceptanceKey) {
+    const previous=await database(env).prepare('SELECT quote_id FROM component_acceptances WHERE acceptance_key=?1').bind(acceptanceKey).first();
+    if(previous) return publicQuote(await readQuote(env,previous.quote_id,{allowExpired:true}));
+  }
   const rail = paymentConfig(env);
   const configJson = canonicalJson(config);
   const snapshotJson = canonicalJson(snapshot);
@@ -77,13 +83,23 @@ async function insertQuote(env, { sku, version, kind, amount, config, snapshot }
     content_hash: snapshot.payload?.content_hash || "", created_at: now(),
     expires_at: Date.now() + 5 * 60_000,
   };
-  await database(env).prepare(`INSERT INTO commerce_quotes
+  const statement = database(env).prepare(`INSERT INTO commerce_quotes
     (id,sku,version,kind,amount_usdc_micros,asset,network,pay_to,config_json,
      request_hash,snapshot_json,content_hash,created_at,expires_at)
     VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14)`)
     .bind(row.id,row.sku,row.version,row.kind,row.amount_usdc_micros,row.asset,
       row.network,row.pay_to,row.config_json,row.request_hash,row.snapshot_json,
-      row.content_hash,row.created_at,row.expires_at).run();
+      row.content_hash,row.created_at,row.expires_at);
+  if(acceptanceKey) {
+    try {
+      await database(env).batch([statement,database(env).prepare('INSERT INTO component_acceptances(acceptance_key,quote_id) VALUES (?1,?2)').bind(acceptanceKey,row.id)]);
+    } catch(error) {
+      const previous=await database(env).prepare('SELECT quote_id FROM component_acceptances WHERE acceptance_key=?1').bind(acceptanceKey).first();
+      if(previous) return publicQuote(await readQuote(env,previous.quote_id,{allowExpired:true}));
+      throw error;
+    }
+  } else await statement.run();
+  if(journey) await enqueueObservation(env,'journey.linked',{journey,payload:{quote_id:row.id}});
   return publicQuote(row);
 }
 
@@ -108,7 +124,7 @@ async function readPayload(env, payload) {
 }
 
 /** Pin a real catalog version and verify that its contents exist before payment. */
-export async function createQuote(env, sku, config = {}) {
+export async function createQuote(env, sku, config = {}, {journey} = {}) {
   const db = database(env);
   const check = await checkConfiguration(db, sku, config);
   if (!check.ok) throw new CommerceError("incomplete_configuration", 400,
@@ -117,6 +133,9 @@ export async function createQuote(env, sku, config = {}) {
     .bind(check.sku).first();
   if (!item) throw new CommerceError("unknown_product", 404);
   if (item.version !== check.version) throw new CommerceError("product_changed", 409);
+  const componentRelease=await db.prepare(`SELECT sku FROM component_releases WHERE sku=?1 AND version=?2
+    AND json_type(manifest_json,'$.components')='array' AND json_array_length(manifest_json,'$.components')>0`).bind(item.sku,item.version).first();
+  if(componentRelease) throw new CommerceError('component_selection_required',409,{trial:'/api/trials'});
   const resolved = await resolveCapability(env, item, ORIGIN);
   const object = await db.prepare(`SELECT * FROM payload_objects WHERE sku = ?1 AND version = ?2`)
     .bind(item.sku, item.version).first();
@@ -155,7 +174,7 @@ export async function createQuote(env, sku, config = {}) {
   return insertQuote(env, {
     sku: item.sku, version: item.version, kind: "product",
     amount: Math.round(Number(item.price_usd) * 1_000_000),
-    config: check.config, snapshot,
+    config: check.config, snapshot, journey,
   });
 }
 
@@ -175,10 +194,10 @@ export function executionInput(input) {
 }
 
 /** Preserve the existing metered sandbox as an explicit one-execution product. */
-export async function createExecutionQuote(env, input) {
+export async function createExecutionQuote(env, input, {journey} = {}) {
   const config = executionInput(input);
   return insertQuote(env, {
-    sku: "SW-EXEC", version: 1, kind: "execution", amount: "2000", config,
+    sku: "SW-EXEC", version: 1, kind: "execution", amount: "2000", config, journey,
     snapshot: { sku: "SW-EXEC", version: 1, invoke_kind: "codemode", allowedActions: ["execute", "deliver"] },
   });
 }
@@ -290,6 +309,7 @@ function pendingSettlement(row, recoveryToken, status = 409) {
 function receiptFor(row, quote, settled) {
   return {
     payment_id: row.payment_id, sku: quote.sku, version: quote.version,
+    ...(JSON.parse(quote.snapshot_json).scope ? {scope:JSON.parse(quote.snapshot_json).scope} : {}),
     protocol: "x402", network: quote.network, asset: quote.asset, pay_to: quote.pay_to,
     payer: row.payer, amount_usdc_micros: quote.amount_usdc_micros,
     tx_hash: settled.transaction, settled_at: now(),
@@ -411,7 +431,7 @@ async function settlePrepared(env, row, quote, input, recoveryToken, dependencie
     {paymentId:row.payment_id,recoveryToken,hint:"Payment settled; recovery will repair the purchase record. Do not re-sign."}); }
   try {
     const grant = await recoverGrant(env,row.payment_id,recoveryToken);
-    return {body:{...await deliverGrant(env,grant),recoveryToken,redelivery:false},paymentResponse:settlement};
+    return {body:{...await deliverGrant(env,grant,{journey:input.journey}),recoveryToken,redelivery:false},paymentResponse:settlement};
   } catch {
     throw new CommerceError("delivery_pending",503,{paymentId:row.payment_id,recoveryToken,
       charged:true,payment_settled:true,receipt,paymentResponse:settlement,
@@ -459,7 +479,9 @@ export async function purchase(env, input, dependencies = {}) {
     if (row.status !== "settled") throw new CommerceError("settlement_pending_recovery",409,
       {paymentId:row.payment_id,hint:"Do not re-sign or submit another payment for this purchase."});
     const grant = await recoverGrant(env,row.payment_id,input.recoveryToken);
-    return {body:{...await deliverGrant(env,grant),recoveryToken:input.recoveryToken,redelivery:true},
+    if(input.journey) await enqueueObservation(env,'recovery.purchase_replayed',
+      {journey:input.journey,payload:{quote_id:quote.id,payment_id:row.payment_id,sku:quote.sku}});
+    return {body:{...await deliverGrant(env,grant,{journey:input.journey}),recoveryToken:input.recoveryToken,redelivery:true},
       paymentResponse:grant.receipt.facilitator_response};
   }
   if (quote.expires_at < Date.now()) throw new CommerceError("quote_expired",409);
@@ -511,7 +533,7 @@ export async function purchase(env, input, dependencies = {}) {
       if (dependencies.execute) run = await dependencies.execute(request,{paymentId:row.payment_id,sku:quote.sku});
       else if (quote.kind === "execution") {
         const {executeCode} = await import("./execution.js");
-        run = await executeCode(env,request.code,request.language,null,null);
+        run = await executeCode(env,request.code,request.language,null,null,{journey:input.journey});
       } else {
         const {invokeAgent} = await import("../../../src/lib/bedrock.js");
         run = await invokeAgent(env,snapshot.invoke_key,request);
@@ -577,29 +599,49 @@ export async function recoverGrant(env,paymentId,recoveryToken) {
   return {
     paymentId,sku:quote.sku,payer:pay.payer,txHash:pay.tx_hash,network:pay.network,
     settledAt:pay.settled_at,receipt,payload:snapshot.payload,
+    ...(snapshot.scope ? {scope:snapshot.scope} : {}),
     allowedActions:quote.kind === "execution" ? ["execute","deliver"] : ["deliver"],
     recoveryToken,
   };
 }
 
-export async function deliverGrant(env,grant) {
+async function prepareGrantDelivery(env,grant) {
   const current = await recoverGrant(env,grant.paymentId,grant.recoveryToken);
   const row = await purchaseRow(database(env),current.paymentId);
   const quote = await readQuote(env,row.quote_id,{allowExpired:true});
   const snapshot = JSON.parse(quote.snapshot_json);
   const prepared = JSON.parse(row.prepared_json);
-  let artifact;
+  let artifact,files;
   if (snapshot.payload?.via === "r2") {
     const bytes = await readPayload(env,snapshot.payload);
     artifact = {encoding:"base64",data:Buffer.from(bytes).toString("base64"),
       mime_type:snapshot.payload.mime_type,size_bytes:bytes.length,
       content_hash:snapshot.payload.content_hash};
+    if (snapshot.payload.hash_scope==='selected-files-canonical-json') {
+      files=JSON.parse(new TextDecoder().decode(bytes));
+      await verifySelectedFiles(files,snapshot.scope);
+    }
   }
   const body = {...prepared,paymentId:current.paymentId,receipt:current.receipt,
-    ...(artifact ? {artifact} : {}),redelivery:true};
+    ...(artifact ? {artifact} : {}),...(files ? {files} : {}),redelivery:true};
+  const deliveryId=`del_${crypto.randomUUID()}`;
   await database(env).prepare("INSERT INTO deliveries (id,payment_id,sku,content_hash) VALUES (?1,?2,?3,?4)")
-    .bind(`del_${crypto.randomUUID()}`,current.paymentId,current.sku,body.content_hash).run();
-  return body;
+    .bind(deliveryId,current.paymentId,current.sku,body.content_hash).run();
+  return {body,deliveryId,quoteId:quote.id};
+}
+
+export async function deliverGrant(env,grant,{journey}={}) {
+  try {
+    const {body,deliveryId,quoteId}=await prepareGrantDelivery(env,grant);
+    if(journey) await enqueueObservation(env,'delivery.prepared',{journey,
+      observationId:deliveryId,payload:{quote_id:quoteId,payment_id:grant.paymentId,
+        sku:grant.sku,delivery_id:deliveryId}});
+    return body;
+  } catch(error) {
+    if(journey) await enqueueObservation(env,'delivery.failed',{journey,
+      payload:{payment_id:grant.paymentId,sku:grant.sku}});
+    throw error;
+  }
 }
 
 /** One paid execution buys one result. Repeated RPC calls recover that result. */
@@ -617,7 +659,7 @@ export async function executeGrantedInvocation(env,grant,input,_runner) {
 }
 
 /** Public challenge, private one-use wallet signature: never a transfer request. */
-export async function createRecoveryChallenge(env,paymentId) {
+export async function createRecoveryChallenge(env,paymentId,{journey}={}) {
   const db = database(env);
   const row = await purchaseRow(db,paymentId);
   if (!row) throw new CommerceError("unknown_purchase",404);
@@ -632,11 +674,13 @@ export async function createRecoveryChallenge(env,paymentId) {
     `Sign only to replace this purchase's recovery credential. This message authorizes no transfer or new charge.`;
   await db.prepare(`INSERT INTO commerce_recovery_challenges (id,payment_id,message,expires_at)
     VALUES (?1,?2,?3,?4)`).bind(challengeId,paymentId,message,expiresAt).run();
+  if(journey) await enqueueObservation(env,'recovery.challenge_created',
+    {journey,payload:{payment_id:paymentId,challenge_id:challengeId}});
   return {challengeId,message,payer:row.payer,expires_at:new Date(expiresAt).toISOString(),
     signature_type:"personal_sign",scope:"replace_purchase_recovery_token"};
 }
 
-export async function recoverWithWallet(env,paymentId,{challengeId,signature} = {}) {
+export async function recoverWithWallet(env,paymentId,{challengeId,signature} = {},{journey}={}) {
   if (typeof challengeId !== "string" || typeof signature !== "string" || signature.length > 20_000) {
     throw new CommerceError("invalid_recovery_proof",401);
   }
@@ -665,5 +709,54 @@ export async function recoverWithWallet(env,paymentId,{challengeId,signature} = 
       .bind(stamp,challengeId,paymentId,expiresCheck),
   ]);
   if (changes[0].meta.changes !== 1) throw new CommerceError("invalid_recovery_proof",401);
+  if(journey) await enqueueObservation(env,'recovery.credential_rotated',
+    {journey,payload:{payment_id:paymentId,challenge_id:challengeId}});
   return {paymentId,recoveryToken:token,recovery:`/api/purchases/${paymentId}/delivery`};
+}
+
+/** Internal final acceptance record. The buyer selected these exact files after trial.
+ * Existing x402 machinery signs/settles this amount; it cannot substitute full price.
+ */
+export async function createScopeQuote(env, {product,scope,files,configuration,acceptanceKey,journey}) {
+  await verifySelectedFiles(files,scope);
+  const content = canonicalJson(files);
+  const content_hash = await sha256(content);
+  const rail = paymentConfig(env);
+  if (scope.network !== rail.network || !sameAddress(scope.asset,rail.asset)) {
+    throw new CommerceError('scope_payment_rail_mismatch',409);
+  }
+  if (!env.PAYLOADS) throw new CommerceError('payload_store_not_configured',503);
+  const r2_key=`selections/${scope.release_hash}/${scope.scope_hash}/${content_hash}.json`;
+  let object=await env.PAYLOADS.get(r2_key);
+  if (!object) {
+    await env.PAYLOADS.put(r2_key,content,{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}});
+    object=await env.PAYLOADS.get(r2_key);
+  }
+  if (!object || await sha256(new Uint8Array(await object.arrayBuffer()))!==content_hash) {
+    throw new CommerceError('selection_payload_not_persisted',503);
+  }
+  const resolved = {ok:true,sku:product.sku,version:product.version,scope,
+    content_hash,content_hash_scope:'selected-files-canonical-json'};
+  const payload = {via:'r2',r2_bucket:'secondwind-payloads',r2_key,content_hash,
+    size_bytes:new TextEncoder().encode(content).byteLength,
+    mime_type:'application/json',hash_scope:'selected-files-canonical-json'};
+  return insertQuote(env,{sku:product.sku,version:product.version,kind:'product',
+    amount:scope.amount_atomic,config:configuration,acceptanceKey,journey,
+    snapshot:{sku:product.sku,slug:product.slug,version:product.version,
+      invoke_kind:'resolve',payload,resolved,scope,manifest_hash:scope.release_hash}});
+}
+
+async function verifySelectedFiles(files,scope) {
+  if (!Array.isArray(files) || !Array.isArray(scope?.files) || files.length!==scope.files.length) {
+    throw new CommerceError('selection_payload_mismatch',409);
+  }
+  const expected=new Map(scope.files.map(file=>[file.path,file]));
+  const seen=new Set();
+  for (const file of files) {
+    const spec=expected.get(file?.path);
+    if (!spec || seen.has(file.path) || typeof file.content!=='string'
+      || new TextEncoder().encode(file.content).byteLength!==spec.size_bytes
+      || await sha256(file.content)!==spec.sha256) throw new CommerceError('selection_payload_mismatch',409);
+    seen.add(file.path);
+  }
 }

@@ -1,0 +1,19 @@
+{
+  "sku": "SW-PT-0006",
+  "version": 2,
+  "result": "passed",
+  "tests": 7,
+  "language": "python",
+  "python_version": "3.12.14",
+  "dependencies": {
+    "aws-lambda-powertools": "3.36.0",
+    "boto3": "1.43.114",
+    "botocore": "1.43.114"
+  },
+  "source_hashes": {
+    "example.py": "0cd6a2d0e0951a22212f2732867bc291d7db7f97c5be677c27551496c310d946",
+    "requirements.txt": "0da11025a3dae01b790394146e4e5df2d211d635f688fcf7939de96b49104c87",
+    "scripts/example_test.py": "797ef02e3844e0d559f30771104d8237a112e1e95d6335fe2a2af9df7d076071"
+  },
+  "scope": "Actual Powertools decorator and DynamoDB persistence adapter with deterministic fake I/O. No AWS deployment, network calls, payment processor or external exactly-once guarantee."
+}

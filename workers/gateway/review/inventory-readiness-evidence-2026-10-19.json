@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "scope": "Read-only reassessment of the held 2026-10-19 inventory export. No production access this pass; no catalog, purchase or stored-hash mutation.",
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "source_snapshot_hash_scope": "SHA-256 of canonicalJson(inventory) UTF-8 bytes, using gateway contracts.js",
+  "historical_evidence_sha256": "75ff411bc7ff6c991d65760bcd1b7bf5883268a8864f3cec14c9c633b0661843",
+  "historical_eligibility_csv_sha256": "6c46edd6ea01507646bc660ca1598386ee467ca422c444d8bb427d6a3b209834",
+  "report_sha256": "e7d6f54cc26f4bd58f9abdb44329607cb80c0f685b05dd42e0cb06f9421f376f",
+  "report_hash_scope": "exact UTF-8 inventory-readiness-2026-10-19.csv bytes",
+  "generator_sha256": "17e90cf37c0f8606480e392f82489c81eb4b5c20215ea73b9c6cabb8739c117f",
+  "records": 157,
+  "statuses_in_snapshot": {
+    "draft": 155,
+    "live": 1,
+    "retired": 1
+  },
+  "legacy_kinds": {
+    "artifact": 51,
+    "guide": 38,
+    "tool": 68
+  },
+  "contract_reviews": {
+    "artifact-product": 51,
+    "bundle": 12,
+    "guidance-product": 38,
+    "unreviewed-tool-kind": 56
+  },
+  "rows_with_mime_type": 0,
+  "rows_with_input_schema": 5,
+  "rows_without_license_claim": 6,
+  "rows_without_provenance_claim": 5,
+  "legacy_hash_relations": {
+    "different_from_guidance": 151,
+    "guidance_hash_prefix": 1,
+    "missing": 5
+  },
+  "local_draft_candidate": {
+    "sku": "AWS-0568",
+    "status": "draft",
+    "content_hash": "c3fdcc168665fae9ebc3e0971541691f921827a95e1b13f230e1513c1edfbe77",
+    "note": "Separate original replacement candidate. Does not resolve the historical upstream attribution or imply publication approval."
+  },
+  "interpretation": "Missing means absent or unverified in the held export and historical audit, not proof that an uninspected external store or upstream file does not exist. Structured metadata keys are pointers, not artifact bytes. The legacy tool kind is not automatically classified as executable. Retired rows are not candidates for promotion."
+}

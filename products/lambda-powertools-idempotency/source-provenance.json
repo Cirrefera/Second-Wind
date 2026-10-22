@@ -1,0 +1,88 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_record_sha256": "23c130d184a2d4197c44a3c238853f9156cd260a5d0ed4132b2426d8ce369704",
+  "historical_guidance_sha256": "62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe",
+  "historical_guidance_size_bytes": 5333,
+  "historical_content_hash": "62a28a512af90491",
+  "historical_record_path": "history/v1-catalog-record.json",
+  "historical_guidance_path": "history/v1-guidance.txt",
+  "corrected_guidance_sha256": "80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+  "upstream_source_inspection": {
+    "schema_version": "1",
+    "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+    "files": [
+      {
+        "repository": "aws-powertools/powertools-lambda-python",
+        "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+        "path": "aws_lambda_powertools/utilities/idempotency/config.py",
+        "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/aws_lambda_powertools/utilities/idempotency/config.py",
+        "sha256": "87c52b68c6dec08dfd2a820887b16907f7d7b48bffbf45a3375511b6f2df7894",
+        "size_bytes": 2868,
+        "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+      },
+      {
+        "repository": "aws-powertools/powertools-lambda-python",
+        "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+        "path": "aws_lambda_powertools/utilities/idempotency/persistence/dynamodb.py",
+        "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/aws_lambda_powertools/utilities/idempotency/persistence/dynamodb.py",
+        "sha256": "db6396e3e1378e754c6450396c75c8d7c263b9a6680919cccc2134aafce4a50b",
+        "size_bytes": 13908,
+        "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+      },
+      {
+        "repository": "aws-powertools/powertools-lambda-python",
+        "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+        "path": "examples/idempotency/src/working_with_idempotency_key_required.py",
+        "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/examples/idempotency/src/working_with_idempotency_key_required.py",
+        "sha256": "c8038833d099ed2367c7871c40c3f4294b1cdb622801b4c973c2d476de656dea",
+        "size_bytes": 579,
+        "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+      },
+      {
+        "repository": "aws-powertools/powertools-lambda-python",
+        "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+        "path": "examples/idempotency/src/working_with_validation_payload.py",
+        "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/examples/idempotency/src/working_with_validation_payload.py",
+        "sha256": "cf68489cae37807602184bf118e7df9cf18ce6d053ad17873b83e80e696ee8a4",
+        "size_bytes": 1651,
+        "relationship": "Interface/source behavior consulted; no implementation file copied into paid guidance."
+      }
+    ],
+    "upstream_root_license": [
+      {
+        "path": "LICENSE",
+        "git_blob_sha": "fcdede53dc874fea9b000af8165310f6f5d0f5a3",
+        "sha256": "bcc1d2d9e0609b03d420c3dbecb438a7b89bfc53d54176ab56301ab1f96b4f0a",
+        "size_bytes": 951,
+        "url": "https://raw.githubusercontent.com/aws-powertools/powertools-lambda-python/0f64f280025fa139c6ee755ad7006d848bf84410/LICENSE",
+        "content": "MIT No Attribution\n\nCopyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+      }
+    ],
+    "scope": "Source/interface evidence, not a licensing approval or proof of external execution."
+  },
+  "original_source_hashes": {
+    "GUIDANCE.md": "80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+    "example.py": "0cd6a2d0e0951a22212f2732867bc291d7db7f97c5be677c27551496c310d946",
+    "requirements.txt": "0da11025a3dae01b790394146e4e5df2d211d635f688fcf7939de96b49104c87",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "GUIDANCE.md",
+        "example.py",
+        "requirements.txt",
+        "LICENSE"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "proposed original-source mapping awaiting trusted review"
+    },
+    {
+      "dependency": "aws-lambda-powertools==3.36.0",
+      "license": "MIT-0",
+      "source_revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
+      "status": "external dependency; no implementation vendored; upstream license inspected, not a product licensing attestation"
+    }
+  ]
+}

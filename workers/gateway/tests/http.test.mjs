@@ -28,6 +28,35 @@ function signedHeaders(payload, token) {
   };
 }
 
+test('HTTP and Capn Web preserve opaque journey correlation across discovery, payment and free recovery',async t=>{
+ const {call,item,db,app,env,calls}=fixture(t);
+ const catalog=await call('/api/tools');const journeyId=catalog.headers.get('X-Journey-Id');
+ assert.match(journeyId,/^jrn_[0-9a-f-]{36}$/);
+ const unsigned=await call(`/api/x402/${item.sku}`,{headers:{'X-Journey-Id':journeyId}});
+ const quote=await unsigned.json();
+ const payment=makePayment({...quote,amount_usdc_micros:'250000'});
+ const paidResponse=await call(`/api/x402/${item.sku}?quote_id=${quote.quoteId}`,{headers:{...signedHeaders(payment),'X-Journey-Id':journeyId}});
+ assert.equal(paidResponse.headers.get('X-Journey-Id'),journeyId);
+ const paid=await paidResponse.json();assert.ok(paid.paymentId);
+ const realFetch=globalThis.fetch;
+ globalThis.fetch=(url,init)=>app.fetch(new Request(url,{...init,headers:{...init?.headers,'X-Journey-Id':journeyId}}),env,{waitUntil(){}});
+ try {
+  const client=newHttpBatchRpcSession('https://secondwindai.com/capnp');
+  assert.equal((await client.getGrant(paid.paymentId,paid.recoveryToken).deliver()).guidance,item.guidance);
+ } finally {globalThis.fetch=realFetch;}
+ const events=db.sqlite.prepare('SELECT event_type,payload FROM business_event_outbox').all();
+ for(const type of ['discovery.described','journey.linked','delivery.prepared','recovery.grant_recovered']) {
+  const observed=events.filter(e=>e.event_type===type);assert.ok(observed.length,type);
+  assert.ok(observed.every(e=>JSON.parse(e.payload).journey_id===journeyId),type);
+ }
+ assert.equal(calls.settle.length,1);
+ const preflight=await call('/api/quotes',{method:'OPTIONS'});
+ assert.match(preflight.headers.get('Access-Control-Allow-Headers'),/X-Journey-Id/);
+ const replaced=await call('/health',{headers:{'X-Journey-Id':'buyer-private-free-text'}});
+ assert.notEqual(replaced.headers.get('X-Journey-Id'),'buyer-private-free-text');
+ assert.doesNotMatch(JSON.stringify(events),new RegExp(paid.recoveryToken));
+});
+
 test("all public discovery aliases serve one live catalog and exclude paid content", async (t) => {
   const { call, item, calls } = fixture(t);
   const paths = [

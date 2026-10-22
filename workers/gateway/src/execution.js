@@ -1,4 +1,4 @@
-import { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
+import {createJourneyContext} from './telemetry.js';
 
 const MAX_CODE_BYTES = 65_536;
 const MAX_RESULT_BYTES = 262_144;
@@ -39,14 +39,14 @@ export async function reportProgress(callback, stage, details, timeoutMs = 250) 
   }
 }
 
-function buildProviders(env, grant) {
-  const search = (query, limit) => searchCatalog(env.SW_DB, query, limit);
-  const describe = sku => describeProduct(env.SW_DB, sku);
-  const configure = (sku, config) => checkConfiguration(env.SW_DB, sku, config);
-  const quote = async (sku, config) => {
-    const { createQuote } = await import("./commerce.js");
-    return createQuote(env, sku, config);
-  };
+async function buildProviders(env, grant, context) {
+  const {ProductService}=await import('./product-service.js');
+  const journey=createJourneyContext({journey_id:context?.journey_id,transport:'sandbox'});
+  const service=new ProductService(env,journey);
+  const search = (query, limit) => service.search(query, limit);
+  const describe = sku => service.describe(sku);
+  const configure = (sku, config) => service.configure(sku, config);
+  const quote = (sku, config) => service.quote(sku, config);
   return {
     search, searchCatalog: search,
     describe, describeProduct: describe,
@@ -63,7 +63,7 @@ function buildProviders(env, grant) {
         throw Object.assign(new Error("delivery_not_entitled"), { status: 403 });
       }
       const { deliverGrant } = await import("./commerce.js");
-      return deliverGrant(env, grant);
+      return deliverGrant(env, grant,{journey:createJourneyContext({journey_id:journey.journey_id,transport:'sandbox'})});
     },
   };
 }
@@ -76,11 +76,15 @@ export async function executeCode(env, code, language, grant, onProgress, option
   await reportProgress(onProgress, "start", { language: input.language }, callbackTimeout);
   let outcome;
   try {
-    const settings = { loader: env.LOADER, timeout, globalOutbound: null, bindings: {} };
+    // Worker Loader infers raw-string module type only for .js/.py names.
+    // Preserve the product's .mjs paths and bytes with an explicit ES module type.
+    const modules=Object.fromEntries(Object.entries(options.modules || {}).map(([name,source])=>
+      [name,name.endsWith('.mjs')&&typeof source==='string'?{js:source}:source]));
+    const settings = { loader: env.LOADER, timeout, globalOutbound: null, bindings: {}, modules };
     const executor = options.executorFactory
       ? await options.executorFactory(settings)
       : new (await import("@cloudflare/codemode")).DynamicWorkerExecutor(settings);
-    const output = await executor.execute(input.code, buildProviders(env, grant), {});
+    const output = await executor.execute(input.code, options.providers || await buildProviders(env, grant, options.journey), {});
     if (!output || typeof output !== "object") {
       throw new Error("invalid_executor_result");
     }

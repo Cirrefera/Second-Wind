@@ -1,0 +1,58 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0568",
+  "sku": "AWS-0568",
+  "slug": "agent-state-dynamodb-manifest",
+  "version": 2,
+  "release_ref": "sha256:57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10",
+  "service": "dynamodb",
+  "product_kind": "artifact-product",
+  "route_summary": "Prepare DynamoDB API requests for agent session state, optional status index, item expiration, point in time recovery and change streams.",
+  "supported_boundary": "Offline request planning for a new DynamoDB agent/session table using string keys, on-demand billing and AWS managed KMS, with separately selected status index, TTL, recovery and streams. No AWS execution, response matcher, existing-table migration, IAM provisioning, global tables, customer-managed KMS or immediate TTL deletion.",
+  "language_policy": "explicit",
+  "aliases": [
+    "agent-state-table"
+  ],
+  "tags": [
+    "dynamodb",
+    "agent-state",
+    "session-state",
+    "request-planning"
+  ],
+  "taxonomy_ids": [
+    "aws.dynamodb"
+  ],
+  "problem_family_ids": [
+    "agent-state-storage"
+  ],
+  "operations": [
+    "prepare-api-plan"
+  ],
+  "environments": [
+    "aws-dynamodb-api"
+  ],
+  "desired_outcomes": [
+    "agent-session-state"
+  ],
+  "input_kinds": [
+    "table-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript",
+    "python"
+  ],
+  "runtimes": [
+    "nodejs24",
+    "python3.12"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "existing-table-migration",
+    "global-tables",
+    "iam-role-creation",
+    "customer-managed-kms",
+    "aws-deployment",
+    "immediate-ttl-expiration"
+  ]
+}

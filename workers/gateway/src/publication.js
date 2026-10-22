@@ -1,10 +1,14 @@
 import {canonicalJson,sha256} from './contracts.js';
+import {componentMenu} from './scope.js';
 
-export const VALIDATOR_VERSION = '2026-10-19.2';
+export const VALIDATOR_VERSION = '2026-10-19.5';
 export const SERVICE_ALIASES = Object.freeze({'api-gateway':'apigateway','step-functions':'states'});
 export const canonicalService = value => SERVICE_ALIASES[value] || value;
 const kinds = new Set(['guidance-product','artifact-product','executable-product','bundle']);
 const digestPattern = /^[a-f0-9]{64}$/;
+const isText = value => typeof value === 'string' && value.trim().length > 0;
+const isContract = value => value !== null && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length > 0;
+const isTextList = value => Array.isArray(value) && value.length > 0 && value.every(isText);
 
 /** Evidence is supplied by release preparation; absence always blocks publication.
  * A report does not itself authorize promotion. No catalog or legacy hash writes.
@@ -12,6 +16,9 @@ const digestPattern = /^[a-f0-9]{64}$/;
 export async function validatePublication(item, manifest, evidence = {}) {
   const blockers = [];
   const require = (condition, reason) => { if (!condition) blockers.push(reason); };
+  const isBundle = typeof item.sku === 'string' && item.sku.startsWith('BUN-');
+  require(isText(item.sku),'sku_missing');
+  require(Number.isSafeInteger(item.version) && item.version > 0,'version_invalid');
   require(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.slug || ''),'slug_invalid');
   require(typeof item.name === 'string' && item.name.trim().length > 0,'name_missing');
   require(typeof item.summary === 'string' && item.summary.trim().length > 0,'summary_missing');
@@ -25,18 +32,38 @@ export async function validatePublication(item, manifest, evidence = {}) {
     require(manifest.sku === item.sku && manifest.slug === item.slug && manifest.version === item.version,'manifest_identity_mismatch');
     require(kinds.has(manifest.product_kind),'product_kind_unreviewed');
     require(manifest.service === canonicalService(item.service) && evidence.service_verified === true,'canonical_service_unverified');
-    require(Boolean(manifest.release_ref),'immutable_release_missing');
+    require(isText(manifest.release_ref),'immutable_release_missing');
     require(digestPattern.test(manifest.content_hash || ''),'release_hash_invalid');
-    require(Boolean(manifest.mime_type),'mime_type_missing');
-    require(Boolean(manifest.delivery_contract) && Boolean(manifest.validation_contract),'contracts_missing');
+    require(isText(manifest.mime_type),'mime_type_missing');
+    require(isContract(manifest.delivery_contract) && isContract(manifest.validation_contract),'contracts_missing');
     require(evidence.contract_review_hash === await sha256(canonicalJson(manifest)),'advertised_contract_unreviewed');
     // Original contribution is a reviewed product claim, not an automatic plagiarism verdict.
     require(typeof manifest.original_contribution === 'string' && manifest.original_contribution.trim().length > 0,'original_contribution_missing');
     require(evidence.product_review_hash === await sha256(canonicalJson(manifest)),'product_contribution_unreviewed');
-    require(Boolean(manifest.origin) && Boolean(manifest.license) && evidence.license_verified === true,'license_or_origin_unverified');
+    require(isText(manifest.origin) && isText(manifest.license) && evidence.license_verified === true,'license_or_origin_unverified');
     require(evidence.purchase_url_verified === true,'purchase_url_unverified');
     require(evidence.pre_settlement_ready === true,'pre_settlement_preparation_unverified');
+    if (manifest.components?.length && manifest.pricing?.mode !== 'proportional-components') require(false,'commercial_component_allocation_missing');
+    if (manifest.pricing?.mode === 'proportional-components') {
+      try {
+        const menu = await componentMenu(manifest);
+        require(manifest.trial_adapter === 'javascript-isolate','trial_adapter_unavailable');
+        for (const component of manifest.components) for (const file of component.files) {
+          require(typeof file.content === 'string','component_file_bytes_missing');
+          if (typeof file.content === 'string') {
+            require(await sha256(file.content) === file.sha256,'component_file_hash_mismatch');
+            require(new TextEncoder().encode(file.content).byteLength === file.size_bytes,'component_file_size_mismatch');
+          }
+        }
+        require(menu.max_amount_atomic === String(Math.round(item.price_usd * 1_000_000)), 'listed_maximum_mismatch');
+        require(evidence.component_payloads_verified_hash === await sha256(canonicalJson(manifest)), 'component_payloads_unverified');
+        require(evidence.sandbox_trial_verified_hash === await sha256(canonicalJson(manifest)), 'component_trial_unverified');
+      } catch (error) { require(false, error.code || 'component_release_invalid'); }
+    }
     const kind = manifest.product_kind;
+    require(!(item.kind === 'artifact' && kind !== 'artifact-product') &&
+      !(item.kind === 'guide' && kind !== 'guidance-product') &&
+      !(isBundle && kind !== 'bundle'),'advertised_kind_mismatch');
     if (kind === 'guidance-product') {
       require(Boolean(item.guidance?.trim()),'guidance_missing');
       require(manifest.hash_scope === 'guidance-utf8' && manifest.content_hash === guidance_hash,'guidance_hash_mismatch');
@@ -53,18 +80,18 @@ export async function validatePublication(item, manifest, evidence = {}) {
     }
     if (kind === 'bundle') require(Array.isArray(manifest.members) && manifest.members.length > 0 && evidence.members_verified === true,'bundle_members_unverified');
     if (manifest.language_policy?.mode === 'configured') {
-      require(Array.isArray(manifest.language_policy.adapters) && manifest.language_policy.adapters.length > 0,'language_adapters_missing');
+      require(isTextList(manifest.language_policy.adapters),'language_adapters_missing');
       require(evidence.language_adapters_verified === true,'language_adapters_unverified');
       require(manifest.language_policy.explicit_selection === true,'explicit_language_selection_missing');
     } else require(manifest.language_policy?.mode === 'not-applicable','language_policy_missing');
-    require(Array.isArray(manifest.tags) && manifest.tags.length > 0 && Boolean(manifest.supported_boundary),'routing_contract_missing');
+    require(isTextList(manifest.tags) && isText(manifest.supported_boundary),'routing_contract_missing');
   }
   // Legacy fields alone never constitute a release or a licensing verification.
   if (!item.license_spdx) blockers.push('legacy_license_missing');
   if (!item.provenance) blockers.push('legacy_provenance_missing');
   if (!item.mime_type && !manifest?.mime_type) blockers.push('mime_type_missing');
   if (item.kind === 'artifact' && !evidence.payload_verified_hash) blockers.push('advertised_artifact_missing');
-  if (item.sku.startsWith('BUN-') && !evidence.members_verified) blockers.push('bundle_members_unverified');
+  if (isBundle && !evidence.members_verified) blockers.push('bundle_members_unverified');
   return {sku:item.sku,slug:item.slug,status:item.status,validator_version:VALIDATOR_VERSION,
     eligibility:blockers.length?'blocked':'eligible',blockers:[...new Set(blockers)],
     guidance_hash,legacy_hash:item.content_hash,legacy_hash_status,

@@ -7,6 +7,8 @@ const rows=[];
 for(const item of items){
  const r=await validatePublication(item,item.manifest,item.evidence);
  rows.push({...r,advertised_kind:item.kind,canonical_service:canonicalService(item.service),
+  completion_state:r.eligibility==='eligible'?item.manifest.product_kind:'invalid-or-incomplete',
+  promised_kind:item.manifest?.product_kind || (item.sku.startsWith('BUN-')?'bundle':item.kind==='artifact'?'artifact-product':item.kind==='guide'?'guidance-product':'requires-contract-review'),
   actual_fulfillment:item.invoke_kind==='resolve'?'inline guidance':'requires payload/execution inspection',
   guidance_bytes:Buffer.byteLength(item.guidance||''),blockers:r.blockers.join(';')});
 }
