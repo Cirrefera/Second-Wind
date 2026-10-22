@@ -21,12 +21,21 @@ from the live D1 rows (60-second isolate cache); the CDP facilitator authenticat
 `createAuthHeaders` (CDP JWT). Hand-rolled payment code no longer serves payments — it survives
 only inside the discovery-document generators pending their port.
 
-**Product model: a curated, opinionated service — not a repository.** The deliverable is the
-**resolved, invocable capability plus the judgment around it**: guidance (the editorial voice),
-the composition graph (how items fit together, each edge carrying its one-line WHY), and
-invocation instructions. The raw files are an implementation detail. x402 gates **invocation and
-guidance**, never bulk download — if the paid response were a zip, this would be a paywalled
-GitHub, which is the failure mode this section exists to prevent.
+**Product model: original assembled payloads built from publicly sourced material.** Second Wind
+selects, combines, structures, and adapts public AWS information, code, and operational patterns
+into useful products for specific tasks. The original content is the resulting synthesis and
+composition, including the guidance, integration, configuration, examples, or validation added
+to make the inputs work together. The buyer purchases the exact versioned deliverable and its
+stated functionality. Its contract determines whether that deliverable is guidance, files, an
+invocable capability, or a combination.
+
+Each release must describe this synthesis in `original_contribution`. Product review assesses the
+actual contribution and its fit to the advertised task; provenance and license review separately
+record the inputs and required attribution. Public source material is compatible with original
+composition. Source availability, originality of the assembled product, and distribution of the
+finished payload are separate properties. The publication contract requires the existing
+contribution, product review, contract, payload-hash, and provenance/license checks. Integration
+of the complete trusted activation path remains tracked in FIX-08.
 
 Storage serves that model: **D1 holds the curated index and the relationship graph
 (`items` + `edges`, migrations/0001_curation.sql) — the graph is the moat, first-class data, not
@@ -131,9 +140,11 @@ This table is updated in place as steps complete.
    the curation tables is the act of publishing; live changes are deliberate writes with a
    version bump and new content hash. What is curated live is what is for sale — nothing else.
 4. **No production store writes (D1, KV, or R2) without Mike's explicit approval.** None.
-8. **Curation never leaks free.** Free surfaces carry stubs only — no guidance, no graph. The
-   opinionated, resolved, framed path is the default; raw artifact access is secondary and
-   deliberate. The self-test enforces this structurally.
+8. **Discovery describes the product; the purchase delivers the agreed payload.** Free catalog
+   and discovery surfaces carry summaries and metadata rather than the complete paid guidance or
+   assembled payload. Public upstream inputs remain valid source material. The original
+   contribution is the useful selection, synthesis, arrangement, and adaptation described in
+   the product's release contract. Existing discovery and delivery checks preserve that boundary.
 9. **Names are symptoms, not taxonomy.** The buyer is a stuck agent scanning a list; it does not
    care which AWS product is involved. An item's `name` is the failure in the agent's own words,
    4–5 plain words ("deploy refuses to update export", "my lambda loops forever"); the `slug`

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createFixtureDb,insertItem} from './helpers/d1.mjs';
 import {canonicalJson,sha256} from '../src/contracts.js';
 import {resolveIntent,validateRoutingManifest} from '../src/routing.js';
+import {searchCatalog} from '../src/catalog.js';
 import {ProductService} from '../src/product-service.js';
 import {createApp} from '../src/index.js';
 import {RpcTarget,newHttpBatchRpcSession,newMessagePortRpcSession} from 'capnweb';
@@ -23,6 +24,63 @@ async function fixture(t,patch={}){
  await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)').bind(item.sku,item.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
  return {env:{SW_DB:db},item,m,db};
 }
+test('unregistered live releases retain literal legacy string search and empty browse without model calls',async t=>{
+ const db=createFixtureDb();t.after(()=>db.close());
+ insertItem(db,{service:'lambda',name:'Lambda idempotency'});
+ insertItem(db,{sku:'SECOND',slug:'second',service:'lambda',name:'Second Lambda guide'});
+ insertItem(db,{sku:'DRAFT',slug:'draft',service:'lambda',status:'draft'});
+ let calls=0;const env={SW_DB:db,CLEF_ROUTING_ENABLED:'true',AI:{run:async()=>{calls++;throw new Error('must not run');}}};
+ for(const query of ['lambda','','  ','%','_','no such product']) {
+  const result=await resolveIntent(env,query,1),expected=await searchCatalog(db,query,1);
+  assert.deepEqual(result.matches,expected);
+  assert.equal(result.matched,expected.length>0);
+  assert.equal(result.status,expected.length?'matches':'no_match');
+  assert.equal(result.routing_ready,false);
+  assert.equal(result.compatibility_scope,'legacy live catalog metadata; structured compatibility not evaluated');
+  assert.equal(result.snapshot_ref,null);assert.deepEqual(result.clarifications,[]);
+  assert.ok(result.matches.every(product=>!Object.hasOwn(product,'routing')&&!Object.hasOwn(product,'compatibility')));
+ }
+ await assert.rejects(resolveIntent(env,'x'.repeat(201)),error=>error.code==='invalid_search_query');
+ await assert.rejects(resolveIntent(env,'lambda',51),error=>error.code==='invalid_search_limit');
+ assert.equal(calls,0);
+ assert.equal(db.sqlite.prepare('SELECT COUNT(*) AS count FROM product_routing_manifests').get().count,0);
+});
+test('structured intent reports unavailable routing instead of guessing constraints for an unregistered live release',async t=>{
+ const db=createFixtureDb();t.after(()=>db.close());const item=insertItem(db,{service:'lambda'});
+ const env={SW_DB:db};
+ for(const intent of [{sku:item.sku},{goal:'lambda'},{sku:item.sku,target_language:'python',target_runtime:'nodejs22'}]) {
+  await assert.rejects(resolveIntent(env,intent),error=>error.code==='routing_not_configured'&&error.status===503);
+  await assert.rejects(new ProductService(env).searchIntent(intent),error=>error.code==='routing_not_configured'&&error.status===503);
+ }
+ const response=await createApp().fetch(new Request('https://secondwindai.com/api/resolve',{
+  method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent:{sku:item.sku,target_language:'python'}})}),env,{waitUntil(){}});
+ assert.equal(response.status,503);assert.equal((await response.json()).error,'routing_not_configured');
+});
+test('HTTP and capability string search preserve legacy matching while observations omit private query text',async t=>{
+ const db=createFixtureDb();t.after(()=>db.close());const item=insertItem(db,{service:'lambda'}),env={SW_DB:db};
+ for(const body of [{query:'lambda'},{intent:'lambda'},{}]) {
+  const response=await createApp().fetch(new Request('https://secondwindai.com/api/resolve',{
+   method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),env,{waitUntil(){}});
+  assert.equal(response.status,200);const result=await response.json();
+  assert.equal(result.status,'matches');assert.equal(result.routing_ready,false);
+  assert.deepEqual(result.matches.map(product=>product.sku),[item.sku]);
+ }
+ const rpc=await new ProductService(env).searchIntent('lambda');
+ assert.equal(rpc.status,'matches');assert.equal(rpc.routing_ready,false);
+ assert.equal((await rpc.candidates[0].product.info()).sku,item.sku);
+ const journey=createJourneyContext();
+ await resolveIntent(env,'private-buyer-query-secret',10,{journey});
+ const rows=db.sqlite.prepare("SELECT event_type,payload FROM business_event_outbox WHERE event_type LIKE 'discovery.%' ORDER BY rowid").all();
+ const privateOperation=rows.filter(row=>JSON.parse(row.payload).journey_id===journey.journey_id);
+ assert.deepEqual(privateOperation.map(row=>row.event_type),['discovery.searched','discovery.resolved']);
+ assert.equal(JSON.parse(privateOperation[1].payload).resolution_status,'no_match');
+ assert.ok(!JSON.stringify(rows).includes('private-buyer-query-secret'));
+});
+test('a genuinely empty live catalog can report no match without routing registration',async t=>{
+ const db=createFixtureDb();t.after(()=>db.close());const env={SW_DB:db};
+ assert.equal((await resolveIntent(env,{sku:'missing'})).status,'no_match');
+ assert.equal((await resolveIntent(env,'')).status,'no_match');
+});
 test('shared resolver observations record only reviewed public dimensions, including no-match operations',async t=>{
  const {env,db}=await fixture(t),journey=createJourneyContext({transport:'rpc'});
  const intent={goal:'quantum gardening private-payment-token',target_language:'javascript',
@@ -416,7 +474,9 @@ test('manifest identities are immutable and unrelated goals return no match',asy
  assert.equal((await resolveIntent(env,{goal:'quantum gardening',target_language:'javascript'})).status,'no_match');
  assert.throws(()=>db.sqlite.exec("UPDATE product_routing_manifests SET reviewed_by='changed'"),/routing_release_immutable/);
  db.sqlite.prepare('UPDATE items SET version=version+1 WHERE sku=?').run(item.sku);
- assert.equal((await resolveIntent(env,{sku:item.sku})).status,'no_match');
+ await assert.rejects(resolveIntent(env,{sku:item.sku}),error=>error.code==='routing_not_configured'&&error.status===503);
+ const legacy=await resolveIntent(env,item.sku);
+ assert.equal(legacy.routing_ready,false);assert.equal(legacy.matches[0].version,item.version+1);
 });
 test('HTTP and capability search use the same compatibility results; Clef cannot rescue a mismatch',async t=>{
  const {env,item}=await fixture(t);let calls=0;

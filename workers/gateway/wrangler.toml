@@ -5,8 +5,10 @@ compatibility_date = "2026-10-18"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
-# The only application Worker. Existing payment secrets remain configured on it:
-# X402_PAY_TO and CDP_FACILITATOR_KEY. Deployments must never recreate or print them.
+# The only application Worker. Required encrypted payment configuration:
+# X402_PAY_TO, X402_EXPECTED_PAY_TO and CDP_FACILITATOR_KEY.
+# The expected recipient must come from an independent owner verification.
+# Deployments must never recreate or print their values.
 
 [[worker_loaders]]
 binding = "LOADER"
@@ -29,7 +31,7 @@ X402_NETWORK = "eip155:8453"
 CANONICAL_ORIGIN = "https://secondwindai.com"
 
 [secrets]
-required = ["X402_PAY_TO", "CDP_FACILITATOR_KEY"]
+required = ["X402_PAY_TO", "X402_EXPECTED_PAY_TO", "CDP_FACILITATOR_KEY"]
 
 [version_metadata]
 binding = "CF_VERSION_METADATA"

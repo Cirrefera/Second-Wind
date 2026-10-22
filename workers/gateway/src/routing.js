@@ -1,6 +1,6 @@
 import {canonicalJson,sha256,CommerceError} from './contracts.js';
 import {canonicalService} from './publication.js';
-import {listCatalog} from './catalog.js';
+import {listCatalog,searchCatalog} from './catalog.js';
 import {readCandidateAlignment} from './clef.js';
 import {createJourneyContext,publicIntentDimensions,enqueueObservation} from './telemetry.js';
 
@@ -68,7 +68,9 @@ export function evaluateCompatibility(manifest,input) {
 }
 
 export async function resolveIntent(env,input,limit=10,{journey}={}) {
-  const intent=intentValue(input);
+  // String search predates routing manifests and also permits an empty browse.
+  // Defer its structured validation until a reviewed routing path is available.
+  let intent=typeof input==='string'?null:intentValue(input);
   if(!Number.isInteger(limit)||limit<1||limit>50) fail('invalid_search_limit');
   const products=await listCatalog(env.SW_DB),bySku=new Map(products.map(p=>[p.sku,p]));
   const {results}=await env.SW_DB.prepare('SELECT sku,version,manifest_json,manifest_hash FROM product_routing_manifests ORDER BY sku,version').all();
@@ -82,6 +84,26 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
       throw new CommerceError('routing_manifest_invalid',503);
     manifests.push({m,product,hash:row.manifest_hash});
   }
+  if(!manifests.length) {
+    if(typeof input==='string') {
+      const matches=await searchCatalog(env.SW_DB,input,limit);
+      const result={matched:matches.length>0,status:matches.length?'matches':'no_match',matches,
+        routing_ready:false,compatibility_scope:'legacy live catalog metadata; structured compatibility not evaluated',
+        snapshot_ref:null,clarifications:[]};
+      if(journey) {
+        const observation=createJourneyContext({journey_id:journey.journey_id,transport:journey.transport});
+        await enqueueObservation(env,'discovery.searched',{journey:observation});
+        await enqueueObservation(env,'discovery.resolved',{journey:observation,payload:{
+          candidate_product_ids:matches.map(product=>product.sku),result_count:matches.length,
+          resolution_status:matches.length===1?'match':matches.length?'multiple_candidates':'no_match'}});
+      }
+      return result;
+    }
+    // An empty manifest table cannot establish incompatibility with live products.
+    if(products.length) throw new CommerceError('routing_not_configured',503,
+      {reason:'version_matched_routing_manifest_missing'});
+  }
+  intent ||= intentValue(input);
   const snapshot_ref='sha256:'+await sha256(canonicalJson(manifests.map(x=>[x.m.sku,x.m.version,x.hash])));
   const observation=journey?createJourneyContext({journey_id:journey.journey_id,transport:journey.transport}):undefined;
   const public_intent=observation?publicIntentDimensions(intent,manifests.map(entry=>entry.m)):undefined;

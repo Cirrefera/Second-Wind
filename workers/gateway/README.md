@@ -14,7 +14,60 @@ Pages runs the small advanced-mode entry in `src/worker.js`. It transparently fo
 | `LOADER` | Fresh Code Mode isolates; no application secrets or outbound fetch granted |
 | `CF_VERSION_METADATA` | Actual Worker version ID, tag and creation timestamp |
 
-The existing encrypted `X402_PAY_TO` and `CDP_FACILITATOR_KEY` secrets stay on the gateway. Wrangler validates their presence and retains them on deployment. Do not re-create them or put their values in source. Public payment configuration is USDC on Base (`eip155:8453`) through CDP. Pages needs only its gateway service binding.
+The encrypted `X402_PAY_TO`, `X402_EXPECTED_PAY_TO`, and `CDP_FACILITATOR_KEY` secrets belong on the gateway. Wrangler validates their presence and retains them on deployment. Do not re-create existing secrets or put their values in source. Public payment configuration is USDC on Base (`eip155:8453`) through CDP. Pages needs only its gateway service binding.
+
+### Payment configuration release prerequisite (FIX-01)
+
+`X402_EXPECTED_PAY_TO` must be supplied from an independently reviewed merchant
+recipient for **Base mainnet**, not copied from the current Worker value or inferred
+from a test fixture, branch name, or historical Sepolia test. The same reviewed
+input must be configured as the GitHub Actions secret `X402_EXPECTED_PAY_TO` for
+release acceptance. Never store a wallet private key in either recipient setting.
+
+The application requires a valid, non-burn recipient matching that assertion
+before it creates new quotes or publishes payable discovery requirements.
+Existing paid versions, receipts, and authenticated delivery recovery remain
+available independently of this configuration gate. Matching configuration is an
+operator assertion; it does not independently prove wallet control or a successful
+funded purchase.
+
+`/api/proof` and x402 discovery return `payment_recipient_configured` and
+`payment_recipient_verified`, plus a value-free `payment_recipient_status` and
+`payment_configuration_error`. Statuses distinguish missing, invalid, burn,
+conflicting, unverified, invalid-verification, mismatched, verified, and unsupported
+network configuration. Recipient values and credentials are excluded from these
+diagnostics; usable discovery requirements include only the intended recipient.
+
+The October 22 read-only check found `X402_PAY_TO` present as an encrypted binding,
+but `X402_EXPECTED_PAY_TO` absent. The live validator reported the recipient as
+unconfigured. The current encrypted recipient value is inaccessible, so its exact
+validation defect remains unknown; do not claim it was corrected or invent an
+address to make readiness pass.
+
+Before an authorized release, independently confirm the merchant input, configure
+the GitHub acceptance secret, and stage the approved Worker correction. Cloudflare
+documents `wrangler versions secret bulk` as a way to prepare a version without
+deploying it; ordinary `wrangler secret put` and `wrangler secret bulk` deploy
+immediately. With owner-approved values in a protected, untracked JSON file, the
+staging command from the repository root is:
+
+```sh
+./workers/gateway/node_modules/.bin/wrangler versions secret bulk "$SECONDWIND_PAYMENT_CONFIG_FILE" --config workers/gateway/wrangler.toml
+```
+
+That file contains `X402_EXPECTED_PAY_TO` and includes `X402_PAY_TO` only when its
+correction is specifically approved. It must not contain null deletions or
+unrelated credentials. Record the returned version ID and keep that version as
+the latest uploaded version until the GitHub release; secret inheritance uses the
+most recently uploaded version, even if it has not been deployed. Recheck the
+inheritance source after any intervening upload. Staging is not production
+acceptance. The approved GitHub release must pass `node scripts/release-acceptance.mjs
+--check-inputs` before mutations and `npm run accept:release` after both deployments.
+Production configuration, merge, and deployment remain separate authorized steps.
+
+References: [Cloudflare Worker secrets](https://developers.cloudflare.com/workers/configuration/secrets/)
+[Wrangler version secret commands](https://developers.cloudflare.com/workers/wrangler/commands/workers/#versions-secret-bulk),
+and [secret inheritance behavior](https://developers.cloudflare.com/workers/observability/errors/#inherit-binding-errors-10057).
 
 ## Public interfaces
 
@@ -95,7 +148,7 @@ produce a quote. Product changes invalidate selected capabilities. Payment
 still requires a separately authorized x402 signature.
 
 Set `X402_EXPECTED_PAY_TO` independently to the verified merchant recipient.
-A mismatch fails payment configuration. `/api/proof` separately exposes
+A missing or mismatched assertion fails new quote/payment configuration. `/api/proof` separately exposes
 `payment_recipient_configured` and `payment_recipient_verified`; without the
 expected-recipient assertion it reports degraded readiness. This is a
 configuration assertion, not proof of wallet control or a funded canary.
