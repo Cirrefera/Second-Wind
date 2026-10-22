@@ -1,10 +1,25 @@
-# FIX-05 — Public source and paid-content boundary
+# FIX-05 — Original assembled payloads and source provenance
 
-## Outcome
+## Owner-defined product policy
 
-**Public exposure is confirmed against the current advertised live release. The remaining blocker is the owner's commercial policy choice.** Recommended policy: charge for the prepared, versioned product and its supported delivery/service while accurately disclosing that source or deliverable content can also be public. This is a proposal, not an adopted policy.
+**Second Wind payloads combine publicly sourced information into an original, useful assembled product. The original content is the selection, synthesis, structure, adaptation, and integration that make the inputs work together for a specific task.**
 
-Recommended tracker status: **BLOCKED — evidence and decision preparation complete; owner policy selection and subsequent enforcement pending.** No customer-facing policy, source file, history, catalog row, price, purchased version, repository visibility, or production setting was changed during this review.
+The owner clarified this on October 22, 2026. This is the adopted product definition. It is not a pending choice between public-source services and private original content. The earlier A/B framing was incorrect and is superseded by this clarification.
+
+The buyer purchases the original assembled deliverable and the functionality in its contract. Public source inputs, the original composition of those inputs, and the distribution of finished payload bytes are separate properties. None of those properties by itself establishes the other two.
+
+Status: **READY_FOR_RELEASE** for this bounded policy/documentation correction. README, SPEC, publication-review guidance, tracker, and handoff now use the owner's definition. Existing publication checks already require an original-contribution claim, product review, and independent source/license evidence. No runtime or schema change is needed to express this policy. Merging the documentation remains pending with PR #7; individual product approval and trusted review verification remain in their existing backlog items.
+
+## Product and review requirements
+
+For each release, use the existing manifest and review path to record:
+
+1. **Source inputs:** the information, code, patterns, or other material used, with enough provenance to identify the relevant source and version. Preserve applicable source attribution and license notices.
+2. **Original contribution:** describe the concrete selection, synthesis, arrangement, adaptation, integration, examples, or validation that turn the inputs into the delivered product. State what this combination enables for the buyer's task.
+3. **Delivered result:** the exact product scope, supported language/runtime where applicable, files or capabilities, validation evidence, and immutable content hash promised by the release contract.
+4. **Product review:** assess whether the actual assembled payload supports that contribution and promise. A nonempty description or a matching hash is structural evidence; the existing review must assess the substance.
+
+The existing `original_contribution` field is the place to describe the synthesis. This clarification does not require a new privacy flag, a minimum number of source repositories, an originality score, or a different architecture. Publicly sourced inputs are expected material for this process.
 
 ## Exact evidence
 
@@ -36,61 +51,40 @@ The historical catalog record preserves an older truncated content hash (`62a28a
 
 **What this proves:** the exact bytes identified by the live product's public hash and byte count are currently downloadable from public GitHub without payment. **What this does not prove:** a newly funded purchase would deliver those bytes correctly. The paid path was not invoked, and funded delivery remains outside this review.
 
-The repository also contains the complete prospective v2 deliverable: `products/lambda-powertools-idempotency/GUIDANCE.md` and the inline payload in `release-input.json`. The candidate identifies 9,572 UTF-8 bytes with SHA-256 `80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf`. Its manifest remains draft and names pending trusted guidance/contract, licensing/provenance, and publication reviews. A future private-payload policy therefore cannot truthfully treat this already-public candidate as never published.
+The repository also contains the complete prospective v2 deliverable: `products/lambda-powertools-idempotency/GUIDANCE.md` and the inline payload in `release-input.json`. The candidate identifies 9,572 UTF-8 bytes with SHA-256 `80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf`. Its manifest remains draft and names pending trusted guidance/contract, licensing/provenance, and publication reviews. These observations describe where the assembled bytes are available. They do not determine whether the product has an original contribution, and they do not change the owner-defined product model.
 
 - [Draft v2 guidance](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/products/lambda-powertools-idempotency/GUIDANCE.md)
 - [Draft v2 release input containing inline payload/source files](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/products/lambda-powertools-idempotency/release-input.json)
 - [Draft v2 candidate and explicit blockers](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/products/lambda-powertools-idempotency/release-candidate.json)
 
-## Present claims and publication behavior
+## Existing publication support
 
-At main `a853b9e…`, `README.md` describes small AWS tools comprising a source coordinate and operational knowledge; its provenance section says Second Wind describes/links rather than redistributing. `SPEC.md` describes paid guidance and invocable capabilities, limits free surfaces to stubs, and contains a standing rule that curation does not leak free. Those claims do not clearly distinguish **free service endpoints** from **public source repositories**. Neither document explicitly promises exclusive ownership of the delivered content, but their paid/free framing leaves the actual publication policy unclear. Broader architecture, pricing, and redistribution drift remains FIX-19.
+The current gateway validator already separates original contribution from source provenance:
 
-- [README at reviewed main](https://github.com/Cirrefera/Second-Wind/blob/a853b9edbdb00be21b7ba157e7deb3ed36782643/README.md): product description and “Provenance & licensing.”
-- [SPEC at reviewed main](https://github.com/Cirrefera/Second-Wind/blob/a853b9edbdb00be21b7ba157e7deb3ed36782643/SPEC.md): architecture paragraphs on product model/free surfaces; standing rules 3 and 8 on immutable published versions and free curation.
+| Existing field or evidence | Purpose under this policy |
+| --- | --- |
+| `manifest.original_contribution` | Describes the actual original synthesis/composition in the product |
+| `evidence.product_review_hash` | Binds the reviewed product-contribution claim to the exact manifest |
+| `manifest.delivery_contract` and `manifest.validation_contract` | Define the deliverable and its validation promise |
+| `evidence.contract_review_hash` | Binds the reviewed contract to that manifest |
+| `manifest.origin`, `manifest.license`, `evidence.license_verified` | Record and review origin/licensing independently from the original-contribution claim |
+| Guidance or payload verification hashes | Bind review and delivery to the exact release bytes |
 
-The draft publication validator checks release identity, immutable hashes, product/contract/license review evidence, payload verification, and declared delivery/language boundaries. The reviewed validator has no explicit field or check establishing whether content is intended to be public or private, whether a price represents content access or a preparation/delivery service, or whether an exclusive-content claim conflicts with public source exposure.
+Both main and the reviewed PR #5 validator explicitly treat original contribution as a reviewed product claim, not an automatic plagiarism verdict. Public availability of source material is not a rejection condition. The draft preparation path maps product, contract, and license reviews into these existing checks and separately records source provenance, source hashes, interface sources, and license mapping.
 
-The preparation module separates `stage` from `activate`, preserves immutable release identity, refuses certain historical mutations, and writes payload, input, and review snapshots to R2 before atomic D1 registration. Its trusted review inputs come from the operator path, not a public publication endpoint in the reviewed gateway. These are useful publication mechanics; they do not select a commercial content-visibility policy. The authenticity of approval evidence remains FIX-08 and was not approved or changed in this review.
+Current main contains the validator and its tests; the preparation/activation caller is in PR #5 and has not been deployed by this batch. These existing checks support the policy contract, but this document does not claim that live activation already enforces the complete draft path. The authenticity of review evidence and the actual trusted publication path remain **FIX-08**. The current source-ready candidates still need their existing per-product reviews under FIX-10/11. This policy clarification does not itself approve a particular payload or rewrite a historical purchase.
 
-- [Draft publication checks](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/workers/gateway/src/publication.js)
-- [Draft preparation, staging, and activation](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/workers/gateway/src/release-preparation.js)
-- [Draft package generator writes full payload/source into release inputs](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/products/lambda-powertools-idempotency/scripts/package.mjs)
+Relevant source:
 
-## Two concrete policy choices
+- [Current accepted publication validator](https://github.com/Cirrefera/Second-Wind/blob/048f08853e863391cf8652cafdd464140e810616/workers/gateway/src/publication.js)
+- [Draft publication validator](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/workers/gateway/src/publication.js)
+- [Draft release preparation](https://github.com/Cirrefera/Second-Wind/blob/8711cdcf2dc31b16dc599da6db7cd0afd783a537/workers/gateway/src/release-preparation.js)
 
-### A. Public source; paid prepared product and service — recommended
+## Changes made for the clarification
 
-Keep the current public repository/history. Describe the charge as payment for the supported, prepared deliverable and the service actually included in that release. The listing identifies the exact version, scope, license, validation evidence, and delivery/recovery behavior. Public availability of some or all bytes is disclosed; confidentiality or exclusive access is not advertised. Advanced configuration, sandbox, or automation benefits are advertised only for releases that actually supply them.
+- README now describes the original assembled payload and its source provenance; it no longer describes the product as merely a source pointer or categorically says that upstream material is never included.
+- SPEC now defines original synthesis/composition as the product model and separates source provenance, product contribution, and delivery. The existing free discovery versus purchased-payload behavior remains explicit.
+- The tracker and handoff remove the pending A/B choice. The owner has supplied the product policy; there is no further owner policy input required for FIX-05.
+- The existing contribution/product/contract/license checks remain the implementation basis. No new runtime gate, schema, price, catalog record, payload version, or deployment was introduced.
 
-Proposed customer-facing policy text for owner approval:
-
-> Second Wind charges for prepared, versioned deliverables and the services stated in each product contract. Source material or deliverable content may also be publicly available. Each listing identifies what the purchase includes, its license, supported scope, and validation and delivery terms. Payment does not imply exclusive access to publicly available content.
-
-Concrete enforcement after approval:
-
-1. Add this paid/public distinction to the authoritative product policy and the relevant README/SPEC sections. Define “free surfaces carry stubs” as a service API rule, not a claim that no source is public anywhere.
-2. Require product/contract review to record existing public availability and the actual paid value for each future release. Reject exclusive-content wording for publicly exposed bytes. Keep the license and original-contribution review separate from commercial positioning.
-3. Preserve historical v1 content, price, receipts, and recovery identity. Apply future metadata/claim changes prospectively; do not rewrite old purchases. Existing paid delivery remains governed by the recorded contract.
-
-Why recommended: it fits the demonstrated public-source state and the platform's intended value in curation, validation, selection, and dependable delivery. It requires no history rewrite or replacement product merely to restore a secrecy claim. This is a commercial recommendation, not an assessment that the currently live guide already delivers every planned platform benefit.
-
-### B. Private original payloads for future releases
-
-Keep existing public history and identify already-public v1 and v2 material accordingly. For genuinely new original deliverable content intended to remain private, keep full payloads and release inputs outside public commits/PRs. Public code, schemas, manifests, and tests use metadata or synthetic fixtures. Approved full bytes remain in private controlled preparation/storage and are delivered through the existing commerce path.
-
-Proposed policy text for owner approval:
-
-> Second Wind identifies the public-source and private original portions of each new product release. Only original content that has not already been published is described as private. Public upstream material and previously published versions retain their stated provenance and licenses. Purchased versions remain recoverable under their recorded delivery terms.
-
-Concrete enforcement after approval:
-
-1. Explicitly identify which future original files are private and which dependencies/material are public. Do not relabel current v1 or the exposed v2 candidate as confidential.
-2. Prepare a private source-to-R2 release process before producing such a release; ensure public release-input snapshots and test fixtures do not embed its full content. The current draft package generator embeds full payload/source and therefore is not sufficient for this policy unchanged.
-3. Add a reviewed visibility/claims gate to release preparation and preserve existing purchased-version delivery. Product/license/contract approvals remain independently required.
-
-Tradeoff: this requires extra release-process work and a clear definition of new original private material. Repository privacy or history rewriting would not retract previously downloaded copies and is not proposed as a remedy.
-
-## Exact remaining decision
-
-The owner should select **A (paid prepared products/services with public source allowed)** or **B (private new original payloads, with existing public material acknowledged)**. Do not mark FIX-05 complete on recommendation alone. After selection, implement the bounded claims/publication enforcement for that policy, verify historical buyer/version preservation, and record the concrete evidence. No additional input is needed to establish the current exposure; that part is complete.
+The publication of a finished assembled payload is retained above as a verified historical observation. It is not evidence that publicly sourced inputs prevent original content, and it is not a reason to redefine the paid product as delivery services alone. Existing purchased versions, prices, hashes, recovery rights, and public history remain intact.

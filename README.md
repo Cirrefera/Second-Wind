@@ -2,7 +2,7 @@
 
 **Agents stall. Second Wind gets them moving.**
 
-Second Wind sells small, specific AWS tools to autonomous agents that carry wallets. Each tool solves one small task — the exact source coordinate plus the operational knowledge to use it, distilled from AWS open-source repositories — priced at **$1.00 USDC or less**, session-less, paid via the [x402 protocol](https://github.com/x402-foundation/x402) with USDC settlement on Base.
+Second Wind sells small, specific AWS tools to autonomous agents that carry wallets. Each tool solves one small task through an original assembled payload: publicly sourced AWS information and code selected, combined, structured, and adapted into a useful deliverable — priced at **$1.00 USDC or less**, session-less, paid via the [x402 protocol](https://github.com/x402-foundation/x402) with USDC settlement on Base.
 
 **Status: pre-launch.** The serving surface is live at **[secondwindai.com](https://secondwindai.com)**; inventory is being curated repo by repo.
 
@@ -32,7 +32,9 @@ Listed in the **Amazon Bedrock AgentCore Agent Registry** (registry `jaMy0SuApKY
 
 ## Provenance & licensing
 
-Tools derive from Apache-2.0 and MIT-0 licensed AWS ecosystem projects. Second Wind describes and links; it does not redistribute. Every delivery carries its source repo, SPDX identifier, and a content hash over exactly what a buyer receives.
+Publicly sourced material supplies the inputs. Second Wind's original contribution is the selection, synthesis, arrangement, adaptation, and validation that combine those inputs into a specific useful payload. The assembled product itself is part of what the buyer purchases; its value includes the original composition and the functionality described in its contract.
+
+Release policy requires source provenance, applicable licenses, required upstream attribution and notices, and a description of the original contribution in the release manifest. Product review must assess that contribution separately from source and license review. A content hash identifies the exact assembled bytes delivered to the buyer.
 
 ---
 

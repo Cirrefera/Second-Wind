@@ -90,7 +90,7 @@ These issues are already represented in the canonical backlog and are not new di
 - **FIX-08, FIX-10 and FIX-11:** Local source preparations correctly remain publication-blocked. AWS-0568 commercial allocation and genuine review/registration inputs remain unresolved.
 - **FIX-12:** Optional live model assistance remains disabled in source. The deterministic corpus agrees with semantic target labels on 26/34 cases, with six false-candidate cases and two missed routes. Its 34/34 fallback-contract result validates the expected existing fallback behavior; it does not establish semantic accuracy. Scripted output cannot establish live model quality or justify activation.
 - **FIX-13 and FIX-14:** Local emitter/outbox fixtures do not prove arrival in the actual raw and specialized sinks.
-- **FIX-05:** Public-source and paid-content policy still needs the owner's decision; this assessment does not choose it.
+- **FIX-05 follow-up:** The owner subsequently clarified that the original product is the useful combination, synthesis, structure, and adaptation of publicly sourced material. The adopted policy is recorded in `docs/FIX05_CONTENT_POLICY_REVIEW.md`; no A/B policy choice remains outstanding. This does not change the exact-head test results above.
 
 ## Scope limits
 
