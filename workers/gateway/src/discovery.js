@@ -1,5 +1,5 @@
 import { listCatalog } from "./catalog.js";
-import { NETWORK, USDC, ORIGIN, paymentConfig } from "./contracts.js";
+import { NETWORK, USDC, ORIGIN, paymentConfig, paymentReadiness } from "./contracts.js";
 
 export const toolUrl = item => `${ORIGIN}/api/x402/${encodeURIComponent(item.slug || item.sku)}`;
 export const toolMethod = item => item.invoke_kind === "bedrock" ? "POST" : "GET";
@@ -26,7 +26,7 @@ export async function resourcesDocument(env) {
   let payTo;
   try { payTo = paymentConfig(env).payTo; } catch { /* mark unavailable below */ }
   return {
-    x402Version:2, payment_configured:Boolean(payTo),
+    x402Version:2, payment_configured:Boolean(payTo), ...paymentReadiness(env),
     items:document.tools.map(item => ({
       resource:item.url,type:"http",x402Version:2,
       accepts:payTo ? [{scheme:"exact",network:NETWORK,asset:USDC,payTo,

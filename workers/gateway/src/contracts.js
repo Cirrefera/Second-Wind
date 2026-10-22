@@ -35,23 +35,41 @@ export function validToken(token) {
   return typeof token === "string" && /^[A-Za-z0-9_-]{43}$/.test(token);
 }
 
-export function paymentConfig(env) {
+function inspectRecipient(env) {
   const values = [env.X402_PAY_TO, env.X402_PAYTO, env.X402_PAYTO_PUBLIC].filter(Boolean);
+  const unavailable = (status, error = "payment_rail_not_configured") =>
+    ({ configured:false, verified:false, status, error });
   if (new Set(values.map(value => String(value).toLowerCase())).size > 1) {
-    throw new CommerceError("payment_recipient_conflict", 503);
+    return unavailable("conflict", "payment_recipient_conflict");
   }
   const payTo = values[0];
-  if (typeof payTo !== "string" || !/^0x[0-9a-fA-F]{40}$/.test(payTo)
-      || isBurnAddress(payTo)) {
-    throw new CommerceError("payment_rail_not_configured", 503);
+  if (payTo === undefined) return unavailable("missing");
+  if (typeof payTo !== "string" || !/^0x[0-9a-fA-F]{40}$/.test(payTo)) {
+    return unavailable("invalid");
   }
-  if (env.X402_EXPECTED_PAY_TO && !sameAddress(payTo, env.X402_EXPECTED_PAY_TO)) {
-    throw new CommerceError("payment_recipient_unverified", 503);
+  if (isBurnAddress(payTo)) return unavailable("burn");
+  const result = {payTo, configured:true, verified:false};
+  const expected = env.X402_EXPECTED_PAY_TO;
+  if (!expected) {
+    return {...result, status:"unverified", error:"payment_recipient_unverified"};
   }
+  if (typeof expected !== "string" || !/^0x[0-9a-fA-F]{40}$/.test(expected)
+      || isBurnAddress(expected)) {
+    return {...result, status:"invalid_verification", error:"payment_recipient_unverified"};
+  }
+  if (!sameAddress(payTo, expected)) {
+    return {...result, status:"mismatch", error:"payment_recipient_unverified"};
+  }
+  return {...result, verified:true, status:"verified", error:null};
+}
+
+export function paymentConfig(env) {
+  const recipient = inspectRecipient(env);
+  if (recipient.error) throw new CommerceError(recipient.error, 503);
   if (env.X402_NETWORK && env.X402_NETWORK !== NETWORK) {
     throw new CommerceError("unsupported_payment_network", 503);
   }
-  return { payTo, network: NETWORK, asset: USDC, facilitator: FACILITATOR };
+  return { payTo:recipient.payTo, network: NETWORK, asset: USDC, facilitator: FACILITATOR };
 }
 
 export function requirementsFor(quote) {
@@ -78,11 +96,15 @@ export function isBurnAddress(address) {
 }
 
 export function paymentReadiness(env) {
-  let configured = false;
-  try { paymentConfig({ ...env, X402_EXPECTED_PAY_TO: undefined }); configured = true; } catch {}
-  let verified = false;
-  if (configured && env.X402_EXPECTED_PAY_TO) {
-    try { paymentConfig(env); verified = true; } catch {}
-  }
-  return { payment_recipient_configured: configured, payment_recipient_verified: verified };
+  const recipient = inspectRecipient(env);
+  const networkSupported = !env.X402_NETWORK || env.X402_NETWORK === NETWORK;
+  // Preserve the existing configured/verified booleans, including network failure.
+  // Only fixed status/error codes leave this function; configured values never do.
+  return {
+    payment_recipient_configured:recipient.configured && networkSupported,
+    payment_recipient_verified:recipient.verified && networkSupported,
+    payment_recipient_status:!networkSupported && recipient.configured
+      ? "unsupported_network" : recipient.status,
+    payment_configuration_error:recipient.error || (networkSupported ? null : "unsupported_payment_network"),
+  };
 }
