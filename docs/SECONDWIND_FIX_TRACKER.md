@@ -8,7 +8,7 @@ Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
 ## Batch 02 current result
 
-Selected IDs: **FIX-04, FIX-05, FIX-06**. Branch: `fix/batch-02-release-controls-content-review`.
+Selected IDs: **FIX-04, FIX-05, FIX-06**. Branch: `fix/batch-02-release-controls-content-review`. Review: [draft PR #7](https://github.com/Cirrefera/Second-Wind/pull/7).
 
 - **FIX-04 — BLOCKED on external configuration and release:** the PR verification and production-job controls are implemented and locally verified in `42494048f132f11b53640ddae0d2590f56e7c844`, tree `d65328ab304039f75932118b992930fd530fe4d2`. The exact branch/environment/credential configuration is prepared in [FIX04_RELEASE_CONTROLS.md](FIX04_RELEASE_CONTROLS.md); it has not been applied.
 - **FIX-05 — BLOCKED on owner policy and enforcement:** unauthenticated retrieval reconfirmed the exact advertised v1 payload, 5,333 bytes and full matching SHA-256. Two concrete policy choices and their enforcement work are prepared in [FIX05_CONTENT_POLICY_REVIEW.md](FIX05_CONTENT_POLICY_REVIEW.md). No commercial policy was chosen for the owner.
@@ -622,7 +622,10 @@ This batch selected exactly FIX-04, FIX-05, and FIX-06. FIX-04 source is ready f
 - Workflow implementation commit: `42494048f132f11b53640ddae0d2590f56e7c844`.
 - Verified local and GitHub implementation tree: `d65328ab304039f75932118b992930fd530fe4d2`.
 - Review documents: [release controls](FIX04_RELEASE_CONTROLS.md), [public-content policy](FIX05_CONTENT_POLICY_REVIEW.md), [exact draft verification](FIX06_PR5_VERIFICATION.md).
-- Batch PR and GitHub verification: publication/evidence follow-up is pending at this document revision; consult the branch's actual PR head and run rather than assuming CI from local results.
+- Draft PR: https://github.com/Cirrefera/Second-Wind/pull/7; open, unmerged, with a clean merge simulation against current main.
+- Evidence/documentation commit: `bee0227a5b5db623aadae55a1ebb4cead901e7c7`, tree `707ba29d52489436851eddabd813a0731cfad9e3`.
+- GitHub PR verification: [run 39824436671](https://github.com/Cirrefera/Second-Wind/actions/runs/39824436671), associated with that head. The actual checkout is GitHub test merge `e9d77c65bb97aeec1a4b782d337fd45b0ebc7d76`, whose tree exactly matches `707ba29d52489436851eddabd813a0731cfad9e3`. Job `119983862990`, **Verify application**, reports completed/success; every test/build step passed. The confirmed check source is GitHub Actions app ID `15368`. Logs show Node v24.21.0, 76 gateway tests, 32 release tests, 21 Pages tests, all legacy assertions, and both builds passing.
+- At this evidence revision, the enclosing run metadata still reported in_progress despite the completed successful job. Do not misreport that lagging field as completed. This documentation-only follow-up leaves workflow/application bytes unchanged; fetch the final PR head and its check before merge.
 - Production remains accepted release `048f08853e863391cf8652cafdd464140e810616`. No batch-02 merge, deployment, admin-setting mutation, product publication, or funded transaction occurred.
 
 ### Local verification evidence
@@ -631,6 +634,7 @@ This batch selected exactly FIX-04, FIX-05, and FIX-06. FIX-04 source is ready f
 | --- | --- |
 | Main-based workflow implementation | 76 gateway tests, 32 acceptance tests, 21 Pages tests, 55 utility assertions, both builds pass |
 | Workflow static/predicate verification | actionlint v1.7.12 pass; 72 actual-expression cases: 2 allowed/70 rejected; independent review pass |
+| Batch PR GitHub verification job | Verify application completed/success in run 39824436671; 76 gateway, 32 acceptance, 21 Pages, 55 utilities, both builds pass on the exact matching test-merge tree |
 | PR #5 exact current head | 146 gateway tests; 21 Pages tests; 55 utility assertions; both builds pass |
 | PR #5 additional offline checks | 16 actual local Dynamic Worker combinations; 32 AWS plans/160 inputs/64 partial shapes; Powertools 7/7; deterministic/scripted routing 34/34 each; preparation evidence reproduces |
 | PR #5 current-head GitHub evidence | No workflow runs, statuses, or check runs returned for the exact draft head |
@@ -656,12 +660,12 @@ After completing any newly authorized blocked actions, the next three queued act
 Continue the existing Second Wind remediation in batches of exactly three stable IDs. Fetch current main, the batch-02 branch/PR, and PR #5 before editing. Use parallel agents for independent selected work. Finish the existing application within its existing architecture.
 
 Repository: https://github.com/Cirrefera/Second-Wind
-Canonical tracker: docs/SECONDWIND_FIX_TRACKER.md. The latest batch-02 tracker/review evidence is on fix/batch-02-release-controls-content-review until its PR is merged; main may still contain the batch-01 record. Do not overwrite the newer handoff with the older main copy.
+Canonical tracker: docs/SECONDWIND_FIX_TRACKER.md. Draft batch PR: https://github.com/Cirrefera/Second-Wind/pull/7. The latest batch-02 tracker/review evidence is on fix/batch-02-release-controls-content-review until PR #7 is merged; main may still contain the batch-01 record. Do not overwrite the newer handoff with the older main copy.
 
 Starting/last checked main: a853b9edbdb00be21b7ba157e7deb3ed36782643.
 Released application: 048f08853e863391cf8652cafdd464140e810616, gateway 0187ab0f-9daa-4eb2-b1dd-0fb2d19e1936, Pages 71cbb351-482d-42d8-be44-1f69497dcbcd; accepted GitHub run 39816488828. FIX-01/02/03 remain COMPLETE. The owner approved the existing merchant and release inputs; do not request recipient input again. Funded-purchase verification remains false.
 
-Batch-02 workflow implementation: 42494048f132f11b53640ddae0d2590f56e7c844, verified tree d65328ab304039f75932118b992930fd530fe4d2. FIX-04 adds the secret-free PR check Verify application and the production job guard/environment, preserving release preflight and acceptance. Local tests: 76 gateway, 32 release, 21 Pages, 55 utility assertions, both builds; actionlint and 72-case event matrix pass. Read actual current PR/CI evidence before claiming CI. FIX-04 remains BLOCKED until exact prepared main/environment protections and environment credential scope are applied/read back with owner authorization, then reviewed merge/release is authorized and accepted. Detailed settings are in docs/FIX04_RELEASE_CONTROLS.md; source YAML alone is not external enforcement. The connector lacks those settings/secret write operations.
+Batch-02 workflow implementation: 42494048f132f11b53640ddae0d2590f56e7c844, verified tree d65328ab304039f75932118b992930fd530fe4d2. FIX-04 adds the secret-free PR check Verify application and the production job guard/environment, preserving release preflight and acceptance. Local tests: 76 gateway, 32 release, 21 Pages, 55 utility assertions, both builds; actionlint and 72-case event matrix pass. GitHub run 39824436671 on head bee0227a5b5db623aadae55a1ebb4cead901e7c7 checked out test merge e9d77c65bb97aeec1a4b782d337fd45b0ebc7d76; both have tree 707ba29d52489436851eddabd813a0731cfad9e3. Its Verify application job 119983862990 completed successfully with all tests/builds; check source GitHub Actions app 15368. Enclosing run metadata was still in_progress at the evidence revision, so fetch current run/check state and final PR head. Subsequent evidence edits are documentation-only. FIX-04 remains BLOCKED until exact prepared main/environment protections and environment credential scope are applied/read back with owner authorization, then reviewed merge/release is authorized and accepted. Detailed settings are in docs/FIX04_RELEASE_CONTROLS.md; source YAML alone is not external enforcement. The connector lacks those settings/secret write operations.
 
 FIX-05 remains BLOCKED on the owner's policy choice and subsequent enforcement. Exact advertised v1 guidance is publicly downloadable: 5,333 bytes, SHA-256 62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe, current advertised price 0.10 USDC. Existing v2 payload is public too. docs/FIX05_CONTENT_POLICY_REVIEW.md prepares A: public source with paid prepared products/stated services (recommendation), and B: private genuinely new original payloads with existing public versions acknowledged. No policy has been selected or customer claims altered. Preserve public history and bought versions.
 

@@ -44,7 +44,7 @@ Apply the following together after owner authorization. These settings preserve 
 | Target | Exact branch `main` |
 | Require a pull request | Enabled |
 | Required approving reviews | 0; owner-controlled merge remains available |
-| Required status check | `Verify application`, expected source **GitHub Actions**, confirmed from the actual PR check |
+| Required status check | `Verify application`, expected source **GitHub Actions** (confirmed app ID `15368`) |
 | Require branch up to date | Enabled |
 | Apply to administrators / prevent bypass | Enabled; no routine bypass actor |
 | Allow force pushes | Disabled |
@@ -96,7 +96,7 @@ The matrix allows only this repository's main push/dispatch and rejects feature 
 
 The restricted sandbox initially prevented the release suite's child process. The unchanged offline command passed with permitted subprocess execution. That environment limitation was not treated as a source failure. Actionlint's downloaded archive matched its published SHA-256 `8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8`.
 
-GitHub PR-run evidence is recorded in the canonical tracker and PR description once available. Local checks do not establish externally enforced settings or production acceptance.
+[Draft PR #7](https://github.com/Cirrefera/Second-Wind/pull/7) triggered [run 39824436671](https://github.com/Cirrefera/Second-Wind/actions/runs/39824436671). Its **Verify application** job (`119983862990`) completed successfully on Node v24.21.0, with all listed application tests/builds passing. GitHub checked out test merge `e9d77c65bb97aeec1a4b782d337fd45b0ebc7d76` for PR head `bee0227a5b5db623aadae55a1ebb4cead901e7c7`; their tree is the identical `707ba29d52489436851eddabd813a0731cfad9e3`. The check source is GitHub Actions app `15368`. Enclosing run metadata still said in_progress at this evidence revision; only the job's successful completion is asserted. Fetch the current head/check before merge. Neither local nor CI tests establish externally applied settings or production acceptance.
 
 ## Primary documentation
 
