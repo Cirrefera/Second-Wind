@@ -1,5 +1,7 @@
 # Second Wind — consolidated application and remaining work
 
+The consolidation record below describes the accepted `548bcc2` release. The owner's subsequent TypeSafe skill/Jev routing work is recorded separately in [JEV_ROUTING_EVALUATION.md](JEV_ROUTING_EVALUATION.md), including real API results, source changes, and the remaining semantic/production prerequisites. Consult that report and the [canonical tracker](SECONDWIND_FIX_TRACKER.md) for follow-up release evidence.
+
 Verified October 22, 2026. Production acceptance returned `accepted: true` at **21:33:58 UTC / 5:33:58 p.m. EDT**.
 
 ## Outcome

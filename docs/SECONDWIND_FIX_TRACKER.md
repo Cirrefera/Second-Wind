@@ -6,6 +6,17 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Jev routing follow-up — October 22, 2026
+
+The owner requested the TypeSafe skill and real Jev API use, especially for structured routing. That evaluation is now performed: **49 successful requests to `jev-1.14.0`**, with native responses, provider request IDs, usage, source hashes, and fixed case labels preserved in [JEV_ROUTING_EVALUATION.md](JEV_ROUTING_EVALUATION.md) and its linked evidence.
+
+- The unchanged 34-case corpus improved from **31/34 to 33/34** expected outcomes, with model calls reduced from **24 to 12**. All **12/12** fresh paraphrase cases passed. These are engineering regression results, not independently adjudicated production accuracy or threshold calibration.
+- Exact lookups and supplied structured constraints stay in code. The resolver preserves other pending candidates after a relative preference, and explicitly requested live versions with absent/stale routing metadata report `routing_not_configured` even when another product has a valid record.
+- A native Jev adapter and explicit `--jev-live` evaluation mode preserve actual model identity and typed Choice/Noul readings. All **198 gateway tests** and both application builds pass locally.
+- One original excluded-deployment case still returns a lexical match after an uncertain reading. The evidence retains that failure. **FIX-07 and FIX-12 remain open** for reviewed production manifest coverage and the remaining semantic fallback/calibration work. No runtime enablement or production Jev credential was added.
+
+This follow-up starts from consolidated main `c8b8991393ba3a304adb44726dabe5f57b6551ca`. Its GitHub verification and release status are recorded with the evaluation report; the earlier consolidation evidence below retains its original source identity.
+
 ## Consolidated result — October 22, 2026
 
 **The remaining in-scope application work is merged into one `main` and deployed.** The owner explicitly authorized consolidation and merge. That authorization supersedes the earlier draft/merge-approval notes preserved below as historical evidence.
@@ -178,13 +189,13 @@ Reproduce the relevant checks on the exact current head, compare it with product
 
 - Priority: **P1**
 - Status: **READY**
-- Evidence: Migration 0004 and the resolver are now deployed. A real post-release string query for lambda finds SW-PT-0006 v1. A structured SKU/language intent returns HTTP 503 routing_not_configured with version_matched_routing_manifest_missing; no reviewed routing record was fabricated or registered.
+- Evidence: Migration 0004 and the resolver are deployed. A real post-consolidation string query for lambda finds SW-PT-0006 v1. A structured SKU/language intent returns HTTP 503 routing_not_configured with version_matched_routing_manifest_missing. The Jev follow-up adds the same truthful result for an explicitly requested live version in a partially reviewed catalog. No routing record was fabricated or registered.
 - Dependencies: The merged resolver and completed FIX-06/28 provide the source baseline. Full structured matching still requires reviewed manifests bound to intended live product versions.
 - Acceptance criteria: representative supported queries find the intended products after the proposed rollout, and missing or incompatible configurations produce truthful responses.
-- Implementation location: workers/gateway/src/routing.js; migrations/0004_routing_manifests.sql; existing live product routing registration
-- Verification: The integrated routing suite passed 26 tests, including missing/stale manifests, legacy free-text lookup, HTTP/capability agreement, and zero model calls on the compatibility path. Actual custom-domain free lookup passed after deployment. Complete structured-routing acceptance remains pending.
-- Release state: A deliberate metadata-search compatibility path is deployed. Structured routing availability is reported truthfully; the remaining manifest registration/coverage work is not complete.
-- Remaining blocker: Prepare/review/register the intended version-matched routing manifests and verify representative structured queries and release coverage.
+- Implementation location: workers/gateway/src/routing.js; migrations/0004_routing_manifests.sql; existing live product routing registration; docs/JEV_ROUTING_EVALUATION.md
+- Verification: The follow-up routing suite passes 28 tests within 198 gateway tests, covering missing/stale and partial manifest coverage, exact-lookup inference bypass, pending alternatives, and HTTP/capability agreement. Real Jev evaluation on disposable draft-v2 projections produces 33/34 existing and 12/12 fresh outcomes. These draft projections do not establish live-v1 coverage. Actual custom-domain free lookup passed after consolidation.
+- Release state: The original metadata-search compatibility path is deployed. The follow-up corrects bounded resolver behavior; production manifest registration/coverage remains incomplete. See docs/JEV_ROUTING_EVALUATION.md for follow-up release evidence.
+- Remaining blocker: Prepare/review/register truthful version-matched routing manifests and consistent release/configuration contracts, then verify representative production structured queries and release coverage. The v2 record cannot be relabeled as the different live v1 payload.
 
 Original bounded scope:
 
@@ -258,17 +269,17 @@ Original bounded scope:
 
 Review the corrected guidance, actual example, supported versions, source/license evidence, validation, and historical-version preservation.
 
-### FIX-12 — Validate optional Clef-assisted routing before enabling it
+### FIX-12 — Validate optional System One routing before enabling it
 
 - Priority: **P2**
 - Status: **READY**
-- Evidence: Optional Clef source is merged but no AI binding or enabling flag was added. Deterministic checks remain authoritative; no live inference was used.
-- Dependencies: Owner direction on optional assistance, reproducible fixtures and deterministic baseline; separately authorized live evaluation and reviewed calibration before enabling.
-- Acceptance criteria: fixture and deterministic results are reproducible; live evaluation and threshold calibration are separately documented if authorized. Keep live assistance disabled until its dependencies and acceptance criteria are met.
-- Implementation location: workers/gateway/src/routing.js, clef.js, and existing routing fixtures on main
-- Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Optional source is present but remains disabled. No live model calibration or enablement is claimed.
-- Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
+- Evidence: The owner explicitly requested the TypeSafe skill and Jev API. That authorization has been exercised with 49 successful HTTP 200 requests to pinned jev-1.14.0. Native responses and provider receipts are recorded in docs/JEV_ROUTING_EVALUATION.md. Optional production assistance remains disabled.
+- Dependencies: Owner direction and initial real API evaluation are satisfied. Remaining dependencies are reviewed production routing coverage, a resolved uncertain-goal/fallback policy, and additional fixed evaluation/calibration before enablement.
+- Acceptance criteria: deterministic and fixture results are reproducible; actual model evidence, uncertainty, fallback behavior, and limits are documented. Keep live assistance disabled until production coverage and semantic acceptance are met.
+- Implementation location: workers/gateway/src/routing.js, clef.js, jev.js; workers/gateway/scripts/evaluate-routing.mjs; routing fixtures and docs/JEV_ROUTING_EVALUATION.md
+- Verification: The unchanged 34 cases improve from 31/34 to 33/34 with 24 to 12 model calls; 12/12 fresh paraphrases pass. All 198 gateway tests pass, including 31 reader/provider and 8 evaluator tests. Mocked runs do not claim measured semantic accuracy. No threshold changes or original-corpus relabeling were used.
+- Release state: The follow-up adds native Jev transport and explicit live evaluation, with no production enabling flag, model credential, or new binding. Its source/CI/release evidence is recorded in docs/JEV_ROUTING_EVALUATION.md. A successful code release would not complete this item's semantic acceptance.
+- Remaining blocker: The original prompt-text-cannot-grant-execution case still returns a lexical match after uncertain Choice/Noul readings. Resolve that fallback policy and validate additional fixed cases/calibration, alongside FIX-07's production coverage, before enabling semantic assistance.
 
 Original bounded scope:
 
@@ -673,11 +684,13 @@ FIX-04 remains visible as blocked on external administrative settings only. FIX-
 ## Ready-to-paste continuation prompt
 
 ```text
-Continue Second Wind from Cirrefera/Second-Wind main and docs/SECONDWIND_FIX_TRACKER.md. Read docs/CONSOLIDATION_STATUS.md for current evidence. Refresh refs because subsequent commits may contain documentation-only evidence.
+Continue Second Wind from Cirrefera/Second-Wind main and docs/SECONDWIND_FIX_TRACKER.md. Read docs/CONSOLIDATION_STATUS.md and docs/JEV_ROUTING_EVALUATION.md for consolidation and subsequent routing evidence. Refresh refs because subsequent source or documentation commits may supersede older identities.
 
 The owner authorized merging all remaining in-scope work. PR #5 and PR #7 are merged. Consolidated application release: 548bcc204d59785951da11e85943607d5e62d9fd. Integration head: 57636d4c84e0a9a96ed078d86413d4e526447106. Verified and merged tree: 6c5cd346c5f5e491973da1e68294c11d63de78ca. Prior draft head 8711cdcf2dc31b16dc599da6db7cd0afd783a537 and PR #7 head b812a981432d49d95d02d4e68565c2a49c32314f are ancestors. Do not deploy or re-merge an old isolated draft.
 
 GitHub verification run 39858026572/job 120101203757 and production run 39858195268/job 120101770147 both succeeded. Combined checks: 174 gateway, 32 release, 21 Pages, 55 utility assertions, 16 actual Dynamic Worker packages, both builds; source-preparation evidence reproduced exactly. Production acceptance identified gateway b761dab0-61e2-4549-ae59-8d0003cef876 and Pages b6fb9357-1f1c-4064-9617-5eb04424e26e at the exact release commit. Health/proof 200 and readiness ready. One live product remains SW-PT-0006 v1 at 0.10 USDC with unchanged hash. No funded purchase or candidate activation was performed.
+
+The owner's subsequent TypeSafe skill/Jev instruction has been applied using 49 real successful API requests to jev-1.14.0. See the evaluation report for exact follow-up source/CI/release evidence. The unchanged 34-case corpus improved from 31/34 to 33/34, with calls reduced from 24 to 12; 12/12 fresh paraphrases and 198 gateway tests pass. An excluded-deployment case still incorrectly retains a lexical match after uncertain readings. Keep that failure visible, thresholds unchanged pending calibration, and runtime inference disabled. Initial live evaluation is authorized and completed; do not ask for that authorization again. FIX-07 still needs truthful version-matched live manifests/contracts; FIX-12 still needs fallback-policy and semantic acceptance work.
 
 COMPLETE: FIX-01,02,03,05,06,28. FIX-04 source controls are deployed; external settings remain BLOCKED. Main is still unprotected, rulesets empty, and production environment has no branch/protection policy; credential scoping unverified. The connector lacks administrative writes. Existing recipient is already supplied and independently verified; do not request it again.
 

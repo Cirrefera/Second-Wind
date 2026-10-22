@@ -56,6 +56,31 @@ test('structured intent reports unavailable routing instead of guessing constrai
   method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent:{sku:item.sku,target_language:'python'}})}),env,{waitUntil(){}});
  assert.equal(response.status,503);assert.equal((await response.json()).error,'routing_not_configured');
 });
+test('mixed routing coverage does not turn an unregistered requested live version into a no-match',async t=>{
+ const {env,db,item}=await fixture(t);
+ const unregistered=insertItem(db,{sku:'UNREGISTERED',slug:'unregistered',service:'lambda',version:2});
+ let calls=0;env.CLEF_ROUTING_ENABLED='true';env.AI={run:async()=>{calls++;throw new Error('must not run');}};
+ for(const stale of [false,true]) {
+  if(stale) {
+   const old={...manifest(unregistered),version:1};
+   await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)')
+    .bind(unregistered.sku,1,canonicalJson(old),await sha256(canonicalJson(old)),'fixture',new Date().toISOString()).run();
+  }
+  for(const identity of [{sku:unregistered.sku},{slug:unregistered.slug}]) {
+   const intent={...identity,target_language:'javascript'};
+   const unavailable=error=>error.code==='routing_not_configured'&&error.status===503
+    &&error.details.reason==='version_matched_routing_manifest_missing';
+   await assert.rejects(resolveIntent(env,intent),unavailable);
+   await assert.rejects(new ProductService(env).searchIntent(intent),unavailable);
+   const response=await createApp().fetch(new Request('https://secondwindai.com/api/resolve',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent})}),env,{waitUntil(){}});
+   assert.equal(response.status,503);assert.equal((await response.json()).error,'routing_not_configured');
+  }
+ }
+ assert.equal((await resolveIntent(env,{sku:item.sku,target_language:'javascript'})).status,'match');
+ assert.equal((await resolveIntent(env,{sku:'UNKNOWN',target_language:'javascript'})).status,'no_match');
+ assert.equal(calls,0);
+});
 test('HTTP and capability string search preserve legacy matching while observations omit private query text',async t=>{
  const db=createFixtureDb();t.after(()=>db.close());const item=insertItem(db,{service:'lambda'}),env={SW_DB:db};
  for(const body of [{query:'lambda'},{intent:'lambda'},{}]) {
@@ -122,7 +147,7 @@ test('fixed evaluation corpus accepts exact real draft metadata and preserves la
  assert.equal(deterministic.semantic_accuracy_measured,false);assert.equal(deterministic.thresholds.calibrated,false);
  assert.equal(deterministic.target_comparison.false_match_cases,6);
  const scripted=await evaluateRouting({mode:'fixture'});
- assert.equal(scripted.completed,34);assert.equal(scripted.passed,34);assert.equal(scripted.model_calls,24);
+ assert.equal(scripted.completed,34);assert.equal(scripted.passed,34);assert.equal(scripted.model_calls,12);
  assert.equal(scripted.semantic_accuracy_measured,false);assert.equal(scripted.thresholds.calibrated,false);
  assert.equal(scripted.target_comparison.false_match_cases,0);
  assert.equal(scripted.target_comparison.missed_match_cases,0);
@@ -133,7 +158,8 @@ test('fixed evaluation corpus accepts exact real draft metadata and preserves la
  const pending=scripted.cases.find(example=>example.id==='guidance-semantic-missing-language');
  assert.deepEqual(pending.observed,{status:'missing_configuration',products:[{sku:'SW-PT-0006',version:2}],clarifications:['target_language']});
  assert.equal(scripted.cases.find(example=>example.id==='two-compatible-candidates').observed.status,'multiple_candidates');
- assert.equal(scripted.cases.find(example=>example.id==='ambiguous-language-only').alignment.readings.candidate.confidence,0);
+ assert.equal(scripted.cases.find(example=>example.id==='ambiguous-language-only').model_calls,0);
+ assert.equal(scripted.cases.find(example=>example.id==='ambiguous-language-only').alignment,undefined);
  assert.deepEqual((await loadRoutingEvaluation()).sources,source.sources);
  await assert.rejects(evaluateRouting({mode:'live'}),/live_evaluation_ai_required/);
  assert.throws(()=>cloudflareEvaluationAi({account:'',token:''}),/required for --live/);
@@ -299,7 +325,7 @@ test('confident semantic routing can surface only the exact eligible product whi
  }
 });
 
-test('Clef choices preserve missing language while explicit conflicts stay model-free',async t=>{
+test('exact identities and typed constraints preserve missing language without model calls',async t=>{
  const {env,item}=await fixture(t);let calls=0;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
   calls++;assert.equal(input.state.candidates.length,1);
@@ -307,14 +333,41 @@ test('Clef choices preserve missing language while explicit conflicts stay model
    probabilities:{unknown:0,candidate_0:1}}}};
  }};
  assert.equal((await resolveIntent(env,{sku:item.sku,target_language:'javascript'})).status,'match');
- assert.equal(calls,1);
+ assert.equal(calls,0);
+ for(const identity of [{slug:item.slug},{alias:'retry-safety'},{service:'lambda',operation:'deduplicate'},
+  {target_language:'javascript'}]) {
+  assert.equal((await resolveIntent(env,{...identity,target_language:'javascript'})).status,'match');
+ }
  const missing=await resolveIntent(env,{sku:item.sku});
  assert.equal(missing.status,'missing_configuration');
  assert.equal(missing.matched,false);
  assert.equal(missing.clarifications[0].question,'What programming language do you want the product delivered in?');
  assert.equal((await resolveIntent(env,{sku:item.sku,target_language:'python'})).status,'no_match');
  assert.equal((await resolveIntent(env,{sku:'wrong',target_language:'javascript'})).status,'no_match');
- assert.equal(calls,2);
+ assert.equal(calls,0);
+ assert.equal((await resolveIntent(env,{sku:item.sku,goal:'avoid repeated work',target_language:'javascript'})).status,'match');
+ assert.equal(calls,1);
+});
+
+test('a semantic preference ranks all pending candidates without discarding the other possible products',async t=>{
+ const {env,db,item}=await fixture(t);
+ const second=insertItem(db,{sku:'SECOND',slug:'second',service:'lambda'}),m=manifest(second);
+ await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)')
+  .bind(second.sku,second.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
+ const intent={goal:'Lambda duplicate processing'},baseline=await resolveIntent(env,intent);
+ assert.equal(baseline.status,'missing_configuration');assert.equal(baseline.matches.length,2);
+ const chosenSku=baseline.matches[1].sku;
+ env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
+  const index=input.state.candidates.findIndex(candidate=>candidate.sku===chosenSku);
+  return routingResponse(input,{choice:`candidate_${index}`});
+ }};
+ const result=await resolveIntent(env,intent);
+ assert.equal(result.status,'missing_configuration');assert.equal(result.matched,false);
+ assert.equal(result.matches[0].sku,chosenSku);
+ assert.deepEqual(result.matches.map(product=>product.sku).sort(),[item.sku,second.sku].sort());
+ assert.ok(result.matches.every(product=>product.compatibility.missing.includes('target_language')));
+ assert.deepEqual(result.clarifications,[{field:'target_language',question:'What programming language do you want the product delivered in?'}]);
+ assert.equal((await resolveIntent(env,intent,1)).matches.length,1);
 });
 
 test('semantic pending choice asks exact language over HTTP and Cap\'n Web before an explicit callback answer matches',async t=>{

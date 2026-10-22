@@ -1,0 +1,1415 @@
+{
+  "schema_version": "1",
+  "mode": "jev-live",
+  "provider": "typesafe-live",
+  "model": "jev-1.14.0",
+  "response_models": [
+    "jev-1.14.0"
+  ],
+  "response_provenance": "live-http",
+  "corpus_ref": "sha256:4e689eba31b64861b1e483f9d3d85ccf08990cdabc0bba2433e0dbcbec60355b",
+  "model_calls": 12,
+  "http": {
+    "requests": 12,
+    "successes": 12,
+    "errors": 0,
+    "transport_errors": 0,
+    "provider_errors": 0,
+    "unobserved_provider_calls": 0
+  },
+  "usage": {
+    "input_tokens": {
+      "total": 16960,
+      "reported_requests": 12
+    },
+    "output_tokens": {
+      "total": 639,
+      "reported_requests": 12
+    }
+  },
+  "latency_ms": {
+    "reported_requests": 12,
+    "total": 1410,
+    "mean": 117.5,
+    "max": 162
+  },
+  "source_scope": "isolated local projection of reviewed draft releases; no publication or deployed-serving claim",
+  "sources": [
+    {
+      "sku": "AWS-0568",
+      "version": 2,
+      "status_in_source": "draft",
+      "source_hash": "7eb48cfcfcdf7b0600b31b06898bfb8bbcdb72b0ac71a1f4833907bf4b6f9a38"
+    },
+    {
+      "sku": "SW-PT-0006",
+      "version": 2,
+      "status_in_source": "draft",
+      "source_hash": "75b3ddfc25cb0ad62d3defc5090a2f05e0e8bf9062f26c5f0e8a000086c09fb5"
+    }
+  ],
+  "thresholds": {
+    "choice_confidence": 0.5,
+    "exists_present": 0.7,
+    "exists_absent_below": 0.35,
+    "calibrated": false
+  },
+  "semantic_accuracy_measured": true,
+  "semantic_measurement_scope": "model-called cases only; application-only cases are excluded from model accuracy",
+  "semantic_quality": "measured only on model-called cases in this fixed source-reviewed corpus; no held-out calibration",
+  "completed": 12,
+  "total": 12,
+  "passed": 12,
+  "cohorts": {
+    "application_only": {
+      "completed": 0,
+      "passed": 0,
+      "target_agreement": 0,
+      "case_ids": []
+    },
+    "model_called": {
+      "completed": 12,
+      "passed": 12,
+      "target_agreement": 12,
+      "case_ids": [
+        "fresh-guidance-plain-paraphrase",
+        "fresh-artifact-request-plan",
+        "fresh-unrelated-orchids",
+        "fresh-existing-global-migration",
+        "fresh-external-bank-guarantee",
+        "fresh-instant-ttl",
+        "fresh-sqs-multi-payment-batch",
+        "fresh-exact-id-wrong-task",
+        "fresh-request-cannot-expand-scope",
+        "fresh-guidance-needs-language",
+        "fresh-two-distinct-jobs",
+        "fresh-two-jobs-need-language"
+      ],
+      "valid_readings": 12,
+      "accuracy": 1
+    }
+  },
+  "categories": {
+    "hard-negative": {
+      "total": 6,
+      "completed": 6,
+      "passed": 6
+    },
+    "missing-language": {
+      "total": 2,
+      "completed": 2,
+      "passed": 2
+    },
+    "multi-candidate": {
+      "total": 1,
+      "completed": 1,
+      "passed": 1
+    },
+    "no-match": {
+      "total": 1,
+      "completed": 1,
+      "passed": 1
+    },
+    "semantic-recall": {
+      "total": 2,
+      "completed": 2,
+      "passed": 2
+    }
+  },
+  "target_comparison": {
+    "status_agreement": 12,
+    "false_match_cases": 0,
+    "missed_match_cases": 0
+  },
+  "unavailable_readings": 0,
+  "cases": [
+    {
+      "id": "fresh-guidance-plain-paraphrase",
+      "category": "semantic-recall",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 162,
+              "request_hash": "0f1654b79c44f23a823c1163289c6a603013bd937389322e80adca67d79b9e90",
+              "response_hash": "920b862cbe82d84c834047fc4aacbcc8da2022042dc262f74e459e5d566de070",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2a78a7019ae878a5747372edf",
+                "cf-ray": "a4ebc8abf9d3a245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1292,
+                "output_tokens": 52
+              }
+            }
+          ],
+          "request_hash": "0f1654b79c44f23a823c1163289c6a603013bd937389322e80adca67d79b9e90",
+          "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.94
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "candidate_0",
+              "confidence": 0.92,
+              "probabilities": {
+                "candidate_0": 0.96,
+                "unknown": 0.04
+              }
+            }
+          },
+          "latency_ms": 163.022
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "0f1654b79c44f23a823c1163289c6a603013bd937389322e80adca67d79b9e90",
+        "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.94
+          },
+          "candidate": {
+            "choice": "candidate_0",
+            "probabilities": {
+              "candidate_0": 0.96,
+              "unknown": 0.04
+            },
+            "confidence": 0.92
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        }
+      }
+    },
+    {
+      "id": "fresh-artifact-request-plan",
+      "category": "semantic-recall",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 104,
+              "request_hash": "01174709c723820e30379298dec96312afdb3adaefe3a4ab88d33e32f7117597",
+              "response_hash": "7d20a168684704b1c4783c87b249195b83f7e760665f299250a9025d948915ab",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2a81770a1a2fc6e294160ac3e",
+                "cf-ray": "a4ebc8acdb3ea245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1212,
+                "output_tokens": 52
+              }
+            }
+          ],
+          "request_hash": "01174709c723820e30379298dec96312afdb3adaefe3a4ab88d33e32f7117597",
+          "questions_hash": "0214cd11cb0d86a8e0243c2b0ec6dec341d54f7410089157c03991491c5172a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.97
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "candidate_0",
+              "confidence": 0.98,
+              "probabilities": {
+                "candidate_0": 0.99,
+                "unknown": 0.01
+              }
+            }
+          },
+          "latency_ms": 104.241
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "01174709c723820e30379298dec96312afdb3adaefe3a4ab88d33e32f7117597",
+        "questions_hash": "0214cd11cb0d86a8e0243c2b0ec6dec341d54f7410089157c03991491c5172a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.97
+          },
+          "candidate": {
+            "choice": "candidate_0",
+            "probabilities": {
+              "candidate_0": 0.99,
+              "unknown": 0.01
+            },
+            "confidence": 0.98
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        }
+      }
+    },
+    {
+      "id": "fresh-unrelated-orchids",
+      "category": "no-match",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 119,
+              "request_hash": "2bf1382522af11285a9cb3139a0223aa95e50d7f2b9eff62010c91d6bfacbe6e",
+              "response_hash": "c14f7af0e9ea99d44ba203351ec19f59dac7c9598879cc5d6807350eba98baf8",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2a8847b958c069d38471ee80c",
+                "cf-ray": "a4ebc8ad7c16a245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1856,
+                "output_tokens": 59
+              }
+            }
+          ],
+          "request_hash": "2bf1382522af11285a9cb3139a0223aa95e50d7f2b9eff62010c91d6bfacbe6e",
+          "questions_hash": "bad2591fa8aef997d80c1bd7b897e1bcb2a70697600a1a9df9e910459a56066c",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.01
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "unknown",
+              "confidence": 1,
+              "probabilities": {
+                "candidate_0": 0,
+                "candidate_1": 0,
+                "unknown": 1
+              }
+            }
+          },
+          "latency_ms": 119.658
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "2bf1382522af11285a9cb3139a0223aa95e50d7f2b9eff62010c91d6bfacbe6e",
+        "questions_hash": "bad2591fa8aef997d80c1bd7b897e1bcb2a70697600a1a9df9e910459a56066c",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.01
+          },
+          "candidate": {
+            "choice": "unknown",
+            "probabilities": {
+              "candidate_0": 0,
+              "candidate_1": 0,
+              "unknown": 1
+            },
+            "confidence": 1
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 2,
+          "eligible_count": 2,
+          "complete": true
+        },
+        "negative_scope": "evaluated_candidates_only"
+      }
+    },
+    {
+      "id": "fresh-existing-global-migration",
+      "category": "hard-negative",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 117,
+              "request_hash": "3c112db2471565b9f7daffe8db4268b0c5110b94248a85911b7b00e774fbbe3a",
+              "response_hash": "a65e06ad212ed4d967defb27e0a25446d92841ce4ca6b1a7aafeb9d4c9b2e963",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2a8fc70dcb41cd57b1eec555a",
+                "cf-ray": "a4ebc8ae4d05a245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1204,
+                "output_tokens": 50
+              }
+            }
+          ],
+          "request_hash": "3c112db2471565b9f7daffe8db4268b0c5110b94248a85911b7b00e774fbbe3a",
+          "questions_hash": "0214cd11cb0d86a8e0243c2b0ec6dec341d54f7410089157c03991491c5172a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.01
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "unknown",
+              "confidence": 1,
+              "probabilities": {
+                "candidate_0": 0,
+                "unknown": 1
+              }
+            }
+          },
+          "latency_ms": 117.316
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "3c112db2471565b9f7daffe8db4268b0c5110b94248a85911b7b00e774fbbe3a",
+        "questions_hash": "0214cd11cb0d86a8e0243c2b0ec6dec341d54f7410089157c03991491c5172a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.01
+          },
+          "candidate": {
+            "choice": "unknown",
+            "probabilities": {
+              "candidate_0": 0,
+              "unknown": 1
+            },
+            "confidence": 1
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        },
+        "negative_scope": "evaluated_candidates_only"
+      }
+    },
+    {
+      "id": "fresh-external-bank-guarantee",
+      "category": "hard-negative",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 124,
+              "request_hash": "31422740907414cd03d16af6a3d14919731a21e205b55e7a8396ba401d39efaf",
+              "response_hash": "600593d0ec60329545d8dd86e7517c7f735c61b44819378845f003240469a2dc",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2a9727f8eadb3ecf9046e6168",
+                "cf-ray": "a4ebc8aefe1aa245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1291,
+                "output_tokens": 52
+              }
+            }
+          ],
+          "request_hash": "31422740907414cd03d16af6a3d14919731a21e205b55e7a8396ba401d39efaf",
+          "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.16
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "candidate_0",
+              "confidence": 0,
+              "probabilities": {
+                "candidate_0": 0.5,
+                "unknown": 0.5
+              }
+            }
+          },
+          "latency_ms": 124.226
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "31422740907414cd03d16af6a3d14919731a21e205b55e7a8396ba401d39efaf",
+        "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.16
+          },
+          "candidate": {
+            "choice": "candidate_0",
+            "probabilities": {
+              "candidate_0": 0.5,
+              "unknown": 0.5
+            },
+            "confidence": 0
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        },
+        "negative_scope": "evaluated_candidates_only"
+      }
+    },
+    {
+      "id": "fresh-instant-ttl",
+      "category": "hard-negative",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 69,
+              "request_hash": "707601110519c50f3da6746c7741c4996eb65f7b294bdf2a7ed68ea8b3671dd5",
+              "response_hash": "dca8d2b1eb1570c8294270e3fbcedd744ba6ff7d7fce435639484e6e2efb1cea",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2a9f17e7c9951440ef8a5b04c",
+                "cf-ray": "a4ebc8afcef7a245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1200,
+                "output_tokens": 50
+              }
+            }
+          ],
+          "request_hash": "707601110519c50f3da6746c7741c4996eb65f7b294bdf2a7ed68ea8b3671dd5",
+          "questions_hash": "0214cd11cb0d86a8e0243c2b0ec6dec341d54f7410089157c03991491c5172a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.06
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "unknown",
+              "confidence": 0.98,
+              "probabilities": {
+                "candidate_0": 0.01,
+                "unknown": 0.99
+              }
+            }
+          },
+          "latency_ms": 69.906
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "707601110519c50f3da6746c7741c4996eb65f7b294bdf2a7ed68ea8b3671dd5",
+        "questions_hash": "0214cd11cb0d86a8e0243c2b0ec6dec341d54f7410089157c03991491c5172a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.06
+          },
+          "candidate": {
+            "choice": "unknown",
+            "probabilities": {
+              "candidate_0": 0.01,
+              "unknown": 0.99
+            },
+            "confidence": 0.98
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        },
+        "negative_scope": "evaluated_candidates_only"
+      }
+    },
+    {
+      "id": "fresh-sqs-multi-payment-batch",
+      "category": "hard-negative",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 153,
+              "request_hash": "d60c1931d680c02eb5d0e5334e19c9231e67152b481be404387ea294dd25f922",
+              "response_hash": "1caeb8178bb7832760c357830656491a3e6dbc9e53200ac4323846b4d8f6041d",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2aa3578afb9cb7786dd23ad18",
+                "cf-ray": "a4ebc8b03f73a245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1290,
+                "output_tokens": 50
+              }
+            }
+          ],
+          "request_hash": "d60c1931d680c02eb5d0e5334e19c9231e67152b481be404387ea294dd25f922",
+          "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.04
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "unknown",
+              "confidence": 0.96,
+              "probabilities": {
+                "candidate_0": 0.02,
+                "unknown": 0.98
+              }
+            }
+          },
+          "latency_ms": 153.705
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "d60c1931d680c02eb5d0e5334e19c9231e67152b481be404387ea294dd25f922",
+        "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.04
+          },
+          "candidate": {
+            "choice": "unknown",
+            "probabilities": {
+              "candidate_0": 0.02,
+              "unknown": 0.98
+            },
+            "confidence": 0.96
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        },
+        "negative_scope": "evaluated_candidates_only"
+      }
+    },
+    {
+      "id": "fresh-exact-id-wrong-task",
+      "category": "hard-negative",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 135,
+              "request_hash": "8c872c907dc4ea89c5c6f5bbb3e4d235789db02579c0929c23e456d29981e2af",
+              "response_hash": "2f7594368d5bb02e013456fe4711dbbf15ae84e18c65621c6990cab4e91dec52",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2aadc76f79279b03216634973",
+                "cf-ray": "a4ebc8b138bca245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1289,
+                "output_tokens": 50
+              }
+            }
+          ],
+          "request_hash": "8c872c907dc4ea89c5c6f5bbb3e4d235789db02579c0929c23e456d29981e2af",
+          "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.03
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "unknown",
+              "confidence": 0.96,
+              "probabilities": {
+                "candidate_0": 0.02,
+                "unknown": 0.98
+              }
+            }
+          },
+          "latency_ms": 136.22
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "8c872c907dc4ea89c5c6f5bbb3e4d235789db02579c0929c23e456d29981e2af",
+        "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.03
+          },
+          "candidate": {
+            "choice": "unknown",
+            "probabilities": {
+              "candidate_0": 0.02,
+              "unknown": 0.98
+            },
+            "confidence": 0.96
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        },
+        "negative_scope": "evaluated_candidates_only"
+      }
+    },
+    {
+      "id": "fresh-request-cannot-expand-scope",
+      "category": "hard-negative",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 80,
+              "request_hash": "e7d9534ab9d7779d83bb1fe481e3d00086c46f49f27461479951128da6bf1192",
+              "response_hash": "aff5b713687f218bff27c8388ba82d308abfff42570892d442e522ddf277e118",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2ab5c77be977ea633bad310be",
+                "cf-ray": "a4ebc8b219bea245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1296,
+                "output_tokens": 50
+              }
+            }
+          ],
+          "request_hash": "e7d9534ab9d7779d83bb1fe481e3d00086c46f49f27461479951128da6bf1192",
+          "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.12
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "unknown",
+              "confidence": 0.24,
+              "probabilities": {
+                "candidate_0": 0.38,
+                "unknown": 0.62
+              }
+            }
+          },
+          "latency_ms": 81.042
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "e7d9534ab9d7779d83bb1fe481e3d00086c46f49f27461479951128da6bf1192",
+        "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.12
+          },
+          "candidate": {
+            "choice": "unknown",
+            "probabilities": {
+              "candidate_0": 0.38,
+              "unknown": 0.62
+            },
+            "confidence": 0.24
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        },
+        "negative_scope": "evaluated_candidates_only"
+      }
+    },
+    {
+      "id": "fresh-guidance-needs-language",
+      "category": "missing-language",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "observed": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 121,
+              "request_hash": "1f0d367a8e16e1b944b0bf4ec17a37bb69ab9ded271eaa0f6f882e0de3817e1d",
+              "response_hash": "17eb37c48f857dfaf7600114f3cb2bef29a5622094897119337db19b3f635c26",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2abb5773fae0da9ae3d7409d6",
+                "cf-ray": "a4ebc8b29a5da245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1283,
+                "output_tokens": 52
+              }
+            }
+          ],
+          "request_hash": "1f0d367a8e16e1b944b0bf4ec17a37bb69ab9ded271eaa0f6f882e0de3817e1d",
+          "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.93
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "candidate_0",
+              "confidence": 0.92,
+              "probabilities": {
+                "candidate_0": 0.96,
+                "unknown": 0.04
+              }
+            }
+          },
+          "latency_ms": 121.051
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "1f0d367a8e16e1b944b0bf4ec17a37bb69ab9ded271eaa0f6f882e0de3817e1d",
+        "questions_hash": "3c0ce38639ff3a357bbd78203218715c2aebd7a06d3d6a8d1d261bb9a2e200a3",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.93
+          },
+          "candidate": {
+            "choice": "candidate_0",
+            "probabilities": {
+              "candidate_0": 0.96,
+              "unknown": 0.04
+            },
+            "confidence": 0.92
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 1,
+          "eligible_count": 1,
+          "complete": true
+        }
+      }
+    },
+    {
+      "id": "fresh-two-distinct-jobs",
+      "category": "multi-candidate",
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "observed": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 127,
+              "request_hash": "a1bfeb61b03da5d4a697342781038187ffff77d43c482f245f0052b5aaec8c52",
+              "response_hash": "5354839447f9ecc337139a732399f7eab05403d230fdeb9d456d122e02a15a0d",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2ac2870f8a0ba81153ec1a683",
+                "cf-ray": "a4ebc8b35b5ea245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1878,
+                "output_tokens": 61
+              }
+            }
+          ],
+          "request_hash": "a1bfeb61b03da5d4a697342781038187ffff77d43c482f245f0052b5aaec8c52",
+          "questions_hash": "1dfee3b5aced64f221ac2fa42edef61856f15602fb4b5dd679bd3dfacee5e8b2",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.98
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "candidate_1",
+              "confidence": 0.51,
+              "probabilities": {
+                "candidate_0": 0.13,
+                "candidate_1": 0.67,
+                "unknown": 0.2
+              }
+            }
+          },
+          "latency_ms": 127.729
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "a1bfeb61b03da5d4a697342781038187ffff77d43c482f245f0052b5aaec8c52",
+        "questions_hash": "1dfee3b5aced64f221ac2fa42edef61856f15602fb4b5dd679bd3dfacee5e8b2",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.98
+          },
+          "candidate": {
+            "choice": "candidate_1",
+            "probabilities": {
+              "candidate_0": 0.13,
+              "candidate_1": 0.67,
+              "unknown": 0.2
+            },
+            "confidence": 0.51
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 2,
+          "eligible_count": 2,
+          "complete": true
+        }
+      }
+    },
+    {
+      "id": "fresh-two-jobs-need-language",
+      "category": "missing-language",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "observed": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "model_calls": 1,
+      "evaluation_scope": "model-called",
+      "provider_calls": [
+        {
+          "provider": "typesafe-live",
+          "requested_model": "jev-1.14.0",
+          "status": "returned",
+          "http_responses": [
+            {
+              "provider": "typesafe-live",
+              "endpoint": "https://api.typesafe.ai/v1/systemone",
+              "model": "jev-1.14.0",
+              "response_model": "jev-1.14.0",
+              "http_status": 200,
+              "ok": true,
+              "latency_ms": 99,
+              "request_hash": "9c66436f0e3f2a830adab1fca92b0ece8694fa020b72d725d7d864bd69120adc",
+              "response_hash": "cc8dc3e6ab30313631b5ebd37e47124282a7d7a918f0ad170fc9763220ba4cfa",
+              "request_ids": {
+                "x-typesafe-request-id": "req_01a165a2acad74d5ae7e5a963d37dd52",
+                "cf-ray": "a4ebc8b42c5aa245-ORD"
+              },
+              "usage": {
+                "input_tokens": 1869,
+                "output_tokens": 61
+              }
+            }
+          ],
+          "request_hash": "9c66436f0e3f2a830adab1fca92b0ece8694fa020b72d725d7d864bd69120adc",
+          "questions_hash": "1dfee3b5aced64f221ac2fa42edef61856f15602fb4b5dd679bd3dfacee5e8b2",
+          "response_model": "jev-1.14.0",
+          "raw_readings": {
+            "answer_exists": {
+              "type": "noul",
+              "noul": 0.97
+            },
+            "candidate": {
+              "type": "choice",
+              "choice": "candidate_1",
+              "confidence": 0.38,
+              "probabilities": {
+                "candidate_0": 0.17,
+                "candidate_1": 0.59,
+                "unknown": 0.24
+              }
+            }
+          },
+          "latency_ms": 99.59
+        }
+      ],
+      "passed": true,
+      "target": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+      "alignment": {
+        "contract_version": "1",
+        "model": "jev-1.14.0",
+        "snapshot_ref": "sha256:da1a977ac775d3fc138dbf825612376cb497faf9cc7a03d8cab87952309fc91e",
+        "request_hash": "9c66436f0e3f2a830adab1fca92b0ece8694fa020b72d725d7d864bd69120adc",
+        "questions_hash": "1dfee3b5aced64f221ac2fa42edef61856f15602fb4b5dd679bd3dfacee5e8b2",
+        "evidence_kind": "model_reading",
+        "readings": {
+          "answer_exists": {
+            "noul": 0.97
+          },
+          "candidate": {
+            "choice": "candidate_1",
+            "probabilities": {
+              "candidate_0": 0.17,
+              "candidate_1": 0.59,
+              "unknown": 0.24
+            },
+            "confidence": 0.38
+          }
+        },
+        "candidate_scope": {
+          "evaluated_count": 2,
+          "eligible_count": 2,
+          "complete": true
+        }
+      }
+    }
+  ],
+  "run_label": "fresh-paraphrase-regression",
+  "started_at": "2026-10-22T22:02:00.905Z",
+  "completed_at": "2026-10-22T22:02:02.360Z",
+  "base_commit": "c8b8991393ba3a304adb44726dabe5f57b6551ca",
+  "source_files": {
+    "src/routing.js": "42267475de85a6023a640075259e42dda064f01b03b5ae3254f5bb8517f5c910",
+    "src/clef.js": "da01cf9482528c04c37b727fd748cfa44daa16c48fe6e6662a05bcd731c69fa0",
+    "src/jev.js": "bd320f7794727450c2d27e6cee8c3afb86b94837520136b7c4a3d9c45a21b2bd",
+    "scripts/evaluate-routing.mjs": "1eb96f956250329d3f9c9125ceae7eb945e0457d3cdd7415ad820021e5c5b3e0",
+    "tests/fixtures/routing-evaluation.json": "f7e917d7180517b21aafe868c4c196dd7701e78f3c07aa9a5eb9e337ff4cb7e1",
+    "tests/fixtures/routing-evaluation-paraphrases.json": "979f45b68d0e5150274157a8f3a14c87e65f653a3b393cc30196f137a599ed04"
+  }
+}
