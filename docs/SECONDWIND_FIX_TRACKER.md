@@ -6,17 +6,30 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Current release result
+
+**FIX-01, FIX-02, and FIX-03 are COMPLETE.** The owner confirmed the GitHub recipient secret and explicitly authorized merging and deploying PR #6. PR #6 merged at `2026-10-22T16:44:30Z`; GitHub deployed and accepted release `048f08853e863391cf8652cafdd464140e810616` at approximately **12:45 p.m. EDT on October 22, 2026**.
+
+- Merged PR: https://github.com/Cirrefera/Second-Wind/pull/6
+- Release commit: `048f08853e863391cf8652cafdd464140e810616`.
+- Successful GitHub deployment/acceptance run: https://github.com/Cirrefera/Second-Wind/actions/runs/39816488828
+- Gateway version: `0187ab0f-9daa-4eb2-b1dd-0fb2d19e1936`, receiving 100% of traffic in deployment `35d5a442-c123-421d-9e8d-7125d092fe49`.
+- Pages production deployment: `71cbb351-482d-42d8-be44-1f69497dcbcd`.
+- Release acceptance returned `accepted: true`, the exact release commit, matching gateway/Pages identities, and one live product. Readiness and discovery agree with the owner-designated Base USDC recipient.
+- Funded-purchase verification remains `false`; no purchase or funds transfer was performed. No new product was published. FIX-16 still owns broader unknown-settlement reconciliation.
+- This completion record changes only the tracker. It does not change the released application, tests, configuration, or deployment workflow.
+
 ## Batch control and source identity
 
 - Selected IDs for batch 01: **FIX-01, FIX-02, FIX-03**. No fourth implementation item is authorized in this run.
 - Working branch: `fix/batch-01-payment-recovery-release`.
 - Published implementation commit: `248fb4d70db4afbc2b53313096d3121eef5ab54e`; verified tree: `32584acbfde5159db13078142d0ae0fd9a3685ae`. The local staged tree exactly matched the GitHub tree before the commit was created.
-- Reviewable draft PR: https://github.com/Cirrefera/Second-Wind/pull/6 (open, draft, unmerged). Subsequent batch-01 edits to this tracker contain handoff metadata only; the implementation/test/workflow files remain those tested at the commit above.
+- Merged PR: https://github.com/Cirrefera/Second-Wind/pull/6. Approved head `929b46464558457f5ffc8dbcc3db5149d2913d04` merged as `048f08853e863391cf8652cafdd464140e810616`. The merge tree exactly matched the approved head; only tracker metadata differs from the original locally tested implementation commit. GitHub reran the full checks on the merge commit.
 - Starting main and observed production commit: `82fe671add6468176134a344d38d2cbc3686b90e`.
 - Separate draft PR #5: `feat/proportional-product-scope` at `8711cdcf2dc31b16dc599da6db7cd0afd783a537`.
 - All fetched branches were checked for an existing canonical tracker/handoff and repository AGENTS.md; none was present. Starting checkout was clean.
-- Production observation: `/health` 200, gateway version `f25ead1b-a5fe-461d-88d2-b5d8cca91dcd`, main commit tag as above; `/api/proof` 503; discovery `payment_configured=false`, empty accepts for the one live product.
-- Active production source and configuration remain unchanged. On October 22 the owner supplied the intended Base-mainnet recipient; both recipient secrets were staged in undeployed Worker version `8d7a1ddb-ee2c-472a-b744-cc9be36f7d7a`. No merge, production deployment, funded canary, product publication, or payment-data mutation was performed. Merge and deployment remain separate approval steps under the original handoff.
+- Pre-release production observation: `/health` 200 on version `f25ead1b-a5fe-461d-88d2-b5d8cca91dcd` and baseline commit; `/api/proof` 503; discovery unconfigured with empty accepts. The accepted release above supersedes that observation.
+- The owner supplied the intended Base-mainnet recipient, both recipient secrets were staged in version `8d7a1ddb-ee2c-472a-b744-cc9be36f7d7a`, and the owner then confirmed the GitHub secret and authorized merge/deployment. GitHub deployed the tested application and inherited the approved recipient configuration. No funded canary or product publication was performed; the existing idempotent migration scripts reported zero rows read/written.
 - Baseline local checks on Node v24.19.0: 54/54 gateway tests, 21/21 actual Pages ingress tests, and 55 legacy utility assertions passed. Both locked dependency installs used `npm ci --ignore-scripts --no-audit --no-fund`.
 - Reviewed historical reports: `secondwind-repository-review-2026-10-22.md`, `secondwind-repository-evidence-2026-10-22.json`, `secondwindai-com-audit-2026-10-22.md`, `secondwindai-com-evidence-2026-10-22.json`. Historical claims for unselected items remain pending revalidation.
 
@@ -31,14 +44,14 @@ P0: current batch release/payment blockers. P1: next release, commerce integrity
 ### FIX-01 — Correct payment configuration and readiness
 
 - Priority: **P0**
-- Status: **BLOCKED**
-- Evidence: The last live GET /api/proof returned 503 with recipient configured=false and verified=false. The active Worker has X402_PAY_TO but lacks X402_EXPECTED_PAY_TO. The owner has now supplied the intended Base-mainnet recipient independently of that encrypted setting, and both recipient bindings are present in the undeployed staged version. Existing secret values were not retrieved.
-- Dependencies: Owner-recipient input is satisfied and Worker configuration is staged. The matching GitHub release-check secret, authorized merge/deployment, and production acceptance remain.
+- Status: **COMPLETE**
+- Evidence: The owner supplied the intended recipient independently of the old encrypted setting. The accepted production release reports ready/configured/verified and usable Base USDC discovery with the intended recipient. Both recipient bindings and the facilitator binding are present on the active version. Existing secret values were not retrieved.
+- Dependencies: Owner input, matching GitHub release input, staged Worker correction, merge/deployment authorization, and production acceptance are satisfied.
 - Acceptance criteria: configuration and readiness checks accurately distinguish valid, invalid, and independently verified recipients; discovery publishes usable intended payment requirements; production acceptance is recorded separately from local tests. Do not execute a funded canary without authorization.
 - Implementation location: `workers/gateway/src/contracts.js`, `workers/gateway/src/index.js`, `workers/gateway/src/discovery.js`, `workers/gateway/wrangler.toml`, `workers/gateway/tests/recipient.test.mjs`, `workers/gateway/README.md`.
-- Verification: New quote and payable-discovery creation require a valid non-burn recipient matching the independently supplied expectation. Diagnostics contain fixed codes only. Targeted recipient + HTTP suite: 21/21 pass. Combined gateway suite: 76/76 pass. Paid recovery/replay stays available after verification configuration loss. The newly supplied address passes strict viem/EIP-55 and application checks, including configured=true, verified=true, status=verified with matching inputs on eip155:8453. Staged code modules exactly match the prior active version; unrelated bindings, main module, compatibility settings, and active deployment are unchanged.
-- Release state: Source implemented and locally verified; unmerged and undeployed. Both approved recipient inputs are staged in version `8d7a1ddb-ee2c-472a-b744-cc9be36f7d7a` with deploy=false. This version inherits the old production code and is only a source for secret inheritance during the eventual GitHub code release. It is not the batch-01 application release. Live traffic remains on the baseline. No funded purchase was performed.
-- Remaining blocker: Configure matching GitHub Actions repository secret X402_EXPECTED_PAY_TO, then obtain merge/deployment authorization and record fresh production acceptance. The connected GitHub tools cannot manage Actions secrets and no authenticated GitHub CLI is available; the owner can set it at https://github.com/Cirrefera/Second-Wind/settings/secrets/actions. The owner-recipient input is no longer missing. The old encrypted recipient's exact validation defect remains unknown.
+- Verification: New quote and payable-discovery creation require a valid non-burn recipient matching the independently supplied expectation. Diagnostics contain fixed codes only. Targeted recipient + HTTP suite: 21/21 pass. Combined gateway suite: 76/76 pass locally and again in GitHub. Paid recovery/replay stays available after verification configuration loss. The supplied address passes strict viem/EIP-55 and application checks. Before release, configuration staging preserved the old code and active deployment. The subsequent accepted release and independent public checks report configured=true, verified=true, status=verified with the intended recipient on eip155:8453; authenticated checks confirm the new source version and preserved unrelated bindings.
+- Release state: Merged and deployed through GitHub in `048f08853e863391cf8652cafdd464140e810616`; postdeployment acceptance passed on gateway `0187ab0f-9daa-4eb2-b1dd-0fb2d19e1936` and Pages `71cbb351-482d-42d8-be44-1f69497dcbcd`. The approved settings were inherited from the staged version into the new code release. No funded purchase was performed.
+- Remaining blocker: None for this item's stated acceptance. The exact defect in the previous unreadable encrypted value remains a historical unknown; it was replaced with the independently supplied approved value. Configuration verification is not proof of a funded transaction.
 
 Original bounded scope:
 
@@ -49,14 +62,14 @@ Identify the actual validation failure without exposing secrets. Correct the app
 ### FIX-02 — Recover interrupted pre-settlement purchases
 
 - Priority: **P0**
-- Status: **READY_FOR_RELEASE**
-- Evidence: Main source still leaves prepared purchases in payment_in_progress after prepared-to-settling write failure; draft PR #5 retains the same path. Audit fault fixture recorded one verification and zero settlements.
+- Status: **COMPLETE**
+- Evidence: The pre-batch source stranded prepared purchases after a prepared-to-settling write failure. The released fix passes the real SQLite fault/race regressions, including one execution and one settlement after safe prepared-state recovery. PR #5 remains separate and was not merged.
 - Dependencies: Durable ownership/state fencing; preserve existing private recovery credentials and settlement uncertainty rules.
 - Acceptance criteria: fault-injection tests demonstrate recovery after the database fault disappears, with no endless retry loop, repeated side effects, or extra settlement calls.
 - Implementation location: `workers/gateway/src/commerce.js`; `workers/gateway/tests/interrupted-purchase.test.mjs`.
 - Verification: 11 new fault/race regressions pass within 76/76 combined gateway tests. Injected failures before/after prepared and settling writes, initial claim acknowledgement loss, concurrent original/resumed calls, private-token failures, stale cleanup racing settlement, and late execution writes. Saved prepared results resume with one execution and one settlement; repeated retries do not settle again. No schema change.
-- Release state: Source implemented and locally verified, including independent ownership/state review; unmerged and undeployed. No production fault injection or funded settlement performed.
-- Remaining blocker: Authorized merge/deployment and production acceptance remain. If a settling claim commits but acknowledgement and readback are unavailable, later invocations remain settlement_pending_recovery and require trustworthy reconciliation (FIX-16), rather than guessing that no money moved.
+- Release state: Included in the merged, deployed, accepted release `048f08853e863391cf8652cafdd464140e810616`. The 76 gateway tests, including all 11 new fault/race regressions, passed again in GitHub Actions before deployment. No production fault injection or funded settlement was performed.
+- Remaining blocker: None for this item's stated acceptance. If a settling claim commits but acknowledgement and readback are unavailable, later invocations remain settlement_pending_recovery and require trustworthy reconciliation (FIX-16), rather than guessing that no money moved.
 
 Original bounded scope:
 
@@ -67,14 +80,14 @@ Implement a bounded recovery or explicit terminal-outcome path using durable own
 ### FIX-03 — Add production release acceptance checks
 
 - Priority: **P0**
-- Status: **READY_FOR_RELEASE**
-- Evidence: Main workflow stops after Worker and Pages uploads; /health currently identifies 82fe671add6468176134a344d38d2cbc3686b90e while /api/proof is degraded.
-- Dependencies: FIX-01 for a passing production release; reviewed expected recipient and existing Cloudflare API credentials for read-only release acceptance.
+- Status: **COMPLETE**
+- Evidence: GitHub run `39816488828` ran release-input preflight before mutations, deployed the gateway and Pages, and then passed the new production acceptance step for exact commit `048f08853e863391cf8652cafdd464140e810616`.
+- Dependencies: FIX-01 readiness, owner-designated expected recipient, and Cloudflare API access were exercised successfully by the release workflow.
 - Acceptance criteria: incorrect deployment identity, degraded readiness, or unavailable payment configuration causes acceptance to fail. Local workflow verification must not be represented as a completed production deployment.
 - Implementation location: `.github/workflows/deploy.yml`; `scripts/release-acceptance.mjs`; `scripts/release-acceptance.test.mjs`; root `package.json`.
-- Verification: 32/32 offline release-acceptance tests pass. Checks reject wrong Pages/gateway commit, failed/degraded readiness, mismatched gateway versions, missing dependencies, unavailable discovery, and wrong recipient/network/asset/amount. Both builds and workflow YAML/order validation pass. Current live Pages API field shapes were independently checked; production acceptance was not run for a new release.
-- Release state: Source implemented and locally verified; unmerged and undeployed. Workflow preflight precedes mutations; read-only acceptance follows both deployments. It never creates a quote/purchase, transfers funds, or automatically rolls back.
-- Remaining blocker: Configure GitHub X402_EXPECTED_PAY_TO to the owner-supplied recipient, preserve the staged FIX-01 Worker secrets for inheritance, and authorize merge/deployment. Existing Cloudflare release token must have Pages metadata read access; any permission failure causes truthful acceptance failure.
+- Verification: All 32 offline release-acceptance tests passed locally and again in GitHub Actions. They reject wrong Pages/gateway commit, failed/degraded readiness, mismatched gateway versions, missing dependencies, unavailable discovery, and wrong recipient/network/asset/amount. Both builds passed. The production checker then returned accepted=true for the exact release and both deployment identities.
+- Release state: Merged, deployed, and exercised successfully in the authorized GitHub release. Preflight preceded mutations; read-only acceptance followed both deployments. No quote/purchase, funds transfer, or automatic rollback was performed.
+- Remaining blocker: None for this item's stated acceptance. Broader PR checks and production branch/environment enforcement remain FIX-04.
 
 Original bounded scope:
 
@@ -511,25 +524,51 @@ Environment: Node v24.19.0; repository lockfiles unchanged; dependencies install
 | `git diff --check` | Pass |
 | Independent selected-code review | No concrete remaining blocker in the ownership/retry logic; independent release/configuration review also found no blocker |
 
-The release-test subprocess was denied in the restricted sandbox; the identical offline command passed with permitted subprocess execution. No network or payment access was needed for those tests. This is local verification, not GitHub Actions evidence, staging acceptance, or production verification.
+The local release-test subprocess was denied in the restricted sandbox; the identical offline command passed with permitted subprocess execution. No network or payment access was needed for those local tests. The table above records local evidence; the separate GitHub release evidence below records the subsequent CI and production results.
 
-### Production observations and limitations
+### GitHub release verification
+
+Run `39816488828`, job `119956248588`, executed the approved merge commit. The workflow concluded success at `2026-10-22T16:45:33Z`.
+
+| Release check | Result |
+| --- | --- |
+| Legacy utilities and Pages ingress | Pass; 55 utility assertions and 21/21 ingress tests |
+| Release acceptance failure-path suite | 32/32 pass; zero failures/skips |
+| Gateway commerce suite | 76/76 pass; zero failures/skips |
+| Gateway and Pages builds | Both pass |
+| Required release-input preflight | Pass before deployment/migrations |
+| Existing commerce/outbox migrations | Pass; 8 and 7 queries respectively, both reporting zero rows read/written |
+| Gateway deployment | Pass; version `0187ab0f-9daa-4eb2-b1dd-0fb2d19e1936` |
+| Pages deployment | Pass; `71cbb351-482d-42d8-be44-1f69497dcbcd` |
+| Production acceptance | Pass; accepted=true for exact merge commit, both deployment identities, payment readiness and intended discovery |
+
+At `2026-10-22T16:47:06.070Z`, an independent authenticated Cloudflare read confirmed 100% of traffic on the release version, the exact source tag, all 12 preserved/staged binding names/types, and unchanged D1/R2 resource targets. No binding was missing or had a type mismatch.
+
+An independent Pages metadata read at approximately `2026-10-22T16:46:52Z` confirmed the canonical production deployment, successful deploy stage, clean `main` source, exact release commit, and expected custom domains.
+
+At `2026-10-22T16:49:41.076027Z` (12:49:41 p.m. EDT), the explicitly identified `SecondWind-readiness-review/1.0` client received HTTP 200 from `/health`, `/api/proof`, `/api/tools`, and `/v2/x402/discovery/resources`. Each response carried the expected Worker version. Health identified the exact release commit. Proof reported ready/configured/verified with all listed dependency checks true. Catalog and discovery each exposed one live product; discovery payment requirements matched the designated recipient and Base network. These were read-only requests and did not create quotes or purchases.
+
+The default Python client separately received an edge 403/Error 1010 before application routing, as it had before this release. The identified review client and GitHub acceptance both passed. No edge security settings were changed; any broader client-compatibility review belongs to the existing domain/edge follow-up in FIX-25.
+
+### Historical pre-release observations and verification limits
 
 - At approximately 2026-10-22 15:37 UTC (11:37 a.m. EDT), `/health` returned 200 with gateway version `f25ead1b-a5fe-461d-88d2-b5d8cca91dcd` and main tag `82fe671add6468176134a344d38d2cbc3686b90e`.
 - `/api/proof` returned 503 with recipient configured=false and verified=false. The listed facilitator/D1/schema/R2 booleans were true. These booleans do not prove a live facilitator payment or storage round trip.
 - Discovery returned payment_configured=false and an empty accepts array for SW-PT-0006 v1. No paid URL, quote creation, or recovery-delivery request was used for the live check.
 - At 2026-10-22 15:43:04 UTC, Pages metadata identified canonical production deployment `03f8463f-83d7-419c-b14f-13d5c310163c`, clean `main`, commit `82fe671add6468176134a344d38d2cbc3686b90e`, and the expected custom domain. The acceptance fixtures match the actual response field types.
-- The newly prepared release has not been deployed. No production pass, wallet-control proof, or funded commerce success is claimed.
+- Those observations preceded the accepted deployment recorded above. No wallet-control proof or funded commerce success is claimed; the owner's recipient designation and read-only release acceptance do not constitute a funded transaction.
 
 ### Required release inputs and change plan
+
+**Completed:** The owner subsequently confirmed the GitHub secret and instructed “done merge and deploy pr 6.” The plan below was executed through the existing GitHub workflow. Its staging history is retained to explain how the approved recipient reached the release; it is no longer a list of outstanding approvals.
 
 Owner-input follow-up, October 22 at 12:16 p.m. EDT:
 
 - The owner supplied the intended Base-mainnet receiving address in this conversation. Its strict EIP-55 checksum, non-burn status, and matching application configuration were verified. The address is accepted as the owner's designation; no wallet private key or additional wallet-control proof is needed for that designation.
 - Staged `X402_PAY_TO` and `X402_EXPECTED_PAY_TO` together using the same owner-supplied value through the version merge-patch API with `deploy=false`. The new version is `8d7a1ddb-ee2c-472a-b744-cc9be36f7d7a` (version 16, created `2026-10-22T16:16:09.098803Z`). No recipient values or other secret values are included in this tracker.
 - The staging source was active version `f25ead1b-a5fe-461d-88d2-b5d8cca91dcd`, source commit `82fe671add6468176134a344d38d2cbc3686b90e`. Direct before/after API comparison confirmed identical code modules, unchanged unrelated bindings, and unchanged compatibility settings. The staged version has a staging message and no source tag; do not describe it as the batch-01 source release.
-- Deployment `3626c8da-f38c-4f6b-b1a2-660250ee913f` still sends 100% of traffic to the prior active version. The staged settings have not changed live traffic. There was no funded transaction.
-- The GitHub connector exposes no Actions-secret management, and there is no authenticated local GitHub CLI. The matching repository secret remains an owner action at https://github.com/Cirrefera/Second-Wind/settings/secrets/actions; no browser fallback or alternate secret-provisioning workflow was used.
+- At that staging step, deployment `3626c8da-f38c-4f6b-b1a2-660250ee913f` still sent 100% of traffic to the prior active version. The staging operation did not change live traffic. The accepted release recorded above subsequently replaced it. There was no funded transaction.
+- The GitHub connector exposes no Actions-secret management, and there is no authenticated local GitHub CLI. The owner completed the repository secret step and confirmed it before authorizing the release. Workflow preflight and postdeployment acceptance then passed. No browser fallback or alternate secret-provisioning workflow was used.
 
 1. Owner-recipient input is complete. Preserve the designated address; do not re-infer it from historical Sepolia evidence or require the owner to repeat it as a new approval.
 2. Configure the GitHub Actions repository secret `X402_EXPECTED_PAY_TO` with the same owner-supplied address. Before release, recheck that staged version `8d7a1ddb-ee2c-472a-b744-cc9be36f7d7a` remains the latest upload; secret inheritance uses the latest uploaded version. Preserve `CDP_FACILITATOR_KEY` and all unrelated bindings. Do not deploy this staging-only version directly as the batch-01 fix.
@@ -550,34 +589,41 @@ Next selected IDs: **FIX-04, FIX-05, FIX-06**. They are the first three actionab
 
 ## Ready-to-paste continuation prompt
 
-Continue the existing Second Wind repair in batches of exactly three stable backlog IDs. Do not restart the audit or redesign the application.
+Continue Second Wind remediation in batches of exactly three stable backlog IDs. Finish the existing application without redesign or scope expansion.
 
 Repository: https://github.com/Cirrefera/Second-Wind
-Canonical tracker: docs/SECONDWIND_FIX_TRACKER.md
-Working branch: fix/batch-01-payment-recovery-release
-Verified implementation commit: 248fb4d70db4afbc2b53313096d3121eef5ab54e
-Verified implementation tree: 32584acbfde5159db13078142d0ae0fd9a3685ae
-Current batch draft PR: https://github.com/Cirrefera/Second-Wind/pull/6
-This tracker may be on a later documentation-only handoff commit. Fetch and inspect the branch head; preserve that tracker update instead of resetting the branch to the implementation commit.
+Canonical tracker: docs/SECONDWIND_FIX_TRACKER.md on main; fetch the current main head before editing. A documentation-only completion record follows the released commit; do not mistake a later tracker commit for a new application deployment.
+Merged PR #6: https://github.com/Cirrefera/Second-Wind/pull/6
+Released application commit: 048f08853e863391cf8652cafdd464140e810616
+Approved PR head: 929b46464558457f5ffc8dbcc3db5149d2913d04
+Original locally tested implementation: 248fb4d70db4afbc2b53313096d3121eef5ab54e
+Successful GitHub deployment/acceptance run: https://github.com/Cirrefera/Second-Wind/actions/runs/39816488828
+Gateway version: 0187ab0f-9daa-4eb2-b1dd-0fb2d19e1936
+Gateway deployment: 35d5a442-c123-421d-9e8d-7125d092fe49, 100% traffic.
+Pages deployment: 71cbb351-482d-42d8-be44-1f69497dcbcd.
 
-Production/main was last observed at 82fe671add6468176134a344d38d2cbc3686b90e. Separate draft PR #5 remains feat/proportional-product-scope at 8711cdcf2dc31b16dc599da6db7cd0afd783a537. Inspect current refs before editing, preserve unrelated changes, and do not merge the whole draft to obtain a fix.
+FIX-01, FIX-02, and FIX-03 are COMPLETE against their stated acceptance criteria. FIX-04 through FIX-27 remain READY and unimplemented in this batch. Do not reopen completed items merely because older documents describe missing recipient input or an undeployed PR.
 
-Batch 01 outcomes: FIX-01 BLOCKED overall, with code locally verified, owner-recipient input received, and both Worker recipient secrets staged without deployment. GitHub X402_EXPECTED_PAY_TO configuration and authorized merge/release remain. FIX-02 and FIX-03 READY_FOR_RELEASE. No merge/production deployment, funded canary, product publication, production migration or buyer-data mutation was performed. Local verification: 76 gateway tests, 32 release tests, 21 actual Pages ingress tests, 55 legacy assertions, both builds, workflow YAML/order validation, and diff whitespace check passed. These are local results, not current-head CI or production evidence.
+The owner supplied and approved the current Base-mainnet recipient, confirmed the matching GitHub secret, and explicitly instructed "done merge and deploy pr 6." Both Worker recipient settings were inherited from staged version 8d7a1ddb-ee2c-472a-b744-cc9be36f7d7a into the tested GitHub release. Do not deploy that old staging version; it contains the previous production code. Preserve the approved recipient and all unrelated credentials. Recipient input is no longer missing.
+
+Release evidence: GitHub reran 76 gateway tests, 32 release-acceptance tests, 21 actual Pages ingress tests, and 55 utility assertions successfully. Both builds, input preflight, existing idempotent migration scripts, gateway deployment, Pages deployment, and postdeployment acceptance passed. The migration commands reported zero rows read/written. Acceptance returned accepted=true for the exact release commit and both deployment identities, with one live product and funded_purchase_verified=false.
+
+Independent authenticated checks confirmed the exact active source tag, 100% traffic, all 12 expected binding names/types, and unchanged D1/R2 targets. At 16:49:41 UTC (12:49:41 p.m. EDT) the explicitly identified review client received HTTP 200 from health, proof, catalog, and discovery, all with the expected Worker version. Proof was ready/configured/verified with all listed dependencies true; discovery matched the owner recipient and Base network. No funded purchase, production fault injection, or new product publication occurred. Unknown settlement outcomes still require trustworthy reconciliation under FIX-16.
+
+Separate draft PR #5 remains feat/proportional-product-scope at last observed head 8711cdcf2dc31b16dc599da6db7cd0afd783a537. It was not merged or modified by this release. Re-fetch current refs before editing and preserve unrelated changes.
 
 Select exactly FIX-04, FIX-05, and FIX-06 next.
 
-FIX-04 — Enforce PR verification and production release boundaries. Inspect the current workflows and external GitHub protection state. Add the intended PR verification and explicit production branch/environment constraints. Ensure manual dispatch cannot deploy an unintended branch to production. Prepare required-status-check/ruleset/environment changes, applying them only when authorized. Acceptance: intended checks run before merge, protections are documented/applied when authorized, and production release is constrained to the approved path. Preserve FIX-03’s preflight and acceptance; do not run the deployment workflow from this feature branch merely to obtain a test result.
+FIX-04 — Enforce PR verification and production release boundaries. Inspect current workflows and GitHub protections. Add intended PR checks and explicit branch/environment constraints; preserve FIX-03 preflight and acceptance. Prepare concrete external protection changes and apply only when authorized. Acceptance: intended checks run before merge, protections are documented/applied when authorized, and production deployment follows the approved path. Do not dispatch production from a feature branch merely to obtain test evidence.
 
-FIX-05 — Resolve public-source and paid-content boundary. Reconfirm current exposure: audit found public SW-PT-0006 v1 guidance at 5,333 bytes and SHA-256 62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe, matching live metadata. Produce concrete policy choices/effects for the owner and enforce the selected policy when that decision is available. Acceptance: publication behavior and claims match the chosen exclusive-content versus packaging/provenance/automation/delivery model, while existing buyers keep exact purchased versions. Evidence gathering is actionable now; final policy enforcement needs the owner’s decision. Do not invent that decision, delete history, make the repository private, or claim public history became confidential.
+FIX-05 — Resolve public-source and paid-content boundary. Reconfirm historical exposure of SW-PT-0006 v1: 5,333 bytes, SHA-256 62a28a512af90491310989a0cef85afdd6f4e53cddddd4b43cff6b5eb975abbe. Prepare concrete owner policy choices and enforce the chosen policy when supplied. Preserve historical purchased versions. Do not invent a commercial policy, delete public history, make a repository private, or claim previously public content is confidential.
 
-FIX-06 — Verify exact current head of draft PR #5. Fetch the current head, run its relevant checks in an isolated checkout/worktree, compare it against production and the batch-01 fixes, and record exact commit/results plus integration/release blockers. Acceptance: reproducible exact-commit verification and a clear merge/release readiness assessment. Prior author-reported 146-test results are historical, not current CI evidence. Do not restore superseded code or merge automatically. Record newly demonstrated defects under new stable backlog IDs rather than expanding this item silently.
+FIX-06 — Verify the exact current PR #5 head in an isolated checkout/worktree. Run relevant checks, compare with the accepted batch-01 release, and record reproducible exact-commit evidence plus integration blockers. Historical reports of 146 passing tests are not current-head CI. Do not restore superseded code or merge the entire draft to obtain one change. Record new demonstrated defects under new stable IDs rather than silently expanding this item.
 
-Authorization continues to cover inspection, isolated code changes, tests, tracker updates, and reviewable branches/draft PRs. The owner's later supplied address authorized designating and staging that specific recipient; this has been done. It does not authorize transfer of funds, replacing that recipient with a different one, unrelated production settings, merging/deploying, product publication, or rewriting public history. Reuse later explicit authorization. Finish all independent preparation before asking only for a concrete remaining action.
+Authorization for the next batch covers inspection, reversible isolated code fixes, tests, tracker updates, and reviewable branches/draft PRs. The user's specific merge/deployment approval applied to PR #6 and has been executed; it is not blanket authorization for unrelated production changes, future PR merges, funds transfers, different merchant recipients, product publication, or public-history rewriting. Reuse any later explicit authorization. Finish independent preparation before asking only for a concrete remaining action.
 
-FIX-01 recipient input is satisfied by the owner's October 22 message. Strict checksum and application validation passed. Both Worker recipient bindings were staged in version 8d7a1ddb-ee2c-472a-b744-cc9be36f7d7a without deployment. Configure the matching GitHub repository secret X402_EXPECTED_PAY_TO before release; the connector cannot manage that secret, so the owner must use repository Actions secrets settings unless a permitted capability becomes available. The staged version contains the unchanged old production code, not batch-01 source. Use its secrets through the normal approved GitHub release, preserving facilitator credentials and unrelated bindings. The old encrypted recipient's precise defect is unknown. Recheck that the staged version remains latest before release; staging is not deployment. Do not ask for another recipient merely because an earlier handoff said it was missing.
+Preserve the single gateway, thin Pages ingress, D1 purchase authority, R2 payload/receipt storage, private-token recovery, and the existing purchase/language handshake. Settling/uncertain payments must never be blindly retried. Do not add a recurring autonomous monitor.
 
-Preserve the existing single gateway, thin Pages ingress, D1 purchase authority, R2 payload/receipt storage, private-token recovery, and the existing purchase/language handshake. The API-only homepage 404 and GitHub Pages upload method are intentional. Settling/uncertain states are never blindly retried; a lost acknowledgement plus unreadable settlement claim requires explicit reconciliation. Authenticated pre-settlement cleanup does not imply external side effects were undone.
+Keep all FIX-01 through FIX-27 entries visible with priority, status, evidence, dependencies, acceptance, implementation, verification, and blockers. Work only on the selected three implementation IDs. If one is blocked, complete its useful independent work, record the exact blocker, and continue the other selected IDs without substituting a fourth item.
 
-Keep every FIX-01 through FIX-27 entry visible with priority, status, evidence, dependencies, acceptance, implementation, verification and blocker. Do not reset/renumber/delete entries or equate prepared source with production completion. Work only on the selected three implementation IDs; if blocked, finish independent work, record the exact blocker, and continue the other selected IDs without substituting a fourth.
-
-Return the same six sections: batch outcome; complete updated backlog; exact branch/commit/PR plus local/CI/staging/production verification; concrete unresolved inputs/approvals; next three actionable IDs; and a self-contained next-model prompt filled with actual results.
+Return the same six sections: batch outcome; complete updated backlog; exact branch/commit/PR and local/CI/staging/production evidence; concrete unresolved inputs/approvals; next three actionable IDs; and a self-contained next-model prompt filled with actual results.
