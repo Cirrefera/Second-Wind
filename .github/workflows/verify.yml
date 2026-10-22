@@ -1,0 +1,46 @@
+name: Verify Second Wind
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: second-wind-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    # This stable check name is the required status check in the release plan.
+    name: Verify application
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            workers/gateway/package-lock.json
+      - name: Install locked Pages dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Install locked gateway dependencies
+        working-directory: workers/gateway
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Test legacy utilities and actual Pages ingress
+        run: npm run selftest
+      - name: Test release acceptance failure paths
+        run: npm run test:release
+      - name: Test the gateway commerce implementation
+        working-directory: workers/gateway
+        run: npm test
+      - name: Build the application Worker
+        working-directory: workers/gateway
+        run: npm run build
+      - name: Build the Pages ingress
+        run: npm run build:worker
