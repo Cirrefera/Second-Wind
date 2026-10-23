@@ -4,6 +4,8 @@ The owner asked us to assess the questions behind unsuccessful probability readi
 
 **The corrected resolver passes 60/60 fixed regression outcomes: 38/38 model-called cases and 22/22 application-only cases. All 219 gateway tests and both builds pass.** The original excluded-deployment failure is resolved in this regression. Production semantic assistance remains disabled pending the separate catalog and acceptance work described below.
 
+**[PR #9](https://github.com/Cirrefera/Second-Wind/pull/9) and [PR #10](https://github.com/Cirrefera/Second-Wind/pull/10) are merged, and the combined application release is accepted in production.** Release `d8541816a4242cdab1aaceea9dd2640edc19b676` passed acceptance on October 22, 2026 at **8:46:36 p.m. EDT / October 23, 00:46:36 UTC**. The production record below includes the earlier stopped attempt and its deterministic timeout correction.
+
 ## Finding and correction
 
 The original routing questions combined three different decisions: relative candidate preference, whether any candidate supported something in the request, and whether a particular product satisfied the requested task. A global existence reading did not establish support for each returned product. The meaning of “supports the request” also changed between a single required outcome, several independent tasks, and topic browsing.
@@ -87,7 +89,27 @@ All **219/219 gateway tests** and both gateway/Pages builds pass locally. Focuse
 
 The first [production run 39879436912](https://github.com/Cirrefera/Second-Wind/actions/runs/39879436912), job `120172983926`, stopped in the gateway test gate with **218/219 passing**, before all migration/deployment/acceptance steps. The late-shape timeout regression observed two provider calls instead of one. A wall-clock deadline comparison alone could allow a late continuation after the caller's timer had already rejected. The follow-up permanently closes the chain when its outer promise settles, and tests expiry while the wall clock is deliberately fixed. This preserves the actual timeout guarantee without relaxing the test or retrying the failed release unchanged.
 
-This lifecycle correction follows the final live question evaluation. The native evidence retains its original implementation hashes; it is not relabeled as an evaluation of a later source commit. The question templates, candidate-support composition, probability bands, and evaluator remain unchanged by the timeout correction. Exact follow-up verification and accepted release identities are recorded when the corrected release passes its required gates.
+This lifecycle correction follows the final live question evaluation. The native evidence retains its original implementation hashes; it is not relabeled as an evaluation of a later source commit. The question templates, candidate-support composition, probability bands, and evaluator remain unchanged by the timeout correction. The strengthened fixed-wall-clock regression fails before the guard and passes after it; all 219 gateway tests pass again.
+
+### Accepted combined release
+
+[PR #10](https://github.com/Cirrefera/Second-Wind/pull/10) supplies the permanent timeout-closure correction. Its [verification run 39879914304](https://github.com/Cirrefera/Second-Wind/actions/runs/39879914304), job `120174532617`, completed successfully for exact source `b032b0ee8c6ce29cbabe08a0ff36e0f02f945135`. GitHub test-merge `47dceafbd5cc5bad15ea68782017df5234e4ea89`, local source, published source, and final merged release all have tree `e21bb4ac165254b0892a3f62f4fbd855b4754e56`.
+
+The combined release `d8541816a4242cdab1aaceea9dd2640edc19b676` passed [production run 39880042324](https://github.com/Cirrefera/Second-Wind/actions/runs/39880042324), job `120174945506`. That run repeated all **219 gateway tests, 32 release-acceptance tests, 21 Pages ingress tests, legacy checks, all 16 actual Dynamic Worker selections, and both builds**. It then passed release-input validation, the four existing additive migrations, gateway and Pages deployment, and exact-release acceptance.
+
+```json
+{
+  "accepted": true,
+  "expected_commit": "d8541816a4242cdab1aaceea9dd2640edc19b676",
+  "gateway_version": "876f2e07-c36a-4263-809e-b94d25daac49",
+  "pages_deployment": "00fbc388-cd26-4fcf-a54a-e1b41a825bce",
+  "origin": "https://secondwindai.com",
+  "live_products": 1,
+  "funded_purchase_verified": false
+}
+```
+
+Acceptance was observed at **2026-10-23 00:46:36 UTC / October 22, 8:46:36 p.m. EDT**. [Machine-readable release evidence](evidence/jev-routing/question-audit/release-acceptance.json) binds both source corrections, verification runs, the stopped production attempt, and final acceptance. A subsequent documentation-only commit records this result without changing the accepted application identity. Only unrelated PR #1 remains open; all in-scope application changes are on `main`.
 
 ## Reproduce and inspect
 

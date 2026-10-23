@@ -1,0 +1,71 @@
+{
+  "schema_version": "1",
+  "kind": "github_release_acceptance",
+  "observed_accepted_at": "2026-10-23T00:46:36.8495895Z",
+  "question_design": {
+    "pr": 9,
+    "source_commit": "0746867fa242f0989832ac7ef564ef9de3ace961",
+    "test_merge": "ae977b4c5b7a010cb819184709efb629654de590",
+    "merged_commit": "d22ef5d337c2ee7c6d05969f3a30928c9e9de0db",
+    "tree": "3fa9e758ed87f979515e7a39847e60703ac8975a",
+    "verification_run": 39879298696,
+    "verification_job": 120172522180,
+    "verification_conclusion": "success"
+  },
+  "initial_production_attempt": {
+    "run": 39879436912,
+    "job": 120172983926,
+    "conclusion": "failure",
+    "gateway_tests": {
+      "passed": 218,
+      "total": 219
+    },
+    "reason": "Late request-shape continuation started a second provider call after caller timeout.",
+    "migration_and_deployment_steps": "skipped"
+  },
+  "deadline_correction": {
+    "pr": 10,
+    "source_commit": "b032b0ee8c6ce29cbabe08a0ff36e0f02f945135",
+    "test_merge": "47dceafbd5cc5bad15ea68782017df5234e4ea89",
+    "merged_commit": "d8541816a4242cdab1aaceea9dd2640edc19b676",
+    "tree": "e21bb4ac165254b0892a3f62f4fbd855b4754e56",
+    "verification_run": 39879914304,
+    "verification_job": 120174532617,
+    "verification_conclusion": "success",
+    "live_question_evaluation_repeated": false,
+    "question_templates_and_composition_unchanged": true
+  },
+  "production": {
+    "run": 39880042324,
+    "job": 120174945506,
+    "attempt": 1,
+    "conclusion": "success",
+    "gateway_tests": {
+      "passed": 219,
+      "total": 219
+    },
+    "release_tests": {
+      "passed": 32,
+      "total": 32
+    },
+    "pages_tests": {
+      "passed": 21,
+      "total": 21
+    },
+    "actual_dynamic_worker_selections": 16,
+    "both_builds": "success",
+    "release_input_preflight": "success",
+    "existing_additive_migrations": 4,
+    "acceptance": {
+      "accepted": true,
+      "expected_commit": "d8541816a4242cdab1aaceea9dd2640edc19b676",
+      "gateway_version": "876f2e07-c36a-4263-809e-b94d25daac49",
+      "pages_deployment": "00fbc388-cd26-4fcf-a54a-e1b41a825bce",
+      "origin": "https://secondwindai.com",
+      "live_products": 1,
+      "funded_purchase_verified": false
+    }
+  },
+  "production_model_assistance_enabled": false,
+  "product_publication_performed": false
+}

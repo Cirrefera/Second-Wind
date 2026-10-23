@@ -2,6 +2,8 @@
 
 **Subsequent question-design audit:** [JEV_QUESTION_AUDIT.md](JEV_QUESTION_AUDIT.md) supersedes the question design and remaining-failure assessment in this historical PR #8 report. The corrected two-stage, per-candidate resolver passes **60/60 fixed regression outcomes**, including **38/38 model-called cases** and **22/22 application-only cases**, using 76 actual API requests in the final complete run. All 219 gateway tests and both builds pass. The previously failing original deployment request now returns `no_match`. The audit retains all rejected alternatives, the intermediate 58/60 result, and the distinction between regressions and unseen examples. Production manifest coverage and optional semantic enablement remain separate work.
 
+The subsequent corrections are merged in PRs #9 and #10 and accepted as application release `d8541816a4242cdab1aaceea9dd2640edc19b676`, through [production run 39880042324](https://github.com/Cirrefera/Second-Wind/actions/runs/39880042324). The linked audit records the exact source/test/release trees, initial stopped attempt, timeout correction, and final gateway/Pages identities.
+
 ## Historical PR #8 result
 
 **Real Jev API calls were used to test and improve the existing structured resolver.** On the unchanged 34-case corpus, the resolver improved from **31/34 to 33/34** expected outcomes while reducing model calls from **24 to 12**. A separate 12-case paraphrase regression set passed **12/12**. One known uncertain reading still falls back to an incorrect lexical match; it remains an explicit limitation before optional semantic assistance can be enabled in production.
