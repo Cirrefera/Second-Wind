@@ -112,3 +112,31 @@ Cloudflare Basin Pipelines SQL and sink configuration are immutable after creati
 is intentionally a new versioned pipeline rather than an edit to `secondwind_telemetry`.
 Creating the new Basin Catalog sinks requires a catalog token value with the required R2/Basin
 permissions. No credential value is checked into the repository.
+
+## FIX-13 verification checkpoint — October 23, 2026
+
+**Source verified; Cloudflare rollout BLOCKED on catalog-token authority. FIX-13 is not complete.**
+
+- PR: [Pin telemetry contract v1 and replace stale Basin projections](https://github.com/Cirrefera/Second-Wind/pull/11), branch `fix/telemetry-contract-v1-20261023`.
+- RED commit: `88cfd25f0380bba6842e1eb11fbe4e91b7a729d5`; original failed run `39984303113` is preserved.
+- GREEN implementation: `bbe6060d0f857cb3f7414e8a20c5724047e06cfb`, tree `4c1717edc795c08618666a139c5fdbda203c2765`.
+- [Verification run 39984653470](https://github.com/Cirrefera/Second-Wind/actions/runs/39984653470), job `120520573239`: completed/success. Gateway, release acceptance, Pages, actual Dynamic Worker tests, gateway build and Pages build all passed.
+- Source inspection found ordered SQL outputs matching all proposed sink fields: journey 29, payment 19, scope 18. Exact event filters contain 29, 6 and 2 events respectively; all require contract version 1 and producer secondwind-gateway. Atomic amounts remain strings. This is structural source verification, not live planner or sink-delivery proof.
+- Cloudflare account `9ae12807d5b18bf3d1bcbe38b9050e05`: the account-token permission-group endpoint returned `is_selectable=false` for Workers R2 Data Catalog Write (`d229766a2f7f4d299f20eaa8c9b1fde9`), Catalog Read and R2 SQL Read. Bucket Item Write is selectable, but storage permission alone is insufficient. No token was created or exposed.
+- Catalog `secondwind-catalog` credential status remains `absent`. Inventory contains none of the three proposed v1 sinks and no `secondwind_contract_v1` pipeline. No Cloudflare resources were changed.
+- Existing stream: `d135ad1c9f9246ae945be1d1b8277ddc`. Legacy pipeline `c36bc1cd21814d3091f84329257b3c09` remains running and untouched. Raw sink: `224b3c7020a24e3897ff06b80970433e`.
+- Raw `secondwind.all_events` metadata read succeeded: its 13 fields still match the checked-in raw schema; 91 snapshots were reported. Metadata is not proof of any particular event's arrival.
+- Existing safe discovery observation in D1: `discovery.described:obs_b2ea171f-367b-4ae4-b50d-266e354c7120`, occurred `2026-10-23T16:07:58.713Z`, sent `2026-10-23T16:08:41.160Z`, last_error NULL. This proves outbox acknowledgement only. No same-event raw/projection trace is claimed; use a fresh observation after the new pipeline is running.
+- D1 read-only checks confirm zero routing manifests and zero component releases. Both prepared v2 products still have empty review_objects and publication_approval_pending. FIX-07 and FIX-08 remain open; no product was activated and production inference stays disabled.
+
+### Exact unblock and remaining acceptance
+
+An authorized account session must be able to create a token containing Catalog Write plus Bucket Item Write, scoped to `com.cloudflare.edge.r2.bucket.9ae12807d5b18bf3d1bcbe38b9050e05_default_secondwind-catalog` where supported. The [Cloudflare catalog authentication guide](https://developers.cloudflare.com/basin-catalog/manage-catalogs/#create-api-token-via-api) documents this bucket-scoped policy. The token belongs only in the sink configuration's secret `config.token`; never put it in source, documentation or chat.
+
+For each checked-in sink, the create request uses its exact name/type/schema and config with account_id, bucket secondwind-catalog, namespace secondwind, table_name (unqualified table name), and the token held in memory. Do not create partial storage-only credentials. Do not assume a catalog token can be revoked after creation; continued sink writes require authentication, and no safe post-bootstrap revocation was established.
+
+1. Provision the minimum authorized catalog credential and create/read back all three sinks using `telemetry/basin-resources-v1.json`.
+2. Validate the exact checked-in SQL, create `secondwind_contract_v1`, then read back running status, SQL, sink schemas and actual Iceberg schemas. Do not repeat the known missing-sink planner failure before this prerequisite changes.
+3. Produce an ordinary public discovery observation and trace its exact event_id from D1 into both raw history and journey_events_v1. Payment/scope remain structurally verified only until genuine events arrive; do not fund a purchase for telemetry testing.
+
+The repository source can be merged independently of the external resource rollout. Its telemetry files do not change serving Worker behavior. A successful GitHub deployment must not be reported as completion of the missing Basin resources or event trace.
