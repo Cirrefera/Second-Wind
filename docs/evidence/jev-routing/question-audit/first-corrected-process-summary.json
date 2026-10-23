@@ -1,0 +1,51 @@
+{
+  "schema_version": "1",
+  "evidence_kind": "observed_process_completion_summary",
+  "reason": "Process stdout reported complete results, but subsequent filesystem reads contained partial checkpoints in three files. Do not treat those files as complete native-response evidence. No source, labels, question templates, or thresholds changed before the repeat for durable reports.",
+  "completed": 60,
+  "passed": 60,
+  "model_called_cases": 38,
+  "application_only_cases": 22,
+  "http_requests": 76,
+  "http_successes": 76,
+  "input_tokens": 60910,
+  "output_tokens": 4432,
+  "groups": [
+    {
+      "name": "original",
+      "completed": 34,
+      "passed": 34,
+      "model_called_cases": 12,
+      "http_requests": 24,
+      "input_tokens": 18302,
+      "output_tokens": 1356
+    },
+    {
+      "name": "paraphrases",
+      "completed": 12,
+      "passed": 12,
+      "model_called_cases": 12,
+      "http_requests": 24,
+      "input_tokens": 18630,
+      "output_tokens": 1350
+    },
+    {
+      "name": "question-regressions",
+      "completed": 8,
+      "passed": 8,
+      "model_called_cases": 8,
+      "http_requests": 16,
+      "input_tokens": 14312,
+      "output_tokens": 1032
+    },
+    {
+      "name": "question-holdouts",
+      "completed": 6,
+      "passed": 6,
+      "model_called_cases": 6,
+      "http_requests": 12,
+      "input_tokens": 9666,
+      "output_tokens": 694
+    }
+  ]
+}

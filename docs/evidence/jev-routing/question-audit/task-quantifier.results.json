@@ -1,0 +1,414 @@
+{
+  "schema_version": "1",
+  "plan_ref": "sha256:afe70594fdb1c5bc108e3835a20abbc61be749426e88b691793cc4f9bff670ca",
+  "started_at": "2026-10-22T23:47:18.292Z",
+  "model": "jev-1.14.0",
+  "calls": [
+    {
+      "case_id": "two-compatible-candidates",
+      "cohort": "original-regression",
+      "state_variant": "fixed-state-quantifier-comparison",
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "80e728fcaa61c1b71dd813bccf9ec9ed71bd0c5710e3829894d38d654f5349bd",
+      "questions_hash": "4d2a5e5f69031ff99152d920271a01b1654ac4e9bed38b6d57017b0eaf7f62f0",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "direct_0": {
+            "type": "noul",
+            "noul": 0.18
+          },
+          "direct_1": {
+            "type": "noul",
+            "noul": 0.58
+          },
+          "one_task_0": {
+            "type": "noul",
+            "noul": 0.78
+          },
+          "one_task_1": {
+            "type": "noul",
+            "noul": 0.86
+          },
+          "one_task_or_topic_0": {
+            "type": "noul",
+            "noul": 0.87
+          },
+          "one_task_or_topic_1": {
+            "type": "noul",
+            "noul": 0.9
+          }
+        },
+        "usage": {
+          "input_tokens": 1789,
+          "output_tokens": 120
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "80e728fcaa61c1b71dd813bccf9ec9ed71bd0c5710e3829894d38d654f5349bd",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166030ce078d28b8fb623545ef5d0",
+          "cf-ray": "a4ec62e7bef0ab71-ORD"
+        },
+        "response_hash": "ca62344599549f40678b95d43e5e67b1de1437b3fbe211b50426ed636bfd6824",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1789,
+          "output_tokens": 120
+        },
+        "latency_ms": 168
+      }
+    },
+    {
+      "case_id": "two-pending-candidates",
+      "cohort": "original-regression",
+      "state_variant": "fixed-state-quantifier-comparison",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "1af10edd99202c8ac6e49b148ba558e7d08378857a77674b8830965ebd15c2b1",
+      "questions_hash": "4d2a5e5f69031ff99152d920271a01b1654ac4e9bed38b6d57017b0eaf7f62f0",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "direct_0": {
+            "type": "noul",
+            "noul": 0.64
+          },
+          "direct_1": {
+            "type": "noul",
+            "noul": 0.04
+          },
+          "one_task_0": {
+            "type": "noul",
+            "noul": 0.68
+          },
+          "one_task_1": {
+            "type": "noul",
+            "noul": 0.07
+          },
+          "one_task_or_topic_0": {
+            "type": "noul",
+            "noul": 0.91
+          },
+          "one_task_or_topic_1": {
+            "type": "noul",
+            "noul": 0.12
+          }
+        },
+        "usage": {
+          "input_tokens": 1774,
+          "output_tokens": 120
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "1af10edd99202c8ac6e49b148ba558e7d08378857a77674b8830965ebd15c2b1",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166030d547af4af6b29159326234b",
+          "cf-ray": "a4ec62e87989ab71-ORD"
+        },
+        "response_hash": "492dd301b22072845e6f4b80d3116797113872f878816a96c399d1ba42b68888",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1774,
+          "output_tokens": 120
+        },
+        "latency_ms": 119
+      }
+    },
+    {
+      "case_id": "fresh-two-distinct-jobs",
+      "cohort": "paraphrase-regression",
+      "state_variant": "fixed-state-quantifier-comparison",
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "2f3c186feccebed64c3d8e33c5c20ded5324ed92ff7a00b6214c531dd5d2f1ba",
+      "questions_hash": "4d2a5e5f69031ff99152d920271a01b1654ac4e9bed38b6d57017b0eaf7f62f0",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "direct_0": {
+            "type": "noul",
+            "noul": 0.44
+          },
+          "direct_1": {
+            "type": "noul",
+            "noul": 0.54
+          },
+          "one_task_0": {
+            "type": "noul",
+            "noul": 0.9
+          },
+          "one_task_1": {
+            "type": "noul",
+            "noul": 0.81
+          },
+          "one_task_or_topic_0": {
+            "type": "noul",
+            "noul": 0.92
+          },
+          "one_task_or_topic_1": {
+            "type": "noul",
+            "noul": 0.88
+          }
+        },
+        "usage": {
+          "input_tokens": 1805,
+          "output_tokens": 120
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "2f3c186feccebed64c3d8e33c5c20ded5324ed92ff7a00b6214c531dd5d2f1ba",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166030dce78a9890d9d98307b2bc9",
+          "cf-ray": "a4ec62e93c42ab71-ORD"
+        },
+        "response_hash": "4c9f14f5247fd92e029c1c91d231646d3221af02b8792738b5fde1a6edf44923",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1805,
+          "output_tokens": 120
+        },
+        "latency_ms": 88
+      }
+    },
+    {
+      "case_id": "fresh-two-jobs-need-language",
+      "cohort": "paraphrase-regression",
+      "state_variant": "fixed-state-quantifier-comparison",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "23b77ecf3547ef50caed7fc381e3502834b9ea7481d12146e41b5291e0e99e39",
+      "questions_hash": "4d2a5e5f69031ff99152d920271a01b1654ac4e9bed38b6d57017b0eaf7f62f0",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "direct_0": {
+            "type": "noul",
+            "noul": 0.34
+          },
+          "direct_1": {
+            "type": "noul",
+            "noul": 0.45
+          },
+          "one_task_0": {
+            "type": "noul",
+            "noul": 0.9
+          },
+          "one_task_1": {
+            "type": "noul",
+            "noul": 0.86
+          },
+          "one_task_or_topic_0": {
+            "type": "noul",
+            "noul": 0.92
+          },
+          "one_task_or_topic_1": {
+            "type": "noul",
+            "noul": 0.88
+          }
+        },
+        "usage": {
+          "input_tokens": 1796,
+          "output_tokens": 120
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "23b77ecf3547ef50caed7fc381e3502834b9ea7481d12146e41b5291e0e99e39",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166030e287b10a0de0cdae4897951",
+          "cf-ray": "a4ec62e9be73ab71-ORD"
+        },
+        "response_hash": "02b45f3f443afd680bf59d4f1e530a9226d9c07dbbe39e5189ed190e6e3ce686",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1796,
+          "output_tokens": 120
+        },
+        "latency_ms": 126
+      }
+    },
+    {
+      "case_id": "prompt-text-cannot-grant-execution",
+      "cohort": "original-regression",
+      "state_variant": "fixed-state-quantifier-comparison",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "a92481a71fb419b243e50ee2766109fc1718102caf3be862248a70b599576999",
+      "questions_hash": "4dfa686240454dffe44ba4fb872f921d16b3efa2f5720e3dd3f693fb065c22ee",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "direct_0": {
+            "type": "noul",
+            "noul": 0.05
+          },
+          "one_task_0": {
+            "type": "noul",
+            "noul": 0.48
+          },
+          "one_task_or_topic_0": {
+            "type": "noul",
+            "noul": 0.37
+          }
+        },
+        "usage": {
+          "input_tokens": 1080,
+          "output_tokens": 62
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "a92481a71fb419b243e50ee2766109fc1718102caf3be862248a70b599576999",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166030ea77b6ead90047d5954d122",
+          "cf-ray": "a4ec62ea8996ab71-ORD"
+        },
+        "response_hash": "ce1774345567b63f4901787b8f3e6d80f64ceecc5cdcbc403a265709db38a57d",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1080,
+          "output_tokens": 62
+        },
+        "latency_ms": 159
+      }
+    },
+    {
+      "case_id": "fresh-guidance-plain-paraphrase",
+      "cohort": "paraphrase-regression",
+      "state_variant": "fixed-state-quantifier-comparison",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "5163a86ebbdcbff1f50ca781b1dd9e6024738148c44002c4b88b2bfbd29dac3b",
+      "questions_hash": "4dfa686240454dffe44ba4fb872f921d16b3efa2f5720e3dd3f693fb065c22ee",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "direct_0": {
+            "type": "noul",
+            "noul": 0.84
+          },
+          "one_task_0": {
+            "type": "noul",
+            "noul": 0.84
+          },
+          "one_task_or_topic_0": {
+            "type": "noul",
+            "noul": 0.87
+          }
+        },
+        "usage": {
+          "input_tokens": 1081,
+          "output_tokens": 62
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "5163a86ebbdcbff1f50ca781b1dd9e6024738148c44002c4b88b2bfbd29dac3b",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166030f4872538f1d4b029cd8b786",
+          "cf-ray": "a4ec62eb8ddaab71-ORD"
+        },
+        "response_hash": "1518d5a67eabf51d35bfd7fdcd4c9c21c0c571a7f1171d443bdf51e08e811f05",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1081,
+          "output_tokens": 62
+        },
+        "latency_ms": 142
+      }
+    }
+  ],
+  "finished_at": "2026-10-22T23:47:19.101Z"
+}

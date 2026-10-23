@@ -47,7 +47,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "Completed-request reuse is within the supplied guidance boundary even without its literal product vocabulary."
     },
@@ -82,7 +90,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The request asks for a new-table offline plan, not execution or migration."
     },
@@ -105,7 +121,15 @@
       },
       "fixture_reading": {
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Neither supplied release addresses horticulture."
     },
@@ -134,7 +158,15 @@
       },
       "fixture_reading": {
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Existing-table migration and global tables are both excluded from the request planner."
     },
@@ -163,7 +195,15 @@
       },
       "fixture_reading": {
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The guidance requires buyer-provided downstream idempotency and does not implement cross-service atomicity or a payment processor."
     },
@@ -192,7 +232,15 @@
       },
       "fixture_reading": {
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Immediate TTL removal is explicitly outside the artifact boundary."
     },
@@ -221,7 +269,15 @@
       },
       "fixture_reading": {
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Single decoded JSON event guidance does not supply SQS batch handling."
     },
@@ -250,7 +306,15 @@
       },
       "fixture_reading": {
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "An exact requested identity must not override an incompatible task; this SKU is guidance using an existing table."
     },
@@ -279,7 +343,15 @@
       },
       "fixture_reading": {
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Buyer instructions cannot enlarge a guidance release into an AWS deployment capability."
     },
@@ -310,7 +382,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "A semantically supported goal still requires an explicit delivery-language answer; missing language is not negative goal evidence."
     },
@@ -351,7 +431,15 @@
       },
       "fixture_reading": {
         "exists": 0.99,
-        "confidence": 0
+        "confidence": 0,
+        "request_shape": {
+          "choice": "multiple_tasks",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "Two independent requested jobs have two relevant supplied products; an arbitrary single winner must not erase the other."
     },
@@ -396,7 +484,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "multiple_tasks",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "A confident rank reading does not remove another compatible pending candidate; both await explicit language selection."
     }

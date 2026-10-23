@@ -1,0 +1,280 @@
+{
+  "schema_version": "1",
+  "label_basis": "Manually labeled engineering cases grounded in corrected draft product boundaries and explicit contracts. These are not independent human adjudication, held-out calibration, production traffic or observed live model answers.",
+  "scope": "Exact source-reviewed local version 2 drafts only. Historical published version 1 identities are not edited, loaded into production or replaced by this corpus.",
+  "fixture_policy": "Scripted typed readings test resolver behavior. They do not measure the model semantic accuracy. fallback_expected freezes the deterministic baseline; expected records the intended source-grounded routing outcome.",
+  "sources": [
+    {
+      "sku": "AWS-0568",
+      "version": 2,
+      "item_file": "../../products/agent-state-dynamodb-manifest/release-input.json",
+      "routing_file": "../../products/agent-state-dynamodb-manifest/routing-manifest.json",
+      "source_hash": "7eb48cfcfcdf7b0600b31b06898bfb8bbcdb72b0ac71a1f4833907bf4b6f9a38"
+    },
+    {
+      "sku": "SW-PT-0006",
+      "version": 2,
+      "item_file": "../../products/lambda-powertools-idempotency/release-input.json",
+      "routing_file": "../../products/lambda-powertools-idempotency/routing-manifest.json",
+      "source_hash": "75b3ddfc25cb0ad62d3defc5090a2f05e0e8bf9062f26c5f0e8a000086c09fb5"
+    }
+  ],
+  "cases": [
+    {
+      "id": "validation-inflight-payment-guidance",
+      "category": "semantic-recall",
+      "rationale": "The guide explains overlapping invocation rejection and handling IdempotencyAlreadyInProgressError.",
+      "intent": {
+        "goal": "Give me Python instructions for handling IdempotencyAlreadyInProgressError when the same payment request arrives while the first invocation is still running.",
+        "product_kind": "guidance-product",
+        "target_language": "python"
+      },
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0,
+          "SW-PT-0006": 1
+        },
+        "sku": "SW-PT-0006",
+        "confidence": 1
+      }
+    },
+    {
+      "id": "validation-expiry-request-generator",
+      "category": "semantic-recall",
+      "rationale": "The offline planner emits new-table and optional expiry request inputs with an activation dependency.",
+      "intent": {
+        "goal": "Provide a JavaScript function that constructs the request inputs to create a new agent/session table and enable expiration on the expires_at attribute after the table becomes active.",
+        "product_kind": "artifact-product",
+        "target_language": "javascript"
+      },
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 1,
+          "SW-PT-0006": 0
+        },
+        "sku": "AWS-0568",
+        "confidence": 1
+      }
+    },
+    {
+      "id": "validation-compound-deployment-required",
+      "category": "hard-negative",
+      "rationale": "Preparation and wiring are required steps toward a single completed deployment, which neither product performs.",
+      "intent": {
+        "goal": "Complete one deployment job for me: prepare the request inputs for an agent/session table and the Lambda retry-protection wiring, then provision both in my AWS account and verify the deployed resources before reporting success.",
+        "target_language": "python"
+      },
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0,
+          "SW-PT-0006": 0
+        },
+        "sku": null,
+        "confidence": 1
+      }
+    },
+    {
+      "id": "validation-response-matcher-required",
+      "category": "hard-negative",
+      "rationale": "The planner supplies verification requests and expected fields but explicitly excludes a response matcher.",
+      "intent": {
+        "goal": "Give me an executable Python verifier that consumes DescribeTable, DescribeTimeToLive and DescribeContinuousBackups responses and decides whether my existing session database has converged to the requested settings.",
+        "product_kind": "artifact-product",
+        "target_language": "python"
+      },
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0,
+          "SW-PT-0006": 0
+        },
+        "sku": null,
+        "confidence": 1
+      }
+    },
+    {
+      "id": "validation-independent-streams-and-retry-window",
+      "category": "multi-candidate",
+      "rationale": "The planner supplies streams; the guide discusses the deduplication window. Both are independent requested deliverables.",
+      "intent": {
+        "goal": "I want two separate items: Python code that prepares a new agent/session table with change streams, and written Python Lambda guidance on choosing a deduplication window for delayed retries and manual replays. I will apply each item myself.",
+        "target_language": "python"
+      },
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "multiple_tasks",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 1,
+          "SW-PT-0006": 1
+        },
+        "sku": "AWS-0568",
+        "confidence": 1
+      }
+    },
+    {
+      "id": "validation-table-planning-topics-language-missing",
+      "category": "missing-language",
+      "rationale": "Topic-only discovery is within the planner scope and explicit language is still required.",
+      "intent": {
+        "goal": "DynamoDB session-table request planning, status indexes, TTL, point-in-time recovery and change streams.",
+        "product_kind": "artifact-product"
+      },
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "fallback_expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "topic_discovery",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 1,
+          "SW-PT-0006": 0
+        },
+        "sku": "AWS-0568",
+        "confidence": 1
+      }
+    }
+  ],
+  "name": "Fresh request-shape routing validation; labels frozen before calls"
+}

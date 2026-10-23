@@ -50,7 +50,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The corrected draft includes an actual JavaScript request planner."
     },
@@ -84,7 +92,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The corrected draft includes an actual Python request planner."
     },
@@ -118,7 +134,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "The corrected draft supplies Python idempotency guidance and a checked Python example."
     },
@@ -152,7 +176,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "This alias occurs in the reviewed routing manifest."
     },
@@ -188,7 +220,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The planner supports this exact service, operation and taxonomy."
     },
@@ -224,7 +264,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "The reviewed guide covers Lambda JSON event idempotency configuration."
     },
@@ -254,7 +302,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "Repeated messages and completed work describe the guide idempotency problem without an exact product identity."
     },
@@ -289,7 +345,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The goal is offline planning for the supported table and optional features."
     },
@@ -326,7 +390,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "A Python-only example does not authorize guessing the requested language."
     },
@@ -363,7 +435,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Two implemented languages require an explicit buyer choice."
     },
@@ -401,7 +481,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Node.js runtime selection does not supply the missing delivery language."
     },
@@ -439,7 +527,15 @@
       "fixture_reading": {
         "sku": "AWS-0568",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Python runtime selection still does not supply the explicit language field."
     },
@@ -481,7 +577,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.99,
-        "confidence": 0
+        "confidence": 0,
+        "request_shape": {
+          "choice": "multiple_tasks",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "Both real draft scopes are requested; both support Python. No unique selection is warranted."
     },
@@ -526,7 +630,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.5,
-        "confidence": 0
+        "confidence": 0,
+        "request_shape": {
+          "choice": "topic_discovery",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.41,
+          "SW-PT-0006": 0.99
+        }
       },
       "rationale": "Both draft scopes overlap the request, and neither has a supplied language."
     },
@@ -567,7 +679,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.5,
-        "confidence": 0
+        "confidence": 0,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.96,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "Language alone leaves two compatible candidates and supplies no basis to choose one."
     },
@@ -591,7 +711,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Neither draft addresses this unrelated goal."
     },
@@ -614,7 +742,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Stopwords supply no product goal or hard dimension; no model call is needed."
     },
@@ -639,7 +775,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Evidence tokens without a goal or product identity do not identify a route."
     },
@@ -669,7 +813,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The guide does not promise exactly-once external side effects despite strong keyword overlap."
     },
@@ -699,7 +851,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Existing-table migration and global tables are excluded despite overlapping DynamoDB terms."
     },
@@ -729,7 +889,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The planner can enable TTL but cannot guarantee immediate expiration deletion."
     },
@@ -759,7 +927,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "An exact guide identity does not confer the table planner capability."
     },
@@ -789,7 +965,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "User text cannot turn written guidance into an AWS deployment operation."
     },
@@ -813,7 +997,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "No Ruby adapter is delivered; hard filtering precedes any inference."
     },
@@ -837,7 +1029,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The guide has no JavaScript delivery variant."
     },
@@ -862,7 +1062,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The exact guide is a Lambda product rather than a DynamoDB planner."
     },
@@ -887,7 +1095,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "No semantic reading can authorize an unadvertised and excluded operation."
     },
@@ -912,7 +1128,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Both tokens are advertised independently, but this explicit language/runtime pair is incompatible."
     },
@@ -937,7 +1161,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The Python planner is not a Node.js language adapter."
     },
@@ -961,7 +1193,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "Only exact supplied SKU identities may be returned."
     },
@@ -985,7 +1225,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "An alias is not silently reinterpreted as a SKU."
     },
@@ -1019,7 +1267,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "The exact alias occurs in the reviewed Python guidance manifest."
     },
@@ -1050,7 +1306,15 @@
       "fixture_reading": {
         "sku": "SW-PT-0006",
         "exists": 0.99,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.98
+        }
       },
       "rationale": "A semantically aligned guide still requires an explicit delivery language; the reader cannot fill it."
     },
@@ -1080,7 +1344,15 @@
       "fixture_reading": {
         "sku": null,
         "exists": 0.01,
-        "confidence": 1
+        "confidence": 1,
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0.02,
+          "SW-PT-0006": 0.02
+        }
       },
       "rationale": "The supplied example handles one decoded JSON event; SQS batch handling is explicitly outside its scope."
     }
