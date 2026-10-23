@@ -81,7 +81,13 @@ The 60 examples are a **regression set**: the eight question-regression cases an
 
 All **219/219 gateway tests** and both gateway/Pages builds pass locally. Focused coverage includes 27 reader tests, 11 native-provider tests, six frozen-audit verification tests, and the routing/evaluation composition regressions. The first full-suite attempt exposed one stale single-stage provider mock, which was updated to verify both native requests and their separate receipts. The environment also blocked the existing Python subprocess checks; the identical approved offline suite passed with those subprocesses available. No product test was weakened or skipped.
 
-Exact GitHub verification and accepted release evidence are recorded here after the existing workflow completes.
+### Source merge and initial production gate
+
+[PR #9](https://github.com/Cirrefera/Second-Wind/pull/9) merged as `d22ef5d337c2ee7c6d05969f3a30928c9e9de0db`, from source `0746867fa242f0989832ac7ef564ef9de3ace961`. The local, published, GitHub test-merge, and merged trees all match `3fa9e758ed87f979515e7a39847e60703ac8975a`. [Verification run 39879298696](https://github.com/Cirrefera/Second-Wind/actions/runs/39879298696), job `120172522180`, passed all 219 gateway tests, 32 release-acceptance tests, 21 Pages ingress tests, legacy checks, all 16 actual Dynamic Worker selections, and both builds. The successful check came from GitHub Actions app `15368` for the exact source head.
+
+The first [production run 39879436912](https://github.com/Cirrefera/Second-Wind/actions/runs/39879436912), job `120172983926`, stopped in the gateway test gate with **218/219 passing**, before all migration/deployment/acceptance steps. The late-shape timeout regression observed two provider calls instead of one. A wall-clock deadline comparison alone could allow a late continuation after the caller's timer had already rejected. The follow-up permanently closes the chain when its outer promise settles, and tests expiry while the wall clock is deliberately fixed. This preserves the actual timeout guarantee without relaxing the test or retrying the failed release unchanged.
+
+This lifecycle correction follows the final live question evaluation. The native evidence retains its original implementation hashes; it is not relabeled as an evaluation of a later source commit. The question templates, candidate-support composition, probability bands, and evaluator remain unchanged by the timeout correction. Exact follow-up verification and accepted release identities are recorded when the corrected release passes its required gates.
 
 ## Reproduce and inspect
 

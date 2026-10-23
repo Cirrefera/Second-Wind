@@ -552,7 +552,10 @@ test('candidate chain shares one deadline across both calls and ignores late sup
  assert.equal(calls,2);
 });
 
-test('a shape response arriving after the whole deadline never starts support inference',async()=>{
+test('a late shape response cannot restart an expired chain when the wall clock has not advanced',async t=>{
+ // Keep wall-clock arithmetic positive after the real timer fires. Expiration
+ // must remain final even if Date.now has low resolution or moves backward.
+ t.mock.method(Date,'now',()=>100000);
  const candidates=[{sku:'ONE',release_ref:'one',route_summary:'A guide',supported_boundary:'Guidance',exclusions:[]}];
  let finish,calls=0,first;
  const pending=readCandidateAlignment({run:(model,input)=>{
