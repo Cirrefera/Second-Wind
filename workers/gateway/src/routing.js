@@ -1,7 +1,7 @@
 import {canonicalJson,sha256,CommerceError} from './contracts.js';
 import {canonicalService} from './publication.js';
 import {listCatalog,searchCatalog} from './catalog.js';
-import {readCandidateAlignment} from './clef.js';
+import {readCandidateAlignment,CLEF_REQUEST_SHAPE_MIN_CONFIDENCE} from './clef.js';
 import {createJourneyContext,publicIntentDimensions,enqueueObservation} from './telemetry.js';
 
 export const ROUTING_VERSION='1';
@@ -15,6 +15,23 @@ const positiveDimensions=dimensions.filter(field=>field!=='required_evidence'&&f
 const constraints={operation:'operations',environment:'environments',desired_outcome:'desired_outcomes',input_kind:'input_kinds',failure_signature:'failure_signatures',target_language:'languages',target_runtime:'runtimes',problem_family:'problem_family_ids',taxonomy_id:'taxonomy_ids'};
 const token=/^[a-z0-9]+(?:[._:+/-][a-z0-9]+)*$/;
 const fail=code=>{throw new CommerceError(code,400);};
+const knownRequestShapes=['single_task','multiple_tasks','topic_discovery'];
+function supportBranches(alignment,index) {
+  const shape=alignment.request_shape.readings.request_shape;
+  const expected=shape.confidence>=CLEF_REQUEST_SHAPE_MIN_CONFIDENCE?[shape.choice]
+    :knownRequestShapes.filter(key=>shape.probabilities[key]>0);
+  const questions=alignment.support_questions?.[`candidate_${index}`];
+  if(!expected.length||expected.some(key=>!knownRequestShapes.includes(key))
+    ||(shape.confidence<CLEF_REQUEST_SHAPE_MIN_CONFIDENCE&&shape.probabilities.unknown!==0)
+    ||!questions||Object.keys(questions).length!==expected.length
+    ||expected.some(key=>!Object.hasOwn(questions,key))) throw new Error('invalid_candidate_support');
+  return expected.map(request_shape=>{
+    const reading=alignment.readings[questions[request_shape]];
+    if(!Number.isFinite(reading?.noul)||reading.noul<0||reading.noul>1)
+      throw new Error('invalid_candidate_support');
+    return {request_shape,noul:reading.noul};
+  });
+}
 export function validateRoutingManifest(m) {
   const errors=[];
   if(!m || typeof m!=='object') return ['routing_manifest_missing'];
@@ -148,29 +165,38 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
     const pool=eligible.slice(0,20);
     try {
       alignment=await readCandidateAlignment(env.AI,intent,pool.map(x=>x.m),snapshot_ref);
-      alignment.candidate_scope={evaluated_count:pool.length,eligible_count:eligible.length,complete:pool.length===eligible.length};
-      const reading=alignment.readings.candidate;
-      const exists=alignment.readings.answer_exists.noul;
-      const chosen=exists>=CLEF_ROUTING_EXISTS_MIN&&reading.confidence>=CLEF_ROUTING_MIN_CONFIDENCE
-        ?pool.find((entry,index)=>reading.choice===`candidate_${index}`):undefined;
-      if(exists<CLEF_ROUTING_EXISTS_ABSENT) {
-        alignment.negative_scope='evaluated_candidates_only';
-        // A confident negative reading is different from an unavailable provider.
-        // The model has no evidence about candidates outside the bounded pool.
-        const excluded=new Set(pool);
-        compatible=compatible.filter(entry=>!excluded.has(entry));
-        ranked=compatible.length?compatible:candidates.filter(entry=>!excluded.has(entry));
-      } else if(chosen) {
-        if(chosen.comparison.compatible) {
-          compatible=[chosen,...compatible.filter(entry=>entry!==chosen)];
-          ranked=compatible;
-        } else {
-          // A relative preference does not reject other pending candidates.
-          // Preserve them when all results still need buyer configuration.
-          const pending=compatible.length?[]:candidates.filter(entry=>entry!==chosen);
-          compatible=[];
-          ranked=[chosen,...pending];
+      const shapeUncertain=alignment.status==='uncertain_request_shape';
+      alignment.candidate_scope={evaluated_count:shapeUncertain?0:pool.length,eligible_count:eligible.length,
+        complete:!shapeUncertain&&pool.length===eligible.length};
+      if(!shapeUncertain) {
+        const membership=new Set(candidates),supported=[];
+        for(const [index,entry] of pool.entries()) {
+          const branches=supportBranches(alignment,index);
+          // A topic reading may improve browsing but does not veto an existing
+          // lexical result. Ambiguous task shapes must agree before membership
+          // changes; raw probabilities remain separate instead of being averaged.
+          const absent=branches.every(branch=>branch.request_shape!=='topic_discovery'
+            &&branch.noul<CLEF_ROUTING_EXISTS_ABSENT);
+          const present=branches.every(branch=>branch.noul>=CLEF_ROUTING_EXISTS_MIN);
+          if(absent) {
+            membership.delete(entry);
+            alignment.negative_scope='evaluated_candidates_only';
+          } else if(present) {
+            membership.add(entry);supported.push(entry);
+          }
+          // Intermediate readings retain lexical membership without creating a
+          // new match. Entries outside this evaluated pool remain untouched.
         }
+        const reading=alignment.readings.candidate;
+        const chosen=reading.confidence>=CLEF_ROUTING_MIN_CONFIDENCE
+          ?pool.find((entry,index)=>reading.choice===`candidate_${index}`&&supported.includes(entry)):undefined;
+        // Choice orders supported candidates; it cannot grant support, remove
+        // another supported candidate, or restore a confidently rejected one.
+        const ordered=chosen?[chosen,...supported.filter(entry=>entry!==chosen)]:supported;
+        const promoted=new Set(ordered);
+        const retained=[...ordered,...candidates.filter(entry=>membership.has(entry)&&!promoted.has(entry))];
+        compatible=retained.filter(entry=>entry.comparison.compatible);
+        ranked=compatible.length?compatible:retained;
       }
     } catch { alignment={status:'unavailable'}; }
   }

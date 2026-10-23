@@ -9,10 +9,24 @@ import {createApp} from '../src/index.js';
 import {RpcTarget,newHttpBatchRpcSession,newMessagePortRpcSession} from 'capnweb';
 import {createJourneyContext} from '../src/telemetry.js';
 import {loadRoutingEvaluation,evaluateRouting,cloudflareEvaluationAi} from '../scripts/evaluate-routing.mjs';
-const routingResponse=(input,{choice='candidate_0',confidence=1,exists=1}={})=>({model:'clef-flash',answers:{
- answer_exists:{type:'noul',noul:exists},candidate:{type:'choice',choice,confidence,
- probabilities:Object.fromEntries(Object.keys(input.questions.candidate.criteria).map(key=>[key,key===choice?1:0]))},
-}});
+const routingResponse=(input,{choice='candidate_0',confidence=1,support,
+ shape='single_task',shapeConfidence=1,shapeProbabilities}={})=>{
+ const question=input.questions.request_shape?'request_shape':'candidate';
+ const selected=question==='request_shape'?shape:choice;
+ const answers={[question]:{type:'choice',choice:selected,confidence:question==='request_shape'?shapeConfidence:confidence,
+  probabilities:question==='request_shape'&&shapeProbabilities?shapeProbabilities
+   :Object.fromEntries(Object.keys(input.questions[question].criteria).map(key=>[key,key===selected?1:0]))}};
+ if(question==='candidate') {
+  assert.equal(support?.length,input.state.candidates.length,'each evaluated candidate needs an explicit individual fit');
+  for(const [id,question] of Object.entries(input.questions).filter(([,question])=>question.type==='noul')) {
+   const match=/^candidate_fit_(\d+)(?:_(single_task|multiple_tasks|topic_discovery))?$/.exec(id);
+   assert.ok(match,'the fixture must recognize each support question');
+   const value=support[Number(match[1])];
+   answers[id]={type:'noul',noul:typeof value==='number'?value:value?.[match[2]||shape]};
+  }
+ }
+ return {model:'clef-flash',answers};
+};
 const manifest=item=>({schema_version:'1',product_id:'lambda-retry',sku:item.sku,slug:item.slug,version:item.version,
  release_ref:'release:one',service:'lambda',product_kind:'artifact-product',route_summary:'Lambda duplicate processing idempotency',
  supported_boundary:'Duplicate event handling in Lambda',aliases:['retry-safety'],tags:['idempotency','duplicate-processing'],
@@ -147,7 +161,7 @@ test('fixed evaluation corpus accepts exact real draft metadata and preserves la
  assert.equal(deterministic.semantic_accuracy_measured,false);assert.equal(deterministic.thresholds.calibrated,false);
  assert.equal(deterministic.target_comparison.false_match_cases,6);
  const scripted=await evaluateRouting({mode:'fixture'});
- assert.equal(scripted.completed,34);assert.equal(scripted.passed,34);assert.equal(scripted.model_calls,12);
+ assert.equal(scripted.completed,34);assert.equal(scripted.passed,34);assert.equal(scripted.model_calls,24);
  assert.equal(scripted.semantic_accuracy_measured,false);assert.equal(scripted.thresholds.calibrated,false);
  assert.equal(scripted.target_comparison.false_match_cases,0);
  assert.equal(scripted.target_comparison.missed_match_cases,0);
@@ -180,31 +194,162 @@ test('unavailable Clef preserves deterministic candidates and status',async t=>{
  const {alignment,...unchanged}=result;
  assert.deepEqual(unchanged,baseline);
 });
-test('confident semantic absence vetoes keyword matches while unavailable and uncertain readings retain fallback',async t=>{
+test('uncertain request shape makes one call and preserves fallback over HTTP and Cap\'n Web',async t=>{
+ const {env}=await fixture(t),intent={goal:'Lambda idempotency',target_language:'javascript'};
+ const baseline=await resolveIntent(env,intent),app=createApp(),realFetch=globalThis.fetch;
+ env.CLEF_ROUTING_ENABLED='true';
+ globalThis.fetch=async(input,init)=>app.fetch(new Request(input,init),env,{waitUntil(){}});
+ try {
+  for(const [shape,shapeConfidence] of [['unknown',1],['single_task',0.49]]) {
+   let calls=0;
+   env.AI={run:async(model,input)=>{
+    calls++;assert.ok(input.questions.request_shape,'uncertain shape must not start candidate evaluation');
+    return routingResponse(input,{shape,shapeConfidence,...(shape==='single_task'?{
+     shapeProbabilities:{single_task:0.6,multiple_tasks:0,topic_discovery:0,unknown:0.4}}:{})});
+   }};
+   const response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent})}),env,{waitUntil(){}});
+   assert.equal(response.status,200);const http=await response.json();
+   const {alignment,...unchanged}=http;assert.deepEqual(unchanged,baseline);
+   assert.equal(alignment.status,'uncertain_request_shape');
+   assert.deepEqual(alignment.candidate_scope,{evaluated_count:0,eligible_count:1,complete:false});
+   assert.equal(alignment.readings,undefined);assert.equal(alignment.negative_scope,undefined);
+   assert.equal(calls,1);
+   const {candidates,...rpc}=await newHttpBatchRpcSession('https://secondwindai.com/capnp').searchIntent(intent);
+   assert.deepEqual(rpc,http);assert.equal(calls,2);
+   for(const candidate of candidates) candidate.product[Symbol.dispose]();
+  }
+ } finally {globalThis.fetch=realFetch;}
+});
+
+test('a malformed second response preserves the whole fallback instead of applying partial negatives',async t=>{
+ const {env,db}=await fixture(t),second=insertItem(db,{sku:'SECOND',slug:'second',service:'lambda'}),m=manifest(second);
+ await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)')
+  .bind(second.sku,second.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
+ const intent={goal:'Lambda idempotency',target_language:'javascript'},baseline=await resolveIntent(env,intent);
+ assert.equal(baseline.matches.length,2);
+ for(const defect of ['missing-fit','invalid-fit','provider-failure']) {
+  let calls=0;
+  const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>{
+   calls++;
+   if(input.questions.request_shape) return routingResponse(input);
+   if(defect==='provider-failure') throw new Error('second_request_failed');
+   const response=routingResponse(input,{support:[0.01,0.01]});
+   if(defect==='missing-fit') delete response.answers.candidate_fit_1;
+   else response.answers.candidate_fit_1.noul=1.01;
+   return response;
+  }}},intent);
+  const {alignment,...unchanged}=result;
+  assert.equal(calls,2);assert.deepEqual(alignment,{status:'unavailable'});
+  assert.deepEqual(unchanged,baseline);
+ }
+});
+test('individual fit boundaries remove only confident negatives and preserve uncertain lexical membership',async t=>{
  const {env}=await fixture(t),intent={goal:'Lambda idempotency exactly once external effects',target_language:'javascript'};
  const baseline=await resolveIntent(env,intent);assert.equal(baseline.status,'match');
  let calls=0;
- for(const choice of ['unknown','candidate_0']) for(const exists of [0,0.349,0.35,0.69]) {
+ for(const choice of ['unknown','candidate_0']) for(const fit of [0,0.349,0.35,0.699,0.7]) {
   const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>{
-   calls++;return routingResponse(input,{choice,exists});
+   calls++;return routingResponse(input,{choice,support:[fit]});
   }}},intent);
-  if(exists<0.35) {
+  if(fit<0.35) {
    assert.equal(result.status,'no_match');assert.equal(result.matched,false);
    assert.deepEqual(result.matches,[]);assert.deepEqual(result.clarifications,[]);
+   assert.equal(result.alignment.negative_scope,'evaluated_candidates_only');
   } else {
    const {alignment,...fallback}=result;assert.deepEqual(fallback,baseline);
+   assert.equal(alignment.negative_scope,undefined);
   }
-  assert.equal(result.alignment.readings.answer_exists.noul,exists);
+  assert.equal(result.alignment.readings.candidate_fit_0.noul,fit);
  }
- assert.equal(calls,8);
+ assert.equal(calls,20);
 });
 
-test('semantic promotion requires both positive existence and Choice confidence',async t=>{
+test('individual support promotes at .7 independently of Choice while middle readings cannot create matches',async t=>{
  const {env}=await fixture(t),intent={goal:'avoid repeated work',target_language:'javascript'};
  assert.equal((await resolveIntent(env,intent)).status,'no_match');
- for(const [exists,confidence,status] of [[0.69,1,'no_match'],[0.7,0.49,'no_match'],[0.7,0.5,'match']]) {
-  const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>routingResponse(input,{exists,confidence})}},intent);
-  assert.equal(result.status,status);
+ for(const fit of [0.349,0.35,0.699,0.7]) for(const [choice,confidence] of [['candidate_0',1],['candidate_0',0.49],['unknown',1]]) {
+  const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>routingResponse(input,{support:[fit],choice,confidence})}},intent);
+  assert.equal(result.status,fit>=0.7?'match':'no_match',`${fit}/${choice}/${confidence}`);
+ }
+});
+
+test('topic discovery preserves lexical browse membership while positive readings can promote a result',async t=>{
+ const {env}=await fixture(t);
+ for(const goal of ['Lambda idempotency','avoid repeated work']) {
+  const intent={goal,target_language:'javascript'},baseline=await resolveIntent(env,intent);
+  for(const fit of [0.01,0.349,0.35,0.699,0.7]) {
+   const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>
+    routingResponse(input,{shape:'topic_discovery',support:[fit]})}},intent);
+   assert.equal(result.status,fit>=0.7?'match':baseline.status,`${goal}/${fit}`);
+   assert.equal(result.alignment.negative_scope,undefined);
+   assert.deepEqual(result.alignment.support_questions,{candidate_0:{topic_discovery:'candidate_fit_0'}});
+   assert.equal(result.alignment.readings.candidate_fit_0.noul,fit);
+  }
+ }
+});
+
+test('ambiguous task shapes require branch consensus for promotion or removal without averaging readings',async t=>{
+ const {env}=await fixture(t);
+ for(const goal of ['Lambda idempotency','avoid repeated work']) {
+  const intent={goal,target_language:'javascript'},baseline=await resolveIntent(env,intent);
+  for(const [support,decision] of [
+   [{single_task:0.01,multiple_tasks:0.02},'absent'],
+   [{single_task:0.99,multiple_tasks:0.01},'unchanged'],
+   [{single_task:0.9,multiple_tasks:0.5},'unchanged'],
+   [{single_task:0.7,multiple_tasks:0.91},'present'],
+  ]) {
+   let calls=0;
+   const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>{
+    calls++;return routingResponse(input,{support:[support],choice:'unknown',shapeConfidence:0.45,
+     shapeProbabilities:{single_task:0.59,multiple_tasks:0.41,topic_discovery:0,unknown:0}});
+   }}},intent);
+   assert.equal(calls,2);
+   assert.equal(result.status,decision==='present'?'match':decision==='absent'?'no_match':baseline.status);
+   assert.deepEqual(result.alignment.support_questions,{candidate_0:{
+    single_task:'candidate_fit_0_single_task',multiple_tasks:'candidate_fit_0_multiple_tasks'}});
+   assert.equal(result.alignment.readings.candidate_fit_0_single_task.noul,support.single_task);
+   assert.equal(result.alignment.readings.candidate_fit_0_multiple_tasks.noul,support.multiple_tasks);
+   assert.equal(result.alignment.readings.candidate_fit_0,undefined,'no aggregate fit is invented');
+   assert.deepEqual(result.alignment.candidate_scope,{evaluated_count:1,eligible_count:1,complete:true});
+   assert.equal(result.alignment.negative_scope,decision==='absent'?'evaluated_candidates_only':undefined);
+  }
+ }
+});
+
+test('an ambiguous branch that includes topic discovery cannot veto lexical browsing',async t=>{
+ const {env}=await fixture(t);
+ for(const goal of ['Lambda idempotency','avoid repeated work']) {
+  const intent={goal,target_language:'javascript'},baseline=await resolveIntent(env,intent);
+  for(const fit of [0.01,0.7]) {
+   const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>
+    routingResponse(input,{support:[{single_task:fit,multiple_tasks:fit,topic_discovery:fit}],shapeConfidence:0.3,
+     shapeProbabilities:{single_task:0.4,multiple_tasks:0.35,topic_discovery:0.25,unknown:0}})}},intent);
+   assert.equal(result.status,fit>=0.7?'match':baseline.status);
+   assert.equal(result.alignment.negative_scope,undefined);
+   assert.equal(Object.keys(result.alignment.support_questions.candidate_0).length,3);
+  }
+ }
+});
+
+test('a missing or malformed ambiguous support branch cannot partially promote or reject a candidate',async t=>{
+ const {env}=await fixture(t);
+ for(const goal of ['Lambda idempotency','avoid repeated work']) for(const defect of ['missing','malformed']) {
+  const intent={goal,target_language:'javascript'},baseline=await resolveIntent(env,intent);
+  let calls=0;
+  const result=await resolveIntent({...env,CLEF_ROUTING_ENABLED:'true',AI:{run:async(model,input)=>{
+   calls++;
+   const response=routingResponse(input,{support:[{single_task:goal.startsWith('Lambda')?0.01:0.99,multiple_tasks:0.99}],
+    shapeConfidence:0.45,shapeProbabilities:{single_task:0.59,multiple_tasks:0.41,topic_discovery:0,unknown:0}});
+   if(!input.questions.request_shape) {
+    if(defect==='missing') delete response.answers.candidate_fit_0_multiple_tasks;
+    else response.answers.candidate_fit_0_multiple_tasks.noul=-0.1;
+   }
+   return response;
+  }}},intent);
+  assert.equal(calls,2);
+  const {alignment,...unchanged}=result;
+  assert.deepEqual(alignment,{status:'unavailable'});assert.deepEqual(unchanged,baseline);
  }
 });
 
@@ -216,7 +361,7 @@ test('HTTP and Cap\'n Web distinguish explicit no-match from provider unavailabi
  env.CLEF_ROUTING_ENABLED='true';
  try {
   for(const available of [true,false]) {
-   env.AI={run:async(model,input)=>{if(!available) throw new Error('unavailable');return routingResponse(input,{choice:'unknown',exists:0.01});}};
+   env.AI={run:async(model,input)=>{if(!available) throw new Error('unavailable');return routingResponse(input,{choice:'unknown',support:[0.01]});}};
    const response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent})}),env,{waitUntil(){}});
    assert.equal(response.status,200);const http=await response.json();
@@ -228,19 +373,20 @@ test('HTTP and Cap\'n Web distinguish explicit no-match from provider unavailabi
   }
  } finally {globalThis.fetch=realFetch;}
 });
-test('a valid complete Clef choice ranks an eligible product without reintroducing conflicts',async t=>{
+test('supported Choice ranks complete products and cannot put a pending product ahead of compatible results',async t=>{
  const {env,db}=await fixture(t);
  for(const [sku,patch] of [['SECOND',{}],['PYTHON',{languages:['python']}],['MISSING',{required_evidence:['event-sample']}]]) {
   const item=insertItem(db,{sku,slug:sku.toLowerCase(),service:'lambda'}),m={...manifest(item),...patch};
   await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)').bind(item.sku,item.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
  }
  const intent={goal:'idempotency',target_language:'javascript'},baseline=await resolveIntent(env,intent);
- let request,chosenSku=baseline.matches[1].sku;
+ let request,chosenSku=baseline.matches[1].sku,pendingOnly=false;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
-  request=input;const keys=Object.keys(input.questions.candidate.criteria);
-  const index=input.state.candidates.findIndex(candidate=>candidate.sku===chosenSku),choice=`candidate_${index}`;
-  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice,confidence:1,
-   probabilities:Object.fromEntries(keys.map(key=>[key,key===choice?1:0]))}}};
+  if(input.questions.request_shape) return routingResponse(input);
+  request=input;
+  const index=input.state.candidates.findIndex(candidate=>candidate.sku===chosenSku);
+  return routingResponse(input,{choice:`candidate_${index}`,support:input.state.candidates.map(candidate=>
+   pendingOnly&&candidate.sku!=='MISSING'?0.01:candidate.sku==='MISSING'?0.9:0.95)});
  }};
  const result=await resolveIntent(env,intent),{alignment,...unchanged}=result;
  assert.equal(alignment.readings.candidate.choice,'candidate_2');
@@ -250,13 +396,17 @@ test('a valid complete Clef choice ranks an eligible product without reintroduci
  assert.deepEqual(request.state.candidates.map(candidate=>candidate.sku),['MISSING',...baseline.matches.map(product=>product.sku)]);
  assert.ok(!request.state.candidates.some(candidate=>candidate.sku==='PYTHON'));
  chosenSku='MISSING';
+ const complete=await resolveIntent(env,intent);
+ assert.equal(complete.status,'multiple_candidates');
+ assert.deepEqual(complete.matches,baseline.matches);
+ pendingOnly=true;
  const pending=await resolveIntent(env,intent);
  assert.equal(pending.status,'missing_configuration');assert.equal(pending.matched,false);
  assert.deepEqual(pending.matches.map(product=>product.sku),['MISSING']);
  assert.deepEqual(pending.clarifications,[{field:'evidence:event-sample',question:'Please supply evidence:event-sample.'}]);
 });
 
-test('HTTP and actual Cap\'n Web routing apply Clef ranking before the requested limit',async t=>{
+test('HTTP and actual Cap\'n Web routing apply supported ranking before the requested limit',async t=>{
  const {env,db,item}=await fixture(t),second=insertItem(db,{sku:'SECOND',slug:'second',service:'lambda'}),m=manifest(second);
  await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)').bind(second.sku,second.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
  const intent={goal:'idempotency',target_language:'javascript'},baseline=await resolveIntent(env,intent,1);
@@ -274,9 +424,9 @@ test('HTTP and actual Cap\'n Web routing apply Clef ranking before the requested
    env.AI={run:async(model,input)=>{
     requests.push(input);
     if(mode==='provider-failure') throw new Error('provider_unavailable');
-    const choice=selected||mode==='low-confidence'?'candidate_1':'unknown',keys=Object.keys(input.questions.candidate.criteria);
-    return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice,confidence:mode==='low-confidence'?0.49:1,
-     probabilities:Object.fromEntries(keys.map(key=>[key,key===choice?1:0]))}}};
+    const choice=selected||mode==='low-confidence'?'candidate_1':'unknown';
+    const support=mode==='semantic-selected'?[0.02,0.98]:mode==='semantic-unknown'?[0.5,0.5]:[0.91,0.96];
+    return routingResponse(input,{choice,confidence:mode==='low-confidence'?0.49:1,support});
    }};
    const response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent:requestIntent,limit:1})}),env,{waitUntil(){}});
@@ -285,8 +435,8 @@ test('HTTP and actual Cap\'n Web routing apply Clef ranking before the requested
    const rpc=await client.searchIntent(requestIntent,1);
    const {candidates,...rpcResult}=rpc;
    assert.deepEqual(rpcResult,http);
-   assert.equal(requests.length,2);
-   assert.ok(requests.every(request=>request.state.candidates.length===2));
+   assert.equal(requests.length,mode==='provider-failure'?2:4);
+   assert.ok(requests.filter(request=>request.questions.candidate).every(request=>request.state.candidates.length===2));
    assert.deepEqual(http.matches.map(product=>product.sku),selected?[item.sku]:fallback.matches.map(product=>product.sku),mode);
    assert.equal(candidates.length,http.matches.length);
    if(candidates.length) assert.equal(typeof candidates[0].product.info,'function');
@@ -297,40 +447,40 @@ test('HTTP and actual Cap\'n Web routing apply Clef ranking before the requested
    else {
     assert.equal(http.alignment.readings.candidate.choice,selected||mode==='low-confidence'?'candidate_1':'unknown');
     assert.match(http.alignment.request_hash,/^[a-f0-9]{64}$/);
+    assert.match(http.alignment.request_shape.request_hash,/^[a-f0-9]{64}$/);
    }
    for(const candidate of candidates) candidate.product[Symbol.dispose]();
   }
  } finally {globalThis.fetch=realFetch;}
 });
 
-test('confident semantic routing can surface only the exact eligible product while uncertain readings retain no match',async t=>{
- const {env,item}=await fixture(t),intent={goal:'avoid repeated work',target_language:'javascript'};
- const fallback=await resolveIntent(env,intent);
- assert.equal(fallback.status,'no_match');
+test('multiple supported candidates survive low Choice confidence and a selected negative never returns',async t=>{
+ const {env,db,item}=await fixture(t),second=insertItem(db,{sku:'SECOND',slug:'second',service:'lambda'}),m=manifest(second);
+ await db.prepare('INSERT INTO product_routing_manifests VALUES (?1,?2,?3,?4,?5,?6)')
+  .bind(second.sku,second.version,canonicalJson(m),await sha256(canonicalJson(m)),'fixture',new Date().toISOString()).run();
+ const intent={goal:'avoid repeated work',target_language:'javascript'};
+ assert.equal((await resolveIntent(env,intent)).status,'no_match');
  env.CLEF_ROUTING_ENABLED='true';
- for(const [choice,confidence] of [['candidate_0',0.5],['candidate_0',0.49],['unknown',1]]) {
-  let calls=0;
-  env.AI={run:async()=>{
-   calls++;return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice,confidence,
-    probabilities:{unknown:choice==='unknown'?1:0,candidate_0:choice==='candidate_0'?1:0}}}};
-  }};
-  const result=await resolveIntent(env,intent),{alignment,...withoutReading}=result;
-  assert.equal(calls,1);
-  if(choice==='candidate_0'&&confidence>=0.5) {
-   assert.equal(result.status,'match');assert.equal(result.matches[0].sku,item.sku);
-   assert.equal(result.matches[0].version,item.version);
-   assert.equal(result.matches[0].compatibility.compatible,true);
-  } else assert.deepEqual(withoutReading,fallback);
-  assert.equal(alignment.readings.candidate.confidence,confidence);
+ for(const [support,choice,confidence,expected] of [
+  [[0.91,0.94],'candidate_1',0.49,[second.sku,item.sku]],
+  [[0.91,0.94],'unknown',1,[second.sku,item.sku]],
+  [[0.01,0.94],'candidate_0',1,[item.sku]],
+  [[0.91,0.01],'candidate_1',1,[second.sku]],
+ ]) {
+  let calls=0;env.AI={run:async(model,input)=>{calls++;return routingResponse(input,{support,choice,confidence});}};
+  const result=await resolveIntent(env,intent);
+  assert.equal(calls,2);assert.deepEqual(result.matches.map(product=>product.sku),expected);
+  assert.equal(result.status,expected.length>1?'multiple_candidates':'match');
+  const limited=await resolveIntent(env,intent,1);
+  assert.equal(limited.matches.length,1);assert.equal(limited.status,result.status);
  }
 });
 
 test('exact identities and typed constraints preserve missing language without model calls',async t=>{
  const {env,item}=await fixture(t);let calls=0;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
-  calls++;assert.equal(input.state.candidates.length,1);
-  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_0',confidence:1,
-   probabilities:{unknown:0,candidate_0:1}}}};
+  calls++;if(input.questions.candidate) assert.equal(input.state.candidates.length,1);
+  return routingResponse(input,{support:[0.98]});
  }};
  assert.equal((await resolveIntent(env,{sku:item.sku,target_language:'javascript'})).status,'match');
  assert.equal(calls,0);
@@ -346,7 +496,7 @@ test('exact identities and typed constraints preserve missing language without m
  assert.equal((await resolveIntent(env,{sku:'wrong',target_language:'javascript'})).status,'no_match');
  assert.equal(calls,0);
  assert.equal((await resolveIntent(env,{sku:item.sku,goal:'avoid repeated work',target_language:'javascript'})).status,'match');
- assert.equal(calls,1);
+ assert.equal(calls,2);
 });
 
 test('a semantic preference ranks all pending candidates without discarding the other possible products',async t=>{
@@ -358,8 +508,9 @@ test('a semantic preference ranks all pending candidates without discarding the 
  assert.equal(baseline.status,'missing_configuration');assert.equal(baseline.matches.length,2);
  const chosenSku=baseline.matches[1].sku;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
+  if(input.questions.request_shape) return routingResponse(input);
   const index=input.state.candidates.findIndex(candidate=>candidate.sku===chosenSku);
-  return routingResponse(input,{choice:`candidate_${index}`});
+  return routingResponse(input,{choice:`candidate_${index}`,support:[0.95,0.91]});
  }};
  const result=await resolveIntent(env,intent);
  assert.equal(result.status,'missing_configuration');assert.equal(result.matched,false);
@@ -368,6 +519,12 @@ test('a semantic preference ranks all pending candidates without discarding the 
  assert.ok(result.matches.every(product=>product.compatibility.missing.includes('target_language')));
  assert.deepEqual(result.clarifications,[{field:'target_language',question:'What programming language do you want the product delivered in?'}]);
  assert.equal((await resolveIntent(env,intent,1)).matches.length,1);
+ env.AI={run:async(model,input)=>routingResponse(input,{choice:'candidate_1',support:[0.41,0.95]})};
+ const mixed=await resolveIntent(env,intent);
+ assert.equal(mixed.status,'missing_configuration');
+ assert.deepEqual(mixed.matches.map(product=>product.sku),[chosenSku,baseline.matches[0].sku]);
+ assert.equal(mixed.alignment.readings.candidate_fit_0.noul,0.41);
+ assert.equal(mixed.alignment.negative_scope,undefined);
 });
 
 test('semantic pending choice asks exact language over HTTP and Cap\'n Web before an explicit callback answer matches',async t=>{
@@ -375,9 +532,8 @@ test('semantic pending choice asks exact language over HTTP and Cap\'n Web befor
  assert.equal((await resolveIntent(env,intent)).status,'no_match');
  const seen=[];
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
-  seen.push(input.state.intent);
-  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_0',confidence:1,
-   probabilities:{unknown:0,candidate_0:1}}}};
+  if(input.questions.candidate) seen.push(input.state.intent);
+  return routingResponse(input,{support:[0.98]});
  }};
  const app=createApp(),response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
   method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent})}),env,{waitUntil(){}});
@@ -415,8 +571,7 @@ test('semantic pending choice asks exact language over HTTP and Cap\'n Web befor
 test('uninformative evidence-only and stopword intents remain model-free no matches',async t=>{
  const {env}=await fixture(t,{language_policy:'not-applicable',languages:[]});let calls=0;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async()=>{
-  calls++;return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_0',confidence:1,
-   probabilities:{unknown:0,candidate_0:1}}}};
+  calls++;throw new Error('must remain model-free');
  }};
  for(const intent of [{evidence:[]},{evidence:['event-sample']},{goal:'help with the product'}]) {
   const result=await resolveIntent(env,intent);
@@ -435,9 +590,9 @@ test('Clef input is bounded to twenty eligible candidates before result limiting
  assert.equal(baseline.matches.length,22);
  let request;
  env.CLEF_ROUTING_ENABLED='true';env.AI={run:async(model,input)=>{
-  request=input;const keys=Object.keys(input.questions.candidate.criteria);
-  return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:1},candidate:{type:'choice',choice:'candidate_19',confidence:1,
-   probabilities:Object.fromEntries(keys.map(key=>[key,key==='candidate_19'?1:0]))}}};
+  if(input.questions.request_shape) return routingResponse(input);
+  request=input;
+  return routingResponse(input,{choice:'candidate_19',support:input.state.candidates.map((candidate,index)=>0.8+index/100)});
  }};
  const result=await resolveIntent(env,intent,1);
  assert.equal(request.state.candidates.length,20);
@@ -445,7 +600,7 @@ test('Clef input is bounded to twenty eligible candidates before result limiting
  assert.equal(result.matches.length,1);assert.equal(result.matches[0].sku,baseline.matches[19].sku);
  assert.equal(result.matches[0].version,baseline.matches[19].version);
  assert.deepEqual(result.alignment.candidate_scope,{evaluated_count:20,eligible_count:22,complete:false});
- env.AI={run:async(model,input)=>routingResponse(input,{choice:'unknown',exists:0})};
+ env.AI={run:async(model,input)=>routingResponse(input,{choice:'unknown',support:Array(20).fill(0)})};
  const absent=await resolveIntent(env,intent,50);
  assert.equal(absent.status,'multiple_candidates');
  assert.deepEqual(absent.matches.map(product=>product.sku),baseline.matches.slice(20).map(product=>product.sku));

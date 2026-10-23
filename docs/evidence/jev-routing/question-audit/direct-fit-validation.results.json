@@ -1,0 +1,1999 @@
+{
+  "schema_version": "1",
+  "plan_ref": "sha256:596c624318ecb249df107f54b82fd4bc147652241328163a65138bd07922feb4",
+  "started_at": "2026-10-22T23:45:42.798Z",
+  "model": "jev-1.14.0",
+  "calls": [
+    {
+      "case_id": "guidance-paraphrase",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "39e3a574d85b5ea66c94e31edb45fdaa585fcdb04067c95a982f663d6e2c1ea7",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.98,
+            "probabilities": {
+              "candidate_0": 0.99,
+              "unknown": 0.01
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.93
+          }
+        },
+        "usage": {
+          "input_tokens": 1433,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "39e3a574d85b5ea66c94e31edb45fdaa585fcdb04067c95a982f663d6e2c1ea7",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a1660197da7121a42708a46c82f5c3",
+          "cf-ray": "a4ec6092e9d9f165-ORD"
+        },
+        "response_hash": "fe704f61abc94526f7f122485b929bc2bd3031f8ffcae0abad8e0439505ac866",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1433,
+          "output_tokens": 72
+        },
+        "latency_ms": 150
+      }
+    },
+    {
+      "case_id": "artifact-natural-goal",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "32836ddf21b78473c9303cc36e793206de39826d672baa9f83038b2db88d3146",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.93
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.96,
+            "probabilities": {
+              "candidate_0": 0.98,
+              "unknown": 0.02
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.89
+          }
+        },
+        "usage": {
+          "input_tokens": 1345,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "32836ddf21b78473c9303cc36e793206de39826d672baa9f83038b2db88d3146",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601984270f38eb478b76b46e989",
+          "cf-ray": "a4ec60937b6ef165-ORD"
+        },
+        "response_hash": "021c4713f7ebd7de2a31e6fb6233cf05aedd2995b8ed4acf640b6f32cab68de9",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1345,
+          "output_tokens": 72
+        },
+        "latency_ms": 100
+      }
+    },
+    {
+      "case_id": "two-compatible-candidates",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "73f49ea3b1589bc08a0cfd64d58f7b84e5fc3a372c29aec4f2c5aef2d732a82b",
+      "questions_hash": "b42dca87c4fbecd6614d30085f17bc64ba1655d46ed26e6e5a2f4f52e0a447d5",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.16,
+            "probabilities": {
+              "candidate_0": 0.44,
+              "candidate_1": 0.21,
+              "unknown": 0.35
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.17
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.54
+          }
+        },
+        "usage": {
+          "input_tokens": 2153,
+          "output_tokens": 100
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "73f49ea3b1589bc08a0cfd64d58f7b84e5fc3a372c29aec4f2c5aef2d732a82b",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a1660198a37ccaaf3b2ec8e68c5b85",
+          "cf-ray": "a4ec60941d72f165-ORD"
+        },
+        "response_hash": "d77916836c71d7b1369814486b5c12697bff41c10e1de6de3f892426bcf896b7",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2153,
+          "output_tokens": 100
+        },
+        "latency_ms": 116
+      }
+    },
+    {
+      "case_id": "two-pending-candidates",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "097e71aa394267e1c4b0701ee3beb29a10110b635068254a34f3c5a945f2f7b0",
+      "questions_hash": "cbf6de533528008cc0259cbfa1ac2bbbb41b187110bedb1f5af7f44bfb5b162e",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.95
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.97,
+            "probabilities": {
+              "candidate_0": 0.98,
+              "candidate_1": 0,
+              "unknown": 0.02
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.65
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.05
+          }
+        },
+        "usage": {
+          "input_tokens": 2138,
+          "output_tokens": 100
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "097e71aa394267e1c4b0701ee3beb29a10110b635068254a34f3c5a945f2f7b0",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601991371cc8a6d0bc57b928eb5",
+          "cf-ray": "a4ec6094df8ef165-ORD"
+        },
+        "response_hash": "4630f61a92aff67dd6fe88456c14f15932980919de039c8070acc9b5a6bf9d77",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2138,
+          "output_tokens": 100
+        },
+        "latency_ms": 199
+      }
+    },
+    {
+      "case_id": "unrelated-goal",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "38c0cd15dcd303f4803c592ea5d15d11e3069513c1d31be4d073b9ded114d5d8",
+      "questions_hash": "b42dca87c4fbecd6614d30085f17bc64ba1655d46ed26e6e5a2f4f52e0a447d5",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.02
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1,
+            "probabilities": {
+              "candidate_0": 0,
+              "candidate_1": 0,
+              "unknown": 1
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.02
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.02
+          }
+        },
+        "usage": {
+          "input_tokens": 2143,
+          "output_tokens": 98
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "38c0cd15dcd303f4803c592ea5d15d11e3069513c1d31be4d073b9ded114d5d8",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a1660199db75e89442e00e8c014b72",
+          "cf-ray": "a4ec60961ac4f165-ORD"
+        },
+        "response_hash": "c22fbab59a0492a05f54a232e49025bd7b8b1f0243e0c189fcd1359d260067a8",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2143,
+          "output_tokens": 98
+        },
+        "latency_ms": 146
+      }
+    },
+    {
+      "case_id": "guide-external-exactly-once",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "e7753484e688371225b306e73929c07b5867dab8b23d35b9f56d5ded4d6ca97d",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.12
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.32,
+            "probabilities": {
+              "candidate_0": 0.34,
+              "unknown": 0.66
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.07
+          }
+        },
+        "usage": {
+          "input_tokens": 1435,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "e7753484e688371225b306e73929c07b5867dab8b23d35b9f56d5ded4d6ca97d",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019a7575dfbc9583e0c03dc838",
+          "cf-ray": "a4ec60970d08f165-ORD"
+        },
+        "response_hash": "3d1c3069c52229f1fba18191edadf652a01a76c9baa72e7358f29f19699fcb82",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1435,
+          "output_tokens": 70
+        },
+        "latency_ms": 87
+      }
+    },
+    {
+      "case_id": "artifact-existing-global-migration",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "4c0e7ae9f6622288f16e62712443dd0a250f7a8d2e08c29b1428fda02b0b9b18",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.02
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.98,
+            "probabilities": {
+              "candidate_0": 0.01,
+              "unknown": 0.99
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.01
+          }
+        },
+        "usage": {
+          "input_tokens": 1348,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "4c0e7ae9f6622288f16e62712443dd0a250f7a8d2e08c29b1428fda02b0b9b18",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019acb7ec18fb7f930f65c699e",
+          "cf-ray": "a4ec60979e5ff165-ORD"
+        },
+        "response_hash": "60454f495f8691346d8217e4aa2f2fc09b0f9ebbe6cde02a0ebe38c50b6c79bc",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1348,
+          "output_tokens": 70
+        },
+        "latency_ms": 88
+      }
+    },
+    {
+      "case_id": "artifact-immediate-ttl",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "d779ce31c382323d53d199ed64e17e4ef8365ccc521bf100e979488349af23c9",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.13
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.92,
+            "probabilities": {
+              "candidate_0": 0.04,
+              "unknown": 0.96
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.09
+          }
+        },
+        "usage": {
+          "input_tokens": 1346,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "d779ce31c382323d53d199ed64e17e4ef8365ccc521bf100e979488349af23c9",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019b257d309846e89809acc8e8",
+          "cf-ray": "a4ec60982fbdf165-ORD"
+        },
+        "response_hash": "aad7d140133d62884d584c42d9c271374f3d9931b9d1419289758e3a3be18bd5",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1346,
+          "output_tokens": 70
+        },
+        "latency_ms": 79
+      }
+    },
+    {
+      "case_id": "exact-identity-wrong-goal",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "f25a451c5fefddc73950fbbf72e41002ac3574b50c4e8743680d973317b7c6c7",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.07
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.92,
+            "probabilities": {
+              "candidate_0": 0.04,
+              "unknown": 0.96
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.04
+          }
+        },
+        "usage": {
+          "input_tokens": 1434,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "f25a451c5fefddc73950fbbf72e41002ac3574b50c4e8743680d973317b7c6c7",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019b797bb692a3f5858003d19f",
+          "cf-ray": "a4ec6098a909f165-ORD"
+        },
+        "response_hash": "914b829f964b7aa211371756e47be040d955aa8840489a412037ccd614d8829a",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1434,
+          "output_tokens": 70
+        },
+        "latency_ms": 102
+      }
+    },
+    {
+      "case_id": "prompt-text-cannot-grant-execution",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "24bef92c94757fbc2d85246993b3129e9ef2512cce7c5fdaa96facd81bfbc216",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.48
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.52,
+            "probabilities": {
+              "candidate_0": 0.76,
+              "unknown": 0.24
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.06
+          }
+        },
+        "usage": {
+          "input_tokens": 1437,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "24bef92c94757fbc2d85246993b3129e9ef2512cce7c5fdaa96facd81bfbc216",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019bdf770ba49020d7cb363381",
+          "cf-ray": "a4ec60994aaff165-ORD"
+        },
+        "response_hash": "182a2c354b2084537d4ad691068fd6e79f41218685f83f69ea15f81f79ebbc39",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1437,
+          "output_tokens": 72
+        },
+        "latency_ms": 85
+      }
+    },
+    {
+      "case_id": "guidance-semantic-missing-language",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "b899be446af18159d83f13324df931540a69ccb1078bd9cf50a9d0dfe352c491",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.94,
+            "probabilities": {
+              "candidate_0": 0.97,
+              "unknown": 0.03
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.93
+          }
+        },
+        "usage": {
+          "input_tokens": 1424,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "b899be446af18159d83f13324df931540a69ccb1078bd9cf50a9d0dfe352c491",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019c3072faa1b8acf0aa5e6cf3",
+          "cf-ray": "a4ec6099cc31f165-ORD"
+        },
+        "response_hash": "82e24ab904a953f093d53f073f9d3c947133639b4d8127150a3bd22c1f2b3906",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1424,
+          "output_tokens": 72
+        },
+        "latency_ms": 99
+      }
+    },
+    {
+      "case_id": "guidance-sqs-batch",
+      "cohort": "original-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "5353e49cb3a5026d7eca36ff85db83f04aa3dcb873a72c08232cc8f001ec8d8d",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.02
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.98,
+            "probabilities": {
+              "candidate_0": 0.01,
+              "unknown": 0.99
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.02
+          }
+        },
+        "usage": {
+          "input_tokens": 1437,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "5353e49cb3a5026d7eca36ff85db83f04aa3dcb873a72c08232cc8f001ec8d8d",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019c967530b8a8fc57fbf1f43d",
+          "cf-ray": "a4ec609a6de5f165-ORD"
+        },
+        "response_hash": "baf0f2f8809a2b3d83c272bc38cdc87500f9ffc06fe8d52bc74016dd9f495e00",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1437,
+          "output_tokens": 70
+        },
+        "latency_ms": 84
+      }
+    },
+    {
+      "case_id": "fresh-guidance-plain-paraphrase",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "0367a5fd3cc84124e7d698a71a4e79db00e63604f59465b8337825993539d48e",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.92
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.96,
+            "probabilities": {
+              "candidate_0": 0.98,
+              "unknown": 0.02
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.84
+          }
+        },
+        "usage": {
+          "input_tokens": 1438,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "0367a5fd3cc84124e7d698a71a4e79db00e63604f59465b8337825993539d48e",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019ce87cd695a572c6c3f7f6f9",
+          "cf-ray": "a4ec609aff8af165-ORD"
+        },
+        "response_hash": "93f3bcc27ea90903f415f96a94a199f62c6b38d708ee7ceea7937127cd30b8cb",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1438,
+          "output_tokens": 72
+        },
+        "latency_ms": 96
+      }
+    },
+    {
+      "case_id": "fresh-artifact-request-plan",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "a1e36184b3e57e34b065d642a93610a720b7785fbb4b1de71189e24514186268",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.96
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.98,
+            "probabilities": {
+              "candidate_0": 0.99,
+              "unknown": 0.01
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.91
+          }
+        },
+        "usage": {
+          "input_tokens": 1357,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "a1e36184b3e57e34b065d642a93610a720b7785fbb4b1de71189e24514186268",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019d4c7dbaa67b2844419de59d",
+          "cf-ray": "a4ec609b9938f165-ORD"
+        },
+        "response_hash": "ac2d79ac13fd7af5cd7f7ec3c86ef31891559a964de014143e64f4846bda01c6",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1357,
+          "output_tokens": 72
+        },
+        "latency_ms": 116
+      }
+    },
+    {
+      "case_id": "fresh-unrelated-orchids",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "a85a720802b5cf4dc85a8a557c2a4a3d1cacdfc6ded7344dd059dc8868e2ade8",
+      "questions_hash": "b42dca87c4fbecd6614d30085f17bc64ba1655d46ed26e6e5a2f4f52e0a447d5",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.01
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1,
+            "probabilities": {
+              "candidate_0": 0,
+              "candidate_1": 0,
+              "unknown": 1
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.01
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.01
+          }
+        },
+        "usage": {
+          "input_tokens": 2147,
+          "output_tokens": 98
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "a85a720802b5cf4dc85a8a557c2a4a3d1cacdfc6ded7344dd059dc8868e2ade8",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019dc27b78ad6aa1be4282af6e",
+          "cf-ray": "a4ec609c4b19f165-ORD"
+        },
+        "response_hash": "13d40e64765c4cf141b84726ca6894a05e7a87170e0245bd8217f521686504dc",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2147,
+          "output_tokens": 98
+        },
+        "latency_ms": 85
+      }
+    },
+    {
+      "case_id": "fresh-existing-global-migration",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "672d4c9d91e5aff19530a8b15823502e13346a97da8bec0cf3a1b0b23bb5878b",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.02
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 1,
+            "probabilities": {
+              "candidate_0": 0,
+              "unknown": 1
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.01
+          }
+        },
+        "usage": {
+          "input_tokens": 1349,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "672d4c9d91e5aff19530a8b15823502e13346a97da8bec0cf3a1b0b23bb5878b",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019e1b77759aec2f00952ee025",
+          "cf-ray": "a4ec609cdc55f165-ORD"
+        },
+        "response_hash": "8fbbe05517506435b5e2ec2041ee0442c20bb1d5dc7ab0c7a7195c95348feb53",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1349,
+          "output_tokens": 70
+        },
+        "latency_ms": 87
+      }
+    },
+    {
+      "case_id": "fresh-external-bank-guarantee",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "213b5f247cac007d207047734207e08ad042eb8ed8a6493b010fb360f0f03d51",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.34
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.18,
+            "probabilities": {
+              "candidate_0": 0.41,
+              "unknown": 0.59
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.17
+          }
+        },
+        "usage": {
+          "input_tokens": 1437,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "213b5f247cac007d207047734207e08ad042eb8ed8a6493b010fb360f0f03d51",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019e6a73c6a9308c2d62e7dd72",
+          "cf-ray": "a4ec609d6db7f165-ORD"
+        },
+        "response_hash": "dd454e150d5b968b3d73ec2709dc750e41f47e79f1f86c29ce91d58731f97af5",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1437,
+          "output_tokens": 70
+        },
+        "latency_ms": 163
+      }
+    },
+    {
+      "case_id": "fresh-instant-ttl",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "3f11cbf0f2a9e3125083f9fda3e97e8100248b2627a9498583d1292bef7f5bd7",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.05
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.96,
+            "probabilities": {
+              "candidate_0": 0.02,
+              "unknown": 0.98
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.05
+          }
+        },
+        "usage": {
+          "input_tokens": 1345,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "3f11cbf0f2a9e3125083f9fda3e97e8100248b2627a9498583d1292bef7f5bd7",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019f177da88efebb07a2a35e26",
+          "cf-ray": "a4ec609e6848f165-ORD"
+        },
+        "response_hash": "58983ca7f247c2837ba5cb1ae3fc0be7cfca78539123cefa138424d3170542bd",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1345,
+          "output_tokens": 70
+        },
+        "latency_ms": 102
+      }
+    },
+    {
+      "case_id": "fresh-sqs-multi-payment-batch",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "e90a76ba28df3381bfa5ef5b549f94a7bbfc549db47cf9c7cda076e62b9ddc59",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.04
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.96,
+            "probabilities": {
+              "candidate_0": 0.02,
+              "unknown": 0.98
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.03
+          }
+        },
+        "usage": {
+          "input_tokens": 1436,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "e90a76ba28df3381bfa5ef5b549f94a7bbfc549db47cf9c7cda076e62b9ddc59",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019f85789ea4c5399d99799a42",
+          "cf-ray": "a4ec609f1a08f165-ORD"
+        },
+        "response_hash": "018354c5d40e4a091079323eeca39c27af604db7e494ba60846c05a2c05dad3a",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1436,
+          "output_tokens": 70
+        },
+        "latency_ms": 104
+      }
+    },
+    {
+      "case_id": "fresh-exact-id-wrong-task",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "764172214d261baf4aa6f03608c2295ff6a0b10cc88998f2deb8053ce53aba6b",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.05
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.96,
+            "probabilities": {
+              "candidate_0": 0.02,
+              "unknown": 0.98
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.04
+          }
+        },
+        "usage": {
+          "input_tokens": 1435,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "764172214d261baf4aa6f03608c2295ff6a0b10cc88998f2deb8053ce53aba6b",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a166019fec7fe993cb35427932d9d3",
+          "cf-ray": "a4ec609fbbc2f165-ORD"
+        },
+        "response_hash": "eb459e87ae31611c93ca09e817143f1e74e5d3a2f72d3d4a4bec843e50ee89f2",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1435,
+          "output_tokens": 70
+        },
+        "latency_ms": 87
+      }
+    },
+    {
+      "case_id": "fresh-request-cannot-expand-scope",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "7757c4c2807eda510e3d11578439e2258b9c77c431e1f116266311574a09f1f4",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.11
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.18,
+            "probabilities": {
+              "candidate_0": 0.41,
+              "unknown": 0.59
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.04
+          }
+        },
+        "usage": {
+          "input_tokens": 1442,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "7757c4c2807eda510e3d11578439e2258b9c77c431e1f116266311574a09f1f4",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a03b7c9aa430990f7db1228b",
+          "cf-ray": "a4ec60a04d38f165-ORD"
+        },
+        "response_hash": "5c5a2ad885741d4d41db636ce7a675963f5e80a74e4829f66bb351a0eaf2d497",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1442,
+          "output_tokens": 70
+        },
+        "latency_ms": 155
+      }
+    },
+    {
+      "case_id": "fresh-guidance-needs-language",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "33420d00d2c10f4faea9fe37da7ce970712d5d8b2269e4db284489a761b45289",
+      "questions_hash": "046d979333951bcc22c62cb555f963c39abf2cb8c8c834fe4184addae8695676",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.93
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.94,
+            "probabilities": {
+              "candidate_0": 0.97,
+              "unknown": 0.03
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.82
+          }
+        },
+        "usage": {
+          "input_tokens": 1429,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "33420d00d2c10f4faea9fe37da7ce970712d5d8b2269e4db284489a761b45289",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a0db7bd2a67f14f99e493e59",
+          "cf-ray": "a4ec60a1481ef165-ORD"
+        },
+        "response_hash": "0ec36000006ca5015cfbb569c19a49996559427bbe6051a76fcda7f4319d0620",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1429,
+          "output_tokens": 72
+        },
+        "latency_ms": 130
+      }
+    },
+    {
+      "case_id": "fresh-two-distinct-jobs",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "df1bc0ab32966f8be87b01b4eaa74b31544d84cd76fa1557db728462666450da",
+      "questions_hash": "cbf6de533528008cc0259cbfa1ac2bbbb41b187110bedb1f5af7f44bfb5b162e",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_1",
+            "confidence": 0.33,
+            "probabilities": {
+              "candidate_0": 0.16,
+              "candidate_1": 0.55,
+              "unknown": 0.29
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.44
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.54
+          }
+        },
+        "usage": {
+          "input_tokens": 2169,
+          "output_tokens": 100
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "df1bc0ab32966f8be87b01b4eaa74b31544d84cd76fa1557db728462666450da",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a164713e993b0439a0b2ae26",
+          "cf-ray": "a4ec60a21a38f165-ORD"
+        },
+        "response_hash": "baaddae1502378eb11c0f3ba3602e085c9a42d2857cb9798bc33e9c39c1cdea4",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2169,
+          "output_tokens": 100
+        },
+        "latency_ms": 118
+      }
+    },
+    {
+      "case_id": "fresh-two-jobs-need-language",
+      "cohort": "paraphrase-regression",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "a935eebfa7b969a1d12d149c073b8f813041440a1ef21e6f45123e411258e86f",
+      "questions_hash": "cbf6de533528008cc0259cbfa1ac2bbbb41b187110bedb1f5af7f44bfb5b162e",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_1",
+            "confidence": 0.35,
+            "probabilities": {
+              "candidate_0": 0.15,
+              "candidate_1": 0.57,
+              "unknown": 0.28
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.37
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.44
+          }
+        },
+        "usage": {
+          "input_tokens": 2160,
+          "output_tokens": 100
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "a935eebfa7b969a1d12d149c073b8f813041440a1ef21e6f45123e411258e86f",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a1d276b68a7701f7f6932085",
+          "cf-ray": "a4ec60a2dc3cf165-ORD"
+        },
+        "response_hash": "340efdeebaffeb3da702a4734b1e4b62fb438193925187a7a0a723f18b9211dd",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2160,
+          "output_tokens": 100
+        },
+        "latency_ms": 100
+      }
+    },
+    {
+      "case_id": "holdout-validation-guide",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "b78ecb7329ffc85fa4f7374b590e7ad82d3e45e68d7b30d7b7373c85642c829f",
+      "questions_hash": "cbf6de533528008cc0259cbfa1ac2bbbb41b187110bedb1f5af7f44bfb5b162e",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.98
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.98,
+            "probabilities": {
+              "candidate_0": 0.99,
+              "candidate_1": 0,
+              "unknown": 0.01
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.86
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.02
+          }
+        },
+        "usage": {
+          "input_tokens": 2166,
+          "output_tokens": 100
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "b78ecb7329ffc85fa4f7374b590e7ad82d3e45e68d7b30d7b7373c85642c829f",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a2397bd698fe85e2f21c71af",
+          "cf-ray": "a4ec60a37debf165-ORD"
+        },
+        "response_hash": "6b777bbca0021bcd99579affb38c8ad6ab0c6ffcb227e10d2fa5d2ef9923ae44",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2166,
+          "output_tokens": 100
+        },
+        "latency_ms": 93
+      }
+    },
+    {
+      "case_id": "holdout-index-streams-plan",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "40bf4af43155a244b3d3018bd4ded7e6afafdb46c893c3017a067af1f0328cd5",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.93
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.96,
+            "probabilities": {
+              "candidate_0": 0.98,
+              "unknown": 0.02
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.76
+          }
+        },
+        "usage": {
+          "input_tokens": 1354,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "40bf4af43155a244b3d3018bd4ded7e6afafdb46c893c3017a067af1f0328cd5",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a29977659887badb14a2b9f0",
+          "cf-ray": "a4ec60a40f6bf165-ORD"
+        },
+        "response_hash": "e1649c3ee740e79a97f79c57d54ea96917c364a65bffd54a91873a0ef7d30549",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1354,
+          "output_tokens": 72
+        },
+        "latency_ms": 106
+      }
+    },
+    {
+      "case_id": "holdout-execute-lambda",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "03aa4544da25f33d018babd921ccfdc8e52257bd015017be21e279c5e8fe5e25",
+      "questions_hash": "cbf6de533528008cc0259cbfa1ac2bbbb41b187110bedb1f5af7f44bfb5b162e",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.06
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.91,
+            "probabilities": {
+              "candidate_0": 0.06,
+              "candidate_1": 0,
+              "unknown": 0.94
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.03
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.01
+          }
+        },
+        "usage": {
+          "input_tokens": 2155,
+          "output_tokens": 98
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "03aa4544da25f33d018babd921ccfdc8e52257bd015017be21e279c5e8fe5e25",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a304730983c86bedce42e706",
+          "cf-ray": "a4ec60a4b94ef165-ORD"
+        },
+        "response_hash": "783b81f5afd60d8ed5ed7251018beedad300667cef18f09d05915f5c4f845e2b",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2155,
+          "output_tokens": 98
+        },
+        "latency_ms": 136
+      }
+    },
+    {
+      "case_id": "holdout-execute-table",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "286a1b46dd10881e8366b8f104d9051933b700b1a7768b7d39dac041144bf5d8",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.12
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.78,
+            "probabilities": {
+              "candidate_0": 0.11,
+              "unknown": 0.89
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.02
+          }
+        },
+        "usage": {
+          "input_tokens": 1351,
+          "output_tokens": 70
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "286a1b46dd10881e8366b8f104d9051933b700b1a7768b7d39dac041144bf5d8",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a3867154839f6ef915effac1",
+          "cf-ray": "a4ec60a59bc0f165-ORD"
+        },
+        "response_hash": "ef6b619fce9d4646edd7c9fbbaeae612029a065ae9c0a077794ec37441727b82",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1351,
+          "output_tokens": 70
+        },
+        "latency_ms": 94
+      }
+    },
+    {
+      "case_id": "holdout-existing-item-cas",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "request_hash": "b9c886ffc934a3ed854cf3e5739d6e37028c4968ab66dd10cd5199cae9fd3d83",
+      "questions_hash": "b42dca87c4fbecd6614d30085f17bc64ba1655d46ed26e6e5a2f4f52e0a447d5",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.17
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.83,
+            "probabilities": {
+              "candidate_0": 0.04,
+              "candidate_1": 0.07,
+              "unknown": 0.89
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.11
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.1
+          }
+        },
+        "usage": {
+          "input_tokens": 2160,
+          "output_tokens": 98
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "b9c886ffc934a3ed854cf3e5739d6e37028c4968ab66dd10cd5199cae9fd3d83",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a3f3737583812f3d2b8a8b92",
+          "cf-ray": "a4ec60a63d61f165-ORD"
+        },
+        "response_hash": "19b689fa1c41f8a5ad7c96d5ad73b554329da90e1f7b6ddd8f8e2ca7f6647cdc",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2160,
+          "output_tokens": 98
+        },
+        "latency_ms": 144
+      }
+    },
+    {
+      "case_id": "holdout-plan-needs-language",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "0402b6a6313fcf030398303bc5e45a81f17c6eebb1b7234ce88921c561789764",
+      "questions_hash": "129b77c8a96f57d4a283b7c73e19aa67b454ddbf7f1c4ef266fb4375042c127b",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.96
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.98,
+            "probabilities": {
+              "candidate_0": 0.99,
+              "unknown": 0.01
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.91
+          }
+        },
+        "usage": {
+          "input_tokens": 1345,
+          "output_tokens": 72
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "0402b6a6313fcf030398303bc5e45a81f17c6eebb1b7234ce88921c561789764",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a47e7b99a1474ed27e34ba88",
+          "cf-ray": "a4ec60a71ff9f165-ORD"
+        },
+        "response_hash": "4ef1c34e24a61792d872f6c20ec39d8c2e9b0362625087cac0f6a0d29363ab6a",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 1345,
+          "output_tokens": 72
+        },
+        "latency_ms": 122
+      }
+    },
+    {
+      "case_id": "holdout-two-independent-tasks",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "request_hash": "10beef15afc1c8a376d1903f840e2b45c471cb1ef4c4782b8ec01e693074b65f",
+      "questions_hash": "b42dca87c4fbecd6614d30085f17bc64ba1655d46ed26e6e5a2f4f52e0a447d5",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.95
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "unknown",
+            "confidence": 0.06,
+            "probabilities": {
+              "candidate_0": 0.33,
+              "candidate_1": 0.3,
+              "unknown": 0.37
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.72
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.83
+          }
+        },
+        "usage": {
+          "input_tokens": 2179,
+          "output_tokens": 98
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "10beef15afc1c8a376d1903f840e2b45c471cb1ef4c4782b8ec01e693074b65f",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a4fb7537be4ce20de503c3dd",
+          "cf-ray": "a4ec60a7da4ef165-ORD"
+        },
+        "response_hash": "052058905404dce3f59b5220478dff40e0a6248efb84268a50dd9998baad27e9",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2179,
+          "output_tokens": 98
+        },
+        "latency_ms": 87
+      }
+    },
+    {
+      "case_id": "holdout-two-needing-language",
+      "cohort": "new-holdout",
+      "state_variant": "full-intent-with-candidate-product-kind",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "request_hash": "c027fe9cac8d833db4d844f2c39974ecfa906e388bc34363e118861db8baf298",
+      "questions_hash": "b42dca87c4fbecd6614d30085f17bc64ba1655d46ed26e6e5a2f4f52e0a447d5",
+      "response": {
+        "model": "jev-1.14.0",
+        "answers": {
+          "answer_exists": {
+            "type": "noul",
+            "noul": 0.99
+          },
+          "candidate": {
+            "type": "choice",
+            "choice": "candidate_0",
+            "confidence": 0.2,
+            "probabilities": {
+              "candidate_0": 0.47,
+              "candidate_1": 0.16,
+              "unknown": 0.37
+            }
+          },
+          "candidate_fit_0": {
+            "type": "noul",
+            "noul": 0.95
+          },
+          "candidate_fit_1": {
+            "type": "noul",
+            "noul": 0.84
+          }
+        },
+        "usage": {
+          "input_tokens": 2168,
+          "output_tokens": 100
+        }
+      },
+      "receipt": {
+        "provider": "typesafe-live",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "model": "jev-1.14.0",
+        "http_status": 200,
+        "ok": true,
+        "request_hash": "c027fe9cac8d833db4d844f2c39974ecfa906e388bc34363e118861db8baf298",
+        "request_ids": {
+          "x-typesafe-request-id": "req_01a16601a559731f8f089a641ab56a57",
+          "cf-ray": "a4ec60a86bf1f165-ORD"
+        },
+        "response_hash": "5603e8ed8b35f0ea08f9904ea24e2d05453ee65f7950786bd84c083d6626b3be",
+        "response_model": "jev-1.14.0",
+        "usage": {
+          "input_tokens": 2168,
+          "output_tokens": 100
+        },
+        "latency_ms": 110
+      }
+    }
+  ],
+  "finished_at": "2026-10-22T23:45:46.413Z"
+}

@@ -1,0 +1,369 @@
+{
+  "schema_version": "1",
+  "label_basis": "Manually labeled engineering cases grounded in corrected draft product boundaries and explicit contracts. These are not independent human adjudication, held-out calibration, production traffic or observed live model answers.",
+  "scope": "Exact source-reviewed local version 2 drafts only. Historical published version 1 identities are not edited, loaded into production or replaced by this corpus.",
+  "fixture_policy": "Scripted typed readings test resolver behavior. They do not measure the model semantic accuracy. fallback_expected freezes the deterministic baseline; expected records the intended source-grounded routing outcome.",
+  "sources": [
+    {
+      "sku": "AWS-0568",
+      "version": 2,
+      "item_file": "../../products/agent-state-dynamodb-manifest/release-input.json",
+      "routing_file": "../../products/agent-state-dynamodb-manifest/routing-manifest.json",
+      "source_hash": "7eb48cfcfcdf7b0600b31b06898bfb8bbcdb72b0ac71a1f4833907bf4b6f9a38"
+    },
+    {
+      "sku": "SW-PT-0006",
+      "version": 2,
+      "item_file": "../../products/lambda-powertools-idempotency/release-input.json",
+      "routing_file": "../../products/lambda-powertools-idempotency/routing-manifest.json",
+      "source_hash": "75b3ddfc25cb0ad62d3defc5090a2f05e0e8bf9062f26c5f0e8a000086c09fb5"
+    }
+  ],
+  "cases": [
+    {
+      "id": "holdout-validation-guide",
+      "category": "semantic-recall",
+      "intent": {
+        "goal": "Show me Python Lambda Powertools wiring that rejects a repeated order ID when the amount changes; I will integrate the example into my own handler.",
+        "target_language": "python"
+      },
+      "rationale": "The guidance contains a payload-validation example; the buyer will integrate it.",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0,
+          "SW-PT-0006": 1
+        },
+        "sku": "SW-PT-0006",
+        "confidence": 1
+      }
+    },
+    {
+      "id": "holdout-index-streams-plan",
+      "category": "semantic-recall",
+      "intent": {
+        "goal": "Give me JavaScript request-generation code for a new DynamoDB agent/session table with a status index and old/new-item change streams.",
+        "target_language": "javascript"
+      },
+      "rationale": "The artifact implements a new-table request planner with optional index and streams.",
+      "expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 1,
+          "SW-PT-0006": 0
+        },
+        "sku": "AWS-0568",
+        "confidence": 1
+      }
+    },
+    {
+      "id": "holdout-execute-lambda",
+      "category": "hard-negative",
+      "intent": {
+        "goal": "Log into my AWS account and deploy the Lambda idempotency handler for me now.",
+        "target_language": "python"
+      },
+      "rationale": "Both products exclude performing AWS operations for the buyer.",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0,
+          "SW-PT-0006": 0
+        },
+        "sku": null,
+        "confidence": 1
+      }
+    },
+    {
+      "id": "holdout-execute-table",
+      "category": "hard-negative",
+      "intent": {
+        "goal": "Create the DynamoDB agent/session table in my AWS account now and enable its status index; I need you to apply the operations.",
+        "target_language": "javascript"
+      },
+      "rationale": "The artifact supplies an offline plan and does not apply AWS operations.",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "match",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0,
+          "SW-PT-0006": 0
+        },
+        "sku": null,
+        "confidence": 1
+      }
+    },
+    {
+      "id": "holdout-existing-item-cas",
+      "category": "hard-negative",
+      "intent": {
+        "goal": "Supply Python code to update an existing DynamoDB agent session item using compare-and-swap on its revision number.",
+        "target_language": "python"
+      },
+      "rationale": "Item-level optimistic concurrency is not a new-table plan or payment retry guidance.",
+      "expected": {
+        "status": "no_match",
+        "products": [],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 0,
+          "SW-PT-0006": 0
+        },
+        "sku": null,
+        "confidence": 1
+      }
+    },
+    {
+      "id": "holdout-plan-needs-language",
+      "category": "missing-language",
+      "intent": {
+        "goal": "Give me request-generation code for a new DynamoDB agent/session table with point-in-time recovery.",
+        "product_kind": "artifact-product"
+      },
+      "rationale": "A supported plan remains relevant while explicit language selection is pending.",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "fallback_expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "single_task",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 1,
+          "SW-PT-0006": 0
+        },
+        "sku": "AWS-0568",
+        "confidence": 1
+      }
+    },
+    {
+      "id": "holdout-two-independent-tasks",
+      "category": "multi-candidate",
+      "intent": {
+        "goal": "I need two separate deliverables: a Python request planner for a new agent/session DynamoDB table, and Python guidance for Lambda payment retry deduplication using my existing idempotency table.",
+        "target_language": "python"
+      },
+      "rationale": "Separate requested deliverables match both manifests without claiming their table schemas are interchangeable.",
+      "expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fallback_expected": {
+        "status": "multiple_candidates",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": []
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "multiple_tasks",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 1,
+          "SW-PT-0006": 1
+        },
+        "sku": "AWS-0568",
+        "confidence": 1
+      }
+    },
+    {
+      "id": "holdout-two-needing-language",
+      "category": "missing-language",
+      "intent": {
+        "goal": "I need two separate deliverables: a request planner for a new agent/session DynamoDB table, and guidance for Lambda payment retry deduplication using my existing idempotency table."
+      },
+      "rationale": "Both independent tasks are supported and await explicit language selection.",
+      "expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "fallback_expected": {
+        "status": "missing_configuration",
+        "products": [
+          {
+            "sku": "AWS-0568",
+            "version": 2
+          },
+          {
+            "sku": "SW-PT-0006",
+            "version": 2
+          }
+        ],
+        "clarifications": [
+          "target_language"
+        ]
+      },
+      "fixture_reading": {
+        "request_shape": {
+          "choice": "multiple_tasks",
+          "confidence": 1
+        },
+        "candidate_support": {
+          "AWS-0568": 1,
+          "SW-PT-0006": 1
+        },
+        "sku": "AWS-0568",
+        "confidence": 1
+      }
+    }
+  ],
+  "name": "Question-design regression cases first observed during direct-fit validation"
+}

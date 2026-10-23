@@ -1,5 +1,7 @@
 # Second Wind — consolidated application and remaining work
 
+**Latest question-design work:** [JEV_QUESTION_AUDIT.md](JEV_QUESTION_AUDIT.md) applies the requested TypeSafe skill to the actual questions and their composition. Its final complete live run passes **60/60 fixed outcomes** (38 model-called, 22 application-only), with **219 gateway tests** and both builds passing. The original deployment-routing failure is resolved in this regression. The new source is proceeding through the existing GitHub verification/release workflow; production inference remains disabled and truthful live-catalog routing coverage remains open.
+
 The consolidation record below describes the accepted `548bcc2` release. The owner's subsequent TypeSafe skill/Jev routing work was merged in [PR #8](https://github.com/Cirrefera/Second-Wind/pull/8) and deployed as accepted application release `dadca82c5cf43ef6be0ebb62b3553e41b46198b8`. [JEV_ROUTING_EVALUATION.md](JEV_ROUTING_EVALUATION.md) records the real API results, source changes, GitHub verification, production acceptance, and remaining semantic/production prerequisites. Consult that report and the [canonical tracker](SECONDWIND_FIX_TRACKER.md) for the later release evidence.
 
 Verified October 22, 2026. Production acceptance returned `accepted: true` at **21:33:58 UTC / 5:33:58 p.m. EDT**.
@@ -109,7 +111,7 @@ The other **22 tracked items** remain visible. Their status is not a count of fa
 | FIX-09 | Reconcile current per-product readiness and explicit child work items; the historical 157-row inventory is not 157 finished products |
 | FIX-10 | Complete AWS-0568 component allocation and genuine reviews before publishing its source-ready v2 |
 | FIX-11 | Complete SW-PT-0006 v2 reviews and controlled publication while retaining v1 purchases |
-| FIX-12 | Optional model evaluation/calibration only if the owner directs it; keep disabled otherwise |
+| FIX-12 | Owner-directed Jev evaluation and question-design correction completed; validate production coverage, unseen request behavior, and provisional probability boundaries before optional enablement |
 | FIX-13 | Align current business-event fields with actual telemetry projections |
 | FIX-14 | Trace event IDs to raw/specialized sinks and verify deduplication, throughput, and operational ownership |
 | FIX-15 | Prevent unrelated callers from consuming lost-token recovery challenge slots |

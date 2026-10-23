@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {canonicalJson,sha256} from '../src/contracts.js';
 import {resolveIntent,validateRoutingManifest,CLEF_ROUTING_MIN_CONFIDENCE,CLEF_ROUTING_EXISTS_MIN,CLEF_ROUTING_EXISTS_ABSENT} from '../src/routing.js';
 import {canonicalService} from '../src/publication.js';
-import {CLEF_MODEL} from '../src/clef.js';
+import {CLEF_MODEL,CLEF_REQUEST_SHAPE_MIN_CONFIDENCE} from '../src/clef.js';
 import {createJevAi} from '../src/jev.js';
 import {createFixtureDb,insertItem} from '../tests/helpers/d1.mjs';
 
@@ -118,11 +118,26 @@ function fixtureAi(example) {
   if(!reading) throw new Error('evaluation_fixture_reading_missing');
   return {provider:'scripted-contract-fixture',run:async(model,input)=>{
     if(reading.unavailable) throw new Error('fixture_provider_unavailable');
+    if(input.questions.request_shape) {
+      if(!reading.request_shape) throw new Error('fixture_request_shape_missing');
+      const {choice,confidence,probabilities}=reading.request_shape;
+      return {model:'clef-flash',answers:{request_shape:{type:'choice',choice,confidence,
+        probabilities:probabilities??Object.fromEntries(Object.keys(input.questions.request_shape.criteria).map(key=>[key,key===choice?1:0]))}}};
+    }
     const index=reading.sku?input.state.candidates.findIndex(candidate=>candidate.sku===reading.sku):-1;
     if(reading.sku&&index<0) throw new Error('fixture_choice_outside_candidate_pool');
     const choice=index<0?'unknown':`candidate_${index}`;
     const keys=Object.keys(input.questions.candidate.criteria);
-    return {model:'clef-flash',answers:{answer_exists:{type:'noul',noul:reading.exists},
+    const support=Object.fromEntries(Object.entries(input.questions).filter(([,question])=>question.type==='noul').map(([id])=>{
+      const match=/^candidate_fit_(\d+)(?:_(single_task|multiple_tasks|topic_discovery))?$/.exec(id);
+      if(!match) throw new Error('fixture_candidate_question_unknown');
+      const candidate=input.state.candidates[Number(match[1])];
+      const value=reading.candidate_support?.[candidate.sku];
+      const fit=typeof value==='number'?value:value?.[match[2]||reading.request_shape.choice];
+      if(!Number.isFinite(fit)) throw new Error('fixture_candidate_support_missing');
+      return [id,{type:'noul',noul:fit}];
+    }));
+    return {model:'clef-flash',answers:{...support,
       candidate:{type:'choice',choice,confidence:reading.confidence,
         probabilities:Object.fromEntries(keys.map(key=>[key,reading.confidence===0?1/keys.length:key===choice?1:0]))}}};
   }};
@@ -154,7 +169,8 @@ export async function evaluateRouting({mode='deterministic',corpusPath=defaultCo
         let finished;
         pendingCalls.push(new Promise(resolve=>{finished=resolve;}));
         const start=performance.now(),responseStart=provider.responses?.length||0;
-        const call={provider:provider.provider||'custom',requested_model:model,status:'pending',http_responses:[]};
+        const call={provider:provider.provider||'custom',requested_model:model,
+          stage:request.questions?.request_shape?'request_shape':'candidate_alignment',status:'pending',http_responses:[]};
         callDetails.push(call);
         try {
           call.request_hash=await sha256(canonicalJson(request));
@@ -193,6 +209,7 @@ export async function evaluateRouting({mode='deterministic',corpusPath=defaultCo
 
   function report() {
     const unavailable=cases.filter(example=>example.alignment?.status==='unavailable').length;
+    const uncertainShapes=cases.filter(example=>example.alignment?.status==='uncertain_request_shape').length;
     const provider=mode==='deterministic'?'none':mode==='fixture'?'scripted-contract-fixture':ai?.provider||'custom';
     const response_provenance=mode==='deterministic'?'none':mode==='fixture'?'scripted-contract-fixture':ai?.response_provenance||'unverified';
     const calls=cases.flatMap(example=>example.provider_calls),http=calls.flatMap(call=>call.http_responses);
@@ -221,14 +238,16 @@ export async function evaluateRouting({mode='deterministic',corpusPath=defaultCo
         max:latencies.length?Math.max(...latencies):null},
       source_scope:'isolated local projection of reviewed draft releases; no publication or deployed-serving claim',
       sources:sources.map(({item,source_hash})=>({sku:item.sku,version:item.version,status_in_source:item.status,source_hash})),
-      thresholds:{choice_confidence:CLEF_ROUTING_MIN_CONFIDENCE,exists_present:CLEF_ROUTING_EXISTS_MIN,exists_absent_below:CLEF_ROUTING_EXISTS_ABSENT,calibrated:false},
+      thresholds:{request_shape_confidence:CLEF_REQUEST_SHAPE_MIN_CONFIDENCE,choice_confidence:CLEF_ROUTING_MIN_CONFIDENCE,
+        candidate_fit_present:CLEF_ROUTING_EXISTS_MIN,candidate_fit_absent_below:CLEF_ROUTING_EXISTS_ABSENT,calibrated:false},
       semantic_accuracy_measured:measured,
-      semantic_measurement_scope:'model-called cases only; application-only cases are excluded from model accuracy',
+      semantic_measurement_scope:'application outcomes on model-called cases only; application-only cases are excluded, and candidate-level support accuracy is not measured',
       semantic_quality:live?(!complete?'incomplete live evaluation checkpoint':unavailable||!observedHttp?'incomplete live evaluation; provider readings or HTTP evidence unavailable':'measured only on model-called cases in this fixed source-reviewed corpus; no held-out calibration'):'unverified; deterministic, scripted, injected or unverified provider decisions only',
       completed:cases.length,total:corpus.cases.length,passed:cases.filter(example=>example.passed).length,
       cohorts:{application_only:cohort(cases.filter(example=>example.model_calls===0)),
         model_called:{...cohort(cases.filter(example=>example.model_calls>0)),
           valid_readings:cases.filter(example=>example.model_calls>0&&example.alignment?.readings).length,
+          uncertain_request_shapes:uncertainShapes,
           accuracy:measured?cases.filter(example=>example.model_calls>0&&example.passed).length/cases.filter(example=>example.model_calls>0).length:null}},
       categories:Object.fromEntries([...new Set(corpus.cases.map(example=>example.category))].sort().map(category=>[category,{
         total:corpus.cases.filter(example=>example.category===category).length,
@@ -238,7 +257,7 @@ export async function evaluateRouting({mode='deterministic',corpusPath=defaultCo
       target_comparison:{status_agreement:cases.filter(example=>example.observed.status===example.target.status).length,
         false_match_cases:cases.filter(example=>example.target.status==='no_match'&&example.observed.products.length).length,
         missed_match_cases:cases.filter(example=>example.target.products.length&&!example.observed.products.length).length},
-      unavailable_readings:unavailable,cases};
+      unavailable_readings:unavailable,uncertain_request_shapes:uncertainShapes,cases};
   }
 }
 

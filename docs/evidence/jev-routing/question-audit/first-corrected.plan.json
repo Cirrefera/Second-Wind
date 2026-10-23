@@ -1,0 +1,36 @@
+{
+  "schema_version": "1",
+  "frozen_at": "2026-10-23T00:09:08.646Z",
+  "model": "jev-1.14.0",
+  "base_commit": "a499b596243e0ec1172f21061b0d22b72988fa38",
+  "implementation_hashes": {
+    "workers/gateway/src/clef.js": "8878e17351331c3fb821823291dfa433d0156c4cbe6da599f06b289bae99a4c4",
+    "workers/gateway/src/routing.js": "45361fb467fe81bceec91c4e317f1da95fdece46052c7ed231b8bfb45ef070b4",
+    "workers/gateway/scripts/evaluate-routing.mjs": "d103743070adfb057ace9a7112593da84025d441caaf07124ed236940dfd452a"
+  },
+  "groups": [
+    {
+      "name": "original",
+      "filename": "routing-evaluation.json",
+      "corpus_hash": "8c0f266defe093c3f7dfd38071384ae104e3b2422457f4796f6935c5b8057e4f"
+    },
+    {
+      "name": "paraphrases",
+      "filename": "routing-evaluation-paraphrases.json",
+      "corpus_hash": "9d133315dafc906490364336d7afd13c137578cf41f1843b504164769a24388f"
+    },
+    {
+      "name": "question-regressions",
+      "filename": "routing-question-regressions.json",
+      "corpus_hash": "d01b44df8151d97e33f3b8393c84a1cacc510b86ab1ed97ac1e2587b1fc6a24c"
+    },
+    {
+      "name": "question-holdouts",
+      "filename": "routing-question-holdouts.json",
+      "corpus_hash": "9de94ed8d10043852ef5d642ff1e0edf1422dbd170580ab5d36527489a44a406"
+    }
+  ],
+  "unchanged_labels": true,
+  "unchanged_probability_bands": true,
+  "max_http_requests": 76
+}

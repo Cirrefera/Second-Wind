@@ -10,21 +10,29 @@ const envelope=()=>({model:JEV_MODEL,answers:{exists:{type:'noul',noul:0.83}},us
 const response=(body=envelope(),options={})=>new Response(JSON.stringify(body),{status:200,headers:{'Content-Type':'application/json'},...options});
 const nextTurn=()=>new Promise(resolve=>setImmediate(resolve));
 
-test('TypeSafe sends native typed questions to the fixed endpoint and records only safe response evidence',async()=>{
- const events=[];let sent,rawResponse,calls=0;
+test('TypeSafe sends both native routing stages to the fixed endpoint with separate safe response evidence',async()=>{
+ const events=[],sent=[],rawResponses=[];let calls=0;
+ const nativeAnswers=[
+  {request_shape:{type:'choice',choice:'single_task',confidence:0.8,
+   probabilities:{single_task:0.9,multiple_tasks:0.1,topic_discovery:0,unknown:0}}},
+  {candidate:{type:'choice',choice:'candidate_0',confidence:0.64,probabilities:{candidate_0:0.82,unknown:0.18}},
+   candidate_fit_0:{type:'noul',noul:0.91}},
+ ];
+ const usages=[{input_tokens:123,output_tokens:12},{input_tokens:321,output_tokens:14}];
  const ai=createJevAi({apiKey,onResponse:event=>events.push(event),fetchImpl:async(url,options)=>{
   calls++;assert.equal(url,JEV_ENDPOINT);assert.equal(options.method,'POST');
+  assert.ok(calls<=2);
   assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
   assert.deepEqual(options.headers,{Authorization:`Bearer ${apiKey}`,'Content-Type':'application/json'});
   assert.equal(options.signal.aborted,false);
-  sent=JSON.parse(options.body);
-  assert.equal(sent.model,JEV_MODEL);
-  rawResponse=JSON.stringify({model:JEV_MODEL,answers:{
-   candidate:{type:'choice',choice:'candidate_0',confidence:0.64,probabilities:{candidate_0:0.82,unknown:0.18}},
-   answer_exists:{type:'noul',noul:0.91},
-  },usage:{input_tokens:321,output_tokens:14}});
+  const body=JSON.parse(options.body);
+  sent.push(body);
+  assert.equal(body.model,JEV_MODEL);
+  assert.deepEqual(Object.keys(body.questions),calls===1?['request_shape']:['candidate','candidate_fit_0']);
+  const rawResponse=JSON.stringify({model:JEV_MODEL,answers:nativeAnswers[calls-1],usage:usages[calls-1]});
+  rawResponses.push(rawResponse);
   return new Response(rawResponse,{status:200,headers:{
-   'x-request-id':'req_offline_123','cf-ray':'abc123-IAD','x-typesafe-request-id':apiKey,
+   'x-request-id':`req_offline_${calls}`,'cf-ray':'abc123-IAD','x-typesafe-request-id':apiKey,
    'x-private-debug':apiKey,'set-cookie':`session=${apiKey}`,
   }});
  }});
@@ -32,15 +40,33 @@ test('TypeSafe sends native typed questions to the fixed endpoint and records on
  const result=await readCandidateAlignment(ai,{goal:'A private buyer question'},[{
   sku:'RETRY',release_ref:'sha256:fixture',route_summary:'Retry handling',supported_boundary:'Duplicate events',exclusions:['payment-processing'],
  }],'snapshot:fixture');
- assert.equal(calls,1);assert.equal(result.model,JEV_MODEL);
+ assert.equal(calls,2);assert.equal(result.model,JEV_MODEL);
+ assert.deepEqual(sent[0].state,{goal:'A private buyer question'});
+ assert.deepEqual(sent[1].state.intent,{goal:'A private buyer question'});
+ assert.equal(sent[1].state.candidates[0].sku,'RETRY');
+ assert.equal(sent[0].questions.request_shape.type,'choice');
+ assert.equal(sent[1].questions.candidate.type,'choice');
+ assert.equal(sent[1].questions.candidate_fit_0.type,'noul');
+ assert.deepEqual(result.request_shape.readings.request_shape,{choice:'single_task',confidence:0.8,
+  probabilities:{single_task:0.9,multiple_tasks:0.1,topic_discovery:0,unknown:0}});
  assert.deepEqual(result.readings.candidate,{choice:'candidate_0',confidence:0.64,probabilities:{candidate_0:0.82,unknown:0.18}});
- assert.deepEqual(result.readings.answer_exists,{noul:0.91});
- assert.equal(events.length,1);
- assert.deepEqual(events[0],{provider:'typesafe-live',endpoint:JEV_ENDPOINT,model:JEV_MODEL,http_status:200,ok:true,
-  request_hash:await sha256(canonicalJson(sent)),request_ids:{'x-request-id':'req_offline_123','cf-ray':'abc123-IAD'},
-  response_hash:await sha256(rawResponse),response_model:JEV_MODEL,usage:{input_tokens:321,output_tokens:14},latency_ms:events[0].latency_ms});
- assert.ok(Number.isInteger(events[0].latency_ms)&&events[0].latency_ms>=0);
- assert.equal(result.request_hash,events[0].request_hash);
+ assert.deepEqual(result.readings.candidate_fit_0,{noul:0.91});
+ assert.deepEqual(result.support_questions,{candidate_0:{single_task:'candidate_fit_0'}});
+ assert.equal(result.readings.answer_exists,undefined);
+ assert.equal(result.readings.request_shape,undefined);
+ assert.equal(events.length,2);
+ for(const [index,event] of events.entries()) {
+  assert.deepEqual(event,{provider:'typesafe-live',endpoint:JEV_ENDPOINT,model:JEV_MODEL,http_status:200,ok:true,
+   request_hash:await sha256(canonicalJson(sent[index])),request_ids:{'x-request-id':`req_offline_${index+1}`,'cf-ray':'abc123-IAD'},
+   response_hash:await sha256(rawResponses[index]),response_model:JEV_MODEL,usage:usages[index],latency_ms:event.latency_ms});
+  assert.ok(Number.isInteger(event.latency_ms)&&event.latency_ms>=0);
+ }
+ assert.equal(result.request_shape.model,JEV_MODEL);
+ assert.equal(result.request_shape.request_hash,events[0].request_hash);
+ assert.equal(result.request_hash,events[1].request_hash);
+ assert.equal(result.request_shape.questions_hash,await sha256(canonicalJson(sent[0].questions)));
+ assert.equal(result.questions_hash,await sha256(canonicalJson(sent[1].questions)));
+ assert.equal(result.chain_hash,await sha256(canonicalJson({snapshot_ref:'snapshot:fixture',request_hashes:events.map(event=>event.request_hash)})));
  assert.ok(!JSON.stringify({ai,events,result,sent}).includes(apiKey));
  assert.ok(!JSON.stringify(events).includes('private buyer'));
 });
