@@ -1,0 +1,376 @@
+{
+  "schema_version": "1",
+  "existing_stream": {
+    "id": "d135ad1c9f9246ae945be1d1b8277ddc",
+    "name": "second_wind_events"
+  },
+  "pipeline": {
+    "name": "secondwind_contract_v1",
+    "sql_file": "basin-pipeline-v1.sql"
+  },
+  "sinks": [
+    {
+      "name": "journey_events_v1_sink",
+      "type": "basin_catalog",
+      "table": "secondwind.journey_events_v1",
+      "schema": {
+        "fields": [
+          {
+            "name": "event_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "event_contract_version",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "event_type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "occurred_ts",
+            "type": "timestamp",
+            "required": true
+          },
+          {
+            "name": "journey_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "observation_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "quote_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "payment_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "trial_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "sku",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "product_version_ref",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "event_family",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "journey_stage",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "observed_outcome",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "transport",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "public_intent",
+            "type": "json",
+            "required": false
+          },
+          {
+            "name": "candidate_product_ids",
+            "type": "json",
+            "required": false
+          },
+          {
+            "name": "selected_product_ids",
+            "type": "json",
+            "required": false
+          },
+          {
+            "name": "resolution_status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "configuration_status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "response_status",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "result_count",
+            "type": "int64",
+            "required": false
+          },
+          {
+            "name": "missing_count",
+            "type": "int64",
+            "required": false
+          },
+          {
+            "name": "error_count",
+            "type": "int64",
+            "required": false
+          },
+          {
+            "name": "clarification_count",
+            "type": "int64",
+            "required": false
+          },
+          {
+            "name": "delivery_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "challenge_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "journey_correlation",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "scope_correlation",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "payment_events_v1_sink",
+      "type": "basin_catalog",
+      "table": "secondwind.payment_events_v1",
+      "schema": {
+        "fields": [
+          {
+            "name": "event_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "event_contract_version",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "event_type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "occurred_ts",
+            "type": "timestamp",
+            "required": true
+          },
+          {
+            "name": "journey_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "payment_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "quote_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "trial_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "sku",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "product_version_ref",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "exact_amount_atomic",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "payment_network",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "artifact_hash",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "release_hash",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "scope_hash",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "journey_stage",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "observed_outcome",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "scope_correlation",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "journey_correlation",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "scope_events_v1_sink",
+      "type": "basin_catalog",
+      "table": "secondwind.scope_events_v1",
+      "schema": {
+        "fields": [
+          {
+            "name": "event_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "event_contract_version",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "event_type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "occurred_ts",
+            "type": "timestamp",
+            "required": true
+          },
+          {
+            "name": "journey_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "trial_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "quote_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "sku",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "product_version_ref",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "release_hash",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "scope_hash",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "exact_amount_atomic",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "selected_share_bps",
+            "type": "int64",
+            "required": false
+          },
+          {
+            "name": "selected_component_ids",
+            "type": "json",
+            "required": false
+          },
+          {
+            "name": "omitted_component_ids",
+            "type": "json",
+            "required": false
+          },
+          {
+            "name": "scope_correlation",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "journey_stage",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "observed_outcome",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    }
+  ],
+  "creation_requirements": {
+    "basin_catalog_bucket": "secondwind-catalog",
+    "namespace": "secondwind",
+    "catalog_token_required": true,
+    "catalog_token_value_stored_in_repo": false
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "schema_version": "1",
+  "event_contract_version": "1",
+  "producer": "secondwind-gateway",
+  "production_observation_date": "2026-10-23",
+  "authority": {
+    "application_contract": "workers/gateway/src/telemetry.js",
+    "durable_outbox": "D1.business_event_outbox",
+    "transport": "Basin stream second_wind_events",
+    "raw_history": "secondwind.all_events"
+  },
+  "d1_outbox": {
+    "table": "business_event_outbox",
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "TEXT",
+        "required": true,
+        "primary_key": true
+      },
+      {
+        "name": "event_type",
+        "type": "TEXT",
+        "required": true
+      },
+      {
+        "name": "occurred_ts",
+        "type": "TEXT",
+        "required": true
+      },
+      {
+        "name": "payload",
+        "type": "TEXT/JSON",
+        "required": true
+      },
+      {
+        "name": "attempts",
+        "type": "INTEGER",
+        "required": true
+      },
+      {
+        "name": "sent_at",
+        "type": "TEXT",
+        "required": false
+      },
+      {
+        "name": "last_error",
+        "type": "TEXT",
+        "required": false
+      }
+    ]
+  },
+  "stream": {
+    "id": "d135ad1c9f9246ae945be1d1b8277ddc",
+    "name": "second_wind_events",
+    "format": "json",
+    "http_enabled": false,
+    "worker_binding_enabled": true,
+    "required_fields": [
+      "event_id",
+      "schema_version",
+      "event_contract_version",
+      "event_type",
+      "occurred_ts",
+      "payload"
+    ],
+    "optional_fields": [
+      "actor_id",
+      "visitor_id",
+      "session_id",
+      "journey_id",
+      "request_id",
+      "buyer_id"
+    ]
+  },
+  "raw_landing_table": "secondwind.all_events",
+  "raw_landing_schema": [
+    {
+      "name": "__ingest_ts",
+      "type": "timestamp",
+      "required": true
+    },
+    {
+      "name": "event_id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "schema_version",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "event_contract_version",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "event_type",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "occurred_ts",
+      "type": "timestamp",
+      "required": true
+    },
+    {
+      "name": "actor_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "visitor_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "session_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "journey_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "request_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "buyer_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "payload",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "event_types": [
+    "journey.linked",
+    "discovery.searched",
+    "discovery.resolved",
+    "discovery.described",
+    "clarification.requested",
+    "clarification.responded",
+    "configuration.checked",
+    "selection.product_selected",
+    "trial.started",
+    "trial.completed",
+    "trial.failed",
+    "trial.expired_while_running",
+    "scope.selected",
+    "scope.accepted",
+    "quote.created",
+    "payment.settlement_started",
+    "payment.settlement_pending",
+    "payment.settled",
+    "payment.failed",
+    "receipt.issued",
+    "entitlement.activated",
+    "delivery.prepared",
+    "delivery.failed",
+    "recovery.grant_recovered",
+    "recovery.challenge_created",
+    "recovery.credential_rotated",
+    "recovery.result_recovered",
+    "recovery.trial_recovered",
+    "recovery.purchase_replayed"
+  ],
+  "payload_fields": {
+    "base": [
+      "payment_id",
+      "quote_id",
+      "sku",
+      "product_version_ref",
+      "artifact_hash",
+      "exact_amount_atomic",
+      "payment_network",
+      "trial_id",
+      "release_hash",
+      "scope_hash",
+      "selected_share_bps"
+    ],
+    "observations": [
+      "journey_id",
+      "observation_id",
+      "transport",
+      "candidate_product_ids",
+      "selected_product_ids",
+      "public_intent",
+      "result_count",
+      "resolution_status",
+      "configuration_status",
+      "missing_count",
+      "error_count",
+      "clarification_count",
+      "response_status",
+      "delivery_id",
+      "challenge_id"
+    ],
+    "derived": [
+      "event_family",
+      "producer",
+      "journey_stage",
+      "observed_outcome"
+    ],
+    "dispatch_enrichment": [
+      "journey_correlation",
+      "scope_correlation",
+      "selected_component_ids",
+      "omitted_component_ids"
+    ]
+  },
+  "projections": [
+    {
+      "name": "journey_events_v1",
+      "sink": "journey_events_v1_sink",
+      "table": "secondwind.journey_events_v1",
+      "event_types": "all_current"
+    },
+    {
+      "name": "payment_events_v1",
+      "sink": "payment_events_v1_sink",
+      "table": "secondwind.payment_events_v1",
+      "event_types": [
+        "payment.settlement_started",
+        "payment.settlement_pending",
+        "payment.settled",
+        "payment.failed",
+        "receipt.issued",
+        "entitlement.activated"
+      ]
+    },
+    {
+      "name": "scope_events_v1",
+      "sink": "scope_events_v1_sink",
+      "table": "secondwind.scope_events_v1",
+      "event_types": [
+        "scope.selected",
+        "scope.accepted"
+      ]
+    }
+  ],
+  "legacy_pipeline": {
+    "id": "c36bc1cd21814d3091f84329257b3c09",
+    "name": "secondwind_telemetry",
+    "status": "running",
+    "compatibility": "stale_against_event_contract_v1",
+    "mutate": false
+  },
+  "rollout": {
+    "mode": "additive",
+    "pipeline_name": "secondwind_contract_v1",
+    "preserve_raw_history": true,
+    "delete_or_rewrite_legacy_tables": false,
+    "requires_catalog_token_for_new_sinks": true
+  }
+}
