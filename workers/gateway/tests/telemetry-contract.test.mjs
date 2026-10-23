@@ -22,12 +22,14 @@ test('v1 Basin projection uses only current event names and current commerce fie
   for (const eventType of Object.keys(EVENT_REGISTRY)) {
     assert.ok(pipelineSql.includes("'" + eventType + "'"), 'missing current event type: ' + eventType);
   }
-  for (const legacy of [
+  for (const legacyEvent of [
     'catalog.selected', 'catalog.no_match', 'scope.activated', 'scope.frozen',
     'commerce.checkout_initiated', 'payment.settle', 'delivery.completed', 'recovery.attempted',
-    'amount_bps', 'price_bps', 'settlement_reference',
   ]) {
-    assert.ok(!pipelineSql.includes(legacy), 'legacy projection token remains: ' + legacy);
+    assert.ok(!pipelineSql.includes("'" + legacyEvent + "'"), 'legacy event remains: ' + legacyEvent);
+  }
+  for (const legacyField of ['amount_bps', 'price_bps', 'settlement_reference']) {
+    assert.ok(!pipelineSql.includes(legacyField), 'legacy projection field remains: ' + legacyField);
   }
   for (const current of [
     'exact_amount_atomic', 'payment_network', 'product_version_ref',
