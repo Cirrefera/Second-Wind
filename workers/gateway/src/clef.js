@@ -146,9 +146,10 @@ export function readCandidateAlignment(ai,intent,candidates,snapshot_ref,options
 async function readCandidateChain(ai,intent,candidates,snapshot_ref,{timeout_ms=CLEF_TIMEOUT_MS}={}) {
   if (!Number.isInteger(timeout_ms) || timeout_ms < 1 || timeout_ms > 30000) throw new Error('invalid_clef_timeout');
   const deadline=Date.now()+timeout_ms;
+  let closed=false;
   const remaining=()=>{
     const ms=deadline-Date.now();
-    if(ms<1) throw new Error('clef_timeout');
+    if(closed||ms<1) throw new Error('clef_timeout');
     return ms;
   };
   if(typeof ai?.run!=='function') throw new Error('clef_not_configured');
@@ -218,9 +219,15 @@ async function readCandidateChain(ai,intent,candidates,snapshot_ref,{timeout_ms=
   // As with readQuestions, this does not promise provider cancellation.
   let timer;
   try {
-    const expired=new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('clef_timeout')),remaining());});
+    const expired=new Promise((_,reject)=>{timer=setTimeout(()=>{
+      closed=true;reject(new Error('clef_timeout'));
+    },remaining());});
     return await Promise.race([readStages(),expired]);
-  } finally { clearTimeout(timer); }
+  } finally {
+    // A late first-stage response must not start support after this call ends,
+    // even if the wall clock still reports time remaining.
+    closed=true;clearTimeout(timer);
+  }
 }
 
 /** Read only observed journey stages. No wallet, buyer content, code, or tokens.
