@@ -16,6 +16,46 @@ The maximum in this path is the release’s price ceiling. The buyer signs the f
 
 Existing scope tests cover a $10 maximum with a 30% selection costing $3; missing dependencies are disclosed rather than silently charged; selection tampering is rejected; allocations sum exactly to the maximum. All five passed. `trials.test.mjs` additionally covers trial/selection without payment configuration, acceptance after trial, settlement of only the selected fraction, and delivery of only selected files. Those integration tests were inspected and are covered by the accepted release’s successful gateway test step; only the five dependency-free scope tests were rerun in this review.
 
+## Code Mode and Cap'n Web: verified preservation contract
+
+Follow-up source review uses the same `c0fb9cc` runtime. Code Mode executes the trial through `DynamicWorkerExecutor`; Cap'n Web exposes product, trial, selection and purchased-grant capabilities. Neither transport determines the charge: `scope.js` computes the selection, and `commerce.js` owns payment and recovery.
+
+| Step | Existing implementation | Meaning to preserve |
+| --- | --- | --- |
+| Inspect maximum | `ProductCapability.components()` → `describeComponents()` → `componentMenu()` | Release-owned `max_amount_atomic`, atomic component allocations and dependencies; no payment. |
+| Try configured product | `select(sku).configure(config).trial(input)` → `trialProduct()` → `executeCode()` | Completed or failed buyer sandbox evidence. Explicit trial providers are `components`, `configuration` and `readFile`; no outbound network or gateway bindings. |
+| Choose purchase | `TrialCapability.selectComponents(ids)` → `prepareComponentSelection()` | Requires completed trial; stores selected IDs, file identities, maximum and selected amount in a hashed scope. No automatic purchase of dependencies. |
+| Accept selection | `SelectionCapability.accept(scope_hash)` → `acceptTrialSelection()` → `createScopeQuote()` | Recomputes and checks the selected scope, persists selected bytes, then creates final payment requirements. Acceptance alone does not settle. Repeated acceptance uses the same trial/scope identity. |
+| Settle selected purchase | HTTP purchase URL from acceptance → `purchase()` | x402 signs/verifies the final selected amount. `createQuote()` rejects component products with `component_selection_required`, preventing the ordinary full-product route from bypassing selection. |
+| Recover purchase | `getGrant()` / `recoverSession()` → `recoverGrant()` → `deliverGrant()` | Authenticated delivery of the purchased bytes/version, without another settlement. |
+
+The HTTP trial endpoints and Cap'n Web capabilities call the same trial/selection/acceptance functions. The existing HTTP-batch test pipelines **recovery of an already completed trial → selection → scope inspection** in one request; it does not prove that the full trial-to-settlement journey takes one request. Trial creation in those service tests uses an injected executor, while separate CI tests exercise the actual Dynamic Worker runtime. Keep these evidence boundaries explicit.
+
+### Other existing payment paths
+
+`SW-EXEC` is an explicit one-invocation purchase at 2,000 atomic USDC units. `purchase()` verifies payment authorization, executes the requested code, persists a successful result, then attempts settlement. Failed Code Mode work is not settled. `executeGrantedInvocation()` recovers the identical result and rejects a changed request; it does not launch another paid execution. This is payment for one successful invocation, not elapsed-time/token metering and not a buyer's post-result selection step.
+
+Products without component releases retain the listed-price purchase path. Products with component releases are gated into the trial/selection path. These are verified differences in current behavior, not authority to invent a meter or silently change existing prices. Production component-release availability remains the separate unresolved publication item recorded above.
+
+### Monetary meaning in the event history
+
+| Value or event | Existing source | Consolidation interpretation |
+| --- | --- | --- |
+| Maximum payment | Release `pricing.max_amount_atomic`; selection `scope_json.max_amount_atomic`; accepted `snapshot_json.scope.max_amount_atomic` | Preserve the exact release ceiling independently of the chosen charge. |
+| Selected charge | Scope `amount_atomic`; acceptance `amount_usdc_micros` | Exact integer atomic units. `selected_share_bps` is an allocation weight, not a measured resource quantity. |
+| `scope.selected`, `scope.accepted`, `quote.created` | D1 triggers in migrations 0002/0003 | Selection/preparation events, not evidence of money moving. Component acceptance emits both acceptance and the compatibility-named creation event; they describe one prepared purchase. |
+| `payment.settlement_started`, `payment.settlement_pending`, `payment.failed` | Purchase-state transitions | Attempts, uncertainty or failure. Their `exact_amount_atomic` is not proof of a settled charge. |
+| `payment.settled`, `receipt.issued`, `entitlement.activated` | Same settled purchase transition, correlated by payment ID | One settled purchase with multiple lifecycle observations; never sum all three as separate revenue. |
+| Delivery and recovery observations | Existing delivery/recovery functions | Repeated access to an existing entitlement, not another purchase or billable use. |
+
+**Specific Ticket 2 gap:** the current event allowlist, scope enrichment and proposed v1 projections carry `exact_amount_atomic` and `selected_share_bps`, but omit the separate maximum. Operational D1 JSON retains it. Preserve that source and map the ceiling separately in the canonical schema before claiming complete monetary coverage. Do not reconstruct the maximum by dividing the selected amount by its share: per-component atomic rounding makes that inference unreliable. Missing historical evidence stays unknown.
+
+**Specific FIX-17/19 language gap:** discovery already documents the trial/selection chain, but `toolsDocument()` still calls acceptance a quote, OpenAPI advertises quote-based purchase, and the generic Cap'n Web guidance still presents `configure().quote()`. Reconcile those descriptions with the owner's maximum-payment model while retaining existing route/field identifiers for compatibility. This is not a missing sandbox implementation.
+
+### Follow-up validation
+
+[PR verification run 40056053605](https://github.com/Cirrefera/Second-Wind/actions/runs/40056053605), for documentation head `5c0635881750af0d4351e6d153c9a82a8967aae7`, passed. Its logs confirm 222 gateway tests, 21 legacy/Pages tests and 32 release-acceptance tests, all passing, plus actual Dynamic Worker checks and both builds. The gateway log explicitly includes selected-fraction settlement, one-batch trial recovery/selection, trial without payment configuration, failed Code Mode work without settlement, and execution replay protections. These existing results are reused; no duplicate suite or funded transaction was run in this follow-up. Later documentation edits do not change that tested runtime.
+
 ## Evidence boundary
 
 - Source: `c0fb9cc2c6927a036e2d0193c3d505630c4c227a`; 64 retrieved source/configuration/document files verified against their Git blob hashes before editing.
