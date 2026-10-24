@@ -7,7 +7,23 @@ Repository: https://github.com/Cirrefera/Second-Wind
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
 
-## FIX-13 verification checkpoint — October 23, 2026
+## Current consolidation checkpoint — October 23, 2026
+
+**Source and production match `c0fb9cc2c6927a036e2d0193c3d505630c4c227a`. FIX-13 remains incomplete; its earlier missing-sink statement is superseded.** PR #11 is merged. [Production run 39986362848](https://github.com/Cirrefera/Second-Wind/actions/runs/39986362848) passed tests, builds, migrations and release acceptance. Gateway `3302125b-6658-4523-94ac-06edb36a191d` serves 100%; Pages deployment `639230c2-516c-4b90-b5cf-a75a9bea13d9` matches the same clean commit.
+
+The owner clarified: **maximum payment → sandbox → chosen purchase or usage → final charge within the maximum; no buyer-facing quote stage.** The component implementation already separates `max_amount_atomic` from selected `amount_atomic`, requires a completed trial and explicit acceptance, and settles the selected amount. Existing `quote*` identifiers do not mean charge the maximum. Five existing scope tests passed. Other fixed-price paths and public quote terminology remain FIX-17/19 reconciliation work; general usage metering is not claimed.
+
+[CONSOLIDATION_INVENTORY.md](CONSOLIDATION_INVENTORY.md), its [baseline](evidence/consolidation/baseline.json) and [569-entry field ledger](evidence/consolidation/field-ledger.csv) record the structural portion of plan Ticket 1: 21 D1 tables, 26 Iceberg schemas, four streams, 19 sinks, the running pipeline, source dependencies and duplicate candidates. Full Ticket 1 remains open for external consumers and protected record/object inventories. Every original field/definition is retained; no retirement or migration is authorized by this inventory.
+
+- All three v1 sinks exist with 29/19/18 fields matching source. They are unconnected, their tables are absent from the listing, and `secondwind_contract_v1` is absent. Do not recreate them or infer credential usability/delivery from existence.
+- The owner’s later consolidation plan governs the final schema and sink count. The prior additive three-sink design is a candidate, not a mandatory rollout.
+- Outbox observation: 378 rows, zero pending. This establishes dispatch/backlog state only; FIX-14 same-event raw/analytical arrival remains open.
+- Routing manifests, component releases and payload-object rows remain zero. Their implementations already exist.
+- Completed FIX-01/02/03/05/06/28 remain completed. All 28 IDs and historical evidence remain. No product publication, inference enablement or production changes occurred.
+
+Earlier checkpoints below are historical where resource state or payment wording differs. Use this checkpoint and the owner’s clarified payment meaning for subsequent work.
+
+## Historical FIX-13 verification checkpoint — before sink provisioning
 
 **Source verified; Cloudflare rollout BLOCKED on catalog-token authority. FIX-13 is not complete.**
 
@@ -329,14 +345,14 @@ Keep deterministic compatibility checks authoritative. Verify typed responses, f
 ### FIX-13 — Align telemetry projections with the current event contract
 
 - Priority: **P1**
-- Status: **BLOCKED — source verified; catalog credential authority missing**
-- Evidence: Audit reports payment.settled / exact_amount_atomic / payment_network do not match older specialized projections. Raw history must remain intact.
-- Dependencies: Authorized catalog credential containing Catalog Write and bucket storage write; create sinks before live SQL validation.
-- Acceptance criteria: current payment and receipt events appear in the intended projections with correct amounts, identifiers, and network fields.
-- Implementation location: workers/gateway/src/telemetry.js; current pipeline SQL; draft telemetry-review.md
-- Verification: PR #11 implementation passed run 39984653470/job 120520573239 including all required tests and builds. Ordered SQL/schema fields and exact event filters match. Live SQL validation and sink delivery remain pending; see the October 23 checkpoint.
-- Release state: PR #11 carries additive declarative telemetry configuration and tests. Application deployment does not create Basin resources; production telemetry acceptance remains incomplete.
-- Remaining blocker: The connected account-token API reports Catalog Write is_selectable=false and catalog credential absent. Three v1 sinks/pipeline and exact-event-ID raw/journey delivery proof remain outstanding.
+- Status: **IN PROGRESS — source deployed; three sinks provisioned; canonical mapping and delivery acceptance pending**
+- Evidence: Current event names/amount fields differ from legacy projections. Three v1 sinks exist with source-matching schemas; no v1 pipeline/table delivery is established.
+- Dependencies: Complete the owner’s consolidation mapping, preserve historical/raw coverage, confirm consumers and usable ingestion credentials, then validate the selected design. Do not recreate existing sinks.
+- Acceptance criteria: current payment/receipt events appear in intended projections with correct amounts, IDs and network; maximum and final-charge semantics remain distinct.
+- Implementation location: workers/gateway/src/telemetry.js; telemetry declarations; CONSOLIDATION_INVENTORY.md and its field ledger.
+- Verification: PR #11 merged in c0fb9cc; production run 39986362848 passed. Live sink fields match 29/19/18 declarations. Pipeline planning, materialization and exact-event arrival remain pending.
+- Release state: Application deployed. Declarative source does not establish external rollout or downstream delivery.
+- Remaining work: Ticket 1 consumer/record coverage, Ticket 2 semantics/target design, Ticket 3 rehearsal/trace. The prior credential blocker is historical, not reasserted as current without evidence.
 
 Original bounded scope:
 

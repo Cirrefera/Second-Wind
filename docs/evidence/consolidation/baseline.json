@@ -1,0 +1,6501 @@
+{
+  "schema_version": "1",
+  "source_commit": "c0fb9cc2c6927a036e2d0193c3d505630c4c227a",
+  "observation_context": "October 23, 2026 America/New_York; orientation and follow-up reads; not a transactionally consistent backup",
+  "scope": "schema and dependency inventory; not migration acceptance or complete external consumer discovery",
+  "deployment": {
+    "gateway_version": "3302125b-6658-4523-94ac-06edb36a191d",
+    "gateway_tag": "c0fb9cc2c6927a036e2d0193c3d505630c4c227a",
+    "pages_deployment": "639230c2-516c-4b90-b5cf-a75a9bea13d9",
+    "accepted_run": 39986362848
+  },
+  "d1": [
+    {
+      "name": "business_event_outbox",
+      "role": "Durable transition/observation dispatch authority; retain.",
+      "row_count_observed": 378,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "event_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "event_type",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "occurred_ts",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "payload",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "attempts",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": "0",
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "sent_at",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "last_error",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [],
+      "references": [
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 181,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 245,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 332,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 338,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 344,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "catalog_items",
+      "role": "Historical catalog model; retain original fields pending migration/import consumer closure.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "slug",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "name",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "item_type",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "service_slug",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "category_slug",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "price_usd",
+          "type": "REAL",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "summary",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "source_repo",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "source_path",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "source_url",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "license_spdx",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "provenance",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 13,
+          "name": "content_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 14,
+          "name": "status",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'draft'",
+          "pk": 0
+        },
+        {
+          "cid": 15,
+          "name": "version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": "1",
+          "pk": 0
+        },
+        {
+          "cid": 16,
+          "name": "yard_artifact_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 17,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        },
+        {
+          "cid": 18,
+          "name": "updated_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        },
+        {
+          "cid": 19,
+          "name": "published_at",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 20,
+          "name": "tool_code",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 21,
+          "name": "reference_doc",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 22,
+          "name": "language",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 23,
+          "name": "token_estimate",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": "0",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "categories",
+          "from": "category_slug",
+          "to": "slug",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "services",
+          "from": "service_slug",
+          "to": "slug",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "categories",
+      "role": "Historical catalog taxonomy reference; retain with catalog_items relationships.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "slug",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "domain",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "name",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "description",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [],
+      "references": [
+        {
+          "file": "workers/gateway/scripts/evaluate-routing.mjs",
+          "line": 252,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "commerce_purchases",
+      "role": "Purchase orchestration, claim ownership and private recovery; retain.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "payment_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "quote_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "payment_key",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "proof_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "recovery_token_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "payer",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "owner",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "status",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "prepared_json",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "receipt_json",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "error_code",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "updated_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "commerce_quotes",
+          "from": "quote_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "payments",
+          "from": "payment_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [
+        "business_purchase_failed",
+        "business_purchase_settled",
+        "business_purchase_settling",
+        "business_purchase_uncertain"
+      ],
+      "references": [
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 243,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 259,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 263,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 278,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 283,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 327,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 383,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 411,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 423,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 455,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 512,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 529,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 553,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 703,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/index.js",
+          "line": 99,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "commerce_quotes",
+      "role": "Existing internal acceptance/payment record; component charge is selected scope amount, with maximum separately in scope. No buyer-facing quote stage; retain identifier compatibility.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "kind",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "amount_usdc_micros",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "asset",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "network",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "pay_to",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "config_json",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "request_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "snapshot_json",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "content_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 13,
+          "name": "expires_at",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [
+        "business_quote_created",
+        "component_scope_accepted"
+      ],
+      "references": [
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 275,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 86,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 209,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "commerce_recovery_challenges",
+      "role": "Private expiring, consumable recovery proof; retain.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "payment_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "message",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "expires_at",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "consumed_at",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "payments",
+          "from": "payment_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 666,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 675,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 688,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 704,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 707,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "component_acceptances",
+      "role": "Acceptance-to-quote idempotency mapping; retain.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "acceptance_key",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "quote_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "commerce_quotes",
+          "from": "quote_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 310,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 69,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 95,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 97,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "component_releases",
+      "role": "Immutable component manifest by SKU/version; retain dormant capability.",
+      "row_count_observed": 0,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 2
+        },
+        {
+          "cid": 2,
+          "name": "manifest_json",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "manifest_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [
+        "component_release_immutable_delete",
+        "component_release_immutable_update"
+      ],
+      "references": [
+        {
+          "file": "workers/gateway/src/catalog.js",
+          "line": 8,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/catalog.js",
+          "line": 11,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 298,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/trials.js",
+          "line": 14,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 136,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 253,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 271,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 281,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "component_selections",
+      "role": "Selection per trial and scope hash; retain.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "trial_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "scope_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 2
+        },
+        {
+          "cid": 2,
+          "name": "scope_json",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "component_trials",
+          "from": "trial_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [
+        "component_scope_selected"
+      ],
+      "references": [
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 270,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 311,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/trials.js",
+          "line": 92,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/trials.js",
+          "line": 103,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "component_trials",
+      "role": "Trial lifecycle, input configuration and result; retain.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "token_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "release_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "config_json",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "status",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "result_json",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "expires_at",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [
+        "component_trial_finished",
+        "component_trial_started"
+      ],
+      "references": [
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 207,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 270,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/telemetry.js",
+          "line": 313,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/trials.js",
+          "line": 45,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/trials.js",
+          "line": 62,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/trials.js",
+          "line": 71,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "deliveries",
+      "role": "Delivery occurrence/audit; retain each legitimate occurrence.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "payment_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "content_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "delivered_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "payments",
+          "from": "payment_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 70,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 73,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 6,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 12,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 13,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 17,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 64,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 342,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 352,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 628,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/ledger.js",
+          "line": 3,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/ledger.js",
+          "line": 18,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "delivery_grants",
+      "role": "Payment-to-payload authorization relation; retain even while empty.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "payment_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "payload_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "granted_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "payload_objects",
+          "from": "payload_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "payments",
+          "from": "payment_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 5,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 7,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 46,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 331,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "edges",
+      "role": "Serving product relationships through src/lib/curation.js; retain relationship identity.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "from_sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "to_sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 2
+        },
+        {
+          "cid": 2,
+          "name": "relation",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 3
+        },
+        {
+          "cid": 3,
+          "name": "position",
+          "type": "INTEGER",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "note",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "items",
+          "from": "to_sku",
+          "to": "sku",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "items",
+          "from": "from_sku",
+          "to": "sku",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [
+        {
+          "file": "src/lib/curation.js",
+          "line": 4,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 49,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 57,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 75,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 78,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "items",
+      "role": "Serving catalog; retain current SKU/version and purchased snapshots.",
+      "row_count_observed": 157,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "slug",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "name",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "kind",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "service",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "summary",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "guidance",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "price_usd",
+          "type": "REAL",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "invoke_kind",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'resolve'",
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "invoke_key",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "input_schema",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "input_example",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "mime_type",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 13,
+          "name": "source_repo",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 14,
+          "name": "source_path",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 15,
+          "name": "source_url",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 16,
+          "name": "license_spdx",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 17,
+          "name": "provenance",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 18,
+          "name": "content_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 19,
+          "name": "status",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'draft'",
+          "pk": 0
+        },
+        {
+          "cid": 20,
+          "name": "version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": "1",
+          "pk": 0
+        },
+        {
+          "cid": 21,
+          "name": "updated_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [],
+      "references": [
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 39,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 72,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 111,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 112,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 217,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 218,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 222,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 224,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 228,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 229,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 248,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 252,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 75,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 165,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 261,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 264,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 370,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 375,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 378,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/discovery.js",
+          "line": 410,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 13,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 20,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 27,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 129,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/api/tools.js",
+          "line": 6,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/api/tools.js",
+          "line": 7,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 9,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 11,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 15,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 17,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 36,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/catalog.js",
+          "line": 12,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 132,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/index.js",
+          "line": 97,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 248,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 269,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 270,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 277,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 278,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 3,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 21,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 38,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/curation.js",
+          "line": 58,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 30,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 131,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 180,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 181,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 182,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 183,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 184,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 185,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 190,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 217,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 438,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 447,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 476,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/discovery.js",
+          "line": 477,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "payload_objects",
+      "role": "Immutable SKU/version-to-R2 object index; retain dormant capability.",
+      "row_count_observed": 0,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "r2_bucket",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "r2_key",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "content_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "size_bytes",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "mime_type",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'application/octet-stream'",
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "items",
+          "from": "sku",
+          "to": "sku",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 4,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 19,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 31,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 100,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 108,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/fulfill.js",
+          "line": 122,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/catalog.js",
+          "line": 12,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 140,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 251,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 271,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 272,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 279,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "payments",
+      "role": "Settlement/payment identity; retain separately from quote and delivery.",
+      "row_count_observed": 3,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "price_usd",
+          "type": "REAL",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "amount_usdc_micros",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "payer",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "tx_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "network",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'eip155:8453'",
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "scheme",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'ExactEvmScheme'",
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "idempotency_key",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "status",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "facilitator_ref",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "settled_at",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [],
+      "references": [
+        {
+          "file": "src/worker.js",
+          "line": 4,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 4,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 63,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 69,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/worker-selftest.mjs",
+          "line": 6,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/x402-networks.js",
+          "line": 65,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 40,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 48,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 59,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 66,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 84,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/api/x402/[sku].js",
+          "line": 107,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 262,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 282,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 324,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 507,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 593,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/ledger.js",
+          "line": 2,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/ledger.js",
+          "line": 10,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "product_routing_manifests",
+      "role": "Reviewed version-matched routing metadata; retain dormant capability.",
+      "row_count_observed": 0,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 2
+        },
+        {
+          "cid": 2,
+          "name": "manifest_json",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "manifest_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "reviewed_by",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "items",
+          "from": "sku",
+          "to": "sku",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [
+        "routing_manifest_no_delete",
+        "routing_manifest_no_update"
+      ],
+      "references": [
+        {
+          "file": "workers/gateway/src/routing.js",
+          "line": 93,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 252,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 271,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/release-preparation.js",
+          "line": 280,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/scripts/evaluate-routing.mjs",
+          "line": 160,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "promotions",
+      "role": "Publication/admin history; retain; external writer identity remains unresolved.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "yard_artifact_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "action",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "actor",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'mike'",
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "note",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [],
+      "references": [],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "purchases",
+      "role": "Legacy purchase orchestration; retain until external/legacy consumers and identities are reconciled.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "quote_id",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "release_version",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "config_hash",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "language",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "runtime",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "amount_usd",
+          "type": "REAL",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "amount_atomic",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "asset",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'USDC'",
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "network",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'eip155:8453'",
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "recipient",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "buyer_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 13,
+          "name": "protocol",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 14,
+          "name": "payment_method",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 15,
+          "name": "status",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'claimed'",
+          "pk": 0
+        },
+        {
+          "cid": 16,
+          "name": "claimed_by",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 17,
+          "name": "claimed_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "datetime('now')",
+          "pk": 0
+        },
+        {
+          "cid": 18,
+          "name": "settled_at",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 19,
+          "name": "payment_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 20,
+          "name": "idempotency_key",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 21,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "datetime('now')",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "payments",
+          "from": "payment_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "items",
+          "from": "sku",
+          "to": "sku",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "triggers": [],
+      "references": [
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 14,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 19,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 42,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 61,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 76,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 88,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 99,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 111,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 121,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/purchase.js",
+          "line": 129,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 63,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 66,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 68,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/discovery.js",
+          "line": 103,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 165,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 438,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 468,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/commerce.js",
+          "line": 714,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/index.js",
+          "line": 215,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/index.js",
+          "line": 228,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "workers/gateway/src/index.js",
+          "line": 230,
+          "gateway_module": true,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "request_log",
+      "role": "HTTP observation history; retain separately from business events; active writer closure pending.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "path",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "sku",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "method",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "status",
+          "type": "INTEGER",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "ua_class",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "created_at",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "strftime('%Y-%m-%dT%H:%M:%fZ','now')",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [],
+      "references": [
+        {
+          "file": "functions/_middleware.js",
+          "line": 8,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "scripts/selftest.mjs",
+          "line": 71,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "functions/_lib/store.js",
+          "line": 82,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        },
+        {
+          "file": "src/lib/ledger.js",
+          "line": 26,
+          "gateway_module": false,
+          "evidence_kind": "text_reference_requires_semantic_review"
+        }
+      ],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    },
+    {
+      "name": "services",
+      "role": "Historical catalog service reference; retain with catalog_items relationships.",
+      "row_count_observed": null,
+      "count_scope": "orientation checkpoint; unknown is null",
+      "columns": [
+        {
+          "cid": 0,
+          "name": "slug",
+          "type": "TEXT",
+          "notnull": 0,
+          "default": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "kind",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "'aws-service'",
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "description",
+          "type": "TEXT",
+          "notnull": 1,
+          "default": "''",
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "triggers": [],
+      "references": [],
+      "disposition": "retain_in_place",
+      "retirement_authorized": false,
+      "consumer_closure": "incomplete; lexical references are not a complete dependency graph"
+    }
+  ],
+  "d1_sqlite_master": [
+    {
+      "type": "index",
+      "name": "business_event_outbox_pending",
+      "tbl_name": "business_event_outbox",
+      "sql": "CREATE INDEX business_event_outbox_pending\n ON business_event_outbox(occurred_ts) WHERE sent_at IS NULL"
+    },
+    {
+      "type": "index",
+      "name": "idx_commerce_purchases_pending",
+      "tbl_name": "commerce_purchases",
+      "sql": "CREATE INDEX idx_commerce_purchases_pending\n  ON commerce_purchases(status, updated_at) WHERE status IN ('settling','uncertain')"
+    },
+    {
+      "type": "index",
+      "name": "idx_commerce_quotes_expiry",
+      "tbl_name": "commerce_quotes",
+      "sql": "CREATE INDEX idx_commerce_quotes_expiry ON commerce_quotes(expires_at)"
+    },
+    {
+      "type": "index",
+      "name": "idx_commerce_recovery_expiry",
+      "tbl_name": "commerce_recovery_challenges",
+      "sql": "CREATE INDEX idx_commerce_recovery_expiry ON commerce_recovery_challenges(expires_at)"
+    },
+    {
+      "type": "index",
+      "name": "idx_deliveries_payment",
+      "tbl_name": "deliveries",
+      "sql": "CREATE INDEX idx_deliveries_payment ON deliveries(payment_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_deliveries_sku",
+      "tbl_name": "deliveries",
+      "sql": "CREATE INDEX idx_deliveries_sku     ON deliveries(sku)"
+    },
+    {
+      "type": "index",
+      "name": "idx_delivery_grants_payment",
+      "tbl_name": "delivery_grants",
+      "sql": "CREATE INDEX idx_delivery_grants_payment ON delivery_grants(payment_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_edges_from",
+      "tbl_name": "edges",
+      "sql": "CREATE INDEX idx_edges_from ON edges(from_sku)"
+    },
+    {
+      "type": "index",
+      "name": "idx_edges_to",
+      "tbl_name": "edges",
+      "sql": "CREATE INDEX idx_edges_to ON edges(to_sku)"
+    },
+    {
+      "type": "index",
+      "name": "idx_items_category",
+      "tbl_name": "catalog_items",
+      "sql": "CREATE INDEX idx_items_category ON catalog_items(category_slug)"
+    },
+    {
+      "type": "index",
+      "name": "idx_items_live",
+      "tbl_name": "items",
+      "sql": "CREATE INDEX idx_items_live ON items(status, kind, service)"
+    },
+    {
+      "type": "index",
+      "name": "idx_items_service",
+      "tbl_name": "catalog_items",
+      "sql": "CREATE INDEX idx_items_service  ON catalog_items(service_slug)"
+    },
+    {
+      "type": "index",
+      "name": "idx_items_status",
+      "tbl_name": "catalog_items",
+      "sql": "CREATE INDEX idx_items_status   ON catalog_items(status)"
+    },
+    {
+      "type": "index",
+      "name": "idx_items_type",
+      "tbl_name": "catalog_items",
+      "sql": "CREATE INDEX idx_items_type     ON catalog_items(item_type)"
+    },
+    {
+      "type": "index",
+      "name": "idx_payload_objects_sku",
+      "tbl_name": "payload_objects",
+      "sql": "CREATE INDEX idx_payload_objects_sku ON payload_objects(sku)"
+    },
+    {
+      "type": "index",
+      "name": "idx_payments_idem",
+      "tbl_name": "payments",
+      "sql": "CREATE UNIQUE INDEX idx_payments_idem  ON payments(idempotency_key) WHERE idempotency_key != ''"
+    },
+    {
+      "type": "index",
+      "name": "idx_payments_payer",
+      "tbl_name": "payments",
+      "sql": "CREATE INDEX idx_payments_payer ON payments(payer)"
+    },
+    {
+      "type": "index",
+      "name": "idx_payments_sku",
+      "tbl_name": "payments",
+      "sql": "CREATE INDEX idx_payments_sku   ON payments(sku)"
+    },
+    {
+      "type": "index",
+      "name": "idx_payments_tx",
+      "tbl_name": "payments",
+      "sql": "CREATE INDEX idx_payments_tx    ON payments(tx_hash)"
+    },
+    {
+      "type": "index",
+      "name": "idx_promotions_sku",
+      "tbl_name": "promotions",
+      "sql": "CREATE INDEX idx_promotions_sku ON promotions(sku)"
+    },
+    {
+      "type": "index",
+      "name": "idx_purchases_buyer",
+      "tbl_name": "purchases",
+      "sql": "CREATE INDEX idx_purchases_buyer ON purchases(buyer_id)"
+    },
+    {
+      "type": "index",
+      "name": "idx_purchases_idem",
+      "tbl_name": "purchases",
+      "sql": "CREATE INDEX idx_purchases_idem ON purchases(idempotency_key)"
+    },
+    {
+      "type": "index",
+      "name": "idx_purchases_sku",
+      "tbl_name": "purchases",
+      "sql": "CREATE INDEX idx_purchases_sku ON purchases(sku)"
+    },
+    {
+      "type": "index",
+      "name": "idx_purchases_status",
+      "tbl_name": "purchases",
+      "sql": "CREATE INDEX idx_purchases_status ON purchases(status)"
+    },
+    {
+      "type": "index",
+      "name": "idx_reqlog_created",
+      "tbl_name": "request_log",
+      "sql": "CREATE INDEX idx_reqlog_created ON request_log(created_at)"
+    },
+    {
+      "type": "table",
+      "name": "_cf_KV",
+      "tbl_name": "_cf_KV",
+      "sql": "CREATE TABLE _cf_KV (\n        key TEXT PRIMARY KEY,\n        value BLOB\n      ) WITHOUT ROWID"
+    },
+    {
+      "type": "table",
+      "name": "business_event_outbox",
+      "tbl_name": "business_event_outbox",
+      "sql": "CREATE TABLE business_event_outbox (\n event_id TEXT PRIMARY KEY,\n event_type TEXT NOT NULL,\n occurred_ts TEXT NOT NULL,\n payload TEXT NOT NULL CHECK(json_valid(payload)),\n attempts INTEGER NOT NULL DEFAULT 0,\n sent_at TEXT,\n last_error TEXT\n)"
+    },
+    {
+      "type": "table",
+      "name": "catalog_items",
+      "tbl_name": "catalog_items",
+      "sql": "CREATE TABLE catalog_items (\n  sku              TEXT PRIMARY KEY,\n  slug             TEXT NOT NULL UNIQUE,\n  name             TEXT NOT NULL,\n  item_type        TEXT NOT NULL CHECK (item_type IN ('tool','construct','diagnostic','recipe','template','manifest','decision','cost-model','auth-flow')),\n  service_slug     TEXT NOT NULL REFERENCES services(slug),\n  category_slug    TEXT NOT NULL REFERENCES categories(slug),\n  price_usd        REAL NOT NULL CHECK (price_usd >= 0),\n  summary          TEXT NOT NULL,\n  source_repo      TEXT NOT NULL DEFAULT '',\n  source_path      TEXT NOT NULL DEFAULT '',\n  source_url       TEXT NOT NULL DEFAULT '',\n  license_spdx     TEXT NOT NULL DEFAULT '',\n  provenance       TEXT NOT NULL CHECK (provenance IN ('upstream','synthesized','hybrid')),\n  content_hash     TEXT NOT NULL,\n  status           TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','live','retired')),\n  version          INTEGER NOT NULL DEFAULT 1,\n  yard_artifact_id TEXT NOT NULL DEFAULT '',\n  created_at       TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),\n  updated_at       TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),\n  published_at     TEXT\n, tool_code TEXT NOT NULL DEFAULT '', reference_doc TEXT NOT NULL DEFAULT '', language TEXT NOT NULL DEFAULT '' CHECK (language IN ('', 'typescript', 'python', 'both')), token_estimate INTEGER NOT NULL DEFAULT 0)"
+    },
+    {
+      "type": "table",
+      "name": "categories",
+      "tbl_name": "categories",
+      "sql": "CREATE TABLE categories (\n  slug        TEXT PRIMARY KEY,\n  domain      TEXT NOT NULL,\n  name        TEXT NOT NULL,\n  description TEXT NOT NULL DEFAULT ''\n)"
+    },
+    {
+      "type": "table",
+      "name": "commerce_purchases",
+      "tbl_name": "commerce_purchases",
+      "sql": "CREATE TABLE commerce_purchases (\n  payment_id TEXT PRIMARY KEY REFERENCES payments(id),\n  quote_id TEXT NOT NULL UNIQUE REFERENCES commerce_quotes(id),\n  payment_key TEXT NOT NULL UNIQUE,\n  proof_hash TEXT NOT NULL,\n  recovery_token_hash TEXT NOT NULL,\n  payer TEXT NOT NULL,\n  owner TEXT NOT NULL,\n  status TEXT NOT NULL CHECK(status IN\n    ('claimed','executing','prepared','settling','settled','failed','uncertain')),\n  prepared_json TEXT CHECK(prepared_json IS NULL OR json_valid(prepared_json)),\n  receipt_json TEXT CHECK(receipt_json IS NULL OR json_valid(receipt_json)),\n  error_code TEXT,\n  created_at TEXT NOT NULL,\n  updated_at TEXT NOT NULL\n)"
+    },
+    {
+      "type": "table",
+      "name": "commerce_quotes",
+      "tbl_name": "commerce_quotes",
+      "sql": "CREATE TABLE commerce_quotes (\n  id TEXT PRIMARY KEY,\n  sku TEXT NOT NULL,\n  version INTEGER NOT NULL,\n  kind TEXT NOT NULL CHECK(kind IN ('product','execution')),\n  amount_usdc_micros TEXT NOT NULL,\n  asset TEXT NOT NULL,\n  network TEXT NOT NULL,\n  pay_to TEXT NOT NULL,\n  config_json TEXT NOT NULL CHECK(json_valid(config_json)),\n  request_hash TEXT NOT NULL,\n  snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),\n  content_hash TEXT NOT NULL,\n  created_at TEXT NOT NULL,\n  expires_at INTEGER NOT NULL\n)"
+    },
+    {
+      "type": "table",
+      "name": "commerce_recovery_challenges",
+      "tbl_name": "commerce_recovery_challenges",
+      "sql": "CREATE TABLE commerce_recovery_challenges (\n  id TEXT PRIMARY KEY,\n  payment_id TEXT NOT NULL REFERENCES payments(id),\n  message TEXT NOT NULL,\n  expires_at INTEGER NOT NULL,\n  consumed_at TEXT\n)"
+    },
+    {
+      "type": "table",
+      "name": "component_acceptances",
+      "tbl_name": "component_acceptances",
+      "sql": "CREATE TABLE component_acceptances (\n acceptance_key TEXT PRIMARY KEY,\n quote_id TEXT NOT NULL UNIQUE REFERENCES commerce_quotes(id)\n)"
+    },
+    {
+      "type": "table",
+      "name": "component_releases",
+      "tbl_name": "component_releases",
+      "sql": "CREATE TABLE component_releases (\n sku TEXT NOT NULL, version INTEGER NOT NULL,\n manifest_json TEXT NOT NULL CHECK(json_valid(manifest_json)),\n manifest_hash TEXT NOT NULL,\n PRIMARY KEY(sku,version)\n)"
+    },
+    {
+      "type": "table",
+      "name": "component_selections",
+      "tbl_name": "component_selections",
+      "sql": "CREATE TABLE component_selections (\n trial_id TEXT NOT NULL REFERENCES component_trials(id),\n scope_hash TEXT NOT NULL,\n scope_json TEXT NOT NULL CHECK(json_valid(scope_json)),\n created_at TEXT NOT NULL,\n PRIMARY KEY(trial_id,scope_hash)\n)"
+    },
+    {
+      "type": "table",
+      "name": "component_trials",
+      "tbl_name": "component_trials",
+      "sql": "CREATE TABLE component_trials (\n id TEXT PRIMARY KEY,\n token_hash TEXT NOT NULL,\n sku TEXT NOT NULL,\n version INTEGER NOT NULL,\n release_hash TEXT NOT NULL,\n config_json TEXT NOT NULL CHECK(json_valid(config_json)),\n status TEXT NOT NULL CHECK(status IN ('running','completed','failed')),\n result_json TEXT CHECK(result_json IS NULL OR json_valid(result_json)),\n created_at TEXT NOT NULL,\n expires_at INTEGER NOT NULL\n)"
+    },
+    {
+      "type": "table",
+      "name": "deliveries",
+      "tbl_name": "deliveries",
+      "sql": "CREATE TABLE deliveries (\n  id           TEXT PRIMARY KEY,\n  payment_id   TEXT NOT NULL REFERENCES payments(id),\n  sku          TEXT NOT NULL,\n  content_hash TEXT NOT NULL,\n  delivered_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))\n)"
+    },
+    {
+      "type": "table",
+      "name": "delivery_grants",
+      "tbl_name": "delivery_grants",
+      "sql": "CREATE TABLE delivery_grants (\n      id           TEXT PRIMARY KEY,\n      payment_id   TEXT NOT NULL REFERENCES payments(id),\n      payload_id   TEXT NOT NULL REFERENCES payload_objects(id),\n      granted_at   TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),\n      UNIQUE(payment_id, payload_id)\n    )"
+    },
+    {
+      "type": "table",
+      "name": "edges",
+      "tbl_name": "edges",
+      "sql": "CREATE TABLE edges (\n  from_sku   TEXT NOT NULL REFERENCES items(sku),\n  to_sku     TEXT NOT NULL REFERENCES items(sku),\n  relation   TEXT NOT NULL CHECK (relation IN ('composes_with','requires','step_of','alternative_to','pairs_with','supersedes')),\n  position   INTEGER,                            -- ordering for step_of (workflow steps)\n  note       TEXT NOT NULL DEFAULT '',           -- one line of WHY \u2014 the opinion\n  PRIMARY KEY (from_sku, to_sku, relation)\n)"
+    },
+    {
+      "type": "table",
+      "name": "items",
+      "tbl_name": "items",
+      "sql": "CREATE TABLE \"items\" (\n  sku            TEXT PRIMARY KEY,\n  slug           TEXT NOT NULL UNIQUE,\n  name           TEXT NOT NULL,\n  kind           TEXT NOT NULL CHECK (kind IN ('tool','workflow','guide','artifact','agent')),\n  service        TEXT NOT NULL DEFAULT '',\n  summary        TEXT NOT NULL,\n  guidance       TEXT NOT NULL DEFAULT '',\n  price_usd      REAL NOT NULL CHECK (price_usd > 0 AND price_usd <= 10.00),\n  invoke_kind    TEXT NOT NULL DEFAULT 'resolve' CHECK (invoke_kind IN ('resolve','bedrock','r2')),\n  invoke_key     TEXT NOT NULL DEFAULT '',\n  input_schema   TEXT NOT NULL DEFAULT '',\n  input_example  TEXT NOT NULL DEFAULT '',\n  mime_type      TEXT NOT NULL DEFAULT '',\n  source_repo    TEXT NOT NULL DEFAULT '',\n  source_path    TEXT NOT NULL DEFAULT '',\n  source_url     TEXT NOT NULL DEFAULT '',\n  license_spdx   TEXT NOT NULL DEFAULT '',\n  provenance     TEXT NOT NULL DEFAULT '',\n  content_hash   TEXT NOT NULL DEFAULT '',\n  status         TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','live','retired')),\n  version        INTEGER NOT NULL DEFAULT 1,\n  updated_at     TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))\n)"
+    },
+    {
+      "type": "table",
+      "name": "payload_objects",
+      "tbl_name": "payload_objects",
+      "sql": "CREATE TABLE payload_objects (\n      id           TEXT PRIMARY KEY,\n      sku          TEXT NOT NULL REFERENCES items(sku),\n      r2_bucket    TEXT NOT NULL,\n      r2_key       TEXT NOT NULL,\n      content_hash TEXT NOT NULL,\n      size_bytes   INTEGER NOT NULL CHECK (size_bytes >= 0),\n      mime_type    TEXT NOT NULL DEFAULT 'application/octet-stream',\n      version      INTEGER NOT NULL,\n      created_at   TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),\n      UNIQUE(sku, version)\n    )"
+    },
+    {
+      "type": "table",
+      "name": "payments",
+      "tbl_name": "payments",
+      "sql": "CREATE TABLE payments (\n  id                 TEXT PRIMARY KEY,\n  sku                TEXT NOT NULL,\n  price_usd          REAL NOT NULL,\n  amount_usdc_micros TEXT NOT NULL,\n  payer              TEXT NOT NULL DEFAULT '',\n  tx_hash            TEXT NOT NULL DEFAULT '',\n  network            TEXT NOT NULL DEFAULT 'eip155:8453',\n  scheme             TEXT NOT NULL DEFAULT 'ExactEvmScheme',\n  idempotency_key    TEXT NOT NULL DEFAULT '',\n  status             TEXT NOT NULL CHECK (status IN ('verified','settled','failed','refund-eligible')),\n  facilitator_ref    TEXT NOT NULL DEFAULT '',\n  created_at         TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),\n  settled_at         TEXT\n)"
+    },
+    {
+      "type": "table",
+      "name": "product_routing_manifests",
+      "tbl_name": "product_routing_manifests",
+      "sql": "CREATE TABLE product_routing_manifests (\n sku TEXT NOT NULL REFERENCES items(sku),\n version INTEGER NOT NULL CHECK(version > 0),\n manifest_json TEXT NOT NULL CHECK(json_valid(manifest_json)),\n manifest_hash TEXT NOT NULL CHECK(length(manifest_hash)=64),\n reviewed_by TEXT NOT NULL CHECK(length(reviewed_by)>0),\n created_at TEXT NOT NULL,\n PRIMARY KEY(sku,version)\n)"
+    },
+    {
+      "type": "table",
+      "name": "promotions",
+      "tbl_name": "promotions",
+      "sql": "CREATE TABLE promotions (\n  id               TEXT PRIMARY KEY,\n  sku              TEXT NOT NULL,\n  yard_artifact_id TEXT NOT NULL DEFAULT '',\n  action           TEXT NOT NULL CHECK (action IN ('promote','update','publish','retire','reprice')),\n  actor            TEXT NOT NULL DEFAULT 'mike',\n  note             TEXT NOT NULL DEFAULT '',\n  created_at       TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))\n)"
+    },
+    {
+      "type": "table",
+      "name": "purchases",
+      "tbl_name": "purchases",
+      "sql": "CREATE TABLE purchases (\n  id TEXT PRIMARY KEY,\n  quote_id TEXT NOT NULL,\n  sku TEXT NOT NULL REFERENCES items(sku),\n  release_version INTEGER NOT NULL,\n  config_hash TEXT NOT NULL,\n  language TEXT,\n  runtime TEXT,\n  amount_usd REAL NOT NULL,\n  amount_atomic TEXT NOT NULL,\n  asset TEXT NOT NULL DEFAULT 'USDC',\n  network TEXT NOT NULL DEFAULT 'eip155:8453',\n  recipient TEXT NOT NULL,\n  buyer_id TEXT,\n  protocol TEXT NOT NULL CHECK (protocol IN ('x402','mpp')),\n  payment_method TEXT,\n  status TEXT NOT NULL CHECK (status IN (\n    'claimed','settling','settled','failed','uncertain','delivering','delivered'\n  )) DEFAULT 'claimed',\n  claimed_by TEXT NOT NULL,\n  claimed_at TEXT NOT NULL DEFAULT (datetime('now')),\n  settled_at TEXT,\n  payment_id TEXT REFERENCES payments(id),\n  idempotency_key TEXT NOT NULL UNIQUE,\n  created_at TEXT NOT NULL DEFAULT (datetime('now')),\n  UNIQUE(quote_id, config_hash)\n)"
+    },
+    {
+      "type": "table",
+      "name": "request_log",
+      "tbl_name": "request_log",
+      "sql": "CREATE TABLE request_log (\n  id         INTEGER PRIMARY KEY AUTOINCREMENT,\n  path       TEXT NOT NULL,\n  sku        TEXT NOT NULL DEFAULT '',\n  method     TEXT NOT NULL,\n  status     INTEGER NOT NULL,\n  ua_class   TEXT NOT NULL DEFAULT '',\n  created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))\n)"
+    },
+    {
+      "type": "table",
+      "name": "services",
+      "tbl_name": "services",
+      "sql": "CREATE TABLE services (\n  slug        TEXT PRIMARY KEY,\n  name        TEXT NOT NULL,\n  kind        TEXT NOT NULL DEFAULT 'aws-service' CHECK (kind IN ('aws-service', 'language', 'platform')),\n  description TEXT NOT NULL DEFAULT ''\n)"
+    },
+    {
+      "type": "trigger",
+      "name": "business_purchase_failed",
+      "tbl_name": "commerce_purchases",
+      "sql": "CREATE TRIGGER business_purchase_failed AFTER UPDATE OF status ON commerce_purchases\nWHEN NEW.status='failed' AND OLD.status != NEW.status\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n SELECT 'payment.failed:' || NEW.payment_id,'payment.failed',NEW.updated_at,\n json_object('payment_id',NEW.payment_id,'quote_id',NEW.quote_id,'sku',q.sku,\n 'product_version_ref',q.version,'artifact_hash',q.content_hash,\n 'exact_amount_atomic',q.amount_usdc_micros,'payment_network',q.network)\n FROM commerce_quotes q WHERE q.id=NEW.quote_id\n ON CONFLICT(event_id) DO NOTHING;\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "business_purchase_settled",
+      "tbl_name": "commerce_purchases",
+      "sql": "CREATE TRIGGER business_purchase_settled AFTER UPDATE OF status ON commerce_purchases\nWHEN NEW.status='settled' AND OLD.status != NEW.status\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n SELECT 'payment.settled:' || NEW.payment_id,'payment.settled',NEW.updated_at,\n json_object('payment_id',NEW.payment_id,'quote_id',NEW.quote_id,'sku',q.sku,\n 'product_version_ref',q.version,'artifact_hash',q.content_hash,\n 'exact_amount_atomic',q.amount_usdc_micros,'payment_network',q.network)\n FROM commerce_quotes q WHERE q.id=NEW.quote_id\n ON CONFLICT(event_id) DO NOTHING;\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n SELECT 'receipt.issued:' || NEW.payment_id,'receipt.issued',NEW.updated_at,\n json_object('payment_id',NEW.payment_id,'quote_id',NEW.quote_id,'sku',q.sku,\n 'product_version_ref',q.version,'artifact_hash',q.content_hash,\n 'exact_amount_atomic',q.amount_usdc_micros,'payment_network',q.network)\n FROM commerce_quotes q WHERE q.id=NEW.quote_id\n ON CONFLICT(event_id) DO NOTHING;\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n SELECT 'entitlement.activated:' || NEW.payment_id,'entitlement.activated',NEW.updated_at,\n json_object('payment_id',NEW.payment_id,'quote_id',NEW.quote_id,'sku',q.sku,\n 'product_version_ref',q.version,'artifact_hash',q.content_hash,\n 'exact_amount_atomic',q.amount_usdc_micros,'payment_network',q.network)\n FROM commerce_quotes q WHERE q.id=NEW.quote_id\n ON CONFLICT(event_id) DO NOTHING;\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "business_purchase_settling",
+      "tbl_name": "commerce_purchases",
+      "sql": "CREATE TRIGGER business_purchase_settling AFTER UPDATE OF status ON commerce_purchases\nWHEN NEW.status='settling' AND OLD.status != NEW.status\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n SELECT 'payment.settlement_started:' || NEW.payment_id,'payment.settlement_started',NEW.updated_at,\n json_object('payment_id',NEW.payment_id,'quote_id',NEW.quote_id,'sku',q.sku,\n 'product_version_ref',q.version,'artifact_hash',q.content_hash,\n 'exact_amount_atomic',q.amount_usdc_micros,'payment_network',q.network)\n FROM commerce_quotes q WHERE q.id=NEW.quote_id\n ON CONFLICT(event_id) DO NOTHING;\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "business_purchase_uncertain",
+      "tbl_name": "commerce_purchases",
+      "sql": "CREATE TRIGGER business_purchase_uncertain AFTER UPDATE OF status ON commerce_purchases\nWHEN NEW.status='uncertain' AND OLD.status != NEW.status\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n SELECT 'payment.settlement_pending:' || NEW.payment_id,'payment.settlement_pending',NEW.updated_at,\n json_object('payment_id',NEW.payment_id,'quote_id',NEW.quote_id,'sku',q.sku,\n 'product_version_ref',q.version,'artifact_hash',q.content_hash,\n 'exact_amount_atomic',q.amount_usdc_micros,'payment_network',q.network)\n FROM commerce_quotes q WHERE q.id=NEW.quote_id\n ON CONFLICT(event_id) DO NOTHING;\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "business_quote_created",
+      "tbl_name": "commerce_quotes",
+      "sql": "CREATE TRIGGER business_quote_created AFTER INSERT ON commerce_quotes\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n VALUES ('quote.created:' || NEW.id,'quote.created',NEW.created_at,\n json_object('quote_id',NEW.id,'sku',NEW.sku,'product_version_ref',NEW.version,\n 'artifact_hash',NEW.content_hash,'exact_amount_atomic',NEW.amount_usdc_micros,'payment_network',NEW.network));\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "component_release_immutable_delete",
+      "tbl_name": "component_releases",
+      "sql": "CREATE TRIGGER component_release_immutable_delete BEFORE DELETE ON component_releases\nBEGIN SELECT RAISE(ABORT,'component_release_immutable'); END"
+    },
+    {
+      "type": "trigger",
+      "name": "component_release_immutable_update",
+      "tbl_name": "component_releases",
+      "sql": "CREATE TRIGGER component_release_immutable_update BEFORE UPDATE ON component_releases\nBEGIN SELECT RAISE(ABORT,'component_release_immutable'); END"
+    },
+    {
+      "type": "trigger",
+      "name": "component_scope_accepted",
+      "tbl_name": "commerce_quotes",
+      "sql": "CREATE TRIGGER component_scope_accepted AFTER INSERT ON commerce_quotes\nWHEN json_extract(NEW.snapshot_json,'$.scope.scope_hash') IS NOT NULL\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n VALUES('scope.accepted:'||NEW.id,'scope.accepted',NEW.created_at,\n json_object('quote_id',NEW.id,'sku',NEW.sku,\n 'scope_hash',json_extract(NEW.snapshot_json,'$.scope.scope_hash'),\n 'selected_share_bps',json_extract(NEW.snapshot_json,'$.scope.selected_share_bps'),\n 'exact_amount_atomic',NEW.amount_usdc_micros));\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "component_scope_selected",
+      "tbl_name": "component_selections",
+      "sql": "CREATE TRIGGER component_scope_selected AFTER INSERT ON component_selections\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n VALUES('scope.selected:'||NEW.trial_id||':'||NEW.scope_hash,'scope.selected',NEW.created_at,\n json_object('trial_id',NEW.trial_id,'scope_hash',NEW.scope_hash,\n 'sku',json_extract(NEW.scope_json,'$.sku'),\n 'selected_share_bps',json_extract(NEW.scope_json,'$.selected_share_bps'),\n 'exact_amount_atomic',json_extract(NEW.scope_json,'$.amount_atomic')));\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "component_trial_finished",
+      "tbl_name": "component_trials",
+      "sql": "CREATE TRIGGER component_trial_finished AFTER UPDATE OF status ON component_trials\nWHEN OLD.status='running' AND NEW.status IN ('completed','failed')\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n VALUES('trial.'||NEW.status||':'||NEW.id,'trial.'||NEW.status,strftime('%Y-%m-%dT%H:%M:%fZ','now'),\n json_object('trial_id',NEW.id,'sku',NEW.sku,'product_version_ref',NEW.version,'release_hash',NEW.release_hash));\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "component_trial_started",
+      "tbl_name": "component_trials",
+      "sql": "CREATE TRIGGER component_trial_started AFTER INSERT ON component_trials\nBEGIN\n INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)\n VALUES('trial.started:'||NEW.id,'trial.started',NEW.created_at,\n json_object('trial_id',NEW.id,'sku',NEW.sku,'product_version_ref',NEW.version,'release_hash',NEW.release_hash));\nEND"
+    },
+    {
+      "type": "trigger",
+      "name": "routing_manifest_no_delete",
+      "tbl_name": "product_routing_manifests",
+      "sql": "CREATE TRIGGER routing_manifest_no_delete BEFORE DELETE ON product_routing_manifests\nBEGIN SELECT RAISE(ABORT,'routing_release_immutable'); END"
+    },
+    {
+      "type": "trigger",
+      "name": "routing_manifest_no_update",
+      "tbl_name": "product_routing_manifests",
+      "sql": "CREATE TRIGGER routing_manifest_no_update BEFORE UPDATE ON product_routing_manifests\nBEGIN SELECT RAISE(ABORT,'routing_release_immutable'); END"
+    }
+  ],
+  "iceberg": [
+    {
+      "name": "product_versions",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "product_version_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "product_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "version",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "catalog_snapshot_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "manifest",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "target_language",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "status",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "failure_signatures",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "signature_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "node_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "pattern",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "severity",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "taxonomy_nodes",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "node_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "parent_node_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "name",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "path",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "depth",
+          "required": false,
+          "type": "long"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "capabilities",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "capability_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "product_version_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "cap_name",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "cap_type",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "interface_def",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "scope_units",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "unit_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "product_version_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "unit_key",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "name",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "price_bps",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 7,
+          "name": "is_required",
+          "required": false,
+          "type": "boolean"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "decision_questions",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "question_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "version",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "text",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "primitive",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "products",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "product_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "sku",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "name",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "kind",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "max_price_bps",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 7,
+          "name": "status",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "taxonomy_node_id",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "decision_profiles",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "profile_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "version",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "name",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "strategy",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "meter_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "unit_key",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "unit_price_bps",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 10,
+          "name": "scope_hash",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "name": "query_hash",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 12,
+          "name": "burned",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 13,
+          "name": "queries_used",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 14,
+          "name": "queries_remaining",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 15,
+          "name": "metering_version",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "decision_reductions",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "decision_run_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "action",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "status",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "reducer_version",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "guard_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "guard",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "verdict",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "identity_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "actor_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "visitor_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "payload",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "commerce_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "sku",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "price_bps",
+          "required": false,
+          "type": "long"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "payment_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "amount_bps",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 9,
+          "name": "asset",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 10,
+          "name": "network",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "name": "settlement_reference",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 12,
+          "name": "outcome",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "execution_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "sandbox_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "language",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "runtime",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 10,
+          "name": "build_status",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "catalog_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "sku",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "product_version_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "catalog_snapshot_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 10,
+          "name": "max_price_bps",
+          "required": false,
+          "type": "long"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "receipt_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "price_bps",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 9,
+          "name": "max_price_bps",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 10,
+          "name": "scope_hash",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "name": "price_digest",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 12,
+          "name": "settlement_reference",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "delivery_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "artifact_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "receipt_id",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "scope_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "product_version_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "unit_key",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "scope_hash",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 10,
+          "name": "price_digest",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "name": "final_price_bps",
+          "required": false,
+          "type": "long"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "decision_answers",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "decision_run_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "question_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "answer",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "confidence",
+          "required": false,
+          "type": "double"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "decision_runs",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "decision_run_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "disposition",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "objective",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 10,
+          "name": "model",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "name": "state_hash",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 12,
+          "name": "tokens_in",
+          "required": false,
+          "type": "long"
+        },
+        {
+          "id": 13,
+          "name": "tokens_out",
+          "required": false,
+          "type": "long"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "decision_options",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "decision_run_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "question_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "option_key",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "probability",
+          "required": false,
+          "type": "double"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "recovery_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 4,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 7,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "recovery_kind",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "receipt_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 10,
+          "name": "outcome",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "all_events",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "schema_version",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "event_contract_version",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 5,
+          "name": "event_type",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 6,
+          "name": "occurred_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 7,
+          "name": "actor_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 8,
+          "name": "visitor_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 9,
+          "name": "session_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 10,
+          "name": "journey_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "name": "request_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 12,
+          "name": "buyer_id",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "id": 13,
+          "name": "payload",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "debug_all",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "event_type",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    },
+    {
+      "name": "flat_test",
+      "schema_id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "__ingest_ts",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "event_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 3,
+          "name": "event_type",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "value",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "disposition": "retain_history_in_place",
+      "retirement_authorized": false,
+      "consumers": "pipeline writers identified; external SQL consumers unresolved"
+    }
+  ],
+  "unconnected_v1_sinks": [
+    {
+      "id": "740a8c3175d448dfb79f276552bbf7a5",
+      "name": "payment_events_v1_sink",
+      "type": "basin_catalog",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_contract_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "occurred_ts",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "journey_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payment_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "quote_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "trial_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_version_ref",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "exact_amount_atomic",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payment_network",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "artifact_hash",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "release_hash",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "scope_hash",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "journey_stage",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "observed_outcome",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "scope_correlation",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "journey_correlation",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "bucket": "secondwind-catalog",
+      "namespace": "secondwind",
+      "table": "payment_events_v1"
+    },
+    {
+      "id": "49b0de3f073345f69df9925cb49b1ec2",
+      "name": "journey_events_v1_sink",
+      "type": "basin_catalog",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_contract_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "occurred_ts",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "journey_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "observation_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "quote_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payment_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "trial_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_version_ref",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "event_family",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "journey_stage",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "observed_outcome",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "transport",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "public_intent",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "candidate_product_ids",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "selected_product_ids",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "resolution_status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "configuration_status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "response_status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "result_count",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "missing_count",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "error_count",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "clarification_count",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "delivery_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "challenge_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "journey_correlation",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "scope_correlation",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "bucket": "secondwind-catalog",
+      "namespace": "secondwind",
+      "table": "journey_events_v1"
+    },
+    {
+      "id": "4e31f23bad044202bdde1085f89926e6",
+      "name": "scope_events_v1_sink",
+      "type": "basin_catalog",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_contract_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "occurred_ts",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "journey_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "trial_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "quote_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_version_ref",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "release_hash",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "scope_hash",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "exact_amount_atomic",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "selected_share_bps",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "selected_component_ids",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "omitted_component_ids",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "scope_correlation",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "journey_stage",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "observed_outcome",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "bucket": "secondwind-catalog",
+      "namespace": "secondwind",
+      "table": "scope_events_v1"
+    }
+  ],
+  "application_event_contract": {
+    "schema_version": "1",
+    "event_contract_version": "1",
+    "producer": "secondwind-gateway",
+    "production_observation_date": "2026-10-23",
+    "authority": {
+      "application_contract": "workers/gateway/src/telemetry.js",
+      "durable_outbox": "D1.business_event_outbox",
+      "transport": "Basin stream second_wind_events",
+      "raw_history": "secondwind.all_events"
+    },
+    "d1_outbox": {
+      "table": "business_event_outbox",
+      "columns": [
+        {
+          "name": "event_id",
+          "type": "TEXT",
+          "required": true,
+          "primary_key": true
+        },
+        {
+          "name": "event_type",
+          "type": "TEXT",
+          "required": true
+        },
+        {
+          "name": "occurred_ts",
+          "type": "TEXT",
+          "required": true
+        },
+        {
+          "name": "payload",
+          "type": "TEXT/JSON",
+          "required": true
+        },
+        {
+          "name": "attempts",
+          "type": "INTEGER",
+          "required": true
+        },
+        {
+          "name": "sent_at",
+          "type": "TEXT",
+          "required": false
+        },
+        {
+          "name": "last_error",
+          "type": "TEXT",
+          "required": false
+        }
+      ]
+    },
+    "stream": {
+      "id": "d135ad1c9f9246ae945be1d1b8277ddc",
+      "name": "second_wind_events",
+      "format": "json",
+      "http_enabled": false,
+      "worker_binding_enabled": true,
+      "required_fields": [
+        "event_id",
+        "schema_version",
+        "event_contract_version",
+        "event_type",
+        "occurred_ts",
+        "payload"
+      ],
+      "optional_fields": [
+        "actor_id",
+        "visitor_id",
+        "session_id",
+        "journey_id",
+        "request_id",
+        "buyer_id"
+      ]
+    },
+    "raw_landing_table": "secondwind.all_events",
+    "raw_landing_schema": [
+      {
+        "name": "__ingest_ts",
+        "type": "timestamp",
+        "required": true
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "schema_version",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "event_contract_version",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "occurred_ts",
+        "type": "timestamp",
+        "required": true
+      },
+      {
+        "name": "actor_id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "visitor_id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "session_id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "journey_id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "request_id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "buyer_id",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "payload",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "event_types": [
+      "journey.linked",
+      "discovery.searched",
+      "discovery.resolved",
+      "discovery.described",
+      "clarification.requested",
+      "clarification.responded",
+      "configuration.checked",
+      "selection.product_selected",
+      "trial.started",
+      "trial.completed",
+      "trial.failed",
+      "trial.expired_while_running",
+      "scope.selected",
+      "scope.accepted",
+      "quote.created",
+      "payment.settlement_started",
+      "payment.settlement_pending",
+      "payment.settled",
+      "payment.failed",
+      "receipt.issued",
+      "entitlement.activated",
+      "delivery.prepared",
+      "delivery.failed",
+      "recovery.grant_recovered",
+      "recovery.challenge_created",
+      "recovery.credential_rotated",
+      "recovery.result_recovered",
+      "recovery.trial_recovered",
+      "recovery.purchase_replayed"
+    ],
+    "payload_fields": {
+      "base": [
+        "payment_id",
+        "quote_id",
+        "sku",
+        "product_version_ref",
+        "artifact_hash",
+        "exact_amount_atomic",
+        "payment_network",
+        "trial_id",
+        "release_hash",
+        "scope_hash",
+        "selected_share_bps"
+      ],
+      "observations": [
+        "journey_id",
+        "observation_id",
+        "transport",
+        "candidate_product_ids",
+        "selected_product_ids",
+        "public_intent",
+        "result_count",
+        "resolution_status",
+        "configuration_status",
+        "missing_count",
+        "error_count",
+        "clarification_count",
+        "response_status",
+        "delivery_id",
+        "challenge_id"
+      ],
+      "derived": [
+        "event_family",
+        "producer",
+        "journey_stage",
+        "observed_outcome"
+      ],
+      "dispatch_enrichment": [
+        "journey_correlation",
+        "scope_correlation",
+        "selected_component_ids",
+        "omitted_component_ids"
+      ]
+    },
+    "projections": [
+      {
+        "name": "journey_events_v1",
+        "sink": "journey_events_v1_sink",
+        "table": "secondwind.journey_events_v1",
+        "event_types": "all_current"
+      },
+      {
+        "name": "payment_events_v1",
+        "sink": "payment_events_v1_sink",
+        "table": "secondwind.payment_events_v1",
+        "event_types": [
+          "payment.settlement_started",
+          "payment.settlement_pending",
+          "payment.settled",
+          "payment.failed",
+          "receipt.issued",
+          "entitlement.activated"
+        ]
+      },
+      {
+        "name": "scope_events_v1",
+        "sink": "scope_events_v1_sink",
+        "table": "secondwind.scope_events_v1",
+        "event_types": [
+          "scope.selected",
+          "scope.accepted"
+        ]
+      }
+    ],
+    "legacy_pipeline": {
+      "id": "c36bc1cd21814d3091f84329257b3c09",
+      "name": "secondwind_telemetry",
+      "status": "running",
+      "compatibility": "stale_against_event_contract_v1",
+      "mutate": false
+    },
+    "rollout": {
+      "mode": "additive",
+      "pipeline_name": "secondwind_contract_v1",
+      "preserve_raw_history": true,
+      "delete_or_rewrite_legacy_tables": false,
+      "requires_catalog_token_for_new_sinks": true
+    }
+  },
+  "owner_payment_semantics": {
+    "model": "maximum payment -> sandbox -> chosen purchase or measured usage -> final charge within maximum",
+    "buyer_facing_quote_stage": false,
+    "legacy_quote_identifiers": "preserve compatibility; not product semantics",
+    "component_path_evidence": [
+      "scope.js prepareComponentSelection retains max_amount_atomic and computes amount_atomic from selected components",
+      "trials.js acceptTrialSelection requires completed trial and matching selected scope",
+      "commerce.js createScopeQuote persists scope.amount_atomic",
+      "Trial and selection require no pre-trial payment authorization; settlement signature covers the final selected amount"
+    ],
+    "limits": [
+      "Selection-based pricing established; no time/token/resource metering claim",
+      "Ordinary product path uses listed price; SW-EXEC uses fixed 2000 atomic units",
+      "Production component_releases empty"
+    ],
+    "verification": {
+      "scope_tests": 5,
+      "passed": 5,
+      "runtime": "Node 24.19.0",
+      "integration_tests": "inspected; accepted release gateway suite successful; not rerun"
+    }
+  },
+  "pipelines": [
+    {
+      "id": "c36bc1cd21814d3091f84329257b3c09",
+      "name": "secondwind_telemetry",
+      "created_at": "2026-10-18T17:49:55.344Z",
+      "modified_at": "2026-10-18T17:49:55.344Z",
+      "sql": "INSERT INTO all_events_sink\nSELECT event_id, schema_version, event_contract_version, event_type, occurred_ts,\n       actor_id, visitor_id, session_id, journey_id, request_id, buyer_id, payload\nFROM second_wind_events;\n\nINSERT INTO identity_events_sink\nSELECT event_id, occurred_ts, actor_id, visitor_id, session_id, buyer_id, payload\nFROM second_wind_events WHERE event_type = 'identity.linked';\n\nINSERT INTO decision_runs_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id,\n       json_get_str(payload, '$.decision_run_id') AS decision_run_id,\n       json_get_str(payload, '$.disposition') AS disposition,\n       json_get_str(payload, '$.objective') AS objective,\n       json_get_str(payload, '$.model') AS model,\n       json_get_str(payload, '$.state_hash') AS state_hash,\n       json_get_int(payload, '$.tokens_in') AS tokens_in,\n       json_get_int(payload, '$.tokens_out') AS tokens_out\nFROM second_wind_events WHERE event_type = 'decision.run';\n\nINSERT INTO decision_answers_sink\nSELECT event_id, occurred_ts,\n       json_get_str(payload, '$.decision_run_id') AS decision_run_id,\n       json_get_str(payload, '$.question_id') AS question_id,\n       json_get_str(payload, '$.answer') AS answer,\n       json_get_float(payload, '$.confidence') AS confidence\nFROM second_wind_events WHERE event_type = 'decision.answer';\n\nINSERT INTO decision_options_sink\nSELECT event_id, occurred_ts,\n       json_get_str(payload, '$.decision_run_id') AS decision_run_id,\n       json_get_str(payload, '$.question_id') AS question_id,\n       json_get_str(payload, '$.option_key') AS option_key,\n       json_get_float(payload, '$.probability') AS probability\nFROM second_wind_events WHERE event_type = 'decision.option';\n\nINSERT INTO decision_reductions_sink\nSELECT event_id, occurred_ts,\n       json_get_str(payload, '$.decision_run_id') AS decision_run_id,\n       json_get_str(payload, '$.action') AS action,\n       json_get_str(payload, '$.status') AS status,\n       json_get_str(payload, '$.reducer_version') AS reducer_version\nFROM second_wind_events WHERE event_type = 'decision.reduction';\n\nINSERT INTO catalog_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id,\n       json_get_str(payload, '$.sku') AS sku,\n       json_get_str(payload, '$.product_version_id') AS product_version_id,\n       json_get_str(payload, '$.catalog_snapshot_id') AS catalog_snapshot_id,\n       json_get_int(payload, '$.max_price_bps') AS max_price_bps\nFROM second_wind_events WHERE event_type IN ('catalog.selected','catalog.no_match');\n\nINSERT INTO scope_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id,\n       json_get_str(payload, '$.product_version_id') AS product_version_id,\n       json_get_str(payload, '$.unit_key') AS unit_key,\n       json_get_str(payload, '$.scope_hash') AS scope_hash,\n       json_get_str(payload, '$.price_digest') AS price_digest,\n       json_get_int(payload, '$.final_price_bps') AS final_price_bps\nFROM second_wind_events WHERE event_type IN ('scope.activated','scope.frozen');\n\nINSERT INTO commerce_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id, buyer_id,\n       json_get_str(payload, '$.sku') AS sku,\n       json_get_int(payload, '$.price_bps') AS price_bps\nFROM second_wind_events WHERE event_type = 'commerce.checkout_initiated';\n\nINSERT INTO meter_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id, buyer_id,\n       json_get_str(payload, '$.unit_key') AS unit_key,\n       json_get_int(payload, '$.unit_price_bps') AS unit_price_bps,\n       json_get_str(payload, '$.scope_hash') AS scope_hash,\n       CAST(NULL AS STRING) AS query_hash, CAST(NULL AS BIGINT) AS burned,\n       CAST(NULL AS BIGINT) AS queries_used, CAST(NULL AS BIGINT) AS queries_remaining,\n       CAST(NULL AS STRING) AS metering_version\nFROM second_wind_events WHERE event_type = 'meter.line_item';\n\nINSERT INTO meter_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id, buyer_id,\n       CAST(NULL AS STRING) AS unit_key, CAST(NULL AS BIGINT) AS unit_price_bps,\n       CAST(NULL AS STRING) AS scope_hash,\n       json_get_str(payload, '$.query_hash') AS query_hash,\n       json_get_int(payload, '$.burned') AS burned,\n       json_get_int(payload, '$.queries_used') AS queries_used,\n       json_get_int(payload, '$.queries_remaining') AS queries_remaining,\n       json_get_str(payload, '$.metering_version') AS metering_version\nFROM second_wind_events WHERE event_type = 'meter.query';\n\nINSERT INTO guard_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id,\n       json_get_str(payload, '$.guard') AS guard,\n       json_get_str(payload, '$.verdict') AS verdict\nFROM second_wind_events WHERE event_type = 'guard.evaluated';\n\nINSERT INTO execution_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id,\n       json_get_str(payload, '$.sandbox_id') AS sandbox_id,\n       json_get_str(payload, '$.language') AS language,\n       json_get_str(payload, '$.runtime') AS runtime,\n       json_get_str(payload, '$.build_status') AS build_status\nFROM second_wind_events WHERE event_type IN ('execution.sandbox_started','execution.build_validated');\n\nINSERT INTO payment_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id, buyer_id,\n       json_get_int(payload, '$.amount_bps') AS amount_bps,\n       json_get_str(payload, '$.asset') AS asset,\n       json_get_str(payload, '$.network') AS network,\n       json_get_str(payload, '$.settlement_reference') AS settlement_reference,\n       json_get_str(payload, '$.outcome') AS outcome\nFROM second_wind_events WHERE event_type = 'payment.settle';\n\nINSERT INTO receipt_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id, buyer_id,\n       json_get_int(payload, '$.price_bps') AS price_bps,\n       json_get_int(payload, '$.max_price_bps') AS max_price_bps,\n       json_get_str(payload, '$.scope_hash') AS scope_hash,\n       json_get_str(payload, '$.price_digest') AS price_digest,\n       json_get_str(payload, '$.settlement_reference') AS settlement_reference\nFROM second_wind_events WHERE event_type = 'receipt.issued';\n\nINSERT INTO delivery_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id, buyer_id,\n       json_get_str(payload, '$.artifact_id') AS artifact_id,\n       json_get_str(payload, '$.receipt_id') AS receipt_id\nFROM second_wind_events WHERE event_type = 'delivery.completed';\n\nINSERT INTO recovery_events_sink\nSELECT event_id, occurred_ts, session_id, journey_id, request_id, buyer_id,\n       json_get_str(payload, '$.recovery_kind') AS recovery_kind,\n       json_get_str(payload, '$.receipt_id') AS receipt_id,\n       json_get_str(payload, '$.outcome') AS outcome\nFROM second_wind_events WHERE event_type = 'recovery.attempted';",
+      "status": "running"
+    }
+  ],
+  "sink_inventory": [
+    {
+      "id": "c680c0a9ed38486e8cfb97689c837abb",
+      "name": "guard_events_sink",
+      "type": "r2_data_catalog",
+      "table": "guard_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "d05c16fca31b490b9df78c0f62cabe09",
+      "name": "receipt_events_sink",
+      "type": "r2_data_catalog",
+      "table": "receipt_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "58802d197c254c62b905a76e6a313167",
+      "name": "delivery_events_sink",
+      "type": "r2_data_catalog",
+      "table": "delivery_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "201f407203454b5ea4c69512a2d0098f",
+      "name": "decision_reductions_sink",
+      "type": "r2_data_catalog",
+      "table": "decision_reductions",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "ce8fce97e43f4fcf841cd3dbd5fc221b",
+      "name": "scope_events_sink",
+      "type": "r2_data_catalog",
+      "table": "scope_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "09aaeb7be8b242e889d416370f0d9b69",
+      "name": "meter_events_sink",
+      "type": "r2_data_catalog",
+      "table": "meter_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "b90d02eeeae248bcb97ed68aa1c382bf",
+      "name": "execution_events_sink",
+      "type": "r2_data_catalog",
+      "table": "execution_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "4df62631d7ce4a368f0ed3bf6c4add11",
+      "name": "recovery_events_sink",
+      "type": "r2_data_catalog",
+      "table": "recovery_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "224b3c7020a24e3897ff06b80970433e",
+      "name": "all_events_sink",
+      "type": "r2_data_catalog",
+      "table": "all_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "f071829fdedc4e64a3611d96a0780ac0",
+      "name": "identity_events_sink",
+      "type": "r2_data_catalog",
+      "table": "identity_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "00607e2756ca4fcd8eae0be3047bce00",
+      "name": "decision_runs_sink",
+      "type": "r2_data_catalog",
+      "table": "decision_runs",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "4fcf24e845e94375995872e8f4be71d9",
+      "name": "decision_answers_sink",
+      "type": "r2_data_catalog",
+      "table": "decision_answers",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "8df7a2c6c4654b7188bf44baa710d825",
+      "name": "decision_options_sink",
+      "type": "r2_data_catalog",
+      "table": "decision_options",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "9fc3532796844eddb36399d0c83a00f2",
+      "name": "catalog_events_sink",
+      "type": "r2_data_catalog",
+      "table": "catalog_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "4f563bf2fbb146ad8a311b3027945b5f",
+      "name": "commerce_events_sink",
+      "type": "r2_data_catalog",
+      "table": "commerce_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "4bc061d156cf4ceb9aea27a8e69fc574",
+      "name": "payment_events_sink",
+      "type": "r2_data_catalog",
+      "table": "payment_events",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "740a8c3175d448dfb79f276552bbf7a5",
+      "name": "payment_events_v1_sink",
+      "type": "basin_catalog",
+      "table": "payment_events_v1",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "49b0de3f073345f69df9925cb49b1ec2",
+      "name": "journey_events_v1_sink",
+      "type": "basin_catalog",
+      "table": "journey_events_v1",
+      "disposition": "retain; replacement/parity required before retirement"
+    },
+    {
+      "id": "4e31f23bad044202bdde1085f89926e6",
+      "name": "scope_events_v1_sink",
+      "type": "basin_catalog",
+      "table": "scope_events_v1",
+      "disposition": "retain; replacement/parity required before retirement"
+    }
+  ],
+  "streams": [
+    {
+      "id": "529afcd3fdf944ccaddc01e8aeca056f",
+      "name": "secondwind_catalog_load",
+      "fields": [
+        {
+          "name": "table_name",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "kind",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "taxonomy_node_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_version_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "catalog_snapshot_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "manifest",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "target_language",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "node_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "parent_node_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "signature_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "pattern",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "severity",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "primitive",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "profile_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "strategy",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "unit_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "unit_key",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "capability_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "cap_name",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "cap_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "interface_def",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "max_price_bps",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "depth",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "price_bps",
+          "type": "int64",
+          "required": false
+        },
+        {
+          "name": "is_required",
+          "type": "bool",
+          "required": false
+        }
+      ],
+      "http_enabled": true,
+      "http_authentication": false,
+      "worker_binding_enabled": true,
+      "disposition": "retain pending producer/consumer closure"
+    },
+    {
+      "id": "b78137147a664af4a4db18c5a6af3b6b",
+      "name": "prefreeze_test",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_contract_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "occurred_ts",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "actor_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "visitor_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "session_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "journey_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "request_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "buyer_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payload",
+          "type": "json",
+          "required": true
+        }
+      ],
+      "http_enabled": true,
+      "http_authentication": false,
+      "worker_binding_enabled": true,
+      "disposition": "retain pending producer/consumer closure"
+    },
+    {
+      "id": "d135ad1c9f9246ae945be1d1b8277ddc",
+      "name": "second_wind_events",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_contract_version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "occurred_ts",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "actor_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "visitor_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "session_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "journey_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "request_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "buyer_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "payload",
+          "type": "json",
+          "required": true
+        }
+      ],
+      "http_enabled": false,
+      "http_authentication": false,
+      "worker_binding_enabled": true,
+      "disposition": "retain pending producer/consumer closure"
+    },
+    {
+      "id": "61db20607ef84e3b9340a078f76baf6e",
+      "name": "flat_test",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "http_enabled": true,
+      "http_authentication": false,
+      "worker_binding_enabled": true,
+      "disposition": "retain pending producer/consumer closure"
+    }
+  ],
+  "bindings": [
+    {
+      "name": "BUSINESS_EVENTS",
+      "type": "pipelines"
+    },
+    {
+      "name": "CANONICAL_ORIGIN",
+      "type": "plain_text"
+    },
+    {
+      "name": "CDP_FACILITATOR_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "CF_VERSION_METADATA",
+      "type": "version_metadata"
+    },
+    {
+      "name": "CODEMODE_BACKEND_URL",
+      "type": "secret_text"
+    },
+    {
+      "name": "DELIVERIES",
+      "type": "r2_bucket"
+    },
+    {
+      "name": "LOADER",
+      "type": "worker_loader"
+    },
+    {
+      "name": "PAYLOADS",
+      "type": "r2_bucket"
+    },
+    {
+      "name": "SW_DB",
+      "type": "d1"
+    },
+    {
+      "name": "X402_EXPECTED_PAY_TO",
+      "type": "secret_text"
+    },
+    {
+      "name": "X402_NETWORK",
+      "type": "plain_text"
+    },
+    {
+      "name": "X402_PAY_TO",
+      "type": "secret_text"
+    }
+  ],
+  "r2": {
+    "payloads": {
+      "bucket": "secondwind-payloads",
+      "listed_objects": 0
+    },
+    "deliveries": {
+      "bucket": "secondwind-deliveries",
+      "listed_objects": 0
+    },
+    "catalog": {
+      "bucket": "secondwind-catalog",
+      "object_manifest_complete": false,
+      "schemas": 26
+    }
+  },
+  "source_import_graph": {
+    "functions/openapi.json.js": [
+      "functions/_lib/discovery.js"
+    ],
+    "functions/capnp.js": [
+      "src/worker.js"
+    ],
+    "functions/rpc.js": [
+      "src/worker.js"
+    ],
+    "functions/_middleware.js": [
+      "functions/_lib/discovery.js",
+      "functions/_lib/store.js"
+    ],
+    "src/worker.js": [],
+    "scripts/selftest.mjs": [
+      "functions/_lib/discovery.js",
+      "functions/_lib/store.js",
+      "functions/_lib/x402.js",
+      "functions/api/proof.js",
+      "functions/api/tools.js",
+      "functions/api/x402/[sku].js",
+      "scripts/spec-schemas.mjs"
+    ],
+    "scripts/worker-selftest.mjs": [
+      "functions/capnp.js",
+      "functions/rpc.js",
+      "src/worker.js"
+    ],
+    "functions/_lib/x402.js": [
+      "functions/_lib/brand.js",
+      "functions/_lib/cdp-auth.js",
+      "functions/_lib/resilience.js",
+      "functions/_lib/x402-networks.js"
+    ],
+    "functions/_lib/discovery.js": [
+      "functions/_lib/brand.js",
+      "functions/_lib/store.js",
+      "functions/_lib/x402-networks.js",
+      "functions/_lib/x402.js"
+    ],
+    "functions/_lib/x402-networks.js": [],
+    "functions/_lib/store.js": [],
+    "functions/_lib/cdp-auth.js": [],
+    "functions/_lib/fulfill.js": [],
+    "functions/_lib/brand.js": [],
+    "functions/_lib/resilience.js": [],
+    "functions/_lib/purchase.js": [
+      "functions/_lib/util.js"
+    ],
+    "functions/api/proof.js": [
+      "functions/_lib/brand.js",
+      "functions/_lib/store.js"
+    ],
+    "functions/api/tools.js": [
+      "functions/_lib/brand.js",
+      "functions/_lib/store.js"
+    ],
+    "functions/v2/x402/discovery/resources.js": [
+      "functions/_lib/discovery.js"
+    ],
+    "functions/api/x402/[sku].js": [
+      "functions/_lib/store.js",
+      "functions/_lib/x402.js"
+    ],
+    "workers/gateway/src/contracts.js": [],
+    "workers/gateway/src/publication.js": [
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/scope.js"
+    ],
+    "workers/gateway/src/clef.js": [
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/telemetry.js"
+    ],
+    "workers/gateway/src/discovery.js": [
+      "workers/gateway/src/catalog.js",
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/telemetry.js"
+    ],
+    "workers/gateway/src/jev.js": [
+      "workers/gateway/src/contracts.js"
+    ],
+    "workers/gateway/src/catalog.js": [],
+    "workers/gateway/src/execution.js": [
+      "workers/gateway/src/commerce.js",
+      "workers/gateway/src/product-service.js",
+      "workers/gateway/src/telemetry.js"
+    ],
+    "workers/gateway/src/telemetry.js": [],
+    "workers/gateway/src/trials.js": [
+      "workers/gateway/src/catalog.js",
+      "workers/gateway/src/commerce.js",
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/execution.js",
+      "workers/gateway/src/scope.js",
+      "workers/gateway/src/telemetry.js"
+    ],
+    "workers/gateway/src/scope.js": [
+      "workers/gateway/src/contracts.js"
+    ],
+    "workers/gateway/src/product-service.js": [
+      "workers/gateway/src/catalog.js",
+      "workers/gateway/src/commerce.js",
+      "workers/gateway/src/execution.js",
+      "workers/gateway/src/routing.js",
+      "workers/gateway/src/telemetry.js",
+      "workers/gateway/src/trials.js"
+    ],
+    "workers/gateway/src/commerce.js": [
+      "src/lib/bedrock.js",
+      "src/lib/curation.js",
+      "workers/gateway/src/catalog.js",
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/execution.js",
+      "workers/gateway/src/telemetry.js"
+    ],
+    "workers/gateway/src/index.js": [
+      "workers/gateway/src/catalog.js",
+      "workers/gateway/src/commerce.js",
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/discovery.js",
+      "workers/gateway/src/product-service.js",
+      "workers/gateway/src/routing.js",
+      "workers/gateway/src/telemetry.js",
+      "workers/gateway/src/trials.js"
+    ],
+    "workers/gateway/src/routing.js": [
+      "workers/gateway/src/catalog.js",
+      "workers/gateway/src/clef.js",
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/publication.js",
+      "workers/gateway/src/telemetry.js"
+    ],
+    "workers/gateway/src/release-preparation.js": [
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/publication.js",
+      "workers/gateway/src/routing.js",
+      "workers/gateway/src/scope.js"
+    ],
+    "workers/gateway/scripts/evaluate-routing.mjs": [
+      "workers/gateway/src/clef.js",
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/jev.js",
+      "workers/gateway/src/publication.js",
+      "workers/gateway/src/routing.js",
+      "workers/gateway/tests/helpers/d1.mjs"
+    ],
+    "workers/gateway/scripts/evaluate-jev-question-plan.mjs": [
+      "workers/gateway/src/contracts.js",
+      "workers/gateway/src/jev.js"
+    ],
+    "workers/gateway/scripts/prepare-release.mjs": [
+      "workers/gateway/src/release-preparation.js"
+    ],
+    "src/lib/curation.js": [],
+    "src/lib/networks.js": [],
+    "src/lib/ledger.js": [],
+    "src/lib/bedrock.js": [],
+    "src/lib/discovery.js": [
+      "src/lib/brand.js",
+      "src/lib/curation.js",
+      "src/lib/networks.js"
+    ],
+    "src/lib/cdp-auth.js": [],
+    "src/lib/brand.js": []
+  },
+  "gateway_module_closure": [
+    "src/lib/bedrock.js",
+    "src/lib/curation.js",
+    "workers/gateway/src/catalog.js",
+    "workers/gateway/src/clef.js",
+    "workers/gateway/src/commerce.js",
+    "workers/gateway/src/contracts.js",
+    "workers/gateway/src/discovery.js",
+    "workers/gateway/src/execution.js",
+    "workers/gateway/src/index.js",
+    "workers/gateway/src/product-service.js",
+    "workers/gateway/src/publication.js",
+    "workers/gateway/src/routing.js",
+    "workers/gateway/src/scope.js",
+    "workers/gateway/src/telemetry.js",
+    "workers/gateway/src/trials.js"
+  ],
+  "pages_module_closure": [
+    "src/worker.js"
+  ],
+  "account_binding_scan": {
+    "other_workers_checked": 19,
+    "other_worker_matches": [],
+    "pages_gateway_bindings": [
+      {
+        "name": "second-wind",
+        "bindings": [
+          {
+            "environment": "production",
+            "name": "GATEWAY",
+            "type": "service",
+            "service": "secondwind-gateway"
+          }
+        ]
+      }
+    ],
+    "limits": "Settings bindings only; excludes API-token clients, external jobs, HTTP clients, dynamic binding construction, and historical deployments."
+  },
+  "unknowns": [
+    "External administrative/import writers and analytical SQL consumers",
+    "R2 catalog full object manifest and protected snapshots",
+    "Historical row identities, conflicting payloads and duplicate occurrences",
+    "Field meanings inside opaque JSON payloads and historical monetary fields",
+    "Restore rehearsal, shadow delivery, same-event sink trace and cutover parity"
+  ],
+  "retirement_authorized": false
+}

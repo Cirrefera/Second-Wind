@@ -1,0 +1,29 @@
+{
+  "source_commit": "c0fb9cc2c6927a036e2d0193c3d505630c4c227a",
+  "result": "pass",
+  "field_entries": 569,
+  "unique_field_keys": 569,
+  "d1_tables": 21,
+  "iceberg_tables": 26,
+  "stream_schemas": 4,
+  "unconnected_sink_schemas_matched": 3,
+  "all_28_fix_ids_preserved": true,
+  "non_document_source_files_unchanged": 66,
+  "sqlite_ddl_reconstructed": true,
+  "scope_test_result": {
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "node": "24.19.0",
+    "kind": "existing selection-pricing tests; no funded payment"
+  },
+  "reused_release_run": 39986362848,
+  "limits": [
+    "No record reconciliation or external-consumer closure",
+    "No migration, restore rehearsal, funded purchase or live sink-arrival proof"
+  ],
+  "artifact_sha256": {
+    "baseline.json": "9c02c80c2e96a84ddb136eb631f0163b55001672b72d843d3c2ea7f80b9ce276",
+    "field-ledger.csv": "2d562e85b6663586c5ba94c423b9b9aa0e1a67b935fa04e03e7e89c8a91305af"
+  }
+}
