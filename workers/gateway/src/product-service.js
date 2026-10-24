@@ -88,16 +88,20 @@ export class GrantCapability extends RpcTarget {
 export class ProductService extends RpcTarget {
   #env;
   #journey;
+  #retainWork;
 
-  constructor(env, journey) {
+  constructor(env, journey, retainWork) {
     super();
     this.#env = env;
+    this.#retainWork = retainWork;
     this.#journey=createJourneyContext({...journey,transport:journey?.transport || 'rpc'});
   }
 
   components(sku) { return describeComponents(this.#env,sku); }
   async trial(sku,config,input,callback) {
-    const result=await trialProduct(this.#env,sku,config,input,callback,{journey:operationJourney(this.#journey)});
+    const pending=trialProduct(this.#env,sku,config,input,callback,{journey:operationJourney(this.#journey)});
+    this.#retainWork?.(pending);
+    const result=await pending;
     return new TrialCapability(this.#env,result.trial_id,result.trial_token,this.#journey);
   }
   async recoverTrial(id,token) {
@@ -145,7 +149,7 @@ export class ProductService extends RpcTarget {
       } finally {clearTimeout(timer);}
     }
     return {...result,candidates:result.matches.map(({routing,compatibility,score,...product})=>({
-      product:new ProductCapability(this.#env,product,undefined,undefined,this.#journey),compatibility,
+      product:new ProductCapability(this.#env,product,undefined,undefined,this.#journey,this.#retainWork),compatibility,
     }))};
   }
   searchCatalog(query, limit) { return this.search(query, limit); }
@@ -155,7 +159,7 @@ export class ProductService extends RpcTarget {
   async select(sku) {
     const product=await describeProduct(this.#env.SW_DB,sku);
     await enqueueObservation(this.#env,'selection.product_selected',{journey:operationJourney(this.#journey),payload:{sku:product.sku,product_version_ref:product.version,selected_product_ids:[product.sku]}});
-    return new ProductCapability(this.#env,product,undefined,undefined,this.#journey);
+    return new ProductCapability(this.#env,product,undefined,undefined,this.#journey,this.#retainWork);
   }
   checkConfiguration(sku, config) { return this.configure(sku, config); }
 
@@ -219,9 +223,9 @@ async function clarify(env, sku, config, callbacks, journey) {
 
 /** Selected public product authority, never a repository or storage capability. */
 export class ProductCapability extends RpcTarget {
-  #env; #product; #config; #check; #journey;
-  constructor(env, product, config, check,journey) {
-    super(); this.#env = env; this.#product = product; this.#config = config; this.#check = check;this.#journey=journey;
+  #env; #product; #config; #check; #journey; #retainWork;
+  constructor(env, product, config, check,journey,retainWork) {
+    super(); this.#env = env; this.#product = product; this.#config = config; this.#check = check;this.#journey=journey;this.#retainWork=retainWork;
   }
   info() { return this.#product; }
   async compatibility(config = this.#config) {
@@ -238,7 +242,7 @@ export class ProductCapability extends RpcTarget {
     await this.#unchanged();
     const result = await clarify(this.#env, this.#product.sku, config, callbacks,operationJourney(this.#journey));
     await this.#unchanged();
-    return new ProductCapability(this.#env, this.#product, result.config, result,this.#journey);
+    return new ProductCapability(this.#env, this.#product, result.config, result,this.#journey,this.#retainWork);
   }
   async components() {
     await this.#unchanged();
@@ -249,7 +253,9 @@ export class ProductCapability extends RpcTarget {
   async trial(input,callback) {
     await this.#unchanged();
     if(!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'),{status:400});
-    const result=await trialProduct(this.#env,this.#product.sku,this.#config,input,callback,{journey:operationJourney(this.#journey)});
+    const pending=trialProduct(this.#env,this.#product.sku,this.#config,input,callback,{journey:operationJourney(this.#journey)});
+    this.#retainWork?.(pending);
+    const result=await pending;
     return new TrialCapability(this.#env,result.trial_id,result.trial_token,this.#journey);
   }
   configuration() { return this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}; }

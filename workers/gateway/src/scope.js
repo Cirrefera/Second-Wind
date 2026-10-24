@@ -42,7 +42,20 @@ export async function validateComponentRelease(release, {allowUnpriced = false} 
       if (paths.has(file.path) && paths.get(file.path) !== identity) fail('conflicting_component_file');
       paths.set(file.path, identity);
     }
+    if (component.files_by_language !== undefined) {
+      const adapters = release.language_policy?.adapters;
+      const mapping = component.files_by_language;
+      if (!Array.isArray(adapters) || !adapters.length || !mapping || typeof mapping !== 'object' || Array.isArray(mapping)
+          || Object.keys(mapping).sort().join('\0') !== [...adapters].sort().join('\0')) fail('invalid_language_file_manifest');
+      for (const language of adapters) {
+        const selectedPaths = mapping[language];
+        if (!Array.isArray(selectedPaths) || !selectedPaths.length || new Set(selectedPaths).size !== selectedPaths.length
+            || selectedPaths.some(path => !localPaths.has(path))) fail('invalid_language_file_manifest');
+      }
+    }
   }
+  if (release.components.some(component => component.files_by_language !== undefined)
+      && release.components.some(component => component.files_by_language === undefined)) fail('invalid_language_file_manifest');
   if (priced && total !== 10000) fail('component_shares_must_total_100_percent');
   const visiting = new Set(), visited = new Set();
   function visit(id) {
@@ -106,7 +119,15 @@ export async function prepareComponentSelection(release, selectedIds, configurat
   const ids = [...selectedIds].sort();
   const amount = ids.reduce((sum,id) => sum + prices.get(id), 0n);
   const files = new Map();
-  for (const id of ids) for (const file of byId.get(id).files) files.set(file.path,{path:file.path,sha256:file.sha256,size_bytes:file.size_bytes,mime_type:file.mime_type});
+  const languageScoped = release.components.some(component => component.files_by_language !== undefined);
+  if (languageScoped && (typeof configuration.language !== 'string'
+      || !release.language_policy?.adapters?.includes(configuration.language))) fail('explicit_language_required');
+  for (const id of ids) {
+    const component = byId.get(id);
+    const allowed = languageScoped ? new Set(component.files_by_language[configuration.language]) : null;
+    for (const file of component.files) if (!allowed || allowed.has(file.path))
+      files.set(file.path,{path:file.path,sha256:file.sha256,size_bytes:file.size_bytes,mime_type:file.mime_type});
+  }
   const scope = {schema_version:'1',sku:release.sku,version:release.version,
     release_ref:release.release_ref,release_hash,
     configuration_hash:await sha256(canonicalJson(configuration)),

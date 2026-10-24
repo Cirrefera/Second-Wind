@@ -3,7 +3,8 @@ import { NETWORK, USDC, ORIGIN, paymentConfig, paymentReadiness } from "./contra
 import {enqueueObservation} from './telemetry.js';
 
 export const toolUrl = item => `${ORIGIN}/api/x402/${encodeURIComponent(item.slug || item.sku)}`;
-export const toolMethod = item => item.invoke_kind === "bedrock" ? "POST" : "GET";
+export const toolMethod = item => item.invoke_kind === "bedrock" ||
+  (item.pricing_mode === "whole-product" && item.language_policy?.mode === "configured") ? "POST" : "GET";
 
 export async function toolsDocument(env,{journey}={}) {
   const items = await listCatalog(env.SW_DB);
@@ -19,7 +20,7 @@ export async function toolsDocument(env,{journey}={}) {
       capnweb:`${ORIGIN}/capnp`,openapi:`${ORIGIN}/openapi.json`},
     toolGuidance:{
       trial:"Check pricing_mode for proportional-components and read components_url for the product's available selections. Complete a sandbox trial, choose what you need, and accept the exact scope before authorizing payment. Products marked whole-product sell their complete declared deliverable; their component trial is unavailable.",
-      purchase:"After trial and selection, accept the selected scope. For a whole-product purchase, request its declared HTTP endpoint with the chosen configuration. Component acceptance records the selected scope without charging. Follow its purchase.url to receive the official x402 challenge, review its exact amount, and authorize payment with PAYMENT-SIGNATURE. Preserve that URL for retries.",
+      purchase:"After trial and selection, accept the selected scope. For a whole product with a configured language, POST its declared HTTP endpoint with {config:{language:<supported language>}}. Other whole products use their declared HTTP method. Component acceptance records the selected scope without charging. Follow its purchase.url to receive the official x402 challenge, review its exact amount, and authorize payment with PAYMENT-SIGNATURE. Preserve that URL for retries. Existing accepted GET URLs remain readable.",
       recovery:"Save paymentId and recoveryToken. Redelivery and Cap'n Web recovery require that private token and never initiate settlement.",
       disconnect:"For response-loss recovery, choose a random 32-byte base64url X-Recovery-Token before purchase and retain the accepted purchase URL.",
       execution:"Code Mode orchestration explicitly uses JavaScript. An existing artifact's language is determined by its product contract.",
@@ -62,7 +63,16 @@ export async function openApiDocument(env,options) {
     "/api/proof":{get:{summary:"Serving dependencies and configuration",responses:{"200":ok("Readiness"),"503":ok("Degraded")}}},
     "/api/resolve":{post:{summary:"Deterministic intent search",responses:{"200":ok("Matches or no_match")}}},
     "/api/products/{sku}/components":{get:{summary:"Available components, dependencies and maximum payment",responses:{"200":ok("Component menu"),"409":ok("Component trial unavailable")}}},
-    "/api/trials":{post:{summary:"Test the product in an isolated sandbox without payment",responses:{"200":ok("Trial result and private recovery token")}}},
+    "/api/trials":{post:{summary:"Run or recover the identical sandbox trial without payment",
+      requestBody:{required:true,content:{"application/json":{schema:{type:"object",required:["sku","input"],properties:{
+        sku:{type:"string"},config:{type:"object"},input:{type:"object",required:["code","language"],
+          dependentRequired:{trial_id:["trial_token"],trial_token:["trial_id"]},properties:{
+            code:{type:"string"},language:{type:"string",enum:["javascript","js"]},
+            trial_id:{type:"string",pattern:"^trial_[A-Za-z0-9_-]{1,96}$",description:"Generate and retain before starting a recoverable trial."},
+            trial_token:{type:"string",pattern:"^[A-Za-z0-9_-]{43}$",description:"Private random 32-byte base64url token; retain before starting."}}}}}}}},
+      responses:{"200":ok("Stored result or running/unknown status with private recovery credentials"),
+        "400":ok("Invalid input or incomplete recovery credentials"),"401":ok("Invalid trial token"),
+        "409":ok("Changed request, changed release or expired trial"),"503":ok("Start outcome requires recovery")}}},
     "/api/trials/{id}":{get:{summary:"Recover a trial with X-Trial-Token",responses:{"200":ok("Trial result")}}},
     "/api/trials/{id}/selection":{post:{summary:"Choose components after a completed trial using X-Trial-Token",responses:{"200":ok("Selected scope, maximum and final amount")}}},
     "/api/trials/{id}/accept":{post:{summary:"Accept the exact selected scope_hash using X-Trial-Token; no charge",responses:{"200":ok("Accepted purchase and payment URL")}}},
@@ -93,8 +103,17 @@ export async function openApiDocument(env,options) {
       parameters:[{in:"query",name:"acceptance_id",schema:{type:"string"}},
         {in:"header",name:"PAYMENT-SIGNATURE",schema:{type:"string"}},
         {in:"header",name:"X-Recovery-Token",schema:{type:"string"}}]};
-    paths[`/api/x402/${encodeURIComponent(item.slug || item.sku)}`] = {[item.method.toLowerCase()]:operation};
-    if (item.slug && item.sku !== item.slug) paths[`/api/x402/${encodeURIComponent(item.sku)}`] = {[item.method.toLowerCase()]:operation};
+    const path = `/api/x402/${encodeURIComponent(item.slug || item.sku)}`;
+    const configured = item.pricing_mode === "whole-product" && item.language_policy?.mode === "configured";
+    if (configured) operation.requestBody={required:true,content:{"application/json":{schema:{type:"object",required:["config"],properties:{
+      config:{type:"object",required:["language"],properties:{language:{type:"string",enum:item.language_policy.adapters}},additionalProperties:true}}}}}};
+    if (configured) {
+      const historicalGet = {...operation,summary:`Legacy accepted GET purchase for ${item.name}`};
+      delete historicalGet.requestBody;
+      historicalGet.parameters=operation.parameters.map(parameter=>parameter.name==='acceptance_id'?{...parameter,required:true}:parameter);
+      paths[path] = {post:operation,get:historicalGet};
+    } else paths[path] = {[item.method.toLowerCase()]:operation};
+    if (item.slug && item.sku !== item.slug) paths[`/api/x402/${encodeURIComponent(item.sku)}`] = paths[path];
   }
   return {openapi:"3.1.0",info:{title:"Second Wind",version:"2.0.0",
     description:"One product service for HTTP/x402 and Cap'n Web. Accepted purchases pin selected content and the final amount; private purchase credentials enable free recovery."},
@@ -107,11 +126,12 @@ export async function llmsDocument(env,options) {
     `## Try and choose\n\n`+
     `Check /api/tools for pricing_mode: proportional-components. Only those products offer selection through a sandbox trial; whole-product listings sell their complete declared deliverable and do not offer a component trial. Read components_url for available selections, shares, dependencies, and the maximum price.\n\n`+
     `Use select(sku).configure(config).trial({code,language:"javascript"}) over Cap'n Web. Inspect trial.info(), save trial.recovery() privately, then call trial.selectComponents(ids). Inspect selection.info() and call selection.accept(scope_hash) with that exact hash. Acceptance records the selected purchase; it does not charge you. Authorize payment only after reviewing your selected scope and exact amount.\n\n`+
-    `HTTP equivalents: POST /api/trials with {sku,config,input:{code,language:"javascript"}}; POST /api/trials/{id}/selection with {components}; POST /api/trials/{id}/accept with {components,scope_hash}. Use X-Trial-Token for selection, acceptance, and GET /api/trials/{id} recovery.\n\n`+
+    `HTTP equivalents: POST /api/trials with {sku,config,input:{code,language:"javascript",trial_id,trial_token}}; POST /api/trials/{id}/selection with {components}; POST /api/trials/{id}/accept with {components,scope_hash}. Use X-Trial-Token for selection, acceptance, and GET /api/trials/{id} recovery.\n\n`+
+    `Before starting a recoverable trial, generate and privately retain trial_id ("trial_" plus a random UUID) and trial_token (32 cryptographically random bytes encoded as base64url). Pass both in the trial input object over HTTP or Cap’n Web. Retry with the same credentials and identical SKU, configuration and code to recover that attempt; changed requests are rejected. GET /api/trials/{id} with X-Trial-Token recovers its stored status/result. Running work may report unknown after its execution window; it is never automatically rerun. Credentials omitted for legacy clients are generated server-side and cannot recover a lost initial response.\n\n`+
     `Trials execute JavaScript in an isolated Dynamic Worker with scoped product access and no outbound networking. A completed trial means your test code executed successfully; it does not establish that a deployment in your AWS account works. Product language support is stated separately in its contract.\n\n`+
     `## Whole-product purchases and payment\n\n`+
     `1. GET ${ORIGIN}/api/tools and ${ORIGIN}/api/proof.\n`+
-    `2. Choose the whole product and configure it. Request its declared HTTP endpoint, or POST ${ORIGIN}/rpc with {"sku":"...","config":{...}}. There is no separate price-request stage.\n`+
+    `2. Choose the whole product and configure it. For a configured-language product, POST its endpoint with {"config":{"language":"..."}}; otherwise use its declared HTTP method. You can also POST ${ORIGIN}/rpc with {"sku":"...","config":{...}}. There is no separate price-request stage.\n`+
     `3. The official x402 middleware returns PAYMENT-REQUIRED; review the exact amount and retry with PAYMENT-SIGNATURE. Keep the accepted purchase URL unchanged.\n`+
     `4. Save paymentId, recoveryToken, content_hash, and receipt.tx_hash.\n\n`+
     `Supply a cryptographically random 32-byte base64url X-Recovery-Token before the first paid attempt if a disconnected response must be recoverable immediately.\n`+
