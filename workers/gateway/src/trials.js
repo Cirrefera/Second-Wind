@@ -1,5 +1,5 @@
-import {checkConfiguration,describeProduct} from './catalog.js';
-import {canonicalJson,sha256,randomToken,validToken,CommerceError} from './contracts.js';
+import {checkConfiguration,copyConfiguration,describeProduct} from './catalog.js';
+import {canonicalJson,sha256,validToken,CommerceError} from './contracts.js';
 import {trialMenu,prepareComponentSelection} from './scope.js';
 import {executeCode,validateExecutionInput} from './execution.js';
 import {createScopeQuote} from './commerce.js';
@@ -37,24 +37,43 @@ export async function describeComponents(env,sku) {
 }
 
 export async function trialProduct(env,sku,configuration,input,callback,options={}) {
+  const id=input?.trial_id,token=input?.trial_token;
+  if(id===undefined && token===undefined) throw new CommerceError('trial_recovery_credentials_required',400,
+    {hint:'Generate and privately retain trial_id (trial_ plus a UUID) and trial_token (32 random bytes as base64url) before execution.'});
+  if(typeof id!=='string' || !/^trial_[A-Za-z0-9_-]{1,96}$/.test(id) || !validToken(token))
+    fail('invalid_trial_recovery_credentials');
+  if(typeof sku!=='string' || !sku.trim() || sku.length>200) fail('invalid_product_key');
+  const execution=validateExecutionInput(input?.code,input?.language);
+  const config=copyConfiguration(configuration);
+  const tokenHash=await sha256(token);
+  const hashRequest=row=>sha256(canonicalJson({sku:sku.trim(),version:row.version,
+    release_hash:row.release_hash,configuration:config,code:execution.code,language:execution.language}));
+  const readAttempt=()=>env.SW_DB.prepare(`SELECT t.*,r.request_hash,r.execution_owner
+    FROM component_trials t LEFT JOIN component_trial_requests r ON r.trial_id=t.id WHERE t.id=?1`).bind(id).first();
+  const validateAttempt=async row=>{
+    if(row.token_hash!==tokenHash) fail('trial_unauthorized',401);
+    if(!row.request_hash || row.request_hash!==await hashRequest(row)) fail('trial_request_conflict',409);
+    if(row.expires_at<Date.now()) {await observeExpiredTrial(env,id);fail('trial_expired',409);}
+  };
+  const responseFor=row=>({trial_id:id,trial_token:token,expires_at:new Date(row.expires_at).toISOString(),
+    release_hash:row.release_hash,status:trialStatus(env,row),result:row.result_json?JSON.parse(row.result_json):null,
+    evidence_kind:'buyer_sandbox_execution',
+    note:'Sandbox output is buyer-run evidence, not verification of a foreign AWS deployment.'});
+  // Recover the original identity before consulting today's catalog. A later
+  // release must never turn an identical retry into a new execution.
+  const prior=await readAttempt();
+  if(prior) {await validateAttempt(prior);return responseFor(prior);}
   const check=await checkConfiguration(env.SW_DB,sku,configuration);
   if(!check.ok) throw new CommerceError('incomplete_configuration',400,{missing:check.missing,errors:check.errors});
   const {product,release,menu,files}=await releaseFor(env,sku);
   if(product.version!==check.version) fail('product_changed',409);
-  const execution=validateExecutionInput(input?.code,input?.language);
-  const suppliedId=input?.trial_id,suppliedToken=input?.trial_token;
-  if((suppliedId!==undefined || suppliedToken!==undefined)
-      && (typeof suppliedId!=='string' || !/^trial_[A-Za-z0-9_-]{1,96}$/.test(suppliedId) || !validToken(suppliedToken)))
-    fail('invalid_trial_recovery_credentials');
-  const id=suppliedId || `trial_${crypto.randomUUID()}`,token=suppliedToken || randomToken();
-  const requestHash=await sha256(canonicalJson({sku:product.sku,version:product.version,
-    release_hash:menu.release_hash,configuration:check.config,code:execution.code,language:execution.language}));
+  const requestHash=await hashRequest({version:product.version,release_hash:menu.release_hash});
   const owner=crypto.randomUUID();
   const created_at=new Date().toISOString(),expires_at=Date.now()+3600000;
   const trialInsert=env.SW_DB.prepare(`INSERT INTO component_trials
     (id,token_hash,sku,version,release_hash,config_json,status,created_at,expires_at)
     VALUES (?1,?2,?3,?4,?5,?6,'running',?7,?8)`)
-    .bind(id,await sha256(token),product.sku,product.version,menu.release_hash,canonicalJson(check.config),created_at,expires_at);
+    .bind(id,tokenHash,product.sku,product.version,menu.release_hash,canonicalJson(check.config),created_at,expires_at);
   const identityInsert=env.SW_DB.prepare(`INSERT INTO component_trial_requests (trial_id,request_hash,execution_owner)
     VALUES (?1,?2,?3)`).bind(id,requestHash,owner);
   let inserted=false;
@@ -63,31 +82,15 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
     // A failed D1 acknowledgement may follow a committed batch. Read back
     // the identity before deciding whether this request owns execution.
   }
-  let row,identity;
-  try {
-    [row,identity]=await Promise.all([
-      env.SW_DB.prepare('SELECT * FROM component_trials WHERE id=?1').bind(id).first(),
-      env.SW_DB.prepare('SELECT request_hash,execution_owner FROM component_trial_requests WHERE trial_id=?1').bind(id).first(),
-    ]);
-  }
+  let row;
+  try { row=await readAttempt(); }
   catch { throw new CommerceError('trial_start_unknown',503,{trial_id:id,trial_token:token}); }
   if(!row) {
     if(!inserted) throw new CommerceError('trial_start_unavailable',503,{trial_id:id,trial_token:token});
     throw new CommerceError('trial_start_unknown',503,{trial_id:id,trial_token:token});
   }
-  if(row.token_hash!==await sha256(token)) fail('trial_unauthorized',401);
-  if(!identity || identity.request_hash!==requestHash) fail('trial_request_conflict',409);
-  if(row.expires_at<Date.now()) {
-    await observeExpiredTrial(env,id);
-    fail('trial_expired',409);
-  }
-  if(identity.execution_owner!==owner) {
-    return {trial_id:id,trial_token:token,expires_at:new Date(row.expires_at).toISOString(),
-      release_hash:row.release_hash,status:trialStatus(env,row),
-      result:row.result_json?JSON.parse(row.result_json):null,
-      evidence_kind:'buyer_sandbox_execution',
-      note:'Sandbox output is buyer-run evidence, not verification of a foreign AWS deployment.'};
-  }
+  await validateAttempt(row);
+  if(row.execution_owner!==owner) return responseFor(row);
   if(options.journey) await enqueueObservation(env,'journey.linked',
     {journey:options.journey,payload:{trial_id:id}});
   // Only explicit trial operations cross into the isolated Worker. No acceptance,

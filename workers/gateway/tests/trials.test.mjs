@@ -19,7 +19,8 @@ async function fixture(t,{unpriced=false}={}){
  db.sqlite.prepare('INSERT INTO component_releases VALUES (?,?,?,?)').run(item.sku,1,canonicalJson(release),await sha256(canonicalJson(release)));
  return {db,item,env,release};
 }
-const input={code:'return await codemode.readFile("core.js")',language:'javascript'};
+const input={code:'return await codemode.readFile("core.js")',language:'javascript',
+ trial_id:'trial_fixture',trial_token:'t'.repeat(43)};
 const executorFactory=()=>({execute:async(code,tools)=>({result:{observed:await tools.readFile('core.js')}})});
 test('trial recovery, component selection and scope inspection pipeline in one HTTP batch without payment',async t=>{
  const {env,item,db}=await fixture(t);

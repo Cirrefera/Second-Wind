@@ -11,9 +11,9 @@ Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 Source baseline: `3e81553d9ada199fadc8065e6774af29350d24a6`. This checkpoint is an implementation candidate, not a deployed completion claim.
 
 - FIX-17: configured whole-product purchase entry now uses POST with explicit configuration; discovery/OpenAPI agree. New acceptances pin the method; historical accepted GET URLs retain their original behavior. Official x402 verification/settlement code is unchanged.
-- Trial response-loss recovery: optional caller-known ID/token pairs, D1 request identity and execution owner, immutable input binding and no automatic rerun. Additive migration 0005 must precede deployment. HTTP/Cap’n Web preserve bounded in-flight work; stored trial results remain recoverable after catalog changes until expiry.
+- Trial response-loss recovery: required caller-known ID/token pairs, D1 request identity and execution owner, immutable input binding and no automatic rerun. Additive migration 0005 must precede deployment. HTTP/Cap’n Web preserve bounded in-flight work; stored trial results remain recoverable after catalog changes until expiry.
 - FIX-19 / product delivery: explicit language file manifests are supported for new releases. AWS-0568 v3 is a separate draft candidate; v2 files, publication references and historical purchases are preserved. V3 is not registered or activated by this change.
-- Verification: source review, syntax/diff checks and gateway compilation. No tests were added or run. A compile is not runtime/payment evidence. Deployment workflow still contains its existing tests; this candidate does not bypass required release checks.
+- Verification: source review, syntax/diff checks and gateway compilation. No new tests were added. Existing fixtures were aligned with the required trial credentials and migration; assertions are unchanged. A compile is not runtime/payment evidence. Required CI and deployment checks remain intact and must pass before release.
 - Details and release order: [buyer-flow implementation record](BUYER_FLOW_IMPLEMENTATION_2026-10-24.md).
 
 ## Product publication and telemetry checkpoint — October 24, 2026

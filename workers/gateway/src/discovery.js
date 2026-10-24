@@ -19,7 +19,7 @@ export async function toolsDocument(env,{journey}={}) {
     discovery:{intent:`${ORIGIN}/api/resolve`,
       capnweb:`${ORIGIN}/capnp`,openapi:`${ORIGIN}/openapi.json`},
     toolGuidance:{
-      trial:"Check pricing_mode for proportional-components and read components_url for the product's available selections. Complete a sandbox trial, choose what you need, and accept the exact scope before authorizing payment. Products marked whole-product sell their complete declared deliverable; their component trial is unavailable.",
+      trial:"Check pricing_mode for proportional-components and read components_url for the product's available selections. Before executing a trial, generate and privately retain input.trial_id (trial_ plus a random UUID) and input.trial_token (32 cryptographically random bytes as base64url); both are required. Retry with the same input to recover the original trial. Complete a sandbox trial, choose what you need, and accept the exact scope before authorizing payment. Products marked whole-product sell their complete declared deliverable; their component trial is unavailable.",
       purchase:"After trial and selection, accept the selected scope. For a whole product with a configured language, POST its declared HTTP endpoint with {config:{language:<supported language>}}. Other whole products use their declared HTTP method. Component acceptance records the selected scope without charging. Follow its purchase.url to receive the official x402 challenge, review its exact amount, and authorize payment with PAYMENT-SIGNATURE. Preserve that URL for retries. Existing accepted GET URLs remain readable.",
       recovery:"Save paymentId and recoveryToken. Redelivery and Cap'n Web recovery require that private token and never initiate settlement.",
       disconnect:"For response-loss recovery, choose a random 32-byte base64url X-Recovery-Token before purchase and retain the accepted purchase URL.",
@@ -62,20 +62,30 @@ export async function openApiDocument(env,options) {
     "/api/tools":{get:{summary:"Free live product metadata",responses:{"200":ok("Catalog")}}},
     "/api/proof":{get:{summary:"Serving dependencies and configuration",responses:{"200":ok("Readiness"),"503":ok("Degraded")}}},
     "/api/resolve":{post:{summary:"Deterministic intent search",responses:{"200":ok("Matches or no_match")}}},
-    "/api/products/{sku}/components":{get:{summary:"Available components, dependencies and maximum payment",responses:{"200":ok("Component menu"),"409":ok("Component trial unavailable")}}},
+    "/api/products/{sku}/components":{get:{summary:"Available components, dependencies and maximum payment",
+      parameters:[{in:"path",name:"sku",required:true,schema:{type:"string"}}],
+      responses:{"200":ok("Component menu"),"409":ok("Component trial unavailable")}}},
     "/api/trials":{post:{summary:"Run or recover the identical sandbox trial without payment",
       requestBody:{required:true,content:{"application/json":{schema:{type:"object",required:["sku","input"],properties:{
-        sku:{type:"string"},config:{type:"object"},input:{type:"object",required:["code","language"],
-          dependentRequired:{trial_id:["trial_token"],trial_token:["trial_id"]},properties:{
+        sku:{type:"string"},config:{type:"object"},input:{type:"object",required:["code","language","trial_id","trial_token"],properties:{
             code:{type:"string"},language:{type:"string",enum:["javascript","js"]},
             trial_id:{type:"string",pattern:"^trial_[A-Za-z0-9_-]{1,96}$",description:"Generate and retain before starting a recoverable trial."},
             trial_token:{type:"string",pattern:"^[A-Za-z0-9_-]{43}$",description:"Private random 32-byte base64url token; retain before starting."}}}}}}}},
       responses:{"200":ok("Stored result or running/unknown status with private recovery credentials"),
         "400":ok("Invalid input or incomplete recovery credentials"),"401":ok("Invalid trial token"),
         "409":ok("Changed request, changed release or expired trial"),"503":ok("Start outcome requires recovery")}}},
-    "/api/trials/{id}":{get:{summary:"Recover a trial with X-Trial-Token",responses:{"200":ok("Trial result")}}},
-    "/api/trials/{id}/selection":{post:{summary:"Choose components after a completed trial using X-Trial-Token",responses:{"200":ok("Selected scope, maximum and final amount")}}},
-    "/api/trials/{id}/accept":{post:{summary:"Accept the exact selected scope_hash using X-Trial-Token; no charge",responses:{"200":ok("Accepted purchase and payment URL")}}},
+    "/api/trials/{id}":{get:{summary:"Recover the original trial with X-Trial-Token, including after a catalog update",
+      parameters:[{in:"path",name:"id",required:true,schema:{type:"string"}}],security:[{TrialToken:[]}],
+      responses:{"200":ok("Stored result or running/unknown status; never executes again"),"401":ok("Invalid credentials"),"409":ok("Trial expired")}}},
+    "/api/trials/{id}/selection":{post:{summary:"Choose components after a completed trial using X-Trial-Token",
+      parameters:[{in:"path",name:"id",required:true,schema:{type:"string"}}],security:[{TrialToken:[]}],
+      requestBody:{required:true,content:{"application/json":{schema:{type:"object",required:["components"],properties:{components:{type:"array",minItems:1,uniqueItems:true,items:{type:"string"}}}}}}},
+      responses:{"200":ok("Selected scope, maximum and final amount"),"400":ok("Invalid selection or missing dependencies"),"401":ok("Invalid credentials"),"409":ok("Trial incomplete, expired or release changed")}}},
+    "/api/trials/{id}/accept":{post:{summary:"Accept the exact selected scope_hash using X-Trial-Token; no charge",
+      parameters:[{in:"path",name:"id",required:true,schema:{type:"string"}}],security:[{TrialToken:[]}],
+      requestBody:{required:true,content:{"application/json":{schema:{type:"object",required:["components","scope_hash"],properties:{
+        components:{type:"array",minItems:1,uniqueItems:true,items:{type:"string"}},scope_hash:{type:"string",pattern:"^[a-f0-9]{64}$"}}}}}},
+      responses:{"200":ok("Accepted purchase and payment URL"),"401":ok("Invalid credentials"),"409":ok("Selection mismatch, expired trial or release changed")}}},
     "/rpc":{post:{summary:"Pay for an accepted SKU, or one explicitly chosen JavaScript invocation",responses}},
     "/capnp":{post:{summary:"Cap'n Web HTTP batch; GET Upgrade also supports WebSocket",responses:{"200":ok("RPC batch result")}}},
     "/api/purchases/{paymentId}/delivery":{get:{summary:"Free authenticated delivery of the purchased version",
@@ -117,7 +127,8 @@ export async function openApiDocument(env,options) {
   }
   return {openapi:"3.1.0",info:{title:"Second Wind",version:"2.0.0",
     description:"One product service for HTTP/x402 and Cap'n Web. Accepted purchases pin selected content and the final amount; private purchase credentials enable free recovery."},
-    servers:[{url:ORIGIN}],paths,components:{securitySchemes:{RecoveryToken:{type:"apiKey",in:"header",name:"X-Recovery-Token"}}}};
+    servers:[{url:ORIGIN}],paths,components:{securitySchemes:{RecoveryToken:{type:"apiKey",in:"header",name:"X-Recovery-Token"},
+      TrialToken:{type:"apiKey",in:"header",name:"X-Trial-Token"}}}};
 }
 
 export async function llmsDocument(env,options) {
@@ -125,9 +136,9 @@ export async function llmsDocument(env,options) {
   return `# Second Wind\n\nPay only for what you need. Listed amounts are maximum payments, never automatic charges. Test supported products in the sandbox, choose what you want, and authorize only the selected purchase amount. USDC on Base via x402 v2.\n\n`+
     `## Try and choose\n\n`+
     `Check /api/tools for pricing_mode: proportional-components. Only those products offer selection through a sandbox trial; whole-product listings sell their complete declared deliverable and do not offer a component trial. Read components_url for available selections, shares, dependencies, and the maximum price.\n\n`+
-    `Use select(sku).configure(config).trial({code,language:"javascript"}) over Cap'n Web. Inspect trial.info(), save trial.recovery() privately, then call trial.selectComponents(ids). Inspect selection.info() and call selection.accept(scope_hash) with that exact hash. Acceptance records the selected purchase; it does not charge you. Authorize payment only after reviewing your selected scope and exact amount.\n\n`+
+    `Use select(sku).configure(config).trial({code,language:"javascript",trial_id,trial_token}) over Cap'n Web with the credentials you retained before starting. Inspect trial.info(), then call trial.selectComponents(ids). Inspect selection.info() and call selection.accept(scope_hash) with that exact hash. Acceptance records the selected purchase; it does not charge you. Authorize payment only after reviewing your selected scope and exact amount.\n\n`+
     `HTTP equivalents: POST /api/trials with {sku,config,input:{code,language:"javascript",trial_id,trial_token}}; POST /api/trials/{id}/selection with {components}; POST /api/trials/{id}/accept with {components,scope_hash}. Use X-Trial-Token for selection, acceptance, and GET /api/trials/{id} recovery.\n\n`+
-    `Before starting a recoverable trial, generate and privately retain trial_id ("trial_" plus a random UUID) and trial_token (32 cryptographically random bytes encoded as base64url). Pass both in the trial input object over HTTP or Cap’n Web. Retry with the same credentials and identical SKU, configuration and code to recover that attempt; changed requests are rejected. GET /api/trials/{id} with X-Trial-Token recovers its stored status/result. Running work may report unknown after its execution window; it is never automatically rerun. Credentials omitted for legacy clients are generated server-side and cannot recover a lost initial response.\n\n`+
+    `Before starting any trial, generate and privately retain trial_id ("trial_" plus a random UUID) and trial_token (32 cryptographically random bytes encoded as base64url). Pass both in the trial input object over HTTP or Cap’n Web; missing credentials are rejected before execution. Retry with the same credentials and identical SKU, configuration and code to recover that attempt, even after a catalog update; changed requests are rejected. GET /api/trials/{id} with X-Trial-Token, or recoverTrial(trial_id,trial_token) over Cap’n Web, recovers its stored status/result. Recovery is available until the returned expires_at (one hour). Running work may report unknown after its execution window; it is never automatically rerun. A trial interrupted before saving its result cannot promise a completed result.\n\n`+
     `Trials execute JavaScript in an isolated Dynamic Worker with scoped product access and no outbound networking. A completed trial means your test code executed successfully; it does not establish that a deployment in your AWS account works. Product language support is stated separately in its contract.\n\n`+
     `## Whole-product purchases and payment\n\n`+
     `1. GET ${ORIGIN}/api/tools and ${ORIGIN}/api/proof.\n`+

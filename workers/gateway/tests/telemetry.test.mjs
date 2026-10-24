@@ -222,7 +222,7 @@ test('actual shared producers record a complete bounded journey without buyer co
  const configured=await selected.configure({}, {clarify:async()=>({language:'javascript',private_answer:'private-answer'})});
  assert.equal(configured.configuration().ok,true);
  const trial=await trialProduct(env,item.sku,{language:'javascript'},
-  {code:'return "private-buyer-code";',language:'javascript'},null,
+  {code:'return "private-buyer-code";',language:'javascript',trial_id:`trial_${crypto.randomUUID()}`,trial_token:'t'.repeat(43)},null,
   {journey:next(),executorFactory:()=>({execute:async()=>({result:'private-trial-output'})})});
  assert.equal((await recoverTrial(env,trial.trial_id,trial.trial_token,{journey:next()})).status,'completed');
  const scope=await selectTrialComponents(env,trial.trial_id,trial.trial_token,['core']);
@@ -266,7 +266,7 @@ test('actual shared producers record a complete bounded journey without buyer co
    {rail:failure.rail,execute:async()=>outcome==='failed'?{ok:false,error:'private preparation failure'}:{ok:true,result:`private-${outcome}-result`}}),
    error=>error.code===(outcome==='pending'?'settlement_pending_recovery':'execution_failed'));
  }
- await trialProduct(env,item.sku,{language:'javascript'},{code:'return "private-failing-code";',language:'javascript'},null,
+ await trialProduct(env,item.sku,{language:'javascript'},{code:'return "private-failing-code";',language:'javascript',trial_id:`trial_${crypto.randomUUID()}`,trial_token:'t'.repeat(43)},null,
   {journey:next(),executorFactory:()=>({execute:async()=>({error:'private-sandbox-diagnostic'})})});
  const expiredId=`trial_${crypto.randomUUID()}`,expiredToken='x'.repeat(43),expiry=Date.now()-1;
  await db.batch([db.prepare(`INSERT INTO component_trials
@@ -337,7 +337,7 @@ test('rejected optional journey links preserve actual quote, trial, scope accept
  const fixedQuote=await createQuote(env,fixed.sku,{}, {journey:next()});
  assert.equal(fixedQuote.amount_usdc_micros,'250000');
  let executions=0;
- const trial=await trialProduct(env,item.sku,{}, {code:'return "private-link-failure-code";',language:'javascript'},null,
+ const trial=await trialProduct(env,item.sku,{}, {code:'return "private-link-failure-code";',language:'javascript',trial_id:`trial_${crypto.randomUUID()}`,trial_token:'t'.repeat(43)},null,
   {journey:next(),executorFactory:()=>({execute:async()=>{executions++;return {result:'private-link-failure-output'};}})});
  assert.equal(trial.status,'completed');
  const scope=await selectTrialComponents(env,trial.trial_id,trial.trial_token,['core']);
@@ -437,7 +437,7 @@ async function componentReleaseFixture(t) {
 async function componentFixture(t,{journey}={}) {
  const {db,env,item,release,releaseHash}=await componentReleaseFixture(t);
  const trial=await trialProduct(env,item.sku,{},
-  {code:'return "private-buyer-code";',language:'javascript'},null,
+  {code:'return "private-buyer-code";',language:'javascript',trial_id:`trial_${crypto.randomUUID()}`,trial_token:'t'.repeat(43)},null,
   {journey,executorFactory:()=>({execute:async()=>({result:'private-buyer-output'})})});
  const scope=await selectTrialComponents(env,trial.trial_id,trial.trial_token,['core']);
  const quote=await acceptTrialSelection(env,trial.trial_id,trial.trial_token,['core'],scope.scope_hash,{journey});
