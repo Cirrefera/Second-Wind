@@ -35,7 +35,35 @@ Local verification: 230 gateway tests pass, including official middleware with c
 This is implementation evidence, not deployment or a live payment claim. FIX-17/19 restoration is staged for review; their broader product/discovery reconciliation and the separate consolidation backlog remain open. Preserve FIX-02 recovery guarantees: prepared retries re-verify without re-executing; settled replay is free; pending/unknown transfers cannot be retried as new payments; receipt loss across both stores requires authoritative reconciliation. All existing FIX IDs and historical evidence below remain.
 
 
-## FIX-13 verification checkpoint — October 23, 2026
+## Owner-directed payment boundary — October 24, 2026
+
+The [standard x402 ownership decision](adr/0001-standard-x402-payment-ownership.md) governs further payment work: official Hono/x402 integration owns challenges, verification and settlement; Second Wind retains product discovery, sandbox trials, explicit component selection, selected-scope amounts, entitlements and authenticated recovery. [CONTEXT.md](../CONTEXT.md) defines maximum payment, trial, selected scope and final charge. No buyer-facing quote stage is introduced.
+
+The bounded Wayfinder map is [Restore standard x402 ownership while preserving sandbox-selected purchases](https://github.com/Cirrefera/Second-Wind/issues/13). It records payment-restoration decisions under this tracker; it does not replace the build backlog.
+
+[Pinned SDK research](X402_STANDARD_RAILS_RESEARCH.md) verifies official dynamic pricing and lifecycle hooks in `@x402/hono/core` 2.28.0. The completed [durable recovery mapping](X402_RECOVERY_MAPPING.md) specifies the narrow restoration: request-local Hono context, positive verification checks, explicit abort on failed claims, existing D1 ownership gates, SDK settlement, receipt persistence and an outer response finalizer. It also records prepared-replay expiry behavior and unresolved settlement/persistence limits. The next build work is implementation under FIX-17/19 using this mapping, with FIX-02 recovery guarantees preserved. This is a source-grounded handoff, not a tested or deployed restoration. No runtime change or test execution occurred in this planning follow-up.
+
+Git history confirms that `409afcb` mounted official `@x402/hono` middleware, while `cc0a70b` replaced it with custom orchestration under a routing/recovery repair. The current implementation's test results remain historical evidence, not approval to retain that architectural replacement. FIX-17/19 must reconcile the standard payment integration with the original product experience; FIX-02's no-duplicate-charge and recovery guarantees must survive the correction. This decision does not reopen unrelated completed fixes or authorize deleting purchase history, blindly reverting later work, publishing products, or deploying changes.
+
+## Verified consolidation checkpoint — October 23, 2026
+
+**Source and production match `c0fb9cc2c6927a036e2d0193c3d505630c4c227a`. FIX-13 remains incomplete; its earlier missing-sink statement is superseded.** PR #11 is merged. [Production run 39986362848](https://github.com/Cirrefera/Second-Wind/actions/runs/39986362848) passed tests, builds, migrations and release acceptance. Gateway `3302125b-6658-4523-94ac-06edb36a191d` serves 100%; Pages deployment `639230c2-516c-4b90-b5cf-a75a9bea13d9` matches the same clean commit.
+
+The owner clarified: **maximum payment → sandbox → chosen purchase or usage → final charge within the maximum; no buyer-facing quote stage.** The component implementation already separates `max_amount_atomic` from selected `amount_atomic`, requires a completed trial and explicit acceptance, and settles the selected amount. Existing `quote*` identifiers do not mean charge the maximum. Five existing scope tests passed. Other fixed-price paths and public quote terminology remain FIX-17/19 reconciliation work; general usage metering is not claimed.
+
+Follow-up verification traces the existing Code Mode/Cap'n Web chain and confirms that ordinary product purchase cannot bypass component selection. `SW-EXEC` settles only after successful execution and replays its stored result without another charge. [PR verification run 40056053605](https://github.com/Cirrefera/Second-Wind/actions/runs/40056053605) passed 222 gateway, 21 legacy/Pages and 32 release-acceptance tests, actual Dynamic Worker checks and both builds. The [preservation contract](CONSOLIDATION_INVENTORY.md#code-mode-and-capn-web-verified-preservation-contract) records a specific FIX-13/14 mapping gap: events/projections omit the separately stored maximum. Do not infer it from a rounded selected amount, count acceptance as payment, or count settlement/receipt/entitlement events as three charges. Existing discovery describes trials but still mixes quote terminology; FIX-17/19 remains open.
+
+[CONSOLIDATION_INVENTORY.md](CONSOLIDATION_INVENTORY.md), its [baseline](evidence/consolidation/baseline.json) and [569-entry field ledger](evidence/consolidation/field-ledger.csv) record the structural portion of plan Ticket 1: 21 D1 tables, 26 Iceberg schemas, four streams, 19 sinks, the running pipeline, source dependencies and duplicate candidates. Full Ticket 1 remains open for external consumers and protected record/object inventories. Every original field/definition is retained; no retirement or migration is authorized by this inventory.
+
+- All three v1 sinks exist with 29/19/18 fields matching source. They are unconnected, their tables are absent from the listing, and `secondwind_contract_v1` is absent. Do not recreate them or infer credential usability/delivery from existence.
+- The owner’s later consolidation plan governs the final schema and sink count. The prior additive three-sink design is a candidate, not a mandatory rollout.
+- Outbox observation: 378 rows, zero pending. This establishes dispatch/backlog state only; FIX-14 same-event raw/analytical arrival remains open.
+- Routing manifests, component releases and payload-object rows remain zero. Their implementations already exist.
+- Completed FIX-01/02/03/05/06/28 remain completed. All 28 IDs and historical evidence remain. No product publication, inference enablement or production changes occurred.
+
+Earlier checkpoints below are historical where resource state or payment wording differs. Use this checkpoint and the owner’s clarified payment meaning for subsequent work.
+
+## Historical FIX-13 verification checkpoint — before sink provisioning
 
 **Source verified; Cloudflare rollout BLOCKED on catalog-token authority. FIX-13 is not complete.**
 
@@ -357,14 +385,14 @@ Keep deterministic compatibility checks authoritative. Verify typed responses, f
 ### FIX-13 — Align telemetry projections with the current event contract
 
 - Priority: **P1**
-- Status: **BLOCKED — source verified; catalog credential authority missing**
-- Evidence: Audit reports payment.settled / exact_amount_atomic / payment_network do not match older specialized projections. Raw history must remain intact.
-- Dependencies: Authorized catalog credential containing Catalog Write and bucket storage write; create sinks before live SQL validation.
-- Acceptance criteria: current payment and receipt events appear in the intended projections with correct amounts, identifiers, and network fields.
-- Implementation location: workers/gateway/src/telemetry.js; current pipeline SQL; draft telemetry-review.md
-- Verification: PR #11 implementation passed run 39984653470/job 120520573239 including all required tests and builds. Ordered SQL/schema fields and exact event filters match. Live SQL validation and sink delivery remain pending; see the October 23 checkpoint.
-- Release state: PR #11 carries additive declarative telemetry configuration and tests. Application deployment does not create Basin resources; production telemetry acceptance remains incomplete.
-- Remaining blocker: The connected account-token API reports Catalog Write is_selectable=false and catalog credential absent. Three v1 sinks/pipeline and exact-event-ID raw/journey delivery proof remain outstanding.
+- Status: **IN PROGRESS — source deployed; three sinks provisioned; canonical mapping and delivery acceptance pending**
+- Evidence: Current event names/amount fields differ from legacy projections. Three v1 sinks exist with source-matching schemas; no v1 pipeline/table delivery is established.
+- Dependencies: Complete the owner’s consolidation mapping, preserve historical/raw coverage, confirm consumers and usable ingestion credentials, then validate the selected design. Do not recreate existing sinks.
+- Acceptance criteria: current payment/receipt events appear in intended projections with correct amounts, IDs and network; maximum and final-charge semantics remain distinct.
+- Implementation location: workers/gateway/src/telemetry.js; telemetry declarations; CONSOLIDATION_INVENTORY.md and its field ledger.
+- Verification: PR #11 merged in c0fb9cc; production run 39986362848 passed. Live sink fields match 29/19/18 declarations. Pipeline planning, materialization and exact-event arrival remain pending.
+- Release state: Application deployed. Declarative source does not establish external rollout or downstream delivery.
+- Remaining work: Ticket 1 consumer/record coverage, Ticket 2 semantics/target design, Ticket 3 rehearsal/trace. The prior credential blocker is historical, not reasserted as current without evidence.
 
 Original bounded scope:
 
@@ -730,7 +758,7 @@ Both checkouts used Node v24.19.0 and locked installs with lifecycle scripts dis
 
 The approved merchant address and existing successful payment configuration are already known. Do not ask for them again or substitute a new recipient. No funded purchase is needed to complete these preparation items.
 
-## Next batch selection
+## Historical next batch selection — before the October 24 payment correction
 
 Work from the consolidated `main`, not the pre-integration draft head. The next three queued actionable P1 IDs are **FIX-07, FIX-08, and FIX-13** under the existing priority/ID order. FIX-07's compatibility repair is already deployed; finish reviewed routing coverage. FIX-08 addresses genuine trusted publication, not another decision about whether public sources can form original content. FIX-13 checks actual event fields and live sink schemas before a projection change.
 
@@ -739,6 +767,8 @@ FIX-04 remains visible as blocked on external administrative settings only. FIX-
 ## Ready-to-paste continuation prompt
 
 ```text
+The October 24 owner-directed payment boundary supersedes earlier instructions to retain custom commerce orchestration. Read CONTEXT.md, docs/adr/0001-standard-x402-payment-ownership.md and docs/X402_RECOVERY_MAPPING.md, then the Wayfinder map at https://github.com/Cirrefera/Second-Wind/issues/13. Default to official Hono/x402 payment handling while preserving sandbox trials, Cap'n Web selections, exact selected charges and durable recovery. Reuse the completed pinned-source research and recovery mapping; do not restart alternative-architecture exploration. Implementation remains open under FIX-17/19 and must preserve FIX-02 guarantees. The release identities and prior queue below are historical evidence, not a new merge/deploy authorization or permission to change payment architecture.
+
 Continue Second Wind from Cirrefera/Second-Wind main and docs/SECONDWIND_FIX_TRACKER.md. Read docs/CONSOLIDATION_STATUS.md, docs/JEV_ROUTING_EVALUATION.md, and docs/JEV_QUESTION_AUDIT.md for consolidation and subsequent routing evidence. Refresh refs because subsequent source or documentation commits may supersede older identities.
 
 The owner authorized merging all remaining in-scope work. PR #5 and PR #7 are merged. Consolidated application release: 548bcc204d59785951da11e85943607d5e62d9fd. Integration head: 57636d4c84e0a9a96ed078d86413d4e526447106. Verified and merged tree: 6c5cd346c5f5e491973da1e68294c11d63de78ca. Prior draft head 8711cdcf2dc31b16dc599da6db7cd0afd783a537 and PR #7 head b812a981432d49d95d02d4e68565c2a49c32314f are ancestors. Do not deploy or re-merge an old isolated draft.
@@ -755,5 +785,5 @@ Select the next three IDs: FIX-07, FIX-08, FIX-13. FIX-07: preserve deployed fre
 
 Two v2 candidates are source-ready but unpublished: AWS-0568 requires component allocation and genuine reviews; SW-PT-0006 v2 requires genuine reviews while preserving v1 purchases. The historical 157-record inventory is not proof that 157 products are finished. Keep all 28 fix IDs and product-specific work visible. PR #1 is an unrelated third-party README advertisement, not application routing; the temporary audit branch adds no serving functionality. Both were excluded from consolidation.
 
-Preserve the single gateway, thin Pages ingress, shared HTTP/x402 and Cap'n Web service, D1 commerce authority, R2 exact payload/receipt storage, immutable quotes and bought versions, explicit delivery-language handshake, deterministic routing authority, and private recovery credentials. Unknown settlement outcomes must never be blindly retried. Finish the existing build without redesign, new unrelated features, or recurring autonomous monitors. Report exact source/CI/deployed evidence and update the canonical tracker with completed work, remaining blockers, and next three IDs.
+Preserve the single gateway, thin Pages ingress, shared HTTP/x402 and Cap'n Web product services, D1 purchase/entitlement history, R2 exact payload/receipt storage, immutable selected scopes and bought versions, explicit delivery-language handshake, deterministic routing authority, and private recovery credentials. Standard x402 owns payment challenges, verification and settlement; existing quote identifiers are compatibility data, not a buyer-facing stage. Unknown settlement outcomes must never be blindly retried. Finish the existing build without unrelated redesign, new features, or recurring autonomous monitors. Report exact source/CI/deployed evidence and update the canonical tracker with completed work, remaining blockers, and next three IDs.
 ```

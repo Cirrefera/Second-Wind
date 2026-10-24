@@ -1,5 +1,13 @@
 # Production schema — 2026-10-23
 
+## Current-state addendum
+
+The complete retained schema/field inventory is in [CONSOLIDATION_INVENTORY.md](CONSOLIDATION_INVENTORY.md) and [baseline.json](evidence/consolidation/baseline.json). All three v1 sinks now exist but are unconnected and their tables are absent. The serving release is c0fb9cc. The owner’s later consolidation plan determines the final destinations; the original additive three-sink design below is historical candidate work.
+
+Payment meaning is maximum payment, sandbox use, then final charge for selected purchase or usage. Existing `commerce_quotes`/`quote_id` names remain implementation identifiers. The component path records its maximum separately from the accepted selected amount; preserve both without charging the ceiling by default.
+
+The earlier snapshot and credential/sink checkpoint below remain historical evidence, not current setup instructions.
+
 This document records the production schema observed directly from Cloudflare before FIX-13 changes. It distinguishes durable application state, the application event contract, the Basin transport schema, raw Iceberg history, and the stale October 18 specialized projections.
 
 ## Authority order
@@ -113,7 +121,7 @@ is intentionally a new versioned pipeline rather than an edit to `secondwind_tel
 Creating the new Basin Catalog sinks requires a catalog token value with the required R2/Basin
 permissions. No credential value is checked into the repository.
 
-## FIX-13 verification checkpoint — October 23, 2026
+## Historical FIX-13 checkpoint — before sink provisioning
 
 **Source verified; Cloudflare rollout BLOCKED on catalog-token authority. FIX-13 is not complete.**
 
