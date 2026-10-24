@@ -1,13 +1,23 @@
 # Second Wind — canonical fix tracker
 
-Last updated: 2026-10-23 (America/New_York).
+Last updated: 2026-10-24 (America/New_York).
 
 Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
 
-## Current consolidation checkpoint — October 23, 2026
+## Owner-directed payment boundary — October 24, 2026
+
+The [standard x402 ownership decision](adr/0001-standard-x402-payment-ownership.md) governs further payment work: official Hono/x402 integration owns challenges, verification and settlement; Second Wind retains product discovery, sandbox trials, explicit component selection, selected-scope amounts, entitlements and authenticated recovery. [CONTEXT.md](../CONTEXT.md) defines maximum payment, trial, selected scope and final charge. No buyer-facing quote stage is introduced.
+
+The bounded Wayfinder map is [Restore standard x402 ownership while preserving sandbox-selected purchases](https://github.com/Cirrefera/Second-Wind/issues/13). It records payment-restoration decisions under this tracker; it does not replace the build backlog.
+
+[Pinned SDK research](X402_STANDARD_RAILS_RESEARCH.md) verifies official dynamic pricing and lifecycle hooks in `@x402/hono/core` 2.28.0. The next bounded work is to map existing durable purchase transitions onto those supported hooks, including explicit abort on failed settlement claims and truthful recovery after settlement succeeds but persistence fails. Hook availability alone is not proof that the restoration preserves those guarantees. No runtime change or test execution occurred in this planning follow-up.
+
+Git history confirms that `409afcb` mounted official `@x402/hono` middleware, while `cc0a70b` replaced it with custom orchestration under a routing/recovery repair. The current implementation's test results remain historical evidence, not approval to retain that architectural replacement. FIX-17/19 must reconcile the standard payment integration with the original product experience; FIX-02's no-duplicate-charge and recovery guarantees must survive the correction. This decision does not reopen unrelated completed fixes or authorize deleting purchase history, blindly reverting later work, publishing products, or deploying changes.
+
+## Verified consolidation checkpoint — October 23, 2026
 
 **Source and production match `c0fb9cc2c6927a036e2d0193c3d505630c4c227a`. FIX-13 remains incomplete; its earlier missing-sink statement is superseded.** PR #11 is merged. [Production run 39986362848](https://github.com/Cirrefera/Second-Wind/actions/runs/39986362848) passed tests, builds, migrations and release acceptance. Gateway `3302125b-6658-4523-94ac-06edb36a191d` serves 100%; Pages deployment `639230c2-516c-4b90-b5cf-a75a9bea13d9` matches the same clean commit.
 
@@ -734,7 +744,7 @@ Both checkouts used Node v24.19.0 and locked installs with lifecycle scripts dis
 
 The approved merchant address and existing successful payment configuration are already known. Do not ask for them again or substitute a new recipient. No funded purchase is needed to complete these preparation items.
 
-## Next batch selection
+## Historical next batch selection — before the October 24 payment correction
 
 Work from the consolidated `main`, not the pre-integration draft head. The next three queued actionable P1 IDs are **FIX-07, FIX-08, and FIX-13** under the existing priority/ID order. FIX-07's compatibility repair is already deployed; finish reviewed routing coverage. FIX-08 addresses genuine trusted publication, not another decision about whether public sources can form original content. FIX-13 checks actual event fields and live sink schemas before a projection change.
 
@@ -743,6 +753,8 @@ FIX-04 remains visible as blocked on external administrative settings only. FIX-
 ## Ready-to-paste continuation prompt
 
 ```text
+The October 24 owner-directed payment boundary supersedes earlier instructions to retain custom commerce orchestration. Read CONTEXT.md and docs/adr/0001-standard-x402-payment-ownership.md, then the Wayfinder map at https://github.com/Cirrefera/Second-Wind/issues/13. Default to official Hono/x402 payment handling while preserving sandbox trials, Cap'n Web selections, exact selected charges and durable recovery. Research the supported SDK integration before runtime changes. The release identities and prior queue below are historical evidence, not a new merge/deploy authorization or permission to change payment architecture.
+
 Continue Second Wind from Cirrefera/Second-Wind main and docs/SECONDWIND_FIX_TRACKER.md. Read docs/CONSOLIDATION_STATUS.md, docs/JEV_ROUTING_EVALUATION.md, and docs/JEV_QUESTION_AUDIT.md for consolidation and subsequent routing evidence. Refresh refs because subsequent source or documentation commits may supersede older identities.
 
 The owner authorized merging all remaining in-scope work. PR #5 and PR #7 are merged. Consolidated application release: 548bcc204d59785951da11e85943607d5e62d9fd. Integration head: 57636d4c84e0a9a96ed078d86413d4e526447106. Verified and merged tree: 6c5cd346c5f5e491973da1e68294c11d63de78ca. Prior draft head 8711cdcf2dc31b16dc599da6db7cd0afd783a537 and PR #7 head b812a981432d49d95d02d4e68565c2a49c32314f are ancestors. Do not deploy or re-merge an old isolated draft.
@@ -759,5 +771,5 @@ Select the next three IDs: FIX-07, FIX-08, FIX-13. FIX-07: preserve deployed fre
 
 Two v2 candidates are source-ready but unpublished: AWS-0568 requires component allocation and genuine reviews; SW-PT-0006 v2 requires genuine reviews while preserving v1 purchases. The historical 157-record inventory is not proof that 157 products are finished. Keep all 28 fix IDs and product-specific work visible. PR #1 is an unrelated third-party README advertisement, not application routing; the temporary audit branch adds no serving functionality. Both were excluded from consolidation.
 
-Preserve the single gateway, thin Pages ingress, shared HTTP/x402 and Cap'n Web service, D1 commerce authority, R2 exact payload/receipt storage, immutable quotes and bought versions, explicit delivery-language handshake, deterministic routing authority, and private recovery credentials. Unknown settlement outcomes must never be blindly retried. Finish the existing build without redesign, new unrelated features, or recurring autonomous monitors. Report exact source/CI/deployed evidence and update the canonical tracker with completed work, remaining blockers, and next three IDs.
+Preserve the single gateway, thin Pages ingress, shared HTTP/x402 and Cap'n Web product services, D1 purchase/entitlement history, R2 exact payload/receipt storage, immutable selected scopes and bought versions, explicit delivery-language handshake, deterministic routing authority, and private recovery credentials. Standard x402 owns payment challenges, verification and settlement; existing quote identifiers are compatibility data, not a buyer-facing stage. Unknown settlement outcomes must never be blindly retried. Finish the existing build without unrelated redesign, new features, or recurring autonomous monitors. Report exact source/CI/deployed evidence and update the canonical tracker with completed work, remaining blockers, and next three IDs.
 ```

@@ -1,6 +1,8 @@
 # Second Wind consolidation inventory
 
-The implemented system is the starting point. This inventory preserves its current authorities and records what must be resolved before consolidation or retirement. It implements the structural inventory portion of Ticket 1 in the owner's system consolidation plan, under the existing FIX-07/08/13/14/19/20/26 work. It does not create a competing fix tracker.
+**October 24 owner decision:** the [standard x402 payment boundary](adr/0001-standard-x402-payment-ownership.md) governs restoration. This inventory describes existing code and data to preserve; it does not approve the custom commerce orchestration introduced in `cc0a70b`. Official Hono/x402 integration owns payment handling, while Second Wind retains its sandbox and selected-purchase experience. The [Wayfinder map](https://github.com/Cirrefera/Second-Wind/issues/13) tracks the bounded integration research under the existing fix tracker.
+
+The implemented system is the inspection starting point. This inventory records current ownership, protected data and what must be resolved before consolidation or retirement. It implements the structural inventory portion of Ticket 1 in the owner's system consolidation plan, under the existing FIX-07/08/13/14/19/20/26 work. It does not create a competing fix tracker.
 
 **Status: structural inventory captured; full Ticket 1 acceptance remains open for external consumer closure and protected object/record inventories.** No application behavior, production resource, product publication, inference setting, payment, or stored record changes in this change.
 
