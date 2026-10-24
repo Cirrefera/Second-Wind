@@ -1,10 +1,38 @@
 # Second Wind — canonical fix tracker
 
-Last updated: 2026-10-23 (America/New_York).
+Last updated: 2026-10-24 (America/New_York).
 
 Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
+
+## Purchase recovery follow-up — October 24, 2026
+
+Draft PR #16 now addresses the owner's three selected failures: reaccepting the same expired, unclaimed component selection renews its existing acceptance; wallet recovery reuses a public challenge instead of exhausting five slots; and authenticated HTTP/Cap'n Web reconciliation can restore a missing receipt from the original finalized Base transfer. No purchase is re-settled. Chain evidence must match the existing authorization key, payer, recipient, native USDC asset and exact selected amount.
+
+Code Mode, Cap'n Web, sandbox trials and selected scope, official Hono/x402 payment ownership, immutable purchase snapshots and D1/R2 recovery remain the architecture. No dependency upgrade or schema migration is introduced. Reconciliation requires the original transaction hash if it was not stored, plus the private recovery token (recoverable through the existing payer-wallet proof). The Base reader is read-only; RPC outages leave recovery pending.
+
+Source review and Worker compilation are the verification scope for this follow-up. No additional test work is included at the owner's direction. This remains a draft implementation, not a deployment or live-payment verification. FIX-15 and FIX-16 below describe this implementation and its remaining release boundary.
+
+## Removal of conflicting commerce behavior — October 24, 2026
+
+The restoration draft now removes `POST /api/quotes`, the Cap'n Web `quote`/`quoteProduct` methods, and Code Mode quote providers. No replacement quote endpoint or whole-product acceptance RPC is introduced. Whole-product buyers request the paid HTTP endpoint directly; official Hono/x402 returns the challenge. The existing component sandbox → selection → acceptance flow remains.
+
+Catalog prices are explicitly maximums. Discovery no longer constructs exact payment requirements from a catalog maximum. Only the official middleware emits those requirements for the selected purchase. Component acceptance exposes the selected amount and ceiling as application metadata, with no parallel x402 requirements builder. The release validator is updated to reject premature exact-payment discovery.
+
+New purchase responses use `acceptanceId`/`acceptance_id`. Historical signed `quote_id` URLs, immutable database rows, receipts, and versioned telemetry keys remain compatible; conflicting identifiers are rejected. These internal records do not create a buyer-facing step. Current README, API instructions, and specification now state that boundary.
+
+The owner stopped further test work during this follow-up. Earlier verification below applies to the earlier restoration tree, not this amended candidate. This amendment has not been merged or deployed; no production data, payment, dependency version, or schema was changed.
+
+## Standard x402 restoration — October 24, 2026
+
+Draft implementation restores official `@x402/hono` middleware for paid HTTP routes using the existing locked 2.28.0 SDK. The payment replacement introduced in PR #3 is removed from the serving path: commerce no longer calls verification or settlement. Existing application claims, preparation, receipts and authenticated recovery integrate through supported lifecycle hooks. Sandbox trials, Cap'n Web selection, final selected amounts within the maximum, immutable files and historical purchase records remain intact. The [owner decision and recovery mapping](https://github.com/Cirrefera/Second-Wind/blob/f6fa26c970cb8f3ffa6b6980837e745a22539fab/docs/X402_RECOVERY_MAPPING.md) remain the scope reference; this implementation does not merge the separate consolidation documentation draft.
+
+Two concrete failures are addressed: unresolved SDK settlement results no longer become terminal uncharged failures, and D1's trigger-inclusive change count no longer makes a successful settlement claim look unsuccessful. The latter was reproduced in the actual local Workers runtime: the purchase reached `settling`, the old exactly-one-row check rejected it, and settlement was blocked. The corrected fenced claim passes with the real D1/R2 bindings. The test fixture's `run()` now uses total changes like D1.
+
+Local verification: 230 gateway tests pass, including official middleware with controlled facilitator outcomes and the bundled Worker in workerd; 21 Pages tests plus root utility self-tests pass; 32 release-acceptance tests pass; actual Dynamic Worker isolation and all 16 selected AWS-0568 planner combinations pass; both bundles build. Existing fault cases now exercise the official SDK rather than a mocked resource-server orchestrator. No dependency versions, schemas, catalog data, secret values or production resources changed. No funded transaction was performed.
+
+This is implementation evidence, not deployment or a live payment claim. FIX-17/19 restoration is staged for review; their broader product/discovery reconciliation and the separate consolidation backlog remain open. Preserve FIX-02 recovery guarantees: prepared retries re-verify without re-executing; settled replay is free; pending/unknown transfers cannot be retried as new payments; receipt loss across both stores requires authoritative reconciliation. All existing FIX IDs and historical evidence below remain.
 
 
 ## FIX-13 verification checkpoint — October 23, 2026
@@ -363,36 +391,22 @@ Trace the same event ID from the D1 outbox through ingestion to the raw and spec
 ### FIX-15 — Prevent recovery-challenge slot interference
 
 - Priority: **P1**
-- Status: **READY**
-- Evidence: Audit fixture filled five outstanding challenges and got 429 on the sixth. This batch does not change challenge throttling.
-- Dependencies: Preserve wallet proof, expiry, one-time use, and retained-token recovery.
-- Acceptance criteria: an unrelated caller cannot monopolize recovery issuance, while expiry, wallet ownership verification, one-time use, and retained-token recovery continue to work.
-- Implementation location: workers/gateway/src/commerce.js recovery challenge paths; recovery tests
-- Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
-- Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
-
-Original bounded scope:
-
-An unauthenticated caller who knows a payment ID can fill its outstanding challenge slots and temporarily block a new lost-token recovery challenge.
-
-Implement a bounded challenge and throttling design that preserves legitimate recovery availability.
+- Status: **IMPLEMENTED IN DRAFT PR #16; NOT DEPLOYED**
+- Evidence: The five-outstanding-challenge rejection is removed. Issuance reuses an active challenge; concurrent requests use the same ID within the recovery generation and time window.
+- Preserved boundaries: payer-wallet proof, expiry, one-time use and retained-token recovery. Successful rotation consumes outstanding challenges.
+- Implementation location: `workers/gateway/src/commerce.js`.
+- Verification: Source review; no new test execution at the owner's direction.
+- Remaining boundary: Merge and deployment have not occurred; production recovery is not claimed verified.
 
 ### FIX-16 — Establish safe reconciliation for unknown settlement outcomes
 
 - Priority: **P1**
-- Status: **READY**
-- Evidence: Uncertain settlement is intentionally not retried. Stored confirmed R2 receipt repair already exists; no operator workflow revalidated here.
-- Dependencies: Verified external settlement evidence; explicit operational authority for entitlement reconciliation.
-- Acceptance criteria: operators can identify the purchase, obtain trustworthy settlement evidence, and resolve entitlement state without a duplicate transfer. Automated reconciliation must be supported by verified external evidence.
-- Implementation location: workers/gateway/src/commerce.js; settlement/reconciliation operations documentation
-- Verification: Not selected or independently revalidated in this batch. Audit evidence is a starting point only.
-- Release state: Consolidation did not complete this item's remaining acceptance work. Historical audit evidence and any merged baseline implementation remain inputs for the next selected work.
-- Remaining blocker: Resolve/revalidate the dependencies above when selected; no other blocker presumed.
-
-Original bounded scope:
-
-Document and, where appropriate, implement the operator workflow for settlements whose external outcome is unknown. Preserve the existing rule against blindly settling again.
+- Status: **IMPLEMENTED IN DRAFT PR #16; NOT DEPLOYED**
+- Evidence: Authenticated HTTP and Cap'n Web actions share the existing D1/R2 recovery path. When neither store has a receipt, a read-only Base client checks the finalized original transaction against the original authorization key, payer, recipient, native USDC and amount before repairing entitlement records.
+- Preserved boundaries: no transfer submission, no repeat settlement, no unproven delivery, no changed purchase scope. Stored receipt repair remains available.
+- Implementation location: `workers/gateway/src/reconciliation.js`, `commerce.js`, `index.js`, `product-service.js`; gateway README recovery instructions.
+- Verification: Source review and Worker compilation; no new test execution or funded payment at the owner's direction.
+- Remaining boundaries: Buyer must supply the original transaction hash if absent from storage. Trusted Base RPC availability and finality are required. An unresolved outcome remains pending. Merge and deployment have not occurred; production recovery is not claimed verified.
 
 ### FIX-17 — Complete the machine-readable API contract
 

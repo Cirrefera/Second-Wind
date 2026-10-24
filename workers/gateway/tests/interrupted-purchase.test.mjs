@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createExecutionQuote, purchase, recoverGrant } from "../src/commerce.js";
+import { purchase } from "./helpers/purchase.mjs";
+import { createExecutionQuote, recoverGrant } from "../src/commerce.js";
 import { createFixtureDb } from "./helpers/d1.mjs";
 import { createRail, deferred, fixtureEnv, makePayment, NETWORK, PAYER } from "./helpers/fixtures.mjs";
 
@@ -10,7 +11,7 @@ async function fixture(t, overrides = {}) {
   const env = fixtureEnv(db);
   const requestData = {code:"return 42",language:"javascript",invocationId:"interrupted-fixture"};
   const quote = await createExecutionQuote(env,requestData);
-  const args = {quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData,
+  const args = {quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData,
     recoveryToken:"p".repeat(43)};
   const {rail,calls} = createRail(overrides);
   let executions = 0;
@@ -63,7 +64,7 @@ test("a prepared-to-settling database fault resumes the saved result with one ex
   assert.equal(f.row().status,"settled");
   assert.equal(f.payment().status,"settled");
   assert.equal(f.executions(),1);
-  assert.equal(f.calls.verify.length,1);
+  assert.equal(f.calls.verify.length,2,"prepared replay is reverified by the official middleware");
   assert.equal(f.calls.settle.length,1);
   await purchase(f.env,f.args,f.dependencies);
   assert.equal(f.calls.settle.length,1);

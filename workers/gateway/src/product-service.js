@@ -5,8 +5,8 @@ import {createJourneyContext,enqueueObservation} from './telemetry.js';
 import { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
 import { executeCode, reportProgress } from "./execution.js";
 import {
-  createQuote, createRecoveryChallenge, deliverGrant, executeGrantedInvocation,
-  recoverGrant, recoverWithWallet,
+  createRecoveryChallenge, deliverGrant, executeGrantedInvocation,
+  recoverGrant, recoverWithWallet, reconcilePurchase,
 } from "./commerce.js";
 
 export { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
@@ -14,10 +14,6 @@ export { executeCode, validateExecutionInput } from "./execution.js";
 
 function operationJourney(journey) {
   return createJourneyContext({journey_id:journey?.journey_id,transport:journey?.transport});
-}
-
-export function quoteProduct(env, sku, config, options) {
-  return createQuote(env, sku, config, options);
 }
 
 export function deliverProduct(env, grant, options) {
@@ -163,15 +159,16 @@ export class ProductService extends RpcTarget {
   }
   checkConfiguration(sku, config) { return this.configure(sku, config); }
 
-  quote(sku, config) { return createQuote(this.#env, sku, config,{journey:operationJourney(this.#journey)}); }
-  quoteProduct(sku, config) { return this.quote(sku, config); }
-
   recoveryChallenge(paymentId) {
     return createRecoveryChallenge(this.#env, paymentId,{journey:operationJourney(this.#journey)});
   }
 
   recoverWithWallet(paymentId, proof) {
     return recoverWithWallet(this.#env, paymentId, proof,{journey:operationJourney(this.#journey)});
+  }
+
+  reconcilePurchase(paymentId, recoveryToken, transaction) {
+    return reconcilePurchase(this.#env,paymentId,recoveryToken,{transaction});
   }
 
   async getGrant(paymentId, recoveryToken) {
@@ -256,15 +253,7 @@ export class ProductCapability extends RpcTarget {
     return new TrialCapability(this.#env,result.trial_id,result.trial_token,this.#journey);
   }
   configuration() { return this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}; }
-  async quote() {
-    await this.#unchanged();
-    if (!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'), {status:400});
-    const quote = await createQuote(this.#env, this.#product.sku, this.#config,{journey:operationJourney(this.#journey)});
-    if (quote.version !== this.#product.version || quote.content_hash !== this.#product.content_hash) {
-      throw Object.assign(new Error('product_changed'), {status:409});
-    }
-    return quote;
-  }
+
 }
 
 export class TrialCapability extends RpcTarget {

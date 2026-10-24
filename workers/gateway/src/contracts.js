@@ -72,14 +72,6 @@ export function paymentConfig(env) {
   return { payTo:recipient.payTo, network: NETWORK, asset: USDC, facilitator: FACILITATOR };
 }
 
-export function requirementsFor(quote) {
-  return {
-    scheme: "exact", network: quote.network, asset: quote.asset,
-    payTo: quote.pay_to, amount: quote.amount_usdc_micros,
-    maxTimeoutSeconds: 300, extra: { name: "USD Coin", version: "2" },
-  };
-}
-
 export function sameAddress(left, right) {
   return typeof left === "string" && typeof right === "string"
     && left.toLowerCase() === right.toLowerCase();
@@ -107,4 +99,10 @@ export function paymentReadiness(env) {
       ? "unsupported_network" : recipient.status,
     payment_configuration_error:recipient.error || (networkSupported ? null : "unsupported_payment_network"),
   };
+}
+
+/** Stable correlation key shared by SDK-verified claims and read-only recovery. */
+export async function authorizationKey(network, asset, payer, nonce) {
+  return `x402:${await sha256(canonicalJson({network,asset:asset.toLowerCase(),
+    payer:payer.toLowerCase(),nonce:nonce.toLowerCase()}))}`;
 }

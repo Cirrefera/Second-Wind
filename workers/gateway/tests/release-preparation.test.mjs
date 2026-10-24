@@ -4,7 +4,8 @@ import {prepareRelease,publishRelease,releasePayloadKey} from '../src/release-pr
 import {canonicalJson,sha256} from '../src/contracts.js';
 import {createFixtureDb,insertItem,rowCount} from './helpers/d1.mjs';
 import {fixtureEnv,createRail,makePayment} from './helpers/fixtures.mjs';
-import {createQuote,purchase,recoverGrant,deliverGrant} from '../src/commerce.js';
+import {purchase} from "./helpers/purchase.mjs";
+import {createQuote,recoverGrant,deliverGrant} from '../src/commerce.js';
 import {readFile} from 'node:fs/promises';
 
 // Synthetic trusted-operator reviews exist only inside these isolated fixtures.
@@ -110,7 +111,7 @@ test('new versions retain prior payloads/contracts and staging leaves the curren
   const db=createFixtureDb(),env=fixtureEnv(db),first=await candidate();
   await publishRelease(env,first,{mode:'activate',reviews:await syntheticReviews(first)});
   const quote=await createQuote(env,first.item.sku,{}),{rail,calls}=createRail();
-  const bought=await purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}},{rail});
+  const bought=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}},{rail});
   const previous=db.sqlite.prepare('SELECT * FROM payload_objects').get();
   const second=await candidate({version:2,guidance:'Version two exact bytes\n'}),reviews=await syntheticReviews(second);
   await publishRelease(env,second,{mode:'stage',reviews});

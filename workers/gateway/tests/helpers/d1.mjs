@@ -21,19 +21,20 @@ export class SqliteD1 {
       const values = indexes.length ? indexes.map((index) => args[index]) : args;
       const execute = (method) => {
         this.statements.push({ sql, method });
+        const before = Number(this.sqlite.prepare("SELECT total_changes() AS n").get().n);
         if (method === "run") {
           const result = statement.run(...values);
           return {
             success: true,
             results: [],
             meta: {
-              changes: Number(result.changes),
+              // D1 counts trigger writes too, unlike sqlite3_changes().
+              changes: Number(this.sqlite.prepare("SELECT total_changes() AS n").get().n) - before,
               last_row_id: Number(result.lastInsertRowid),
               rows_written: Number(result.changes),
             },
           };
         }
-        const before = Number(this.sqlite.prepare("SELECT total_changes() AS n").get().n);
         const results = statement.all(...values);
         const changes = Number(this.sqlite.prepare("SELECT total_changes() AS n").get().n) - before;
         return {

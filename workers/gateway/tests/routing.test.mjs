@@ -555,7 +555,7 @@ test('semantic pending choice asks exact language over HTTP and Cap\'n Web befor
  const client=newMessagePortRpcSession(channel.port2);
  t.after(()=>{client[Symbol.dispose]();server[Symbol.dispose]();channel.port1.close();channel.port2.close();});
  const pending=await client.searchIntent(intent);
- await assert.rejects(async()=>await pending.candidates[0].product.quote(),/incomplete_configuration/);
+ assert.equal((await pending.candidates[0].product.configuration()).ok,false);
  pending.candidates[0].product[Symbol.dispose]();
  let asked=false;
  class Buyer extends RpcTarget {clarify(questions){asked=true;assert.deepEqual(questions,http.clarifications);return {target_language:'javascript'};}}

@@ -49,7 +49,7 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
   await statement.run();
   if(options.journey) await enqueueObservation(env,'journey.linked',
     {journey:options.journey,payload:{trial_id:id}});
-  // Only explicit trial operations cross into the isolated Worker. No quote,
+  // Only explicit trial operations cross into the isolated Worker. No acceptance,
   // payment, grant, storage, gateway secret or network capability is provided.
   const providers={
     components:async()=>menu,

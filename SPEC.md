@@ -12,14 +12,22 @@ is proven, (2) the step-by-step action plan with the proof required to advance e
 
 ## 0. Architecture
 
-**The gatekeeper is the official x402 SDK.** Serving runs as a Hono app on Cloudflare Workers
-(`src/worker.js`, bundled to `public/_worker.js`) using `@x402/hono` + `@x402/core` +
-`@x402/evm` — the pattern of the official CloudFront/Lambda@Edge example, on the edge runtime we
-already operate. The middleware verifies payment before the handler and settles ONLY after the
-handler succeeds: a buyer is never charged for a failed response. Payment routes are generated
-from the live D1 rows (60-second isolate cache); the CDP facilitator authenticates via
-`createAuthHeaders` (CDP JWT). Hand-rolled payment code no longer serves payments — it survives
-only inside the discovery-document generators pending their port.
+**The gatekeeper is the official x402 SDK.** Pages (`src/worker.js`) forwards application
+requests to the Hono Worker (`workers/gateway/src/index.js`). Official `@x402/hono`
+middleware owns challenges, verification, settlement and protocol headers. Application
+hooks bind the selected purchase to durable claims, receipts and free recovery.
+A successful settlement followed by failed delivery remains a paid purchase to recover;
+it must never be represented as uncharged or purchased again.
+
+**Commercial boundary.** Catalog amounts are maximum payments. Agents use Code Mode
+and Cap'n Web to inspect, configure and test supported releases, then choose the
+components they want. The selected amount is bounded by the maximum. Whole-product
+purchases select the complete declared deliverable. The official x402 challenge carries
+the final authorized amount. There is no custom quote stage or replacement payment
+engine. Discovery does not publish a maximum as an exact payment requirement.
+The current execution product sells one invocation; general consumption metering is
+not implemented and must not be advertised. Historical ledger identifiers remain
+readable so existing purchases and signatures retain their recovery path.
 
 **Product model: original assembled payloads built from publicly sourced material.** Second Wind
 selects, combines, structures, and adapts public AWS information, code, and operational patterns
@@ -47,11 +55,10 @@ surfaces carry stubs only**; the self-test fails structurally if guidance or gra
 leaks onto a free surface. **AWS (Bedrock)** executes behind the paywall when an item requires
 computation; Cloudflare verifies, proxies, settles after success.
 
-**Network is config, not a constant.** The first proof runs **Base Sepolia (`eip155:84532`)**
-with valueless test USDC via the public `x402.org` facilitator (no auth) — real on-chain
-verify → settle exercised at zero cost, on the same network the AP2/a2a-x402 reference samples
-use. Promotion to Base mainnet is an env swap (`X402_NETWORK`, `X402_FACILITATOR_URL` → CDP with
-JWT auth, mainnet `payTo`). The proof `payTo` must be a THROWAWAY test wallet (Mike supplies).
+**Serving network.** The gateway currently uses USDC on Base (`eip155:8453`) through
+the CDP facilitator, with independently asserted merchant configuration. Local tests
+use a controlled facilitator and do not prove a funded transaction. Network changes
+are separate from this repair.
 
 **Execution layer (Bedrock) — implemented.** Curated items with `invoke_kind: "bedrock"` become
 paid `POST` routes: the middleware verifies, the worker invokes the agent via SigV4-signed fetch
@@ -59,7 +66,7 @@ paid `POST` routes: the middleware verifies, the worker invokes the agent via Si
 invocation succeeds — a failed agent run never charges the buyer. The bazaar block advertises
 `bodyType: json` with the item's input schema.
 
-**A2A/AP2 posture.** HTTP is the primary surface, built a2a-x402-shaped: the x402 payment objects
+**A2A/AP2 posture.** Cap'n Web is the agent interaction surface; payments use HTTP/x402: the x402 payment objects
 (PaymentRequirements / PaymentPayload / receipts) stay cleanly separable so the same core can be
 carried over A2A tasks or nested in an AP2 CartMandate later. The AgentCard
 `capabilities.extensions` declaration of the a2a-x402 URI is DEFERRED until an actual A2A task
@@ -150,8 +157,8 @@ This table is updated in place as steps complete.
    4–5 plain words ("deploy refuses to update export", "my lambda loops forever"); the `slug`
    carries the technical taxonomy underneath. The self-test enforces the shape: 3–5 words, no
    hyphens, never a slug echo.
-5. **Price ceiling: $1.00 USDC per tool.** A tool is a small task — one specific thing an agent
-   fails at, with the short content that unblocks it.
+5. **The published release defines the maximum payment.** The selected purchase amount
+   must stay within it; the maximum is never an automatic charge.
 6. **Plain names only.** No metaphor vocabulary on any agent-facing surface. The selftest greps
    for banned words and fails on a hit.
 7. **The test suite must encode the spec, not the implementation.** Any conformance fix lands

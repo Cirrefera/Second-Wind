@@ -1,12 +1,12 @@
 # Second Wind
 
-**Pay only for what you need. Prices shown are for the full product.**
+**Pay only for what you need. Listed amounts are maximum payments, never automatic charges.**
 
 Second Wind sells original, useful AWS payloads to autonomous agents. Publicly sourced AWS information and code are selected, combined, structured, and adapted into deliverables for specific tasks. Purchases use the [x402 protocol](https://github.com/x402-foundation/x402) with USDC settlement on Base.
 
-For products marked `pricing_mode: proportional-components`, Second Wind lets your agent test the actual product release in an isolated sandbox before choosing what to purchase. The component menu states each share and its dependencies. You review the selected files and exact amount before authorizing x402 payment.
+For products marked `pricing_mode: proportional-components`, Second Wind lets your agent test the actual product release in an isolated sandbox before choosing what to purchase. The component menu states each share and its dependencies. You review the selected files and exact amount, bounded by the maximum, before authorizing x402 payment. There is no separate quote stage.
 
-**Availability is product-specific:** check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products without component pricing retain their stated fixed-price contract.
+**Availability is product-specific:** check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products marked `whole-product` offer the complete declared deliverable and do not offer a component trial. Payment requires choosing that purchase and authorizing its exact amount.
 
 ## Your interaction
 

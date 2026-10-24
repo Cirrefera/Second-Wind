@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createExecutionQuote, purchase } from "../src/commerce.js";
+import { purchase } from "./helpers/purchase.mjs";
+import { createExecutionQuote, } from "../src/commerce.js";
 import { createJourneyContext, streamEvent } from "../src/telemetry.js";
 import { createFixtureDb } from "./helpers/d1.mjs";
 import { createRail, fixtureEnv, makePayment } from "./helpers/fixtures.mjs";
@@ -12,7 +13,7 @@ async function fixture(t) {
   const journey = createJourneyContext({transport:"http"});
   const requestData = {code:"return 42",language:"javascript",invocationId:"journey-fixture"};
   const quote = await createExecutionQuote(env,requestData,{journey});
-  const args = {quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData,
+  const args = {quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData,
     recoveryToken:"j".repeat(43),journey};
   const {rail,calls} = createRail();
   let executions = 0;
@@ -45,7 +46,7 @@ test("initial settlement observes its first delivery before any recovery or repl
   assert.equal(f.executions(),1);
   const events = f.deliveries();
   assert.equal(events.length,1);
-  assertDelivery(events[0],result.body.paymentId,f.quote.quoteId,f.args.journey);
+  assertDelivery(events[0],result.body.paymentId,f.quote.acceptanceId,f.args.journey);
 });
 
 test("prepared recovery observes the resumed request's delivery and settles only once", async t => {
@@ -65,12 +66,12 @@ test("prepared recovery observes the resumed request's delivery and settles only
   assert.equal(resumed.body.paymentId,prepared.payment_id);
   assert.equal(f.row().prepared_json,prepared.prepared_json);
   assert.equal(f.row().status,"settled");
-  assert.equal(f.calls.verify.length,1);
+  assert.equal(f.calls.verify.length,2,"prepared replay uses official verification again");
   assert.equal(f.calls.settle.length,1);
   assert.equal(f.executions(),1);
   const events = f.deliveries();
   assert.equal(events.length,1);
-  assertDelivery(events[0],prepared.payment_id,f.quote.quoteId,journey);
+  assertDelivery(events[0],prepared.payment_id,f.quote.acceptanceId,journey);
 
   const replayJourney = createJourneyContext({journey_id:journey.journey_id,transport:"http"});
   const replay = await purchase(f.env,{...f.args,journey:replayJourney},f.dependencies);
@@ -79,5 +80,5 @@ test("prepared recovery observes the resumed request's delivery and settles only
   assert.equal(f.executions(),1);
   const repeated = f.deliveries();
   assert.equal(repeated.length,2);
-  assertDelivery(repeated[1],prepared.payment_id,f.quote.quoteId,replayJourney);
+  assertDelivery(repeated[1],prepared.payment_id,f.quote.acceptanceId,replayJourney);
 });

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Read-only production acceptance. Never calls a paid URL or creates a quote. */
+/** Read-only production acceptance. Never calls a paid URL or prepares a purchase. */
 import { pathToFileURL } from "node:url";
 import { setTimeout as sleep } from "node:timers/promises";
 import { NETWORK, USDC, isBurnAddress, sameAddress } from "../workers/gateway/src/contracts.js";
@@ -115,6 +115,10 @@ export function validateRelease(config, responses) {
   requireCheck(discovery.body.x402Version === 2 && discovery.body.payment_configured === true,
     "discovery_payment_unavailable");
   requireCheck(Array.isArray(items) && items.length === tools.length, "discovery_catalog_mismatch");
+  const rail = discovery.body.payment;
+  requireCheck(rail?.rail === "x402" && rail.network === NETWORK
+    && sameAddress(rail.asset, USDC), "discovery_rail_mismatch");
+  requireCheck(sameAddress(rail.payTo, config.expectedRecipient), "discovery_recipient_mismatch");
   const seen = new Set();
   for (const item of items) {
     const tool = tools.find(candidate => candidate.sku === item.sku && candidate.version === item.version);
@@ -125,15 +129,26 @@ export function validateRelease(config, responses) {
     let resource;
     try { resource = new URL(item.resource); } catch { throw new AcceptanceError("discovery_resource_mismatch"); }
     requireCheck(resource.origin === config.origin && resource.pathname.startsWith("/api/x402/"), "discovery_resource_mismatch");
-    requireCheck(Array.isArray(item.accepts) && item.accepts.length === 1, "discovery_requirements_unavailable");
-    const requirement = item.accepts[0];
-    requireCheck(requirement?.scheme === "exact" && requirement.network === NETWORK
-      && sameAddress(requirement.asset, USDC), "discovery_rail_mismatch");
-    requireCheck(sameAddress(requirement.payTo, config.expectedRecipient), "discovery_recipient_mismatch");
-    requireCheck(typeof requirement.amount === "string" && /^[1-9]\d*$/.test(requirement.amount)
-      && requirement.amount === tool.price_usdc_micros, "discovery_amount_mismatch");
-    requireCheck(Number.isSafeInteger(requirement.maxTimeoutSeconds) && requirement.maxTimeoutSeconds > 0
-      && requirement.extra?.name === "USD Coin" && requirement.extra?.version === "2", "discovery_requirements_invalid");
+    requireCheck(Array.isArray(item.accepts) && item.accepts.length === 0, "discovery_premature_payment_requirements");
+    requireCheck(item.payment_requirements_url === item.resource, "discovery_requirements_url_mismatch");
+    requireCheck(item.pricing_mode === tool.pricing_mode && ["whole-product", "proportional-components"].includes(item.pricing_mode)
+      && item.pricing_status === tool.pricing_status, "discovery_pricing_mismatch");
+    if (item.pricing_mode === "proportional-components") {
+      requireCheck(item.components_url === `/api/products/${encodeURIComponent(item.sku)}/components`
+        && tool.components_url === item.components_url && item.trial_url === "/api/trials"
+        && tool.trial_url === item.trial_url, "discovery_trial_mismatch");
+    }
+    if (item.pricing_status === "not_configured") {
+      requireCheck(item.pricing_mode === "proportional-components" && item.price_role === "historical-unconfirmed"
+        && tool.price_role === item.price_role && item.max_amount_atomic === undefined
+        && tool.max_amount_atomic === undefined, "discovery_unconfigured_price");
+    } else {
+      requireCheck(item.pricing_status === "configured" && item.price_role === "maximum"
+        && tool.price_role === "maximum", "discovery_price_role_mismatch");
+      requireCheck(typeof item.max_amount_atomic === "string" && /^[1-9]\d*$/.test(item.max_amount_atomic)
+        && item.max_amount_atomic === tool.max_amount_atomic
+        && item.max_amount_atomic === tool.price_usdc_micros, "discovery_amount_mismatch");
+    }
   }
   return {
     accepted: true, expected_commit: config.expectedCommit, gateway_version: version.id,

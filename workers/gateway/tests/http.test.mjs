@@ -14,7 +14,7 @@ function fixture(t, dependencies = {}) {
   // Readiness checks shape only. This is never passed to a real facilitator.
   env.CDP_FACILITATOR_KEY = JSON.stringify({ id: "offline-fixture", privateKey: "offline-fixture" });
   const { rail, calls } = createRail();
-  const app = createApp({ rail, ...dependencies });
+  const app = createApp({ facilitator:rail, ...dependencies });
   const call = (path, init = {}) => app.fetch(new Request(`https://secondwindai.com${path}`, init), env, {
     waitUntil() {},
   });
@@ -35,7 +35,7 @@ test('HTTP and Capn Web preserve opaque journey correlation across discovery, pa
  const unsigned=await call(`/api/x402/${item.sku}`,{headers:{'X-Journey-Id':journeyId}});
  const quote=await unsigned.json();
  const payment=makePayment({...quote,amount_usdc_micros:'250000'});
- const paidResponse=await call(`/api/x402/${item.sku}?quote_id=${quote.quoteId}`,{headers:{...signedHeaders(payment),'X-Journey-Id':journeyId}});
+ const paidResponse=await call(`/api/x402/${item.sku}?quote_id=${quote.acceptanceId}`,{headers:{...signedHeaders(payment),'X-Journey-Id':journeyId}});
  assert.equal(paidResponse.headers.get('X-Journey-Id'),journeyId);
  const paid=await paidResponse.json();assert.ok(paid.paymentId);
  const realFetch=globalThis.fetch;
@@ -83,7 +83,7 @@ test("HTTP purchase, HTTP replay and Cap'n Web recovery share one paid purchase"
   const required = decodePaymentRequiredHeader(unsigned.headers.get("PAYMENT-REQUIRED"));
   const challenge = await unsigned.json();
   assert.equal(required.accepts[0].amount, "250000");
-  assert.ok(challenge.quoteId);
+  assert.ok(challenge.acceptanceId);
   assert.match(challenge.content_hash, /^[0-9a-f]{64}$/);
   assert.doesNotMatch(JSON.stringify(challenge), /Paid version one/);
   const payment = makePayment({ ...challenge, price_usdc_micros: required.accepts[0].amount });
@@ -102,7 +102,7 @@ test("HTTP purchase, HTTP replay and Cap'n Web recovery share one paid purchase"
   const replay = await call("/rpc", {
     method: "POST",
     headers: { ...signedHeaders(payment, paid.recoveryToken), "Content-Type": "application/json" },
-    body: JSON.stringify({ quoteId: challenge.quoteId, config: {} }),
+    body: JSON.stringify({ quoteId: challenge.acceptanceId, config: {} }),
   });
   assert.equal(replay.status, 200, await replay.clone().text());
   const replayed = await replay.json();
@@ -135,7 +135,7 @@ test("HEAD requests never submit a signed payment for verification or settlement
   const { call, item, calls } = fixture(t);
   const challenge = await (await call(`/api/x402/${item.sku}`)).json();
   const payment = makePayment(challenge);
-  const response = await call(`/api/x402/${item.sku}?quote_id=${challenge.quoteId}`, {
+  const response = await call(`/api/x402/${item.sku}?quote_id=${challenge.acceptanceId}`, {
     method: "HEAD", headers: signedHeaders(payment),
   });
   assert.equal(response.status, 402);
@@ -150,7 +150,7 @@ test("a delivery failure after settlement returns the receipt and credential nee
   const payment = makePayment(challenge);
   db.sqlite.exec(`CREATE TRIGGER fixture_delivery_audit_failure BEFORE INSERT ON deliveries
     BEGIN SELECT RAISE(ABORT, 'fixture delivery audit write failure'); END`);
-  const failed = await call(`/api/x402/${item.sku}?quote_id=${challenge.quoteId}`, {
+  const failed = await call(`/api/x402/${item.sku}?quote_id=${challenge.acceptanceId}`, {
     headers: signedHeaders(payment),
   });
   assert.equal(failed.status, 503);
@@ -189,12 +189,12 @@ test("RPC execution requires explicit valid input before payment and settles a s
   const challenge = await first.json();
   const payment = makePayment(challenge);
   payment.resource.url = challenge.retry_url;
-  const response = await post({ ...input, quoteId: challenge.quoteId }, signedHeaders(payment));
+  const response = await post({ ...input, quoteId: challenge.acceptanceId }, signedHeaders(payment));
   assert.equal(response.status, 200, await response.clone().text());
   const result = await response.json();
   assert.equal(result.result, 42);
   assert.equal(result.receipt.amount_usdc_micros, "2000");
-  const replay = await post({ ...input, quoteId: challenge.quoteId }, signedHeaders(payment, result.recoveryToken));
+  const replay = await post({ ...input, quoteId: challenge.acceptanceId }, signedHeaders(payment, result.recoveryToken));
   assert.equal(replay.status, 200);
   assert.equal((await replay.json()).redelivery, true);
   assert.equal(executions, 1);
@@ -231,7 +231,7 @@ test("the artifact endpoint delivers exact bytes and authenticated artifact rede
   await env.PAYLOADS.put(key, bytes);
   const challenge = await (await call(`/api/x402/${item.sku}/artifact`)).json();
   const payment = makePayment(challenge);
-  const response = await call(`/api/x402/${item.sku}/artifact?quote_id=${challenge.quoteId}`, {
+  const response = await call(`/api/x402/${item.sku}/artifact?quote_id=${challenge.acceptanceId}`, {
     headers: signedHeaders(payment),
   });
   assert.equal(response.status, 200, await response.clone().text());
@@ -259,7 +259,7 @@ test("a completed payment replay without its generated recovery token identifies
   const { call, item, calls } = fixture(t);
   const challenge = await (await call(`/api/x402/${item.sku}`)).json();
   const payment = makePayment(challenge);
-  const path = `/api/x402/${item.sku}?quote_id=${challenge.quoteId}`;
+  const path = `/api/x402/${item.sku}?quote_id=${challenge.acceptanceId}`;
   const first = await call(path, { headers: signedHeaders(payment) });
   assert.equal(first.status, 200);
   const paid = await first.json();
@@ -274,4 +274,41 @@ test("a completed payment replay without its generated recovery token identifies
   assert.doesNotMatch(JSON.stringify(error), /Paid version one/);
   assert.equal(calls.verify.length, 1);
   assert.equal(calls.settle.length, 1);
+});
+
+test('quote APIs are removed; whole-product requests use the official challenge directly',async t=>{
+ const {call,item,calls,env,db}=fixture(t);
+ for(const path of ['/api/quotes','/api/purchases/accept']) {
+  assert.equal((await call(path,{method:'POST',body:JSON.stringify({sku:item.sku,config:{}})})).status,405);
+ }
+ const {ProductService}=await import('../src/product-service.js');const service=new ProductService(env);
+ const selected=await service.select(item.sku);
+ assert.equal(service.quote,undefined);assert.equal(service.quoteProduct,undefined);assert.equal(selected.quote,undefined);
+ assert.equal(service.accept,undefined,'no renamed quoting stage');
+ assert.equal(db.sqlite.prepare('SELECT count(*) n FROM commerce_quotes').get().n,0);
+ const response=await call('/rpc',{method:'POST',body:JSON.stringify({sku:item.sku,config:{}})});
+ assert.equal(response.status,402);const body=await response.json();
+ assert.equal(body.quoteId,undefined);assert.ok(body.acceptanceId);
+ const required=decodePaymentRequiredHeader(response.headers.get('PAYMENT-REQUIRED'));
+ assert.equal(required.accepts[0].amount,'250000');
+ assert.equal(calls.verify.length,0);assert.equal(calls.settle.length,0);
+});
+
+test('historical signed purchase URLs remain recoverable and conflicting identifiers are rejected',async t=>{
+ const {call,item,calls}=fixture(t);
+ const initial=await call(`/api/x402/${item.sku}`),accepted=await initial.json();
+ const legacy=`https://secondwindai.com/api/x402/${item.sku}?quote_id=${accepted.acceptanceId}`;
+ const proof=makePayment(accepted);proof.resource.url=legacy;
+ const wrong='q_00000000-0000-4000-8000-000000000000';
+ for(const path of [`${legacy}&acceptance_id=${wrong}`,`${legacy}&quote_id=${wrong}`]) {
+  const response=await call(path.replace('https://secondwindai.com',''),{headers:signedHeaders(proof)});
+  assert.equal(response.status,409);assert.equal((await response.json()).error,'acceptance_mismatch');
+ }
+ assert.equal(calls.verify.length,0);
+ const path=new URL(legacy).pathname+new URL(legacy).search;
+ const paid=await call(path,{headers:signedHeaders(proof)});assert.equal(paid.status,200);
+ const body=await paid.json();
+ const replay=await call(path,{headers:signedHeaders(proof,body.recoveryToken)});
+ assert.equal(replay.status,200);assert.equal((await replay.json()).paymentId,body.paymentId);
+ assert.equal(calls.settle.length,1);
 });

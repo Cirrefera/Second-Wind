@@ -4,7 +4,8 @@ import {
   RpcTarget, newHttpBatchRpcSession, newHttpBatchRpcResponse, newMessagePortRpcSession,
 } from "capnweb";
 import { ProductService } from "../src/product-service.js";
-import { createQuote, purchase, deliverGrant, recoverGrant } from "../src/commerce.js";
+import { purchase } from "./helpers/purchase.mjs";
+import { createQuote, deliverGrant, recoverGrant } from "../src/commerce.js";
 import { describeProduct, searchCatalog } from "../src/catalog.js";
 import { createFixtureDb, insertItem } from "./helpers/d1.mjs";
 import { fixtureEnv, makePayment, createRail } from "./helpers/fixtures.mjs";
@@ -31,7 +32,7 @@ test("getGrant and recoverSession both require the secret purchase credential", 
   const service = new ProductService(env);
   const quote = await createQuote(env, item.sku, {});
   const { rail, calls } = createRail();
-  const paid = await purchase(env, { quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: {} }, { rail });
+  const paid = await purchase(env, { quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: {} }, { rail });
   const { paymentId, recoveryToken } = paid.body;
   for (const method of ["getGrant", "recoverSession"]) {
     await assert.rejects(service[method](paymentId));
@@ -48,7 +49,7 @@ test("dependent grant→info/delivery calls pipeline in one actual HTTP batch", 
   const { env, item } = fixture(t);
   const quote = await createQuote(env, item.sku, {});
   const { rail, calls } = createRail();
-  const paid = await purchase(env, { quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: {} }, { rail });
+  const paid = await purchase(env, { quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: {} }, { rail });
   const { paymentId, recoveryToken } = paid.body;
   const expected = await deliverGrant(env, await recoverGrant(env, paymentId, recoveryToken));
   const realFetch = globalThis.fetch;
@@ -81,7 +82,7 @@ test("bidirectional progress callbacks cross a real RPC session, and reconnect r
   const { env, item } = fixture(t);
   const quote = await createQuote(env, item.sku, {});
   const { rail, calls } = createRail();
-  const paid = await purchase(env, { quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: {} }, { rail });
+  const paid = await purchase(env, { quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: {} }, { rail });
   const { paymentId, recoveryToken } = paid.body;
   const progress = [];
   class Progress extends RpcTarget {
@@ -123,18 +124,18 @@ test("bidirectional progress callbacks cross a real RPC session, and reconnect r
   recoveredGrant[Symbol.dispose]();
 });
 
-test('free product selection, configuration and quote pipeline in one HTTP round trip', async t => {
+test('free product selection, configuration pipeline in one HTTP round trip', async t => {
  const {env,item}=fixture(t);
  const realFetch=globalThis.fetch; let trips=0;
  globalThis.fetch=async(input,init)=>{trips++;return newHttpBatchRpcResponse(new Request(input,init),new ProductService(env));};
  try {
   const client=newHttpBatchRpcSession('https://secondwindai.com/capnp');
-  const quote=await client.select(item.sku).configure({}).quote();
+  const quote=await client.select(item.sku).configure({}).configuration();
   assert.equal(quote.sku,item.sku); assert.equal(trips,1);
  } finally {globalThis.fetch=realFetch;}
 });
 
-test('buyer answers the exact language question over bidirectional RPC before a quote',async t=>{
+test('buyer answers the exact language question over bidirectional RPC before purchase',async t=>{
  const {env,item,db}=fixture(t);
  db.sqlite.prepare('UPDATE items SET input_schema=? WHERE sku=?').run(JSON.stringify({type:'object',required:['language'],properties:{language:{enum:['python']}},additionalProperties:false}),item.sku);
  const channel=new MessageChannel();
@@ -145,15 +146,15 @@ test('buyer answers the exact language question over bidirectional RPC before a 
  class Buyer extends RpcTarget {clarify(q){questions=q;return {language:'python'};}}
  const configured=await client.select(item.sku).configure({},new Buyer());
  assert.equal(questions[0].question,'What programming language do you want the product delivered in?');
- assert.equal((await configured.quote()).config.language,'python');
+ assert.equal((await configured.configuration()).config.language,'python');
  configured[Symbol.dispose]();
 });
 
 test('selected capabilities reject catalog changes and incomplete configuration',async t=>{
  const {env,item,db}=fixture(t); const service=new ProductService(env);
  const product=await service.select(item.sku);
- await assert.rejects(product.quote(),/incomplete_configuration/);
+ assert.equal(product.configuration().ok,false);
  const configured=await product.configure({});
  db.sqlite.prepare('UPDATE items SET guidance=? WHERE sku=?').run('changed deliverable',item.sku);
- await assert.rejects(configured.quote(),/product_changed/);
+ await assert.rejects(configured.compatibility(),/product_changed/);
 });

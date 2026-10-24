@@ -1,8 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { privateKeyToAccount } from "viem/accounts";
+import { purchase } from "./helpers/purchase.mjs";
 import {
-  createQuote, purchase, recoverGrant, createRecoveryChallenge, recoverWithWallet,
+  createQuote, recoverGrant, createRecoveryChallenge, recoverWithWallet,
 } from "../src/commerce.js";
 import { createFixtureDb, insertItem } from "./helpers/d1.mjs";
 import { fixtureEnv, createRail, makePayment } from "./helpers/fixtures.mjs";
@@ -25,7 +26,7 @@ async function paidFixture(t) {
       return { success: true, transaction: `0x${"c".repeat(64)}`, network: "eip155:8453", payer: buyer.address };
     },
   });
-  const paid = await purchase(env, { quoteId: quote.quoteId, paymentPayload, requestData: {} }, { rail });
+  const paid = await purchase(env, { quoteId: quote.acceptanceId, paymentPayload, requestData: {} }, { rail });
   return { db, env, calls, ...paid.body };
 }
 

@@ -4,7 +4,8 @@ import {createFixtureDb,insertItem} from './helpers/d1.mjs';
 import {fixtureEnv,createRail,makePayment} from './helpers/fixtures.mjs';
 import {canonicalJson,sha256,USDC,NETWORK} from '../src/contracts.js';
 import {trialProduct,selectTrialComponents,acceptTrialSelection,recoverTrial} from '../src/trials.js';
-import {createQuote,purchase,recoverGrant,deliverGrant} from '../src/commerce.js';
+import {purchase} from "./helpers/purchase.mjs";
+import {createQuote,recoverGrant,deliverGrant} from '../src/commerce.js';
 import {ProductService} from '../src/product-service.js';
 import {resourcesDocument} from '../src/discovery.js';
 import {newHttpBatchRpcSession,newHttpBatchRpcResponse} from 'capnweb';
@@ -57,10 +58,10 @@ test('explicit acceptance charges selected fraction and durable recovery deliver
  await assert.rejects(acceptTrialSelection(env,trial.trial_id,trial.trial_token,['extra'],scope.scope_hash),/selection_acceptance_mismatch/);
  const quote=await acceptTrialSelection(env,trial.trial_id,trial.trial_token,['core'],scope.scope_hash);
  assert.equal(quote.amount_usdc_micros,'3000000');
- assert.equal((await acceptTrialSelection(env,trial.trial_id,trial.trial_token,['core'],scope.scope_hash)).quoteId,quote.quoteId);
+ assert.equal((await acceptTrialSelection(env,trial.trial_id,trial.trial_token,['core'],scope.scope_hash)).acceptanceId,quote.acceptanceId);
  await assert.rejects(createQuote(env,item.sku,{}),/component_selection_required/);
  const {rail,calls}=createRail();
- const paid=await purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}},{rail});
+ const paid=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}},{rail});
  assert.deepEqual(paid.body.files.map(f=>f.path),['core.js']);
  assert.equal(paid.body.content_hash,await sha256(canonicalJson(paid.body.files)));
  assert.equal(paid.body.receipt.scope.scope_hash,scope.scope_hash);
@@ -105,7 +106,7 @@ test('unpriced source can be trialed but cannot select or authorize a price',asy
  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM payments').get().n,0);
 });
 
-test('selected bytes must persist in R2 before a quote; missing bytes cannot settle a payment',async t=>{
+test('selected bytes must persist in R2 before acceptance; missing bytes cannot settle a payment',async t=>{
  const {env,item,db}=await fixture(t);
  const trial=await trialProduct(env,item.sku,{},input,null,{executorFactory});
  const scope=await selectTrialComponents(env,trial.trial_id,trial.trial_token,['core']);
@@ -115,18 +116,18 @@ test('selected bytes must persist in R2 before a quote; missing bytes cannot set
  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM commerce_quotes').get().n,0);
  env.PAYLOADS.put=put;
  const quote=await acceptTrialSelection(env,trial.trial_id,trial.trial_token,['core'],scope.scope_hash);
- const stored=db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.quoteId).snapshot_json;
+ const stored=db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.acceptanceId).snapshot_json;
  assert.doesNotMatch(stored,/export const|"content":/);
  const snapshot=JSON.parse(stored);assert.equal(snapshot.payload.via,'r2');
  const original=await env.PAYLOADS.get(snapshot.payload.r2_key);
  await env.PAYLOADS.delete(snapshot.payload.r2_key);
  const {rail,calls}=createRail();
- await assert.rejects(purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}},{rail}),/payload_missing/);
+ await assert.rejects(purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}},{rail}),/payload_missing/);
  assert.equal(calls.settle.length,0);
  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM payments WHERE status=\'settled\'').get().n,0);
  await env.PAYLOADS.put(snapshot.payload.r2_key,await original.arrayBuffer());
  // The failed claim cannot be used as a new charge: request a fresh quote.
- await assert.rejects(purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}},{rail}),/invalid_recovery_token|recovery_required/);
+ await assert.rejects(purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}},{rail}),/invalid_recovery_token|recovery_required/);
 });
 
 test('scope readback mismatch fails before quote creation',async t=>{
@@ -148,4 +149,49 @@ test('a selected product cannot silently inspect a later version menu',async t=>
  assert.equal(selected.info().version,1);
  await assert.rejects(selected.components(),/product_changed/);
  assert.equal((await (await service.select(item.sku)).components()).version,2);
+});
+
+test('maximum stays discovery metadata; only the trial-selected amount reaches official x402 settlement',async t=>{
+ const {env,item,db}=await fixture(t);
+ const {createApp}=await import('../src/index.js');
+ const {decodePaymentRequiredHeader,encodePaymentSignatureHeader}=await import('@x402/core/http');
+ const {rail,calls}=createRail();const app=createApp({facilitator:rail});
+ const call=(path,init={})=>app.fetch(new Request(new URL(path,'https://secondwindai.com'),init),env,{waitUntil(){}});
+ const discovery=await (await call('/discovery/resources')).json();
+ const resource=discovery.items.find(x=>x.sku===item.sku);
+ assert.equal(resource.price_role,'maximum');assert.equal(resource.max_amount_atomic,'10000000');
+ assert.deepEqual(resource.accepts,[],'a maximum is never advertised as an exact payment');
+ for(const path of ['/api/tools','/openapi.json','/llms.txt']) {
+  const text=await (await call(path)).text();
+  assert.doesNotMatch(text,/\bquote\b|\/api\/quotes|quote_id|quoteId/i,path);
+ }
+ assert.equal((await call(`/api/x402/${item.sku}`)).status,409,'component purchases require trial selection');
+ assert.equal(calls.settle.length,0);
+ const trial=await trialProduct(env,item.sku,{},input,null,{executorFactory});
+ const scope=await selectTrialComponents(env,trial.trial_id,trial.trial_token,['core']);
+ const acceptedResponse=await call(`/api/trials/${trial.trial_id}/accept`,{method:'POST',
+  headers:{'Content-Type':'application/json','X-Trial-Token':trial.trial_token},
+  body:JSON.stringify({components:['core'],scope_hash:scope.scope_hash})});
+ assert.equal(acceptedResponse.status,200);const accepted=await acceptedResponse.json();
+ assert.equal(accepted.amount_usdc_micros,'3000000');assert.equal(accepted.max_amount_atomic,'10000000');
+ assert.equal(accepted.quoteId,undefined);assert.equal(accepted.accepts,undefined);
+ assert.equal(calls.verify.length,0);assert.equal(calls.settle.length,0);
+ assert.equal(db.sqlite.prepare('SELECT count(*) n FROM payments').get().n,0);
+ const challenge=await call(accepted.purchase.url);
+ assert.equal(challenge.status,402);
+ const required=decodePaymentRequiredHeader(challenge.headers.get('PAYMENT-REQUIRED'));
+ assert.equal(required.accepts[0].amount,'3000000');
+ assert.equal(new URL(required.resource.url).searchParams.get('acceptance_id'),accepted.acceptanceId);
+ const sign=amount=>{const p=makePayment({...accepted,amount_usdc_micros:amount});p.resource=required.resource;return encodePaymentSignatureHeader(p);};
+ const oversized=await call(required.resource.url,{headers:{'PAYMENT-SIGNATURE':sign('10000000')}});
+ assert.equal(oversized.status,402);assert.equal(calls.settle.length,0);
+ const proof=sign('3000000');
+ const paid=await call(required.resource.url,{headers:{'PAYMENT-SIGNATURE':proof}});
+ assert.equal(paid.status,200,await paid.clone().text());const body=await paid.json();
+ assert.equal(body.receipt.amount_usdc_micros,'3000000');
+ assert.deepEqual(body.files.map(f=>f.path),['core.js']);
+ assert.equal(calls.settle.length,1);assert.equal(calls.settle[0].requirements.amount,'3000000');
+ const replay=await call(required.resource.url,{headers:{'PAYMENT-SIGNATURE':proof,'X-Recovery-Token':body.recoveryToken}});
+ assert.equal(replay.status,200);assert.equal((await replay.json()).paymentId,body.paymentId);
+ assert.equal(calls.settle.length,1,'recovery never charges again');
 });

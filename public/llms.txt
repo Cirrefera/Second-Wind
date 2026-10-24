@@ -1,10 +1,10 @@
 # Second Wind
 
-**Pay only for what you need. Prices shown are for the full product.**
+**Pay only for what you need. Listed amounts are maximum payments, never automatic charges.**
 
-For products marked `pricing_mode: proportional-components`, Second Wind lets your agent test the actual product release in an isolated sandbox before choosing what to purchase. The component menu states each share and its dependencies. You review the selected files and exact amount before authorizing x402 payment.
+For products marked `pricing_mode: proportional-components`, Second Wind lets your agent test the actual product release in an isolated sandbox before choosing what to purchase. The component menu states each share and its dependencies. You review the selected files and exact amount, bounded by the maximum, before authorizing x402 payment. There is no separate quote stage.
 
-**Availability:** consult the live catalog for currently supported purchase modes. Do not assume a product supports it: check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products without component pricing retain their stated fixed-price contract.
+**Availability:** consult the live catalog for currently supported purchase modes. Do not assume a product supports it: check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products marked `whole-product` offer the complete declared deliverable and do not offer a component trial. Payment requires choosing that purchase and authorizing its exact amount.
 
 ## Your interaction
 

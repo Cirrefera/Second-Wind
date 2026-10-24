@@ -31,6 +31,10 @@ async function publicProduct(row) {
     throw Object.assign(new Error("invalid_catalog_price"), { status: 503 });
   }
   const { _guidance, _payload_id, _payload_hash, _payload_mime, _payload_size, _component_pricing, _release_manifest, ...product } = row;
+  product.price_role='maximum';
+  product.max_amount_atomic=String(amount);
+  product.pricing_mode='whole-product';
+  product.pricing_status='configured';
   let release;
   if (_release_manifest) {
     try { release=JSON.parse(_release_manifest); }
@@ -43,7 +47,7 @@ async function publicProduct(row) {
     product.components_url=`/api/products/${encodeURIComponent(product.sku)}/components`;
     product.trial_url='/api/trials';
     product.pricing_status=release?.pricing ? 'configured' : 'not_configured';
-    if (!release?.pricing) product.price_role='historical-unconfirmed';
+    if (!release?.pricing) { product.price_role='historical-unconfirmed'; delete product.max_amount_atomic; }
   }
   if (_payload_id) {
     if (typeof _payload_hash !== "string" || !/^[a-f0-9]{64}$/i.test(_payload_hash)) {

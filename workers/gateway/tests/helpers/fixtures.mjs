@@ -76,16 +76,21 @@ export class MemoryR2 {
   }
 }
 
-/** Synthetic rail: explicitly no signing, wallet keys, chain, or network. */
+/** Synthetic facilitator injected below the real SDK: no keys, chain, or network. */
 export function createRail(overrides = {}) {
   const calls = { verify: [], settle: [] };
   const rail = {
-    async verifyPayment(payload, requirements) {
+    async getSupported() { return {kinds:[{x402Version:2,scheme:"exact",network:NETWORK}],extensions:[],signers:{}}; },
+    async verify(payload, requirements) {
       calls.verify.push({ payload, requirements });
       if (overrides.verifyPayment) return overrides.verifyPayment(payload, requirements);
+      const auth = payload.payload.authorization;
+      if (auth.to.toLowerCase() !== requirements.payTo.toLowerCase() || auth.value !== requirements.amount) {
+        return {isValid:false,invalidReason:"invalid_exact_evm_payload"};
+      }
       return { isValid: true, payer: PAYER };
     },
-    async settlePayment(payload, requirements) {
+    async settle(payload, requirements) {
       calls.settle.push({ payload, requirements });
       if (overrides.settlePayment) return overrides.settlePayment(payload, requirements);
       return {
@@ -109,6 +114,7 @@ export function makePayment(quote, sequence = 1) {
     payTo: RECIPIENT,
     amount,
     maxTimeoutSeconds: 300,
+    extra: {name:"USD Coin",version:"2"},
     ...(quote.accepts?.[0] || quote.paymentRequirements || {}),
   };
   const nonce = `0x${sequence.toString(16).padStart(64, "0")}`;
@@ -116,7 +122,7 @@ export function makePayment(quote, sequence = 1) {
     x402Version: 2,
     accepted,
     resource: {
-      url: `https://secondwindai.com/api/x402/${quote.sku}?quote_id=${quote.quoteId}`,
+      url: quote.purchase?.url || `https://secondwindai.com/api/x402/${quote.sku}?acceptance_id=${quote.acceptanceId}`,
       description: "Offline commerce regression test",
       mimeType: "application/json",
     },
