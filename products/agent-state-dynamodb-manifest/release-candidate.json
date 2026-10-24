@@ -170,7 +170,8 @@
           "size_bytes": 11357,
           "mime_type": "text/plain; charset=utf-8"
         }
-      ]
+      ],
+      "share_bps": 4000
     },
     {
       "id": "status-index",
@@ -193,7 +194,8 @@
           "size_bytes": 794,
           "mime_type": "text/x-python"
         }
-      ]
+      ],
+      "share_bps": 2000
     },
     {
       "id": "expiry",
@@ -216,7 +218,8 @@
           "size_bytes": 521,
           "mime_type": "text/x-python"
         }
-      ]
+      ],
+      "share_bps": 1000
     },
     {
       "id": "recovery",
@@ -239,7 +242,8 @@
           "size_bytes": 597,
           "mime_type": "text/x-python"
         }
-      ]
+      ],
+      "share_bps": 2000
     },
     {
       "id": "change-stream",
@@ -262,7 +266,8 @@
           "size_bytes": 293,
           "mime_type": "text/x-python"
         }
-      ]
+      ],
+      "share_bps": 1000
     }
   ],
   "trial_adapter": "javascript-isolate",
@@ -289,7 +294,6 @@
   },
   "status": "draft",
   "publication_blockers": [
-    "component_price_allocation_pending",
     "trusted_product_and_contract_reviews_pending",
     "trusted_license_and_provenance_review_pending",
     "publication_approval_pending"
@@ -298,5 +302,11 @@
     "service_model": "passed",
     "javascript_and_python_variants": "passed",
     "aws_deployment": "not_performed"
+  },
+  "pricing": {
+    "mode": "proportional-components",
+    "max_amount_atomic": "5000000",
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bda02913",
+    "network": "eip155:8453"
   }
 }

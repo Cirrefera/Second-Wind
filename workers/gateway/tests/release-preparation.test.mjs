@@ -157,15 +157,15 @@ test('stored-byte corruption and stale trusted reviews fail closed before D1 wri
   db.close();
 });
 
-test('actual AWS-0568 source stages with exact deliverables and missing commercial/review inputs remain blocked',async()=>{
+test('actual AWS-0568 source stages with approved pricing and missing reviews remain blocked',async()=>{
   const input=JSON.parse(await readFile(new URL('../../../products/agent-state-dynamodb-manifest/release-input.json',import.meta.url),'utf8'));
   const db=createFixtureDb(),env=fixtureEnv(db);
   const report=await prepareRelease(env,input);
   assert.equal(report.source_ready,true,JSON.stringify(report.source_blockers));
   assert.equal(input.manifest.components.length,5);
   assert.deepEqual(input.manifest.language_policy.adapters,['javascript','python']);
-  assert.equal(input.manifest.pricing,undefined);
-  assert.ok(report.publication.blockers.includes('commercial_component_allocation_missing'));
+  assert.equal(input.manifest.pricing.max_amount_atomic,'5000000');
+  assert.ok(!report.publication.blockers.includes('commercial_component_allocation_missing'));
   const reviews=[{kind:'routing',subject_hash:report.routing_hash,reviewed_by:'offline-actual-source-fixture',reference:'fixture:local-stage-only'}];
   const staged=await publishRelease(env,input,{mode:'stage',reviews});
   assert.equal(staged.payload.stored_verified,true);assert.equal(staged.input_object.stored_verified,true);
@@ -185,12 +185,12 @@ test('actual SW-PT-0006 guidance stages exact v2 bytes without rewriting its liv
   const input=JSON.parse(await readFile(new URL('release-input.json',root),'utf8'));
   const historical=JSON.parse(await readFile(new URL(input.source_provenance.historical_record_path,root),'utf8'));
   const db=createFixtureDb(),env=fixtureEnv(db);
-  insertItem(db,historical);
+  insertItem(db,{...historical,price_usd:1});
   const before=db.sqlite.prepare('SELECT * FROM items').get();
   const report=await prepareRelease(env,input);
   assert.equal(report.source_ready,true,JSON.stringify(report.source_blockers));
   assert.deepEqual(input.manifest.language_policy.adapters,['python']);
-  assert.equal(input.item.price_usd,historical.price_usd);
+  assert.equal(input.item.price_usd,1);
   assert.equal(input.item.content_hash,historical.content_hash);
   const reviews=[{kind:'routing',subject_hash:report.routing_hash,reviewed_by:'offline-actual-source-fixture',reference:'fixture:local-stage-only'}];
   const staged=await publishRelease(env,input,{mode:'stage',reviews});

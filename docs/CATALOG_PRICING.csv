@@ -1,0 +1,157 @@
+sku,slug,maximum_usdc,reason
+AWS-0550,lambda-powertools-logger-ts,1.00,Focused tool or substantive troubleshooting guide
+AWS-0551,lambda-powertools-tracer-ts,1.00,Focused tool or substantive troubleshooting guide
+AWS-0552,lambda-powertools-metrics-ts,1.00,Focused tool or substantive troubleshooting guide
+AWS-0553,lambda-powertools-idempotency-ts,1.00,Focused tool or substantive troubleshooting guide
+AWS-0554,lambda-powertools-parameters-ts,1.00,Focused tool or substantive troubleshooting guide
+AWS-0555,lambda-powertools-batch-ts,1.00,Focused tool or substantive troubleshooting guide
+AWS-0556,bedrock-agent-cdk,1.00,Focused tool or substantive troubleshooting guide
+AWS-0557,bedrock-knowledge-base-cdk,1.00,Focused tool or substantive troubleshooting guide
+AWS-0558,sagemaker-endpoint-cdk,1.00,Focused tool or substantive troubleshooting guide
+AWS-0559,cloudwatch-monitoring-facade,1.00,Focused tool or substantive troubleshooting guide
+AWS-0560,api-gateway-lambda-dynamodb-stack,1.00,Focused tool or substantive troubleshooting guide
+AWS-0561,bedrock-guardrails-cdk,1.00,Focused tool or substantive troubleshooting guide
+AWS-0562,x402-lambda-payment-gate-recipe,0.50,Simple recipe or configuration helper
+AWS-0563,bedrock-agent-action-group-recipe,0.50,Simple recipe or configuration helper
+AWS-0564,dynamodb-agent-state-bootstrap-recipe,0.50,Simple recipe or configuration helper
+AWS-0565,lambda-vs-fargate-agent-decision,0.25,Basic reference or service overview
+AWS-0566,dynamodb-vs-aurora-dsql-decision,0.25,Basic reference or service overview
+AWS-0567,stepfunctions-vs-eventbridge-pipes-decision,0.25,Basic reference or service overview
+AWS-0568,agent-state-dynamodb-manifest,5.00,Modular agent-state planner
+AWS-0569,bedrock-agent-execution-role-manifest,0.50,Simple recipe or configuration helper
+AWS-0570,lambda-x402-env-manifest,0.50,Simple recipe or configuration helper
+AWS-0571,dynamodb-throttle-diagnostic,1.00,Focused tool or substantive troubleshooting guide
+AWS-0572,lambda-payment-timeout-diagnostic,1.00,Focused tool or substantive troubleshooting guide
+AWS-0573,bedrock-quota-exceeded-diagnostic,1.00,Focused tool or substantive troubleshooting guide
+AWS-0574,lambda-vs-fargate-cost-model,0.25,Basic reference or service overview
+AWS-0575,bedrock-claude-inference-cost-model,0.25,Basic reference or service overview
+AWS-0576,dynamodb-billing-mode-cost-model,0.25,Basic reference or service overview
+AWS-0577,cross-account-bedrock-auth-flow,1.00,Focused tool or substantive troubleshooting guide
+AWS-0578,lambda-dynamodb-least-privilege-auth-flow,0.50,Simple recipe or configuration helper
+AWS-0579,agentcore-x402-wallet-auth-flow,1.00,Focused tool or substantive troubleshooting guide
+AWS-0580,sagemaker-endpoint-failed-during-creation,1.00,Focused tool or substantive troubleshooting guide
+AWS-0581,sagemaker-endpoint-container-health-check-timeout,1.00,Focused tool or substantive troubleshooting guide
+AWS-0582,sagemaker-endpoint-no-instance-capacity-available,1.00,Focused tool or substantive troubleshooting guide
+AWS-0583,sagemaker-endpoint-model-artifact-access-denied,1.00,Focused tool or substantive troubleshooting guide
+AWS-0584,sagemaker-endpoint-invocation-stream-error,1.00,Focused tool or substantive troubleshooting guide
+AWS-0585,sagemaker-endpoint-went-out-of-service,1.00,Focused tool or substantive troubleshooting guide
+AWS-0586,sagemaker-training-job-out-of-memory,1.00,Focused tool or substantive troubleshooting guide
+AWS-0587,sagemaker-training-job-spot-instance-interrupted,1.00,Focused tool or substantive troubleshooting guide
+AWS-0588,sagemaker-training-job-script-failed-on-startup,1.00,Focused tool or substantive troubleshooting guide
+AWS-0592,sagemaker-training-job-input-channel-access-denied,1.00,Focused tool or substantive troubleshooting guide
+AWS-0593,sagemaker-async-inference-output-never-written,1.00,Focused tool or substantive troubleshooting guide
+AWS-0594,sagemaker-async-inference-model-returned-error,1.00,Focused tool or substantive troubleshooting guide
+AWS-0595,lambda-powertools-idempotency-concurrent-execution,1.00,Focused tool or substantive troubleshooting guide
+AWS-0596,lambda-powertools-idempotency-payload-mismatch,1.00,Focused tool or substantive troubleshooting guide
+AWS-0597,lambda-powertools-idempotency-dynamodb-unavailable,1.00,Focused tool or substantive troubleshooting guide
+AWS-0598,lambda-powertools-idempotency-key-not-found,1.00,Focused tool or substantive troubleshooting guide
+AWS-0599,lambda-powertools-bedrock-agent-action-group-rejected,1.00,Focused tool or substantive troubleshooting guide
+AWS-0600,lambda-powertools-parameters-access-denied-at-cold-start,1.00,Focused tool or substantive troubleshooting guide
+AWS-0601,lambda-powertools-sqs-batch-partial-failure,1.00,Focused tool or substantive troubleshooting guide
+AWS-0602,aws-s3-service-overview,0.25,Basic reference or service overview
+AWS-0603,aws-iam-service-overview,0.25,Basic reference or service overview
+AWS-0604,aws-logs-service-overview,0.25,Basic reference or service overview
+AWS-0605,aws-xray-service-overview,0.25,Basic reference or service overview
+AWS-0606,aws-sqs-service-overview,0.25,Basic reference or service overview
+AWS-0607,aws-sns-service-overview,0.25,Basic reference or service overview
+AWS-0608,aws-events-service-overview,0.25,Basic reference or service overview
+AWS-0609,aws-states-service-overview,0.25,Basic reference or service overview
+AWS-0610,aws-secretsmanager-service-overview,0.25,Basic reference or service overview
+AWS-0611,aws-ssm-service-overview,0.25,Basic reference or service overview
+AWS-0612,aws-kms-service-overview,0.25,Basic reference or service overview
+AWS-0613,aws-cognito-service-overview,0.25,Basic reference or service overview
+AWS-0614,aws-ecs-service-overview,0.25,Basic reference or service overview
+AWS-0615,aws-eks-service-overview,0.25,Basic reference or service overview
+AWS-0616,aws-ec2-service-overview,0.25,Basic reference or service overview
+AWS-0617,aws-rds-service-overview,0.25,Basic reference or service overview
+AWS-0618,aws-elasticache-service-overview,0.25,Basic reference or service overview
+AWS-0619,aws-kinesis-service-overview,0.25,Basic reference or service overview
+AWS-0620,aws-firehose-service-overview,0.25,Basic reference or service overview
+AWS-0621,aws-glue-service-overview,0.25,Basic reference or service overview
+AWS-0622,aws-athena-service-overview,0.25,Basic reference or service overview
+AWS-0623,aws-redshift-service-overview,0.25,Basic reference or service overview
+AWS-0624,aws-opensearch-service-overview,0.25,Basic reference or service overview
+AWS-0625,aws-cognito-identity-service-overview,0.25,Basic reference or service overview
+AWS-0626,aws-cloudfront-service-overview,0.25,Basic reference or service overview
+AWS-0627,aws-apigateway-service-overview,0.25,Basic reference or service overview
+AWS-0629,cfn-lint-template-validation,1.00,Focused tool or substantive troubleshooting guide
+AWS-0630,aws-sdk-ruby-resource-interface,0.50,Simple recipe or configuration helper
+AWS-0631,cdk-lambda,1.00,Focused tool or substantive troubleshooting guide
+AWS-0632,cdk-lambda-nodejs,1.00,Focused tool or substantive troubleshooting guide
+AWS-0633,cdk-lambda-event-sources,1.00,Focused tool or substantive troubleshooting guide
+AWS-0634,cdk-dynamodb,1.00,Focused tool or substantive troubleshooting guide
+AWS-0635,cdk-s3,1.00,Focused tool or substantive troubleshooting guide
+AWS-0636,cdk-s3-deployment,1.00,Focused tool or substantive troubleshooting guide
+AWS-0637,cdk-bedrock,1.00,Focused tool or substantive troubleshooting guide
+AWS-0638,cdk-bedrockagentcore,1.00,Focused tool or substantive troubleshooting guide
+AWS-0639,cdk-apigateway,1.00,Focused tool or substantive troubleshooting guide
+AWS-0640,cdk-apigatewayv2,1.00,Focused tool or substantive troubleshooting guide
+AWS-0641,cdk-apigatewayv2-integrations,1.00,Focused tool or substantive troubleshooting guide
+AWS-0642,cdk-iam,1.00,Focused tool or substantive troubleshooting guide
+AWS-0643,cdk-kms,1.00,Focused tool or substantive troubleshooting guide
+AWS-0644,cdk-secretsmanager,1.00,Focused tool or substantive troubleshooting guide
+AWS-0645,cdk-ssm,1.00,Focused tool or substantive troubleshooting guide
+AWS-0646,cdk-sqs,1.00,Focused tool or substantive troubleshooting guide
+AWS-0647,cdk-sns,1.00,Focused tool or substantive troubleshooting guide
+AWS-0648,cdk-events,1.00,Focused tool or substantive troubleshooting guide
+AWS-0649,cdk-events-targets,1.00,Focused tool or substantive troubleshooting guide
+AWS-0650,cdk-stepfunctions,1.00,Focused tool or substantive troubleshooting guide
+AWS-0651,cdk-stepfunctions-tasks,1.00,Focused tool or substantive troubleshooting guide
+AWS-0652,cdk-cloudwatch,1.00,Focused tool or substantive troubleshooting guide
+AWS-0653,cdk-logs,1.00,Focused tool or substantive troubleshooting guide
+AWS-0654,cdk-cognito,1.00,Focused tool or substantive troubleshooting guide
+AWS-0655,cdk-ecs,1.00,Focused tool or substantive troubleshooting guide
+AWS-0656,cdk-ecs-patterns,1.00,Focused tool or substantive troubleshooting guide
+AWS-0657,cdk-eks,1.00,Focused tool or substantive troubleshooting guide
+AWS-0658,cdk-rds,1.00,Focused tool or substantive troubleshooting guide
+AWS-0659,cdk-elasticache,1.00,Focused tool or substantive troubleshooting guide
+AWS-0660,cdk-kinesis,1.00,Focused tool or substantive troubleshooting guide
+AWS-0661,cdk-cloudfront,1.00,Focused tool or substantive troubleshooting guide
+AWS-0662,cdk-cloudtrail,1.00,Focused tool or substantive troubleshooting guide
+AWS-0663,cdk-backup,1.00,Focused tool or substantive troubleshooting guide
+AWS-0664,cdk-ec2,1.00,Focused tool or substantive troubleshooting guide
+AWS-0665,cdk-ecr,1.00,Focused tool or substantive troubleshooting guide
+AWS-0666,cdk-athena,1.00,Focused tool or substantive troubleshooting guide
+AWS-0667,cdk-glue,1.00,Focused tool or substantive troubleshooting guide
+AWS-0668,cdk-cognito-identitypool,1.00,Focused tool or substantive troubleshooting guide
+AWS-0669,cdk-codebuild,1.00,Focused tool or substantive troubleshooting guide
+AWS-0670,cdk-codepipeline,1.00,Focused tool or substantive troubleshooting guide
+AWS-0671,cdk-codepipeline-actions,1.00,Focused tool or substantive troubleshooting guide
+AWS-0672,chalice-rest-api-decorator-pattern,0.50,Simple recipe or configuration helper
+AWS-0673,chalice-automatic-iam-policy-generator,1.00,Focused tool or substantive troubleshooting guide
+AWS-0674,chalice-local-dev-to-lambda-deploy-recipe,0.50,Simple recipe or configuration helper
+AWS-0675,chalice-deployment-failed-diagnostic,1.00,Focused tool or substantive troubleshooting guide
+AWS-0676,claudia-nodejs-lambda-deploy,1.00,Focused tool or substantive troubleshooting guide
+AWS-0677,claudia-api-builder-pattern,0.50,Simple recipe or configuration helper
+AWS-0678,aws-s3-ruby-client,0.50,Simple recipe or configuration helper
+AWS-0679,minio-s3-compatible-local-store,1.00,Focused tool or substantive troubleshooting guide
+AWS-0680,minio-to-aws-s3-migration-recipe,1.00,Focused tool or substantive troubleshooting guide
+AWS-0681,aws-sdk-pandas-athena-to-dataframe,0.50,Simple recipe or configuration helper
+AWS-0682,aws-sdk-pandas-s3-read-write,0.50,Simple recipe or configuration helper
+AWS-0683,aws-sdk-pandas-glue-catalog,0.50,Simple recipe or configuration helper
+AWS-0684,aws-sdk-pandas-redshift-connection,0.50,Simple recipe or configuration helper
+AWS-0685,bedrock-agent-with-action-group-sample,1.00,Focused tool or substantive troubleshooting guide
+AWS-0686,bedrock-rag-knowledge-base-sample,1.00,Focused tool or substantive troubleshooting guide
+AWS-0687,bedrock-multimodal-inference-sample,1.00,Focused tool or substantive troubleshooting guide
+AWS-0688,agentcore-sdk-agent-runtime-setup,1.00,Focused tool or substantive troubleshooting guide
+AWS-0689,agentcore-sdk-memory-management,1.00,Focused tool or substantive troubleshooting guide
+AWS-0690,agentcore-sdk-session-handling,1.00,Focused tool or substantive troubleshooting guide
+AWS-0691,agentcore-sdk-tool-registration-recipe,0.50,Simple recipe or configuration helper
+BUN-AGENTCORE,bun-agentcore-pack,10.00,Flagship service bundle
+BUN-API-GATEWAY,bun-api-gateway-pack,5.00,Substantial service bundle
+BUN-ATHENA,bun-athena-pack,1.00,Focused tool or substantive troubleshooting guide
+BUN-BEDROCK,bun-bedrock-pack,5.00,Substantial service bundle
+BUN-DYNAMODB,bun-dynamodb-pack,5.00,Substantial service bundle
+BUN-ECS,bun-ecs-pack,5.00,Substantial service bundle
+BUN-EVENTS,bun-events-pack,1.00,Focused tool or substantive troubleshooting guide
+BUN-GLUE,bun-glue-pack,5.00,Substantial service bundle
+BUN-LAMBDA,bun-lambda-pack,10.00,Flagship service bundle
+BUN-S3,bun-s3-pack,5.00,Substantial service bundle
+BUN-SAGEMAKER,bun-sagemaker-pack,10.00,Flagship service bundle
+BUN-STEP-FUNCTIONS,bun-step-functions-pack,5.00,Substantial service bundle
+SW-PT-0006,lambda-powertools-idempotency,1.00,Focused tool or substantive troubleshooting guide
+SW-RR-0001,text-to-structure,0.50,Simple recipe or configuration helper
+SW-RR-0002,tool-call-repair,0.50,Simple recipe or configuration helper
+SW-RR-0003,loop-verdict,0.50,Simple recipe or configuration helper
+SW-RR-0004,grounding-check,0.50,Simple recipe or configuration helper
+SW-RR-0005,context-compact,0.50,Simple recipe or configuration helper
