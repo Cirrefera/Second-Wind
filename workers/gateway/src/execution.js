@@ -1,3 +1,4 @@
+import {buyerView} from './public-identity.js';
 import {createJourneyContext} from './telemetry.js';
 
 const MAX_CODE_BYTES = 65_536;
@@ -51,17 +52,17 @@ async function buildProviders(env, grant, context) {
     describe, describeProduct: describe,
     configure, checkConfiguration: configure,
     async entitlement() {
-      return grant ? {
+      return grant ? buyerView(env.SW_DB,{
         sku: grant.sku, paymentId: grant.paymentId,
         allowedActions: [...(grant.allowedActions || [])],
-      } : null;
+      }) : null;
     },
     async deliver() {
       if (!grant || !grant.allowedActions?.includes("deliver")) {
         throw Object.assign(new Error("delivery_not_entitled"), { status: 403 });
       }
       const { deliverGrant } = await import("./commerce.js");
-      return deliverGrant(env, grant,{journey:createJourneyContext({journey_id:journey.journey_id,transport:'sandbox'})});
+      return buyerView(env.SW_DB,await deliverGrant(env, grant,{journey:createJourneyContext({journey_id:journey.journey_id,transport:'sandbox'})}));
     },
   };
 }

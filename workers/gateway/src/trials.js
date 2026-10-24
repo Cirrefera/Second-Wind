@@ -1,3 +1,4 @@
+import {publicProduct} from './public-identity.js';
 import {copyConfiguration,describeProduct} from './catalog.js';
 import {canonicalJson,sha256,validToken,CommerceError} from './contracts.js';
 import {trialMenu,prepareComponentSelection} from './scope.js';
@@ -102,7 +103,7 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
   // Buyer-controlled code receives only the bounded result, never product modules.
   const preview=await runProductPreview(env,release,check.config,access.request.components,options);
   const providers={
-    components:async()=>menu,
+    components:async()=>publicProduct({...menu,slug:product.slug}),
     configuration:async()=>check.config,
     preview:async()=>structuredClone(preview),
   };

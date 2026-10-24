@@ -173,7 +173,7 @@ export async function createQuote(env, sku, config = {}, {journey,purchaseMethod
 
 /** A sandbox admission is a separate service purchase, never a SKU file grant. */
 export async function createSandboxAccess(env, {request,product,acceptanceKey,journey}) {
-  const descriptor={trial_id:request.trial_id,sku:product.sku,version:product.version,
+  const descriptor={trial_id:request.trial_id,slug:product.slug,version:product.version,
     release_hash:request.release_hash,amount_usdc_micros:'10000',invocations:1,
     product_purchase_included:false};
   const content=canonicalJson(descriptor),contentHash=await sha256(content);

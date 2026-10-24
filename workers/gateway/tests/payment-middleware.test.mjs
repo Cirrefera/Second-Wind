@@ -98,7 +98,7 @@ test("concurrent distinct purchases keep request-local amounts and identities se
   await entered.promise; release.resolve();
   const responses=await Promise.all([a,b]); assert.ok(responses.every(r=>r.status===200));
   const [one,two]=await Promise.all(responses.map(r=>r.json()));
-  assert.equal(one.receipt.sku,first.sku); assert.equal(two.receipt.sku,other.sku);
+  assert.equal(one.receipt.slug,f.item.slug); assert.equal(two.receipt.slug,second.slug);
   assert.equal(one.receipt.amount_usdc_micros,"250000"); assert.equal(two.receipt.amount_usdc_micros,"750000");
   assert.notEqual(one.paymentId,two.paymentId); assert.equal(f.calls.settle.length,2);
 });

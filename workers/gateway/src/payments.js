@@ -1,3 +1,4 @@
+import {paymentProduct} from './public-identity.js';
 import { paymentMiddlewareFromHTTPServer, x402HTTPResourceServer, x402ResourceServer } from "@x402/hono";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { decodePaymentRequiredHeader } from "@x402/core/http";
@@ -71,6 +72,7 @@ export function paymentHandler(dependencies = {}) {
     c.set("purchase",state);
     const server = await serverFor(c.env);
     const {quote} = state;
+    const product=paymentProduct(quote);
     let signedResource;
     try { signedResource = new URL(state.input.paymentPayload?.resource?.url); } catch { /* unsigned */ }
     const legacy = new URL(c.req.url).searchParams.has("quote_id") || signedResource?.searchParams.has("quote_id");
@@ -81,10 +83,10 @@ export function paymentHandler(dependencies = {}) {
         price:{amount:quote.amount_usdc_micros,asset:quote.asset,extra:{name:"USD Coin",version:"2"}},
         maxTimeoutSeconds:300},
       resource:`${ORIGIN}${route}?${identifier}=${encodeURIComponent(quote.id)}`,
-      description:quote.kind === "execution" ? "One JavaScript Code Mode invocation" : `Second Wind ${quote.sku} v${quote.version}`,
+      description:product.description,
       mimeType:"application/json",
       unpaidResponseBody:() => ({contentType:"application/json",body:{error:"payment_required",
-        acceptanceId:quote.id,sku:quote.sku,version:quote.version,content_hash:quote.content_hash,
+        acceptanceId:quote.id,slug:product.slug,version:quote.version,content_hash:quote.content_hash,
         amount_usdc_micros:quote.amount_usdc_micros,
         max_amount_atomic:JSON.parse(quote.snapshot_json).scope?.max_amount_atomic || quote.amount_usdc_micros,
         recovery:"Preserve the purchase URL and a private X-Recovery-Token for response-loss recovery."}}),

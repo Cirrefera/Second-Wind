@@ -50,7 +50,7 @@ async function publicProduct(row) {
   if (_component_pricing) {
     product.price_role='maximum';
     product.pricing_mode='proportional-components';
-    product.components_url=`/api/products/${encodeURIComponent(product.sku)}/components`;
+    product.components_url=`/api/products/${encodeURIComponent(product.slug)}/components`;
     product.trial_url='/api/trials';
     product.pricing_status=release?.pricing ? 'configured' : 'not_configured';
     if (!release?.pricing) { product.price_role='historical-unconfirmed'; delete product.max_amount_atomic; }
@@ -172,7 +172,7 @@ export async function checkConfiguration(db, sku, config) {
     cfg = copyConfiguration(config);
   } catch (error) {
     return {
-      ok: false, sku: product.sku, version: product.version, missing: [],
+      ok: false, sku: product.sku, slug: product.slug, version: product.version, missing: [],
       errors: [{ code: error.code || "invalid_configuration", message: error.details || error.message }],
     };
   }
@@ -180,7 +180,7 @@ export async function checkConfiguration(db, sku, config) {
   if (Object.hasOwn(cfg, "language") &&
       (typeof cfg.language !== "string" || !cfg.language.trim() || cfg.language.length > 64)) {
     return {
-      ok: false, sku: product.sku, version: product.version, missing: [],
+      ok: false, sku: product.sku, slug: product.slug, version: product.version, missing: [],
       errors: [{ code: "invalid_language", message: "Choose an explicit supported language." }],
     };
   }
@@ -214,7 +214,7 @@ export async function checkConfiguration(db, sku, config) {
       : `Missing required field: ${error.field}`,
   }));
   return {
-    ok: errors.length === 0, sku: product.sku, version: product.version,
+    ok: errors.length === 0, sku: product.sku, slug: product.slug, version: product.version,
     config: cfg, missing, errors,
   };
 }

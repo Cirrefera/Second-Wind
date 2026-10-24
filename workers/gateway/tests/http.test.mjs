@@ -71,7 +71,7 @@ test("all public discovery aliases serve one live catalog and exclude paid conte
   const resources = await (await call("/.well-known/x402")).json();
   assert.deepEqual(await (await call("/discovery/resources")).json(), resources);
   assert.deepEqual(await (await call("/v2/x402/discovery/resources")).json(), resources);
-  assert.match(JSON.stringify(await (await call("/api/tools")).json()), new RegExp(item.sku));
+  assert.match(JSON.stringify(await (await call("/api/tools")).json()), new RegExp(item.slug));
   assert.equal(calls.verify.length, 0);
   assert.equal(calls.settle.length, 0);
 });
