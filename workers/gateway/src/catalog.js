@@ -107,7 +107,7 @@ export async function searchCatalog(db, query = "", limit = 10) {
   return Promise.all((rows.results || []).map(publicProduct));
 }
 
-function copyConfiguration(config) {
+export function copyConfiguration(config) {
   const source = config === undefined ? {} : config;
   if (!source || Array.isArray(source) || typeof source !== "object") {
     throw requestError("invalid_configuration", "Configuration must be an object.");

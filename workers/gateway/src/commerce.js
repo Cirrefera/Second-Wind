@@ -40,7 +40,7 @@ function publicAcceptance(row) {
     payment: {rail:"x402", network:row.network, asset:row.asset},
     issued_at: row.created_at, expires_at: new Date(row.expires_at).toISOString(),
     purchase: {
-      method: snapshot.invoke_kind === "bedrock" || row.kind === "execution" ? "POST" : "GET",
+      method: snapshot.purchase_method || (snapshot.invoke_kind === "bedrock" || row.kind === "execution" ? "POST" : "GET"),
       url: `${ORIGIN}${path}?acceptance_id=${encodeURIComponent(row.id)}`,
     },
   };
@@ -115,7 +115,7 @@ async function readPayload(env, payload) {
 }
 
 /** Pin a real catalog version and verify that its contents exist before payment. */
-export async function createQuote(env, sku, config = {}, {journey} = {}) {
+export async function createQuote(env, sku, config = {}, {journey,purchaseMethod} = {}) {
   const db = database(env);
   const check = await checkConfiguration(db, sku, config);
   if (!check.ok) throw new CommerceError("incomplete_configuration", 400,
@@ -160,6 +160,7 @@ export async function createQuote(env, sku, config = {}, {journey} = {}) {
   const snapshot = {
     sku: item.sku, slug: item.slug, version: item.version,
     invoke_kind: item.invoke_kind, invoke_key: item.invoke_key,
+    ...(purchaseMethod ? {purchase_method:purchaseMethod} : {}),
     resolved, payload, manifest_hash: await sha256(canonicalJson(resolved)),
   };
   return insertQuote(env, {

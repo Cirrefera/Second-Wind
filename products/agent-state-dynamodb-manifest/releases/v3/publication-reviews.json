@@ -1,0 +1,83 @@
+[
+  {
+    "kind": "service",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "contract",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "product",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "license",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "purchase-url",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "language-adapters",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "validation",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "sandbox-trial",
+    "subject_hash": "0793a18bd81cf1cc3ce6f2a097ef8f05b1c9ec54963f41b408a77c0a94dde9a9",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "routing",
+    "subject_hash": "33a8217008572534ae05610b1772e857cc9309718562344796fc354e7ae75850",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md#aws-0568-v3-language-scoped-delivery-review",
+    "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  }
+]

@@ -11,7 +11,7 @@ import { describeProduct } from "./catalog.js";
 import { createQuote, createExecutionQuote, readQuote, openPurchase, recoverGrant, deliverGrant,
   createRecoveryChallenge, recoverWithWallet, reconcilePurchase } from "./commerce.js";
 import { CommerceError, NETWORK, ORIGIN, paymentReadiness } from "./contracts.js";
-import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument } from "./discovery.js";
+import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument, toolMethod } from "./discovery.js";
 
 async function jsonBody(request) {
   if (Number(request.headers.get("content-length") || 0) > 100_000) throw new CommerceError("request_too_large",413);
@@ -48,6 +48,10 @@ function recoveryToken(request,body = {}) {
   const authorization = request.headers.get("Authorization");
   return request.headers.get("X-Recovery-Token") ||
     (authorization?.startsWith("Bearer ") ? authorization.slice(7) : undefined) || body.recoveryToken;
+}
+
+function retainWork(c,pending) {
+  try { c.executionCtx.waitUntil(pending.catch(()=>{})); } catch { /* Local fetch may have no execution context. */ }
 }
 
 /** Dependency injection is a test/server-construction seam, never an env bypass. */
@@ -122,7 +126,10 @@ export function createApp(dependencies = {}) {
   });
   app.post('/api/trials',async c=>{
     const b=await jsonBody(c.req.raw);
-    return c.json(await trialProduct(c.env,b.sku,b.config || {},b.input,null,{journey:c.get("journey")}));
+    const pending=trialProduct(c.env,b.sku,b.config || {},b.input,null,{journey:c.get("journey")});
+    // Bounded continuation helps on disconnect; D1 remains the recovery authority.
+    retainWork(c,pending);
+    return c.json(await pending);
   });
   app.get('/api/trials/:id',async c=>c.json(await recoverTrial(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),{journey:c.get('journey')})));
   app.post('/api/trials/:id/selection',async c=>{
@@ -160,10 +167,14 @@ export function createApp(dependencies = {}) {
       }
       if (!quoteId) {
         const product = await describeProduct(c.env.SW_DB,key);
+        const requiredMethod = toolMethod(product);
+        if (c.req.method !== requiredMethod && !(c.req.method === "HEAD" && requiredMethod === "GET")) {
+          throw new CommerceError("method_not_allowed",405,{hint:`Use ${requiredMethod} for this product.`});
+        }
         if (product.invoke_kind === "bedrock" && c.req.method !== "POST") {
           throw new CommerceError("method_not_allowed",405,{hint:"Use POST with the product's input schema."});
         }
-        quoteId = (await createQuote(c.env,key,requestData,{journey:c.get("journey")})).acceptanceId;
+        quoteId = (await createQuote(c.env,key,requestData,{journey:c.get("journey"),purchaseMethod:requiredMethod})).acceptanceId;
       }
       route = `/api/x402/${encodeURIComponent(key)}`;
     }
@@ -174,11 +185,16 @@ export function createApp(dependencies = {}) {
       if (new URL(c.req.url).pathname.endsWith("/artifact") && snapshot.payload?.via !== "r2") {
         throw new CommerceError("unknown_artifact",404);
       }
-      const expectedMethod = snapshot.invoke_kind === "bedrock" ? "POST" : "GET";
-      if (c.req.method !== expectedMethod && !(c.req.method === "HEAD" && expectedMethod === "GET")) {
+      // Accepted requests use their immutable method, never today's catalog.
+      const expectedMethod = snapshot.purchase_method || (snapshot.invoke_kind === "bedrock" ? "POST" : "GET");
+      const acceptedRead = expectedMethod === "GET" && (c.req.method === "GET" || c.req.method === "HEAD");
+      if (c.req.method !== expectedMethod && !acceptedRead) {
         throw new CommerceError("method_not_allowed",405,{hint:`Use ${expectedMethod} for this product.`});
       }
-      if (c.req.method === "GET" || c.req.method === "HEAD") requestData = JSON.parse(quote.config_json);
+      if (acceptedRead || (expectedMethod === "POST" && snapshot.invoke_kind !== "bedrock"
+          && body.config === undefined && Object.keys(requestData).length === 0)) {
+        requestData = JSON.parse(quote.config_json);
+      }
     } else if (quote.kind === "product" && body.config === undefined) requestData = JSON.parse(quote.config_json);
     const input = {quoteId,paymentPayload,requestData,
       recoveryToken:recoveryToken(c.req.raw,body),journey:c.get("journey")};
@@ -211,7 +227,7 @@ export function createApp(dependencies = {}) {
   app.get("/api/x402/:key",c=>paid(c));
   app.post("/api/x402/:key",c=>paid(c));
   app.get("/api/x402/:key/artifact",c=>paid(c));
-  app.all("/capnp",c=>newWorkersRpcResponse(c.req.raw,new ProductService(c.env,{...c.get("journey"),transport:"rpc"})));
+  app.all("/capnp",c=>newWorkersRpcResponse(c.req.raw,new ProductService(c.env,{...c.get("journey"),transport:"rpc"},pending=>retainWork(c,pending))));
   app.get("/api/purchases/:paymentId/delivery",async c=>{
     const grant = await recoverGrant(c.env,c.req.param("paymentId"),recoveryToken(c.req.raw));
     await enqueueObservation(c.env,"recovery.grant_recovered",{journey:c.get("journey"),payload:{payment_id:grant.paymentId,sku:grant.sku}});

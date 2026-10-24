@@ -77,6 +77,9 @@ jobs:
       - name: Apply versioned routing manifest schema
         working-directory: workers/gateway
         run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0004_routing_manifests.sql
+      - name: Apply recoverable trial request identities
+        working-directory: workers/gateway
+        run: ./node_modules/.bin/wrangler d1 execute second-wind-catalog --remote --file=migrations/0005_trial_recovery.sql
       - name: Deploy the application Worker first
         working-directory: workers/gateway
         # Wrangler preserves existing encrypted secrets. Required secret names

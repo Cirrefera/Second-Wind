@@ -6,6 +6,16 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Buyer-flow repair implementation — October 24, 2026
+
+Source baseline: `3e81553d9ada199fadc8065e6774af29350d24a6`. This checkpoint is an implementation candidate, not a deployed completion claim.
+
+- FIX-17: configured whole-product purchase entry now uses POST with explicit configuration; discovery/OpenAPI agree. New acceptances pin the method; historical accepted GET URLs retain their original behavior. Official x402 verification/settlement code is unchanged.
+- Trial response-loss recovery: required caller-known ID/token pairs, D1 request identity and execution owner, immutable input binding and no automatic rerun. Additive migration 0005 must precede deployment. HTTP/Cap’n Web preserve bounded in-flight work; stored trial results remain recoverable after catalog changes until expiry.
+- FIX-19 / product delivery: explicit language file manifests are supported for new releases. AWS-0568 v3 is a separate draft candidate; v2 files, publication references and historical purchases are preserved. V3 is not registered or activated by this change.
+- Verification: source review, syntax/diff checks and gateway compilation. No new tests were added. Existing fixtures were aligned with the required trial credentials and migration; assertions are unchanged. A compile is not runtime/payment evidence. Required CI and deployment checks remain intact and must pass before release.
+- Details and release order: [buyer-flow implementation record](BUYER_FLOW_IMPLEMENTATION_2026-10-24.md).
+
 ## Product publication and telemetry checkpoint — October 24, 2026
 
 PRs #12, #16 and #17 are merged. Production run [40120724077](https://github.com/Cirrefera/Second-Wind/actions/runs/40120724077) accepted main commit `af0188fe02137277b8a4f7c90c07fb5f0eaa5b5e`, gateway `b6a21b13-d032-41ed-a518-801e3bf3a051` and Pages deployment `2c5a3ecd-209e-4a00-a44b-e86e80a339a9`. The draft/not-deployed statements in the historical October 24 sections below are superseded by this checkpoint. No funded purchase was verified.

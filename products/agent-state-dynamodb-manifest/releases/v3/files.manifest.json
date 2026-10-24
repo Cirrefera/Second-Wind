@@ -1,0 +1,86 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0568",
+  "version": 3,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "planner.mjs",
+      "sha256": "c8c7a61b7287ce99547abbfa96706430b4268c6f94843c162d551854bb54cb9c",
+      "size_bytes": 2633,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "planner.py",
+      "sha256": "e79d64a7c2680aaf4c0a3471b9417e290233a59188a8384470a33960ff4de7d7",
+      "size_bytes": 3057,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "1ae694fb12ef37f985e2972abb07cf8c01268b3b68a304918e44e364c6312106",
+      "size_bytes": 309,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b80ed99e18ae947d894d861d9ae729a54bf8986d34d5923f262d10c410cbfb44",
+      "size_bytes": 6512,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "features/status-index.mjs",
+      "sha256": "f58bf13cd9ffb80e4b9d3bc9b0d7558990a4f7d2eaee9b106b819430c2ee36d8",
+      "size_bytes": 648,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/status_index.py",
+      "sha256": "2d7112a3274d00fecc1eac9a5ebb361afc7779cbb48052d0e065e81f9f6a391f",
+      "size_bytes": 794,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "features/expiry.mjs",
+      "sha256": "44f7373cf604ff7cdc72252d4908f3588cc37ce283899e5e30bfc86d9ad12ce8",
+      "size_bytes": 428,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/expiry.py",
+      "sha256": "1d662ec1e68872b77dd4b6e12625ba3237ece5e8237691a686aa97393518ae91",
+      "size_bytes": 521,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "features/recovery.mjs",
+      "sha256": "1a2a45974703441e55e830f79d318423228d15ad5f8cfd0715eba3cbd42333b2",
+      "size_bytes": 508,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/recovery.py",
+      "sha256": "c66827757c37be4bc1c49d449f427be4d1981e051f5c5f3df739d28800fc1024",
+      "size_bytes": 597,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "features/change-stream.mjs",
+      "sha256": "086410727f47e332fcf38987ba26069b4d1f6a19719d64b31e0c68581cd803c2",
+      "size_bytes": 253,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "features/change_stream.py",
+      "sha256": "cd9e43955b6d92961b5eaa065823fbc0848396cfcb5f96d0618d99ea35c56286",
+      "size_bytes": 293,
+      "mime_type": "text/x-python"
+    }
+  ]
+}
