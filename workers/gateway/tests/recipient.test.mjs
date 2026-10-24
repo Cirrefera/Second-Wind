@@ -16,7 +16,7 @@ function fixture(t) {
   const env = fixtureEnv(db);
   env.CDP_FACILITATOR_KEY = JSON.stringify({id:"offline-fixture", privateKey:"offline-fixture"});
   const {rail, calls} = createRail();
-  const app = createApp({rail});
+  const app = createApp({facilitator:rail});
   const call = (path, init = {}) => app.fetch(new Request(`https://secondwindai.com${path}`, init), env, {
     waitUntil() {},
   });

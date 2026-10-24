@@ -1,6 +1,10 @@
 # Second Wind application Worker
 
-`secondwind-gateway` owns discovery, quotes, payment, grants, execution, delivery and recovery. HTTP and Cap'n Web call the same commerce functions and D1 purchase records.
+`secondwind-gateway` serves discovery, sandbox selection, accepted purchases, execution, delivery and recovery. Official `@x402/hono` middleware owns payment challenges, verification and settlement. HTTP and Cap'n Web share application functions and D1 purchase records.
+
+`src/payments.js` restores the standard middleware pattern documented by [Cloudflare](https://developers.cloudflare.com/agents/tools/payments/x402/charge-for-http-content/) using the existing locked `@x402/hono` 2.28.0 package. Its SDK lifecycle hooks record application claims and receipts; `commerce.js` does not call verification or settlement. Hono context storage keeps hook state request-local. The SDK builds and serializes the challenge; legacy JSON consumers receive a copy of that SDK-produced challenge.
+
+The settlement claim retains its purchase ID, owner and state predicates. Its success check uses a positive affected-row count because [D1 reports total changes](https://developers.cloudflare.com/api/resources/d1/), including the existing telemetry trigger's insert. Requiring exactly one incorrectly rejected successful claims in workerd. The SQLite fixture now mirrors that behavior, and the bundled Worker has a real workerd/D1/R2 payment-and-replay regression test with an offline facilitator.
 
 Pages runs the small advanced-mode entry in `src/worker.js`. It transparently forwards application requests through `GATEWAY → secondwind-gateway`, preserving the original Response and WebSocket upgrade; remaining requests use static assets. There is no separate Pages cashier or public Workers URL proxy. This ingress uses existing account-level deployment permissions, not zone-route creation. The API-only `/` may return404.
 
@@ -90,9 +94,9 @@ All paths below use `https://secondwindai.com`.
 
 ## Purchase and content contract
 
-1. Obtain a quote or follow the initial402 challenge. Preserve its exact `quote_id`, configuration and purchase URL. New quotes expire after five minutes.
-2. A quote pins the SKU, version, input, price, recipient and content hash. R2 payloads must exist and match their exact-byte hash before payment; inline guidance is snapshotted and hashed as UTF-8. Delivery never switches to the latest catalog version.
-3. Sign the402 requirements, then retry with `PAYMENT-SIGNATURE` and a private recovery token. Verification precedes a durable unique claim; only its owner executes and settles. A settlement timeout remains uncertain and is never automatically settled again.
+1. For component products, inspect the maximum, test in the sandbox, select components and accept the final scope before payment. The final amount is bounded by the maximum; the maximum is not automatically charged. Existing fixed-price products retain their declared contracts.
+2. Follow the accepted purchase URL or initial 402 challenge. Internal `quote_id` identifiers preserve compatibility and pin SKU, version, input, final amount, recipient and content hash; they do not introduce a buyer-facing quote stage. New acceptance records expire after five minutes. R2 payloads must exist and match their exact-byte hash; delivery never switches to the latest catalog version.
+3. Sign the SDK's 402 requirements, then retry with `PAYMENT-SIGNATURE` and a private recovery token. Official verification precedes a durable unique claim; only its owner executes and permits SDK settlement. The SDK owns its bounded identical-payment pending retry. Unresolved outcomes remain uncertain, and application retries cannot launch another settlement.
 4. Save `paymentId`, `recoveryToken`, the receipt and its transaction hash. Verify content using the response's explicit `content_hash_scope`; an R2 artifact is base64 encoded within the JSON delivery envelope. The artifact purchase route and authenticated delivery with `?format=artifact` return its exact raw bytes instead.
 
 Code Mode requires an explicit `language: "javascript"` (or `"js"`). It orchestrates the exposed product operations; it does not translate an inventory item into another language. One execution purchase buys one invocation and its persisted result. Repeating its exact code/language/invocation ID recovers that result; it does not buy unlimited execution. SKU delivery grants do not grant arbitrary code execution. Cap'n Web delivery/result-recovery callbacks report bounded `start`/`complete` notifications; a disconnected callback cannot change the purchase outcome.
@@ -114,6 +118,8 @@ If omitted, the server generates a token and returns it with the first purchase 
 If a server-generated token and response were both lost, retry the original quoted payment request to discover its payment ID and recovery-challenge URL. An ordinary externally owned payer wallet can request a challenge, sign its exact `message` using `personal_sign`, and POST `{ "challengeId": "...", "signature": "0x..." }` to the recovery endpoint. The expiring, one-use challenge replaces the recovery token and authorizes no new payment. Save the replacement immediately. Contract wallets must retain their private recovery token; contract-signature recovery is not implemented.
 
 A `delivery_pending` response with `payment_settled: true` contains the paid receipt, payment ID and token: retry delivery, never pay again. An uncertain settlement must be reconciled, not re-signed or re-settled; a stored confirmed R2 receipt can repair an interrupted D1 write. Where no confirmed receipt was stored, operator reconciliation is required. A confirmed failure with `charged: false` can obtain a fresh quote after its cause is fixed.
+
+Prepared replay passes through official verification again before resuming settlement; an expired authorization does not automatically receive a replacement signature or rerun the saved execution. Unknown settlement errors remain uncertain. A broadcast transaction hash stored on a still-verified payment is reconciliation evidence only: delivery still requires both payment and purchase to be settled with a confirmed receipt. If settlement succeeds but persistence fails, the response preserves the SDK receipt header and reports payment settled/recovery pending. A crash before any receipt reaches D1 or R2 still requires authoritative reconciliation.
 
 ## Build, verify and deploy
 

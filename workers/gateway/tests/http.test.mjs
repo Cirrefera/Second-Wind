@@ -14,7 +14,7 @@ function fixture(t, dependencies = {}) {
   // Readiness checks shape only. This is never passed to a real facilitator.
   env.CDP_FACILITATOR_KEY = JSON.stringify({ id: "offline-fixture", privateKey: "offline-fixture" });
   const { rail, calls } = createRail();
-  const app = createApp({ rail, ...dependencies });
+  const app = createApp({ facilitator:rail, ...dependencies });
   const call = (path, init = {}) => app.fetch(new Request(`https://secondwindai.com${path}`, init), env, {
     waitUntil() {},
   });

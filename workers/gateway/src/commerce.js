@@ -1,17 +1,13 @@
-import { x402ResourceServer, HTTPFacilitatorClient } from "@x402/core/server";
-import { ExactEvmScheme } from "@x402/evm/exact/server";
-import { createFacilitatorConfig } from "@coinbase/x402";
 import { verifyMessage } from "viem";
 import { checkConfiguration } from "./catalog.js";
 import { resolveCapability } from "../../../src/lib/curation.js";
 import { enqueueObservation } from "./telemetry.js";
 import {
-  CommerceError, NETWORK, ORIGIN, FACILITATOR, canonicalJson, sha256,
+  CommerceError, NETWORK, ORIGIN, canonicalJson, sha256,
   randomToken, validToken, paymentConfig, requirementsFor, sameAddress,
 } from "./contracts.js";
 
 export { CommerceError } from "./contracts.js";
-const rails = new WeakMap();
 const now = () => new Date().toISOString();
 const MAX_PAYLOAD_BYTES = 16 * 1024 * 1024;
 // A retry may close an abandoned preparation, but never execute it again.
@@ -21,24 +17,6 @@ const PREPARATION_TIMEOUT_MS = 5 * 60_000;
 function database(env) {
   if (!env.SW_DB) throw new CommerceError("database_not_configured", 503);
   return env.SW_DB;
-}
-
-async function railFor(env) {
-  if (rails.has(env)) return rails.get(env);
-  const pending = (async () => {
-    paymentConfig(env);
-    let key;
-    try { key = JSON.parse(env.CDP_FACILITATOR_KEY); } catch { /* fail below */ }
-    if (!key?.id || !key?.privateKey) throw new CommerceError("facilitator_not_configured", 503);
-    const { createAuthHeaders } = createFacilitatorConfig(key.id, key.privateKey);
-    const server = new x402ResourceServer(new HTTPFacilitatorClient({
-      url: FACILITATOR, createAuthHeaders,
-    })).register(NETWORK, new ExactEvmScheme());
-    await server.initialize();
-    return server;
-  })();
-  rails.set(env, pending);
-  try { return await pending; } catch (error) { rails.delete(env); throw error; }
 }
 
 function publicQuote(row) {
@@ -217,25 +195,19 @@ export async function describeQuote(env, quoteId) {
   return publicQuote(await readQuote(env, quoteId));
 }
 
+// Correlation only. Payment validity is established by the official SDK.
 async function paymentIdentity(payload, quote) {
-  const accepted = payload?.accepted;
   const auth = payload?.payload?.authorization;
   const signature = payload?.payload?.signature;
-  if (payload?.x402Version !== 2 || accepted?.scheme !== "exact"
-      || accepted.network !== quote.network || !sameAddress(accepted.asset, quote.asset)
-      || !sameAddress(accepted.payTo, quote.pay_to)
-      || String(accepted.amount) !== quote.amount_usdc_micros
-      || !auth || !/^0x[\da-f]{64}$/i.test(auth.nonce || "")
-      || !/^0x[\da-f]{40}$/i.test(auth.from || "")
-      || !sameAddress(auth.to, quote.pay_to) || String(auth.value) !== quote.amount_usdc_micros
-      || typeof signature !== "string" || !/^0x[\da-f]+$/i.test(signature)) {
-    throw new CommerceError("payment_requirements_mismatch", 402);
+  if (!/^0x[\da-f]{64}$/i.test(auth?.nonce || "")
+      || !/^0x[\da-f]{40}$/i.test(auth?.from || "") || typeof signature !== "string") {
+    throw new CommerceError("unsupported_payment_identity",402);
   }
   return {
     payer: auth.from,
-    key: `x402:${await sha256(canonicalJson({ network: quote.network,
-      asset: quote.asset.toLowerCase(), payer: auth.from.toLowerCase(), nonce: auth.nonce.toLowerCase() }))}`,
-    proofHash: await sha256(canonicalJson({ authorization: auth, signature })),
+    key: `x402:${await sha256(canonicalJson({network:quote.network,
+      asset:quote.asset.toLowerCase(),payer:auth.from.toLowerCase(),nonce:auth.nonce.toLowerCase()}))}`,
+    proofHash: await sha256(canonicalJson({authorization:auth,signature})),
   };
 }
 
@@ -362,100 +334,18 @@ async function reconcileStoredReceipt(env, row, quote) {
   return purchaseRow(database(env),row.payment_id);
 }
 
-/** An invocation can call the rail only after acquiring this exact owner.
- * Replays of a settling/uncertain row never enter here. */
-async function settlePrepared(env, row, quote, input, recoveryToken, dependencies, verifiedRail) {
+/** Resolve application identity and authenticated recovery before payment processing. */
+export async function openPurchase(env, input) {
   const db = database(env);
-  let rail;
-  try {
-    const config = paymentConfig(env);
-    if (!sameAddress(config.payTo,quote.pay_to)) throw new CommerceError("quote_recipient_changed",409);
-    rail = verifiedRail || dependencies.rail || await railFor(env);
-  } catch (error) {
-    throw new CommerceError(error.code || "payment_verification_unavailable",error.status || 503,
-      {paymentId:row.payment_id,recoveryToken,charged:false,
-        hint:"The prepared result is saved. Resolve payment configuration and retry the original purchase; do not re-sign."});
-  }
-  const prepared = JSON.parse(row.prepared_json);
-  const owner = crypto.randomUUID();
-  let claimed = false;
-  try {
-    const transition = await db.prepare(`UPDATE commerce_purchases SET status='settling',owner=?1,updated_at=?2
-      WHERE payment_id=?3 AND owner=?4 AND status='prepared'`)
-      .bind(owner,now(),row.payment_id,row.owner).run();
-    claimed = transition.meta.changes === 1;
-  } catch {
-    // A D1 response may be lost after its write commits. Only this still-live
-    // invocation knows it has not called the rail under its unique owner yet.
-    // If readback is unavailable, leave the durable state for normal recovery.
-    let current;
-    try { current = await purchaseRow(db,row.payment_id); }
-    catch { throw pendingSettlement(row,recoveryToken,503); }
-    if (current?.status === "prepared") throw preparedRetry(current,recoveryToken);
-    claimed = current?.status === "settling" && current.owner === owner;
-    if (!claimed) {
-      if (current?.status === "failed") throw failedPurchase(current);
-      throw pendingSettlement(row,recoveryToken);
-    }
-  }
-  if (!claimed) {
-    const current = await purchaseRow(db,row.payment_id);
-    if (current?.status === "failed") throw failedPurchase(current);
-    throw pendingSettlement(row,recoveryToken);
-  }
-  row = {...row,owner,status:"settling"};
-  const requirements = requirementsFor(quote);
-  let settlement;
-  try { settlement = await rail.settlePayment(input.paymentPayload,requirements); }
-  catch {
-    await db.prepare("UPDATE commerce_purchases SET status='uncertain',updated_at=?1 WHERE payment_id=?2 AND owner=?3 AND status='settling'")
-      .bind(now(),row.payment_id,row.owner).run();
-    throw pendingSettlement(row,recoveryToken);
-  }
-  if (!settlement?.success) {
-    await setFailed(db,row,"settlement_failed",true);
-    throw new CommerceError("settlement_failed",402,{paymentId:row.payment_id,recoveryToken,
-      charged:false,quotes:"/api/quotes",paymentResponse:settlement});
-  }
-  if (!/^0x[\da-f]{64}$/i.test(settlement.transaction || "")
-      || settlement.network !== quote.network
-      || (settlement.payer && !sameAddress(settlement.payer,row.payer))) {
-    await db.prepare("UPDATE commerce_purchases SET status='uncertain',updated_at=?1 WHERE payment_id=?2 AND owner=?3 AND status='settling'")
-      .bind(now(),row.payment_id,row.owner).run();
-    throw pendingSettlement(row,recoveryToken);
-  }
-  const receipt = receiptFor(row,quote,settlement);
-  receipt.content_hash = prepared.content_hash;
-  try { await durableReceipt(env,row,quote,receipt); }
-  catch { throw new CommerceError("settlement_pending_recovery",503,
-    {paymentId:row.payment_id,recoveryToken,hint:"Payment settled; recovery will repair the purchase record. Do not re-sign."}); }
-  try {
-    const grant = await recoverGrant(env,row.payment_id,recoveryToken);
-    return {body:{...await deliverGrant(env,grant,{journey:input.journey}),recoveryToken,redelivery:false},paymentResponse:settlement};
-  } catch {
-    throw new CommerceError("delivery_pending",503,{paymentId:row.payment_id,recoveryToken,
-      charged:true,payment_settled:true,receipt,paymentResponse:settlement,
-      recovery:`/api/purchases/${row.payment_id}/delivery`,
-      hint:"Payment settled. Save the recovery token and retry delivery; do not pay again."});
-  }
-}
-
-/**
- * The only money path. Verification precedes a durable UNIQUE claim; only the
- * claim owner executes and settles. Completed retries never call the rail.
- */
-export async function purchase(env, input, dependencies = {}) {
-  const db = database(env);
-  const quote = await readQuote(env,input.quoteId,{ allowExpired: true });
-  const identity = await paymentIdentity(input.paymentPayload,quote);
+  const quote = await readQuote(env,input.quoteId,{allowExpired:true});
   const request = quote.kind === "execution" ? executionInput(input.requestData) : (input.requestData || {});
   if (await sha256(canonicalJson(request)) !== quote.request_hash) {
     throw new CommerceError("purchase_request_mismatch",409);
   }
-  const existing = await db.prepare("SELECT * FROM commerce_purchases WHERE payment_key=?1")
-    .bind(identity.key).first();
+  const state = {env,input,quote,request,recoveryToken:input.recoveryToken};
+  const existing = await db.prepare("SELECT * FROM commerce_purchases WHERE quote_id=?1").bind(quote.id).first();
   if (existing) {
-    if (existing.quote_id !== quote.id || existing.proof_hash !== identity.proofHash) {
+    if (input.paymentPayload && (await paymentIdentity(input.paymentPayload,quote)).proofHash !== existing.proof_hash) {
       throw new CommerceError("payment_reuse_mismatch",409);
     }
     if (["claimed","executing"].includes(existing.status) && !preparationExpired(existing)) {
@@ -468,34 +358,42 @@ export async function purchase(env, input, dependencies = {}) {
         recovery_challenge:`/api/purchases/${existing.payment_id}/recovery-challenge`});
     }
     let row = await closeAbandonedPreparation(db,existing);
-    if (row.status === "prepared") {
-      return settlePrepared(env,row,quote,input,input.recoveryToken,dependencies);
-    }
+    if (row.status === "prepared") { state.row = row; return state; }
     if (["claimed","executing"].includes(row.status)) {
       throw new CommerceError("payment_in_progress",409,{paymentId:row.payment_id,retry_after:2});
     }
     row = await reconcileStoredReceipt(env,row,quote);
     if (row.status === "failed") throw failedPurchase(row);
-    if (row.status !== "settled") throw new CommerceError("settlement_pending_recovery",409,
-      {paymentId:row.payment_id,hint:"Do not re-sign or submit another payment for this purchase."});
+    if (row.status !== "settled") throw pendingSettlement(row,input.recoveryToken);
     const grant = await recoverGrant(env,row.payment_id,input.recoveryToken);
     if(input.journey) await enqueueObservation(env,'recovery.purchase_replayed',
       {journey:input.journey,payload:{quote_id:quote.id,payment_id:row.payment_id,sku:quote.sku}});
-    return {body:{...await deliverGrant(env,grant,{journey:input.journey}),recoveryToken:input.recoveryToken,redelivery:true},
-      paymentResponse:grant.receipt.facilitator_response};
+    state.response = {body:{...await deliverGrant(env,grant,{journey:input.journey}),
+      recoveryToken:input.recoveryToken,redelivery:true},paymentResponse:grant.receipt.facilitator_response};
+    return state;
   }
   if (quote.expires_at < Date.now()) throw new CommerceError("quote_expired",409);
   const config = paymentConfig(env);
   if (!sameAddress(config.payTo,quote.pay_to)) throw new CommerceError("quote_recipient_changed",409);
-  const recoveryToken = input.recoveryToken || randomToken();
-  if (!validToken(recoveryToken)) throw new CommerceError("invalid_recovery_token",400);
-  const rail = dependencies.rail || await railFor(env);
-  const requirements = requirementsFor(quote);
-  let verification;
-  try { verification = await rail.verifyPayment(input.paymentPayload,requirements); }
-  catch { throw new CommerceError("payment_verification_unavailable",503); }
-  if (!verification?.isValid || (verification.payer && !sameAddress(verification.payer,identity.payer))) {
-    throw new CommerceError("payment_verification_failed",402);
+  state.recoveryToken ||= randomToken();
+  if (!validToken(state.recoveryToken)) throw new CommerceError("invalid_recovery_token",400);
+  return state;
+}
+
+/** Called only by the official SDK's positively verified lifecycle hook. */
+export async function claimVerifiedPurchase(state, {paymentPayload,result}) {
+  const {env,quote,recoveryToken} = state;
+  const db = database(env);
+  if (result?.isValid !== true) throw new CommerceError("payment_verification_failed",402);
+  const identity = await paymentIdentity(paymentPayload,quote);
+  if (result.payer && !sameAddress(result.payer,identity.payer)) {
+    throw new CommerceError("payment_payer_mismatch",402);
+  }
+  if (state.row) {
+    if (state.row.payment_key !== identity.key || state.row.proof_hash !== identity.proofHash) {
+      throw new CommerceError("payment_reuse_mismatch",409);
+    }
+    return;
   }
   const row = {
     payment_id:`pay_${crypto.randomUUID()}`,quote_id:quote.id,payment_key:identity.key,
@@ -522,6 +420,106 @@ export async function purchase(env, input, dependencies = {}) {
     }
     throw new CommerceError("purchase_record_unavailable",503);
   }
+  state.row = row;
+}
+
+/** Only the still-live, fenced owner can allow SDK settlement. */
+export async function claimPurchaseSettlement(state) {
+  const {env,quote,recoveryToken} = state;
+  const row = state.row;
+  if (!row || row.status !== "prepared") throw new CommerceError("purchase_not_prepared",409);
+  const config = paymentConfig(env);
+  if (!sameAddress(config.payTo,quote.pay_to)) throw new CommerceError("quote_recipient_changed",409);
+  const db = database(env);
+  const owner = crypto.randomUUID();
+  let claimed = false;
+  try {
+    const transition = await db.prepare(`UPDATE commerce_purchases SET status='settling',owner=?1,updated_at=?2
+      WHERE payment_id=?3 AND owner=?4 AND status='prepared'`)
+      .bind(owner,now(),row.payment_id,row.owner).run();
+    // D1 includes trigger writes in meta.changes. The PK/owner/state predicate
+    // can update at most one purchase, but its outbox trigger also writes.
+    claimed = transition.meta.changes > 0;
+  } catch {
+    // A D1 response may be lost after its write commits. Only this still-live
+    // invocation knows it has not called the rail under its unique owner yet.
+    // If readback is unavailable, leave the durable state for normal recovery.
+    let current;
+    try { current = await purchaseRow(db,row.payment_id); }
+    catch { throw pendingSettlement(row,recoveryToken,503); }
+    if (current?.status === "prepared") throw preparedRetry(current,recoveryToken);
+    claimed = current?.status === "settling" && current.owner === owner;
+    if (!claimed) {
+      if (current?.status === "failed") throw failedPurchase(current);
+      throw pendingSettlement(row,recoveryToken);
+    }
+  }
+  if (!claimed) {
+    const current = await purchaseRow(db,row.payment_id);
+    if (current?.status === "failed") throw failedPurchase(current);
+    throw pendingSettlement(row,recoveryToken);
+  }
+  state.row = {...row,owner,status:"settling"};
+}
+
+export async function recordUncertainSettlement(state, outcome) {
+  const {env,row,quote,recoveryToken} = state;
+  state.error = pendingSettlement(row,recoveryToken);
+  const db = database(env);
+  const statements = [db.prepare("UPDATE commerce_purchases SET status='uncertain',updated_at=?1 WHERE payment_id=?2 AND owner=?3 AND status='settling'")
+    .bind(now(),row.payment_id,row.owner)];
+  if (outcome?.network === quote.network && /^0x[\da-f]{64}$/i.test(outcome.transaction || "")) {
+    // A broadcast hash is reconciliation evidence, never a settled entitlement.
+    state.error.details.transaction = outcome.transaction;
+    statements.push(db.prepare(`UPDATE payments SET tx_hash=?1 WHERE id=?2 AND status='verified'
+      AND EXISTS (SELECT 1 FROM commerce_purchases WHERE payment_id=?2 AND owner=?3 AND status='uncertain')`)
+      .bind(outcome.transaction,row.payment_id,row.owner));
+  }
+  await db.batch(statements);
+}
+
+/** A transfer and the application stores are not an atomic transaction. */
+export async function recordPurchaseSettlement(state, settlement) {
+  const {env,row,quote,recoveryToken} = state;
+  state.settlement = settlement;
+  if (!/^0x[\da-f]{64}$/i.test(settlement.transaction || "")
+      || settlement.network !== quote.network
+      || (settlement.payer && !sameAddress(settlement.payer,row.payer))) {
+    await recordUncertainSettlement(state);
+    return;
+  }
+  const receipt = receiptFor(row,quote,settlement);
+  receipt.content_hash = JSON.parse(row.prepared_json).content_hash;
+  try { await durableReceipt(env,row,quote,receipt); }
+  catch {
+    state.error = new CommerceError("settlement_pending_recovery",503,
+      {paymentId:row.payment_id,recoveryToken,charged:true,payment_settled:true,receipt,
+        hint:"Payment settled; receipt persistence needs recovery. Do not pay again."});
+    return;
+  }
+  state.receipt = receipt;
+}
+
+export async function finishPurchase(state) {
+  if (state.error) throw state.error;
+  const {env,row,input,recoveryToken,receipt,settlement} = state;
+  if (!receipt) throw pendingSettlement(row,recoveryToken,503);
+  try {
+    const grant = await recoverGrant(env,row.payment_id,recoveryToken);
+    return {body:{...await deliverGrant(env,grant,{journey:input.journey}),recoveryToken,redelivery:false},
+      paymentResponse:settlement};
+  } catch {
+    throw new CommerceError("delivery_pending",503,{paymentId:row.payment_id,recoveryToken,
+      charged:true,payment_settled:true,receipt,recovery:`/api/purchases/${row.payment_id}/delivery`,
+      hint:"Payment settled. Retry delivery with your recovery token; do not pay again."});
+  }
+}
+
+/** Persist the original result before the payment middleware may settle. */
+export async function preparePurchase(state, dependencies = {}) {
+  const {env,row,quote,input,request,recoveryToken} = state;
+  const db = database(env);
+  if (row.status === "prepared") return row;
   const snapshot = JSON.parse(quote.snapshot_json);
   let prepared;
   try {
@@ -578,8 +576,7 @@ export async function purchase(env, input, dependencies = {}) {
       {paymentId:row.payment_id,recoveryToken,charged:false,
         hint:"Preparation failed before settlement. Check any external execution effects before starting another purchase."});
   }
-  return settlePrepared(env,{...row,status:"prepared",prepared_json:canonicalJson(prepared)},
-    quote,input,recoveryToken,dependencies,rail);
+  return {...row,status:"prepared",prepared_json:canonicalJson(prepared)};
 }
 
 export async function recoverGrant(env,paymentId,recoveryToken) {

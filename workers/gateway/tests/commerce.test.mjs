@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { purchase } from "./helpers/purchase.mjs";
 import {
   createQuote,
   createExecutionQuote,
-  purchase,
   recoverGrant,
   deliverGrant,
   executeGrantedInvocation,
@@ -285,7 +285,7 @@ test("database claim failures stop before execution or settlement", async (t) =>
   assert.equal(rowCount(db, "payments"), 0);
 });
 
-test("a payment with a different amount or recipient is rejected before verification", async (t) => {
+test("SDK requirement matching and facilitator verification reject altered amounts or recipients", async (t) => {
   const { env, item, db } = fixture(t);
   const quote = await createQuote(env, item.sku, {});
   const { rail, calls } = createRail();
@@ -302,7 +302,7 @@ test("a payment with a different amount or recipient is rejected before verifica
       quoteId: quote.quoteId, paymentPayload: proof, requestData: {},
     }, { rail }));
   }
-  assert.equal(calls.verify.length, 0);
+  assert.equal(calls.verify.length, 1, "authorization contents are checked by the facilitator; unmatched offers never reach it");
   assert.equal(calls.settle.length, 0);
   assert.equal(db.sqlite.prepare("SELECT count(*) AS n FROM payments WHERE status='settled'").get().n, 0);
 });

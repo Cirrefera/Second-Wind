@@ -4,7 +4,8 @@ import {
   RpcTarget, newHttpBatchRpcSession, newHttpBatchRpcResponse, newMessagePortRpcSession,
 } from "capnweb";
 import { ProductService } from "../src/product-service.js";
-import { createQuote, purchase, deliverGrant, recoverGrant } from "../src/commerce.js";
+import { purchase } from "./helpers/purchase.mjs";
+import { createQuote, deliverGrant, recoverGrant } from "../src/commerce.js";
 import { describeProduct, searchCatalog } from "../src/catalog.js";
 import { createFixtureDb, insertItem } from "./helpers/d1.mjs";
 import { fixtureEnv, makePayment, createRail } from "./helpers/fixtures.mjs";

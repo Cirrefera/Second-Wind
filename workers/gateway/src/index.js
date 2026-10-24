@@ -2,13 +2,15 @@ import {resolveIntent} from './routing.js';
 import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import { dispatchOutbox,createJourneyContext,enqueueObservation } from './telemetry.js';
 import { Hono } from "hono";
+import { contextStorage } from "hono/context-storage";
+import { paymentHandler } from "./payments.js";
 import { newWorkersRpcResponse } from "capnweb";
-import { decodePaymentSignatureHeader, encodePaymentRequiredHeader, encodePaymentResponseHeader } from "@x402/core/http";
+import { decodePaymentSignatureHeader, encodePaymentResponseHeader } from "@x402/core/http";
 import { ProductService } from "./product-service.js";
 import { describeProduct } from "./catalog.js";
-import { createQuote, createExecutionQuote, readQuote, purchase, recoverGrant, deliverGrant,
+import { createQuote, createExecutionQuote, readQuote, openPurchase, recoverGrant, deliverGrant,
   createRecoveryChallenge, recoverWithWallet } from "./commerce.js";
-import { CommerceError, NETWORK, ORIGIN, paymentReadiness, requirementsFor } from "./contracts.js";
+import { CommerceError, NETWORK, ORIGIN, paymentReadiness } from "./contracts.js";
 import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument } from "./discovery.js";
 
 async function jsonBody(request) {
@@ -24,7 +26,7 @@ async function jsonBody(request) {
 
 function signatureFrom(request) {
   if (request.method === "HEAD") return null;
-  const header = request.headers.get("PAYMENT-SIGNATURE");
+  const header = request.headers.get("PAYMENT-SIGNATURE") || request.headers.get("X-PAYMENT");
   if (!header) return null;
   if (header.length > 24_000) throw new CommerceError("invalid_payment_header",400);
   try { return decodePaymentSignatureHeader(header); }
@@ -45,24 +47,11 @@ function recoveryToken(request,body = {}) {
     (authorization?.startsWith("Bearer ") ? authorization.slice(7) : undefined) || body.recoveryToken;
 }
 
-function challenge(c,quote,route) {
-  const requirements = {
-    x402Version:2,
-    resource:{url:`${ORIGIN}${route}?quote_id=${encodeURIComponent(quote.id)}`,
-      description:quote.kind === "execution" ? "One JavaScript Code Mode invocation" : `Second Wind ${quote.sku} v${quote.version}`,
-      mimeType:"application/json"},
-    accepts:[requirementsFor(quote)],
-  };
-  c.header("PAYMENT-REQUIRED",encodePaymentRequiredHeader(requirements));
-  return c.json({...requirements,error:"payment_required",quoteId:quote.id,
-    sku:quote.sku,version:quote.version,content_hash:quote.content_hash,
-    retry_url:requirements.resource.url,
-    recovery:"Preserve quote_id. Set a random 32-byte base64url X-Recovery-Token before payment for response-loss recovery; otherwise save the token returned on success."},402);
-}
-
 /** Dependency injection is a test/server-construction seam, never an env bypass. */
 export function createApp(dependencies = {}) {
   const app = new Hono();
+  const pay = paymentHandler(dependencies);
+  app.use("*",contextStorage());
   app.use("*",async(c,next)=>{
     if (c.req.method === "OPTIONS") return new Response(null,{status:204,headers:{
       "Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET, POST, HEAD, OPTIONS",
@@ -192,20 +181,32 @@ export function createApp(dependencies = {}) {
       }
       if (c.req.method === "GET" || c.req.method === "HEAD") requestData = JSON.parse(quote.config_json);
     } else if (quote.kind === "product" && body.config === undefined) requestData = JSON.parse(quote.config_json);
-    if (!paymentPayload) return challenge(c,quote,route);
-    const pending = purchase(c.env,{quoteId,paymentPayload,requestData,
-      recoveryToken:recoveryToken(c.req.raw,body),journey:c.get("journey")},dependencies);
+    const input = {quoteId,paymentPayload,requestData,
+      recoveryToken:recoveryToken(c.req.raw,body),journey:c.get("journey")};
+    const state = paymentPayload ? await openPurchase(c.env,input) : {env:c.env,quote,input};
+    if (c.req.method === "HEAD") {
+      // A HEAD request may inspect a resource but never submit a payment.
+      const headers = new Headers(c.req.raw.headers);
+      headers.delete("PAYMENT-SIGNATURE"); headers.delete("X-PAYMENT");
+      c.req.raw = new Request(c.req.raw,{headers});
+    }
+    const pending = state.response ? Promise.resolve(state.response) : pay(c,state,route);
     try { c.executionCtx.waitUntil(pending.catch(()=>{})); } catch { /* local fetch has no context */ }
     const response = await pending;
-    c.header("PAYMENT-RESPONSE",encodePaymentResponseHeader(response.paymentResponse));
+    if (!response) return c.res;
+    // Historical authenticated replay uses the SDK's header serializer; fresh
+    // payment responses already carry the official middleware's headers.
+    if (state.response) c.header("PAYMENT-RESPONSE",encodePaymentResponseHeader(response.paymentResponse));
     if (response.body.content_hash) c.header("X-Content-Hash",response.body.content_hash);
     if (!isRpc && new URL(c.req.url).pathname.endsWith("/artifact")) {
       c.header("X-Payment-Id",response.body.paymentId);
       c.header("X-Recovery-Token",response.body.recoveryToken);
       c.header("Content-Type",response.body.artifact.mime_type);
-      return c.body(Buffer.from(response.body.artifact.data,"base64"));
+      c.res = c.body(Buffer.from(response.body.artifact.data,"base64"));
+      return c.res;
     }
-    return c.json(response.body);
+    c.res = c.json(response.body);
+    return c.res;
   }
   app.post("/rpc",c=>paid(c,true));
   app.get("/api/x402/:key",c=>paid(c));

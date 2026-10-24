@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test --test-isolation=none tests/*.test.mjs",
-    "build": "esbuild src/index.js --bundle --format=esm --platform=browser --conditions=workerd,worker,browser --external:cloudflare:* --external:node:* --outfile=dist/worker.js",
+    "build": "esbuild src/index.js --bundle --format=esm --platform=browser --conditions=workerd,worker,browser --alias:url=node:url --external:cloudflare:* --external:node:* --outfile=dist/worker.js",
     "test:dynamic-worker": "node tests/dynamic-worker.integration.mjs"
   },
   "dependencies": {

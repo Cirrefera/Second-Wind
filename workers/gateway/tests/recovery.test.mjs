@@ -1,8 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { privateKeyToAccount } from "viem/accounts";
+import { purchase } from "./helpers/purchase.mjs";
 import {
-  createQuote, purchase, recoverGrant, createRecoveryChallenge, recoverWithWallet,
+  createQuote, recoverGrant, createRecoveryChallenge, recoverWithWallet,
 } from "../src/commerce.js";
 import { createFixtureDb, insertItem } from "./helpers/d1.mjs";
 import { fixtureEnv, createRail, makePayment } from "./helpers/fixtures.mjs";

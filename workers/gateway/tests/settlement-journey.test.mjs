@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createExecutionQuote, purchase } from "../src/commerce.js";
+import { purchase } from "./helpers/purchase.mjs";
+import { createExecutionQuote, } from "../src/commerce.js";
 import { createJourneyContext, streamEvent } from "../src/telemetry.js";
 import { createFixtureDb } from "./helpers/d1.mjs";
 import { createRail, fixtureEnv, makePayment } from "./helpers/fixtures.mjs";
@@ -65,7 +66,7 @@ test("prepared recovery observes the resumed request's delivery and settles only
   assert.equal(resumed.body.paymentId,prepared.payment_id);
   assert.equal(f.row().prepared_json,prepared.prepared_json);
   assert.equal(f.row().status,"settled");
-  assert.equal(f.calls.verify.length,1);
+  assert.equal(f.calls.verify.length,2,"prepared replay uses official verification again");
   assert.equal(f.calls.settle.length,1);
   assert.equal(f.executions(),1);
   const events = f.deliveries();

@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createFixtureDb,insertItem} from './helpers/d1.mjs';
 import {fixtureEnv,createRail,makePayment} from './helpers/fixtures.mjs';
-import {createQuote,createExecutionQuote,purchase} from '../src/commerce.js';
+import {purchase} from "./helpers/purchase.mjs";
+import {createQuote,createExecutionQuote,} from '../src/commerce.js';
 import {ProductService} from '../src/product-service.js';
 import {createApp} from '../src/index.js';
 import {executeCode} from '../src/execution.js';
@@ -262,8 +263,8 @@ test('actual shared producers record a complete bounded journey without buyer co
    return {success:false,errorReason:'private settlement failure'};
   }});
   await assert.rejects(purchase(env,{quoteId:extraQuote.quoteId,paymentPayload:payload,requestData:request,journey:next()},
-   {rail:failure.rail,execute:async()=>({ok:true,result:`private-${outcome}-result`})}),
-   error=>error.code===(outcome==='pending'?'settlement_pending_recovery':'settlement_failed'));
+   {rail:failure.rail,execute:async()=>outcome==='failed'?{ok:false,error:'private preparation failure'}:{ok:true,result:`private-${outcome}-result`}}),
+   error=>error.code===(outcome==='pending'?'settlement_pending_recovery':'execution_failed'));
  }
  await trialProduct(env,item.sku,{language:'javascript'},{code:'return "private-failing-code";',language:'javascript'},null,
   {journey:next(),executorFactory:()=>({execute:async()=>({error:'private-sandbox-diagnostic'})})});

@@ -4,7 +4,8 @@ import {prepareRelease,publishRelease,releasePayloadKey} from '../src/release-pr
 import {canonicalJson,sha256} from '../src/contracts.js';
 import {createFixtureDb,insertItem,rowCount} from './helpers/d1.mjs';
 import {fixtureEnv,createRail,makePayment} from './helpers/fixtures.mjs';
-import {createQuote,purchase,recoverGrant,deliverGrant} from '../src/commerce.js';
+import {purchase} from "./helpers/purchase.mjs";
+import {createQuote,recoverGrant,deliverGrant} from '../src/commerce.js';
 import {readFile} from 'node:fs/promises';
 
 // Synthetic trusted-operator reviews exist only inside these isolated fixtures.
