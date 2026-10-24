@@ -6,6 +6,11 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Buyer-flow release evidence — 2026-10-24
+
+PR #19 deployed configured POST purchases, required pre-execution trial credentials and single-owner recovery. PR #20 activated language-specific AWS-0568 v3 through the existing publisher. Live observations confirm the official configured guide challenge, recovery of a disconnected trial without another execution, both language-specific R2 packages, and preservation of an accepted v2 URL after activation. The final follow-up fixes bodyless accepted POST parsing. [Detailed evidence and limitations](BUYER_FLOW_IMPLEMENTATION_2026-10-24.md#production-evidence--2026-10-24). Standard Hono/x402, prices, old payloads and purchase snapshots are preserved.
+
+
 ## Buyer-flow repair implementation — October 24, 2026
 
 Source baseline: `3e81553d9ada199fadc8065e6774af29350d24a6`. This checkpoint is an implementation candidate, not a deployed completion claim.
