@@ -1,3 +1,4 @@
+import {buyerView,publicProduct} from './public-identity.js';
 import {resolveIntent} from './routing.js';
 import {prepareTrialAccess} from './trial-access.js';
 import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
@@ -18,7 +19,7 @@ function operationJourney(journey) {
 }
 
 export function deliverProduct(env, grant, options) {
-  return deliverGrant(env, grant, options);
+  return deliverGrant(env, grant, options).then(value=>buyerView(env.SW_DB,value));
 }
 
 async function withProgress(callback, operation, task) {
@@ -73,7 +74,7 @@ export class GrantCapability extends RpcTarget {
     const grant = await recoverGrant(
       this.#env, this.#grant.paymentId, this.#grant.recoveryToken,
     );
-    return {
+    return buyerView(this.#env.SW_DB,{
       paymentId: grant.paymentId,
       sku: grant.sku,
       settledAt: grant.settledAt,
@@ -81,7 +82,7 @@ export class GrantCapability extends RpcTarget {
       txHash: grant.txHash,
       network: grant.network,
       allowedActions: [...(grant.allowedActions || [])],
-    };
+    });
   }
 }
 
@@ -98,9 +99,9 @@ export class ProductService extends RpcTarget {
     this.#journey=createJourneyContext({...journey,transport:journey?.transport || 'rpc'});
   }
 
-  components(sku) { return describeComponents(this.#env,sku); }
+  async components(sku) { return buyerView(this.#env.SW_DB,await describeComponents(this.#env,sku)); }
   async prepareTrial(sku,config,input) {
-    return (await prepareTrialAccess(this.#env,sku,config,input,{journey:operationJourney(this.#journey)})).acceptance;
+    return buyerView(this.#env.SW_DB,(await prepareTrialAccess(this.#env,sku,config,input,{journey:operationJourney(this.#journey)})).acceptance);
   }
   async trial(sku,config,input,callback) {
     const pending=trialProduct(this.#env,sku,config,input,callback,{journey:operationJourney(this.#journey)});
@@ -115,7 +116,7 @@ export class ProductService extends RpcTarget {
   async describe(sku) {
     const product=await describeProduct(this.#env.SW_DB,sku);
     await enqueueObservation(this.#env,'discovery.described',{journey:operationJourney(this.#journey),payload:{sku:product.sku,product_version_ref:product.version}});
-    return product;
+    return publicProduct(product);
   }
   describeProduct(sku) { return this.describe(sku); }
 
@@ -125,7 +126,7 @@ export class ProductService extends RpcTarget {
     await enqueueObservation(this.#env,'discovery.searched',{journey});
     const products=await searchCatalog(this.#env.SW_DB,query,limit);
     await enqueueObservation(this.#env,'discovery.resolved',{journey,payload:{candidate_product_ids:products.map(p=>p.sku),result_count:products.length,resolution_status:products.length?'multiple_candidates':'no_match'}});
-    return products;
+    return products.map(publicProduct);
   }
   async searchIntent(intent, limit, callbacks) {
     const journey=operationJourney(this.#journey);
@@ -152,13 +153,13 @@ export class ProductService extends RpcTarget {
         throw error;
       } finally {clearTimeout(timer);}
     }
-    return {...result,candidates:result.matches.map(({routing,compatibility,score,...product})=>({
+    return {...await buyerView(this.#env.SW_DB,result),candidates:result.matches.map(({routing,compatibility,score,...product})=>({
       product:new ProductCapability(this.#env,product,undefined,undefined,this.#journey,this.#retainWork),compatibility,
     }))};
   }
   searchCatalog(query, limit) { return this.search(query, limit); }
 
-  configure(sku, config, callbacks) { return clarify(this.#env, sku, config, callbacks,operationJourney(this.#journey)); }
+  async configure(sku, config, callbacks) { return buyerView(this.#env.SW_DB,await clarify(this.#env, sku, config, callbacks,operationJourney(this.#journey))); }
 
   async select(sku) {
     const product=await describeProduct(this.#env.SW_DB,sku);
@@ -175,8 +176,8 @@ export class ProductService extends RpcTarget {
     return recoverWithWallet(this.#env, paymentId, proof,{journey:operationJourney(this.#journey)});
   }
 
-  reconcilePurchase(paymentId, recoveryToken, transaction) {
-    return reconcilePurchase(this.#env,paymentId,recoveryToken,{transaction});
+  async reconcilePurchase(paymentId, recoveryToken, transaction) {
+    return buyerView(this.#env.SW_DB,await reconcilePurchase(this.#env,paymentId,recoveryToken,{transaction}));
   }
 
   async getGrant(paymentId, recoveryToken) {
@@ -231,10 +232,10 @@ export class ProductCapability extends RpcTarget {
   constructor(env, product, config, check,journey,retainWork) {
     super(); this.#env = env; this.#product = product; this.#config = config; this.#check = check;this.#journey=journey;this.#retainWork=retainWork;
   }
-  info() { return this.#product; }
+  info() { return publicProduct(this.#product); }
   async compatibility(config = this.#config) {
     await this.#unchanged();
-    return clarify(this.#env, this.#product.sku, config,null,operationJourney(this.#journey));
+    return buyerView(this.#env.SW_DB,await clarify(this.#env, this.#product.sku, config,null,operationJourney(this.#journey)));
   }
   async #unchanged() {
     const current = await describeProduct(this.#env.SW_DB, this.#product.sku);
@@ -252,7 +253,7 @@ export class ProductCapability extends RpcTarget {
     await this.#unchanged();
     const menu=await describeComponents(this.#env,this.#product.sku);
     await this.#unchanged();
-    return menu;
+    return buyerView(this.#env.SW_DB,menu);
   }
   async trial(input,callback) {
     await this.#unchanged();
@@ -265,9 +266,9 @@ export class ProductCapability extends RpcTarget {
   async prepareTrial(input) {
     await this.#unchanged();
     if(!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'),{status:400});
-    return (await prepareTrialAccess(this.#env,this.#product.sku,this.#config,input,{journey:operationJourney(this.#journey)})).acceptance;
+    return buyerView(this.#env.SW_DB,(await prepareTrialAccess(this.#env,this.#product.sku,this.#config,input,{journey:operationJourney(this.#journey)})).acceptance);
   }
-  configuration() { return this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}; }
+  configuration() { return publicProduct(this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}); }
 
 }
 
@@ -278,7 +279,7 @@ export class TrialCapability extends RpcTarget {
   recovery() {return {trial_id:this.#id,trial_token:this.#token};}
   async selectComponents(ids) {
     const scope=await selectTrialComponents(this.#env,this.#id,this.#token,ids);
-    return new SelectionCapability(this.#env,this.#id,this.#token,scope,this.#journey);
+    return new SelectionCapability(this.#env,this.#id,this.#token,await buyerView(this.#env.SW_DB,scope),this.#journey);
   }
 }
 class SelectionCapability extends RpcTarget {
@@ -287,6 +288,6 @@ class SelectionCapability extends RpcTarget {
   info() {return structuredClone(this.#scope);}
   accept(expectedScopeHash) {
     if(expectedScopeHash!==this.#scope.scope_hash) throw Object.assign(new Error('selection_acceptance_mismatch'),{status:409});
-    return acceptTrialSelection(this.#env,this.#id,this.#token,this.#scope.selected_components,expectedScopeHash,{journey:operationJourney(this.#journey)});
+    return acceptTrialSelection(this.#env,this.#id,this.#token,this.#scope.selected_components,expectedScopeHash,{journey:operationJourney(this.#journey)}).then(value=>buyerView(this.#env.SW_DB,value));
   }
 }

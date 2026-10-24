@@ -153,7 +153,7 @@ test("verified recipient discovery publishes the intended payment destination wi
   assert.equal(proof.payment.payment_configuration_error, null);
   const discovery = await (await call("/.well-known/x402")).json();
   assert.equal(discovery.payment_configured, true);
-  assert.deepEqual(discovery.items.find(entry => entry.sku === item.sku).accepts, []);
+  assert.deepEqual(discovery.items.find(entry => entry.slug === item.slug).accepts, []);
   assert.deepEqual(discovery.payment, {rail:"x402", network:NETWORK, asset:USDC, payTo:RECIPIENT});
   assert.equal(calls.settle.length, 0);
 });

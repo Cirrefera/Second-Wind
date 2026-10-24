@@ -1,3 +1,4 @@
+import {publicProduct} from '../src/public-identity.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createFixtureDb,insertItem} from './helpers/d1.mjs';
@@ -102,11 +103,11 @@ test('HTTP and capability string search preserve legacy matching while observati
    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),env,{waitUntil(){}});
   assert.equal(response.status,200);const result=await response.json();
   assert.equal(result.status,'matches');assert.equal(result.routing_ready,false);
-  assert.deepEqual(result.matches.map(product=>product.sku),[item.sku]);
+  assert.deepEqual(result.matches.map(product=>product.slug),[item.slug]);
  }
  const rpc=await new ProductService(env).searchIntent('lambda');
  assert.equal(rpc.status,'matches');assert.equal(rpc.routing_ready,false);
- assert.equal((await rpc.candidates[0].product.info()).sku,item.sku);
+ assert.equal((await rpc.candidates[0].product.info()).slug,item.slug);
  const journey=createJourneyContext();
  await resolveIntent(env,'private-buyer-query-secret',10,{journey});
  const rows=db.sqlite.prepare("SELECT event_type,payload FROM business_event_outbox WHERE event_type LIKE 'discovery.%' ORDER BY rowid").all();
@@ -210,7 +211,7 @@ test('uncertain request shape makes one call and preserves fallback over HTTP an
    const response=await app.fetch(new Request('https://secondwindai.com/api/resolve',{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intent})}),env,{waitUntil(){}});
    assert.equal(response.status,200);const http=await response.json();
-   const {alignment,...unchanged}=http;assert.deepEqual(unchanged,baseline);
+   const {alignment,...unchanged}=http;assert.deepEqual(unchanged,{...baseline,matches:baseline.matches.map(publicProduct)});
    assert.equal(alignment.status,'uncertain_request_shape');
    assert.deepEqual(alignment.candidate_scope,{evaluated_count:0,eligible_count:1,complete:false});
    assert.equal(alignment.readings,undefined);assert.equal(alignment.negative_scope,undefined);
@@ -437,7 +438,7 @@ test('HTTP and actual Cap\'n Web routing apply supported ranking before the requ
    assert.deepEqual(rpcResult,http);
    assert.equal(requests.length,mode==='provider-failure'?2:4);
    assert.ok(requests.filter(request=>request.questions.candidate).every(request=>request.state.candidates.length===2));
-   assert.deepEqual(http.matches.map(product=>product.sku),selected?[item.sku]:fallback.matches.map(product=>product.sku),mode);
+   assert.deepEqual(http.matches.map(product=>product.slug),selected?[item.slug]:fallback.matches.map(product=>product.slug),mode);
    assert.equal(candidates.length,http.matches.length);
    if(candidates.length) assert.equal(typeof candidates[0].product.info,'function');
    assert.equal(http.status,mode==='semantic-selected'?'match':fallback.status);
@@ -540,7 +541,7 @@ test('semantic pending choice asks exact language over HTTP and Cap\'n Web befor
  assert.equal(response.status,200);
  const http=await response.json();
  assert.equal(http.status,'missing_configuration');assert.equal(http.matched,false);
- assert.equal(http.matches.length,1);assert.equal(http.matches[0].sku,item.sku);
+ assert.equal(http.matches.length,1);assert.equal(http.matches[0].slug,item.slug);
  assert.equal(http.matches[0].compatibility.compatible,false);
  assert.deepEqual(http.clarifications,[{field:'target_language',question:'What programming language do you want the product delivered in?'}]);
  const realFetch=globalThis.fetch;
@@ -561,9 +562,9 @@ test('semantic pending choice asks exact language over HTTP and Cap\'n Web befor
  class Buyer extends RpcTarget {clarify(questions){asked=true;assert.deepEqual(questions,http.clarifications);return {target_language:'javascript'};}}
  const result=await client.searchIntent(intent,10,new Buyer());
  assert.equal(asked,true);assert.equal(result.status,'match');assert.equal(result.matched,true);
- assert.equal(result.matches[0].sku,item.sku);assert.equal(result.matches[0].version,item.version);
+ assert.equal(result.matches[0].slug,item.slug);assert.equal(result.matches[0].version,item.version);
  assert.equal(result.matches[0].compatibility.compatible,true);
- assert.equal((await result.candidates[0].product.info()).sku,item.sku);
+ assert.equal((await result.candidates[0].product.info()).slug,item.slug);
  assert.equal(seen.at(-1).target_language,'javascript');
  assert.ok(seen.slice(0,-1).every(value=>value.target_language===undefined));
  result.candidates[0].product[Symbol.dispose]();
@@ -642,7 +643,7 @@ test('every supplied identity must match its own namespace',async t=>{
   assert.equal((await resolveIntent(env,{...identity,target_language:'javascript'})).status,'no_match',JSON.stringify(identity));
  }
  const result=await resolveIntent(env,{sku:item.sku,slug:item.slug,alias:'retry-safety',target_language:'javascript'});
- assert.equal(result.status,'match');assert.equal(result.matches[0].sku,item.sku);
+ assert.equal(result.status,'match');assert.equal(result.matches[0].slug,item.slug);
 });
 
 test('lexical routing uses whole words from positive declared dimensions',async t=>{
@@ -673,7 +674,7 @@ test('language is requested explicitly and not inferred from runtime',async t=>{
  const service=new ProductService(env);let asked=false;
  const found=await service.searchIntent({alias:'retry-safety'},10,{clarify:async()=>{asked=true;return {target_language:'javascript'};}});
  assert.ok(asked);assert.equal(found.status,'match');assert.equal(found.candidates.length,1);
- assert.equal((await found.candidates[0].product.info()).sku,r.matches[0].sku);
+ assert.equal((await found.candidates[0].product.info()).slug,r.matches[0].slug);
  await found.candidates[0].product.configure({});
 });
 test('manifest identities are immutable and unrelated goals return no match',async t=>{

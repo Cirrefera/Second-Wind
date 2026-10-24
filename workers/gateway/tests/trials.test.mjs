@@ -200,7 +200,7 @@ test('sandbox access costs one cent through official x402; selected product paym
  const {rail,calls}=createRail();const app=createApp({facilitator:rail});
  const call=(path,init={})=>app.fetch(new Request(new URL(path,'https://secondwindai.com'),init),env,{waitUntil(){}});
  const discovery=(await call('/discovery/resources')).json();
- const resources=await discovery;const resource=resources.items.find(x=>x.sku===item.sku);
+ const resources=await discovery;const resource=resources.items.find(x=>x.slug===item.slug);
  assert.equal(resource.price_role,'maximum');assert.equal(resource.max_amount_atomic,'5000000');
  assert.deepEqual(resource.accepts,[],'a maximum is never advertised as an exact payment');
  for(const path of ['/api/tools','/openapi.json','/llms.txt']) {
@@ -220,7 +220,7 @@ test('sandbox access costs one cent through official x402; selected product paym
  assert.equal(excessive.status,402);assert.equal(calls.settle.length,0);
  const paidResponse=await call(required.resource.url,{method:'POST',headers:{'PAYMENT-SIGNATURE':sign('10000'),'X-Recovery-Token':input.trial_token}});
  assert.equal(paidResponse.status,200,await paidResponse.clone().text());const accessBody=await paidResponse.json();
- assert.equal(accessBody.receipt.amount_usdc_micros,'10000');assert.equal(accessBody.receipt.sku,'SW-SANDBOX');
+ assert.equal(accessBody.receipt.amount_usdc_micros,'10000');assert.equal(accessBody.receipt.slug,'sandbox-preview');
  assert.equal(accessBody.files,undefined,'sandbox pass grants no product files');
  assert.equal(calls.settle.length,1);assert.equal(calls.settle[0].requirements.amount,'10000');
  const trial=await trialProduct(env,item.sku,config,input,null,{previewExecutorFactory,executorFactory:buyerExecutorFactory()});

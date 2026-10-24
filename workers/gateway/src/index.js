@@ -1,3 +1,4 @@
+import {buyerView,requestProduct} from './public-identity.js';
 import {resolveIntent} from './routing.js';
 import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import {prepareTrialAccess} from './trial-access.js';
@@ -86,7 +87,7 @@ export function createApp(dependencies = {}) {
   });
 
   app.get("/health",c=>c.json({ok:true,worker:"secondwind-gateway",mode:"unified",
-    network:NETWORK,surfaces:["http-x402:/api/x402/{sku}","http-x402:/rpc","capnweb:/capnp"],do_free:true,
+    network:NETWORK,surfaces:["http-x402:/api/x402/{slug}","http-x402:/rpc","capnweb:/capnp"],do_free:true,
     deployment:c.env.CF_VERSION_METADATA || null}));
   app.get("/api/proof",async c=>{
     let db = false,commerce = false,key = false;
@@ -119,17 +120,17 @@ export function createApp(dependencies = {}) {
   app.get("/llms.txt",async c=>c.text(await llmsDocument(c.env,{journey:c.get("journey")})));
   app.post("/api/resolve",async c=>{
     const body = await jsonBody(c.req.raw);
-    return c.json(await resolveIntent(c.env,body.intent ?? body.query ?? "",body.limit ?? 10,{journey:c.get("journey")}));
+    return c.json(await buyerView(c.env.SW_DB,await resolveIntent(c.env,body.intent ?? body.query ?? "",body.limit ?? 10,{journey:c.get("journey")})));
   });
   app.get('/api/products/:sku/components',async c=>{
     const menu=await describeComponents(c.env,c.req.param('sku'));
     await enqueueObservation(c.env,'discovery.described',{journey:c.get('journey'),payload:{sku:menu.sku,product_version_ref:menu.version}});
-    return c.json(menu);
+    return c.json(await buyerView(c.env.SW_DB,menu));
   });
   app.post('/api/trials/access',c=>paid(c,false,true));
   app.post('/api/trials',async c=>{
     const b=await jsonBody(c.req.raw);
-    const pending=trialProduct(c.env,b.sku,b.config || {},b.input,null,{journey:c.get("journey")});
+    const pending=trialProduct(c.env,requestProduct(b),b.config || {},b.input,null,{journey:c.get("journey")});
     // Bounded continuation helps on disconnect; D1 remains the recovery authority.
     retainWork(c,pending);
     return c.json(await pending);
@@ -137,15 +138,15 @@ export function createApp(dependencies = {}) {
   app.get('/api/trials/:id',async c=>c.json(await recoverTrial(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),{journey:c.get('journey')})));
   app.post('/api/trials/:id/selection',async c=>{
     const b=await jsonBody(c.req.raw);
-    return c.json(await selectTrialComponents(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components));
+    return c.json(await buyerView(c.env.SW_DB,await selectTrialComponents(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components)));
   });
   app.post('/api/trials/:id/accept',async c=>{
     const b=await jsonBody(c.req.raw);
-    return c.json(await acceptTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components,b.scope_hash,{journey:c.get("journey")}));
+    return c.json(await buyerView(c.env.SW_DB,await acceptTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components,b.scope_hash,{journey:c.get("journey")})));
   });
   app.post("/api/configure",async c=>{
     const body = await jsonBody(c.req.raw);
-    return c.json(await new ProductService(c.env,c.get("journey")).configure(body.sku,body.config || {}));
+    return c.json(await new ProductService(c.env,c.get("journey")).configure(requestProduct(body),body.config || {}));
   });
 
   async function paid(c,isRpc = false,isSandbox = false) {
@@ -155,8 +156,8 @@ export function createApp(dependencies = {}) {
     if (!quoteId && paymentPayload) throw new CommerceError("acceptance_required",400,{hint:"Retry the original accepted purchase URL."});
     let requestData,route,trialToken;
     if (isSandbox) {
-      if (!quoteId || body.sku !== undefined || body.input !== undefined || body.config !== undefined) {
-        const prepared=await prepareTrialAccess(c.env,body.sku,body.config || {},body.input,{journey:c.get('journey')});
+      if (!quoteId || requestProduct(body) !== undefined || body.input !== undefined || body.config !== undefined) {
+        const prepared=await prepareTrialAccess(c.env,requestProduct(body),body.config || {},body.input,{journey:c.get('journey')});
         if (quoteId && quoteId !== prepared.acceptance.acceptanceId) throw new CommerceError('acceptance_mismatch',409);
         quoteId=prepared.acceptance.acceptanceId;
         requestData=prepared.request;
@@ -173,7 +174,7 @@ export function createApp(dependencies = {}) {
       requestData = body.code !== undefined ? {code:body.code,language:body.language,
         ...(body.invocationId ? {invocationId:body.invocationId} : {})} : body.config || {};
       if (!quoteId) {
-        if (body.sku) quoteId = (await createQuote(c.env,body.sku,requestData,{journey:c.get("journey")})).acceptanceId;
+        if (requestProduct(body)) quoteId = (await createQuote(c.env,requestProduct(body),requestData,{journey:c.get("journey")})).acceptanceId;
         else quoteId = (await createExecutionQuote(c.env,requestData,{journey:c.get("journey")})).acceptanceId;
       }
       route = "/rpc";
@@ -248,7 +249,7 @@ export function createApp(dependencies = {}) {
       c.res = c.body(Buffer.from(response.body.artifact.data,"base64"));
       return c.res;
     }
-    c.res = c.json(response.body);
+    c.res = c.json(await buyerView(c.env.SW_DB,response.body));
     return c.res;
   }
   app.post("/rpc",c=>paid(c,true));
@@ -267,12 +268,12 @@ export function createApp(dependencies = {}) {
       c.header("Content-Type",body.artifact.mime_type);
       return c.body(Buffer.from(body.artifact.data,"base64"));
     }
-    return c.json(body);
+    return c.json(await buyerView(c.env.SW_DB,body));
   });
   app.post("/api/purchases/:paymentId/reconcile",async c=>{
     const body = await jsonBody(c.req.raw);
-    return c.json(await reconcilePurchase(c.env,c.req.param("paymentId"),
-      recoveryToken(c.req.raw,body),{transaction:body.transaction}));
+    return c.json(await buyerView(c.env.SW_DB,await reconcilePurchase(c.env,c.req.param("paymentId"),
+      recoveryToken(c.req.raw,body),{transaction:body.transaction})));
   });
   app.post("/api/purchases/:paymentId/recovery-challenge",async c=>
     c.json(await createRecoveryChallenge(c.env,c.req.param("paymentId"),{journey:c.get("journey")})));

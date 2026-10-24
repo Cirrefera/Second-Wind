@@ -1,3 +1,4 @@
+import {buyerView,publicProduct} from '../src/public-identity.js';
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
@@ -20,8 +21,8 @@ function fixture(t) {
 test("Cap'n Web and plain product calls expose the same public contract", async (t) => {
   const { db, item, env } = fixture(t);
   const service = new ProductService(env);
-  assert.deepEqual(await service.describe(item.sku), await describeProduct(db, item.sku));
-  assert.deepEqual(await service.search("recovery", 10), await searchCatalog(db, "recovery", 10));
+  assert.deepEqual(await service.describe(item.sku), publicProduct(await describeProduct(db, item.sku)));
+  assert.deepEqual(await service.search("recovery", 10), (await searchCatalog(db, "recovery", 10)).map(publicProduct));
   assert.deepEqual(await service.describeProduct(item.sku), await service.describe(item.sku));
   assert.equal(Object.hasOwn(service, "env"), false, "RPC roots do not expose raw bindings");
   assert.equal(Object.hasOwn(service, "grant"), false);
@@ -70,8 +71,8 @@ test("dependent grant→info/delivery calls pipeline in one actual HTTP batch", 
     const [info, delivered] = await Promise.all([infoPromise, deliveryPromise]);
     assert.equal(roundTrips, 1);
     assert.equal(info.paymentId, paymentId);
-    assert.equal(info.sku, item.sku);
-    assert.deepEqual(delivered, expected);
+    assert.equal(info.slug, item.slug);
+    assert.deepEqual(delivered, await buyerView(env.SW_DB,expected));
     assert.equal(calls.settle.length, 1);
   } finally {
     globalThis.fetch = realFetch;
@@ -131,7 +132,7 @@ test('free product selection, configuration pipeline in one HTTP round trip', as
  try {
   const client=newHttpBatchRpcSession('https://secondwindai.com/capnp');
   const quote=await client.select(item.sku).configure({}).configuration();
-  assert.equal(quote.sku,item.sku); assert.equal(trips,1);
+  assert.equal(quote.slug,item.slug); assert.equal(trips,1);
  } finally {globalThis.fetch=realFetch;}
 });
 
