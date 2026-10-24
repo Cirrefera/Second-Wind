@@ -1,0 +1,67 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_record": {
+    "sku": "AWS-0568",
+    "slug": "agent-state-dynamodb-manifest",
+    "name": "agent-state-dynamodb-manifest",
+    "kind": "artifact",
+    "service": "dynamodb",
+    "summary": "DynamoDB CreateTable manifest for agent state. PK: agent_id(S) SK: session_id(S). GSI: status-index. TTL: expires_at. Billing: PAY_PER_REQUEST. PITR: enabled. Streams: NEW_AND_OLD_IMAGES. SSE: enabled. Pass directly to CreateTable API.",
+    "guidance": "DynamoDB CreateTable manifest for agent state. PK: agent_id(S) SK: session_id(S). GSI: status-index. TTL: expires_at. Billing: PAY_PER_REQUEST. PITR: enabled. Streams: NEW_AND_OLD_IMAGES. SSE: enabled. Pass directly to CreateTable API.\n\nStructured payload:\n{\"slug\": \"agent-state-dynamodb-manifest\"}",
+    "price_usd": 0.5,
+    "invoke_kind": "resolve",
+    "input_schema": "",
+    "mime_type": "",
+    "source_repo": "awslabs/amazon-dynamodb-tools",
+    "source_url": "https://github.com/awslabs/amazon-dynamodb-tools",
+    "license_spdx": "Apache-2.0",
+    "provenance": "github",
+    "content_hash": "99264137b57258f5",
+    "status": "draft",
+    "version": 1
+  },
+  "historical_record_sha256": "65ba1907dfab27fac8e674cee0b55da27f2f01d2f5148a038779faf25b0e7a37",
+  "current_origin": "original Second Wind implementation; no DynamoDB Tools code included",
+  "original_file_hashes": {
+    "planner.mjs": "c8c7a61b7287ce99547abbfa96706430b4268c6f94843c162d551854bb54cb9c",
+    "planner.py": "e79d64a7c2680aaf4c0a3471b9417e290233a59188a8384470a33960ff4de7d7",
+    "selection.schema.json": "1ae694fb12ef37f985e2972abb07cf8c01268b3b68a304918e44e364c6312106",
+    "README.md": "f4babbc63410fa5dd65cacfff2bdc3749df2824c283cae8d4c95cd07c6be1546",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "features/status-index.mjs": "f58bf13cd9ffb80e4b9d3bc9b0d7558990a4f7d2eaee9b106b819430c2ee36d8",
+    "features/status_index.py": "2d7112a3274d00fecc1eac9a5ebb361afc7779cbb48052d0e065e81f9f6a391f",
+    "features/expiry.mjs": "44f7373cf604ff7cdc72252d4908f3588cc37ce283899e5e30bfc86d9ad12ce8",
+    "features/expiry.py": "1d662ec1e68872b77dd4b6e12625ba3237ece5e8237691a686aa97393518ae91",
+    "features/recovery.mjs": "1a2a45974703441e55e830f79d318423228d15ad5f8cfd0715eba3cbd42333b2",
+    "features/recovery.py": "c66827757c37be4bc1c49d449f427be4d1981e051f5c5f3df739d28800fc1024",
+    "features/change-stream.mjs": "086410727f47e332fcf38987ba26069b4d1f6a19719d64b31e0c68581cd803c2",
+    "features/change_stream.py": "cd9e43955b6d92961b5eaa065823fbc0848396cfcb5f96d0618d99ea35c56286"
+  },
+  "interface_sources": [
+    "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html",
+    "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTimeToLive.html",
+    "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateContinuousBackups.html"
+  ],
+  "license_mapping": [
+    {
+      "paths": [
+        "planner.mjs",
+        "planner.py",
+        "selection.schema.json",
+        "README.md",
+        "LICENSE",
+        "features/status-index.mjs",
+        "features/status_index.py",
+        "features/expiry.mjs",
+        "features/expiry.py",
+        "features/recovery.mjs",
+        "features/recovery.py",
+        "features/change-stream.mjs",
+        "features/change_stream.py"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level mapping reviewed; not an independent legal certification"
+    }
+  ]
+}

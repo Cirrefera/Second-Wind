@@ -1,4 +1,5 @@
 import {resolveIntent} from './routing.js';
+import {prepareTrialAccess} from './trial-access.js';
 import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
 import { RpcTarget } from "capnweb";
 import {createJourneyContext,enqueueObservation} from './telemetry.js';
@@ -98,6 +99,9 @@ export class ProductService extends RpcTarget {
   }
 
   components(sku) { return describeComponents(this.#env,sku); }
+  async prepareTrial(sku,config,input) {
+    return (await prepareTrialAccess(this.#env,sku,config,input,{journey:operationJourney(this.#journey)})).acceptance;
+  }
   async trial(sku,config,input,callback) {
     const pending=trialProduct(this.#env,sku,config,input,callback,{journey:operationJourney(this.#journey)});
     this.#retainWork?.(pending);
@@ -257,6 +261,11 @@ export class ProductCapability extends RpcTarget {
     this.#retainWork?.(pending);
     const result=await pending;
     return new TrialCapability(this.#env,result.trial_id,result.trial_token,this.#journey);
+  }
+  async prepareTrial(input) {
+    await this.#unchanged();
+    if(!this.#check?.ok) throw Object.assign(new Error('incomplete_configuration'),{status:400});
+    return (await prepareTrialAccess(this.#env,this.#product.sku,this.#config,input,{journey:operationJourney(this.#journey)})).acceptance;
   }
   configuration() { return this.#check || {ok:false, missing:[], errors:[{code:'configuration_required'}]}; }
 

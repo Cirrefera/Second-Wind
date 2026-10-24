@@ -6,6 +6,14 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Paid protected sandbox — implementation checkpoint, 2026-10-24
+
+User-approved policy: only the explicit 72 SKUs in `workers/gateway/src/sandbox-policy.js` are eligible. The other 85 inventory items, including result services and bundles, cannot start trials. Eligibility does not imply runtime availability. New trial admission costs $0.01 through the existing official Hono/x402 handler; settlement grants preview admission only. Exact trial retries/recovery remain free and never silently rerun. Product price ceilings and component allocations are unchanged.
+
+The new AWS-0568 v4 preview privately executes its selected JavaScript implementation. Buyer code receives only bounded diagnostics plus public component/configuration data. Python delivery remains selectable, explicitly previewed through JavaScript. Paid product delivery alone exposes selected files. Existing purchases and historical release objects remain intact. Migration 0006 links each trial to exactly one paid admission.
+
+Gateway and public discovery changes are implemented and existing required checks pass. Deployment and v4 activation are pending at this checkpoint; see the v4 preview review for evidence and limits.
+
 ## Buyer-flow release evidence — 2026-10-24
 
 PR #19 deployed configured POST purchases, required pre-execution trial credentials and single-owner recovery. PR #20 activated language-specific AWS-0568 v3 through the existing publisher. Live observations confirm the official configured guide challenge, recovery of a disconnected trial without another execution, both language-specific R2 packages, and preservation of an accepted v2 URL after activation. The final follow-up fixes bodyless accepted POST parsing. [Detailed evidence and limitations](BUYER_FLOW_IMPLEMENTATION_2026-10-24.md#production-evidence--2026-10-24). Standard Hono/x402, prices, old payloads and purchase snapshots are preserved.

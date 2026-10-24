@@ -1,13 +1,15 @@
-import {checkConfiguration,copyConfiguration,describeProduct} from './catalog.js';
+import {copyConfiguration,describeProduct} from './catalog.js';
 import {canonicalJson,sha256,validToken,CommerceError} from './contracts.js';
 import {trialMenu,prepareComponentSelection} from './scope.js';
 import {executeCode,validateExecutionInput} from './execution.js';
 import {createScopeQuote} from './commerce.js';
+import {authorizeTrialAccess} from './trial-access.js';
+import {runProductPreview} from './preview.js';
 import {enqueueObservation,observeExpiredTrial} from './telemetry.js';
 
 const fail=(code,status=400)=>{throw new CommerceError(code,status);};
 const trialStatus=(env,row)=>row.status!=='running'?row.status:
-  Date.now()<Date.parse(row.created_at)+Math.max(100,Math.min(60_000,Number(env.EXECUTION_TIMEOUT_MS)||15_000))+5_000?'running':'unknown';
+  Date.now()<Date.parse(row.created_at)+2*Math.max(100,Math.min(60_000,Number(env.EXECUTION_TIMEOUT_MS)||15_000))+5_000?'running':'unknown';
 
 // Releases contain small immutable UTF-8 file packages. Other adapters must be
 // implemented explicitly; no claims of arbitrary language execution or AWS access.
@@ -47,7 +49,8 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
   const config=copyConfiguration(configuration);
   const tokenHash=await sha256(token);
   const hashRequest=row=>sha256(canonicalJson({sku:sku.trim(),version:row.version,
-    release_hash:row.release_hash,configuration:config,code:execution.code,language:execution.language}));
+    release_hash:row.release_hash,configuration:config,code:execution.code,language:execution.language,
+    ...(input?.components!==undefined?{components:Array.isArray(input.components)?[...input.components].sort():input.components}:{})}));
   const readAttempt=()=>env.SW_DB.prepare(`SELECT t.*,r.request_hash,r.execution_owner
     FROM component_trials t LEFT JOIN component_trial_requests r ON r.trial_id=t.id WHERE t.id=?1`).bind(id).first();
   const validateAttempt=async row=>{
@@ -63,10 +66,10 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
   // release must never turn an identical retry into a new execution.
   const prior=await readAttempt();
   if(prior) {await validateAttempt(prior);return responseFor(prior);}
-  const check=await checkConfiguration(env.SW_DB,sku,configuration);
-  if(!check.ok) throw new CommerceError('incomplete_configuration',400,{missing:check.missing,errors:check.errors});
-  const {product,release,menu,files}=await releaseFor(env,sku);
-  if(product.version!==check.version) fail('product_changed',409);
+  const access=await authorizeTrialAccess(env,sku,configuration,input,options);
+  const {product,release,paymentId}=access;
+  const check={config:access.request.configuration};
+  const menu=await trialMenu(release);
   const requestHash=await hashRequest({version:product.version,release_hash:menu.release_hash});
   const owner=crypto.randomUUID();
   const created_at=new Date().toISOString(),expires_at=Date.now()+3600000;
@@ -76,8 +79,10 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
     .bind(id,tokenHash,product.sku,product.version,menu.release_hash,canonicalJson(check.config),created_at,expires_at);
   const identityInsert=env.SW_DB.prepare(`INSERT INTO component_trial_requests (trial_id,request_hash,execution_owner)
     VALUES (?1,?2,?3)`).bind(id,requestHash,owner);
+  const paymentInsert=env.SW_DB.prepare('INSERT INTO component_trial_payments(trial_id,payment_id) VALUES (?1,?2)')
+    .bind(id,paymentId);
   let inserted=false;
-  try { await env.SW_DB.batch([trialInsert,identityInsert]); inserted=true; }
+  try { await env.SW_DB.batch([trialInsert,identityInsert,paymentInsert]); inserted=true; }
   catch {
     // A failed D1 acknowledgement may follow a committed batch. Read back
     // the identity before deciding whether this request owns execution.
@@ -93,15 +98,17 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
   if(row.execution_owner!==owner) return responseFor(row);
   if(options.journey) await enqueueObservation(env,'journey.linked',
     {journey:options.journey,payload:{trial_id:id}});
-  // Only explicit trial operations cross into the isolated Worker. No acceptance,
-  // payment, grant, storage, gateway secret or network capability is provided.
+  // Product code executes once in a private isolate under a fixed adapter.
+  // Buyer-controlled code receives only the bounded result, never product modules.
+  const preview=await runProductPreview(env,release,check.config,access.request.components,options);
   const providers={
     components:async()=>menu,
     configuration:async()=>check.config,
-    readFile:async(path)=>{if(!files.has(path)) fail('trial_file_not_found',404);return files.get(path).content;},
+    preview:async()=>structuredClone(preview),
   };
-  const modules=Object.fromEntries([...files].filter(([path])=>/\.m?js$/.test(path)).map(([path,file])=>['product/'+path,file.content]));
-  const result=await executeCode(env,execution.code,execution.language,null,callback,{...options,providers,modules});
+  const result=preview.ok
+    ? await executeCode(env,execution.code,execution.language,null,callback,{...options,providers,modules:{}})
+    : {ok:false,error:preview.code || 'preview_execution_failed'};
   const status=result.ok?'completed':'failed';
   try {
     await env.SW_DB.prepare('UPDATE component_trials SET status=?1,result_json=?2 WHERE id=?3 AND status=\'running\'')

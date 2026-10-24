@@ -1,0 +1,83 @@
+[
+  {
+    "kind": "service",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "contract",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "product",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "license",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "purchase-url",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "validation",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "language-adapters",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "sandbox-trial",
+    "subject_hash": "b648805a93d1ade2f56e55e89e40e27f0061eb59095914889f4698e86a979e56",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "routing",
+    "subject_hash": "5af4442598f7d05d04a4864ea1e6fa56a8680d2a8cc7a3716fa0fea8b44ddf2f",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md#aws-0568-v4-protected-preview-review",
+    "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  }
+]

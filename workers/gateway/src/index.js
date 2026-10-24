@@ -1,5 +1,6 @@
 import {resolveIntent} from './routing.js';
 import {describeComponents,trialProduct,recoverTrial,selectTrialComponents,acceptTrialSelection} from './trials.js';
+import {prepareTrialAccess} from './trial-access.js';
 import { dispatchOutbox,createJourneyContext,enqueueObservation } from './telemetry.js';
 import { Hono } from "hono";
 import { contextStorage } from "hono/context-storage";
@@ -10,7 +11,7 @@ import { ProductService } from "./product-service.js";
 import { describeProduct } from "./catalog.js";
 import { createQuote, createExecutionQuote, readQuote, openPurchase, recoverGrant, deliverGrant,
   createRecoveryChallenge, recoverWithWallet, reconcilePurchase } from "./commerce.js";
-import { CommerceError, NETWORK, ORIGIN, paymentReadiness } from "./contracts.js";
+import { CommerceError, NETWORK, ORIGIN, paymentReadiness, sha256, validToken } from "./contracts.js";
 import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument, toolMethod } from "./discovery.js";
 
 async function jsonBody(request, allowEmpty = false) {
@@ -125,6 +126,7 @@ export function createApp(dependencies = {}) {
     await enqueueObservation(c.env,'discovery.described',{journey:c.get('journey'),payload:{sku:menu.sku,product_version_ref:menu.version}});
     return c.json(menu);
   });
+  app.post('/api/trials/access',c=>paid(c,false,true));
   app.post('/api/trials',async c=>{
     const b=await jsonBody(c.req.raw);
     const pending=trialProduct(c.env,b.sku,b.config || {},b.input,null,{journey:c.get("journey")});
@@ -146,13 +148,28 @@ export function createApp(dependencies = {}) {
     return c.json(await new ProductService(c.env,c.get("journey")).configure(body.sku,body.config || {}));
   });
 
-  async function paid(c,isRpc = false) {
+  async function paid(c,isRpc = false,isSandbox = false) {
     const body = c.req.method === "POST" ? await jsonBody(c.req.raw,true) : {};
     const paymentPayload = signatureFrom(c.req.raw);
     let quoteId = acceptanceFrom(c.req.raw,paymentPayload,body);
     if (!quoteId && paymentPayload) throw new CommerceError("acceptance_required",400,{hint:"Retry the original accepted purchase URL."});
-    let requestData,route;
-    if (isRpc) {
+    let requestData,route,trialToken;
+    if (isSandbox) {
+      if (!quoteId || body.sku !== undefined || body.input !== undefined || body.config !== undefined) {
+        const prepared=await prepareTrialAccess(c.env,body.sku,body.config || {},body.input,{journey:c.get('journey')});
+        if (quoteId && quoteId !== prepared.acceptance.acceptanceId) throw new CommerceError('acceptance_mismatch',409);
+        quoteId=prepared.acceptance.acceptanceId;
+        requestData=prepared.request;
+        trialToken=prepared.token;
+        const provided=recoveryToken(c.req.raw,body);
+        if (provided && provided !== trialToken) throw new CommerceError('trial_unauthorized',401);
+      } else {
+        const accepted=await readQuote(c.env,quoteId,{allowExpired:Boolean(paymentPayload)});
+        requestData=JSON.parse(accepted.config_json);
+        trialToken=recoveryToken(c.req.raw,body);
+      }
+      route='/api/trials/access';
+    } else if (isRpc) {
       requestData = body.code !== undefined ? {code:body.code,language:body.language,
         ...(body.invocationId ? {invocationId:body.invocationId} : {})} : body.config || {};
       if (!quoteId) {
@@ -180,7 +197,17 @@ export function createApp(dependencies = {}) {
       route = `/api/x402/${encodeURIComponent(key)}`;
     }
     const quote = await readQuote(c.env,quoteId,{allowExpired:Boolean(paymentPayload)});
-    if (!isRpc) {
+    const purchaseSnapshot=JSON.parse(quote.snapshot_json);
+    if (isSandbox) {
+      if (purchaseSnapshot.purchase_purpose !== 'sandbox-access') throw new CommerceError('acceptance_product_mismatch',409);
+      // The pre-retained trial credential also protects this bound access
+      // receipt. A bearer token alone never establishes payment settlement.
+      if (paymentPayload && (!validToken(trialToken) || await sha256(trialToken) !== requestData.trial_token_hash))
+        throw new CommerceError('trial_unauthorized',401);
+    } else if (purchaseSnapshot.purchase_purpose === 'sandbox-access') {
+      throw new CommerceError('sandbox_payment_route_required',409,{purchase:'/api/trials/access'});
+    }
+    if (!isRpc && !isSandbox) {
       const snapshot = JSON.parse(quote.snapshot_json);
       if (c.req.param("key") !== quote.sku && c.req.param("key") !== snapshot.slug) throw new CommerceError("acceptance_product_mismatch",409);
       if (new URL(c.req.url).pathname.endsWith("/artifact") && snapshot.payload?.via !== "r2") {
@@ -196,9 +223,9 @@ export function createApp(dependencies = {}) {
           && body.config === undefined && Object.keys(requestData).length === 0)) {
         requestData = JSON.parse(quote.config_json);
       }
-    } else if (quote.kind === "product" && body.config === undefined) requestData = JSON.parse(quote.config_json);
+    } else if (isRpc && quote.kind === "product" && body.config === undefined) requestData = JSON.parse(quote.config_json);
     const input = {quoteId,paymentPayload,requestData,
-      recoveryToken:recoveryToken(c.req.raw,body),journey:c.get("journey")};
+      recoveryToken:isSandbox?trialToken:recoveryToken(c.req.raw,body),journey:c.get("journey")};
     const state = paymentPayload ? await openPurchase(c.env,input) : {env:c.env,quote,input};
     if (c.req.method === "HEAD") {
       // A HEAD request may inspect a resource but never submit a payment.

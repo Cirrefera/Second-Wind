@@ -24,7 +24,8 @@ function database(env) {
 // Only the official middleware emits x402 payment requirements.
 function publicAcceptance(row) {
   const snapshot = JSON.parse(row.snapshot_json);
-  const path = row.kind === "execution" ? "/rpc"
+  const path = snapshot.purchase_purpose === "sandbox-access" ? "/api/trials/access"
+    : row.kind === "execution" ? "/rpc"
     : `/api/x402/${encodeURIComponent(snapshot.slug || row.sku)}`;
   return {
     acceptanceId: row.id, sku: row.sku, version: row.version,
@@ -170,6 +171,22 @@ export async function createQuote(env, sku, config = {}, {journey,purchaseMethod
   });
 }
 
+/** A sandbox admission is a separate service purchase, never a SKU file grant. */
+export async function createSandboxAccess(env, {request,product,acceptanceKey,journey}) {
+  const descriptor={trial_id:request.trial_id,sku:product.sku,version:product.version,
+    release_hash:request.release_hash,amount_usdc_micros:'10000',invocations:1,
+    product_purchase_included:false};
+  const content=canonicalJson(descriptor),contentHash=await sha256(content);
+  return insertQuote(env,{sku:'SW-SANDBOX',version:1,kind:'product',amount:'10000',
+    config:request,acceptanceKey,journey,snapshot:{sku:'SW-SANDBOX',version:1,
+      purchase_purpose:'sandbox-access',purchase_method:'POST',invoke_kind:'resolve',
+      trial_product:product,manifest_hash:request.release_hash,
+      payload:{via:'inline',guidance:content,content_hash:contentHash,
+        size_bytes:new TextEncoder().encode(content).byteLength,mime_type:'application/json',hash_scope:'sandbox-access-json-utf8'},
+      resolved:{ok:true,sku:'SW-SANDBOX',version:1,purpose:'sandbox-access',
+        sandbox_access:descriptor,content_hash:contentHash,content_hash_scope:'sandbox-access-json-utf8'}}});
+}
+
 export function executionInput(input) {
   if (!input || typeof input.code !== "string" || !input.code.trim() || input.code.length > 65536) {
     throw new CommerceError("invalid_code", 400);
@@ -185,7 +202,7 @@ export function executionInput(input) {
   return { code: input.code, language: "javascript", ...(input.invocationId ? { invocationId: input.invocationId } : {}) };
 }
 
-/** One purchased invocation; component sandbox trials are free and separate. */
+/** One purchased invocation; SKU previews require their separately bound admission. */
 export async function createExecutionQuote(env, input, {journey} = {}) {
   const config = executionInput(input);
   return insertQuote(env, {
