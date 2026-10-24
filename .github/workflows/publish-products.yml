@@ -1,0 +1,57 @@
+name: Publish reviewed products
+on:
+  push:
+    branches: [main]
+    paths: [products/publication.json]
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit containing the reviewed publication record
+        required: true
+        type: string
+      mode:
+        description: Stage immutable releases or activate reviewed products
+        required: true
+        default: stage
+        type: choice
+        options: [stage, activate]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'Cirrefera/Second-Wind' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    concurrency:
+      group: second-wind-production
+      cancel-in-progress: false
+    defaults:
+      run:
+        working-directory: workers/gateway
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      EXPECTED_COMMIT: ${{ inputs.expected_commit || github.sha }}
+      RELEASE_MODE: ${{ inputs.mode || 'record' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: workers/gateway/package-lock.json
+      - name: Install locked operator dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Publish through the existing release service
+        run: node scripts/publish-prepared-releases.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: publication-result
+          path: workers/gateway/release-result.json
+          if-no-files-found: ignore

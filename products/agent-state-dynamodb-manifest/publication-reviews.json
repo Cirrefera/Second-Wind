@@ -1,0 +1,83 @@
+[
+  {
+    "kind": "service",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "contract",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "product",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "license",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "purchase-url",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "language-adapters",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "routing",
+    "subject_hash": "556039037aa0108e5794abf7a7b018d7c0cdd1ec61972a7cc9e7ef02e89032f1",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "validation",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "sandbox-trial",
+    "subject_hash": "d5a3d3d16b1b672767bb74492da5932684cce8bcd97c37edfb54ac5222859b5a",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#aws-0568-dynamodb-request-planner",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  }
+]
