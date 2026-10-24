@@ -9,7 +9,7 @@ import { decodePaymentSignatureHeader, encodePaymentResponseHeader } from "@x402
 import { ProductService } from "./product-service.js";
 import { describeProduct } from "./catalog.js";
 import { createQuote, createExecutionQuote, readQuote, openPurchase, recoverGrant, deliverGrant,
-  createRecoveryChallenge, recoverWithWallet } from "./commerce.js";
+  createRecoveryChallenge, recoverWithWallet, reconcilePurchase } from "./commerce.js";
 import { CommerceError, NETWORK, ORIGIN, paymentReadiness } from "./contracts.js";
 import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument } from "./discovery.js";
 
@@ -216,7 +216,7 @@ export function createApp(dependencies = {}) {
     const grant = await recoverGrant(c.env,c.req.param("paymentId"),recoveryToken(c.req.raw));
     await enqueueObservation(c.env,"recovery.grant_recovered",{journey:c.get("journey"),payload:{payment_id:grant.paymentId,sku:grant.sku}});
     const body = await deliverGrant(c.env,grant,{journey:c.get("journey")});
-    c.header("PAYMENT-RESPONSE",encodePaymentResponseHeader(grant.receipt.facilitator_response));
+    c.header("PAYMENT-RESPONSE",encodePaymentResponseHeader(grant.paymentResponse));
     c.header("X-Content-Hash",body.content_hash);
     if (new URL(c.req.url).searchParams.get("format") === "artifact") {
       if (!body.artifact) throw new CommerceError("unknown_artifact",404);
@@ -224,6 +224,11 @@ export function createApp(dependencies = {}) {
       return c.body(Buffer.from(body.artifact.data,"base64"));
     }
     return c.json(body);
+  });
+  app.post("/api/purchases/:paymentId/reconcile",async c=>{
+    const body = await jsonBody(c.req.raw);
+    return c.json(await reconcilePurchase(c.env,c.req.param("paymentId"),
+      recoveryToken(c.req.raw,body),{transaction:body.transaction}));
   });
   app.post("/api/purchases/:paymentId/recovery-challenge",async c=>
     c.json(await createRecoveryChallenge(c.env,c.req.param("paymentId"),{journey:c.get("journey")})));

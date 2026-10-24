@@ -6,7 +6,7 @@ import { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js
 import { executeCode, reportProgress } from "./execution.js";
 import {
   createRecoveryChallenge, deliverGrant, executeGrantedInvocation,
-  recoverGrant, recoverWithWallet,
+  recoverGrant, recoverWithWallet, reconcilePurchase,
 } from "./commerce.js";
 
 export { checkConfiguration, describeProduct, searchCatalog } from "./catalog.js";
@@ -165,6 +165,10 @@ export class ProductService extends RpcTarget {
 
   recoverWithWallet(paymentId, proof) {
     return recoverWithWallet(this.#env, paymentId, proof,{journey:operationJourney(this.#journey)});
+  }
+
+  reconcilePurchase(paymentId, recoveryToken, transaction) {
+    return reconcilePurchase(this.#env,paymentId,recoveryToken,{transaction});
   }
 
   async getGrant(paymentId, recoveryToken) {

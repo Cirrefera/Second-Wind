@@ -71,7 +71,19 @@ export async function openApiDocument(env,options) {
     "/api/purchases/{paymentId}/delivery":{get:{summary:"Free authenticated delivery of the purchased version",
       parameters:[{in:"path",name:"paymentId",required:true,schema:{type:"string"}}],
       security:[{RecoveryToken:[]}],responses:{"200":ok("Delivery"),"401":ok("Recovery token required")}}},
-    "/api/purchases/{paymentId}/recovery-challenge":{post:{summary:"Create a one-use wallet recovery challenge",
+    "/api/purchases/{paymentId}/reconcile":{post:{
+      summary:"Confirm the original finalized Base transfer and repair its purchase records without submitting payment",
+      parameters:[{in:"path",name:"paymentId",required:true,schema:{type:"string"}}],
+      security:[{RecoveryToken:[]}],
+      requestBody:{required:true,content:{"application/json":{schema:{type:"object",properties:{
+        transaction:{type:"string",pattern:"^0x[0-9a-fA-F]{64}$",description:"Original transaction hash; omit only when already recorded on the purchase"}}}}}},
+      responses:{"200":{description:"Confirmed purchase; use authenticated delivery",content:{"application/json":{schema:{
+        type:"object",required:["paymentId","status","receipt","recovery"],properties:{
+          paymentId:{type:"string"},status:{const:"settled"},receipt:{type:"object"},recovery:{type:"string"}}}}}},
+        "400":ok("Original transaction hash required"),"401":ok("Private recovery token required"),
+        "409":ok("Purchase or transaction cannot be reconciled, does not match, or is not finalized"),
+        "503":ok("Chain evidence or durable recording temporarily unavailable; never pay again")}}},
+    "/api/purchases/{paymentId}/recovery-challenge":{post:{summary:"Get or reuse a one-use wallet recovery challenge",
       parameters:[{in:"path",name:"paymentId",required:true,schema:{type:"string"}}],responses:{"200":ok("Wallet challenge")}}},
     "/api/purchases/{paymentId}/recover":{post:{summary:"Exchange a wallet-signed challenge for a new recovery token",
       parameters:[{in:"path",name:"paymentId",required:true,schema:{type:"string"}}],responses:{"200":ok("New token"),"401":ok("Invalid proof")}}},
@@ -110,7 +122,7 @@ export async function llmsDocument(env,options) {
     `New transport sessions reacquire capabilities from D1; promise pipelining does not make a disconnected session durable.\n\n`+
     `## Recovery\n\nGET ${ORIGIN}/api/purchases/{paymentId}/delivery with X-Recovery-Token is free. `+
     `If a token was lost, POST the recovery-challenge endpoint and then POST its wallet-signed response to recover. `+
-    `An uncertain settlement is never retried as a new charge.\n\n`+
+    `For a pending purchase without a saved receipt, POST /api/purchases/{paymentId}/reconcile with X-Recovery-Token and {"transaction":"0x..."}, or call reconcilePurchase(paymentId,recoveryToken,transaction) over Cap'n Web. The transaction hash may be omitted only when already recorded. This reads finalized Base evidence and repairs the original purchase; it never submits a transfer. Then use delivery or getGrant as usual. An uncertain settlement is never retried as a new charge.\n\n`+
     `## Live products (${document.total_live})\n\n`+
     document.tools.map(item=>`- ${item.sku}: ${item.name} — ${item.max_amount_atomic ? `maximum $${item.price_usd} USDC` : "pricing not configured"} — ${item.method} ${item.url} — v${item.version}, SHA-256 ${item.content_hash}\n`).join("");
 }

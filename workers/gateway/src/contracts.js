@@ -100,3 +100,9 @@ export function paymentReadiness(env) {
     payment_configuration_error:recipient.error || (networkSupported ? null : "unsupported_payment_network"),
   };
 }
+
+/** Stable correlation key shared by SDK-verified claims and read-only recovery. */
+export async function authorizationKey(network, asset, payer, nonce) {
+  return `x402:${await sha256(canonicalJson({network,asset:asset.toLowerCase(),
+    payer:payer.toLowerCase(),nonce:nonce.toLowerCase()}))}`;
+}
