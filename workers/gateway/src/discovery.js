@@ -1,6 +1,7 @@
 import { listCatalog } from "./catalog.js";
 import { NETWORK, USDC, ORIGIN, paymentConfig, paymentReadiness } from "./contracts.js";
 import {enqueueObservation} from './telemetry.js';
+import {isSandboxEligible} from './sandbox-policy.js';
 
 export const toolUrl = item => `${ORIGIN}/api/x402/${encodeURIComponent(item.slug || item.sku)}`;
 export const toolMethod = item => item.invoke_kind === "bedrock" ||
@@ -12,14 +13,17 @@ export async function toolsDocument(env,{journey}={}) {
     payload:{result_count:items.length,candidate_product_ids:items.slice(0,50).map(item=>item.sku)}});
   return {
     service:"Second Wind",
-    introduction:"Pay only for what you need. Listed amounts are maximum payments, never automatic charges. Test supported products in the sandbox, choose what you want, and authorize only the selected purchase amount.",
+    introduction:"Pay only for what you need. Listed product amounts are maximum payments, never automatic charges. For supported products, preview access costs $0.01 per new trial through x402; recovery is free. Product purchases remain separately priced.",
     total_live:items.length,
     payment:{rail:"x402",network:NETWORK,asset:"USDC"},
-    tools:items.map(item => ({...item,url:toolUrl(item),method:toolMethod(item)})),
+    tools:items.map(item => ({...item,url:toolUrl(item),method:toolMethod(item),
+      sandbox_eligible:isSandboxEligible(item.sku),
+      sandbox_available:Boolean(item.sandbox_available),
+      ...(item.sandbox_access_url?{sandbox_access_url:item.sandbox_access_url}:{})})),
     discovery:{intent:`${ORIGIN}/api/resolve`,
       capnweb:`${ORIGIN}/capnp`,openapi:`${ORIGIN}/openapi.json`},
     toolGuidance:{
-      trial:"Check pricing_mode for proportional-components and read components_url for the product's available selections. Before executing a trial, generate and privately retain input.trial_id (trial_ plus a random UUID) and input.trial_token (32 cryptographically random bytes as base64url); both are required. Retry with the same input to recover the original trial. Complete a sandbox trial, choose what you need, and accept the exact scope before authorizing payment. Products marked whole-product sell their complete declared deliverable; their component trial is unavailable.",
+      trial:"Check sandbox_eligible and sandbox_available. Eligibility is the approved SKU policy; availability also requires an active compatible release. Only sandbox_available products support previews now. Generate and retain input.trial_id (trial_ plus a random UUID) and input.trial_token (32 random bytes as base64url); include components, code, and language:'javascript'. Prepare access with POST /api/trials/access or Cap'n Web prepareTrial. HTTP returns a $0.01 x402 challenge; Cap'n Web returns a public acceptance with its payment URL. Authorize the challenge using the returned URL and X-Recovery-Token equal to input.trial_token. Then run the paid trial with POST /api/trials or Cap'n Web trial and the identical SKU, config, and input. Recovery and retry of that same trial are free. Product-specific contracts define whether delivery-language choices are previewed through JavaScript. Products marked whole-product sell their complete declared deliverable and do not offer component selection.",
       purchase:"After trial and selection, accept the selected scope. For a whole product with a configured language, POST its declared HTTP endpoint with {config:{language:<supported language>}}. Other whole products use their declared HTTP method. Component acceptance records the selected scope without charging. Follow its purchase.url to receive the official x402 challenge, review its exact amount, and authorize payment with PAYMENT-SIGNATURE. Preserve that URL for retries. Existing accepted GET URLs remain readable.",
       recovery:"Save paymentId and recoveryToken. Redelivery and Cap'n Web recovery require that private token and never initiate settlement.",
       disconnect:"For response-loss recovery, choose a random 32-byte base64url X-Recovery-Token before purchase and retain the accepted purchase URL.",
@@ -45,6 +49,9 @@ export async function resourcesDocument(env,options) {
       description:item.summary,sku:item.sku,method:item.method,
       ...(item.pricing_mode ? {pricing_mode:item.pricing_mode,pricing_status:item.pricing_status,
         price_role:item.price_role,components_url:item.components_url,trial_url:item.trial_url} : {}),
+      sandbox_eligible:isSandboxEligible(item.sku),
+      sandbox_available:Boolean(item.sandbox_available),
+      ...(item.sandbox_access_url?{sandbox_access_url:item.sandbox_access_url}:{}),
       content_hash:item.content_hash,content_hash_scope:item.content_hash_scope,version:item.version,
       lastUpdated:Math.floor(Date.parse(item.updated_at)/1000),
     })),
@@ -64,14 +71,24 @@ export async function openApiDocument(env,options) {
     "/api/resolve":{post:{summary:"Deterministic intent search",responses:{"200":ok("Matches or no_match")}}},
     "/api/products/{sku}/components":{get:{summary:"Available components, dependencies and maximum payment",
       parameters:[{in:"path",name:"sku",required:true,schema:{type:"string"}}],
-      responses:{"200":ok("Component menu"),"409":ok("Component trial unavailable")}}},
-    "/api/trials":{post:{summary:"Run or recover the identical sandbox trial without payment",
+      responses:{"200":ok("Available components, dependencies and maximum product payment"),"409":ok("Component trial unavailable")}}},
+    "/api/trials/access":{post:{summary:"Prepare or recover one-cent sandbox access for an eligible product",
       requestBody:{required:true,content:{"application/json":{schema:{type:"object",required:["sku","input"],properties:{
-        sku:{type:"string"},config:{type:"object"},input:{type:"object",required:["code","language","trial_id","trial_token"],properties:{
+        sku:{type:"string"},config:{type:"object"},input:{type:"object",required:["trial_id","trial_token","components","code","language"],properties:{
+          trial_id:{type:"string",pattern:"^trial_[A-Za-z0-9_-]{1,96}$"},
+          trial_token:{type:"string",pattern:"^[A-Za-z0-9_-]{43}$"},components:{type:"array",minItems:1,uniqueItems:true,items:{type:"string"}},
+          code:{type:"string"},language:{type:"string",enum:["javascript"]}}}}}}}},
+      responses:{"200":ok("Paid sandbox access or recovered acceptance"),"402":ok("Initial $0.01 x402 sandbox-access challenge"),
+        "400":ok("Invalid preview input or unsupported execution language"),"403":ok("Sandbox payment required or product unavailable")}}},
+    "/api/trials":{post:{summary:"Run a paid sandbox trial or recover its identical prior result",
+      requestBody:{required:true,content:{"application/json":{schema:{type:"object",required:["sku","input"],properties:{
+        sku:{type:"string"},config:{type:"object"},input:{type:"object",required:["code","language","trial_id","trial_token","components"],properties:{
             code:{type:"string"},language:{type:"string",enum:["javascript","js"]},
+            components:{type:"array",minItems:1,uniqueItems:true,items:{type:"string"}},
             trial_id:{type:"string",pattern:"^trial_[A-Za-z0-9_-]{1,96}$",description:"Generate and retain before starting a recoverable trial."},
             trial_token:{type:"string",pattern:"^[A-Za-z0-9_-]{43}$",description:"Private random 32-byte base64url token; retain before starting."}}}}}}}},
-      responses:{"200":ok("Stored result or running/unknown status with private recovery credentials"),
+      responses:{"200":ok("Stored bounded preview result or running/unknown status with private recovery credentials"),
+        "403":ok("Sandbox access payment required; prepare access at /api/trials/access"),
         "400":ok("Invalid input or incomplete recovery credentials"),"401":ok("Invalid trial token"),
         "409":ok("Changed request, changed release or expired trial"),"503":ok("Start outcome requires recovery")}}},
     "/api/trials/{id}":{get:{summary:"Recover the original trial with X-Trial-Token, including after a catalog update",
@@ -126,7 +143,7 @@ export async function openApiDocument(env,options) {
     if (item.slug && item.sku !== item.slug) paths[`/api/x402/${encodeURIComponent(item.sku)}`] = paths[path];
   }
   return {openapi:"3.1.0",info:{title:"Second Wind",version:"2.0.0",
-    description:"One product service for HTTP/x402 and Cap'n Web. Accepted purchases pin selected content and the final amount; private purchase credentials enable free recovery."},
+      description:"One product service for HTTP/x402 and Cap'n Web. Sandbox access is a separate one-cent x402 payment for eligible products; a buyer's identical retry/recovery is free. Accepted product purchases are priced separately."},
     servers:[{url:ORIGIN}],paths,components:{securitySchemes:{RecoveryToken:{type:"apiKey",in:"header",name:"X-Recovery-Token"},
       TrialToken:{type:"apiKey",in:"header",name:"X-Trial-Token"}}}};
 }
@@ -136,10 +153,11 @@ export async function llmsDocument(env,options) {
   return `# Second Wind\n\nPay only for what you need. Listed amounts are maximum payments, never automatic charges. Test supported products in the sandbox, choose what you want, and authorize only the selected purchase amount. USDC on Base via x402 v2.\n\n`+
     `## Try and choose\n\n`+
     `Check /api/tools for pricing_mode: proportional-components. Only those products offer selection through a sandbox trial; whole-product listings sell their complete declared deliverable and do not offer a component trial. Read components_url for available selections, shares, dependencies, and the maximum price.\n\n`+
-    `Use select(sku).configure(config).trial({code,language:"javascript",trial_id,trial_token}) over Cap'n Web with the credentials you retained before starting. Inspect trial.info(), then call trial.selectComponents(ids). Inspect selection.info() and call selection.accept(scope_hash) with that exact hash. Acceptance records the selected purchase; it does not charge you. Authorize payment only after reviewing your selected scope and exact amount.\n\n`+
-    `HTTP equivalents: POST /api/trials with {sku,config,input:{code,language:"javascript",trial_id,trial_token}}; POST /api/trials/{id}/selection with {components}; POST /api/trials/{id}/accept with {components,scope_hash}. Use X-Trial-Token for selection, acceptance, and GET /api/trials/{id} recovery.\n\n`+
+    `Check sandbox_eligible and sandbox_available in /api/tools. Eligibility is the approved SKU policy; availability also requires an active compatible release. Only sandbox_available products can be previewed. Generate and retain trial_id ("trial_" plus a random UUID) and trial_token (32 random bytes as base64url). Prepare access with select(sku).configure(config).prepareTrial({trial_id,trial_token,components,code,language:"javascript"}) over Cap'n Web, or POST /api/trials/access with {sku,config,input:{trial_id,trial_token,components,code,language:"javascript"}}. HTTP returns a separate $0.01 x402 sandbox-access challenge; Cap'n Web returns a public acceptance with its payment URL. Authorize using the payment URL and X-Recovery-Token equal to trial_token. Product purchase pricing is separate.\n\n`+
+    `After paying, run the identical trial with POST /api/trials using the same {sku,config,input}. Cap'n Web trial uses the same input. The trial code can call only codemode.preview(), codemode.components(), and codemode.configuration(); product source and modules remain private to the trusted adapter. codemode.preview() returns only the product-approved summary fields; it never returns source, cookbook text, a full plan, operation inputs, or arbitrary product logs. Your own code controls its returned result and logs. Retry or recover using the same trial_id and trial_token; recovery is free and does not execute the trial again.\n\n`+
+    `After the trial, inspect trial.info() and choose components with trial.selectComponents(ids). Inspect selection.info(), then call selection.accept(scope_hash) using that exact hash. Acceptance returns the selected scope and product purchase URL but does not charge for the product. The one-cent sandbox access is separate. Authorize the product's exact x402 amount at the returned URL. HTTP equivalents are POST /api/trials/{id}/selection with {components}, then POST /api/trials/{id}/accept with {components,scope_hash}; send X-Trial-Token with both.\n\n`+
     `Before starting any trial, generate and privately retain trial_id ("trial_" plus a random UUID) and trial_token (32 cryptographically random bytes encoded as base64url). Pass both in the trial input object over HTTP or Cap’n Web; missing credentials are rejected before execution. Retry with the same credentials and identical SKU, configuration and code to recover that attempt, even after a catalog update; changed requests are rejected. GET /api/trials/{id} with X-Trial-Token, or recoverTrial(trial_id,trial_token) over Cap’n Web, recovers its stored status/result. Recovery is available until the returned expires_at (one hour). Running work may report unknown after its execution window; it is never automatically rerun. A trial interrupted before saving its result cannot promise a completed result.\n\n`+
-    `Trials execute JavaScript in an isolated Dynamic Worker with scoped product access and no outbound networking. A completed trial means your test code executed successfully; it does not establish that a deployment in your AWS account works. Product language support is stated separately in its contract.\n\n`+
+    `Buyer JavaScript runs in an isolated Dynamic Worker with no outbound networking and receives only the three codemode methods above. The product's trusted preview adapter privately runs its JavaScript planner and returns a bounded summary. Product delivery language is separate from sandbox execution language; Python source can be delivered where listed, but the sandbox does not execute Python. A completed trial does not establish that deployment in your AWS account works.\n\n`+
     `## Whole-product purchases and payment\n\n`+
     `1. GET ${ORIGIN}/api/tools and ${ORIGIN}/api/proof.\n`+
     `2. Choose the whole product and configure it. For a configured-language product, POST its endpoint with {"config":{"language":"..."}}; otherwise use its declared HTTP method. You can also POST ${ORIGIN}/rpc with {"sku":"...","config":{...}}. There is no separate price-request stage.\n`+

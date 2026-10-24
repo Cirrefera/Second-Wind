@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0568",
+  "version": 4,
+  "input": "products/agent-state-dynamodb-manifest/releases/v4/release-input.json",
+  "input_sha256": "cf46075ac113a1b83bb850763fb13fbc960441139ef1cb3aa2d12f4151b54827",
+  "reviews": "products/agent-state-dynamodb-manifest/releases/v4/publication-reviews.json",
+  "reviews_sha256": "64f4997ea48d83b295278a24f0aaf9fcf0ed6b264bee986c828232ba5b090bcb",
+  "review_report": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md",
+  "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+  "resolved_blockers": [
+    "bounded_preview_contract_requires_review",
+    "language_scoped_candidate_requires_review",
+    "publication_approval_pending",
+    "trusted_license_and_provenance_review_pending",
+    "trusted_product_and_contract_reviews_pending"
+  ],
+  "mode": "activate",
+  "activation_gate": "trusted_adapter_integration_and_compatible_gateway_deployment_readback_required"
+}

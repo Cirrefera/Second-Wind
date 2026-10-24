@@ -1,4 +1,6 @@
 import { Validator } from "@cfworker/json-schema";
+import { isSandboxEligible } from './sandbox-policy.js';
+import { previewAvailable } from './preview.js';
 
 const CATALOG_COLUMNS = `i.sku, i.slug, i.name, i.kind, i.service, i.summary, i.price_usd,
   i.invoke_kind, i.input_schema, i.input_example, i.mime_type, i.source_repo,
@@ -32,6 +34,7 @@ async function publicProduct(row) {
   }
   const { _guidance, _payload_id, _payload_hash, _payload_mime, _payload_size, _component_pricing, _release_manifest, ...product } = row;
   product.price_role='maximum';
+  product.sandbox_eligible=isSandboxEligible(product.sku);
   product.max_amount_atomic=String(amount);
   product.pricing_mode='whole-product';
   product.pricing_status='configured';
@@ -41,6 +44,9 @@ async function publicProduct(row) {
     catch { throw Object.assign(new Error('invalid_release_manifest'),{status:503}); }
     if (release.language_policy) product.language_policy=release.language_policy;
   }
+  product.sandbox_available=Boolean(product.sandbox_eligible && _component_pricing
+    && release && await previewAvailable(release));
+  if(product.sandbox_available) product.sandbox_access_url='/api/trials/access';
   if (_component_pricing) {
     product.price_role='maximum';
     product.pricing_mode='proportional-components';
