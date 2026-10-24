@@ -4,7 +4,7 @@ import { resolveCapability } from "../../../src/lib/curation.js";
 import { enqueueObservation } from "./telemetry.js";
 import {
   CommerceError, NETWORK, ORIGIN, canonicalJson, sha256,
-  randomToken, validToken, paymentConfig, requirementsFor, sameAddress,
+  randomToken, validToken, paymentConfig, sameAddress,
 } from "./contracts.js";
 
 export { CommerceError } from "./contracts.js";
@@ -19,12 +19,14 @@ function database(env) {
   return env.SW_DB;
 }
 
-function publicQuote(row) {
+// Historical commerce_quotes rows remain immutable acceptance snapshots.
+// Only the official middleware emits x402 payment requirements.
+function publicAcceptance(row) {
   const snapshot = JSON.parse(row.snapshot_json);
   const path = row.kind === "execution" ? "/rpc"
     : `/api/x402/${encodeURIComponent(snapshot.slug || row.sku)}`;
   return {
-    quoteId: row.id, sku: row.sku, version: row.version,
+    acceptanceId: row.id, sku: row.sku, version: row.version,
     price_usd: Number(row.amount_usdc_micros) / 1_000_000,
     price_usdc_micros: row.amount_usdc_micros,
     amount_usdc_micros: row.amount_usdc_micros,
@@ -33,11 +35,12 @@ function publicQuote(row) {
     manifest_hash: snapshot.manifest_hash || null,
     ...(snapshot.scope ? {scope:snapshot.scope} : {}),
     config: JSON.parse(row.config_json),
-    accepts: [requirementsFor(row)],
+    max_amount_atomic: snapshot.scope?.max_amount_atomic || row.amount_usdc_micros,
+    payment: {rail:"x402", network:row.network, asset:row.asset},
     issued_at: row.created_at, expires_at: new Date(row.expires_at).toISOString(),
     purchase: {
       method: snapshot.invoke_kind === "bedrock" || row.kind === "execution" ? "POST" : "GET",
-      url: `${ORIGIN}${path}?quote_id=${encodeURIComponent(row.id)}`,
+      url: `${ORIGIN}${path}?acceptance_id=${encodeURIComponent(row.id)}`,
     },
   };
 }
@@ -45,7 +48,7 @@ function publicQuote(row) {
 async function insertQuote(env, { sku, version, kind, amount, config, snapshot, acceptanceKey, journey }) {
   if (acceptanceKey) {
     const previous=await database(env).prepare('SELECT quote_id FROM component_acceptances WHERE acceptance_key=?1').bind(acceptanceKey).first();
-    if(previous) return publicQuote(await readQuote(env,previous.quote_id,{allowExpired:true}));
+    if(previous) return publicAcceptance(await readQuote(env,previous.quote_id,{allowExpired:true}));
   }
   const rail = paymentConfig(env);
   const configJson = canonicalJson(config);
@@ -73,12 +76,12 @@ async function insertQuote(env, { sku, version, kind, amount, config, snapshot, 
       await database(env).batch([statement,database(env).prepare('INSERT INTO component_acceptances(acceptance_key,quote_id) VALUES (?1,?2)').bind(acceptanceKey,row.id)]);
     } catch(error) {
       const previous=await database(env).prepare('SELECT quote_id FROM component_acceptances WHERE acceptance_key=?1').bind(acceptanceKey).first();
-      if(previous) return publicQuote(await readQuote(env,previous.quote_id,{allowExpired:true}));
+      if(previous) return publicAcceptance(await readQuote(env,previous.quote_id,{allowExpired:true}));
       throw error;
     }
   } else await statement.run();
   if(journey) await enqueueObservation(env,'journey.linked',{journey,payload:{quote_id:row.id}});
-  return publicQuote(row);
+  return publicAcceptance(row);
 }
 
 async function readPayload(env, payload) {
@@ -171,7 +174,7 @@ export function executionInput(input) {
   return { code: input.code, language: "javascript", ...(input.invocationId ? { invocationId: input.invocationId } : {}) };
 }
 
-/** Preserve the existing metered sandbox as an explicit one-execution product. */
+/** One purchased invocation; component sandbox trials are free and separate. */
 export async function createExecutionQuote(env, input, {journey} = {}) {
   const config = executionInput(input);
   return insertQuote(env, {
@@ -182,17 +185,13 @@ export async function createExecutionQuote(env, input, {journey} = {}) {
 
 export async function readQuote(env, quoteId, { allowExpired = false } = {}) {
   if (typeof quoteId !== "string" || !/^q_[A-Za-z0-9-]{20,80}$/.test(quoteId)) {
-    throw new CommerceError("quote_required", 400, { quotes: "/api/quotes" });
+    throw new CommerceError("acceptance_required", 400, { hint: "Preserve the accepted purchase URL." });
   }
   const quote = await database(env).prepare("SELECT * FROM commerce_quotes WHERE id = ?1")
     .bind(quoteId).first();
-  if (!quote) throw new CommerceError("unknown_quote", 404);
-  if (!allowExpired && quote.expires_at < Date.now()) throw new CommerceError("quote_expired", 409);
+  if (!quote) throw new CommerceError("unknown_acceptance", 404);
+  if (!allowExpired && quote.expires_at < Date.now()) throw new CommerceError("acceptance_expired", 409);
   return quote;
-}
-
-export async function describeQuote(env, quoteId) {
-  return publicQuote(await readQuote(env, quoteId));
 }
 
 // Correlation only. Payment validity is established by the official SDK.
@@ -263,7 +262,7 @@ function failedPurchase(row) {
     {paymentId:row.payment_id,charged:false,
       ...(row.error_code === "preparation_interrupted"
         ? {execution_outcome:"unknown",hint:"Preparation was interrupted before settlement. This attempt will not execute or settle again. Check any external work before starting another purchase."}
-        : {quotes:"/api/quotes",hint:"This attempt failed before confirmed settlement. Check the failure and any external execution effects before starting another purchase."})});
+        : {hint:"This attempt failed before confirmed settlement. Check the failure and any external execution effects before starting another purchase."})});
 }
 
 function preparedRetry(row, recoveryToken) {
@@ -372,9 +371,9 @@ export async function openPurchase(env, input) {
       recoveryToken:input.recoveryToken,redelivery:true},paymentResponse:grant.receipt.facilitator_response};
     return state;
   }
-  if (quote.expires_at < Date.now()) throw new CommerceError("quote_expired",409);
+  if (quote.expires_at < Date.now()) throw new CommerceError("acceptance_expired",409);
   const config = paymentConfig(env);
-  if (!sameAddress(config.payTo,quote.pay_to)) throw new CommerceError("quote_recipient_changed",409);
+  if (!sameAddress(config.payTo,quote.pay_to)) throw new CommerceError("acceptance_recipient_changed",409);
   state.recoveryToken ||= randomToken();
   if (!validToken(state.recoveryToken)) throw new CommerceError("invalid_recovery_token",400);
   return state;
@@ -416,7 +415,7 @@ export async function claimVerifiedPurchase(state, {paymentPayload,result}) {
   } catch (error) {
     if (/UNIQUE constraint failed/i.test(String(error?.message || error))) {
       throw new CommerceError("payment_in_progress",409,{retry_after:2,
-        hint:"This quote or payment is already claimed. Retry the original purchase; do not re-sign."});
+        hint:"This accepted purchase or payment is already claimed. Retry the original purchase; do not re-sign."});
     }
     throw new CommerceError("purchase_record_unavailable",503);
   }
@@ -429,7 +428,7 @@ export async function claimPurchaseSettlement(state) {
   const row = state.row;
   if (!row || row.status !== "prepared") throw new CommerceError("purchase_not_prepared",409);
   const config = paymentConfig(env);
-  if (!sameAddress(config.payTo,quote.pay_to)) throw new CommerceError("quote_recipient_changed",409);
+  if (!sameAddress(config.payTo,quote.pay_to)) throw new CommerceError("acceptance_recipient_changed",409);
   const db = database(env);
   const owner = crypto.randomUUID();
   let claimed = false;

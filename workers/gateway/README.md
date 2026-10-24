@@ -29,7 +29,7 @@ input must be configured as the GitHub Actions secret `X402_EXPECTED_PAY_TO` for
 release acceptance. Never store a wallet private key in either recipient setting.
 
 The application requires a valid, non-burn recipient matching that assertion
-before it creates new quotes or publishes payable discovery requirements.
+before it prepares a new purchase or serves a payment challenge.
 Existing paid versions, receipts, and authenticated delivery recovery remain
 available independently of this configuration gate. Matching configuration is an
 operator assertion; it does not independently prove wallet control or a successful
@@ -40,7 +40,7 @@ funded purchase.
 `payment_configuration_error`. Statuses distinguish missing, invalid, burn,
 conflicting, unverified, invalid-verification, mismatched, verified, and unsupported
 network configuration. Recipient values and credentials are excluded from these
-diagnostics; usable discovery requirements include only the intended recipient.
+diagnostics; payment metadata includes only the intended recipient.
 
 The October 22 read-only check found `X402_PAY_TO` present as an encrypted binding,
 but `X402_EXPECTED_PAY_TO` absent. The live validator reported the recipient as
@@ -81,21 +81,24 @@ All paths below use `https://secondwindai.com`.
 | --- | --- |
 | `GET /api/tools`, `/api/proof`, `/openapi.json`, `/llms.txt` | Free discovery and configuration readiness |
 | `GET /.well-known/x402`, `/v2/x402/discovery/resources`, `/discovery/resources` | Generated resource discovery; last path is a compatibility alias |
-| `POST /api/resolve`, `/api/configure`, `/api/quotes` | Public intent matching, input validation and a pinned product quote |
+| `POST /api/resolve`, `/api/configure` | Public intent matching and input validation |
 | `GET /api/x402/{sku-or-slug}` | Quoted product purchase; executable Bedrock products use `POST` |
 | `GET /api/x402/{sku-or-slug}/artifact` | Artifact purchase returning exact bytes, with payment and recovery metadata in response headers |
-| `POST /rpc` | A quoted product request, or one explicitly requested JavaScript Code Mode invocation |
+| `POST /rpc` | A selected product request, or one explicitly requested JavaScript Code Mode invocation |
 | `POST /capnp`, WebSocket `/capnp` | HTTP batch/promise pipelining and bidirectional Cap'n Web sessions |
 | `GET /api/purchases/{paymentId}/delivery` | Authenticated free redelivery |
 | `POST /api/purchases/{paymentId}/recovery-challenge`, `/api/purchases/{paymentId}/recover` | Lost-token wallet recovery |
 | `GET /health`, any application `OPTIONS` | Worker liveness/version evidence and CORS preflight |
 
-`/api/catalog` redirects to `/api/tools`. Free Cap'n Web methods are `describe`, `search`, `configure`, `quote`, `recoveryChallenge` and `recoverWithWallet`; legacy method aliases remain. `getGrant(paymentId, recoveryToken)` returns a purchase-scoped capability with `info`, `deliver` and, where entitled, `execute`. `recoverSession` reissues that capability from D1 after a disconnect.
+`/api/catalog` redirects to `/api/tools`. Free Cap'n Web methods are `describe`, `search`, `configure`, `recoveryChallenge` and `recoverWithWallet`. The custom quote endpoint and RPC methods are removed. `getGrant(paymentId, recoveryToken)` returns a purchase-scoped capability with `info`, `deliver` and, where entitled, `execute`. `recoverSession` reissues that capability from D1 after a disconnect.
 
 ## Purchase and content contract
 
-1. For component products, inspect the maximum, test in the sandbox, select components and accept the final scope before payment. The final amount is bounded by the maximum; the maximum is not automatically charged. Existing fixed-price products retain their declared contracts.
-2. Follow the accepted purchase URL or initial 402 challenge. Internal `quote_id` identifiers preserve compatibility and pin SKU, version, input, final amount, recipient and content hash; they do not introduce a buyer-facing quote stage. New acceptance records expire after five minutes. R2 payloads must exist and match their exact-byte hash; delivery never switches to the latest catalog version.
+Discovery describes maximum amounts as application metadata, with no signable `accepts` entries. Only official `@x402/hono` generates payment requirements at the selected purchase endpoint. Whole-product buyers request the product directly (or POST `/rpc` with SKU and configuration); component buyers use the existing trial → selection → acceptance flow. No replacement quote endpoint is introduced. Internal table/column and versioned telemetry names are retained for historical compatibility; they do not define a buyer step.
+
+
+1. For component products, inspect the maximum, test in the sandbox, select components and accept the final scope before payment. The final amount is bounded by the maximum; the maximum is not automatically charged. Whole-product purchases select the complete declared deliverable at its stated amount.
+2. Follow the accepted purchase URL or initial 402 challenge. New purchase URLs use `acceptance_id`. Historical `quote_id` URLs and immutable ledger rows remain readable for payment/recovery compatibility. The records pin SKU, version, input, final amount, recipient and content hash. New acceptance records expire after five minutes. R2 payloads must exist and match their exact-byte hash; delivery never switches to the latest catalog version.
 3. Sign the SDK's 402 requirements, then retry with `PAYMENT-SIGNATURE` and a private recovery token. Official verification precedes a durable unique claim; only its owner executes and permits SDK settlement. The SDK owns its bounded identical-payment pending retry. Unresolved outcomes remain uncertain, and application retries cannot launch another settlement.
 4. Save `paymentId`, `recoveryToken`, the receipt and its transaction hash. Verify content using the response's explicit `content_hash_scope`; an R2 artifact is base64 encoded within the JSON delivery envelope. The artifact purchase route and authenticated delivery with `?format=artifact` return its exact raw bytes instead.
 
@@ -103,7 +106,7 @@ Code Mode requires an explicit `language: "javascript"` (or `"js"`). It orchestr
 
 ## Private recovery credentials
 
-`X-Recovery-Token` is a bearer credential: 32 cryptographically random bytes encoded as 43 unpadded base64url characters. Keep it private and retain it with the quote. `Authorization: Bearer <token>` is also accepted on HTTP recovery. Payment IDs, transaction hashes and on-chain payment authorizations are not recovery credentials; the payment signature can become observable on chain.
+`X-Recovery-Token` is a bearer credential: 32 cryptographically random bytes encoded as 43 unpadded base64url characters. Keep it private and retain it with the accepted purchase URL. `Authorization: Bearer <token>` is also accepted on HTTP recovery. Payment IDs, transaction hashes and on-chain payment authorizations are not recovery credentials; the payment signature can become observable on chain.
 
 Prefer choosing the token **before** the paid request so a lost response is recoverable. A Node client can create one with:
 
@@ -113,11 +116,11 @@ const recoveryToken = randomBytes(32).toString("base64url");
 // Persist it privately, then send it as X-Recovery-Token on the paid request.
 ```
 
-If omitted, the server generates a token and returns it with the first purchase response. Normal delivery/session recovery uses D1 and R2, costs nothing, and never calls the facilitator. Retry a lost response using the original quoted URL, payment proof and retained token, or use the authenticated delivery endpoint once the payment ID is known.
+If omitted, the server generates a token and returns it with the first purchase response. Normal delivery/session recovery uses D1 and R2, costs nothing, and never calls the facilitator. Retry a lost response using the original purchase URL, payment proof and retained token, or use the authenticated delivery endpoint once the payment ID is known.
 
-If a server-generated token and response were both lost, retry the original quoted payment request to discover its payment ID and recovery-challenge URL. An ordinary externally owned payer wallet can request a challenge, sign its exact `message` using `personal_sign`, and POST `{ "challengeId": "...", "signature": "0x..." }` to the recovery endpoint. The expiring, one-use challenge replaces the recovery token and authorizes no new payment. Save the replacement immediately. Contract wallets must retain their private recovery token; contract-signature recovery is not implemented.
+If a server-generated token and response were both lost, retry the original payment request to discover its payment ID and recovery-challenge URL. An ordinary externally owned payer wallet can request a challenge, sign its exact `message` using `personal_sign`, and POST `{ "challengeId": "...", "signature": "0x..." }` to the recovery endpoint. The expiring, one-use challenge replaces the recovery token and authorizes no new payment. Save the replacement immediately. Contract wallets must retain their private recovery token; contract-signature recovery is not implemented.
 
-A `delivery_pending` response with `payment_settled: true` contains the paid receipt, payment ID and token: retry delivery, never pay again. An uncertain settlement must be reconciled, not re-signed or re-settled; a stored confirmed R2 receipt can repair an interrupted D1 write. Where no confirmed receipt was stored, operator reconciliation is required. A confirmed failure with `charged: false` can obtain a fresh quote after its cause is fixed.
+A `delivery_pending` response with `payment_settled: true` contains the paid receipt, payment ID and token: retry delivery, never pay again. An uncertain settlement must be reconciled, not re-signed or re-settled; a stored confirmed R2 receipt can repair an interrupted D1 write. Where no confirmed receipt was stored, operator reconciliation is required. A confirmed failure with `charged: false` can start a new purchase after its cause is fixed.
 
 Prepared replay passes through official verification again before resuming settlement; an expired authorization does not automatically receive a replacement signature or rerun the saved execution. Unknown settlement errors remain uncertain. A broadcast transaction hash stored on a still-verified payment is reconciliation evidence only: delivery still requires both payment and purchase to be settled with a confirmed receipt. If settlement succeeds but persistence fails, the response preserves the SDK receipt header and reports payment settled/recovery pending. A crash before any receipt reaches D1 or R2 still requires authoritative reconciliation.
 
@@ -144,17 +147,17 @@ Record the commit, bundle hash, Worker version, Pages deployment ID and test res
 
 ### Buyer capability and publication checks (pending production verification)
 
-Existing `search`, `describe`, `configure`, `quote`, and aliases are retained.
+Existing `search`, `describe`, and `configure` remain. Quote methods are removed.
 `select(sku)` returns a session-local product capability supporting `info()`,
-`compatibility(config)`, `configure(config, callbacks?)`, `configuration()`, and
-`quote()`. A caller may pipeline `select(sku).configure(config).quote()`.
+`compatibility(config)`, `configure(config, callbacks?)`, `configuration()`,
+`components()` and `trial(input)`. A caller may pipeline `select(sku).configure(config).configuration()`.
 `callbacks.clarify(questions)` returns a JSON object of answers; one round is
 bounded to 16 questions and 10 seconds. Incomplete or invalid answers cannot
-produce a quote. Product changes invalidate selected capabilities. Payment
+prepare a purchase. Product changes invalidate selected capabilities. Payment
 still requires a separately authorized x402 signature.
 
 Set `X402_EXPECTED_PAY_TO` independently to the verified merchant recipient.
-A missing or mismatched assertion fails new quote/payment configuration. `/api/proof` separately exposes
+A missing or mismatched assertion blocks new payment preparation. `/api/proof` separately exposes
 `payment_recipient_configured` and `payment_recipient_verified`; without the
 expected-recipient assertion it reports degraded readiness. This is a
 configuration assertion, not proof of wallet control or a funded canary.
@@ -296,18 +299,18 @@ Powertools example has seven fake-I/O behavior cases, including repeat external
 effects after a failure. None of these tests calls AWS or proves a deployment.
 
 Trials can inspect and execute structurally complete unpriced releases. Selection
-and quoting require the real release-owned allocation. Draft releases remain
+and acceptance require the real release-owned allocation. Draft releases remain
 outside public discovery/trials; throwaway local databases expose fixtures solely
 for acceptance. This adds no public draft or approval bypass.
 
-Selected-file quotes now pin existing R2 objects rather than embedding file bytes
+Selected purchases pin existing R2 objects rather than embedding file bytes
 in D1 snapshots. Exact file hashes/sizes are checked before writing, R2 readback
-must match before a quote exists, and delivery revalidates the pinned payload.
+must match before a purchase is accepted, and delivery revalidates the pinned payload.
 Tests cover missing/corrupt bytes before settlement, bought-version recovery,
 failed writes, scoped delivery and one-settlement replay.
 
 The existing outbox now records observed discovery, clarification, configuration,
-selection, testing, quote/payment, response preparation and recovery. Optional
+selection, testing, acceptance/payment, response preparation and recovery. Optional
 `X-Journey-Id` (opaque generated ID) correlates HTTP, Cap'n Web and sandbox calls;
 return it on later requests to join a journey. It grants no authority. No private
 search/configuration/code/result/payment/recovery content is logged. Transactional

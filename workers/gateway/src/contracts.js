@@ -72,14 +72,6 @@ export function paymentConfig(env) {
   return { payTo:recipient.payTo, network: NETWORK, asset: USDC, facilitator: FACILITATOR };
 }
 
-export function requirementsFor(quote) {
-  return {
-    scheme: "exact", network: quote.network, asset: quote.asset,
-    payTo: quote.pay_to, amount: quote.amount_usdc_micros,
-    maxTimeoutSeconds: 300, extra: { name: "USD Coin", version: "2" },
-  };
-}
-
 export function sameAddress(left, right) {
   return typeof left === "string" && typeof right === "string"
     && left.toLowerCase() === right.toLowerCase();

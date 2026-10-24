@@ -85,7 +85,7 @@ test("an unsupported network remains unconfigured even with a matching recipient
   });
 });
 
-test("an unverified recipient publishes no payable requirements and cannot create a quote", async t => {
+test("an unverified recipient publishes no payable requirements and cannot initiate payment", async t => {
   const {env, db, calls, call, item} = fixture(t);
   delete env.X402_EXPECTED_PAY_TO;
   const proofResponse = await call("/api/proof");
@@ -107,7 +107,7 @@ test("an unverified recipient publishes no payable requirements and cannot creat
     assert.ok(discovery.items.every(item => item.accepts.length === 0));
     assert.doesNotMatch(JSON.stringify(discovery), new RegExp(RECIPIENT));
   }
-  const response = await call("/api/quotes", {
+  const response = await call("/rpc", {
     method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({sku:item.sku}),
   });
   assert.equal(response.status, 503);
@@ -144,7 +144,7 @@ test("proof and discovery expose only sanitized reasons for invalid and mismatch
   }
 });
 
-test("verified recipient discovery publishes the exact intended requirements", async t => {
+test("verified recipient discovery publishes the intended payment destination without charging", async t => {
   const {call, item, calls} = fixture(t);
   const proofResponse = await call("/api/proof");
   assert.equal(proofResponse.status, 200);
@@ -153,11 +153,8 @@ test("verified recipient discovery publishes the exact intended requirements", a
   assert.equal(proof.payment.payment_configuration_error, null);
   const discovery = await (await call("/.well-known/x402")).json();
   assert.equal(discovery.payment_configured, true);
-  assert.deepEqual(discovery.items.find(entry => entry.sku === item.sku).accepts, [{
-    scheme:"exact", network:NETWORK, asset:USDC, payTo:RECIPIENT,
-    amount:"250000", maxTimeoutSeconds:300, extra:{name:"USD Coin", version:"2"},
-  }]);
-  assert.equal(calls.verify.length, 0);
+  assert.deepEqual(discovery.items.find(entry => entry.sku === item.sku).accepts, []);
+  assert.deepEqual(discovery.payment, {rail:"x402", network:NETWORK, asset:USDC, payTo:RECIPIENT});
   assert.equal(calls.settle.length, 0);
 });
 
@@ -166,7 +163,7 @@ test("loss of recipient verification blocks an unpurchased quote before any paym
   const quote = await (await call(`/api/x402/${item.sku}`)).json();
   const signature = encodePaymentSignatureHeader(makePayment(quote));
   delete env.X402_EXPECTED_PAY_TO;
-  const response = await call(`/api/x402/${item.sku}?quote_id=${quote.quoteId}`, {
+  const response = await call(`/api/x402/${item.sku}?quote_id=${quote.acceptanceId}`, {
     headers:{"PAYMENT-SIGNATURE":signature},
   });
   assert.equal(response.status, 503);
@@ -180,7 +177,7 @@ test("recipient configuration failures preserve paid recovery and original recei
   const {call, env, item, calls} = fixture(t);
   const quote = await (await call(`/api/x402/${item.sku}`)).json();
   const signature = encodePaymentSignatureHeader(makePayment(quote));
-  const purchasePath = `/api/x402/${item.sku}?quote_id=${quote.quoteId}`;
+  const purchasePath = `/api/x402/${item.sku}?quote_id=${quote.acceptanceId}`;
   const paidResponse = await call(purchasePath, {headers:{"PAYMENT-SIGNATURE":signature}});
   assert.equal(paidResponse.status, 200);
   const paid = await paidResponse.json();

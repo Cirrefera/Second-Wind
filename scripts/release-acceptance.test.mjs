@@ -33,17 +33,17 @@ function fixture() {
         payment_recipient_configured: true, payment_recipient_verified: true, facilitator_configured: true },
       dependencies: { database: true, commerce_schema: true, payload_store: true, delivery_store: true } }),
     catalog: response({ total_live: 1, tools: [
-      { sku: "FIXTURE", version: 1, price_usdc_micros: "100000", url: resource, method: "GET" },
+      { sku: "FIXTURE", version: 1, price_usdc_micros: "100000", max_amount_atomic: "100000", price_role: "maximum", pricing_mode:"whole-product", pricing_status:"configured", url: resource, method: "GET" },
     ] }),
-    discovery: response({ x402Version: 2, payment_configured: true, items: [
+    discovery: response({ x402Version: 2, payment_configured: true, payment:{rail:"x402",network,asset:usdc,payTo:env.X402_EXPECTED_PAY_TO}, items: [
       { sku: "FIXTURE", version: 1, resource, type: "http", method: "GET", x402Version: 2,
-        accepts: [{ scheme: "exact", network, asset: usdc, payTo: env.X402_EXPECTED_PAY_TO,
-          amount: "100000", maxTimeoutSeconds: 300, extra: { name: "USD Coin", version: "2" } }] },
+        accepts: [], payment_requirements_url:resource, max_amount_atomic:"100000",
+        price_role:"maximum", pricing_mode:"whole-product", pricing_status:"configured" },
     ] }),
   };
 }
 
-test("accepts matching production identities and usable exact payment discovery without certifying payment", () => {
+test("accepts matching production identities and maximum-only catalog discovery without certifying payment", () => {
   assert.deepEqual(validateRelease(config, fixture()), {
     accepted: true, expected_commit: env.GITHUB_SHA, gateway_version: version,
     pages_deployment: "fixture-pages-deployment", origin: "https://secondwindai.com",
@@ -68,14 +68,15 @@ const rejectedCases = [
   ["mixed gateway versions", value => { value.discovery.headers.set("X-Worker-Version", "other-version"); }, "discovery_gateway_version_mismatch"],
   ["empty live catalog", value => { value.catalog.body.tools = []; value.catalog.body.total_live = 0; }, "live_catalog_unavailable"],
   ["discovery not payment configured", value => { value.discovery.body.payment_configured = false; }, "discovery_payment_unavailable"],
-  ["empty accepts", value => { value.discovery.body.items[0].accepts = []; }, "discovery_requirements_unavailable"],
-  ["wrong recipient", value => { value.discovery.body.items[0].accepts[0].payTo = `0x${"2".repeat(40)}`; }, "discovery_recipient_mismatch"],
-  ["wrong network", value => { value.discovery.body.items[0].accepts[0].network = "eip155:84532"; }, "discovery_rail_mismatch"],
-  ["wrong asset", value => { value.discovery.body.items[0].accepts[0].asset = `0x${"3".repeat(40)}`; }, "discovery_rail_mismatch"],
-  ["wrong price", value => { value.discovery.body.items[0].accepts[0].amount = "100001"; }, "discovery_amount_mismatch"],
-  ["numeric rather than exact string amount", value => { value.discovery.body.items[0].accepts[0].amount = 100000; }, "discovery_amount_mismatch"],
+  ["catalog maximum advertised as exact payment", value => { value.discovery.body.items[0].accepts = [{scheme:"exact",amount:"100000"}]; }, "discovery_premature_payment_requirements"],
+  ["wrong recipient", value => { value.discovery.body.payment.payTo = `0x${"2".repeat(40)}`; }, "discovery_recipient_mismatch"],
+  ["wrong network", value => { value.discovery.body.payment.network = "eip155:84532"; }, "discovery_rail_mismatch"],
+  ["wrong asset", value => { value.discovery.body.payment.asset = `0x${"3".repeat(40)}`; }, "discovery_rail_mismatch"],
+  ["wrong price", value => { value.discovery.body.items[0].max_amount_atomic = "100001"; }, "discovery_amount_mismatch"],
+  ["numeric rather than exact string amount", value => { value.discovery.body.items[0].max_amount_atomic = 100000; }, "discovery_amount_mismatch"],
   ["wrong product version", value => { value.discovery.body.items[0].version = 2; }, "discovery_product_mismatch"],
-  ["zero payment timeout", value => { value.discovery.body.items[0].accepts[0].maxTimeoutSeconds = 0; }, "discovery_requirements_invalid"],
+  ["catalog price advertised as a charge", value => { value.discovery.body.items[0].price_role = "exact"; }, "discovery_price_role_mismatch"],
+  ["missing payment URL", value => { delete value.discovery.body.items[0].payment_requirements_url; }, "discovery_requirements_url_mismatch"],
 ];
 
 for (const [name, mutate, expectedCode] of rejectedCases) {
@@ -185,4 +186,17 @@ test("CLI preflight validates input without calling the network or printing cred
     assert.equal(output.includes(env.CLOUDFLARE_API_TOKEN), false);
     assert.equal(output.includes(env.X402_EXPECTED_PAY_TO), false);
   }
+});
+
+test('component discovery may describe a maximum or unconfigured pricing without signable requirements',()=>{
+ const f=fixture(),tool=f.catalog.body.tools[0],item=f.discovery.body.items[0];
+ for(const target of [tool,item]) Object.assign(target,{pricing_mode:'proportional-components',
+  components_url:'/api/products/FIXTURE/components',trial_url:'/api/trials'});
+ assert.equal(validateRelease(config,f).accepted,true);
+ for(const target of [tool,item]) {
+  target.pricing_status='not_configured';target.price_role='historical-unconfirmed';delete target.max_amount_atomic;
+ }
+ assert.equal(validateRelease(config,f).accepted,true);
+ item.max_amount_atomic='100000';
+ assert.throws(()=>validateRelease(config,f),error=>error.code==='discovery_unconfigured_price');
 });

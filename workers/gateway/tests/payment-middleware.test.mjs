@@ -15,9 +15,9 @@ function fixture(t,overrides = {}) {
   let executions = 0;
   const app = createApp({facilitator:rail,execute:async()=>{ executions++; return {ok:true,result:42}; }});
   const buy = (quote,payload = makePayment(quote),config = {}) => app.fetch(new Request(
-    `https://secondwindai.com/rpc?quote_id=${quote.quoteId}`,{method:"POST",
+    `https://secondwindai.com/rpc?quote_id=${quote.acceptanceId}`,{method:"POST",
       headers:{"Content-Type":"application/json","PAYMENT-SIGNATURE":encodePaymentSignatureHeader(payload),"X-Recovery-Token":"p".repeat(43)},
-      body:JSON.stringify({quoteId:quote.quoteId,config}),
+      body:JSON.stringify({quoteId:quote.acceptanceId,config}),
     }),env,{waitUntil(){}});
   return {db,item,env,calls,buy,app,executions:()=>executions};
 }
@@ -135,7 +135,7 @@ test("the bundled Worker runs official payment hooks and free replay in workerd"
   const input={code:"return 42",language:"javascript"};
   const initial=await runtime.dispatchFetch("http://localhost/rpc",{method:"POST",body:JSON.stringify(input)});
   assert.equal(initial.status,402);const q=await initial.json(),proof=makePayment(q);
-  const buy=()=>runtime.dispatchFetch(`http://localhost/rpc?quote_id=${q.quoteId}`,{method:"POST",
+  const buy=()=>runtime.dispatchFetch(`http://localhost/rpc?quote_id=${q.acceptanceId}`,{method:"POST",
     headers:{"PAYMENT-SIGNATURE":encodePaymentSignatureHeader(proof),"X-Recovery-Token":"p".repeat(43)},body:JSON.stringify(input)});
   const paid=await buy();
   assert.equal(paid.status,200,await paid.clone().text());

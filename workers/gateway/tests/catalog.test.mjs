@@ -73,7 +73,7 @@ test("declared input schemas enforce nested types, required fields, enums and ex
 test("a malformed catalog schema fails closed while existing language-neutral guidance remains purchasable", async (t) => {
   const { db, item, env } = fixture(t, { kind: "tool" });
   assert.equal((await checkConfiguration(db, item.sku, {})).ok, true);
-  assert.ok((await createQuote(env, item.sku, {})).quoteId);
+  assert.ok((await createQuote(env, item.sku, {})).acceptanceId);
   db.sqlite.prepare("UPDATE items SET input_schema=? WHERE sku=?").run("{broken json", item.sku);
   assert.equal((await checkConfiguration(db, item.sku, {})).ok, false);
   await assert.rejects(createQuote(env, item.sku, {}));

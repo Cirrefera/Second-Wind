@@ -11,7 +11,7 @@ async function fixture(t, overrides = {}) {
   const env = fixtureEnv(db);
   const requestData = {code:"return 42",language:"javascript",invocationId:"interrupted-fixture"};
   const quote = await createExecutionQuote(env,requestData);
-  const args = {quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData,
+  const args = {quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData,
     recoveryToken:"p".repeat(43)};
   const {rail,calls} = createRail(overrides);
   let executions = 0;

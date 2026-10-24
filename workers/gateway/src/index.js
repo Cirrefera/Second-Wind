@@ -33,12 +33,15 @@ function signatureFrom(request) {
   catch { throw new CommerceError("invalid_payment_header",400); }
 }
 
-function quoteFrom(request,payload,body = {}) {
-  const requested = new URL(request.url).searchParams.get("quote_id") || body.quoteId;
+function acceptanceFrom(request,payload,body = {}) {
+  const params = new URL(request.url).searchParams;
   let embedded;
-  try { embedded = new URL(payload?.resource?.url).searchParams.get("quote_id"); } catch { /* optional */ }
-  if (requested && embedded && requested !== embedded) throw new CommerceError("quote_mismatch",409);
-  return requested || embedded;
+  try { embedded = new URL(payload?.resource?.url).searchParams; } catch { /* optional */ }
+  const ids = [...params.getAll("acceptance_id"), ...params.getAll("quote_id"),
+    body.acceptanceId, body.quoteId, ...(embedded?.getAll("acceptance_id") || []),
+    ...(embedded?.getAll("quote_id") || [])].filter(value => value !== undefined && value !== null);
+  if (ids.some(id => id !== ids[0])) throw new CommerceError("acceptance_mismatch",409);
+  return ids[0];
 }
 
 function recoveryToken(request,body = {}) {
@@ -130,10 +133,6 @@ export function createApp(dependencies = {}) {
     const b=await jsonBody(c.req.raw);
     return c.json(await acceptTrialSelection(c.env,c.req.param('id'),c.req.header('X-Trial-Token'),b.components,b.scope_hash,{journey:c.get("journey")}));
   });
-  app.post("/api/quotes",async c=>{
-    const body = await jsonBody(c.req.raw);
-    return c.json(await createQuote(c.env,body.sku,body.config || {},{journey:c.get("journey")}));
-  });
   app.post("/api/configure",async c=>{
     const body = await jsonBody(c.req.raw);
     return c.json(await new ProductService(c.env,c.get("journey")).configure(body.sku,body.config || {}));
@@ -142,36 +141,36 @@ export function createApp(dependencies = {}) {
   async function paid(c,isRpc = false) {
     const body = c.req.method === "POST" ? await jsonBody(c.req.raw) : {};
     const paymentPayload = signatureFrom(c.req.raw);
-    let quoteId = quoteFrom(c.req.raw,paymentPayload,body);
-    if (!quoteId && paymentPayload) throw new CommerceError("quote_required",400,{hint:"Retry the original quoted URL."});
+    let quoteId = acceptanceFrom(c.req.raw,paymentPayload,body);
+    if (!quoteId && paymentPayload) throw new CommerceError("acceptance_required",400,{hint:"Retry the original accepted purchase URL."});
     let requestData,route;
     if (isRpc) {
       requestData = body.code !== undefined ? {code:body.code,language:body.language,
         ...(body.invocationId ? {invocationId:body.invocationId} : {})} : body.config || {};
       if (!quoteId) {
-        if (body.sku) quoteId = (await createQuote(c.env,body.sku,requestData,{journey:c.get("journey")})).quoteId;
-        else quoteId = (await createExecutionQuote(c.env,requestData,{journey:c.get("journey")})).quoteId;
+        if (body.sku) quoteId = (await createQuote(c.env,body.sku,requestData,{journey:c.get("journey")})).acceptanceId;
+        else quoteId = (await createExecutionQuote(c.env,requestData,{journey:c.get("journey")})).acceptanceId;
       }
       route = "/rpc";
     } else {
       const key = c.req.param("key");
       requestData = body.config ?? body;
       if (requestData === body) {
-        requestData = {...body}; delete requestData.quoteId; delete requestData.recoveryToken;
+        requestData = {...body}; delete requestData.quoteId; delete requestData.acceptanceId; delete requestData.recoveryToken;
       }
       if (!quoteId) {
         const product = await describeProduct(c.env.SW_DB,key);
         if (product.invoke_kind === "bedrock" && c.req.method !== "POST") {
           throw new CommerceError("method_not_allowed",405,{hint:"Use POST with the product's input schema."});
         }
-        quoteId = (await createQuote(c.env,key,requestData,{journey:c.get("journey")})).quoteId;
+        quoteId = (await createQuote(c.env,key,requestData,{journey:c.get("journey")})).acceptanceId;
       }
       route = `/api/x402/${encodeURIComponent(key)}`;
     }
     const quote = await readQuote(c.env,quoteId,{allowExpired:Boolean(paymentPayload)});
     if (!isRpc) {
       const snapshot = JSON.parse(quote.snapshot_json);
-      if (c.req.param("key") !== quote.sku && c.req.param("key") !== snapshot.slug) throw new CommerceError("quote_product_mismatch",409);
+      if (c.req.param("key") !== quote.sku && c.req.param("key") !== snapshot.slug) throw new CommerceError("acceptance_product_mismatch",409);
       if (new URL(c.req.url).pathname.endsWith("/artifact") && snapshot.payload?.via !== "r2") {
         throw new CommerceError("unknown_artifact",404);
       }

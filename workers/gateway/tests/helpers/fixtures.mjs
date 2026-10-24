@@ -114,6 +114,7 @@ export function makePayment(quote, sequence = 1) {
     payTo: RECIPIENT,
     amount,
     maxTimeoutSeconds: 300,
+    extra: {name:"USD Coin",version:"2"},
     ...(quote.accepts?.[0] || quote.paymentRequirements || {}),
   };
   const nonce = `0x${sequence.toString(16).padStart(64, "0")}`;
@@ -121,7 +122,7 @@ export function makePayment(quote, sequence = 1) {
     x402Version: 2,
     accepted,
     resource: {
-      url: `https://secondwindai.com/api/x402/${quote.sku}?quote_id=${quote.quoteId}`,
+      url: quote.purchase?.url || `https://secondwindai.com/api/x402/${quote.sku}?acceptance_id=${quote.acceptanceId}`,
       description: "Offline commerce regression test",
       mimeType: "application/json",
     },

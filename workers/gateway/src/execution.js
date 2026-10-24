@@ -46,12 +46,10 @@ async function buildProviders(env, grant, context) {
   const search = (query, limit) => service.search(query, limit);
   const describe = sku => service.describe(sku);
   const configure = (sku, config) => service.configure(sku, config);
-  const quote = (sku, config) => service.quote(sku, config);
   return {
     search, searchCatalog: search,
     describe, describeProduct: describe,
     configure, checkConfiguration: configure,
-    quote, quoteProduct: quote,
     async entitlement() {
       return grant ? {
         sku: grant.sku, paymentId: grant.paymentId,

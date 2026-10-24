@@ -27,7 +27,7 @@ test('quote and outbox roll back together; migration is repeatable',async t=>{
 test('Basin failure preserves settlement; replay never duplicates logical events',async t=>{
  const {db,env,item}=fixture(t);const quote=await createQuote(env,item.sku,{});
  const {rail,calls}=createRail();
- const args={quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}};
+ const args={quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}};
  const result=await purchase(env,args,{rail});
  const rows=db.sqlite.prepare('SELECT * FROM business_event_outbox').all();
  assert.deepEqual(rows.map(r=>r.event_type).sort(),['quote.created','payment.settlement_started','payment.settled','receipt.issued','entitlement.activated'].sort());
@@ -152,19 +152,19 @@ test('prepared journey links support explicit fixture transactions and exact dur
  await db.batch([statement(),observationStatement(db,'journey.linked',{journey,payload:{trial_id:id}})]);
  const quote=await createQuote(env,item.sku,{});
  const quoteJourney=createJourneyContext({journey_id:journey.journey_id,transport:'http'});
- assert.equal((await enqueueObservation(env,'journey.linked',{journey:quoteJourney,payload:{quote_id:quote.quoteId}})).status,'queued');
+ assert.equal((await enqueueObservation(env,'journey.linked',{journey:quoteJourney,payload:{quote_id:quote.acceptanceId}})).status,'queued');
  const other=createJourneyContext({transport:'rpc'});
- assert.equal((await enqueueObservation(env,'journey.linked',{journey:other,payload:{quote_id:quote.quoteId}})).status,'duplicate');
- const {rail}=createRail();await purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}},{rail});
+ assert.equal((await enqueueObservation(env,'journey.linked',{journey:other,payload:{quote_id:quote.acceptanceId}})).status,'duplicate');
+ const {rail}=createRail();await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}},{rail});
  const sent=[];env.BUSINESS_EVENTS={send:async rows=>sent.push(...rows)};
  await dispatchOutbox(env);
- const core=sent.filter(e=>e.event_type==='trial.started'||e.payload.quote_id===quote.quoteId);
+ const core=sent.filter(e=>e.event_type==='trial.started'||e.payload.quote_id===quote.acceptanceId);
  assert.ok(core.length>=6);
  assert.ok(core.every(e=>e.payload.journey_id===journey.journey_id));
  assert.ok(core.every(e=>e.payload.transport==='http'));
  const linkReads=db.statements.filter(x=>x.sql==='SELECT event_type,payload FROM business_event_outbox WHERE event_id=?1');
  assert.ok(linkReads.length<=2*sent.length);
- for(const invalid of [{quote_id:quote.quoteId,trial_id:id},{quote_id:'private-token'},{payment_id:'private'},{}])
+ for(const invalid of [{quote_id:quote.acceptanceId,trial_id:id},{quote_id:'private-token'},{payment_id:'private'},{}])
   assert.throws(()=>observationStatement(db,'journey.linked',{journey,payload:invalid}));
 });
 
@@ -192,8 +192,8 @@ test('an expired still-running trial yields only the recorded expiry observation
 test('execution quote and settlement with no pre-result artifact hash remain exportable',async t=>{
  const {db,env}=fixture(t),input={code:'return "private-execution-output";',language:'javascript',invocationId:'private-invocation'};
  const quote=await createExecutionQuote(env,input),{rail,calls}=createRail();
- assert.equal(db.sqlite.prepare('SELECT content_hash FROM commerce_quotes WHERE id=?').get(quote.quoteId).content_hash,'');
- const paid=await purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:input},
+ assert.equal(db.sqlite.prepare('SELECT content_hash FROM commerce_quotes WHERE id=?').get(quote.acceptanceId).content_hash,'');
+ const paid=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:input},
   {rail,execute:async()=>({ok:true,result:'private-execution-output'})});
  const sent=[];env.BUSINESS_EVENTS={send:async events=>sent.push(...events)};
  const result=await dispatchOutbox(env);
@@ -232,15 +232,15 @@ test('actual shared producers record a complete bounded journey without buyer co
  const {rail,calls}=createRail({verifyPayment:async()=>({isValid:true,payer:buyer.address}),
   settlePayment:async()=>({success:true,transaction:`0x${'c'.repeat(64)}`,network:NETWORK,payer:buyer.address})});
  const payment=makePayment(quote);payment.payload.authorization.from=buyer.address;
- const paid=await purchase(env,{quoteId:quote.quoteId,paymentPayload:payment,
+ const paid=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:payment,
   requestData:{language:'javascript'},journey:next()},{rail});
  const grant=await service.getGrant(paid.body.paymentId,paid.body.recoveryToken);
  await grant.deliver();
- const snapshot=JSON.parse(db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.quoteId).snapshot_json);
+ const snapshot=JSON.parse(db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.acceptanceId).snapshot_json);
  env.PAYLOADS.failedReads.add(snapshot.payload.r2_key);
  await assert.rejects(grant.deliver());
  env.PAYLOADS.failedReads.delete(snapshot.payload.r2_key);
- await purchase(env,{quoteId:quote.quoteId,paymentPayload:payment,requestData:{language:'javascript'},
+ await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:payment,requestData:{language:'javascript'},
   recoveryToken:paid.body.recoveryToken,journey:next()},{rail});
  const challenge=await service.recoveryChallenge(paid.body.paymentId);
  const signature=await buyer.signMessage({message:challenge.message});
@@ -250,7 +250,7 @@ test('actual shared producers record a complete bounded journey without buyer co
  const execution={code:'return "private-execution-result";',language:'javascript',invocationId:'private-invocation'};
  const executionQuote=await createExecutionQuote(env,execution,{journey:next()});
  const executionPayment=makePayment(executionQuote,2);executionPayment.payload.authorization.from=buyer.address;
- const executionPaid=await purchase(env,{quoteId:executionQuote.quoteId,paymentPayload:executionPayment,
+ const executionPaid=await purchase(env,{quoteId:executionQuote.acceptanceId,paymentPayload:executionPayment,
   requestData:execution,journey:next()},{rail,execute:async()=>({ok:true,result:'private-execution-result'})});
  const executionGrant=await service.getGrant(executionPaid.body.paymentId,executionPaid.body.recoveryToken);
  await executionGrant.execute(execution.invocationId,execution.code,execution.language);
@@ -262,7 +262,7 @@ test('actual shared producers record a complete bounded journey without buyer co
    if(outcome==='pending') throw new Error('private settlement provider diagnostic');
    return {success:false,errorReason:'private settlement failure'};
   }});
-  await assert.rejects(purchase(env,{quoteId:extraQuote.quoteId,paymentPayload:payload,requestData:request,journey:next()},
+  await assert.rejects(purchase(env,{quoteId:extraQuote.acceptanceId,paymentPayload:payload,requestData:request,journey:next()},
    {rail:failure.rail,execute:async()=>outcome==='failed'?{ok:false,error:'private preparation failure'}:{ok:true,result:`private-${outcome}-result`}}),
    error=>error.code===(outcome==='pending'?'settlement_pending_recovery':'execution_failed'));
  }
@@ -313,7 +313,7 @@ test('optional observation storage failures cannot change payment, delivery or c
  payment.payload.authorization.from=buyer.address;
  const {rail,calls}=createRail({verifyPayment:async()=>({isValid:true,payer:buyer.address}),
   settlePayment:async()=>({success:true,transaction:`0x${'d'.repeat(64)}`,network:NETWORK,payer:buyer.address})});
- const paid=await purchase(env,{quoteId:quote.quoteId,paymentPayload:payment,requestData:{},journey},{rail});
+ const paid=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:payment,requestData:{},journey},{rail});
  const grant=await service.getGrant(paid.body.paymentId,paid.body.recoveryToken);
  assert.equal((await grant.deliver()).guidance,item.guidance);
  const challenge=await service.recoveryChallenge(paid.body.paymentId);
@@ -343,15 +343,15 @@ test('rejected optional journey links preserve actual quote, trial, scope accept
  const scope=await selectTrialComponents(env,trial.trial_id,trial.trial_token,['core']);
  const quote=await acceptTrialSelection(env,trial.trial_id,trial.trial_token,['core'],scope.scope_hash,{journey:next()});
  const acceptedAgain=await acceptTrialSelection(env,trial.trial_id,trial.trial_token,['core'],scope.scope_hash,{journey:next()});
- assert.equal(acceptedAgain.quoteId,quote.quoteId);
+ assert.equal(acceptedAgain.acceptanceId,quote.acceptanceId);
  assert.equal(quote.amount_usdc_micros,'75000');
  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM commerce_quotes').get().n,2);
  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM component_trials WHERE status=\'completed\'').get().n,1);
  assert.equal(db.sqlite.prepare('SELECT count(*) n FROM component_acceptances').get().n,1);
  assert.equal(executions,1);
  const {rail,calls}=createRail(),paymentPayload=makePayment(quote);
- const paid=await purchase(env,{quoteId:quote.quoteId,paymentPayload,requestData:{},journey:next()},{rail});
- const replay=await purchase(env,{quoteId:quote.quoteId,paymentPayload,requestData:{},
+ const paid=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload,requestData:{},journey:next()},{rail});
+ const replay=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload,requestData:{},
   recoveryToken:paid.body.recoveryToken,journey:next()},{rail});
  assert.equal(paid.body.paymentId,replay.body.paymentId);
  assert.equal(replay.body.redelivery,true);
@@ -406,15 +406,16 @@ test('Code Mode default providers use shared observations with sandbox correlati
    await providers.search('private-customer-search');
    await providers.describe(item.sku);
    assert.equal((await providers.configure(item.sku,{})).ok,true);
-   const quote=await providers.quote(item.sku,{});
+   assert.equal(providers.quote,undefined);
+   assert.equal(providers.quoteProduct,undefined);
    assert.equal(await providers.entitlement(),null);
    await assert.rejects(providers.deliver(),error=>error.message==='delivery_not_entitled');
-   return {result:{quote_id:quote.quoteId}};
+   return {result:{configured:true}};
   }})});
  assert.equal(result.ok,true);
  const events=db.sqlite.prepare('SELECT * FROM business_event_outbox').all().map(streamEvent);
  assert.deepEqual(events.map(event=>event.event_type).sort(),['discovery.searched','discovery.resolved',
-  'discovery.described','configuration.checked','quote.created','journey.linked'].sort());
+  'discovery.described','configuration.checked'].sort());
  assert.ok(events.filter(event=>event.payload.journey_id).every(event=>event.payload.journey_id===journey.journey_id&&event.payload.transport==='sandbox'));
  assert.ok(!JSON.stringify(events).includes('private'));
  const sent=[];env.BUSINESS_EVENTS={send:async rows=>sent.push(...rows)};
@@ -446,7 +447,7 @@ async function componentFixture(t,{journey}={}) {
 test('dispatch correlates observed component choices through payment to the pinned release, with stable retries',async t=>{
  const {db,env,item,trial,scope,quote,release,releaseHash}=await componentFixture(t);
  const {rail}=createRail();const paymentPayload=makePayment(quote);
- const paid=await purchase(env,{quoteId:quote.quoteId,paymentPayload,requestData:{}},{rail});
+ const paid=await purchase(env,{quoteId:quote.acceptanceId,paymentPayload,requestData:{}},{rail});
  // A newer valid release cannot change the choices already observed in version 1.
  db.sqlite.prepare('UPDATE items SET version=2 WHERE sku=?').run(item.sku);
  const later={...release,version:2,release_ref:'fixture:release:2',components:release.components.map(c=>({...c,id:'later-'+c.id}))};
@@ -482,16 +483,16 @@ test('absent or malformed optional correlation preserves base events and never g
  assert.equal((await dispatchOutbox(env)).sent,1);
  assert.equal(sent[0].payload.scope_correlation,'not_applicable');
  assert.equal(sent[0].payload.selected_component_ids,undefined);
- const before=db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.quoteId).snapshot_json;
+ const before=db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.acceptanceId).snapshot_json;
  const snapshot={...JSON.parse(before),scope:{scope_hash:'malformed',selected_components:['private-content']}};
- db.sqlite.prepare('UPDATE commerce_quotes SET snapshot_json=? WHERE id=?').run(JSON.stringify(snapshot),quote.quoteId);
+ db.sqlite.prepare('UPDATE commerce_quotes SET snapshot_json=? WHERE id=?').run(JSON.stringify(snapshot),quote.acceptanceId);
  db.sqlite.prepare('UPDATE business_event_outbox SET sent_at=NULL').run();
  assert.equal((await dispatchOutbox(env)).sent,1);
  assert.equal(sent[1].payload.scope_correlation,'unavailable');
- assert.equal(sent[1].payload.quote_id,quote.quoteId);
+ assert.equal(sent[1].payload.quote_id,quote.acceptanceId);
  assert.equal(sent[1].payload.selected_component_ids,undefined);
  assert.ok(!JSON.stringify(sent[1]).includes('private-content'));
- assert.equal(db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.quoteId).snapshot_json,JSON.stringify(snapshot));
+ assert.equal(db.sqlite.prepare('SELECT snapshot_json FROM commerce_quotes WHERE id=?').get(quote.acceptanceId).snapshot_json,JSON.stringify(snapshot));
  db.sqlite.prepare(`INSERT INTO business_event_outbox(event_id,event_type,occurred_ts,payload)
   VALUES ('orphan','scope.selected','2026-10-19T00:00:00Z',?)`).run(JSON.stringify({trial_id:'missing',scope_hash:'a'.repeat(64),sku:item.sku}));
  assert.equal((await dispatchOutbox(env)).sent,1);
@@ -501,7 +502,7 @@ test('absent or malformed optional correlation preserves base events and never g
 
 test('missing component release or optional database failure cannot change a settled purchase',async t=>{
  const {db,env,quote}=await componentFixture(t);const {rail,calls}=createRail();
- await purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}},{rail});
+ await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}},{rail});
  const sent=[];
  const failingDb={prepare(sql){if(sql.includes('FROM component_releases')) throw new Error('private database diagnostic');return db.prepare(sql);}};
  env.SW_DB=failingDb;env.BUSINESS_EVENTS={send:async events=>sent.push(...events)};
@@ -534,11 +535,11 @@ test('poison events do not starve fresh events and dispatch work is bounded',asy
 test('review-only Basin projections preserve exact amounts, arrays and logical IDs on generated fixtures',async t=>{
  const {db,env,item,trial,scope,quote}=await componentFixture(t),journey=createJourneyContext({transport:'rpc'});
  await enqueueObservation(env,'journey.linked',{journey,payload:{trial_id:trial.trial_id}});
- await enqueueObservation(env,'journey.linked',{journey,payload:{quote_id:quote.quoteId}});
+ await enqueueObservation(env,'journey.linked',{journey,payload:{quote_id:quote.acceptanceId}});
  await enqueueObservation(env,'discovery.resolved',{journey,payload:{resolution_status:'match',
   candidate_product_ids:[item.sku],public_intent:{service:'s3',operation:'restore'}}});
  await enqueueObservation(env,'selection.product_selected',{journey,payload:{selected_product_ids:[item.sku],sku:item.sku}});
- const {rail}=createRail();await purchase(env,{quoteId:quote.quoteId,paymentPayload:makePayment(quote),requestData:{}},{rail});
+ const {rail}=createRail();await purchase(env,{quoteId:quote.acceptanceId,paymentPayload:makePayment(quote),requestData:{}},{rail});
  const sent=[];env.BUSINESS_EVENTS={send:async rows=>sent.push(...rows)};
  for(let i=0;i<10;i++) { const result=await dispatchOutbox(env);assert.equal(result.failed,0);if(!result.sent) break; }
  db.sqlite.exec(`CREATE TABLE second_wind_events (

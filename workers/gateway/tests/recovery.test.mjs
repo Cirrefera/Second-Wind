@@ -26,7 +26,7 @@ async function paidFixture(t) {
       return { success: true, transaction: `0x${"c".repeat(64)}`, network: "eip155:8453", payer: buyer.address };
     },
   });
-  const paid = await purchase(env, { quoteId: quote.quoteId, paymentPayload, requestData: {} }, { rail });
+  const paid = await purchase(env, { quoteId: quote.acceptanceId, paymentPayload, requestData: {} }, { rail });
   return { db, env, calls, ...paid.body };
 }
 

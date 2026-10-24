@@ -6,6 +6,16 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Removal of conflicting commerce behavior — October 24, 2026
+
+The restoration draft now removes `POST /api/quotes`, the Cap'n Web `quote`/`quoteProduct` methods, and Code Mode quote providers. No replacement quote endpoint or whole-product acceptance RPC is introduced. Whole-product buyers request the paid HTTP endpoint directly; official Hono/x402 returns the challenge. The existing component sandbox → selection → acceptance flow remains.
+
+Catalog prices are explicitly maximums. Discovery no longer constructs exact payment requirements from a catalog maximum. Only the official middleware emits those requirements for the selected purchase. Component acceptance exposes the selected amount and ceiling as application metadata, with no parallel x402 requirements builder. The release validator is updated to reject premature exact-payment discovery.
+
+New purchase responses use `acceptanceId`/`acceptance_id`. Historical signed `quote_id` URLs, immutable database rows, receipts, and versioned telemetry keys remain compatible; conflicting identifiers are rejected. These internal records do not create a buyer-facing step. Current README, API instructions, and specification now state that boundary.
+
+The owner stopped further test work during this follow-up. Earlier verification below applies to the earlier restoration tree, not this amended candidate. This amendment has not been merged or deployed; no production data, payment, dependency version, or schema was changed.
+
 ## Standard x402 restoration — October 24, 2026
 
 Draft implementation restores official `@x402/hono` middleware for paid HTTP routes using the existing locked 2.28.0 SDK. The payment replacement introduced in PR #3 is removed from the serving path: commerce no longer calls verification or settlement. Existing application claims, preparation, receipts and authenticated recovery integrate through supported lifecycle hooks. Sandbox trials, Cap'n Web selection, final selected amounts within the maximum, immutable files and historical purchase records remain intact. The [owner decision and recovery mapping](https://github.com/Cirrefera/Second-Wind/blob/f6fa26c970cb8f3ffa6b6980837e745a22539fab/docs/X402_RECOVERY_MAPPING.md) remain the scope reference; this implementation does not merge the separate consolidation documentation draft.

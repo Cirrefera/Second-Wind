@@ -34,7 +34,7 @@ function denied(error) {
 
 async function buy(env, quote, rail, sequence = 1, requestData = {}) {
   return purchase(env, {
-    quoteId: quote.quoteId,
+    quoteId: quote.acceptanceId,
     paymentPayload: makePayment(quote, sequence),
     requestData,
   }, { rail });
@@ -56,7 +56,7 @@ test("concurrent retries claim one purchase and reach settlement exactly once", 
     },
   });
   const args = {
-    quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: {},
+    quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: {},
     recoveryToken: "b".repeat(43),
   };
   const owner = purchase(env, args, { rail });
@@ -128,7 +128,7 @@ test("a D1 failure after successful settlement is repaired from the private rece
   const quote = await createQuote(env, item.sku, {});
   const { rail, calls } = createRail();
   const args = {
-    quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: {},
+    quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: {},
     recoveryToken: "e".repeat(43),
   };
   db.sqlite.exec(`CREATE TRIGGER fixture_settlement_write_failure BEFORE UPDATE ON payments
@@ -157,7 +157,7 @@ test("a settlement timeout stays unresolved, and replay cannot launch a second s
     async settlePayment() { throw new Error("facilitator connection lost after submission"); },
   });
   const args = {
-    quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: {},
+    quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: {},
     recoveryToken: "c".repeat(43),
   };
   await assert.rejects(purchase(env, args, { rail }), (error) => error.code === "settlement_pending_recovery");
@@ -178,7 +178,7 @@ test("simultaneous paid execution attempts execute and settle once across SQLite
     async execute() { executions += 1; return { ok: true, result: 42 }; },
   };
   const args = {
-    quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: input,
+    quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: input,
     recoveryToken: "d".repeat(43),
   };
   const results = await Promise.allSettled(Array.from({ length: 8 },
@@ -213,11 +213,11 @@ test("a signed proof for one quote cannot purchase another SKU", async (t) => {
   const otherQuote = await createQuote(env, other.sku, {});
   const proof = makePayment(firstQuote);
   const { rail, calls } = createRail();
-  const first = await purchase(env, { quoteId: firstQuote.quoteId, paymentPayload: proof, requestData: {} }, { rail });
+  const first = await purchase(env, { quoteId: firstQuote.acceptanceId, paymentPayload: proof, requestData: {} }, { rail });
   const firstIdentity = identity(first);
   await assert.rejects(
     purchase(env, {
-      quoteId: otherQuote.quoteId, paymentPayload: proof, requestData: {},
+      quoteId: otherQuote.acceptanceId, paymentPayload: proof, requestData: {},
       recoveryToken: firstIdentity.recoveryToken,
     }, { rail }),
     denied,
@@ -236,7 +236,7 @@ test("delivery remains bound to the bought version after a catalog edit and reti
   const original = await deliverGrant(env, grant);
   db.sqlite.prepare("UPDATE items SET guidance=?, version=2, status='retired', content_hash=? WHERE sku=?")
     .run("This content did not exist at purchase.", "f".repeat(64), item.sku);
-  db.sqlite.prepare("UPDATE commerce_quotes SET expires_at=1 WHERE id=?").run(quote.quoteId);
+  db.sqlite.prepare("UPDATE commerce_quotes SET expires_at=1 WHERE id=?").run(quote.acceptanceId);
   const recovered = await recoverGrant(env, paymentId, recoveryToken);
   const after = await deliverGrant(env, recovered);
   assert.deepEqual(after, original);
@@ -299,7 +299,7 @@ test("SDK requirement matching and facilitator verification reject altered amoun
     const proof = makePayment(quote, index + 10);
     mutate(proof);
     await assert.rejects(purchase(env, {
-      quoteId: quote.quoteId, paymentPayload: proof, requestData: {},
+      quoteId: quote.acceptanceId, paymentPayload: proof, requestData: {},
     }, { rail }));
   }
   assert.equal(calls.verify.length, 1, "authorization contents are checked by the facilitator; unmatched offers never reach it");
@@ -314,7 +314,7 @@ test("failed Code Mode work is not settled", async (t) => {
   const { rail, calls } = createRail();
   let executions = 0;
   await assert.rejects(purchase(env, {
-    quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: input,
+    quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: input,
   }, {
     rail,
     async execute() { executions += 1; return { ok: false, error: "failed" }; },
@@ -331,7 +331,7 @@ test("an execution retry replays the paid result and rejects altered code or ext
   const { rail, calls } = createRail();
   let executions = 0;
   const execute = async () => { executions += 1; return { ok: true, result: { answer: 42 } }; };
-  const args = { quoteId: quote.quoteId, paymentPayload: makePayment(quote), requestData: input };
+  const args = { quoteId: quote.acceptanceId, paymentPayload: makePayment(quote), requestData: input };
   const initial = await purchase(env, args, { rail, execute });
   const { paymentId, recoveryToken } = identity(initial);
   const retry = await purchase(env, { ...structuredClone(args), recoveryToken }, { rail, execute });
