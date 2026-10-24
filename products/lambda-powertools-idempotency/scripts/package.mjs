@@ -10,6 +10,10 @@ const historicEvidence=JSON.parse(await readFile(new URL('../../workers/gateway/
 if(snapshot!==historicEvidence.snapshot_sha256) throw new Error('historical_snapshot_mismatch');
 const original=held.find(item=>item.sku==='SW-PT-0006');
 if(!original||original.status!=='live'||original.version!==1) throw new Error('historical_identity_mismatch');
+const pricing=JSON.parse(await readFile(new URL('../pricing.json',root),'utf8'));
+const approved=pricing.entries.find(entry=>entry.sku===original.sku);
+if(!approved || !/^[1-9][0-9]*$/.test(approved.max_amount_atomic)) throw new Error('approved_pricing_missing');
+const approvedMaximum=Number(approved.max_amount_atomic)/1_000_000;
 const validation=JSON.parse(await readFile(new URL('validation.json',root),'utf8'));
 if(validation.result!=='passed'||validation.tests!==7||validation.language!=='python') throw new Error('validation_not_passed');
 for(const [path,hash] of Object.entries(validation.source_hashes)) if(digest(await readFile(new URL(path,root)))!==hash) throw new Error('stale_validation:'+path);
@@ -24,7 +28,7 @@ await mkdir(new URL('history/',root),{recursive:true});
 await writeFile(new URL('history/v1-guidance.txt',root),original.guidance);
 await writeFile(new URL('history/v1-catalog-record.json',root),JSON.stringify(original,null,2)+'\n');
 const content_hash=digest(guidance),release_ref='sha256:'+content_hash;
-const item={...original,version:2,status:'draft',kind:'guide',name:'retries double charge customers',
+const item={...original,price_usd:approvedMaximum,version:2,status:'draft',kind:'guide',name:'retries double charge customers',
  summary:'Python Lambda Powertools idempotency wiring with validated business keys, payload checks, replay behavior and an explicit external-payment failure boundary. Includes a tested Python example; no deployment or payment processor.',
  guidance,mime_type:'text/markdown; charset=utf-8',input_schema:'',license_spdx:'Apache-2.0',provenance:'original',
  source_repo:'',source_url:'https://secondwindai.com'};

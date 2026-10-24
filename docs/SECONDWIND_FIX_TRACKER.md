@@ -6,6 +6,12 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Owner-approved catalog pricing — October 24, 2026
+
+The approved maximum-payment schedule is applied to D1: 3 products at $10, 8 at $5, 92 at $1, 21 at $0.50 and 32 at $0.25. The retired proof product is excluded. Readback confirms 155 drafts, one live product and one retired product; no product was activated. See [the exact assignments and application evidence](CATALOG_PRICING.md) and `products/pricing.json`.
+
+AWS-0568 now has its commercial allocation ($2 table, $1 status index, $0.50 expiry, $1 recovery, $0.50 change stream); its release input remains draft pending the existing genuine review and publication prerequisites. SW-PT-0006 has a $1 maximum and its replacement input is aligned. Historical payloads, purchase amounts and recovery credentials remain intact. FIX-10's missing allocation is resolved; FIX-08/10/11 are not thereby complete. Payment rails, sandbox code and Cap'n Web are unchanged.
+
 ## Purchase recovery follow-up — October 24, 2026
 
 Draft PR #16 now addresses the owner's three selected failures: reaccepting the same expired, unclaimed component selection renews its existing acceptance; wallet recovery reuses a public challenge instead of exhausting five slots; and authenticated HTTP/Cap'n Web reconciliation can restore a missing receipt from the original finalized Base transfer. No purchase is re-settled. Chain evidence must match the existing authorization key, payer, recipient, native USDC asset and exact selected amount.

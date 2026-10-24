@@ -1,0 +1,955 @@
+{
+  "schema_version": "1",
+  "decision_date": "2026-10-24",
+  "currency": "USDC",
+  "network": "eip155:8453",
+  "price_role": "maximum",
+  "approval": "Owner approved the SKU groups and delegated remaining tier assignments in this conversation.",
+  "entries": [
+    {
+      "sku": "AWS-0550",
+      "slug": "lambda-powertools-logger-ts",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0551",
+      "slug": "lambda-powertools-tracer-ts",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0552",
+      "slug": "lambda-powertools-metrics-ts",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0553",
+      "slug": "lambda-powertools-idempotency-ts",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0554",
+      "slug": "lambda-powertools-parameters-ts",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0555",
+      "slug": "lambda-powertools-batch-ts",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0556",
+      "slug": "bedrock-agent-cdk",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0557",
+      "slug": "bedrock-knowledge-base-cdk",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0558",
+      "slug": "sagemaker-endpoint-cdk",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0559",
+      "slug": "cloudwatch-monitoring-facade",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0560",
+      "slug": "api-gateway-lambda-dynamodb-stack",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0561",
+      "slug": "bedrock-guardrails-cdk",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0562",
+      "slug": "x402-lambda-payment-gate-recipe",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0563",
+      "slug": "bedrock-agent-action-group-recipe",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0564",
+      "slug": "dynamodb-agent-state-bootstrap-recipe",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0565",
+      "slug": "lambda-vs-fargate-agent-decision",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0566",
+      "slug": "dynamodb-vs-aurora-dsql-decision",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0567",
+      "slug": "stepfunctions-vs-eventbridge-pipes-decision",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0568",
+      "slug": "agent-state-dynamodb-manifest",
+      "max_amount_atomic": "5000000",
+      "reason": "Modular agent-state planner"
+    },
+    {
+      "sku": "AWS-0569",
+      "slug": "bedrock-agent-execution-role-manifest",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0570",
+      "slug": "lambda-x402-env-manifest",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0571",
+      "slug": "dynamodb-throttle-diagnostic",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0572",
+      "slug": "lambda-payment-timeout-diagnostic",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0573",
+      "slug": "bedrock-quota-exceeded-diagnostic",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0574",
+      "slug": "lambda-vs-fargate-cost-model",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0575",
+      "slug": "bedrock-claude-inference-cost-model",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0576",
+      "slug": "dynamodb-billing-mode-cost-model",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0577",
+      "slug": "cross-account-bedrock-auth-flow",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0578",
+      "slug": "lambda-dynamodb-least-privilege-auth-flow",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0579",
+      "slug": "agentcore-x402-wallet-auth-flow",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0580",
+      "slug": "sagemaker-endpoint-failed-during-creation",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0581",
+      "slug": "sagemaker-endpoint-container-health-check-timeout",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0582",
+      "slug": "sagemaker-endpoint-no-instance-capacity-available",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0583",
+      "slug": "sagemaker-endpoint-model-artifact-access-denied",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0584",
+      "slug": "sagemaker-endpoint-invocation-stream-error",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0585",
+      "slug": "sagemaker-endpoint-went-out-of-service",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0586",
+      "slug": "sagemaker-training-job-out-of-memory",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0587",
+      "slug": "sagemaker-training-job-spot-instance-interrupted",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0588",
+      "slug": "sagemaker-training-job-script-failed-on-startup",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0592",
+      "slug": "sagemaker-training-job-input-channel-access-denied",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0593",
+      "slug": "sagemaker-async-inference-output-never-written",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0594",
+      "slug": "sagemaker-async-inference-model-returned-error",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0595",
+      "slug": "lambda-powertools-idempotency-concurrent-execution",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0596",
+      "slug": "lambda-powertools-idempotency-payload-mismatch",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0597",
+      "slug": "lambda-powertools-idempotency-dynamodb-unavailable",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0598",
+      "slug": "lambda-powertools-idempotency-key-not-found",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0599",
+      "slug": "lambda-powertools-bedrock-agent-action-group-rejected",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0600",
+      "slug": "lambda-powertools-parameters-access-denied-at-cold-start",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0601",
+      "slug": "lambda-powertools-sqs-batch-partial-failure",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0602",
+      "slug": "aws-s3-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0603",
+      "slug": "aws-iam-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0604",
+      "slug": "aws-logs-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0605",
+      "slug": "aws-xray-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0606",
+      "slug": "aws-sqs-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0607",
+      "slug": "aws-sns-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0608",
+      "slug": "aws-events-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0609",
+      "slug": "aws-states-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0610",
+      "slug": "aws-secretsmanager-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0611",
+      "slug": "aws-ssm-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0612",
+      "slug": "aws-kms-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0613",
+      "slug": "aws-cognito-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0614",
+      "slug": "aws-ecs-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0615",
+      "slug": "aws-eks-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0616",
+      "slug": "aws-ec2-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0617",
+      "slug": "aws-rds-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0618",
+      "slug": "aws-elasticache-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0619",
+      "slug": "aws-kinesis-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0620",
+      "slug": "aws-firehose-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0621",
+      "slug": "aws-glue-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0622",
+      "slug": "aws-athena-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0623",
+      "slug": "aws-redshift-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0624",
+      "slug": "aws-opensearch-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0625",
+      "slug": "aws-cognito-identity-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0626",
+      "slug": "aws-cloudfront-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0627",
+      "slug": "aws-apigateway-service-overview",
+      "max_amount_atomic": "250000",
+      "reason": "Basic reference or service overview"
+    },
+    {
+      "sku": "AWS-0629",
+      "slug": "cfn-lint-template-validation",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0630",
+      "slug": "aws-sdk-ruby-resource-interface",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0631",
+      "slug": "cdk-lambda",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0632",
+      "slug": "cdk-lambda-nodejs",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0633",
+      "slug": "cdk-lambda-event-sources",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0634",
+      "slug": "cdk-dynamodb",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0635",
+      "slug": "cdk-s3",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0636",
+      "slug": "cdk-s3-deployment",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0637",
+      "slug": "cdk-bedrock",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0638",
+      "slug": "cdk-bedrockagentcore",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0639",
+      "slug": "cdk-apigateway",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0640",
+      "slug": "cdk-apigatewayv2",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0641",
+      "slug": "cdk-apigatewayv2-integrations",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0642",
+      "slug": "cdk-iam",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0643",
+      "slug": "cdk-kms",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0644",
+      "slug": "cdk-secretsmanager",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0645",
+      "slug": "cdk-ssm",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0646",
+      "slug": "cdk-sqs",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0647",
+      "slug": "cdk-sns",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0648",
+      "slug": "cdk-events",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0649",
+      "slug": "cdk-events-targets",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0650",
+      "slug": "cdk-stepfunctions",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0651",
+      "slug": "cdk-stepfunctions-tasks",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0652",
+      "slug": "cdk-cloudwatch",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0653",
+      "slug": "cdk-logs",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0654",
+      "slug": "cdk-cognito",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0655",
+      "slug": "cdk-ecs",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0656",
+      "slug": "cdk-ecs-patterns",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0657",
+      "slug": "cdk-eks",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0658",
+      "slug": "cdk-rds",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0659",
+      "slug": "cdk-elasticache",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0660",
+      "slug": "cdk-kinesis",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0661",
+      "slug": "cdk-cloudfront",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0662",
+      "slug": "cdk-cloudtrail",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0663",
+      "slug": "cdk-backup",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0664",
+      "slug": "cdk-ec2",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0665",
+      "slug": "cdk-ecr",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0666",
+      "slug": "cdk-athena",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0667",
+      "slug": "cdk-glue",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0668",
+      "slug": "cdk-cognito-identitypool",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0669",
+      "slug": "cdk-codebuild",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0670",
+      "slug": "cdk-codepipeline",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0671",
+      "slug": "cdk-codepipeline-actions",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0672",
+      "slug": "chalice-rest-api-decorator-pattern",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0673",
+      "slug": "chalice-automatic-iam-policy-generator",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0674",
+      "slug": "chalice-local-dev-to-lambda-deploy-recipe",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0675",
+      "slug": "chalice-deployment-failed-diagnostic",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0676",
+      "slug": "claudia-nodejs-lambda-deploy",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0677",
+      "slug": "claudia-api-builder-pattern",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0678",
+      "slug": "aws-s3-ruby-client",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0679",
+      "slug": "minio-s3-compatible-local-store",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0680",
+      "slug": "minio-to-aws-s3-migration-recipe",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0681",
+      "slug": "aws-sdk-pandas-athena-to-dataframe",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0682",
+      "slug": "aws-sdk-pandas-s3-read-write",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0683",
+      "slug": "aws-sdk-pandas-glue-catalog",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0684",
+      "slug": "aws-sdk-pandas-redshift-connection",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "AWS-0685",
+      "slug": "bedrock-agent-with-action-group-sample",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0686",
+      "slug": "bedrock-rag-knowledge-base-sample",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0687",
+      "slug": "bedrock-multimodal-inference-sample",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0688",
+      "slug": "agentcore-sdk-agent-runtime-setup",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0689",
+      "slug": "agentcore-sdk-memory-management",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0690",
+      "slug": "agentcore-sdk-session-handling",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "AWS-0691",
+      "slug": "agentcore-sdk-tool-registration-recipe",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "BUN-AGENTCORE",
+      "slug": "bun-agentcore-pack",
+      "max_amount_atomic": "10000000",
+      "reason": "Flagship service bundle"
+    },
+    {
+      "sku": "BUN-API-GATEWAY",
+      "slug": "bun-api-gateway-pack",
+      "max_amount_atomic": "5000000",
+      "reason": "Substantial service bundle"
+    },
+    {
+      "sku": "BUN-ATHENA",
+      "slug": "bun-athena-pack",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "BUN-BEDROCK",
+      "slug": "bun-bedrock-pack",
+      "max_amount_atomic": "5000000",
+      "reason": "Substantial service bundle"
+    },
+    {
+      "sku": "BUN-DYNAMODB",
+      "slug": "bun-dynamodb-pack",
+      "max_amount_atomic": "5000000",
+      "reason": "Substantial service bundle"
+    },
+    {
+      "sku": "BUN-ECS",
+      "slug": "bun-ecs-pack",
+      "max_amount_atomic": "5000000",
+      "reason": "Substantial service bundle"
+    },
+    {
+      "sku": "BUN-EVENTS",
+      "slug": "bun-events-pack",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "BUN-GLUE",
+      "slug": "bun-glue-pack",
+      "max_amount_atomic": "5000000",
+      "reason": "Substantial service bundle"
+    },
+    {
+      "sku": "BUN-LAMBDA",
+      "slug": "bun-lambda-pack",
+      "max_amount_atomic": "10000000",
+      "reason": "Flagship service bundle"
+    },
+    {
+      "sku": "BUN-S3",
+      "slug": "bun-s3-pack",
+      "max_amount_atomic": "5000000",
+      "reason": "Substantial service bundle"
+    },
+    {
+      "sku": "BUN-SAGEMAKER",
+      "slug": "bun-sagemaker-pack",
+      "max_amount_atomic": "10000000",
+      "reason": "Flagship service bundle"
+    },
+    {
+      "sku": "BUN-STEP-FUNCTIONS",
+      "slug": "bun-step-functions-pack",
+      "max_amount_atomic": "5000000",
+      "reason": "Substantial service bundle"
+    },
+    {
+      "sku": "SW-PT-0006",
+      "slug": "lambda-powertools-idempotency",
+      "max_amount_atomic": "1000000",
+      "reason": "Focused tool or substantive troubleshooting guide"
+    },
+    {
+      "sku": "SW-RR-0001",
+      "slug": "text-to-structure",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "SW-RR-0002",
+      "slug": "tool-call-repair",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "SW-RR-0003",
+      "slug": "loop-verdict",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "SW-RR-0004",
+      "slug": "grounding-check",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    },
+    {
+      "sku": "SW-RR-0005",
+      "slug": "context-compact",
+      "max_amount_atomic": "500000",
+      "reason": "Simple recipe or configuration helper"
+    }
+  ],
+  "component_allocations": {
+    "AWS-0568": {
+      "table": 4000,
+      "status-index": 2000,
+      "expiry": 1000,
+      "recovery": 2000,
+      "change-stream": 1000
+    }
+  }
+}

@@ -1,0 +1,1258 @@
+[
+  {
+    "sku": "AWS-0550",
+    "slug": "lambda-powertools-logger-ts",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0551",
+    "slug": "lambda-powertools-tracer-ts",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0552",
+    "slug": "lambda-powertools-metrics-ts",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0553",
+    "slug": "lambda-powertools-idempotency-ts",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0554",
+    "slug": "lambda-powertools-parameters-ts",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0555",
+    "slug": "lambda-powertools-batch-ts",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0556",
+    "slug": "bedrock-agent-cdk",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0557",
+    "slug": "bedrock-knowledge-base-cdk",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0558",
+    "slug": "sagemaker-endpoint-cdk",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0559",
+    "slug": "cloudwatch-monitoring-facade",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0560",
+    "slug": "api-gateway-lambda-dynamodb-stack",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0561",
+    "slug": "bedrock-guardrails-cdk",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0562",
+    "slug": "x402-lambda-payment-gate-recipe",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0563",
+    "slug": "bedrock-agent-action-group-recipe",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0564",
+    "slug": "dynamodb-agent-state-bootstrap-recipe",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0565",
+    "slug": "lambda-vs-fargate-agent-decision",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0566",
+    "slug": "dynamodb-vs-aurora-dsql-decision",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0567",
+    "slug": "stepfunctions-vs-eventbridge-pipes-decision",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0568",
+    "slug": "agent-state-dynamodb-manifest",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0569",
+    "slug": "bedrock-agent-execution-role-manifest",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0570",
+    "slug": "lambda-x402-env-manifest",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0571",
+    "slug": "dynamodb-throttle-diagnostic",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0572",
+    "slug": "lambda-payment-timeout-diagnostic",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0573",
+    "slug": "bedrock-quota-exceeded-diagnostic",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0574",
+    "slug": "lambda-vs-fargate-cost-model",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0575",
+    "slug": "bedrock-claude-inference-cost-model",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0576",
+    "slug": "dynamodb-billing-mode-cost-model",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0577",
+    "slug": "cross-account-bedrock-auth-flow",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0578",
+    "slug": "lambda-dynamodb-least-privilege-auth-flow",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0579",
+    "slug": "agentcore-x402-wallet-auth-flow",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0580",
+    "slug": "sagemaker-endpoint-failed-during-creation",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0581",
+    "slug": "sagemaker-endpoint-container-health-check-timeout",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0582",
+    "slug": "sagemaker-endpoint-no-instance-capacity-available",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0583",
+    "slug": "sagemaker-endpoint-model-artifact-access-denied",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0584",
+    "slug": "sagemaker-endpoint-invocation-stream-error",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0585",
+    "slug": "sagemaker-endpoint-went-out-of-service",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0586",
+    "slug": "sagemaker-training-job-out-of-memory",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0587",
+    "slug": "sagemaker-training-job-spot-instance-interrupted",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0588",
+    "slug": "sagemaker-training-job-script-failed-on-startup",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0592",
+    "slug": "sagemaker-training-job-input-channel-access-denied",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0593",
+    "slug": "sagemaker-async-inference-output-never-written",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0594",
+    "slug": "sagemaker-async-inference-model-returned-error",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0595",
+    "slug": "lambda-powertools-idempotency-concurrent-execution",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0596",
+    "slug": "lambda-powertools-idempotency-payload-mismatch",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0597",
+    "slug": "lambda-powertools-idempotency-dynamodb-unavailable",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0598",
+    "slug": "lambda-powertools-idempotency-key-not-found",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0599",
+    "slug": "lambda-powertools-bedrock-agent-action-group-rejected",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0600",
+    "slug": "lambda-powertools-parameters-access-denied-at-cold-start",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0601",
+    "slug": "lambda-powertools-sqs-batch-partial-failure",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0602",
+    "slug": "aws-s3-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0603",
+    "slug": "aws-iam-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0604",
+    "slug": "aws-logs-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0605",
+    "slug": "aws-xray-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0606",
+    "slug": "aws-sqs-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0607",
+    "slug": "aws-sns-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0608",
+    "slug": "aws-events-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0609",
+    "slug": "aws-states-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0610",
+    "slug": "aws-secretsmanager-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0611",
+    "slug": "aws-ssm-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0612",
+    "slug": "aws-kms-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0613",
+    "slug": "aws-cognito-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0614",
+    "slug": "aws-ecs-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0615",
+    "slug": "aws-eks-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0616",
+    "slug": "aws-ec2-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0617",
+    "slug": "aws-rds-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0618",
+    "slug": "aws-elasticache-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0619",
+    "slug": "aws-kinesis-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0620",
+    "slug": "aws-firehose-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0621",
+    "slug": "aws-glue-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0622",
+    "slug": "aws-athena-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0623",
+    "slug": "aws-redshift-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0624",
+    "slug": "aws-opensearch-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0625",
+    "slug": "aws-cognito-identity-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0626",
+    "slug": "aws-cloudfront-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0627",
+    "slug": "aws-apigateway-service-overview",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0629",
+    "slug": "cfn-lint-template-validation",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0630",
+    "slug": "aws-sdk-ruby-resource-interface",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0631",
+    "slug": "cdk-lambda",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0632",
+    "slug": "cdk-lambda-nodejs",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0633",
+    "slug": "cdk-lambda-event-sources",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0634",
+    "slug": "cdk-dynamodb",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0635",
+    "slug": "cdk-s3",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0636",
+    "slug": "cdk-s3-deployment",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0637",
+    "slug": "cdk-bedrock",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0638",
+    "slug": "cdk-bedrockagentcore",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0639",
+    "slug": "cdk-apigateway",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0640",
+    "slug": "cdk-apigatewayv2",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0641",
+    "slug": "cdk-apigatewayv2-integrations",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0642",
+    "slug": "cdk-iam",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0643",
+    "slug": "cdk-kms",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0644",
+    "slug": "cdk-secretsmanager",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0645",
+    "slug": "cdk-ssm",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0646",
+    "slug": "cdk-sqs",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0647",
+    "slug": "cdk-sns",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0648",
+    "slug": "cdk-events",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0649",
+    "slug": "cdk-events-targets",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0650",
+    "slug": "cdk-stepfunctions",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0651",
+    "slug": "cdk-stepfunctions-tasks",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0652",
+    "slug": "cdk-cloudwatch",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0653",
+    "slug": "cdk-logs",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0654",
+    "slug": "cdk-cognito",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0655",
+    "slug": "cdk-ecs",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0656",
+    "slug": "cdk-ecs-patterns",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0657",
+    "slug": "cdk-eks",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0658",
+    "slug": "cdk-rds",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0659",
+    "slug": "cdk-elasticache",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0660",
+    "slug": "cdk-kinesis",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0661",
+    "slug": "cdk-cloudfront",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0662",
+    "slug": "cdk-cloudtrail",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0663",
+    "slug": "cdk-backup",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0664",
+    "slug": "cdk-ec2",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0665",
+    "slug": "cdk-ecr",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0666",
+    "slug": "cdk-athena",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0667",
+    "slug": "cdk-glue",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0668",
+    "slug": "cdk-cognito-identitypool",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0669",
+    "slug": "cdk-codebuild",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0670",
+    "slug": "cdk-codepipeline",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0671",
+    "slug": "cdk-codepipeline-actions",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0672",
+    "slug": "chalice-rest-api-decorator-pattern",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0673",
+    "slug": "chalice-automatic-iam-policy-generator",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0674",
+    "slug": "chalice-local-dev-to-lambda-deploy-recipe",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0675",
+    "slug": "chalice-deployment-failed-diagnostic",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0676",
+    "slug": "claudia-nodejs-lambda-deploy",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0677",
+    "slug": "claudia-api-builder-pattern",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0678",
+    "slug": "aws-s3-ruby-client",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0679",
+    "slug": "minio-s3-compatible-local-store",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0680",
+    "slug": "minio-to-aws-s3-migration-recipe",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0681",
+    "slug": "aws-sdk-pandas-athena-to-dataframe",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0682",
+    "slug": "aws-sdk-pandas-s3-read-write",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0683",
+    "slug": "aws-sdk-pandas-glue-catalog",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0684",
+    "slug": "aws-sdk-pandas-redshift-connection",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0685",
+    "slug": "bedrock-agent-with-action-group-sample",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0686",
+    "slug": "bedrock-rag-knowledge-base-sample",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0687",
+    "slug": "bedrock-multimodal-inference-sample",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0688",
+    "slug": "agentcore-sdk-agent-runtime-setup",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0689",
+    "slug": "agentcore-sdk-memory-management",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0690",
+    "slug": "agentcore-sdk-session-handling",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "AWS-0691",
+    "slug": "agentcore-sdk-tool-registration-recipe",
+    "kind": "guide",
+    "price_usd": 0.25,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-AGENTCORE",
+    "slug": "bun-agentcore-pack",
+    "kind": "tool",
+    "price_usd": 2,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-API-GATEWAY",
+    "slug": "bun-api-gateway-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-ATHENA",
+    "slug": "bun-athena-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-BEDROCK",
+    "slug": "bun-bedrock-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-DYNAMODB",
+    "slug": "bun-dynamodb-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-ECS",
+    "slug": "bun-ecs-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-EVENTS",
+    "slug": "bun-events-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-GLUE",
+    "slug": "bun-glue-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-LAMBDA",
+    "slug": "bun-lambda-pack",
+    "kind": "tool",
+    "price_usd": 2,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-S3",
+    "slug": "bun-s3-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-SAGEMAKER",
+    "slug": "bun-sagemaker-pack",
+    "kind": "tool",
+    "price_usd": 2,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "BUN-STEP-FUNCTIONS",
+    "slug": "bun-step-functions-pack",
+    "kind": "tool",
+    "price_usd": 1,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "SW-PT-0006",
+    "slug": "lambda-powertools-idempotency",
+    "kind": "tool",
+    "price_usd": 0.1,
+    "status": "live",
+    "version": 1
+  },
+  {
+    "sku": "SW-RR-0001",
+    "slug": "text-to-structure",
+    "kind": "tool",
+    "price_usd": 0.02,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "SW-RR-0002",
+    "slug": "tool-call-repair",
+    "kind": "tool",
+    "price_usd": 0.02,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "SW-RR-0003",
+    "slug": "loop-verdict",
+    "kind": "tool",
+    "price_usd": 0.03,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "SW-RR-0004",
+    "slug": "grounding-check",
+    "kind": "tool",
+    "price_usd": 0.03,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "SW-RR-0005",
+    "slug": "context-compact",
+    "kind": "tool",
+    "price_usd": 0.02,
+    "status": "draft",
+    "version": 1
+  },
+  {
+    "sku": "SW-TEST-0001",
+    "slug": "sepolia-proof-tool",
+    "kind": "tool",
+    "price_usd": 0.01,
+    "status": "retired",
+    "version": 1
+  }
+]
