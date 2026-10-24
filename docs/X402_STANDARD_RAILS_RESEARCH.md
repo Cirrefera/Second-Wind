@@ -52,6 +52,6 @@ Existing `quote_id` and stored records are compatibility identifiers. Retaining 
 
 These constraints are drawn from the published 2.28.0 Hono `paymentMiddlewareFromHTTPServer()` and core `x402ResourceServer.settlePayment()`, `settleWithPendingRetry()` and `x402HTTPResourceServer.processSettlement()` implementations. They identify the narrow adaptation work required; they do not justify another custom payment rail.
 
-## Decision left for implementation planning
+## Follow-up mapping
 
-Map each existing durable transition to the supported SDK lifecycle and identify the minimal adapter that preserves request/scope identity, one execution/settlement owner, confirmed receipts and free recovery. Then review that mapping against the existing fault cases before replacing the serving route. No experimental alternative implementation, test execution, production write, price change, product activation or payment was performed for this note.
+The [durable recovery mapping](X402_RECOVERY_MAPPING.md) now maps each existing transition to the supported SDK lifecycle and identifies the minimal adapter preserving request/scope identity, one execution/settlement owner, confirmed receipts and free recovery. It resolves the source-level integration question and records the fault cases and compatibility limits that implementation must validate. The restoration itself remains unimplemented. No experimental alternative implementation, test execution, production write, price change, product activation or payment was performed for this note.
