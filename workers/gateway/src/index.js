@@ -13,10 +13,11 @@ import { createQuote, createExecutionQuote, readQuote, openPurchase, recoverGran
 import { CommerceError, NETWORK, ORIGIN, paymentReadiness } from "./contracts.js";
 import { toolsDocument, resourcesDocument, openApiDocument, llmsDocument, toolMethod } from "./discovery.js";
 
-async function jsonBody(request) {
+async function jsonBody(request, allowEmpty = false) {
   if (Number(request.headers.get("content-length") || 0) > 100_000) throw new CommerceError("request_too_large",413);
   const text = await request.text();
   if (new TextEncoder().encode(text).length > 100_000) throw new CommerceError("request_too_large",413);
+  if (allowEmpty && !text.trim()) return {};
   try {
     const body = JSON.parse(text);
     if (!body || Array.isArray(body) || typeof body !== "object") throw new Error();
@@ -146,7 +147,7 @@ export function createApp(dependencies = {}) {
   });
 
   async function paid(c,isRpc = false) {
-    const body = c.req.method === "POST" ? await jsonBody(c.req.raw) : {};
+    const body = c.req.method === "POST" ? await jsonBody(c.req.raw,true) : {};
     const paymentPayload = signatureFrom(c.req.raw);
     let quoteId = acceptanceFrom(c.req.raw,paymentPayload,body);
     if (!quoteId && paymentPayload) throw new CommerceError("acceptance_required",400,{hint:"Retry the original accepted purchase URL."});
