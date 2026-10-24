@@ -4,7 +4,7 @@
   "sku": "SW-PT-0006",
   "slug": "lambda-powertools-idempotency",
   "version": 2,
-  "release_ref": "sha256:80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+  "release_ref": "sha256:e14bbc3db3be4b16a9fa1415077ce2933bb44bab93cf476a7811bcf60b68bcd9",
   "service": "lambda",
   "product_kind": "guidance-product",
   "route_summary": "Configure Python Lambda Powertools DynamoDB idempotency to deduplicate completed retries, reject changed payment payloads and reason about uncertain external side effects.",

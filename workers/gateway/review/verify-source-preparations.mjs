@@ -24,8 +24,8 @@ for(const product of ['agent-state-dynamodb-manifest','lambda-powertools-idempot
   validation_file_sha256:digest(validationBytes),validation,preparation:report});
 }
 const inspectionBytes=await readFile(new URL('corpus-source-inspection.json',root)),inspection=JSON.parse(inspectionBytes);
-const evidence={schema_version:'1',observed_date:'2026-10-19',
- scope:'Local actual-source preparation with exact inline payload bytes. No cloud credentials, store writes, publication approvals, price allocations, live inference, AWS calls or payment operations.',
+const evidence={schema_version:'1',observed_date:'2026-10-24',
+ scope:'Local actual-source preparation with exact inline payload bytes. No cloud credentials, store writes, publication approvals, price changes, live inference, AWS calls or payment operations.',
  generator_sha256:digest(await readFile(new URL('verify-source-preparations.mjs',root))),
  preparation_source_sha256:digest(await readFile(new URL('../src/release-preparation.js',root))),
  source_snapshot_sha256:inspection.source_snapshot_sha256,source_inspection_sha256:digest(inspectionBytes),source_inspection_counts:inspection.counts,products};

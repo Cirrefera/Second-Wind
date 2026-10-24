@@ -1,0 +1,34 @@
+{
+  "schema_version": "1",
+  "review_report": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md",
+  "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+  "releases": [
+    {
+      "sku": "AWS-0568",
+      "version": 2,
+      "input": "products/agent-state-dynamodb-manifest/release-input.json",
+      "input_sha256": "9efccf451c3e62ff336e5cbbd750ea975a70d43a4a0974c4a5185d4d73b55efa",
+      "reviews": "products/agent-state-dynamodb-manifest/publication-reviews.json",
+      "reviews_sha256": "8e00792e2dd44bb4b3e507f073fdeb60b93b79a88ca5aa4d3a06ee59e4eb3e96",
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ]
+    },
+    {
+      "sku": "SW-PT-0006",
+      "version": 2,
+      "input": "products/lambda-powertools-idempotency/release-input.json",
+      "input_sha256": "c610fbe956fe3fb3619af9eedbc51517e93074792767f5bd0a6ad703c2d78f47",
+      "reviews": "products/lambda-powertools-idempotency/publication-reviews.json",
+      "reviews_sha256": "cc45ec912368d458e0971a9d353dcfeae42b7e82e4b7d4fdff11e00f3f886fb4",
+      "resolved_blockers": [
+        "trusted_guidance_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ]
+    }
+  ],
+  "mode": "activate"
+}

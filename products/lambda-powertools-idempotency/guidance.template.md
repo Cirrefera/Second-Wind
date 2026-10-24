@@ -1,6 +1,6 @@
 # Retries double charge customers
 
-Use this guidance when a Python Lambda handler can receive a logical payment more than once. This draft release supports **Python only**, tested with Python 3.12, Powertools 3.36.0 and boto3 1.43.114. Explicitly select `target_language: "python"` when resolving this product and `language="python"` when constructing the example. Other languages require a separately implemented and tested variant. The v1 catalog guidance's TypeScript, Java and .NET examples are retained in history, outside this release's supported contract.
+Use this guidance when a Python Lambda handler can receive a logical payment more than once. This release supports **Python only**, tested with Python 3.12, Powertools 3.36.0 and boto3 1.43.114. Explicitly select `target_language: "python"` when resolving this product and `language="python"` when constructing the example. Other languages require a separately implemented and tested variant. The v1 catalog guidance's TypeScript, Java and .NET examples are retained in history, outside this release's supported contract.
 
 The example accepts a **decoded JSON object** whose `body` has globally unique `orderId`, `customerId`, positive integer `amount` in your processor's minor units, and uppercase three-letter `currency`. Decode and authenticate an API Gateway body before calling it. The handler is for one payment event per invocation. It does not implement SQS batch failure reporting, event authentication or a payment processor.
 
@@ -83,4 +83,4 @@ This corrected guidance and wiring example are original Second Wind work under A
 - https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html
 - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
 
-This is draft version 2. It neither edits the historical live version 1 nor attests that publication, licensing or production deployment has been approved.
+This is version 2. Historical version 1 guidance and existing purchase records remain preserved separately.

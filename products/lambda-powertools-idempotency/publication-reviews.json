@@ -1,0 +1,74 @@
+[
+  {
+    "kind": "service",
+    "subject_hash": "563dbdc2e1ba783c090f468b3513ee414adc9857701b2b4059493f0cbd39c84e",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "contract",
+    "subject_hash": "563dbdc2e1ba783c090f468b3513ee414adc9857701b2b4059493f0cbd39c84e",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "product",
+    "subject_hash": "563dbdc2e1ba783c090f468b3513ee414adc9857701b2b4059493f0cbd39c84e",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "license",
+    "subject_hash": "563dbdc2e1ba783c090f468b3513ee414adc9857701b2b4059493f0cbd39c84e",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "purchase-url",
+    "subject_hash": "563dbdc2e1ba783c090f468b3513ee414adc9857701b2b4059493f0cbd39c84e",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "language-adapters",
+    "subject_hash": "563dbdc2e1ba783c090f468b3513ee414adc9857701b2b4059493f0cbd39c84e",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "routing",
+    "subject_hash": "75bbf6e9ae1d4310668e2f328e90585a09839d7b4426310e64b62307b17140b5",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "guidance-quality",
+    "subject_hash": "563dbdc2e1ba783c090f468b3513ee414adc9857701b2b4059493f0cbd39c84e",
+    "reviewed_by": "codex-source-review-2026-10-24",
+    "reference": "docs/PRODUCT_RELEASE_REVIEW_2026-10-24.md#sw-pt-0006-python-idempotency-guidance",
+    "review_report_sha256": "62e30e1a7f9dfe84626bf9ce786b49feb04924d5689b36860a4007f620f60d34",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  }
+]

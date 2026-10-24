@@ -6,7 +6,7 @@
   "historical_content_hash": "62a28a512af90491",
   "historical_record_path": "history/v1-catalog-record.json",
   "historical_guidance_path": "history/v1-guidance.txt",
-  "corrected_guidance_sha256": "80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+  "corrected_guidance_sha256": "e14bbc3db3be4b16a9fa1415077ce2933bb44bab93cf476a7811bcf60b68bcd9",
   "upstream_source_inspection": {
     "schema_version": "1",
     "revision": "0f64f280025fa139c6ee755ad7006d848bf84410",
@@ -61,7 +61,7 @@
     "scope": "Source/interface evidence, not a licensing approval or proof of external execution."
   },
   "original_source_hashes": {
-    "GUIDANCE.md": "80a57963f64ae52ab0f75ad9b58bbab737db9891b13d7a87961f0b5947239fbf",
+    "GUIDANCE.md": "e14bbc3db3be4b16a9fa1415077ce2933bb44bab93cf476a7811bcf60b68bcd9",
     "example.py": "0cd6a2d0e0951a22212f2732867bc291d7db7f97c5be677c27551496c310d946",
     "requirements.txt": "0da11025a3dae01b790394146e4e5df2d211d635f688fcf7939de96b49104c87",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"

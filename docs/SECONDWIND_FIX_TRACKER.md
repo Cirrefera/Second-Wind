@@ -6,6 +6,16 @@ Repository: https://github.com/Cirrefera/Second-Wind
 
 Canonical tracker: `docs/SECONDWIND_FIX_TRACKER.md`.
 
+## Product publication and telemetry checkpoint — October 24, 2026
+
+PRs #12, #16 and #17 are merged. Production run [40120724077](https://github.com/Cirrefera/Second-Wind/actions/runs/40120724077) accepted main commit `af0188fe02137277b8a4f7c90c07fb5f0eaa5b5e`, gateway `b6a21b13-d032-41ed-a518-801e3bf3a051` and Pages deployment `2c5a3ecd-209e-4a00-a44b-e86e80a339a9`. The draft/not-deployed statements in the historical October 24 sections below are superseded by this checkpoint. No funded purchase was verified.
+
+The existing `secondwind_contract_v1` pipeline is running. All three versioned tables exist. The journey table has ten snapshots with 33 record appends, matching the 33 discovery events in D1 since pipeline creation; the outbox has zero pending rows. Payment and scope tables have no snapshots and no matching new producer events were observed. This is table/snapshot arrival evidence, not row-by-row reconciliation, payment proof or completion of all telemetry consolidation. See `docs/evidence/telemetry/contract-v1-2026-10-24.json`.
+
+Actual source and evidence reviews for AWS-0568 v2 and SW-PT-0006 v2 are recorded in [the release review](PRODUCT_RELEASE_REVIEW_2026-10-24.md), with an explicit AI reviewer identity and exact manifest hashes. Existing validation evidence is reused. Product code and payment code are unchanged; delivered documentation now reflects approved pricing, actual sandbox language support and release wording. Exact candidate bytes were regenerated. The publication record resolves the prior editorial pending markers; the original source inputs retain those markers and all runtime gates remain enforced.
+
+The operator workflow invokes the existing `publishRelease` function through official Wrangler remote bindings. A merge changing `products/publication.json` explicitly requests its recorded mode; manual dispatch pins a main commit and mode. The workflow registers immutable payloads, review records and routing manifests, then activates only through the existing guarded operation. Publication results and production readback must be recorded before FIX-10/11 are marked complete. No product is claimed live by this source checkpoint.
+
 ## Owner-approved catalog pricing — October 24, 2026
 
 The approved maximum-payment schedule is applied to D1: 3 products at $10, 8 at $5, 92 at $1, 21 at $0.50 and 32 at $0.25. The retired proof product is excluded. Readback confirms 155 drafts, one live product and one retired product; no product was activated. See [the exact assignments and application evidence](CATALOG_PRICING.md) and `products/pricing.json`.

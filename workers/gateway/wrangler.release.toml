@@ -1,0 +1,15 @@
+# Binding access for the manual GitHub publication operation. Never deployed.
+name = "secondwind-gateway"
+compatibility_date = "2026-10-18"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "SW_DB"
+database_name = "second-wind-catalog"
+database_id = "db6412e2-4c9d-4b82-a93e-3b9f3708245d"
+remote = true
+
+[[r2_buckets]]
+binding = "PAYLOADS"
+bucket_name = "secondwind-payloads"
+remote = true

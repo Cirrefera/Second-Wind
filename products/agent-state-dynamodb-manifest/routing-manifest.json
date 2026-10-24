@@ -4,7 +4,7 @@
   "sku": "AWS-0568",
   "slug": "agent-state-dynamodb-manifest",
   "version": 2,
-  "release_ref": "sha256:57ce8e7d4e78fdb24d7bd6c3327ce4ea9eb95912af8ed32f666ebb6f914e5d10",
+  "release_ref": "sha256:55f958029ede09f9216e84b67ce8112fe3503ded1a3d55bc654e01d8327cd1f5",
   "service": "dynamodb",
   "product_kind": "artifact-product",
   "route_summary": "Prepare DynamoDB API requests for agent session state, optional status index, item expiration, point in time recovery and change streams.",

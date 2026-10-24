@@ -1,0 +1,118 @@
+{
+  "observed_at": "2026-10-24T19:29:04.235Z",
+  "pipeline_id": "19fa478e36e74d9cb430ebed0c5c4326",
+  "tables": [
+    {
+      "name": "journey_events_v1",
+      "table_uuid": "01a16ed4-ccb8-7dd1-a333-22dd072b5749",
+      "total_snapshots": 10,
+      "last_updated_ms": 1792869545366,
+      "record_appends_in_returned_snapshots": 33,
+      "field_names": [
+        "__ingest_ts",
+        "event_id",
+        "event_contract_version",
+        "event_type",
+        "occurred_ts",
+        "journey_id",
+        "observation_id",
+        "quote_id",
+        "payment_id",
+        "trial_id",
+        "sku",
+        "product_version_ref",
+        "event_family",
+        "journey_stage",
+        "observed_outcome",
+        "transport",
+        "public_intent",
+        "candidate_product_ids",
+        "selected_product_ids",
+        "resolution_status",
+        "configuration_status",
+        "response_status",
+        "result_count",
+        "missing_count",
+        "error_count",
+        "clarification_count",
+        "delivery_id",
+        "challenge_id",
+        "journey_correlation",
+        "scope_correlation"
+      ]
+    },
+    {
+      "name": "payment_events_v1",
+      "table_uuid": "01a16ed4-cc4a-71c3-8841-eb3cad358a7b",
+      "total_snapshots": 0,
+      "last_updated_ms": 1792860802123,
+      "record_appends_in_returned_snapshots": 0,
+      "field_names": [
+        "__ingest_ts",
+        "event_id",
+        "event_contract_version",
+        "event_type",
+        "occurred_ts",
+        "journey_id",
+        "payment_id",
+        "quote_id",
+        "trial_id",
+        "sku",
+        "product_version_ref",
+        "exact_amount_atomic",
+        "payment_network",
+        "artifact_hash",
+        "release_hash",
+        "scope_hash",
+        "journey_stage",
+        "observed_outcome",
+        "scope_correlation",
+        "journey_correlation"
+      ]
+    },
+    {
+      "name": "scope_events_v1",
+      "table_uuid": "01a16ed4-cc53-7ee2-9a9d-3f0760ab6e90",
+      "total_snapshots": 0,
+      "last_updated_ms": 1792860802133,
+      "record_appends_in_returned_snapshots": 0,
+      "field_names": [
+        "__ingest_ts",
+        "event_id",
+        "event_contract_version",
+        "event_type",
+        "occurred_ts",
+        "journey_id",
+        "trial_id",
+        "quote_id",
+        "sku",
+        "product_version_ref",
+        "release_hash",
+        "scope_hash",
+        "exact_amount_atomic",
+        "selected_share_bps",
+        "selected_component_ids",
+        "omitted_component_ids",
+        "scope_correlation",
+        "journey_stage",
+        "observed_outcome"
+      ]
+    }
+  ],
+  "pipeline_status": "running",
+  "outbox": [
+    [
+      {
+        "total": 602,
+        "pending": 0,
+        "last_sent": "2026-10-24T19:13:39.912Z"
+      }
+    ],
+    [
+      {
+        "event_type": "discovery.described",
+        "n": 33
+      }
+    ]
+  ]
+}

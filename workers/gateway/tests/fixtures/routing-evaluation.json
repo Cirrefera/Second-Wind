@@ -9,14 +9,14 @@
       "version": 2,
       "item_file": "../../products/agent-state-dynamodb-manifest/release-input.json",
       "routing_file": "../../products/agent-state-dynamodb-manifest/routing-manifest.json",
-      "source_hash": "3bc62d020eb57362b7316d354eb0e48910a8295412c5038e91ed42e24da2f1a5"
+      "source_hash": "5d37e13a6b673777bc78c7f99d0d14a6cdd6b66f1d8cd22d78c1adc93db79c0a"
     },
     {
       "sku": "SW-PT-0006",
       "version": 2,
       "item_file": "../../products/lambda-powertools-idempotency/release-input.json",
       "routing_file": "../../products/lambda-powertools-idempotency/routing-manifest.json",
-      "source_hash": "c0065a5549434155fb76a50cbe4d9fe7826c951f4820b8208aee5222f67cc07c"
+      "source_hash": "6a26d47048c8adb03ae51f04f9465977a32315215ff6568abf7fdbde021bf401"
     }
   ],
   "cases": [
