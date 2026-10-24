@@ -121,20 +121,22 @@ export function validateRelease(config, responses) {
   requireCheck(sameAddress(rail.payTo, config.expectedRecipient), "discovery_recipient_mismatch");
   const seen = new Set();
   for (const item of items) {
-    const tool = tools.find(candidate => candidate.sku === item.sku && candidate.version === item.version);
-    requireCheck(tool && !seen.has(item.sku), "discovery_product_mismatch");
-    seen.add(item.sku);
+    requireCheck(typeof item.slug === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.slug)
+      && item.sku === undefined, "discovery_product_identity_invalid");
+    const tool = tools.find(candidate => candidate.slug === item.slug && candidate.version === item.version);
+    requireCheck(tool && tool.sku === undefined && !seen.has(item.slug), "discovery_product_mismatch");
+    seen.add(item.slug);
     requireCheck(item.resource === tool.url && item.method === tool.method
       && item.type === "http" && item.x402Version === 2, "discovery_resource_mismatch");
     let resource;
     try { resource = new URL(item.resource); } catch { throw new AcceptanceError("discovery_resource_mismatch"); }
-    requireCheck(resource.origin === config.origin && resource.pathname.startsWith("/api/x402/"), "discovery_resource_mismatch");
+    requireCheck(resource.origin === config.origin && resource.pathname === `/api/x402/${encodeURIComponent(item.slug)}`, "discovery_resource_mismatch");
     requireCheck(Array.isArray(item.accepts) && item.accepts.length === 0, "discovery_premature_payment_requirements");
     requireCheck(item.payment_requirements_url === item.resource, "discovery_requirements_url_mismatch");
     requireCheck(item.pricing_mode === tool.pricing_mode && ["whole-product", "proportional-components"].includes(item.pricing_mode)
       && item.pricing_status === tool.pricing_status, "discovery_pricing_mismatch");
     if (item.pricing_mode === "proportional-components") {
-      requireCheck(item.components_url === `/api/products/${encodeURIComponent(item.sku)}/components`
+      requireCheck(item.components_url === `/api/products/${encodeURIComponent(item.slug)}/components`
         && tool.components_url === item.components_url && item.trial_url === "/api/trials"
         && tool.trial_url === item.trial_url, "discovery_trial_mismatch");
     }

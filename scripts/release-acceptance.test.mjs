@@ -33,10 +33,10 @@ function fixture() {
         payment_recipient_configured: true, payment_recipient_verified: true, facilitator_configured: true },
       dependencies: { database: true, commerce_schema: true, payload_store: true, delivery_store: true } }),
     catalog: response({ total_live: 1, tools: [
-      { sku: "FIXTURE", version: 1, price_usdc_micros: "100000", max_amount_atomic: "100000", price_role: "maximum", pricing_mode:"whole-product", pricing_status:"configured", url: resource, method: "GET" },
+      { slug: "fixture-tool", version: 1, price_usdc_micros: "100000", max_amount_atomic: "100000", price_role: "maximum", pricing_mode:"whole-product", pricing_status:"configured", url: resource, method: "GET" },
     ] }),
     discovery: response({ x402Version: 2, payment_configured: true, payment:{rail:"x402",network,asset:usdc,payTo:env.X402_EXPECTED_PAY_TO}, items: [
-      { sku: "FIXTURE", version: 1, resource, type: "http", method: "GET", x402Version: 2,
+      { slug: "fixture-tool", version: 1, resource, type: "http", method: "GET", x402Version: 2,
         accepts: [], payment_requirements_url:resource, max_amount_atomic:"100000",
         price_role:"maximum", pricing_mode:"whole-product", pricing_status:"configured" },
     ] }),
@@ -191,7 +191,7 @@ test("CLI preflight validates input without calling the network or printing cred
 test('component discovery may describe a maximum or unconfigured pricing without signable requirements',()=>{
  const f=fixture(),tool=f.catalog.body.tools[0],item=f.discovery.body.items[0];
  for(const target of [tool,item]) Object.assign(target,{pricing_mode:'proportional-components',
-  components_url:'/api/products/FIXTURE/components',trial_url:'/api/trials'});
+  components_url:'/api/products/fixture-tool/components',trial_url:'/api/trials'});
  assert.equal(validateRelease(config,f).accepted,true);
  for(const target of [tool,item]) {
   target.pricing_status='not_configured';target.price_role='historical-unconfirmed';delete target.max_amount_atomic;
