@@ -1,20 +1,21 @@
 {
   "schema_version": "1",
-  "review_report": "docs/LANGUAGE_DELIVERY_REVIEW_2026-10-24.md",
-  "review_report_sha256": "43ff6db8023d3663c5bd7ec50fef80770941584a79a69fcb9c2a8ab939c8acab",
+  "review_report": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md",
+  "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
   "releases": [
     {
       "sku": "AWS-0568",
-      "version": 3,
-      "input": "products/agent-state-dynamodb-manifest/releases/v3/release-input.json",
-      "input_sha256": "2ddda65a09c19b38c171dbd45ee2b24d521dc575d39f604bd32126d432b6fc01",
-      "reviews": "products/agent-state-dynamodb-manifest/releases/v3/publication-reviews.json",
-      "reviews_sha256": "83b07415ed748216ed951d5b0779a7678986a081cf454d404c55d10b28d9a164",
+      "version": 4,
+      "input": "products/agent-state-dynamodb-manifest/releases/v4/release-input.json",
+      "input_sha256": "cf46075ac113a1b83bb850763fb13fbc960441139ef1cb3aa2d12f4151b54827",
+      "reviews": "products/agent-state-dynamodb-manifest/releases/v4/publication-reviews.json",
+      "reviews_sha256": "64f4997ea48d83b295278a24f0aaf9fcf0ed6b264bee986c828232ba5b090bcb",
       "resolved_blockers": [
-        "trusted_product_and_contract_reviews_pending",
-        "trusted_license_and_provenance_review_pending",
+        "bounded_preview_contract_requires_review",
+        "language_scoped_candidate_requires_review",
         "publication_approval_pending",
-        "language_scoped_candidate_requires_review"
+        "trusted_license_and_provenance_review_pending",
+        "trusted_product_and_contract_reviews_pending"
       ]
     }
   ],
