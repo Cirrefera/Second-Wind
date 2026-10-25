@@ -43,3 +43,8 @@ stream = "d135ad1c9f9246ae945be1d1b8277ddc"
 
 [triggers]
 crons = ["* * * * *"]
+
+# Dedicated versioned project storage.
+[[artifacts]]
+binding = "ARTIFACTS"
+namespace = "secondwind"
