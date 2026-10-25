@@ -1,0 +1,380 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0678",
+    "slug": "aws-s3-ruby-client",
+    "name": "read and write S3 objects from Ruby",
+    "kind": "artifact",
+    "service": "s3",
+    "summary": "Ruby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.",
+    "guidance": "# read and write S3 objects from Ruby\n\nRuby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.\n\nSelect `language: \"ruby\"` explicitly in the package configuration.\n\nHosted preview is blocked: The real S3 operations require Ruby, the aws-sdk-s3 gem, and a buyer S3 endpoint with credentials. The hosted adapter has no Ruby runtime or customer credentials.\n\n## Runtime and boundary\n\nRuby 3.2+ and aws-sdk-s3 1.233.0. Calls S3 only when invoked with buyer credentials and a bucket. Never embeds credentials; not a replacement HTTP/signature implementation.\n\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\n\n## Files\n\n- `Gemfile`\n- `lib/object_store.rb`\n- `example.rb`\n- `selection.schema.json`\n\n## Use\n\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\n\nGrant only the bucket and actions needed by the application. Object keys are not filesystem paths, and a returned SDK response reports the actual S3 operation outcome.\n\n## Sources and provenance\n\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\n\n- https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html\n- https://github.com/aws/aws-sdk-ruby\n\nUpstream repository: https://github.com/aws/aws-sdk-ruby\n\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\n\n\n## Native preview entrypoint\n\nRun `preview.rb` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.\n\n## Cloudflare R2 target\n\nThe S3 operations also support Cloudflare R2 through the official Ruby SDK. Set `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` using R2 S3 API credentials with access to the intended bucket. Do not place credentials in a product configuration or preview request.\n\nCall `ObjectStore.r2_client` and pass that client to `ObjectStore.put`, `get`, or `delete`.\n\nThe client uses `https://<account-id>.r2.cloudflarestorage.com` and signing region `auto`. This is a delivered Ruby client configuration; it does not establish hosted Ruby execution or verify a live bucket.\n\nReference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-ruby/\n",
+    "price_usd": 0.5,
+    "invoke_kind": "resolve",
+    "input_schema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"language\":{\"type\":\"string\",\"const\":\"ruby\"},\"bucket\":{\"type\":\"string\",\"minLength\":3},\"key\":{\"type\":\"string\",\"minLength\":1},\"region\":{\"type\":\"string\",\"minLength\":1},\"endpoint\":{\"type\":\"string\",\"format\":\"uri\"}},\"required\":[\"language\",\"bucket\",\"key\"]}",
+    "mime_type": "application/json",
+    "source_repo": "https://github.com/aws/aws-sdk-ruby",
+    "source_url": "https://github.com/aws/aws-sdk-ruby",
+    "license_spdx": "Apache-2.0",
+    "provenance": "original",
+    "status": "draft",
+    "version": 2,
+    "input_example": "{\"language\":\"ruby\",\"bucket\":\"example-bucket\",\"key\":\"preview/example.txt\",\"region\":\"us-east-1\",\"endpoint\":\"http://127.0.0.1:9000\"}"
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0678",
+    "slug": "aws-s3-ruby-client",
+    "version": 2,
+    "product_kind": "artifact-product",
+    "service": "s3",
+    "release_ref": "sha256:695a929696bc4591605fa560d667ddbff4b02b47c5c52d05ce5026c1f07a81fb",
+    "content_hash": "695a929696bc4591605fa560d667ddbff4b02b47c5c52d05ce5026c1f07a81fb",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "Ruby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "ruby": "lib/object_store.rb"
+      },
+      "configuration_schema": "selection.schema.json",
+      "side_effects": "native calls may be remote or modify buyer-controlled resources"
+    },
+    "validation_contract": {
+      "kind": "native-runtime-required",
+      "languages": [
+        "ruby"
+      ],
+      "hosted_preview": "unavailable",
+      "private_native_preview": "available",
+      "preview_blocked_reason": "The real S3 operations require Ruby, the aws-sdk-s3 gem, and a buyer S3 endpoint with credentials. The hosted adapter has no Ruby runtime or customer credentials.",
+      "aws_deployment": "not-performed",
+      "live_service_validation": "not-performed",
+      "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+      "private_native_preview_entrypoint": "preview.rb",
+      "native_preview_output_fields": [
+        "ok",
+        "status",
+        "diagnostic_codes",
+        "row_count",
+        "column_count",
+        "object_bytes",
+        "file_count",
+        "result_count",
+        "response_bytes",
+        "response_char_count",
+        "input_token_count",
+        "output_token_count",
+        "record_count",
+        "artifact_bytes"
+      ]
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "ruby"
+      ]
+    },
+    "tags": [
+      "s3",
+      "ruby",
+      "aws-s3-ruby-client"
+    ],
+    "supported_boundary": "Ruby 3.2+ and aws-sdk-s3 1.233.0. Calls S3 only when invoked with buyer credentials and a bucket. Never embeds credentials; not a replacement HTTP/signature implementation.",
+    "hosted_preview_available": false,
+    "native_preview_blocker": "The real S3 operations require Ruby, the aws-sdk-s3 gem, and a buyer S3 endpoint with credentials. The hosted adapter has no Ruby runtime or customer credentials.",
+    "publication_blockers": [
+      "hosted_preview_runtime_unavailable",
+      "trusted_product_and_contract_reviews_pending",
+      "trusted_license_and_provenance_review_pending",
+      "publication_approval_pending",
+      "native_private_preview_requires_native_runtime_or_service_identity"
+    ],
+    "required_files": [
+      {
+        "path": "Gemfile",
+        "sha256": "7a9d2ed26f9421ebe9de9f49b5bcbbee8f5523ccf0551061ca66c7caa63c7941",
+        "size_bytes": 58,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "lib/object_store.rb",
+        "sha256": "b948692314bab7ce99b15f5729309aa2f25100297afe29f7ee6ae5dc375bbd64",
+        "size_bytes": 1354,
+        "mime_type": "text/x-ruby"
+      },
+      {
+        "path": "example.rb",
+        "sha256": "0a97101002fe7c3d21e3460e4516f06272d6113cad9c067c9f00b8e9f8966d34",
+        "size_bytes": 291,
+        "mime_type": "text/x-ruby"
+      },
+      {
+        "path": "README.md",
+        "sha256": "fe7613cbd7fcbd9ec76fac9165e840fbde6590b536a74342ed9c44b2025c7824",
+        "size_bytes": 3516,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "selection.schema.json",
+        "sha256": "fe1f2d902a2a32b7085a2e21c0fedb7ea26f25998719f1f2506e50b45abb73e4",
+        "size_bytes": 482,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "preview.rb",
+        "sha256": "ad2bf2649694c9f723fdaea3e02436a8b271d86f90c34cefd5534fc83050b69d",
+        "size_bytes": 738,
+        "mime_type": "text/x-ruby"
+      }
+    ],
+    "dependencies": {
+      "aws-sdk-s3": "1.233.0"
+    },
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "const": "ruby"
+        },
+        "bucket": {
+          "type": "string",
+          "minLength": 3
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "region": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "language",
+        "bucket",
+        "key"
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "Gemfile",
+      "content": "source \"https://rubygems.org\"\ngem \"aws-sdk-s3\", \"1.233.0\"\n",
+      "sha256": "7a9d2ed26f9421ebe9de9f49b5bcbbee8f5523ccf0551061ca66c7caa63c7941",
+      "size_bytes": 58,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "lib/object_store.rb",
+      "content": "require 'aws-sdk-s3'\n\nmodule ObjectStore\n  module_function\n  def client(region: ENV.fetch('AWS_REGION'), endpoint: ENV['S3_ENDPOINT'], force_path_style: false)\n    options = {region: region}\n    options[:endpoint] = endpoint if endpoint\n    options[:force_path_style] = true if force_path_style\n    Aws::S3::Client.new(**options)\n  end\n  # R2 uses the official S3 SDK and R2 S3 API credentials, not an AWS account.\n  def r2_client(account_id: ENV.fetch('R2_ACCOUNT_ID'),\n                access_key_id: ENV.fetch('R2_ACCESS_KEY_ID'),\n                secret_access_key: ENV.fetch('R2_SECRET_ACCESS_KEY'))\n    raise ArgumentError, 'invalid_r2_account_id' unless /\\A[0-9a-f]{32}\\z/i.match?(account_id)\n    Aws::S3::Client.new(\n      endpoint: \"https://#{account_id}.r2.cloudflarestorage.com\", region: 'auto',\n      access_key_id: access_key_id, secret_access_key: secret_access_key\n    )\n  end\n  def put(client:, bucket:, key:, body:, content_type: 'application/octet-stream')\n    raise ArgumentError, 'bucket and key are required' if bucket.to_s.empty? || key.to_s.empty?\n    client.put_object(bucket: bucket, key: key, body: body, content_type: content_type)\n  end\n  def get(client:, bucket:, key:)\n    client.get_object(bucket: bucket, key: key).body\n  end\n  def delete(client:, bucket:, key:)\n    client.delete_object(bucket: bucket, key: key)\n  end\nend\n",
+      "sha256": "b948692314bab7ce99b15f5729309aa2f25100297afe29f7ee6ae5dc375bbd64",
+      "size_bytes": 1354,
+      "mime_type": "text/x-ruby"
+    },
+    {
+      "path": "example.rb",
+      "content": "require_relative 'lib/object_store'\nclient = ObjectStore.client\nObjectStore.put(client: client, bucket: ENV.fetch('S3_BUCKET'), key: 'demo/hello.txt', body: 'hello', content_type: 'text/plain')\nputs ObjectStore.get(client: client, bucket: ENV.fetch('S3_BUCKET'), key: 'demo/hello.txt').read\n",
+      "sha256": "0a97101002fe7c3d21e3460e4516f06272d6113cad9c067c9f00b8e9f8966d34",
+      "size_bytes": 291,
+      "mime_type": "text/x-ruby"
+    },
+    {
+      "path": "README.md",
+      "content": "# read and write S3 objects from Ruby\n\nRuby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.\n\nSelect `language: \"ruby\"` explicitly in the package configuration.\n\nHosted preview is blocked: The real S3 operations require Ruby, the aws-sdk-s3 gem, and a buyer S3 endpoint with credentials. The hosted adapter has no Ruby runtime or customer credentials.\n\n## Runtime and boundary\n\nRuby 3.2+ and aws-sdk-s3 1.233.0. Calls S3 only when invoked with buyer credentials and a bucket. Never embeds credentials; not a replacement HTTP/signature implementation.\n\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\n\n## Files\n\n- `Gemfile`\n- `lib/object_store.rb`\n- `example.rb`\n- `selection.schema.json`\n\n## Use\n\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\n\nGrant only the bucket and actions needed by the application. Object keys are not filesystem paths, and a returned SDK response reports the actual S3 operation outcome.\n\n## Sources and provenance\n\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\n\n- https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html\n- https://github.com/aws/aws-sdk-ruby\n\nUpstream repository: https://github.com/aws/aws-sdk-ruby\n\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\n\n\n## Native preview entrypoint\n\nRun `preview.rb` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.\n\n## Cloudflare R2 target\n\nThe S3 operations also support Cloudflare R2 through the official Ruby SDK. Set `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` using R2 S3 API credentials with access to the intended bucket. Do not place credentials in a product configuration or preview request.\n\nCall `ObjectStore.r2_client` and pass that client to `ObjectStore.put`, `get`, or `delete`.\n\nThe client uses `https://<account-id>.r2.cloudflarestorage.com` and signing region `auto`. This is a delivered Ruby client configuration; it does not establish hosted Ruby execution or verify a live bucket.\n\nReference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-ruby/\n",
+      "sha256": "fe7613cbd7fcbd9ec76fac9165e840fbde6590b536a74342ed9c44b2025c7824",
+      "size_bytes": 3516,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "content": "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"language\": {\n      \"type\": \"string\",\n      \"const\": \"ruby\"\n    },\n    \"bucket\": {\n      \"type\": \"string\",\n      \"minLength\": 3\n    },\n    \"key\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"region\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"endpoint\": {\n      \"type\": \"string\",\n      \"format\": \"uri\"\n    }\n  },\n  \"required\": [\n    \"language\",\n    \"bucket\",\n    \"key\"\n  ]\n}\n",
+      "sha256": "fe1f2d902a2a32b7085a2e21c0fedb7ea26f25998719f1f2506e50b45abb73e4",
+      "size_bytes": 482,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.rb",
+      "content": "require 'json'\nrequire_relative 'lib/object_store'\n# Performs an actual GetObject. Never emits object bytes or AWS response bodies.\nbegin\n  body = ObjectStore.get(client: ObjectStore.client, bucket: ENV.fetch('S3_BUCKET'), key: ENV.fetch('S3_KEY'))\n  bytes = 0\n  while (chunk = body.read(16 * 1024))\n    bytes += chunk.bytesize\n    raise 'object_too_large' if bytes > 16 * 1024 * 1024\n  end\n  puts JSON.generate(ok: true, status: 'object_read', object_bytes: bytes)\nrescue Aws::S3::Errors::NoSuchKey\n  puts JSON.generate(ok: false, status: 'blocked', diagnostic_codes: ['object_not_found'])\n  exit 2\nrescue Aws::Errors::ServiceError\n  puts JSON.generate(ok: false, status: 'blocked', diagnostic_codes: ['s3_request_failed'])\n  exit 2\nend\n",
+      "sha256": "ad2bf2649694c9f723fdaea3e02436a8b271d86f90c34cefd5534fc83050b69d",
+      "size_bytes": 738,
+      "mime_type": "text/x-ruby"
+    }
+  ],
+  "configuration_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "ruby"
+      },
+      "bucket": {
+        "type": "string",
+        "minLength": 3
+      },
+      "key": {
+        "type": "string",
+        "minLength": 1
+      },
+      "region": {
+        "type": "string",
+        "minLength": 1
+      },
+      "endpoint": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "required": [
+      "language",
+      "bucket",
+      "key"
+    ]
+  },
+  "source_provenance": {
+    "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+    "historical_catalog_record": {
+      "sku": "AWS-0678",
+      "slug": "aws-s3-ruby-client",
+      "kind": "tool",
+      "price_usd": 0.5,
+      "status": "draft",
+      "version": 1
+    },
+    "upstream_inspection": {
+      "source_repository": "marcel/aws-s3",
+      "source_revision": "c4a99b34618ecc2990305fb52c685a9b0b7b8389",
+      "structured_pointer": "lib/aws/s3.rb",
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "pointer_inspection": {
+        "path": "lib/aws/s3.rb",
+        "status": "found",
+        "git_object_sha": "e6c23f5ff1ac0c2d77185fc3a268771409d06f9a",
+        "object_type": "blob",
+        "descendant_file_count": 0,
+        "url": "https://github.com/marcel/aws-s3/tree/c4a99b34618ecc2990305fb52c685a9b0b7b8389/lib/aws/s3.rb"
+      }
+    },
+    "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+    "upstream_repository": "https://github.com/aws/aws-sdk-ruby",
+    "interface_sources": [
+      "https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html",
+      "https://github.com/aws/aws-sdk-ruby"
+    ],
+    "dependencies": {
+      "aws-sdk-s3": "1.233.0"
+    },
+    "original_file_hashes": {
+      "Gemfile": "7a9d2ed26f9421ebe9de9f49b5bcbbee8f5523ccf0551061ca66c7caa63c7941",
+      "lib/object_store.rb": "b948692314bab7ce99b15f5729309aa2f25100297afe29f7ee6ae5dc375bbd64",
+      "example.rb": "0a97101002fe7c3d21e3460e4516f06272d6113cad9c067c9f00b8e9f8966d34",
+      "README.md": "fe7613cbd7fcbd9ec76fac9165e840fbde6590b536a74342ed9c44b2025c7824",
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "selection.schema.json": "fe1f2d902a2a32b7085a2e21c0fedb7ea26f25998719f1f2506e50b45abb73e4",
+      "preview.rb": "ad2bf2649694c9f723fdaea3e02436a8b271d86f90c34cefd5534fc83050b69d"
+    },
+    "license_mapping": [
+      {
+        "paths": [
+          "Gemfile",
+          "lib/object_store.rb",
+          "example.rb",
+          "README.md",
+          "LICENSE",
+          "selection.schema.json"
+        ],
+        "license": "Apache-2.0",
+        "license_file": "LICENSE",
+        "status": "source-level claim; independent review pending"
+      }
+    ],
+    "previous_release_input_sha256": "ec064dfecd2ed3243482f068ff1ceff0f9785fc6457e9374711b5caabd3730c8"
+  },
+  "blockers": [
+    "native_private_preview_entrypoint_missing",
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "updated_product_source_requires_review"
+  ],
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0678",
+    "sku": "AWS-0678",
+    "slug": "aws-s3-ruby-client",
+    "version": 2,
+    "release_ref": "sha256:695a929696bc4591605fa560d667ddbff4b02b47c5c52d05ce5026c1f07a81fb",
+    "service": "s3",
+    "product_kind": "artifact-product",
+    "route_summary": "Ruby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.",
+    "supported_boundary": "Ruby 3.2+ and aws-sdk-s3 1.233.0. Calls S3 only when invoked with buyer credentials and a bucket. Never embeds credentials; not a replacement HTTP/signature implementation.",
+    "language_policy": "explicit",
+    "aliases": [],
+    "tags": [
+      "s3",
+      "ruby",
+      "aws-s3-ruby-client"
+    ],
+    "taxonomy_ids": [
+      "aws.s3"
+    ],
+    "problem_family_ids": [
+      "s3-integration"
+    ],
+    "operations": [
+      "aws-s3-ruby-client"
+    ],
+    "environments": [
+      "ruby"
+    ],
+    "desired_outcomes": [
+      "working-s3-integration"
+    ],
+    "input_kinds": [
+      "native-ruby-input"
+    ],
+    "failure_signatures": [
+      "s3-request-failure"
+    ],
+    "languages": [
+      "ruby"
+    ],
+    "runtimes": [
+      "ruby3.2"
+    ],
+    "required_evidence": [],
+    "exclusions": []
+  },
+  "payload": {
+    "content": "{\"files\":[{\"content\":\"source \\\"https://rubygems.org\\\"\\ngem \\\"aws-sdk-s3\\\", \\\"1.233.0\\\"\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"Gemfile\",\"sha256\":\"7a9d2ed26f9421ebe9de9f49b5bcbbee8f5523ccf0551061ca66c7caa63c7941\",\"size_bytes\":58},{\"content\":\"require 'aws-sdk-s3'\\n\\nmodule ObjectStore\\n  module_function\\n  def client(region: ENV.fetch('AWS_REGION'), endpoint: ENV['S3_ENDPOINT'], force_path_style: false)\\n    options = {region: region}\\n    options[:endpoint] = endpoint if endpoint\\n    options[:force_path_style] = true if force_path_style\\n    Aws::S3::Client.new(**options)\\n  end\\n  # R2 uses the official S3 SDK and R2 S3 API credentials, not an AWS account.\\n  def r2_client(account_id: ENV.fetch('R2_ACCOUNT_ID'),\\n                access_key_id: ENV.fetch('R2_ACCESS_KEY_ID'),\\n                secret_access_key: ENV.fetch('R2_SECRET_ACCESS_KEY'))\\n    raise ArgumentError, 'invalid_r2_account_id' unless /\\\\A[0-9a-f]{32}\\\\z/i.match?(account_id)\\n    Aws::S3::Client.new(\\n      endpoint: \\\"https://#{account_id}.r2.cloudflarestorage.com\\\", region: 'auto',\\n      access_key_id: access_key_id, secret_access_key: secret_access_key\\n    )\\n  end\\n  def put(client:, bucket:, key:, body:, content_type: 'application/octet-stream')\\n    raise ArgumentError, 'bucket and key are required' if bucket.to_s.empty? || key.to_s.empty?\\n    client.put_object(bucket: bucket, key: key, body: body, content_type: content_type)\\n  end\\n  def get(client:, bucket:, key:)\\n    client.get_object(bucket: bucket, key: key).body\\n  end\\n  def delete(client:, bucket:, key:)\\n    client.delete_object(bucket: bucket, key: key)\\n  end\\nend\\n\",\"mime_type\":\"text/x-ruby\",\"path\":\"lib/object_store.rb\",\"sha256\":\"b948692314bab7ce99b15f5729309aa2f25100297afe29f7ee6ae5dc375bbd64\",\"size_bytes\":1354},{\"content\":\"require_relative 'lib/object_store'\\nclient = ObjectStore.client\\nObjectStore.put(client: client, bucket: ENV.fetch('S3_BUCKET'), key: 'demo/hello.txt', body: 'hello', content_type: 'text/plain')\\nputs ObjectStore.get(client: client, bucket: ENV.fetch('S3_BUCKET'), key: 'demo/hello.txt').read\\n\",\"mime_type\":\"text/x-ruby\",\"path\":\"example.rb\",\"sha256\":\"0a97101002fe7c3d21e3460e4516f06272d6113cad9c067c9f00b8e9f8966d34\",\"size_bytes\":291},{\"content\":\"# read and write S3 objects from Ruby\\n\\nRuby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.\\n\\nSelect `language: \\\"ruby\\\"` explicitly in the package configuration.\\n\\nHosted preview is blocked: The real S3 operations require Ruby, the aws-sdk-s3 gem, and a buyer S3 endpoint with credentials. The hosted adapter has no Ruby runtime or customer credentials.\\n\\n## Runtime and boundary\\n\\nRuby 3.2+ and aws-sdk-s3 1.233.0. Calls S3 only when invoked with buyer credentials and a bucket. Never embeds credentials; not a replacement HTTP/signature implementation.\\n\\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\\n\\n## Files\\n\\n- `Gemfile`\\n- `lib/object_store.rb`\\n- `example.rb`\\n- `selection.schema.json`\\n\\n## Use\\n\\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\\n\\nGrant only the bucket and actions needed by the application. Object keys are not filesystem paths, and a returned SDK response reports the actual S3 operation outcome.\\n\\n## Sources and provenance\\n\\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\\n\\n- https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html\\n- https://github.com/aws/aws-sdk-ruby\\n\\nUpstream repository: https://github.com/aws/aws-sdk-ruby\\n\\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\\n\\n\\n## Native preview entrypoint\\n\\nRun `preview.rb` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.\\n\\n## Cloudflare R2 target\\n\\nThe S3 operations also support Cloudflare R2 through the official Ruby SDK. Set `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` using R2 S3 API credentials with access to the intended bucket. Do not place credentials in a product configuration or preview request.\\n\\nCall `ObjectStore.r2_client` and pass that client to `ObjectStore.put`, `get`, or `delete`.\\n\\nThe client uses `https://<account-id>.r2.cloudflarestorage.com` and signing region `auto`. This is a delivered Ruby client configuration; it does not establish hosted Ruby execution or verify a live bucket.\\n\\nReference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-ruby/\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"README.md\",\"sha256\":\"fe7613cbd7fcbd9ec76fac9165e840fbde6590b536a74342ed9c44b2025c7824\",\"size_bytes\":3516},{\"content\":\"                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \\\"License\\\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \\\"Licensor\\\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \\\"Legal Entity\\\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \\\"control\\\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \\\"You\\\" (or \\\"Your\\\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \\\"Source\\\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \\\"Object\\\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \\\"Work\\\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \\\"Derivative Works\\\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \\\"Contribution\\\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \\\"submitted\\\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \\\"Not a Contribution.\\\"\\n\\n      \\\"Contributor\\\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \\\"NOTICE\\\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \\\"AS IS\\\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \\\"[]\\\"\\n      replaced with your own identifying information. (Don't include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \\\"printed page\\\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \\\"License\\\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"LICENSE\",\"sha256\":\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\"size_bytes\":11357},{\"content\":\"{\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"properties\\\": {\\n    \\\"language\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"const\\\": \\\"ruby\\\"\\n    },\\n    \\\"bucket\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 3\\n    },\\n    \\\"key\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1\\n    },\\n    \\\"region\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1\\n    },\\n    \\\"endpoint\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"format\\\": \\\"uri\\\"\\n    }\\n  },\\n  \\\"required\\\": [\\n    \\\"language\\\",\\n    \\\"bucket\\\",\\n    \\\"key\\\"\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"selection.schema.json\",\"sha256\":\"fe1f2d902a2a32b7085a2e21c0fedb7ea26f25998719f1f2506e50b45abb73e4\",\"size_bytes\":482},{\"content\":\"require 'json'\\nrequire_relative 'lib/object_store'\\n# Performs an actual GetObject. Never emits object bytes or AWS response bodies.\\nbegin\\n  body = ObjectStore.get(client: ObjectStore.client, bucket: ENV.fetch('S3_BUCKET'), key: ENV.fetch('S3_KEY'))\\n  bytes = 0\\n  while (chunk = body.read(16 * 1024))\\n    bytes += chunk.bytesize\\n    raise 'object_too_large' if bytes > 16 * 1024 * 1024\\n  end\\n  puts JSON.generate(ok: true, status: 'object_read', object_bytes: bytes)\\nrescue Aws::S3::Errors::NoSuchKey\\n  puts JSON.generate(ok: false, status: 'blocked', diagnostic_codes: ['object_not_found'])\\n  exit 2\\nrescue Aws::Errors::ServiceError\\n  puts JSON.generate(ok: false, status: 'blocked', diagnostic_codes: ['s3_request_failed'])\\n  exit 2\\nend\\n\",\"mime_type\":\"text/x-ruby\",\"path\":\"preview.rb\",\"sha256\":\"ad2bf2649694c9f723fdaea3e02436a8b271d86f90c34cefd5534fc83050b69d\",\"size_bytes\":738}],\"schema_version\":\"1\",\"sku\":\"AWS-0678\",\"version\":2}",
+    "sha256": "695a929696bc4591605fa560d667ddbff4b02b47c5c52d05ce5026c1f07a81fb",
+    "size_bytes": 19449,
+    "mime_type": "application/json"
+  }
+}

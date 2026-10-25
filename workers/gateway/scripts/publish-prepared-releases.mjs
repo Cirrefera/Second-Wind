@@ -3,6 +3,7 @@ import {fileURLToPath} from 'node:url';
 import {getPlatformProxy} from 'wrangler';
 import {canonicalJson,sha256} from '../src/contracts.js';
 import {prepareRelease,publishRelease} from '../src/release-preparation.js';
+import {PRIVATE_RUNTIME_ADAPTER} from '../src/private-runtime.js';
 
 // Operator entry point for a reviewed publication-record commit or manual dispatch.
 // No HTTP route,
@@ -22,7 +23,7 @@ if(!['stage','activate'].includes(mode)) throw new Error('explicit_publication_m
 if(await sha256(await read(authorization.review_report))!==authorization.review_report_sha256)
   throw new Error('review_report_changed');
 const pending=[];
-const mechanical=new Set(['pre_settlement_preparation_unverified','immutable_guidance_release_unverified']);
+const mechanical=new Set(['pre_settlement_preparation_unverified','immutable_guidance_release_unverified','private_runtime_assets_unverified']);
 for(const release of authorization.releases) {
   const bytes=await read(release.input);
   if(await sha256(bytes)!==release.input_sha256) throw new Error('reviewed_input_changed');
@@ -39,7 +40,23 @@ for(const release of authorization.releases) {
   const report=await prepareRelease({},input,{reviews});
   if(!report.source_ready||report.publication.blockers.some(b=>!mechanical.has(b)))
     throw new Error('publication_review_incomplete:'+input.item.sku+':'+report.publication.blockers.join(','));
-  pending.push({input,reviews});
+  let runtimeAssets;
+  if(input.manifest.preview_contract?.adapter===PRIVATE_RUNTIME_ADAPTER){
+    const {buildProduct}=await import('./build-private-products.mjs');
+    const built=await buildProduct({sku:input.item.sku,slug:input.item.slug,release_input:release.input});
+    if(built.build?.kind!=='private-javascript-modules'
+      ||canonicalJson(built.build.modules)!==canonicalJson(input.manifest.private_runtime?.modules)
+      ||built.build.entrypoint!==input.manifest.private_runtime?.entrypoint)
+      throw new Error('reviewed_private_runtime_build_changed:'+input.item.sku);
+    runtimeAssets=new Map();
+    for(const asset of built.build.modules){
+      const bytes=await readFile(new URL(`.private-builds/${input.item.slug}/${built.source_sha256}/assets/${asset.sha256}`,root));
+      if(bytes.byteLength!==asset.size_bytes||await sha256(bytes)!==asset.sha256)
+        throw new Error('private_runtime_build_bytes_changed:'+input.item.sku);
+      runtimeAssets.set(asset.sha256,bytes);
+    }
+  }
+  pending.push({input,reviews,runtimeAssets});
 }
 let proxy;
 const results=[];
@@ -54,8 +71,8 @@ try {
     if(!row||row.version>input.item.version||row.price_usd!==input.item.price_usd)
       throw new Error('catalog_release_preflight_failed:'+input.item.sku);
   }
-  for(const {input,reviews} of pending) {
-    const result=await publishRelease(env,input,{mode,reviews});
+  for(const {input,reviews,runtimeAssets} of pending) {
+    const result=await publishRelease(env,input,{mode,reviews,runtimeAssets});
     results.push(result);
     console.log(JSON.stringify({sku:result.sku,version:result.version,status:result.status,
       payload_hash:result.payload.content_hash,manifest_hash:result.manifest_hash,routing_hash:result.routing_hash,

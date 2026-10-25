@@ -1,0 +1,59 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0677",
+    "slug": "claudia-api-builder-pattern",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "claudiajs/claudia",
+    "source_revision": "9d68ed4c62e123279b14b31b7dfbc34710f40689",
+    "structured_pointer": "src/util/convert-api-gw-proxy-request.js",
+    "observed_deliverable": "artifact_pointer_without_product_assembly",
+    "pointer_inspection": {
+      "path": "src/util/convert-api-gw-proxy-request.js",
+      "status": "not_found_in_pinned_tree",
+      "git_object_sha": null,
+      "object_type": null,
+      "descendant_file_count": 0,
+      "url": "https://github.com/claudiajs/claudia/tree/9d68ed4c62e123279b14b31b7dfbc34710f40689/src/util/convert-api-gw-proxy-request.js"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/claudiajs/claudia-api-builder",
+  "interface_sources": [
+    "https://github.com/claudiajs/claudia-api-builder",
+    "https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md"
+  ],
+  "dependencies": {
+    "claudia-api-builder": "4.1.2"
+  },
+  "original_file_hashes": {
+    "package.json": "545ff6f54c4c7dcf97a920f48fdb39550b3da299aa80e1501854f3d8246cd3e3",
+    "api.js": "9e0100557b5e2db90f149f0939ac6e93b9fe9d47abde20ef6fa825748ea59b71",
+    "README.md": "9fe1331ff8674527ec6aaae4f39505f701993f03a49716f2fd18ed4cc23df7ff",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "6c351492ba93f38e07cb0e7706b1abbf7f63f2846fd422f8b997f668b79dafeb",
+    "preview.js": "444ef2b2a5daa8432da657e7d8d60e3d64605f7c252d44c315f9aaa6ec06fa61",
+    "package-lock.json": "e2646cc409bb99a712633192d06c018d9503d866d6421476e95ff28319334b65",
+    "preview.mjs": "6d3a4ea7810fa27154ad37b765b40ddb7c868a970cd60bd26d4f74b3949e7652"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "package.json",
+        "api.js",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ],
+  "previous_release_input_sha256": "f208a338df65081a81e99400b8a355e6f4281514f02092f9350afdc7e9336e79"
+}

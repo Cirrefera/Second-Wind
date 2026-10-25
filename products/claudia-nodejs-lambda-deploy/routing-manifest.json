@@ -7,7 +7,7 @@
   "release_ref": "sha256:e7dc2054e89f6ece4f6a46c43478ac7a7f1cc42baaaccd439a0c3dcdce0cb36b",
   "service": "lambda",
   "product_kind": "artifact-product",
-  "route_summary": "Pinned Claudia.js deployment scaffold for a Node.js Lambda/API Gateway service, with explicit create and update commands; deployment runs in the buyer AWS account.",
+  "route_summary": "A Node.js Lambda handler with a health route, pinned deployment tooling, and explicit create and update commands. Deployment runs in the buyer\u2019s AWS account.",
   "supported_boundary": "Node.js 18.x, Claudia 5.14.1, buyer AWS credentials and account. Scripts call Claudia only when the buyer runs them; no deploy, role creation, or AWS success is claimed during hosted preview.",
   "language_policy": "explicit",
   "aliases": [],

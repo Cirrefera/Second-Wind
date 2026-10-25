@@ -23,3 +23,13 @@ See [`configuration.schema.json`](./configuration.schema.json). The root `input.
 - Upstream SDK/library version: Ruby SDK v3 service gem; version constrained in Gemfile
 
 Real client operations require valid AWS credentials and may read, write, or invoke billable services. `build_request` uses response stubs and does not make AWS calls.
+
+## Cloudflare R2 target
+
+The S3 operations also support Cloudflare R2 through the official Ruby SDK. Set `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` using R2 S3 API credentials with access to the intended bucket. Do not place credentials in a product configuration or preview request.
+
+Call `r2_client` and pass the returned S3 client to `put_object`. R2 does not provide the DynamoDB or Bedrock operations.
+
+The client uses `https://<account-id>.r2.cloudflarestorage.com` and signing region `auto`. This is a delivered Ruby client configuration; it does not establish hosted Ruby execution or verify a live bucket.
+
+Reference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-ruby/

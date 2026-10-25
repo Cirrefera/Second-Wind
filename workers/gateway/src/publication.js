@@ -43,6 +43,8 @@ export async function validatePublication(item, manifest, evidence = {}) {
     require(isText(manifest.origin) && isText(manifest.license) && evidence.license_verified === true,'license_or_origin_unverified');
     require(evidence.purchase_url_verified === true,'purchase_url_unverified');
     require(evidence.pre_settlement_ready === true,'pre_settlement_preparation_unverified');
+    if(manifest.preview_contract?.adapter==='js-product-runtime-v1')
+      require(evidence.sandbox_trial_verified_hash === await sha256(canonicalJson(manifest)), 'private_runtime_trial_unverified');
     if (manifest.components?.length && manifest.pricing?.mode !== 'proportional-components') require(false,'commercial_component_allocation_missing');
     if (manifest.pricing?.mode === 'proportional-components') {
       try {

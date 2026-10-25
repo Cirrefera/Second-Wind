@@ -2,6 +2,7 @@ import {canonicalJson,sha256,CommerceError} from './contracts.js';
 import {validatePublication,canonicalService} from './publication.js';
 import {validateRoutingManifest} from './routing.js';
 import {validateComponentRelease} from './scope.js';
+import {PRIVATE_RUNTIME_ADAPTER,privateRuntimeDescriptor,loadPrivateRuntime,stagePrivateRuntime} from './private-runtime.js';
 
 const text=value=>typeof value==='string'&&value.trim().length>0;
 const sorted=value=>canonicalJson(Array.isArray(value)?[...value].sort():[]);
@@ -162,6 +163,12 @@ export async function prepareRelease(env={},input={},options={}) {
     'language_adapters_missing','explicit_language_selection_missing','language_policy_missing','routing_contract_missing']);
   blockers.push(...publication.blockers.filter(blocker=>structural.has(blocker)));
   const publicationBlockers=[...publication.blockers,...blockers];
+  if(manifest?.preview_contract?.adapter===PRIVATE_RUNTIME_ADAPTER) {
+    try { privateRuntimeDescriptor(manifest); }
+    catch { blockers.push('private_runtime_descriptor_invalid');publicationBlockers.push('private_runtime_descriptor_invalid'); }
+    try { await loadPrivateRuntime(env,manifest,{verifyOnly:true}); }
+    catch { publicationBlockers.push('private_runtime_assets_unverified'); }
+  }
   if(!routingReview) publicationBlockers.push('routing_review_missing');
   if(Array.isArray(input.blockers)) publicationBlockers.push(...input.blockers.filter(text));
   if((manifest?.components?.length||manifest?.component_candidates?.length)&&manifest?.pricing?.mode!=='proportional-components') publicationBlockers.push('commercial_component_allocation_missing');
@@ -241,7 +248,7 @@ export async function publishRelease(env,input,options={}) {
   const reviews=Array.isArray(options.reviews)?options.reviews:[];
   const routingReview=reviewed(reviews,'routing',report.routing_hash);
   if(!routingReview) fail('routing_review_missing',{report});
-  const mechanical=new Set(['pre_settlement_preparation_unverified','immutable_guidance_release_unverified']);
+  const mechanical=new Set(['pre_settlement_preparation_unverified','immutable_guidance_release_unverified','private_runtime_assets_unverified']);
   if(options.mode==='activate'&&report.publication.blockers.some(blocker=>!mechanical.has(blocker))) fail('release_publication_blocked',{report});
   const db=env.SW_DB;
   const item={...defaults,...input.item};
@@ -261,6 +268,8 @@ export async function publishRelease(env,input,options={}) {
   if(sameVersion&&(immutable||current.status!=='draft')&&ITEM_FIELDS.some(field=>item[field]!==current[field])) fail('immutable_item_version_conflict');
   if(options.mode==='stage'&&sameVersion&&current.status==='live'&&!immutable) fail('cannot_stage_live_version');
   await storePayload(env,input,report);
+  if(input.manifest?.preview_contract?.adapter===PRIVATE_RUNTIME_ADAPTER)
+    await stagePrivateRuntime(env,input.manifest,options.runtimeAssets||new Map());
   await storeReviews(env,reviews,report);
   await storeInput(env,input,report);
   report=await prepareRelease(env,input,options);

@@ -16,7 +16,8 @@ function trialCredentials(input) {
 }
 
 function normalizedComponents(input) {
-  if(!Array.isArray(input?.components) || !input.components.length || input.components.length>100
+  if(input?.components===undefined)return [];
+  if(!Array.isArray(input?.components) || input.components.length>100
       || input.components.some(id=>typeof id!=='string') || new Set(input.components).size!==input.components.length)
     fail('explicit_trial_components_required');
   return [...input.components].sort();
@@ -35,8 +36,8 @@ async function pinnedRelease(env,sku,version,expectedHash) {
   return release;
 }
 
-async function validatePreviewRequest(release,configuration,components) {
-  const preview=await validatePreview(release,configuration,components);
+async function validatePreviewRequest(env,release,configuration,components) {
+  const preview=await validatePreview(release,configuration,components,{env});
   if(Array.isArray(preview)) return preview;
   if(preview?.ok===true && Array.isArray(preview.selected_components)) return preview.selected_components;
   fail(preview?.code || 'trial_preview_contract_invalid',409);
@@ -107,7 +108,7 @@ export async function prepareTrialAccess(env,sku,configuration,input,{journey}={
       configuration:config,execution,components});
     if(canonicalJson(stored)!==canonicalJson(request)
         || await sha256(canonicalJson(request))!==prior.request_hash) fail('trial_request_conflict',409);
-    const selected=await validatePreviewRequest(release,config,components);
+    const selected=await validatePreviewRequest(env,release,config,components);
     if(canonicalJson(selected)!==canonicalJson(components)) fail('trial_request_conflict',409);
     const acceptance=await createSandboxAccess(env,{request,product,acceptanceKey:accessKey(id),journey});
     await assertSameAcceptance(env,acceptance,request,product);
@@ -135,7 +136,7 @@ export async function prepareTrialAccess(env,sku,configuration,input,{journey}={
   const releaseHash=await sha256(canonicalJson(release));
   if(releaseHash!==releaseRow.manifest_hash || release.sku!==product.sku || release.version!==product.version)
     fail('component_release_hash_mismatch',503);
-  const selected=await validatePreviewRequest(release,checked.config,components);
+  const selected=await validatePreviewRequest(env,release,checked.config,components);
   const request=buildRequest({id,tokenHash,productKey,product,releaseHash,
     configuration:checked.config,execution,components:selected});
   const acceptance=await createSandboxAccess(env,{request,product,acceptanceKey:accessKey(id),journey});

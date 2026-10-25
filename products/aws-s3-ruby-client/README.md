@@ -40,3 +40,13 @@ Dependency versions are pinned in the supplied manifest. The current package sou
 ## Native preview entrypoint
 
 Run `preview.rb` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.
+
+## Cloudflare R2 target
+
+The S3 operations also support Cloudflare R2 through the official Ruby SDK. Set `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` using R2 S3 API credentials with access to the intended bucket. Do not place credentials in a product configuration or preview request.
+
+Call `ObjectStore.r2_client` and pass that client to `ObjectStore.put`, `get`, or `delete`.
+
+The client uses `https://<account-id>.r2.cloudflarestorage.com` and signing region `auto`. This is a delivered Ruby client configuration; it does not establish hosted Ruby execution or verify a live bucket.
+
+Reference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-ruby/

@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0630",
+  "sku": "AWS-0630",
+  "slug": "aws-sdk-ruby-resource-interface",
+  "version": 2,
+  "release_ref": "sha256:4b1f8b0eb3b7ee3ea335552612197d0ffed23ea71021d7526afe103b0719814e",
+  "service": "aws-sdk",
+  "product_kind": "artifact-product",
+  "route_summary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters.",
+  "supported_boundary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters. The package runs locally with the pinned native Ruby dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "aws-sdk-ruby-resource-interface",
+    "aws-sdk",
+    "ruby"
+  ],
+  "taxonomy_ids": [
+    "aws.aws-sdk"
+  ],
+  "problem_family_ids": [
+    "aws-aws-sdk-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-ruby"
+  ],
+  "desired_outcomes": [
+    "aws-sdk-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "ruby"
+  ],
+  "runtimes": [
+    "ruby3"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

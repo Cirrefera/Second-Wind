@@ -6,6 +6,7 @@ import {executeCode,validateExecutionInput} from './execution.js';
 import {createScopeQuote} from './commerce.js';
 import {authorizeTrialAccess} from './trial-access.js';
 import {runProductPreview} from './preview.js';
+import {PRIVATE_RUNTIME_ADAPTER} from './private-runtime.js';
 import {enqueueObservation,observeExpiredTrial} from './telemetry.js';
 
 const fail=(code,status=400)=>{throw new CommerceError(code,status);};
@@ -70,7 +71,11 @@ export async function trialProduct(env,sku,configuration,input,callback,options=
   const access=await authorizeTrialAccess(env,sku,configuration,input,options);
   const {product,release,paymentId}=access;
   const check={config:access.request.configuration};
-  const menu=await trialMenu(release);
+  const menu=release.preview_contract?.adapter===PRIVATE_RUNTIME_ADAPTER
+      &&release.preview_contract.selection_mode==='whole-product'
+    ?{sku:release.sku,version:release.version,release_hash:access.request.release_hash,
+      pricing_mode:'whole-product',max_amount_atomic:product.price_usdc_micros,components:[]}
+    :await trialMenu(release);
   const requestHash=await hashRequest({version:product.version,release_hash:menu.release_hash});
   const owner=crypto.randomUUID();
   const created_at=new Date().toISOString(),expires_at=Date.now()+3600000;

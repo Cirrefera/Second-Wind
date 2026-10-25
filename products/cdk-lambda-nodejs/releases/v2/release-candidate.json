@@ -1,0 +1,171 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0632",
+  "slug": "cdk-lambda-nodejs",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:265801a4d34627414d5b986a220620100765eb100473e768471bae8f70ada6bd",
+  "content_hash": "265801a4d34627414d5b986a220620100765eb100473e768471bae8f70ada6bd",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original Second Wind package wrapper, configuration schema, local preview adapter, provenance and usage guidance around https://github.com/aws/aws-cdk; no upstream implementation source is included.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "typescript": "product.ts"
+    },
+    "application_entrypoint": "app.ts",
+    "preview_entrypoint": "preview.ts",
+    "exports": [
+      "buildStack"
+    ],
+    "configuration_schema": "input.schema.json",
+    "side_effects": "local synthesis; AWS resources are created only when the buyer explicitly runs the CDK deploy command"
+  },
+  "validation_contract": {
+    "kind": "local-native-dependency-validation",
+    "language": "typescript",
+    "dependency_runtime": "required",
+    "preview_execution": "verified-locally",
+    "validation_evidence": "aws-cdk-lib 2.274.0 in-memory synthesis before product-builder extraction; extraction kept the same construct calls, and cdk-lambda buyer entrypoint readback confirmed one Lambda function",
+    "aws_deployment": "not-performed",
+    "gateway_preview": "unavailable-until-native-runtime-support"
+  },
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "typescript",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "AWS CDK Node.js Lambda bundling configuration",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language"
+    ],
+    "properties": {
+      "language": {
+        "const": "typescript"
+      }
+    }
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "typescript"
+    ]
+  },
+  "tags": [
+    "cdk-lambda-nodejs",
+    "lambda",
+    "typescript",
+    "aws"
+  ],
+  "supported_boundary": "Define a NodejsFunction with local esbuild bundling and explicit runtime and entrypoint. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "c6796f7b05d6486ab8ba0b2157c7e332e8067863dc76c13d1bf707a72f5d09c3",
+      "size_bytes": 2461,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "app.ts",
+      "sha256": "61c1bb579ecfa85ffee93cd860fad2062394f37893beb1f06003ee1f50edb1b4",
+      "size_bytes": 153,
+      "mime_type": "text/typescript"
+    },
+    {
+      "path": "cdk.json",
+      "sha256": "40c24a321efb0976c32ffdec919056bb2c432a2167c6ccf6fa8c59e7b9126a41",
+      "size_bytes": 113,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "configuration.schema.json",
+      "sha256": "03280715a689ace2527b53166ebf843a27dbefac167c98081ad742dcf71da732",
+      "size_bytes": 288,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "handler.ts",
+      "sha256": "26912f687727d3fec9ef865852f07791dd74cfd506754ef13c14594fba6d3d8d",
+      "size_bytes": 76,
+      "mime_type": "text/typescript"
+    },
+    {
+      "path": "input.schema.json",
+      "sha256": "03280715a689ace2527b53166ebf843a27dbefac167c98081ad742dcf71da732",
+      "size_bytes": 288,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "0c6b5404091a7f63638110eadfd1a229d41c5a7209550c979675fdc064fc65d1",
+      "size_bytes": 24479,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "efdd5640340712d02728dbc5d897bd6318ca0aba4325b1fddedd4141f432c406",
+      "size_bytes": 447,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview-contract.json",
+      "sha256": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
+      "size_bytes": 191,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview-runner.ts",
+      "sha256": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
+      "size_bytes": 80,
+      "mime_type": "text/typescript"
+    },
+    {
+      "path": "preview.ts",
+      "sha256": "d2b85b8a985310930122d3ec47e2588d3a46fd2b800724590490f83ebc8e04f0",
+      "size_bytes": 825,
+      "mime_type": "text/typescript"
+    },
+    {
+      "path": "product.ts",
+      "sha256": "26190ec9df224a9b20ffa7e7e6c864f0efeae1a582e0e84382d0d8d2097bfa9f",
+      "size_bytes": 651,
+      "mime_type": "text/typescript"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "e736da006f03bddb7bec22374844876828e78b7cbd5e0820ae100f58cd6ec69f",
+      "size_bytes": 3633,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "publication_blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending",
+    "updated_product_source_requires_review"
+  ]
+}

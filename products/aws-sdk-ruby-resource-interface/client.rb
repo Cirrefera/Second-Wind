@@ -4,14 +4,26 @@ require 'aws-sdk-bedrockruntime'
 
 # Build the official service client. Set stub_responses: true for local validation;
 # the default client follows the normal AWS SDK credential chain.
-def client_for(service, region: 'us-east-1', stub_responses: false)
+def client_for(service, region: 'us-east-1', stub_responses: false, endpoint: nil, credentials: nil)
   options = { region: region, stub_responses: stub_responses }
+  raise ArgumentError, 'custom_endpoint_requires_s3' if endpoint && service != 's3'
+  options[:endpoint] = endpoint if endpoint
+  options[:credentials] = credentials if credentials
   case service
   when 's3' then Aws::S3::Client.new(**options)
   when 'dynamodb' then Aws::DynamoDB::Client.new(**options)
   when 'bedrock-runtime' then Aws::BedrockRuntime::Client.new(**options)
   else raise ArgumentError, 'unsupported_service'
   end
+end
+
+# Cloudflare R2 is an explicit S3 target; DynamoDB and Bedrock remain AWS services.
+def r2_client(account_id: ENV.fetch('R2_ACCOUNT_ID'),
+              access_key_id: ENV.fetch('R2_ACCESS_KEY_ID'),
+              secret_access_key: ENV.fetch('R2_SECRET_ACCESS_KEY'))
+  raise ArgumentError, 'invalid_r2_account_id' unless /\A[0-9a-f]{32}\z/i.match?(account_id)
+  client_for('s3', region: 'auto', endpoint: "https://#{account_id}.r2.cloudflarestorage.com",
+             credentials: Aws::Credentials.new(access_key_id, secret_access_key))
 end
 
 def put_object(client, bucket:, key:, body:)

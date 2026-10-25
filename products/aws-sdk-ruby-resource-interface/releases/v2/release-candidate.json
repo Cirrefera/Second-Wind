@@ -1,0 +1,243 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0630",
+  "slug": "aws-sdk-ruby-resource-interface",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "service": "aws-sdk",
+  "release_ref": "sha256:4b1f8b0eb3b7ee3ea335552612197d0ffed23ea71021d7526afe103b0719814e",
+  "content_hash": "4b1f8b0eb3b7ee3ea335552612197d0ffed23ea71021d7526afe103b0719814e",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original Second Wind package wrapper, configuration schema, local preview adapter, provenance and usage guidance around https://github.com/aws/aws-sdk-ruby; no upstream implementation source is included.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "ruby": "client.rb"
+    },
+    "exports": [
+      "client_for",
+      "put_object",
+      "get_item",
+      "invoke_model",
+      "build_request"
+    ],
+    "configuration_schema": "input.schema.json",
+    "side_effects": "SDK operation helpers can call AWS; build_request uses response stubs"
+  },
+  "validation_contract": {
+    "kind": "local-native-dependency-validation",
+    "language": "ruby",
+    "dependency_runtime": "required",
+    "preview_execution": "blocked-runtime-not-installed",
+    "validation_evidence": "ruby and bundler are not installed in this workspace",
+    "aws_deployment": "not-performed",
+    "gateway_preview": "unavailable-until-native-runtime-support"
+  },
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "ruby",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Ruby AWS SDK resource interface configuration",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language",
+      "service"
+    ],
+    "properties": {
+      "language": {
+        "const": "ruby"
+      },
+      "service": {
+        "enum": [
+          "s3",
+          "dynamodb",
+          "bedrock-runtime"
+        ]
+      },
+      "region": {
+        "type": "string",
+        "default": "us-east-1"
+      },
+      "bucket": {
+        "type": "string",
+        "minLength": 3
+      },
+      "key": {
+        "type": "string",
+        "minLength": 1
+      },
+      "body": {
+        "type": "string"
+      },
+      "table_name": {
+        "type": "string",
+        "minLength": 3
+      },
+      "key_name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "key_value": {
+        "type": "string"
+      },
+      "model_id": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "oneOf": [
+      {
+        "properties": {
+          "service": {
+            "const": "s3"
+          },
+          "bucket": {
+            "type": "string",
+            "minLength": 3
+          },
+          "key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "body": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucket",
+          "key",
+          "body"
+        ]
+      },
+      {
+        "properties": {
+          "service": {
+            "const": "dynamodb"
+          },
+          "table_name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "key_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "key_value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "table_name",
+          "key_name",
+          "key_value"
+        ]
+      },
+      {
+        "properties": {
+          "service": {
+            "const": "bedrock-runtime"
+          },
+          "model_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "model_id",
+          "body"
+        ]
+      }
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "ruby"
+    ]
+  },
+  "tags": [
+    "aws-sdk-ruby-resource-interface",
+    "aws-sdk",
+    "ruby",
+    "aws"
+  ],
+  "supported_boundary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters. The package runs locally with the pinned native Ruby dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "required_files": [
+    {
+      "path": "Gemfile",
+      "sha256": "84ba745fb2b077f7729858d4dd8a1b08596c0554140a1797cc6e88764ae39fa0",
+      "size_bytes": 137,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "d6951daa5910c65585d117a38035bf1fe2fd23e86d20a5edd60754a7b9db5f72",
+      "size_bytes": 621,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "3f05c494e774682d005dceb1734622c5ac60da973025d91c48999d69fdbcc18d",
+      "size_bytes": 2797,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "client.rb",
+      "sha256": "7725ece89c3457bed3c13321f2be9661049e7f40144794f566c7b13c928758b4",
+      "size_bytes": 2883,
+      "mime_type": "text/x-ruby"
+    },
+    {
+      "path": "configuration.schema.json",
+      "sha256": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+      "size_bytes": 2105,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "input.schema.json",
+      "sha256": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+      "size_bytes": 2105,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview-contract.json",
+      "sha256": "7d4e7eeb7ce4f2c26eb1d5c862633bee88d730dee69efd781fe0224aa022239d",
+      "size_bytes": 185,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "e0914f6cbc750e576ce757dddc1acf30953ec3714993cc0db61ad3e76d991e5c",
+      "size_bytes": 372,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "publication_blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending",
+    "native_preview_execution_not_verified",
+    "updated_product_source_requires_review"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0654",
+  "sku": "AWS-0654",
+  "slug": "cdk-cognito",
+  "version": 3,
+  "service": "cognito",
+  "product_kind": "artifact-product",
+  "route_summary": "Cognito user pool, client, domain, and optional Google identity provider using Secrets Manager references.",
+  "supported_boundary": "Local CDK synthesis for Amazon Cognito User Pools. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cognito"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "cognito",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.cognito"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cognito-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:b8cba6bee7287690c7fc5044866d98dc0d444fc827a88618cbfb4332c94d528e"
+}

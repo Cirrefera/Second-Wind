@@ -1,0 +1,4 @@
+{
+  "name": "Node.js Resource API Kit",
+  "summary": "A Node.js resource API with GET and POST routes, request validation, and an API Gateway-ready Lambda export."
+}

@@ -1,0 +1,2954 @@
+{
+  "scope": "65 remaining eligible products; local build and execution only",
+  "products": [
+    {
+      "sku": "AWS-0556",
+      "slug": "bedrock-agent-cdk",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 30400978,
+      "source_sha256": "0e014a16283dd6a0390c09b464c0c377ff7557ba8dda21095ecf8c848672aa57",
+      "input_sha256": "ed51076f4141b993d3108f71ab08f10df7977749a45f1925e233e0ad40b46d08",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0556",
+        "slug": "bedrock-agent-cdk",
+        "input_sha256": "ed51076f4141b993d3108f71ab08f10df7977749a45f1925e233e0ad40b46d08",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "589e7166a00a2b03b09ee7d1223a9b7af0cfef6ebdc824f7b811fee53a0cbf9f"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "910f65e490229cb2e70b72d2e13f435ed156c6296bbd4c13df943974699d5c81"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "ebff8fc07398e50d39a0f727b213e6e5b1b78afde8322b65b6f8aa995ee70540"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:48.067Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "bedrock-agent-cdk",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0557",
+      "slug": "bedrock-knowledge-base-cdk",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 30402443,
+      "source_sha256": "bc44e8cdb8c16a139fa36b7ef8cae3f6395e06aede3257efe98221cd3d35122d",
+      "input_sha256": "869358e67cc6712698204a1f33db9167180972645c815725cd8db09586dccd9f",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0557",
+        "slug": "bedrock-knowledge-base-cdk",
+        "input_sha256": "869358e67cc6712698204a1f33db9167180972645c815725cd8db09586dccd9f",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "91eee18454fd6508e84be706cbca3cafc9e90a009f34d7805c8861cbbac3e115"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "8342b90410c2afeb3da248b47d5789a2e1d36590714bd0485b3b8890efc856eb"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "1124fb7fc17a618e170e3c803b0aa185b527985acbac2d028c3d3e6519c6d48c"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:49.433Z",
+        "execution_verified": false,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": false,
+            "status": "blocked",
+            "slug": "bedrock-knowledge-base-cdk",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "validation_failed"
+            ],
+            "resource_count": 0
+          },
+          "logs": [
+            "[warn] [WARNING] aws-cdk-lib.aws_lambda.FunctionOptions#logRetention is deprecated, and will be removed in the next major release.\n  use `logGroup` instead"
+          ]
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0558",
+      "slug": "sagemaker-endpoint-cdk",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 34606558,
+      "source_sha256": "55be302d6a263e3b9d5c9aa21122c6a23a499e80200594adb10c9bc7637b3080",
+      "input_sha256": "0bcf616101249f33665e59d556dc4802ff19991022a7fa18ee97163d4154ac60",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0558",
+        "slug": "sagemaker-endpoint-cdk",
+        "input_sha256": "0bcf616101249f33665e59d556dc4802ff19991022a7fa18ee97163d4154ac60",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "5ba67e8ae26251f076907de63dadeed696c74159392c57c3d33c7c14a9f61822"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "6897d0cede01f0ec9400f7059660e3f7ac9cb279ee2e8211cbe4f1f3ea710a11"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "8538031b6a7d853dfbc8cd6820106d30872fe0c1fc69750cf0a60087cd426cc9"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:50.968Z",
+        "execution_verified": false,
+        "result": {
+          "ok": false,
+          "error": "Cannot read properties of undefined (reading 'Function')"
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0559",
+      "slug": "cloudwatch-monitoring-facade",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 23561137,
+      "source_sha256": "7a2b94e512db48b26cdd7b63c71e6ce5f635f1e991e9bfc0a280fb28d0362615",
+      "input_sha256": "a6aabd5cc2baba91989a0c35f3141cb24afcbf307ce3f0da65a6d466a4546293",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0559",
+        "slug": "cloudwatch-monitoring-facade",
+        "input_sha256": "a6aabd5cc2baba91989a0c35f3141cb24afcbf307ce3f0da65a6d466a4546293",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "41606c66352b8fe844acf3cd85f42ef1a79a0c8511f7df481d90592f75895f9d"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "048c6af15e6e9c10d66cb7b472dd582577f377456bc5dc218e84f412b4d37c8d"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "d2ef0b0573f81beb2e7142ece6091da1a6761cb2575e57a8640d361e5750d8b4"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:52.456Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cloudwatch-monitoring-facade",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0560",
+      "slug": "api-gateway-lambda-dynamodb-stack",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17526531,
+      "source_sha256": "e63ee9166d7acec9f41fef9d93dc0362122ae786924635ac0b5b0b1f411c7b01",
+      "input_sha256": "35da1df52f850c1fc7f0ab0ae88e60e0854cec2e527a655e6864a19101ff5b75",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0560",
+        "slug": "api-gateway-lambda-dynamodb-stack",
+        "input_sha256": "35da1df52f850c1fc7f0ab0ae88e60e0854cec2e527a655e6864a19101ff5b75",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "d58a8abbd746b98812dc35ad4a496902f3a47ed85e7246fffc1df64d0874b3ff"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "866c905a4749673e6ca48a7967e99b0f0259dd9f2b0404103dff232b192f3110"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "d99e15ba2f74c38a71df51bd288eece12efd56f81c7e5a7e41ae9ff8855d08f6"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:53.191Z",
+        "execution_verified": false,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": false,
+            "status": "blocked",
+            "slug": "api-gateway-lambda-dynamodb-stack",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "validation_failed"
+            ],
+            "resource_count": 0
+          },
+          "logs": [
+            "[warn] [WARNING] aws-cdk-lib.aws_dynamodb.TableOptions#pointInTimeRecovery is deprecated, and will be removed in the next major release.\n  use `pointInTimeRecoverySpecification` instead"
+          ]
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0561",
+      "slug": "bedrock-guardrails-cdk",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 30401793,
+      "source_sha256": "44b5932060fd720983dd12605186a027e4e60a07f40df0aedbf9667066538866",
+      "input_sha256": "9435e636206e15a1e90f642b5282dee3b69cc00b687e3f9a9962e9c23fbeb78b",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0561",
+        "slug": "bedrock-guardrails-cdk",
+        "input_sha256": "9435e636206e15a1e90f642b5282dee3b69cc00b687e3f9a9962e9c23fbeb78b",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "2232cb3d28a393d36965a619f91f46edd32c4e28c6d379a1a88d43bed918e23d"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "e64f0a10f7e1007ff44cdabc6f2494e40ef32b687d39364db701ae3ae1e6c936"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "2e7071113d05907da8b380e67d529ceccf7c5590bc2bc0e54c1b694e01e819a5"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:54.976Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "bedrock-guardrails-cdk",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0629",
+      "slug": "cfn-lint-template-validation",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "942069a00685bbd21c197b244d9f5eb1eef8d72c009c5450c8b5366cdbe91c67",
+      "input_sha256": "6e5910cb020b4ab73ca3bff7e1ba3213a6f5e4bb31ddd3737790e718c698cb73",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0630",
+      "slug": "aws-sdk-ruby-resource-interface",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "6ad7435289d631eb52adfeef048214205c4e27417bb78f31cf84e72c0de4f85c",
+      "input_sha256": "8e84de739bb646941db6acf1fc92741cb696b68473c986947b5d113fdb8e41dd",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0631",
+      "slug": "cdk-lambda",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16349060,
+      "source_sha256": "59f98dc431d9c4b4514435344c51010564ad76ba32bf0da39e52831b519cf97d",
+      "input_sha256": "be6e70c041b01ac24b06cf98a889313919b240d64f92ec9d83a12c1a6f02f4d3",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0631",
+        "slug": "cdk-lambda",
+        "input_sha256": "be6e70c041b01ac24b06cf98a889313919b240d64f92ec9d83a12c1a6f02f4d3",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "b96ccf6d42e54582680822e7870371ac2f248ed72279864ced2ca13a4e5264e9"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "fc0a9b4f8cadbadb603183449b8437a905e6fa7c9ff139a5aab679f894850cbf"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "a1e137294b29ac2bb43c2bf60a3511cceeed3af6670e2c0904786d8bc9b01751"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:55:08.428Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-lambda",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 2
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0633",
+      "slug": "cdk-lambda-event-sources",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17645118,
+      "source_sha256": "1d85972aedc67d934e60fccc388e9a4351e05d9cba7e8eb44cd2cf9081820e1c",
+      "input_sha256": "00c673620d3da028eec22d9a9b42d8095cf0b1981c8ebc527f3e80aa466c266f",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0633",
+        "slug": "cdk-lambda-event-sources",
+        "input_sha256": "00c673620d3da028eec22d9a9b42d8095cf0b1981c8ebc527f3e80aa466c266f",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "7aab4e0e2fdd39bfacf9d10951b0e570df96c8f4983f8edbc2880f1b9ffbcae3"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "f6cd156ed34f0fe299f263907b4b5c57c7bfe7880be0a09c8234fadc8cfd0663"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "f7529a1f10512c6045275a2626681b9cfa45ffc8a28b450021ad03599400c971"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:56.188Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-lambda-event-sources",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 7
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0634",
+      "slug": "cdk-dynamodb",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16844733,
+      "source_sha256": "308ea3fc1a5c14b772ada8ecec96fe9f5d87d0a306e1eabede46fb734970f6e7",
+      "input_sha256": "31b119750c21aa94344466bd0ba62b58fa010e888731f638474029838723cf93",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0634",
+        "slug": "cdk-dynamodb",
+        "input_sha256": "31b119750c21aa94344466bd0ba62b58fa010e888731f638474029838723cf93",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "4d15db7005ee5a32ae8b3b3b43627cf28a9f1ea2f3a765cd8cf6cbbb6e8bafa2"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "6755afab1ccdaf0273333440831e4537a917302a98007356818c569f62d7b5fd"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "a1c54315546d36c0c999f69cc440828797480a2eb858f9ce024fe729c4fb7fd3"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:55:51.660Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-dynamodb",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0635",
+      "slug": "cdk-s3",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 13072924,
+      "source_sha256": "c0b1dee352f60c1e122f79979f154060dfb12498579a15a4745f1a8e25c7a1cf",
+      "input_sha256": "6f153864690adc591ab97a277a4cd60100c750507b1ec5c6cc5d53026c435097",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0635",
+        "slug": "cdk-s3",
+        "input_sha256": "6f153864690adc591ab97a277a4cd60100c750507b1ec5c6cc5d53026c435097",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "22d1b4b875ddb469bf4e80ac28f950b52ccb3e94ad6fa2bf667360350fa1bb5f"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "3042e2a5b6ab1b5a0402e2eab980c8479f8426b752cacf52a91548ccc5f4bed0"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "9e1ac429cbb44bfa7918c6d60bd30742bcfb8de29ec862c676ec9cbfb9946a62"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:57.166Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-s3",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0636",
+      "slug": "cdk-s3-deployment",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16383073,
+      "source_sha256": "c7324be908940c15fda1d845a600c7f619636c058bfdfdf3e3f09a40644b2a2e",
+      "input_sha256": "391c73cf2375034bc3f278efa2b42e0703c70e7259fe361415108c88366dd54d",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0636",
+        "slug": "cdk-s3-deployment",
+        "input_sha256": "391c73cf2375034bc3f278efa2b42e0703c70e7259fe361415108c88366dd54d",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "9c94b2cf324126e697b60b616709bbd635a20baa3cad20b13e44b7d9159f89dd"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "842ece9d40a2dca51d690532e91e2ce536adc4c77bce1d1385ed5eb7d7220829"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "bec04242a3b59fef6e9690da1464302093091abbe03ea0fc0e01e819134ad58e"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:57.864Z",
+        "execution_verified": false,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": false,
+            "status": "blocked",
+            "slug": "cdk-s3-deployment",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "validation_failed"
+            ]
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0637",
+      "slug": "cdk-bedrock",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12768093,
+      "source_sha256": "706d36c2fb1c33ba6ae77b43c175026b309f1dd03eb956ba415ff72f5e60a6fc",
+      "input_sha256": "0d7285da872ada97ce1a2723b7047a639f815b86972b07ca1c54227ee6957de9",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0637",
+        "slug": "cdk-bedrock",
+        "input_sha256": "0d7285da872ada97ce1a2723b7047a639f815b86972b07ca1c54227ee6957de9",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "9492cc6e8e60ff73f85d55393cf6145291779d8335d301e86a5ce6df4bf965c7"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "46605aa68a4599c7dcd11b8843e5419dd74b1e115d48b1456180f4b5aed37309"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "20fce083271c197b04d88cfa50d28b3dbbfa015ebf23b366d5debe32871699a2"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:58:58.796Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-bedrock",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0638",
+      "slug": "cdk-bedrockagentcore",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 18000560,
+      "source_sha256": "65c0fdd8e46aa894a52030334464aa120a9ba3e5267860cfabdf331b2f327230",
+      "input_sha256": "84a205e8d679d9eb96322e41cff61e8ab9cb2514fd50b42107b6b71b2a804300",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0638",
+        "slug": "cdk-bedrockagentcore",
+        "input_sha256": "84a205e8d679d9eb96322e41cff61e8ab9cb2514fd50b42107b6b71b2a804300",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "e587f7ab6f2717090d862c9421f8e799bd6034193e8df1e2a6e4b2a472a50123"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "c2d5ee80ced0f5317975cb4f7ec676a71329b9089c1ad394647dd61a2f2adbaa"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "be4b61e9f6af934396a1716f7ed4068e15fa0c39d97417f8f49c26b67f231164"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:00.044Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-bedrockagentcore",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 2
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0639",
+      "slug": "cdk-apigateway",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17208050,
+      "source_sha256": "d63f232e455904aa37cdaaa4ab327c805636b6a135d3ba243bb4c528f8425699",
+      "input_sha256": "4611b58e99691a470652a3ec2cf5022d63898485bd45b598d1fc8265858304b8",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0639",
+        "slug": "cdk-apigateway",
+        "input_sha256": "4611b58e99691a470652a3ec2cf5022d63898485bd45b598d1fc8265858304b8",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "92ea1882efeb235a80a986283e693927c7c4662c6f0353895a2725785c89dec8"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "a04a71b7aa5ae6f7406fac38f0fb1780140b07fcbd5ae1e76d75ece006ed3338"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "1f3327c9a9b6bc6c242eb3caf1b2939a70e6881f10981a80035f7fc8e0833ab9"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:55:53.340Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-apigateway",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 14
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0640",
+      "slug": "cdk-apigatewayv2",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17573015,
+      "source_sha256": "717a3b714ac1fe02029036d683a8352b85d2e82492b32abaa5cc8031ef3be355",
+      "input_sha256": "b3ceeaa0e0cf4fccb0054239e3ebf5fa99a93c088d68f5a0c83d921ff44744eb",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0640",
+        "slug": "cdk-apigatewayv2",
+        "input_sha256": "b3ceeaa0e0cf4fccb0054239e3ebf5fa99a93c088d68f5a0c83d921ff44744eb",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "fb766e07648b7fde8811e244129f9212074e39604d7e31f4c2e4947b8a079c88"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "7b02aeae69250316c92bc9a0956e488ed46a7f4b399fc91206d2cfa50a37b53d"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "17f57a1561d8ae951f83a672bb569489d330f11526b85b8becd5af6546c3f835"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:01.238Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-apigatewayv2",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 7
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0641",
+      "slug": "cdk-apigatewayv2-integrations",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17573142,
+      "source_sha256": "f850fb627c932c31ea860d3ba8a1bc200cc708fd294e9a677b4967cf0317facd",
+      "input_sha256": "608833b481fa1155622e458f6dc156433ff3671dcafadc5dc93cf9077e9e5e80",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0641",
+        "slug": "cdk-apigatewayv2-integrations",
+        "input_sha256": "608833b481fa1155622e458f6dc156433ff3671dcafadc5dc93cf9077e9e5e80",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "92e699654b893a2de0c8c4ec691a9f0b5fd43f2037d702e761e9e35709f8b1a2"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "f18e87605b1248668c098ce698ef97bba0804653fd308b7008772d77563abc5f"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "91e456bc47d71436b983891588cc05ccb60265447f9143347d18cc9717f83eb9"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:02.382Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-apigatewayv2-integrations",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 7
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0642",
+      "slug": "cdk-iam",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12518076,
+      "source_sha256": "662ed27dfd5c0b3d1f3176ee16562642d94a62c4d1d0bcc34ae3b7b0b3a6479e",
+      "input_sha256": "f692fb242e8c2b78d6ed6d1e2b4545829b89a8032808a3f0cb79c82f8c559adf",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0642",
+        "slug": "cdk-iam",
+        "input_sha256": "f692fb242e8c2b78d6ed6d1e2b4545829b89a8032808a3f0cb79c82f8c559adf",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "cf93d348f4df3fef4c2e6254fdafcdf7e2edbba10873506f4522925a8bd6fa98"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "2e21dad16bd3819f4da3d4741aabd4001b41356d68abba7794969db0bd612012"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "efa2a49a1e7922eb9807d20b7c04058b17f36f88a0e89afcf1d701065700092c"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:03.223Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-iam",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 2
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0643",
+      "slug": "cdk-kms",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12520172,
+      "source_sha256": "ee4027bbbeb7261a31841ebc2ad3bf8a16006c964818af2690df567fdc0d034a",
+      "input_sha256": "efbc69da1bbbbeff5a22a4053780c6c9fe70ee8d54ddef3332a7e604f4792de2",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0643",
+        "slug": "cdk-kms",
+        "input_sha256": "efbc69da1bbbbeff5a22a4053780c6c9fe70ee8d54ddef3332a7e604f4792de2",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "4400e75f91b03c289dc8e091e5179935bc83d300e7836d870a533cf76c5d07da"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "ab8220a35ee4b7f9064a5f1020bd8f5f32145f3ef30bed9067f0b2d0b9cb1a72"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "18ff4b33e05e5804be1783fd4896a6bbf256a15b1950ae5e0afd9f5b95d897de"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:04.103Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-kms",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 4
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0644",
+      "slug": "cdk-secretsmanager",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16602584,
+      "source_sha256": "646f615d4f9122dc2b5fb756a5c5a1586faa1374bf42826d3a03a9c8b488fb4f",
+      "input_sha256": "b2d45a74d274d3e0a6511f8313d7c6fb2e442ea91e2a2c37c44cde3275acc88f",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0644",
+        "slug": "cdk-secretsmanager",
+        "input_sha256": "b2d45a74d274d3e0a6511f8313d7c6fb2e442ea91e2a2c37c44cde3275acc88f",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "4c759f55a738b8181b7a71b1a53e2f9f37d81f8b0f040278295409ba1aeb6552"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "d0ccf815a0c749601a2996cc3ad2d56b01dd31316aa34eeb46dcad8d873f5d3b"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "c2ed4566a1fa9c47fa574bbb09891588fa4529c33c397c0b1c3fa76e1257eddb"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:05.136Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-secretsmanager",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0645",
+      "slug": "cdk-ssm",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12626991,
+      "source_sha256": "3041e082ad3e4fbf1d17aa7d25ef3c3683082a9d8e507d588498aee99af40471",
+      "input_sha256": "091333aa1feae9e4329a10db9a0a39b455453a5a03255369667d26ab1265738d",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0645",
+        "slug": "cdk-ssm",
+        "input_sha256": "091333aa1feae9e4329a10db9a0a39b455453a5a03255369667d26ab1265738d",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "0e7da296a20638b1f2e5e7e5c370ec031467c54e89bc51561aa880e80aa527ab"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "d8b9fc15854ca74f7e3ebdf9dc283007cd6353a771c9ac72010dd64555d3b772"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "6e338e4be0ba5e3653625a654282d06f9f6cbb575a20e0a629fb7e55547ad127"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:06.017Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-ssm",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0646",
+      "slug": "cdk-sqs",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12826406,
+      "source_sha256": "74c7badde9a5555b1204826eb88857fc68338cfbe8f0d29e542ca262776496ab",
+      "input_sha256": "07c0b0fcaf2fd1363c8b4f82db12c930ad32fd8b4e91c73282784f00c807aa96",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0646",
+        "slug": "cdk-sqs",
+        "input_sha256": "07c0b0fcaf2fd1363c8b4f82db12c930ad32fd8b4e91c73282784f00c807aa96",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "841e9ac1eec23794ff5ed6aa93f0b6af2929d933c7ecaff216396e065339d026"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "a53b7a3f00eb4b39dd589368c4aefdd01ea33e26b7eb63de6957592cd2a8bfd8"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "f6f26d0fb9b35f186aae2d6733684ebd6bdf8268ee6d7ea127f3f66696ee20c7"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:06.946Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-sqs",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0647",
+      "slug": "cdk-sns",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12922070,
+      "source_sha256": "e6017022df8cbfbae85844f8237384d4ebe842096e6543b3f1835f1fb7271369",
+      "input_sha256": "369cec282618a4f2196dbedcc259f9f6e24397a62f70c1f0a96bae4910628459",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0647",
+        "slug": "cdk-sns",
+        "input_sha256": "369cec282618a4f2196dbedcc259f9f6e24397a62f70c1f0a96bae4910628459",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "31904325aa43a7e4e12006c9e55436433511cb044f4e604e93856a88bb1a30d2"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "d9fc4f34eb66b31de6a6bd2eaf24f4b473486f7d3993750c4f33313b207c6c18"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "60da83bb08ffa134ff03785456b164224093ebb651e63fc185241f3e2099e01e"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:07.825Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-sns",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 4
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0648",
+      "slug": "cdk-events",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12640931,
+      "source_sha256": "5e815ab258503f01ae7b98761d7d9e439fe3b72f039aa5d499f48aa3cfa539a6",
+      "input_sha256": "e6a3cf7818f30988b4a92e0805e8947a4f5d1d3d50588506970e9295e6df90fd",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0648",
+        "slug": "cdk-events",
+        "input_sha256": "e6a3cf7818f30988b4a92e0805e8947a4f5d1d3d50588506970e9295e6df90fd",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "d070d1e8544d1ddd50c9ace4baee8ba9ca694680c532e72ed6c4a921fa1196dd"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "8f8dcce1fdda0a0c51685729e8922a9da1b61a5ba1e5eebe25195eb9bc4abe0b"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "30ae64b2d0bce43713e09148795a6194918fb6a7ef49f5d7a16dacecbcb021fd"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:08.722Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-events",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0649",
+      "slug": "cdk-events-targets",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 19041490,
+      "source_sha256": "11d8768d0791f18abeba66b086d34fc5aefd804bfb3ddab6e010beeca23652b6",
+      "input_sha256": "dd92ce85d6ea6199fa8a94c6c7a6709be47eaa8a9593c379218c74350ed1c7ce",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0649",
+        "slug": "cdk-events-targets",
+        "input_sha256": "dd92ce85d6ea6199fa8a94c6c7a6709be47eaa8a9593c379218c74350ed1c7ce",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "e41a3f9cc6f5518e63c463e50c344d08789c4bf38b32eba11e61d82097e689ad"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "c0b5caac0382599a2b25a7eee50a815b6a9200e2736b9e1e0ac7456763617e14"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "05ef91ae273724dde4f83634467cf986ae22f818c32d67080528109e064a6479"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:09.902Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-events-targets",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0650",
+      "slug": "cdk-stepfunctions",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17899113,
+      "source_sha256": "a04ad50391c40ce37258eb7050328dbce65432689d0f7e6d39ed8302cbcfa093",
+      "input_sha256": "59090eafc41a7448fd2912a11dbc4e10332e2eb26f5cdcd93eb6b9c3788314e7",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0650",
+        "slug": "cdk-stepfunctions",
+        "input_sha256": "59090eafc41a7448fd2912a11dbc4e10332e2eb26f5cdcd93eb6b9c3788314e7",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "9bafc1c99895267c7ce823b5d719e42a9b1818b13b103dc63b710120f3472497"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "2fc53b2e0943c6180a1f8c4651a8fb4964dfc8294f41f02be8329bcde859e99f"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "85826535119115fdc92701ce89ff933f4b28fa734a4bb139ecbb547657ad4cb5"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:11.047Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-stepfunctions",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 2
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0651",
+      "slug": "cdk-stepfunctions-tasks",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 19331245,
+      "source_sha256": "278c769d19b82183102452c58948666bb2f03c38af8f4770dc4e7e76003c2a1f",
+      "input_sha256": "85eed5af790ca7b58457c4d34ff4e2d8d7529ba5be87e6908514614348441949",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0651",
+        "slug": "cdk-stepfunctions-tasks",
+        "input_sha256": "85eed5af790ca7b58457c4d34ff4e2d8d7529ba5be87e6908514614348441949",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "a9afdb3b858b3c6d50f702894314402acce82216e22e584f39acbec2e913783a"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "297cd0c718100d6ab242143a1c2ef76086dd67e386f06dec08ec97d615e87bc6"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "fc0d4cb49212d2760c52c06c704786f28c62919341874d1e90caea233f1b7573"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:12.246Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-stepfunctions-tasks",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0652",
+      "slug": "cdk-cloudwatch",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12717403,
+      "source_sha256": "c9f03856c4e6b13a874e569660ab9204c6ea9551bff8ffed20db52c3fd7de578",
+      "input_sha256": "e6cece33cadec27f939fc63e14b0532658c825eb2537e3eceed6e82500492f30",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0652",
+        "slug": "cdk-cloudwatch",
+        "input_sha256": "e6cece33cadec27f939fc63e14b0532658c825eb2537e3eceed6e82500492f30",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "9b6d68239bf2bfb4b67addbc7373addfab59c1753cd9f663a1921545f9203abe"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "39c706e9dcdf59b690ba457f60684ef2613e53f759c87abd2e5eee7ede3aa793"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "29975c3976ba7a72f307b770fea46bb2902fe62ef7b9da8e8b81f0b7c5db96e0"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:13.143Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-cloudwatch",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0653",
+      "slug": "cdk-logs",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16295981,
+      "source_sha256": "16bf21a463c9c9c9d81b438c7f211ef324b66296b44cea27ba2f56d90f20e919",
+      "input_sha256": "9d716de4ee29d94352f4d7b7ffdc338c17b5b24487331c1c69b196f40adefbc9",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0653",
+        "slug": "cdk-logs",
+        "input_sha256": "9d716de4ee29d94352f4d7b7ffdc338c17b5b24487331c1c69b196f40adefbc9",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "173da886af0178f2a2b0afb932882b622f52c139a634bf60c1b7711785e8aa22"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "e0e96cec3c0c98593110c033a95052c44f27a938a23c85de202f6324c4253e0a"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "4a6f5331f942f56786eb86ac97e4caece014a79366791688f9ce1915152ae8fa"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:14.215Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-logs",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0654",
+      "slug": "cdk-cognito",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17199782,
+      "source_sha256": "4b130a676178ad3d7cfc4847d280e104ab507f97bed4c0b40dc8abd61858e9f0",
+      "input_sha256": "6e2c4b326bb4d4ef3b64e28784ae7fde605c875e4daed7e752431909f595b35c",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0654",
+        "slug": "cdk-cognito",
+        "input_sha256": "6e2c4b326bb4d4ef3b64e28784ae7fde605c875e4daed7e752431909f595b35c",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "1ed770b72df3d9539ff8fdecfa0c0ddfd5af31edc67b6ff99216df97de73361b"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "2a70b9062cc19bd69a418020a3f1aba90d93ad8d717ab8fbf000395faee6dab2"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "dd8803c4d0dec869471a71264c877f539e2ba83e0fb16dfce02607646aa1d3d9"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:15.278Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-cognito",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0655",
+      "slug": "cdk-ecs",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17688051,
+      "source_sha256": "6f4451f42291db83e29a08bd1dd8ed37888b55a0648c36cbff072d9e00a338d3",
+      "input_sha256": "701f68a3eb5ac093b9c337d000fc94377d5c6b75e2648450fe6478b5250d688e",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0655",
+        "slug": "cdk-ecs",
+        "input_sha256": "701f68a3eb5ac093b9c337d000fc94377d5c6b75e2648450fe6478b5250d688e",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "3997ac84ceaff7ea154a05cab0197abb088d8db547c25e9c168577e2460b6c82"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "f861355b2e316abd9983133843e42b581a17c7fd240a8fe959838889e7f399cc"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "96225295ead16387c2a5e1ece832fed880eeaa8f0814cd3227d3583d93d31975"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:16.602Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-ecs",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 19
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0656",
+      "slug": "cdk-ecs-patterns",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 19472842,
+      "source_sha256": "6a410c55407635a7db5b5a3c6e8c382a187a68f882fb4e423a62ca4d86d15e41",
+      "input_sha256": "12b84cf07642af751b1b0ea02da8edc98570cb247fbc551ab8a3e5e5128772a1",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0656",
+        "slug": "cdk-ecs-patterns",
+        "input_sha256": "12b84cf07642af751b1b0ea02da8edc98570cb247fbc551ab8a3e5e5128772a1",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "ca8d19451d6287e2869932db28e3088eb61992becce898814c8d770abe3b48ed"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "1f9628f7801190f10f724d3a14d8307f7bcf3576d8b136c5e6f6881fec048119"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "efdc02cf5fccf5edf42d7d5d5ceb27c66b2aa8ddd3e7a1072ecdd68b9f9ab9ef"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:18.172Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-ecs-patterns",
+            "selected_components": [
+              "stack"
+            ],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 35
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0657",
+      "slug": "cdk-eks",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17438369,
+      "source_sha256": "a749a92860fcb1ba7b4ccdf816f1296f8d89cdad6896a5388db667672725a913",
+      "input_sha256": "d50fdce19bf2535e6be0e6966d076b9f41ffa4076c330e1582ebf85e96a6353f",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0657",
+        "slug": "cdk-eks",
+        "input_sha256": "d50fdce19bf2535e6be0e6966d076b9f41ffa4076c330e1582ebf85e96a6353f",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "0002a96b08147a87e9a757ba4be12acf241cb9fd08c3fd3112f80ffe21095772"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "2de8c2856275a1da7be583d2b217ac3f443895cfefb2d3c1b64dfbec242ec7ce"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "87a82502b0c4560e93e022be4f631c6c9556070df2c563cd18427beb2d0e59e8"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:18.972Z",
+        "execution_verified": false,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": false,
+            "status": "blocked",
+            "slug": "cdk-eks",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "validation_failed"
+            ],
+            "resource_count": 0
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0658",
+      "slug": "cdk-rds",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17126601,
+      "source_sha256": "1cf3828f6d55047b91b45aa001600f1fab1ad403caab139ad197c82dd37bf844",
+      "input_sha256": "4f41926f5cdb9955c313fe112ceca7751d911f40ee93fd6ef6ac7d8ca63bff3b",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0658",
+        "slug": "cdk-rds",
+        "input_sha256": "4f41926f5cdb9955c313fe112ceca7751d911f40ee93fd6ef6ac7d8ca63bff3b",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "09d2056c1f0b646e379213445064a1013d5a49da74de490954d1dda24cb8fc7d"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "2e4896d23530574a37904852e078a092d1633c0974467df0d9de9a3bcb587be2"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "9ae18a41b612ca33d1e7b29a67592964559d5321c38c3c3e25dc267ed4c9adf1"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:20.231Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-rds",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 26
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0659",
+      "slug": "cdk-elasticache",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 15604051,
+      "source_sha256": "9d8341eee07a953c6ccdeaba8f42a6f1673a2d834f3946957b373779b4c71289",
+      "input_sha256": "9de2c97f45d93079dbfe886a03539f04f1ccb09fff383ac1ba05d6a2d3967138",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0659",
+        "slug": "cdk-elasticache",
+        "input_sha256": "9de2c97f45d93079dbfe886a03539f04f1ccb09fff383ac1ba05d6a2d3967138",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "ceeaff398e03288a8c88ae77e12343229a85b172f15cf59ed47f655975ac103f"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "a9ed78d5e2d3e234aab325aa38bc5004e5f3db2834fe8a2e7770997be9098e58"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "e70c66fe6a65b55facc0a5417e619f30d433973f94bfc766dfd1e7c7d6bb0b9a"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:21.316Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-elasticache",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 23
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0660",
+      "slug": "cdk-kinesis",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12850441,
+      "source_sha256": "f93ce624126e5895acaed753ea5ac05bdfd2e67ef99fe397b054716f15d4064c",
+      "input_sha256": "00d7cd4affda414fec9f3f973352ab49d85acd5f9aa7c09141b7ea9dfb882c7d",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0660",
+        "slug": "cdk-kinesis",
+        "input_sha256": "00d7cd4affda414fec9f3f973352ab49d85acd5f9aa7c09141b7ea9dfb882c7d",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "58aa07cf92729c5d9268b7fa789f1318f81b649312402eb164185ec765e8aa67"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "91038386d7ba3329cc5908e215dc8229554ec635e6a46223224fd47d55e4b355"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "e05e306ce2db14635917ed8be17228fb7ab82b6f3680cb8ecadb4f826d6b7277"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:22.216Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-kinesis",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0661",
+      "slug": "cdk-cloudfront",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16917397,
+      "source_sha256": "1aafdd0a910636112bb120cc275056639b5b857cb2ffa46ffc1587f4f209def4",
+      "input_sha256": "5f2ea0984c71618e91607fed8bf31c2931911061f0e1e641484f8c5a556efca5",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0661",
+        "slug": "cdk-cloudfront",
+        "input_sha256": "5f2ea0984c71618e91607fed8bf31c2931911061f0e1e641484f8c5a556efca5",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "dc7e67e9f38bef98f4303ec43a27c29bbeefd446d0d3ae253f3e2c0544058db0"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "d5a501beaae1459a9576fc3d8645ddd17214115d5f664971afb7f5a3a9d83a41"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "a98874ccc33d425782f8df13fc1e4444a921ee26e6839c7df561865a6f37138e"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:23.343Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-cloudfront",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 4
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0662",
+      "slug": "cdk-cloudtrail",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 13627459,
+      "source_sha256": "21e2403dbdb0e156e2fb808918d4b068f1f5ec21d48c65e7532be9cc9957f799",
+      "input_sha256": "f648d3d98382c741591e7abac3ec6bd31ebe0d4d1ba414c3ee426d94ab32c966",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0662",
+        "slug": "cdk-cloudtrail",
+        "input_sha256": "f648d3d98382c741591e7abac3ec6bd31ebe0d4d1ba414c3ee426d94ab32c966",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "53036dab48c66eedd812546b27dca34c4ff6e1a197aebfa43ba4b458eb106306"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "04e16fa96979c6614a00bcf961de08f625abc9d8b425233e0c937695d72c4dfa"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "763c83362bc7efe7473ceddfb6f906931dc6764a348a3a15453a5d9027c2fe88"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:24.381Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-cloudtrail",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 6
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0663",
+      "slug": "cdk-backup",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17767122,
+      "source_sha256": "4b0f54f932b8c373e123cb88edee0e332acd6e178a0b3c0ee43493fb9913182e",
+      "input_sha256": "8cc9ddea420cd9c5dff58d8ef3b511900d48fa9b73cf99d8e2471c9c7a48b08b",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0663",
+        "slug": "cdk-backup",
+        "input_sha256": "8cc9ddea420cd9c5dff58d8ef3b511900d48fa9b73cf99d8e2471c9c7a48b08b",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "15b7f90f84d1e5e5bcba7ab18fe983b2f2c94ba6159827e3a2cf3f5281eb5c3a"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "710369ff8dbea1c6941d4ebc456b89a930e4a4aac938faa2eb90ebcb38409a52"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "6ebf1475c7a1eb22a7158e4cc06d0b9ba683f37f7c6454544fd1632397076933"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:25.538Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-backup",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0664",
+      "slug": "cdk-ec2",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 15452489,
+      "source_sha256": "04f8760e0f80a2f704c272964dba968708a69dc1c62febec2b678cd775e5d948",
+      "input_sha256": "8c271d99f82727142ee8702e159215cf619aec78801a33510ee408aee78d6640",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0664",
+        "slug": "cdk-ec2",
+        "input_sha256": "8c271d99f82727142ee8702e159215cf619aec78801a33510ee408aee78d6640",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "479955044905cd5c54431f4e24854c7634682c0c790b26b58327d2a7674ae208"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "6ed7cbc16558e6a1f3aa8036f016478c9a26f0ca2530941bb3336cb5d5495afc"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "0c4d227b86f49b1c2e74a0dbdf0ab385088bc1f70e54b3ea5933f0f741c235b9"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:26.718Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-ec2",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 26
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0665",
+      "slug": "cdk-ecr",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 12742990,
+      "source_sha256": "6acd0f6226950eadd94235f45952d1f14ea0e32d030d2ca339686ff89a1eeb3b",
+      "input_sha256": "d1e99fe846b2efeba5ad912215d903bb6f102b870b90c869362ea94ebdc540d5",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0665",
+        "slug": "cdk-ecr",
+        "input_sha256": "d1e99fe846b2efeba5ad912215d903bb6f102b870b90c869362ea94ebdc540d5",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "8e4100df1fc248a2866566b0baeb151dc3a13b09bf28084cadafe9874d92e409"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "8d343fd3d7d984889dd077f0f8877f238200ae2f40a9b8b1fa7a99381364afd2"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "291e64f5e5b9b28f01db90ced8976e09c631239ae0d65d57efcbbe0523e65cd4"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:27.692Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-ecr",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0666",
+      "slug": "cdk-athena",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 13087686,
+      "source_sha256": "691494716d728272905fc62da7f4b306aaea5e20fd9d65698ac654b452f26103",
+      "input_sha256": "1d42a0ef796fd771de2b219021f5cac5f9516d5e9a11814a3cc6f162982509dd",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0666",
+        "slug": "cdk-athena",
+        "input_sha256": "1d42a0ef796fd771de2b219021f5cac5f9516d5e9a11814a3cc6f162982509dd",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "c1c5480f53fb7a2a0e504fab853ae2d48b2e8568f0f88832847d340e9c26cf8c"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "79ec129395a16385cdda431388be70aa10fa4ef08347b6e89a1a6e932f50ccaf"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "71ca3a217eee1e65e174c0cf28cd6f94c124ab9f252de56cbd6f2a3546a702c0"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:28.583Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-athena",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0667",
+      "slug": "cdk-glue",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 17133433,
+      "source_sha256": "715c6086f41b6382a5fc37d58772e711cdf9049087a78a3edbfe30d5987b20f7",
+      "input_sha256": "acce05fd59e0bcf579d001e69795bb1a7dedc65b2f0047d63c10c84e3898d22f",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0667",
+        "slug": "cdk-glue",
+        "input_sha256": "acce05fd59e0bcf579d001e69795bb1a7dedc65b2f0047d63c10c84e3898d22f",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "02e241622d3967ea393524ff7057bf233e2c4d9026223125602d16bfc4307a99"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "df27a514e3ea0f5813c036fda5c06f7da623bf65d03ff0942bbeed769f82e778"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "06fd9bc2aba50ae75c4e826f8347f4f0a029c4b7370e52f8642f7c4f56b68ff0"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:29.707Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-glue",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 6
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0668",
+      "slug": "cdk-cognito-identitypool",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16891501,
+      "source_sha256": "c11f2730439ab41b8f311b6c7f35a757a5b8e2c8be61bc704c02cbaac653b277",
+      "input_sha256": "71364ec83cb5529ff148c958a6d1e860e04db7ef496d666cc8b1c7889319c82e",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0668",
+        "slug": "cdk-cognito-identitypool",
+        "input_sha256": "71364ec83cb5529ff148c958a6d1e860e04db7ef496d666cc8b1c7889319c82e",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "1531c5f9ef43fd8885d8f2319ca1efc57aa0e8a95fab906f7ed3bfefba92d379"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "88928366e78af851b047bbe5417dfba201f1f30ee9b05883180265fc51d4904c"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "323ecb38a2e45973f90f244b15dbaa5e1b70446a2c5871fe7596a353eb4fcfcb"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:30.793Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-cognito-identitypool",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 3
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0669",
+      "slug": "cdk-codebuild",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 15805130,
+      "source_sha256": "a9d52a69bc4c4e1064362564d0d063d3fa82ed1f432a21fe4f502b6528afefa2",
+      "input_sha256": "c9062a8854f0c525926399678aa492f7dcb20d85e71d4bf18a19136ad276e4ab",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0669",
+        "slug": "cdk-codebuild",
+        "input_sha256": "c9062a8854f0c525926399678aa492f7dcb20d85e71d4bf18a19136ad276e4ab",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "24a6a505d2cd84202cd5bec7ce3cc52649c827e7bfb622784393a03e2ce4c1e6"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "0bac06c0cf5ef32e53d42f125edcdddcd5a34aa0c93eef8e7e3adb95705f86b7"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "b3fad193cb24adfd43a1fee06612da02d9518886c742bd7fbd05ac887a7061c8"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:31.870Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-codebuild",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 7
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0670",
+      "slug": "cdk-codepipeline",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 19650080,
+      "source_sha256": "076e4b7dfdd2d86df7930b9fe58f776605adb936b9a9119e7c06127929676be0",
+      "input_sha256": "2ce3fdaea3f7029b317b3bd2c6ee5db2bb462439dd15945c0b906ba944fc128a",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0670",
+        "slug": "cdk-codepipeline",
+        "input_sha256": "2ce3fdaea3f7029b317b3bd2c6ee5db2bb462439dd15945c0b906ba944fc128a",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "9ab2a08ddacf6efc84ab68d5dddb361b3d52b28069303974ebc7e5cf04cb90a2"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "0403590a30c2e73b57bc3b00dcef46e52bdcb20d5dbdaf8f7d7414d267e6c7b8"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "c62c864c372d9d993745c593184453af231aeed8d6b407124dfbbd6b3eea18c0"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:33.175Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-codepipeline",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 15
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0671",
+      "slug": "cdk-codepipeline-actions",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 19650115,
+      "source_sha256": "c3030ab475ed2377a9f773dec364d33fbec93b44f82f56bd6f776da52092e478",
+      "input_sha256": "73f474f374b6d60a8c0c6bf90da40010408bd466bef7db044b8e791d6b6d15bb",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": {
+        "sku": "AWS-0671",
+        "slug": "cdk-codepipeline-actions",
+        "input_sha256": "73f474f374b6d60a8c0c6bf90da40010408bd466bef7db044b8e791d6b6d15bb",
+        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "3b2f1804b1957733042282efcd5d9ca0774919b64cc3bdc8b1ff0cbad23709fe"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "4552ca5c9ac0ef716cc30c307650fefd2f3ea0aaabdcb855a94558560b7b0d56"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "841514aab81c064a9a08d7e5d72d790071075100f7273236ab19ead284ecdd17"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:34.437Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-codepipeline-actions",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 16
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0672",
+      "slug": "chalice-rest-api-decorator-pattern",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "d62db96da451fe338e6eca2d715c772d4259790e7949c31aebf52c648dce4c82",
+      "input_sha256": "20f2478b04b27268ca2662484b96d726375d55a816e02ac7ca0f4cda54a30520",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0673",
+      "slug": "chalice-automatic-iam-policy-generator",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "83bd753f137a70c6d7239b1f2b431abb31f065d1a32167eb08513987017aed26",
+      "input_sha256": "3728b2ffaded32283a117361e6454a71bbb39e7bb0da81b92dd5907dced67143",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0678",
+      "slug": "aws-s3-ruby-client",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "295fc4836099309caa7115ec4efc449796194c3a89fd0adf929f54de0a2bb4fe",
+      "input_sha256": "09f567283da98ded2da2015ae1a929bcd5a07f5b0ce71d87af5568d8ebdb4936",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0679",
+      "slug": "minio-s3-compatible-local-store",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "30130e4ce5ef1647939dc6aab246863d77215860b25a3bccb43429913eba810c",
+      "input_sha256": "990d4471105ce3c8b823de611a471ec6a4621455cec98b7446244ebe86c9c575",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0681",
+      "slug": "aws-sdk-pandas-athena-to-dataframe",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "017355920342b5556f0fedba41c0151dd90a2f1bbebc1f7ccd404f57bb007fb1",
+      "input_sha256": "08bf5683a604a3d40913ad02c9d2d9662a5d3c2126fc393b8eab2a4f641efaac",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0682",
+      "slug": "aws-sdk-pandas-s3-read-write",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "7cf415e7b112c93d2a4994ea08440660e0dc007815020a5e5e225a165788e5b9",
+      "input_sha256": "f0d22ba0840a228dbbec7b9428590647da2651c19241d8f2e49a92b2d1ff6d61",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0683",
+      "slug": "aws-sdk-pandas-glue-catalog",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "d9433167b6ee18b49d7c586933431b69c7a0ac1608232597b76664a2b5ac4c4f",
+      "input_sha256": "3bac23e482f64a81ff87df3e9275487980380a2e7721cce3100500a2e589f94f",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0684",
+      "slug": "aws-sdk-pandas-redshift-connection",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "cfa15b49cee144bec7d5d6d17c77b93170a3b6dce9f6b14dd7841cc5cf7b3f30",
+      "input_sha256": "a4d18d40964d909ab8759076038d68add1ec59dd597f527cc50c02c220e34865",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0685",
+      "slug": "bedrock-agent-with-action-group-sample",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "cb90bd342f7b65953b89be28d04f5b22fa6e06d7db9dcafe516853845f0114fc",
+      "input_sha256": "37d69a52bb7dd77090c5407a530697828a1cf937f8181a1489a47a61d29309fd",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0686",
+      "slug": "bedrock-rag-knowledge-base-sample",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "07b6a8247d3f67024d5bf3798faa30587c84e069a224f0d93052a80db849adb4",
+      "input_sha256": "57d3e55b456b46b4fc5fbb8a9368d77ddb39ec461035dea9b454118ad5b42c7f",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0687",
+      "slug": "bedrock-multimodal-inference-sample",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "fb20acb92f52523c5e0e577df11c44eee991f17b3f34539d25afc4e45d8900ac",
+      "input_sha256": "996e30afdbb6f14ec2bbb3af3e38c65e54047851789aad90c6454fa84294ff29",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0688",
+      "slug": "agentcore-sdk-agent-runtime-setup",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "dd7689210817a4524216917014b1f82aae5d5ca69533af412c615ed6d753ca64",
+      "input_sha256": "74e0c6c106fefffdd576225e44103cbcb6616882be1592804fe8b3c697c614d8",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0689",
+      "slug": "agentcore-sdk-memory-management",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "257afc3a43d402a07a5c297d853c4da3468d14a908afcb68afdbf2dd530d1b8a",
+      "input_sha256": "2f505137d3ea59a2fd5789f3de004646ca10b291a9ea3d07ce9ede826b20109a",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0690",
+      "slug": "agentcore-sdk-session-handling",
+      "build_kind": "native-source",
+      "build_bytes": null,
+      "source_sha256": "7113985693197f644a7658221ba8d0f79762db656800e938a30a1e0dfdb5b10a",
+      "input_sha256": "3827c0241238b88255a2936cce484534a3386b068cfe0ef43d4e131f66f3e456",
+      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "execution": null,
+      "published": false
+    },
+    {
+      "sku": "AWS-0632",
+      "slug": "cdk-lambda-nodejs",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 16384179,
+      "source_sha256": "a6e0122238cd0c6257cbeb9c9d07e26ff2a59d3169978365f7f37bdf1e8f6821",
+      "input_sha256": "27f4504121ec898809faab552f56bf6a13703d972a2ff7f7e67085e5b26b7f60",
+      "builder_sha256": "9a0945ca90fe8f7f5994176d54b3414ae582e427179813266701ea83d7e2c8c7",
+      "execution": {
+        "sku": "AWS-0632",
+        "slug": "cdk-lambda-nodejs",
+        "input_sha256": "27f4504121ec898809faab552f56bf6a13703d972a2ff7f7e67085e5b26b7f60",
+        "builder_sha256": "9a0945ca90fe8f7f5994176d54b3414ae582e427179813266701ea83d7e2c8c7",
+        "modules": [
+          {
+            "name": "product/validator.wasm",
+            "sha256": "ce8c4fc9c4c07b24bbb4bd7329def544e024d15a8c9ae0fbb597c681a2f4800a"
+          },
+          {
+            "name": "product/files.json",
+            "sha256": "7cb1bbfc1ff7ff335f2bdf675bed5ec4372133f888ccba6ad3dcb77a50d00057"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "cd1c5b2d5f90e723de90e97f6ebb29fa601abcdbbf5b3431c1b1fa80e5d05aa4"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "ab21dbbbe5c62a29670fde7c46362293a2a2972db91ecb8554a6c9c6f486e93a"
+          },
+          {
+            "name": "product/handler.txt",
+            "sha256": "8ba5c2a97da6a22973102eab76f7ae2885ffacb4f3d24e4039a353fccb4fcf54"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "cacc0ee100181221b32adcc812f573b81213ec133ef7936c46b10842b7a5ebd9"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:40.485Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "cdk-lambda-nodejs",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "resource_count": 2
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0676",
+      "slug": "claudia-nodejs-lambda-deploy",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 89325,
+      "source_sha256": "4c2a3af706ab0c672b27be8b19beee7d450a227b0c31b3e8669e9118a780dd77",
+      "input_sha256": "6e5f0e198d0ad650e587ef05a8413f01706640464acd1f8316ee08ded62bdf34",
+      "builder_sha256": "9a0945ca90fe8f7f5994176d54b3414ae582e427179813266701ea83d7e2c8c7",
+      "execution": {
+        "sku": "AWS-0676",
+        "slug": "claudia-nodejs-lambda-deploy",
+        "input_sha256": "6e5f0e198d0ad650e587ef05a8413f01706640464acd1f8316ee08ded62bdf34",
+        "builder_sha256": "9a0945ca90fe8f7f5994176d54b3414ae582e427179813266701ea83d7e2c8c7",
+        "modules": [
+          {
+            "name": "product/files.json",
+            "sha256": "08bba7f9fdc15d6103529876efc87ac3b66822becc4882d2604a1333cd7713d4"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "b774ed929fed642cc2a0816057a84a383f716a94f83b67bcce4b0c61498a8fb4"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "4c3278c1ca2beac5bc74d8648f818b5951517d866d9b255a0e28b6455497978a"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T12:59:40.528Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "claudia-nodejs-lambda-deploy",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "verification_count": 2,
+            "route_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    },
+    {
+      "sku": "AWS-0677",
+      "slug": "claudia-api-builder-pattern",
+      "build_kind": "private-javascript-modules",
+      "build_bytes": 14992,
+      "source_sha256": "c7477ab5f64b504ba66140a054000b047bc6d690a74ea816f099c197bfc258ad",
+      "input_sha256": "80b32ffcbfe2df61b459fc7d70f3fef38ed0db55cdfbe4323616ce5fb3243747",
+      "builder_sha256": "9a0945ca90fe8f7f5994176d54b3414ae582e427179813266701ea83d7e2c8c7",
+      "execution": {
+        "sku": "AWS-0677",
+        "slug": "claudia-api-builder-pattern",
+        "input_sha256": "80b32ffcbfe2df61b459fc7d70f3fef38ed0db55cdfbe4323616ce5fb3243747",
+        "builder_sha256": "9a0945ca90fe8f7f5994176d54b3414ae582e427179813266701ea83d7e2c8c7",
+        "modules": [
+          {
+            "name": "product/files.json",
+            "sha256": "91b1642c2b210681684444e71687004c5f462d2c5ba1f08b6c6d0c22b2e60777"
+          },
+          {
+            "name": "product/rules.json",
+            "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+          },
+          {
+            "name": "product/native.mjs",
+            "sha256": "e6104f9ab3046aacbd363d0ced50a41836de9200e934fe2117bfdab34a86f642"
+          },
+          {
+            "name": "product/preview.mjs",
+            "sha256": "25cd8a3a55d1c1f880adeef13dfd4c903713e672bc9cf1db81f7c50b7c0dd65f"
+          }
+        ],
+        "runtime": "local-workerd",
+        "outbound": "disabled",
+        "executed_at": "2026-10-25T13:01:21.458Z",
+        "execution_verified": true,
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "status": "complete",
+            "slug": "claudia-api-builder-pattern",
+            "selected_components": [],
+            "diagnostic_codes": [
+              "local_fixture_only"
+            ],
+            "verification_count": 1,
+            "route_count": 1
+          },
+          "logs": []
+        }
+      },
+      "published": false
+    }
+  ]
+}

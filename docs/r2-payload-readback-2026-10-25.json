@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-25",
+  "method": "Read-only R2 listing and GET; compare D1 payload_objects. JSON bodies are parsed by the connector; body hashes below are recomputed from reconstructed compact JSON, not direct raw-byte streaming. Text payload is hashed directly.",
+  "results": [
+    {
+      "sku": "AWS-0550",
+      "version": 1,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact"
+      ],
+      "body_type": "object",
+      "file_count": 11
+    },
+    {
+      "sku": "AWS-0551",
+      "version": 1,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact"
+      ],
+      "body_type": "object",
+      "file_count": 11
+    },
+    {
+      "sku": "AWS-0552",
+      "version": 1,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact"
+      ],
+      "body_type": "object",
+      "file_count": 12
+    },
+    {
+      "sku": "AWS-0553",
+      "version": 1,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact"
+      ],
+      "body_type": "object",
+      "file_count": 11
+    },
+    {
+      "sku": "AWS-0554",
+      "version": 1,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact"
+      ],
+      "body_type": "object",
+      "file_count": 11
+    },
+    {
+      "sku": "AWS-0555",
+      "version": 1,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact"
+      ],
+      "body_type": "object",
+      "file_count": 9
+    },
+    {
+      "sku": "AWS-0568",
+      "version": 2,
+      "current": false,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact",
+        "canonical"
+      ],
+      "body_type": "object",
+      "file_count": 13
+    },
+    {
+      "sku": "AWS-0568",
+      "version": 3,
+      "current": false,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact",
+        "canonical"
+      ],
+      "body_type": "object",
+      "file_count": 13
+    },
+    {
+      "sku": "AWS-0568",
+      "version": 4,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "compact",
+        "canonical"
+      ],
+      "body_type": "object",
+      "file_count": 13
+    },
+    {
+      "sku": "SW-PT-0006",
+      "version": 2,
+      "current": true,
+      "read_success": true,
+      "size_matches": true,
+      "metadata_hash_matches": true,
+      "body_hash_reconstruction": [
+        "text"
+      ],
+      "body_type": "string",
+      "file_count": null
+    }
+  ]
+}

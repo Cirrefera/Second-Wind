@@ -1,44 +1,24 @@
-# deploy a Node.js Lambda with Claudia
+# Node.js Lambda Deployment Kit
 
-Pinned Claudia.js deployment scaffold for a Node.js Lambda/API Gateway service, with explicit create and update commands; deployment runs in the buyer AWS account.
+A Node.js Lambda handler with a health route, pinned deployment tooling, and explicit create and update commands. Deployment runs in the buyer’s AWS account.
 
 Select `language: "javascript"` explicitly in the package configuration.
 
-Hosted preview is blocked: Claudia is an npm CLI whose create/update workflow changes buyer AWS resources. The hosted adapter has no npm dependency loader or buyer AWS credentials, so no deployment preview can run.
+## Private preview
 
-## Runtime and boundary
-
-Node.js 18.x, Claudia 5.14.1, buyer AWS credentials and account. Scripts call Claudia only when the buyer runs them; no deploy, role creation, or AWS success is claimed during hosted preview.
-
-This package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.
-
-## Files
-
-- `package.json`
-- `app.js`
-- `deploy.sh`
-- `update.sh`
-- `selection.schema.json`
+`preview.mjs` invokes the supplied Lambda handler’s health route and missing-route response. The preview returns bounded status and counts; it does not deploy AWS resources. Hosted runtime publication is pending, and trial admission remains disabled until that release is ready.
 
 ## Use
 
-Review the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.
+Run `npm ci` to install the exact dependency tree recorded in `package-lock.json`. Review `app.js` and `selection.schema.json`, then use the supplied deployment configuration in your own AWS account. Provide credentials through your local SDK credential chain. Never submit credentials in a marketplace preview request.
 
-The proxy API can be publicly reachable. Add an authorizer or API resource policy and review the generated IAM role before routing real user data.
+Add an authorizer or API resource policy, request limits, and application authorization before handling real user data. Deployment may create or change AWS resources and incur charges.
 
-## Sources and provenance
+## Dependencies and attribution
 
-The current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.
+The package currently declares Node.js 18.x and uses Claudia 5.14.1. The lockfile pins transitive dependencies. The integration code is original Second Wind work based on these documented interfaces:
 
 - https://github.com/claudiajs/claudia
-- https://claudiajs.com/tutorials/installing.html
 - https://claudiajs.com/tutorials/deploying.html
 
-Upstream repository: https://github.com/claudiajs/claudia
-
-Dependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.
-
-
-## Native preview entrypoint
-
-Run `preview.sh` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.
+See `LICENSE` and the dependency licenses. Source review and hosted execution evidence are separate from verification of a buyer AWS deployment.

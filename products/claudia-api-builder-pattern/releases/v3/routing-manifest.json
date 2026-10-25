@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0677",
+  "sku": "AWS-0677",
+  "slug": "claudia-api-builder-pattern",
+  "version": 3,
+  "release_ref": "sha256:e04304dadb4db1e73c01de01b3c0e3d4bc399ed7b8ae11c82185168dee3086b3",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A Node.js resource API with GET and POST routes, request validation, and an API Gateway-ready Lambda export.",
+  "supported_boundary": "Node.js 18.x with claudia-api-builder 4.1.2. The route module must be bundled/deployed by Claudia in the buyer account; no live API or AWS deployment is supplied.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "lambda",
+    "javascript",
+    "claudia-api-builder-pattern"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda"
+  ],
+  "problem_family_ids": [
+    "lambda-integration"
+  ],
+  "operations": [
+    "claudia-api-builder-pattern"
+  ],
+  "environments": [
+    "javascript"
+  ],
+  "desired_outcomes": [
+    "working-lambda-integration"
+  ],
+  "input_kinds": [
+    "native-javascript-input"
+  ],
+  "failure_signatures": [
+    "lambda-request-failure"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs18"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

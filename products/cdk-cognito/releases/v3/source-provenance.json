@@ -1,0 +1,59 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0654",
+  "slug": "cdk-cognito",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "source_repo": "https://github.com/aws/aws-cdk",
+  "source_revision": "aws-cdk-lib-v2.274.0",
+  "supersedes_catalog_version": 1,
+  "relationship": "Uses the published aws-cdk-lib API. No upstream implementation files are copied.",
+  "dependency_pins": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.5.0"
+  },
+  "documentation": [
+    "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib-readme.html",
+    "https://docs.aws.amazon.com/cdk/v2/guide/"
+  ],
+  "source_hashes": {
+    "product.mjs": "8319c764b4d882b6f127abee550f06a666b7edfe4a23c45110b31e27b7b31c38",
+    "preview.mjs": "0a19e359ce120f408536d44b5c8098a6979edac295883f3edf274a4c6624a8e9",
+    "config.schema.json": "60a9b04d15d4ac36fbdca9e6d01088f4e6b59d38048aa274567ff06fba25fd94",
+    "selection.schema.json": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+    "package.json": "d7d4c664387426fc73399113fcf9e15038db8138dc36950500eee043c8b38dfd",
+    "package-lock.json": "01bc09c62249812c8db6f07ce1da605d4b19bb3935ec7d388c14df2c887abc49",
+    "README.md": "643c180d54b973c3e03156000f58a7fb734c14a32fb1a12a4eee22020ee2c3e6",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "review_status": "proposed",
+  "license_mapping": [
+    {
+      "paths": [
+        "product.mjs",
+        "preview.mjs",
+        "config.schema.json",
+        "selection.schema.json",
+        "package.json",
+        "package-lock.json",
+        "README.md",
+        "LICENSE"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "proposed original-source mapping awaiting trusted review"
+    }
+  ],
+  "previous_release_input_sha256": "81a863cdf78f92a145f99cf3a6b5ea86f03bdaa4dfb706520e5433f0ddce383b",
+  "original_file_hashes": {
+    "product.mjs": "8319c764b4d882b6f127abee550f06a666b7edfe4a23c45110b31e27b7b31c38",
+    "preview.mjs": "0a19e359ce120f408536d44b5c8098a6979edac295883f3edf274a4c6624a8e9",
+    "config.schema.json": "60a9b04d15d4ac36fbdca9e6d01088f4e6b59d38048aa274567ff06fba25fd94",
+    "selection.schema.json": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+    "package.json": "d7d4c664387426fc73399113fcf9e15038db8138dc36950500eee043c8b38dfd",
+    "package-lock.json": "7d5c5f527db3061cb0404492c8d6322ef2429242086f8f406e7ae55430962e0a",
+    "README.md": "643c180d54b973c3e03156000f58a7fb734c14a32fb1a12a4eee22020ee2c3e6",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "source-provenance.json": "ef3eef91a2e057f8539c1221b34447c5f13c56953da714dc949a9b3413f66647"
+  }
+}

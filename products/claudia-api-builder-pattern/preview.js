@@ -7,7 +7,9 @@ const request = {
   pathParameters: {id: process.env.PREVIEW_RESOURCE_ID || 'preview'},
   headers: {},
 };
-api.proxyRouter(request, {}).then((response) => {
+new Promise((resolve, reject) => {
+  Promise.resolve(api.proxyRouter(request, {done: (error, result) => error ? reject(error) : resolve(result)})).catch(reject);
+}).then((response) => {
   const body = typeof response.body === 'string' ? response.body : JSON.stringify(response.body ?? null);
   console.log(JSON.stringify({ok: response.statusCode === 200, status: 'route_invoked', response_bytes: Buffer.byteLength(body)}));
   if (response.statusCode !== 200) process.exitCode = 2;

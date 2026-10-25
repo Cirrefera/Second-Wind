@@ -44,7 +44,7 @@ async function publicProduct(row) {
     catch { throw Object.assign(new Error('invalid_release_manifest'),{status:503}); }
     if (release.language_policy) product.language_policy=release.language_policy;
   }
-  product.sandbox_available=Boolean(product.sandbox_eligible && _component_pricing
+  product.sandbox_available=Boolean(product.sandbox_eligible
     && release && await previewAvailable(release));
   if(product.sandbox_available) {
     product.sandbox_access_url='/api/trials/access';

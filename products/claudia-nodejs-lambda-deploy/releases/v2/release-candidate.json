@@ -1,0 +1,165 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0676",
+  "slug": "claudia-nodejs-lambda-deploy",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:ac824fa67c4d3a9ff0f121d50db6db419273fa94e40aeb6e40a6d78876dc0f88",
+  "content_hash": "ac824fa67c4d3a9ff0f121d50db6db419273fa94e40aeb6e40a6d78876dc0f88",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Pinned Claudia.js deployment scaffold for a Node.js Lambda/API Gateway service, with explicit create and update commands; deployment runs in the buyer AWS account.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "javascript": "app.js"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "javascript"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "Claudia is an npm CLI whose create/update workflow changes buyer AWS resources. The hosted adapter has no npm dependency loader or buyer AWS credentials, so no deployment preview can run.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.sh",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "javascript"
+    ]
+  },
+  "tags": [
+    "lambda",
+    "javascript",
+    "claudia-nodejs-lambda-deploy"
+  ],
+  "supported_boundary": "Node.js 18.x, Claudia 5.14.1, buyer AWS credentials and account. Scripts call Claudia only when the buyer runs them; no deploy, role creation, or AWS success is claimed during hosted preview.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "Claudia is an npm CLI whose create/update workflow changes buyer AWS resources. The hosted adapter has no npm dependency loader or buyer AWS credentials, so no deployment preview can run.",
+  "publication_blockers": [
+    "native_private_preview_entrypoint_missing",
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "updated_product_source_requires_review"
+  ],
+  "required_files": [
+    {
+      "path": "package.json",
+      "sha256": "22ca816a942e1be09eefdded8c7f3e74113d7bc93157f8cbb2147a4bce12e474",
+      "size_bytes": 175,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "app.js",
+      "sha256": "7d85e4fc6883d2f827bd641f71c7a218257e9a2f97079780f83899c4317aba12",
+      "size_bytes": 425,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "deploy.sh",
+      "sha256": "cc81fb99b23e6b6afe506cdb6c7e21967010fa79a4bc7d0317d869fcef4944d1",
+      "size_bytes": 271,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "update.sh",
+      "sha256": "4d51245e388574f1609c1050963b1389eaae39640c893f35b367b3aaa24e48a5",
+      "size_bytes": 110,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "e7f9b5645b6e533000c7c9ff0db55580333f8e6563055a36380561be41770bc9",
+      "size_bytes": 2898,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "010da27a3726f942a52287148807276e81e1d305e8b7f7ece3ee40be0e111fd7",
+      "size_bytes": 351,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.sh",
+      "sha256": "f7ca8d1a54464fb753d1ea8adbe38b70be2c689e62f563ff6649f89b191b2860",
+      "size_bytes": 493,
+      "mime_type": "text/x-shellscript"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "3ee1cd543319da76aa943bf16956ccc92fb73c4689c11c778b0e8ac727847349",
+      "size_bytes": 77354,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "b66a0f6ce6aa187fc5b6bd01a3163b4d6111021493cbaaabe30a800f61364afd",
+      "size_bytes": 685,
+      "mime_type": "text/javascript"
+    }
+  ],
+  "dependencies": {
+    "claudia": "5.14.1"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "javascript"
+      },
+      "api_module": {
+        "type": "string",
+        "default": "app"
+      },
+      "region": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "language",
+      "api_module"
+    ]
+  },
+  "status": "draft"
+}

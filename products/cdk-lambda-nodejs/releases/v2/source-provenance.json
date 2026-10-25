@@ -1,0 +1,24 @@
+{
+  "upstream_repository": "https://github.com/aws/aws-cdk",
+  "primary_documentation": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda_nodejs-readme.html",
+  "upstream_license": "Apache-2.0",
+  "upstream_source_included": false,
+  "provenance": "original-wrapper",
+  "previous_release_input_sha256": "c78892054f25676dc69eca7f03ee7f5da99404afce4a7db41a0ae3a71c9edeb6",
+  "original_file_hashes": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "c6796f7b05d6486ab8ba0b2157c7e332e8067863dc76c13d1bf707a72f5d09c3",
+    "app.ts": "61c1bb579ecfa85ffee93cd860fad2062394f37893beb1f06003ee1f50edb1b4",
+    "cdk.json": "40c24a321efb0976c32ffdec919056bb2c432a2167c6ccf6fa8c59e7b9126a41",
+    "configuration.schema.json": "03280715a689ace2527b53166ebf843a27dbefac167c98081ad742dcf71da732",
+    "handler.ts": "26912f687727d3fec9ef865852f07791dd74cfd506754ef13c14594fba6d3d8d",
+    "input.schema.json": "03280715a689ace2527b53166ebf843a27dbefac167c98081ad742dcf71da732",
+    "package-lock.json": "0c6b5404091a7f63638110eadfd1a229d41c5a7209550c979675fdc064fc65d1",
+    "package.json": "efdd5640340712d02728dbc5d897bd6318ca0aba4325b1fddedd4141f432c406",
+    "preview-contract.json": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
+    "preview-runner.ts": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
+    "preview.ts": "d2b85b8a985310930122d3ec47e2588d3a46fd2b800724590490f83ebc8e04f0",
+    "product.ts": "26190ec9df224a9b20ffa7e7e6c864f0efeae1a582e0e84382d0d8d2097bfa9f",
+    "source-provenance.json": "e736da006f03bddb7bec22374844876828e78b7cbd5e0820ae100f58cd6ec69f"
+  }
+}

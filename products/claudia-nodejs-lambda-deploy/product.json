@@ -1,0 +1,4 @@
+{
+  "name": "Node.js Lambda Deployment Kit",
+  "summary": "A Node.js Lambda handler with a health route, pinned deployment tooling, and explicit create and update commands. Deployment runs in the buyer\u2019s AWS account."
+}

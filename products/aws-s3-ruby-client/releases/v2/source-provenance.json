@@ -1,0 +1,59 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0678",
+    "slug": "aws-s3-ruby-client",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "marcel/aws-s3",
+    "source_revision": "c4a99b34618ecc2990305fb52c685a9b0b7b8389",
+    "structured_pointer": "lib/aws/s3.rb",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "lib/aws/s3.rb",
+      "status": "found",
+      "git_object_sha": "e6c23f5ff1ac0c2d77185fc3a268771409d06f9a",
+      "object_type": "blob",
+      "descendant_file_count": 0,
+      "url": "https://github.com/marcel/aws-s3/tree/c4a99b34618ecc2990305fb52c685a9b0b7b8389/lib/aws/s3.rb"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/aws/aws-sdk-ruby",
+  "interface_sources": [
+    "https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html",
+    "https://github.com/aws/aws-sdk-ruby"
+  ],
+  "dependencies": {
+    "aws-sdk-s3": "1.233.0"
+  },
+  "original_file_hashes": {
+    "Gemfile": "7a9d2ed26f9421ebe9de9f49b5bcbbee8f5523ccf0551061ca66c7caa63c7941",
+    "lib/object_store.rb": "b948692314bab7ce99b15f5729309aa2f25100297afe29f7ee6ae5dc375bbd64",
+    "example.rb": "0a97101002fe7c3d21e3460e4516f06272d6113cad9c067c9f00b8e9f8966d34",
+    "README.md": "fe7613cbd7fcbd9ec76fac9165e840fbde6590b536a74342ed9c44b2025c7824",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "fe1f2d902a2a32b7085a2e21c0fedb7ea26f25998719f1f2506e50b45abb73e4",
+    "preview.rb": "ad2bf2649694c9f723fdaea3e02436a8b271d86f90c34cefd5534fc83050b69d"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "Gemfile",
+        "lib/object_store.rb",
+        "example.rb",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ],
+  "previous_release_input_sha256": "ec064dfecd2ed3243482f068ff1ceff0f9785fc6457e9374711b5caabd3730c8"
+}

@@ -1,0 +1,18 @@
+{
+  "upstream_repository": "https://github.com/aws/aws-sdk-ruby",
+  "primary_documentation": "https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html",
+  "upstream_license": "Apache-2.0",
+  "upstream_source_included": false,
+  "provenance": "original-wrapper",
+  "previous_release_input_sha256": "ceeef00447bf65b84751b6b2c21d01be3f4271188d3a518b53a6b257e64e27ff",
+  "original_file_hashes": {
+    "Gemfile": "84ba745fb2b077f7729858d4dd8a1b08596c0554140a1797cc6e88764ae39fa0",
+    "LICENSE": "d6951daa5910c65585d117a38035bf1fe2fd23e86d20a5edd60754a7b9db5f72",
+    "README.md": "3f05c494e774682d005dceb1734622c5ac60da973025d91c48999d69fdbcc18d",
+    "client.rb": "7725ece89c3457bed3c13321f2be9661049e7f40144794f566c7b13c928758b4",
+    "configuration.schema.json": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+    "input.schema.json": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+    "preview-contract.json": "7d4e7eeb7ce4f2c26eb1d5c862633bee88d730dee69efd781fe0224aa022239d",
+    "source-provenance.json": "e0914f6cbc750e576ce757dddc1acf30953ec3714993cc0db61ad3e76d991e5c"
+  }
+}

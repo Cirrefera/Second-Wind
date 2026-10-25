@@ -7,7 +7,7 @@
   "release_ref": "sha256:78c0a1f9fffce26af9e5e45e879a349fc716a0d96b162a3d24442994cd6fb77e",
   "service": "lambda",
   "product_kind": "artifact-product",
-  "route_summary": "Claudia API Builder route module using the real Express-style get/post API, with request validation and API Gateway-ready Lambda export.",
+  "route_summary": "A Node.js resource API with GET and POST routes, request validation, and an API Gateway-ready Lambda export.",
   "supported_boundary": "Node.js 18.x with claudia-api-builder 4.1.2. The route module must be bundled/deployed by Claudia in the buyer account; no live API or AWS deployment is supplied.",
   "language_policy": "explicit",
   "aliases": [],

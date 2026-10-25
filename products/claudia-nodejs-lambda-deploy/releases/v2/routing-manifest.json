@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0676",
+  "sku": "AWS-0676",
+  "slug": "claudia-nodejs-lambda-deploy",
+  "version": 2,
+  "release_ref": "sha256:ac824fa67c4d3a9ff0f121d50db6db419273fa94e40aeb6e40a6d78876dc0f88",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "Pinned Claudia.js deployment scaffold for a Node.js Lambda/API Gateway service, with explicit create and update commands; deployment runs in the buyer AWS account.",
+  "supported_boundary": "Node.js 18.x, Claudia 5.14.1, buyer AWS credentials and account. Scripts call Claudia only when the buyer runs them; no deploy, role creation, or AWS success is claimed during hosted preview.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "lambda",
+    "javascript",
+    "claudia-nodejs-lambda-deploy"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda"
+  ],
+  "problem_family_ids": [
+    "lambda-integration"
+  ],
+  "operations": [
+    "claudia-nodejs-lambda-deploy"
+  ],
+  "environments": [
+    "javascript"
+  ],
+  "desired_outcomes": [
+    "working-lambda-integration"
+  ],
+  "input_kinds": [
+    "native-javascript-input"
+  ],
+  "failure_signatures": [
+    "lambda-request-failure"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs18"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

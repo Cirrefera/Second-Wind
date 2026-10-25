@@ -3,6 +3,7 @@ import { prepareComponentSelection } from './scope.js';
 import { CommerceError, sha256 } from './contracts.js';
 import { isSandboxEligible } from './sandbox-policy.js';
 import { parse } from 'acorn';
+import {PRIVATE_RUNTIME_ADAPTER,privateRuntimeDescriptor,loadPrivateRuntime} from './private-runtime.js';
 
 const ADAPTER = 'dynamodb-plan-summary-v1';
 const PRODUCT_ADAPTER = 'js-product-entrypoint-v1';
@@ -51,7 +52,7 @@ function productPreviewContract(release) {
   if (!isSandboxEligible(release?.sku)
       || release?.product_kind !== 'artifact-product'
       || release?.trial_adapter !== 'javascript-isolate'
-      || contract?.adapter !== PRODUCT_ADAPTER
+      || ![PRODUCT_ADAPTER,PRIVATE_RUNTIME_ADAPTER].includes(contract?.adapter)
       || contract?.mode !== 'bounded-diagnostics'
       || contract?.execution_language !== 'javascript'
       || contract?.entrypoint !== 'preview.mjs'
@@ -62,6 +63,16 @@ function productPreviewContract(release) {
     fail('preview_not_supported');
   }
   return contract;
+}
+
+export async function productPreviewScope(release,components,configuration) {
+  if(release?.preview_contract?.adapter===PRIVATE_RUNTIME_ADAPTER
+      &&release?.preview_contract?.selection_mode==='whole-product') {
+    if(release.components!==undefined||!Array.isArray(components)||components.length
+        ||!release.language_policy?.adapters?.includes(configuration?.language))fail('preview_selection_invalid',400);
+    return {selected_components:[]};
+  }
+  return prepareComponentSelection(release,components,configuration);
 }
 
 function validatedConfiguration(release,configuration) {
@@ -82,11 +93,12 @@ function validatedConfiguration(release,configuration) {
 }
 
 /** Validate the reviewed adapter, explicit selection, dependencies and language. */
-export async function validatePreview(release,configuration,components) {
-  if (release?.sku !== 'AWS-0568' && release?.preview_contract?.adapter === PRODUCT_ADAPTER) {
+export async function validatePreview(release,configuration,components,{env}={}) {
+  if (release?.sku !== 'AWS-0568' && [PRODUCT_ADAPTER,PRIVATE_RUNTIME_ADAPTER].includes(release?.preview_contract?.adapter)) {
     productPreviewContract(release);
-    const scope = await prepareComponentSelection(release, components, configuration);
-    await productJavascriptPackage(release, scope.selected_components);
+    const scope = await productPreviewScope(release, components, configuration);
+    if(release.preview_contract.adapter===PRIVATE_RUNTIME_ADAPTER)await loadPrivateRuntime(env,release,{verifyOnly:true});
+    else await productJavascriptPackage(release, scope.selected_components);
     return scope.selected_components;
   }
   previewContract(release);
@@ -259,12 +271,13 @@ async function productJavascriptPackage(release, selectedIds) {
 /** Catalog projection check: reviewed contract, priced selection and all private JS bytes. */
 export async function previewAvailable(release) {
   try {
-    if (release?.sku !== 'AWS-0568' && release?.preview_contract?.adapter === PRODUCT_ADAPTER) {
+    if (release?.sku !== 'AWS-0568' && [PRODUCT_ADAPTER,PRIVATE_RUNTIME_ADAPTER].includes(release?.preview_contract?.adapter)) {
       productPreviewContract(release);
-      const config = {language:'javascript'};
-      const selected = release.components.map(component => component.id);
-      await prepareComponentSelection(release, selected, config);
-      await productJavascriptPackage(release, selected);
+      const config = {language:release.language_policy?.adapters?.[0]||'javascript'};
+      const selected = (release.components||[]).map(component => component.id);
+      await productPreviewScope(release, selected, config);
+      if(release.preview_contract.adapter===PRIVATE_RUNTIME_ADAPTER)privateRuntimeDescriptor(release);
+      else await productJavascriptPackage(release, selected);
       return true;
     }
     previewContract(release);
@@ -298,10 +311,11 @@ function result(ok,configurationValid,selected,deliveryLanguage,details={}) {
 
 /** Run only the reviewed, fixed planner and return counts rather than its plan. */
 export async function runProductPreview(env,release,configuration,selectedIds,options={}) {
-  if (release?.sku !== 'AWS-0568' && release?.preview_contract?.adapter === PRODUCT_ADAPTER) {
+  if (release?.sku !== 'AWS-0568' && [PRODUCT_ADAPTER,PRIVATE_RUNTIME_ADAPTER].includes(release?.preview_contract?.adapter)) {
     const contract = productPreviewContract(release);
-    const selected = await prepareComponentSelection(release, selectedIds, configuration);
-    const {modules} = await productJavascriptPackage(release, selected.selected_components);
+    const selected = await productPreviewScope(release, selectedIds, configuration);
+    const {modules} = release.preview_contract.adapter===PRIVATE_RUNTIME_ADAPTER
+      ?await loadPrivateRuntime(env,release):await productJavascriptPackage(release, selected.selected_components);
     const providers = {
       configuration: async () => configuration,
       selectedComponents: async () => [...selected.selected_components],
