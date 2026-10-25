@@ -122,7 +122,19 @@ async function nodeRuntime(row,input,files,dir) {
     artifactImport="import prebuiltHandler from './handler.txt';";
     previewArtifacts=',{prebuiltHandler}';
   }
-  const call=ts?`module.preview(configuration${previewArtifacts})`:'module.preview({configuration,selected_components})';
+  let objectArtifacts='';
+  if(row.slug==='api-gateway-lambda-dynamodb-stack'){
+    const handlers={};
+    for(const name of ['create','get-one','get-all','update-one','delete-one']){
+      const compiled=await build({absWorkingDir:source,entryPoints:[`handlers/${name}.mjs`],bundle:true,
+        write:false,platform:'node',target:'node20',format:'cjs',minify:true,logLevel:'silent'});
+      handlers[name]=compiled.outputFiles[0].text;
+    }
+    add('product/handlers.json','json',JSON.stringify(handlers));
+    artifactImport="import prebuiltHandlers from './handlers.json';";
+    objectArtifacts=',prebuiltHandlers';
+  }
+  const call=ts?`module.preview(configuration${previewArtifacts})`:`module.preview({configuration,selected_components${objectArtifacts}})`;
   add('product/preview.mjs','javascript',`import {initialize} from './native.mjs';
 import * as fs from 'node:fs';import path from 'node:path';
 import files from './files.json';import rules from './rules.json';${wasmImport}${artifactImport}

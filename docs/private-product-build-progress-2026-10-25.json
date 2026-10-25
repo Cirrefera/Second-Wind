@@ -227,15 +227,15 @@
       "sku": "AWS-0560",
       "slug": "api-gateway-lambda-dynamodb-stack",
       "build_kind": "private-javascript-modules",
-      "build_bytes": 17526531,
-      "source_sha256": "e63ee9166d7acec9f41fef9d93dc0362122ae786924635ac0b5b0b1f411c7b01",
-      "input_sha256": "35da1df52f850c1fc7f0ab0ae88e60e0854cec2e527a655e6864a19101ff5b75",
-      "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+      "build_bytes": 20571455,
+      "source_sha256": "15e60340c77dab6eb867a7d2939d5f516fefcbb3ec5924aedc2fac6205182c22",
+      "input_sha256": "5636cbfb92d6d718f2103769bf79c5b792ceea0d6c2a7202e31f1173bf0cacf0",
+      "builder_sha256": "d434358fd4c1e6fd157edfab0222853b5bb02d2871139ed4269310f534f56dcc",
       "execution": {
         "sku": "AWS-0560",
         "slug": "api-gateway-lambda-dynamodb-stack",
-        "input_sha256": "35da1df52f850c1fc7f0ab0ae88e60e0854cec2e527a655e6864a19101ff5b75",
-        "builder_sha256": "bc336e926ed4f2162d7625a8707d28830d610135d06cc129b5bce3d2f649305f",
+        "input_sha256": "5636cbfb92d6d718f2103769bf79c5b792ceea0d6c2a7202e31f1173bf0cacf0",
+        "builder_sha256": "d434358fd4c1e6fd157edfab0222853b5bb02d2871139ed4269310f534f56dcc",
         "modules": [
           {
             "name": "product/validator.wasm",
@@ -251,33 +251,38 @@
           },
           {
             "name": "product/native.mjs",
-            "sha256": "866c905a4749673e6ca48a7967e99b0f0259dd9f2b0404103dff232b192f3110"
+            "sha256": "4aee47d22b8b0934d6e7f229598d39f916155b7787d278b316246113e1051943"
+          },
+          {
+            "name": "product/handlers.json",
+            "sha256": "ea94b52eb369516e6619cdfbac0f9cf0fe39e150941852757765187b7f4c099d"
           },
           {
             "name": "product/preview.mjs",
-            "sha256": "d99e15ba2f74c38a71df51bd288eece12efd56f81c7e5a7e41ae9ff8855d08f6"
+            "sha256": "3c231ab30d14b71aaf4b5ff0fbd04bff1d51c40116a3c2fdff2f029550ecb5aa"
           }
         ],
         "runtime": "local-workerd",
         "outbound": "disabled",
-        "executed_at": "2026-10-25T12:58:53.191Z",
-        "execution_verified": false,
+        "executed_at": "2026-10-25T13:58:25.900Z",
+        "execution_verified": true,
         "result": {
           "ok": true,
           "result": {
-            "ok": false,
-            "status": "blocked",
+            "ok": true,
+            "status": "complete",
             "slug": "api-gateway-lambda-dynamodb-stack",
             "selected_components": [
               "stack"
             ],
             "diagnostic_codes": [
-              "validation_failed"
+              "local_fixture_only"
             ],
-            "resource_count": 0
+            "resource_count": 41
           },
           "logs": [
-            "[warn] [WARNING] aws-cdk-lib.aws_dynamodb.TableOptions#pointInTimeRecovery is deprecated, and will be removed in the next major release.\n  use `pointInTimeRecoverySpecification` instead"
+            "[warn] [WARNING] aws-cdk-lib.aws_dynamodb.TableOptions#pointInTimeRecovery is deprecated, and will be removed in the next major release.\n  use `pointInTimeRecoverySpecification` instead",
+            "[error] product/native.mjs:1087:25577\nWARNING Runtime: Runtime 'nodejs20.x' was deprecated on '2026-04-30'. Creation will be disabled on '2027-02-01', and updates will be disabled on '2027-03-03'. Please consider updating to 'nodejs24.x' (CloudFormation Validate)\n   ItemsApi/CreateItem/Resource (CreateItem0F65601B) aws-cdk-lib.aws_lambda.CfnFunction\n   Acknowledge with 'CloudFormation-Validate::W2531'\n\nproduct/native.mjs:1087:25577\nWARNING Runtime: Runtime 'nodejs20.x' was deprecated on '2026-04-30'. Creation will be disabled on '2027-02-01', and updates will be disabled on '2027-03-03'. Please consider updating to 'nodejs24.x' (CloudFormation Validate)\n   ItemsApi/GetItem/Resource (GetItemEC730894) aws-cdk-lib.aws_lambda.CfnFunction\n   Acknowledge with 'CloudFormation-Validate::W2531'\n\nproduct/native.mjs:1087:25577\nWARNING Runtime: Runtime 'nodejs20.x' was deprecated on '2026-04-30'. Creation will be disabled on '2027-02-01', and updates will be disabled on '2027-03-03'. Please consider updating to 'nodejs24.x' (CloudFormation Validate)\n   ItemsApi/GetItems/Resource (GetItems406EA289) aws-cdk-lib.aws_lambda.CfnFunction\n   Acknowledge with 'CloudFormation-Validate::W2531'\n\nproduct/native.mjs:1087:25577\nWARNING Runtime: Runtime 'nodejs20.x' was deprecated on '2026-04-30'. Creation will be disabled on '2027-02-01', and updates will be disabled on '2027-03-03'. Please consider updating to 'nodejs24.x' (CloudFormation Validate)\n   ItemsApi/UpdateItem/Resource (UpdateItem232B9C62) aws-cdk-lib.aws_lambda.CfnFunction\n   Acknowledge with 'CloudFormation-Validate::W2531'\n\nproduct/native.mjs:1087:25577\nWARNING Runtime: Runtime 'nodejs20.x' was deprecated on '2026-04-30'. Creation will be disabled on '2027-02-01', and updates will be disabled on '2027-03-03'. Please consider updating to 'nodejs24.x' (CloudFormation Validate)\n   ItemsApi/DeleteItem/Resource (DeleteItem3B2526D2) aws-cdk-lib.aws_lambda.CfnFunction\n   Acknowledge with 'CloudFormation-Validate::W2531'\n\nA copy of th"
           ]
         }
       },

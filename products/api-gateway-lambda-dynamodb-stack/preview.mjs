@@ -7,7 +7,7 @@ import { createStack } from './product.mjs';
 // Trusted, private native Node preview. It synthesizes the actual product stack
 // locally and returns only bounded counts; no CloudFormation template or AWS
 // API call leaves this module. The gateway Worker currently cannot execute it.
-export async function preview({ configuration, selected_components }) {
+export async function preview({ configuration, selected_components, prebuiltHandlers }) {
   let outdir;
   try {
     if (!Array.isArray(selected_components) || selected_components.length !== 1 || selected_components[0] !== 'stack') {
@@ -18,7 +18,7 @@ export async function preview({ configuration, selected_components }) {
     }
     outdir = mkdtempSync(join(tmpdir(), 'secondwind-private-cdk-preview-'));
     const app = new App({ outdir, analyticsReporting: false });
-    createStack(app, { configuration, selected_components });
+    createStack(app, { configuration, selected_components, prebuiltHandlers });
     const assembly = app.synth();
     const resource_count = assembly.stacks.reduce((sum, stack) => sum + Object.keys(stack.template?.Resources || {}).length, 0);
     return { ok: true, status: 'complete', slug: 'api-gateway-lambda-dynamodb-stack', selected_components: ['stack'], resource_count };

@@ -4,11 +4,11 @@ This is implementation work on `work/build-remaining-products`, based on product
 
 ## Built and executed
 
-All 49 remaining JavaScript/TypeScript products now compile separately using their own source and pinned npm dependencies. All 49 were executed once in local workerd, with outbound access disabled, after applicable fixes. 44 currently return successful bounded diagnostics. The other 16 of the 65 products have native source materialized but no completed hosted interpreter adapter. They are not counted as runtime builds.
+All 49 remaining JavaScript/TypeScript products now compile separately using their own source and pinned npm dependencies. All 49 were executed once in local workerd, with outbound access disabled, after applicable fixes. 45 currently return successful bounded diagnostics. The other 16 of the 65 products have native source materialized but no completed hosted interpreter adapter. They are not counted as runtime builds.
 
 The exact input, source, builder and module hashes, execution results and unresolved products are in `private-product-build-progress-2026-10-25.json`. Reuse this evidence for unchanged artifacts. Do not rerun the audit or claim a generic pass covers another product.
 
-Five JavaScript/TypeScript previews remain blocked: Bedrock Knowledge Base CDK, SageMaker Endpoint CDK, API Gateway/Lambda/DynamoDB Stack, S3 Deployment CDK, and EKS CDK. Their source has native asset or synthesis requirements to resolve. The failed preview result alone is not a precise diagnosis of each underlying exception.
+Four JavaScript/TypeScript previews remain blocked: Bedrock Knowledge Base CDK, SageMaker Endpoint CDK, S3 Deployment CDK, and EKS CDK. Their source has native asset or synthesis requirements to resolve. The failed preview result alone is not a precise diagnosis of each underlying exception.
 
 ## Implemented changes
 
@@ -24,7 +24,7 @@ The gateway bundle builds. The 31 existing checks in publication, release-prepar
 
 ## Continue implementation
 
-1. Resolve the five remaining JavaScript/TypeScript previews using their actual product dependencies and assets. Retain unchanged successful execution evidence.
+1. Resolve the four remaining JavaScript/TypeScript previews using their actual product dependencies and assets. Retain unchanged successful execution evidence.
 2. Complete the 16 interpreter/service-specific private adapters: two Chalice, one cfn-lint, two Ruby, one MinIO, four awswrangler, three Bedrock and three AgentCore. Python Dynamic Workers are documented; vendored dependencies and native extension compatibility still need implementation.
 3. Freeze final runtime descriptors into release manifests, review the resulting source and behavior, then use the existing publication path. Current compile reports do not populate release approval fields.
 4. Preserve the 72 eligible / 85 excluded policy and all approved prices. Trial access remains $0.01 for a new execution; saved-result recovery is free.
@@ -40,3 +40,7 @@ AWS Core is reference only. Keep infrastructure on Cloudflare. The R2 SDK exampl
 - https://developers.cloudflare.com/r2/api/s3/api/
 
 Local generated bundles live under `.private-builds/` and are excluded from git. They are reproducible from source and locks; do not assert they exist in R2 until uploaded and read back.
+
+## Follow-up implementation
+
+The API Gateway/Lambda/DynamoDB private preview now synthesizes 41 resources using the five real handlers compiled before execution. Native buyer deployment retains its normal bundling default. The freeze command now includes files held in component definitions; previously it could omit these when creating a new draft. This execution still emits upstream runtime deprecation warnings, recorded with the result. No release activation occurred.

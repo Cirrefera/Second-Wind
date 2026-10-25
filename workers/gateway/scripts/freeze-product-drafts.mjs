@@ -21,14 +21,15 @@ for(const slug of requested){
     input.manifest.original_contribution=display.summary;
     input.routing_manifest.route_summary=display.summary;
   }
-  const names=new Set(input.files.map(f=>f.path));
+  const originalFiles=[...input.files,...(input.manifest.components||[]).flatMap(c=>c.files||[])];
+  const names=new Set(originalFiles.map(f=>f.path));
   for(const name of ['package-lock.json','preview.mjs']){
     if(await readFile(path.join(directory,name)).then(()=>true,()=>false))names.add(name);
   }
   const files=[];
   for(const name of names){
     const content=await readFile(path.join(directory,name),'utf8');
-    const old=input.files.find(f=>f.path===name);
+    const old=originalFiles.find(f=>f.path===name);
     files.push({...old,path:name,content,sha256:await sha256(content),size_bytes:Buffer.byteLength(content),
       mime_type:old?.mime_type||(name.endsWith('.json')?'application/json':'text/javascript')});
   }

@@ -2,10 +2,10 @@ import { App, Stack, RemovalPolicy } from 'aws-cdk-lib';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Runtime, Code } from 'aws-cdk-lib/aws-lambda';
 import { fileURLToPath } from 'node:url';
 
-export function createStack(app, { configuration: c }) {
+export function createStack(app, { configuration: c, prebuiltHandlers }) {
   if (!c || !/^https:\/\/[A-Za-z0-9.-]+$/.test(c.allowed_origin)
       || !/^[A-Za-z][A-Za-z0-9-]{1,62}$/.test(c.stack_name)
       || !/^\d{12}$/.test(c.account) || !c.region) throw new Error('invalid_configuration');
@@ -18,7 +18,8 @@ export function createStack(app, { configuration: c }) {
   });
   const handler = (file, id) => new NodejsFunction(stack, id, {
     entry: fileURLToPath(new URL(`./handlers/${file}.mjs`, import.meta.url)),
-    handler: 'handler', runtime: Runtime.NODEJS_20_X,
+    handler: prebuiltHandlers ? 'index.handler' : 'handler', runtime: Runtime.NODEJS_20_X,
+    ...(prebuiltHandlers ? {code: Code.fromInline(prebuiltHandlers[file])} : {}),
     environment: { TABLE_NAME: table.tableName, ALLOWED_ORIGIN: c.allowed_origin },
     bundling: { minify: true, sourceMap: false },
   });

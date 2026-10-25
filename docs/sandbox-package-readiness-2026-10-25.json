@@ -196,11 +196,13 @@
       "sku": "AWS-0560",
       "slug": "api-gateway-lambda-dynamodb-stack",
       "family": "CDK",
-      "release_input": "products/api-gateway-lambda-dynamodb-stack/release-input.json",
-      "version": 1,
-      "manifest_hash": "d429df81d0c2798f93c906f60fca2f8f01c6129d6b40d83e87a028ff3b967758",
-      "source_ready": true,
-      "source_blockers": [],
+      "release_input": "products/api-gateway-lambda-dynamodb-stack/releases/v2/release-input.json",
+      "version": 2,
+      "manifest_hash": "082213dc44094ad7858d7543df94da55fc415218d1ca13e27572e941e5b91a4f",
+      "source_ready": false,
+      "source_blockers": [
+        "updated_product_source_requires_review"
+      ],
       "input_example_valid": true,
       "input_example_errors": [],
       "source_files_match": true,
