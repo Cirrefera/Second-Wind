@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "scope": "71 unpublished drafts; not a hosted rollout",
+  "scope": "71 unpublished drafts; Cloudflare private local demonstrations; not AWS hosted execution",
   "products": [
     {
       "sku": "AWS-0550",
@@ -8,7 +8,7 @@
       "family": "Powertools",
       "release_input": "products/lambda-powertools-logger-ts/release-input.json",
       "version": 1,
-      "manifest_hash": "ca4693c7a6ad103bb9c0c3f5623b27f79eabd080e54ff794e476e50be8cdb510",
+      "manifest_hash": "481fb9a0e5efced75b8e93fdb4acd5105ceb036b24fa49b488866d846b4b63cf",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -17,9 +17,9 @@
       "source_file_errors": [],
       "maximum_price_usdc": 1,
       "price_matches": true,
-      "private_adapter_compatible": false,
+      "private_adapter_compatible": true,
       "published": false,
-      "blocker": "native_node_runtime_not_integrated"
+      "blocker": "publication_review_and_activation_pending"
     },
     {
       "sku": "AWS-0551",
@@ -27,7 +27,7 @@
       "family": "Powertools",
       "release_input": "products/lambda-powertools-tracer-ts/release-input.json",
       "version": 1,
-      "manifest_hash": "5387f1bc4137e419dc539282420c91d3d3661d1a6290a71546a1d22cd483af40",
+      "manifest_hash": "8f580a9dfa8c25a7d85a3b9e0527637171bf3963cdeab700cd4d6c8a299bea6f",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -46,7 +46,7 @@
       "family": "Powertools",
       "release_input": "products/lambda-powertools-metrics-ts/release-input.json",
       "version": 1,
-      "manifest_hash": "eeda74e1dc8f01adf240088ad61e1a17a9a10f4dd209d2b3e1c5c263d9eb647d",
+      "manifest_hash": "17ef2eea3e3385bfc1e1f11fdeb9f621b5bb3b2f8a4fa0bd05d448fa4939c408",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -55,9 +55,9 @@
       "source_file_errors": [],
       "maximum_price_usdc": 1,
       "price_matches": true,
-      "private_adapter_compatible": false,
+      "private_adapter_compatible": true,
       "published": false,
-      "blocker": "native_node_runtime_not_integrated"
+      "blocker": "publication_review_and_activation_pending"
     },
     {
       "sku": "AWS-0553",
@@ -65,7 +65,7 @@
       "family": "Powertools",
       "release_input": "products/lambda-powertools-idempotency-ts/release-input.json",
       "version": 1,
-      "manifest_hash": "0e088789615f837ede6dadb729f9930124054929160cd354876c32cf83396fc0",
+      "manifest_hash": "0ec53a041d3191f60a099815ebfdeea38eb4510dfb06a83486722c88356a876a",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -74,9 +74,9 @@
       "source_file_errors": [],
       "maximum_price_usdc": 1,
       "price_matches": true,
-      "private_adapter_compatible": false,
+      "private_adapter_compatible": true,
       "published": false,
-      "blocker": "native_node_runtime_not_integrated"
+      "blocker": "publication_review_and_activation_pending"
     },
     {
       "sku": "AWS-0554",
@@ -84,7 +84,7 @@
       "family": "Powertools",
       "release_input": "products/lambda-powertools-parameters-ts/release-input.json",
       "version": 1,
-      "manifest_hash": "3d78f7efa89a4c2dff74f6a1ca8b416b6a9907a6743636193583505ffb5b83fb",
+      "manifest_hash": "ccd9bdb00f1430e98e6cd6ed1953cbbc658e45caacbc98fbac2049b32794972f",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -93,9 +93,9 @@
       "source_file_errors": [],
       "maximum_price_usdc": 1,
       "price_matches": true,
-      "private_adapter_compatible": false,
+      "private_adapter_compatible": true,
       "published": false,
-      "blocker": "native_node_runtime_not_integrated"
+      "blocker": "publication_review_and_activation_pending"
     },
     {
       "sku": "AWS-0555",
@@ -133,7 +133,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0557",
@@ -152,7 +152,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated;opensearch_and_aurora_provider_bundling_requires_docker"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated;opensearch_and_aurora_provider_bundling_requires_docker"
     },
     {
       "sku": "AWS-0558",
@@ -171,7 +171,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0559",
@@ -190,7 +190,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0560",
@@ -209,7 +209,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0561",
@@ -228,7 +228,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0629",
@@ -285,7 +285,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0632",
@@ -304,7 +304,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0633",
@@ -323,7 +323,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0634",
@@ -342,7 +342,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0635",
@@ -361,7 +361,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0636",
@@ -380,7 +380,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0637",
@@ -399,7 +399,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0638",
@@ -418,7 +418,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0639",
@@ -437,7 +437,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0640",
@@ -456,7 +456,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0641",
@@ -475,7 +475,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0642",
@@ -494,7 +494,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0643",
@@ -513,7 +513,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0644",
@@ -532,7 +532,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0645",
@@ -551,7 +551,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0646",
@@ -570,7 +570,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0647",
@@ -589,7 +589,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0648",
@@ -608,7 +608,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0649",
@@ -627,7 +627,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0650",
@@ -646,7 +646,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0651",
@@ -665,7 +665,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0652",
@@ -684,7 +684,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0653",
@@ -703,7 +703,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0654",
@@ -722,7 +722,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0655",
@@ -741,7 +741,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0656",
@@ -760,7 +760,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0657",
@@ -779,7 +779,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0658",
@@ -798,7 +798,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0659",
@@ -817,7 +817,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0660",
@@ -836,7 +836,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0661",
@@ -855,7 +855,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0662",
@@ -874,7 +874,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0663",
@@ -893,7 +893,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0664",
@@ -912,7 +912,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0665",
@@ -931,7 +931,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0666",
@@ -950,7 +950,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0667",
@@ -969,7 +969,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0668",
@@ -988,7 +988,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0669",
@@ -1007,7 +1007,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0670",
@@ -1026,7 +1026,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0671",
@@ -1045,7 +1045,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_cdk_runtime_not_integrated"
+      "blocker": "private_cdk_runtime_artifact_packaging_not_integrated"
     },
     {
       "sku": "AWS-0672",
@@ -1053,7 +1053,7 @@
       "family": "Chalice",
       "release_input": "products/chalice-rest-api-decorator-pattern/release-input.json",
       "version": 2,
-      "manifest_hash": "e63349c44c78e7441480cd48f5e266ac5153fdef80622cc603e68e90aae7419e",
+      "manifest_hash": "552b596e90c5ec22ec8a6eee1bd28adf730785c8fb31239290320a01d03db950",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -1064,7 +1064,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_reverification_and_runtime_integration_required"
+      "blocker": "python_dependency_packaging_and_private_runtime_integration_required"
     },
     {
       "sku": "AWS-0673",
@@ -1072,7 +1072,7 @@
       "family": "Chalice",
       "release_input": "products/chalice-automatic-iam-policy-generator/release-input.json",
       "version": 2,
-      "manifest_hash": "e7589579c11aa9cc1c14455cdb168a906f093668c89aae2c331229746e4683bf",
+      "manifest_hash": "ee820b54b46f8564e7f686fd6fa9b6e72deb4365c2f52fe8116da488a2a19a0f",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -1083,7 +1083,7 @@
       "price_matches": true,
       "private_adapter_compatible": false,
       "published": false,
-      "blocker": "native_reverification_and_runtime_integration_required"
+      "blocker": "python_dependency_packaging_and_private_runtime_integration_required"
     },
     {
       "sku": "AWS-0676",

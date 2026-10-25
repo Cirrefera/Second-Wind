@@ -19,8 +19,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "4d3818e15d2db1d4c93c63b2cacbf9cee80e771cf7a5ebd69f8c40f955c8f254",
-      "size_bytes": 1931,
+      "sha256": "28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890",
+      "size_bytes": 1506,
       "media_type": "text/markdown",
       "license": "Apache-2.0"
     },
@@ -40,8 +40,8 @@
     },
     {
       "path": "preview.py",
-      "sha256": "7cf3255558630cef215673ec2f3de108ade2ca2662bd44900550c3a75824a9f8",
-      "size_bytes": 3401,
+      "sha256": "36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140",
+      "size_bytes": 2889,
       "media_type": "text/x-python",
       "license": "Apache-2.0"
     },
@@ -61,8 +61,8 @@
     },
     {
       "path": "validation.json",
-      "sha256": "a6a9ed503e4c8520eb31faf2404c31251ac38ba7a5d7e9c0fc98d2fc50754759",
-      "size_bytes": 688,
+      "sha256": "fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128",
+      "size_bytes": 538,
       "media_type": "application/json",
       "license": "Apache-2.0"
     }
@@ -90,5 +90,11 @@
       "status": "version-pinned dependencies; third-party package licenses remain applicable"
     }
   ],
-  "runtime_blocker": "Current Workers preview cannot execute the native Python Chalice subprocess; hosted preview remains disabled."
+  "runtime_blocker": "Python dependency packaging and private gateway runtime integration remain required; no subprocess is needed for this preview.",
+  "private_preview": {
+    "implementation": "Chalice get_client_calls_for_app and PolicyBuilder over actual product app.py",
+    "credentials": "inert isolated offline session only; no account credentials or provider chain",
+    "network": "SDK before-send handler rejects requests",
+    "application_execution": false
+  }
 }

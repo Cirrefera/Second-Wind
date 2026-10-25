@@ -5,21 +5,21 @@
   "product_kind": "artifact-product",
   "required_files": [
     {
+      "path": "config.schema.json",
+      "sha256": "dbd30a6aa62dcf5a217e431985f76ab8f31099a35751f85cb2d0bc08cf5054c9",
+      "size_bytes": 397,
+      "mime_type": "application/json"
+    },
+    {
       "path": "LICENSE",
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
       "size_bytes": 11357,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
-      "path": "README.md",
-      "sha256": "6eec10e4b6aae879bcda0ecb7186d23877dcbef0cefb0fdd2258de2663a6d9d1",
-      "size_bytes": 2090,
-      "mime_type": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "config.schema.json",
-      "sha256": "dbd30a6aa62dcf5a217e431985f76ab8f31099a35751f85cb2d0bc08cf5054c9",
-      "size_bytes": 397,
+      "path": "package-lock.json",
+      "sha256": "12f543cac7fe92e7a2137fa8dc03ec07af06e553e15ef8bb6e29d7ddd0a2c30b",
+      "size_bytes": 8569,
       "mime_type": "application/json"
     },
     {
@@ -30,14 +30,20 @@
     },
     {
       "path": "preview.mjs",
-      "sha256": "4abf0e465c2768011ae76163c9247c2ba41f28de5ab45613a4caa28f544ad555",
-      "size_bytes": 1740,
+      "sha256": "a80e13186c666f93d2fd7547d897361d59d251e8a8915e9ee80790d354a716ed",
+      "size_bytes": 2358,
       "mime_type": "text/javascript"
     },
     {
+      "path": "README.md",
+      "sha256": "1116968f7740d6db6d30ee905a2c03507f0113016370494264ddf51c234d847f",
+      "size_bytes": 2244,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "source-provenance.json",
-      "sha256": "93c93ee8cc6c7a71a39f7bba2a5e734ae2b7d0e2ec712174f3d74c8abd07ad99",
-      "size_bytes": 1699,
+      "sha256": "6ab70a245856cdf477b6dd90a70fb863bbf954bb866b65978e62fcc41fc1ad9f",
+      "size_bytes": 2034,
       "mime_type": "application/json"
     },
     {
@@ -48,8 +54,8 @@
     },
     {
       "path": "validation.json",
-      "sha256": "9b042c304174a340a81a8dcaaf02cc93e2004b13693d55e89bc6ec9a7aacb203",
-      "size_bytes": 884,
+      "sha256": "77b3a33af5585dabf90974f95dc3cc63702d7042e4af460d9d36367304ac3ce7",
+      "size_bytes": 889,
       "mime_type": "application/json"
     }
   ]

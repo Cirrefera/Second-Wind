@@ -5,51 +5,69 @@
   "product_kind": "artifact-product",
   "required_files": [
     {
-      "path": "LICENSE",
-      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-      "size_bytes": 11357,
-      "mime_type": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "README.md",
-      "sha256": "91f23e06d3078e6453856de8f672e5907e0738624b5d32359d6a3ee5f2189e8a",
-      "size_bytes": 2147,
-      "mime_type": "text/plain; charset=utf-8"
-    },
-    {
       "path": "config.schema.json",
       "sha256": "d46a09eba514bfb5797c18cd637cea41b0759427e942ef53417b9312d16294ab",
       "size_bytes": 692,
       "mime_type": "application/json"
     },
     {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "6115776d4ffa74913cf7e838b5821f3d9921509f0b9f5731d1d7af3c3dc22488",
+      "size_bytes": 19771,
+      "mime_type": "application/json"
+    },
+    {
       "path": "package.json",
-      "sha256": "214df92d96690076b1d2d9bf6d035495c431cf51ec4ed4829134b5f7fa47968e",
-      "size_bytes": 465,
+      "sha256": "3642249a4316d951f3b27841b3c71dfb91137298c4d7f1a760392cb69d113f16",
+      "size_bytes": 506,
       "mime_type": "application/json"
     },
     {
       "path": "preview.mjs",
-      "sha256": "42942a8079154b0b2c2ec73f2b1ce79f3941dc360760998e5d1e39493d38d519",
-      "size_bytes": 2288,
+      "sha256": "fed59011e25dca2f9599ea13872bcb1442fc53dc325b4591b10193be4f406992",
+      "size_bytes": 226455,
       "mime_type": "text/javascript"
     },
     {
+      "path": "preview.source.mjs",
+      "sha256": "a32bb157a0462d73550570faba987b5df2254d42300658cba78466f0336f47e8",
+      "size_bytes": 3249,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "README.md",
+      "sha256": "1b683912342023539b73631f716a4b14176e213b8f9c96940a62f1c4981d9d72",
+      "size_bytes": 2200,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "source-provenance.json",
-      "sha256": "c54c56a7176076232861e56c02c8713e1fe694002ed62be5a5b3f8162ab4805d",
-      "size_bytes": 1784,
+      "sha256": "9be0f6cf11846588f3f9861dc111ff77ce3c83e073aa423f74a140f30201293d",
+      "size_bytes": 7970,
       "mime_type": "application/json"
     },
     {
       "path": "src/idempotency.mjs",
-      "sha256": "750573bf749f869dd9d6113a734936061a93e7797299dda728107952048a59ac",
-      "size_bytes": 1270,
+      "sha256": "d1fdabd9a695d7446b6cbc5578aa63dc4f3f11ae86dc31109416df133c464c4d",
+      "size_bytes": 1342,
       "mime_type": "text/javascript"
     },
     {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "5c733b8fbf60002204ae242f3ccc370041a85c7db4654ea94a45a0f5c875ca21",
+      "size_bytes": 146077,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "validation.json",
-      "sha256": "15773b9eb1c0b430bcf8d0b454a8184e6c17c459302c5d098b0c92777cf5da02",
-      "size_bytes": 884,
+      "sha256": "a53a95ac8c4218c0bf12daccc1746bc4e7987cd64ef61af2d263523c0a7928d3",
+      "size_bytes": 953,
       "mime_type": "application/json"
     }
   ]

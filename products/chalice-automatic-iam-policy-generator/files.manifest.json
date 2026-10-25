@@ -12,8 +12,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "4d3818e15d2db1d4c93c63b2cacbf9cee80e771cf7a5ebd69f8c40f955c8f254",
-      "size_bytes": 1931,
+      "sha256": "28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890",
+      "size_bytes": 1506,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
@@ -30,8 +30,8 @@
     },
     {
       "path": "preview.py",
-      "sha256": "7cf3255558630cef215673ec2f3de108ade2ca2662bd44900550c3a75824a9f8",
-      "size_bytes": 3401,
+      "sha256": "36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140",
+      "size_bytes": 2889,
       "mime_type": "text/x-python"
     },
     {
@@ -48,14 +48,14 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "9c8d332825fd17d36ad6f7df0130e1946c3203b7d74ac5a6569e1a3177b95321",
-      "size_bytes": 3002,
+      "sha256": "8931a6171b93ab7525a0d6e1867d316a4cc7240e53dc2f21ea13593aed938ec3",
+      "size_bytes": 3344,
       "mime_type": "application/json"
     },
     {
       "path": "validation.json",
-      "sha256": "a6a9ed503e4c8520eb31faf2404c31251ac38ba7a5d7e9c0fc98d2fc50754759",
-      "size_bytes": 688,
+      "sha256": "fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128",
+      "size_bytes": 538,
       "mime_type": "application/json"
     }
   ]

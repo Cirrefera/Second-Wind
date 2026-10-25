@@ -12,20 +12,30 @@ function validateAge(max_age_seconds) {
   return max_age_seconds;
 }
 
-export async function readSsmParameter(name, { max_age_seconds = 5, decrypt = true, transform } = {}) {
+export async function readSsmParameter(name, { max_age_seconds = 5, decrypt = true, transform } = {}, { provider } = {}) {
   validateAge(max_age_seconds);
   if (typeof decrypt !== 'boolean') throw new Error('invalid_decrypt_option');
-  return getParameter(validateName(name), {
+  const options = {
     maxAge: max_age_seconds,
     decrypt,
     ...(transform ? { transform } : {}),
-  });
+  };
+  if (provider !== undefined) {
+    if (!provider || typeof provider.get !== 'function') throw new Error('ssm_provider_required');
+    return provider.get(validateName(name), options);
+  }
+  return getParameter(validateName(name), options);
 }
 
-export async function readSecret(name, { max_age_seconds = 5, transform } = {}) {
+export async function readSecret(name, { max_age_seconds = 5, transform } = {}, { provider } = {}) {
   validateAge(max_age_seconds);
-  return getSecret(validateName(name), {
+  const options = {
     maxAge: max_age_seconds,
     ...(transform ? { transform } : {}),
-  });
+  };
+  if (provider !== undefined) {
+    if (!provider || typeof provider.get !== 'function') throw new Error('secrets_provider_required');
+    return provider.get(validateName(name), options);
+  }
+  return getSecret(validateName(name), options);
 }

@@ -4,7 +4,7 @@
   "sku": "AWS-0673",
   "slug": "chalice-automatic-iam-policy-generator",
   "version": 2,
-  "release_ref": "sha256:bf93cf45c5d11bf4ed7d182c3b9b7e911a8c20c5a1258f38fc22d92e7a19801d",
+  "release_ref": "sha256:387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "Chalice gen-policy workflow that derives IAM actions from boto3 source analysis.",

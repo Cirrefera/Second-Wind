@@ -20,7 +20,7 @@ The helper never logs the complete event or response. Do not pass secrets or per
 
 ## Native private preview and boundary
 
-`preview.mjs` runs the actual Powertools Logger helper in Node.js with a synthetic Lambda request ID and captures the emitted JSON line before returning bounded counts. It does not log a caller event or send data to CloudWatch. Hosted preview remains unavailable because the gateway Worker Loader does not provide this package's native dependency runtime; the preview does not prove Lambda behavior.
+`preview.mjs` is a bundled, private Worker entrypoint that runs the actual Powertools Logger helper with a fixed synthetic request ID and captures local output. It reports zero emitted lines when the configured level suppresses the helper's `info` call (WARN and ERROR). No caller event is logged and no CloudWatch request is made. `POWERTOOLS_DEV` is enabled only inside the preview to make local output visible. This checks logger behavior in the Worker profile; it does not prove Lambda runtime behavior.
 
 ## Files and source
 

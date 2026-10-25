@@ -5,21 +5,21 @@
   "product_kind": "artifact-product",
   "required_files": [
     {
+      "path": "config.schema.json",
+      "sha256": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
+      "size_bytes": 351,
+      "mime_type": "application/json"
+    },
+    {
       "path": "LICENSE",
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
       "size_bytes": 11357,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
-      "path": "README.md",
-      "sha256": "9c4a49b1605969e48b2aa5cb870077c7c54291eee2c50788b420490c027b372d",
-      "size_bytes": 1742,
-      "mime_type": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "config.schema.json",
-      "sha256": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
-      "size_bytes": 351,
+      "path": "package-lock.json",
+      "sha256": "2107bcbfd55c54ee9ce3a8713f13d56d35f9914ed0ba84eff1c01684dcb672d4",
+      "size_bytes": 17259,
       "mime_type": "application/json"
     },
     {
@@ -30,26 +30,44 @@
     },
     {
       "path": "preview.mjs",
-      "sha256": "327870b735bbe8b63f92308168c34ffef346855387781f9e7c1d3ecbabe17631",
-      "size_bytes": 1873,
+      "sha256": "e9e6081d71dac1baaf1e26a49a84f8786144ee9823649f1b257bbf986f322bd7",
+      "size_bytes": 240849,
       "mime_type": "text/javascript"
     },
     {
+      "path": "preview.source.mjs",
+      "sha256": "75204e3fa162aa354a2516e0524d5ec5161c9c774078de83503c920f58226139",
+      "size_bytes": 2315,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "README.md",
+      "sha256": "0464aeb4ec1a0dddde4d4407b75d8e3f755e51a05468d77eadd7040c2ecf1668",
+      "size_bytes": 1907,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "source-provenance.json",
-      "sha256": "263808b44d6d9f69f7350e6af75072588a808f94b86d3de5a4a3c0ad386c7a89",
-      "size_bytes": 1822,
+      "sha256": "b0c43c5b0b1de16a7cb17d267f378dd58ebbf3b76569301b80476f99d1052e22",
+      "size_bytes": 6255,
       "mime_type": "application/json"
     },
     {
       "path": "src/parameters.mjs",
-      "sha256": "26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402",
-      "size_bytes": 1098,
+      "sha256": "82499cce5df1da5e17821fbe0e4d8b97fe1be7c0f27fea990e5648c0d0fd30ad",
+      "size_bytes": 1572,
       "mime_type": "text/javascript"
     },
     {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "af0d948f043d3779b30948330f390fab918ee58ba4e52f7e06e3588c8b8f9a38",
+      "size_bytes": 107538,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "validation.json",
-      "sha256": "2fa40fbe190907d6ea7c353410d30de0a4078ef3d6874d2b5abc471854c15604",
-      "size_bytes": 884,
+      "sha256": "025f43c5eff76c4d5bb1047c032ee51ced163c195051ef617a7846f506f3bcfd",
+      "size_bytes": 953,
       "mime_type": "application/json"
     }
   ]

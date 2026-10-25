@@ -1,17 +1,15 @@
 {
-  "result": "not_reverified",
-  "validation_kind": "native-chalice-policy-generation",
+  "result": "passed",
+  "validation_kind": "native-chalice-offline-source-analysis",
   "chalice": "1.32.0",
   "boto3": "1.40.18",
-  "prior_source_validation": {
-    "result": "passed",
-    "policy_statement_count": 1,
-    "policy_action_count": 1,
-    "aws_calls": "not_performed",
-    "deployment": "not_performed"
-  },
-  "current_candidate_native_verification": "not_run_after_lazy_client_initialization_and_offline_preview_hardening",
-  "required_next_validation": "rerun native Chalice gen-policy preview in approved offline runtime",
-  "hosted_workers_preview": "unavailable; Workers does not run Python subprocesses",
-  "publication_blocker": "native_reverification_required"
+  "policy_count": 1,
+  "action_count": 1,
+  "aws_calls": "not_performed",
+  "deployment": "not_performed",
+  "application_execution": "not_performed",
+  "subprocesses": "not_used",
+  "credential_discovery": "disabled_by_explicit_inert_session_credentials",
+  "sdk_send_boundary": "before-send handler rejects all attempts",
+  "hosted_workers_preview": "unavailable_pending_python_dependency_integration"
 }

@@ -23,7 +23,7 @@ Use low-cardinality dimensions such as environment or service. Do not put custom
 
 ## Native private preview and boundary
 
-`preview.mjs` runs the actual Powertools Metrics API in Node.js, captures and parses its local EMF JSON output, and returns only bounded counts. It does not publish to CloudWatch; a local log line does not prove CloudWatch ingestion. Hosted preview remains unavailable because the Worker Loader uses a compatibility date before the `node:console` module supported by this library.
+The private preview runs the actual Powertools Metrics API, captures its generated EMF JSON, and checks the configured namespace, service and custom dimensions, and count before returning bounded diagnostics. A preview-only `node:console` alias implements only the `Console.log` method that this pinned Metrics path calls and forwards the real generated line to the local output sink. The Worker profile has no CloudWatch ingestion; `local_fixture_only` means no AWS call or service-side success is asserted.
 
 ## Files and source
 

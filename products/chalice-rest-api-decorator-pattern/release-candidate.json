@@ -5,8 +5,8 @@
   "version": 2,
   "product_kind": "artifact-product",
   "service": "lambda",
-  "release_ref": "sha256:7a0221957a950dc325e6fe91a258f8be923c499fba4e95cf66322c3b74e841b3",
-  "content_hash": "7a0221957a950dc325e6fe91a258f8be923c499fba4e95cf66322c3b74e841b3",
+  "release_ref": "sha256:5e827a51e5bef5de621843bbf74d2776d95fb30b449671b77829bd7a83073dc6",
+  "content_hash": "5e827a51e5bef5de621843bbf74d2776d95fb30b449671b77829bd7a83073dc6",
   "hash_scope": "file-package-json-utf8",
   "mime_type": "application/json",
   "origin": "Second Wind",
@@ -20,17 +20,19 @@
     },
     "private_preview_entrypoint": "preview.py",
     "configuration_schema": "config.schema.json",
-    "side_effects": "local synthesis/package generation only; no AWS calls or deployment"
+    "side_effects": "Delivered Chalice route handles requests after buyer deployment; the private preview executes routing and handler code locally without AWS calls."
   },
   "validation_contract": {
-    "kind": "native-chalice-framework-validation",
+    "kind": "native-chalice-routing-and-handler-execution",
     "language": "python",
     "framework_version": "Chalice 1.32.0",
     "aws_calls": "not_performed",
     "deployment": "not_performed",
     "hosted_preview": "unavailable",
-    "hosted_preview_reason": "The current Cloudflare Workers request runtime cannot load native CDK dependencies or execute Python subprocesses.",
-    "native_verification_status": "not_reverified"
+    "hosted_preview_reason": "Python dependencies and the private Python preview adapter are not yet integrated.",
+    "native_verification_status": "passed",
+    "credential_discovery": "not_used",
+    "subprocesses": "not_used"
   },
   "language_policy": {
     "mode": "configured",
@@ -82,8 +84,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "86b5aba6da5b323313fe795f94e94bbd95e9e1b842b64679d4b6141853b0ab3c",
-      "size_bytes": 1574,
+      "sha256": "453e92d66d76a924b738b98da62e34e641fa410df17eadef06b790b97b5cf971",
+      "size_bytes": 1278,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
@@ -100,8 +102,8 @@
     },
     {
       "path": "preview.py",
-      "sha256": "666114d4b305f2cf90c7d292b2a58ee3ff15b88d0cc89437e873d6a4eaf64c02",
-      "size_bytes": 3267,
+      "sha256": "41c8918bc42000a21a93fa34d74acdb0256f8d59ed78876e34cf8753ad186210",
+      "size_bytes": 2675,
       "mime_type": "text/x-python"
     },
     {
@@ -118,14 +120,14 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "703adeffe167de022c29fa4833c9a84ee91dfe60ddc3bd65d87b44333266b998",
-      "size_bytes": 2997,
+      "sha256": "176f1885a42275a7ba1981698f2ce9e61758dec20e70de47f20d07d434dc4d11",
+      "size_bytes": 3266,
       "mime_type": "application/json"
     },
     {
       "path": "validation.json",
-      "sha256": "f03435cf620d9eb5f6d88b9bada1d29777acba0de0c6ad5a2472a8bfdcd3173d",
-      "size_bytes": 559,
+      "sha256": "652cf4bd0f7472b8db387fcd4f66928dcf2dc29ef3095fadc511ee4e8e9f8c45",
+      "size_bytes": 495,
       "mime_type": "application/json"
     }
   ],
@@ -133,21 +135,20 @@
   "publication_blockers": [
     "hosted_preview_runtime_unavailable",
     "trusted_publication_reviews_missing",
-    "payload_not_staged_to_immutable_store",
-    "native_reverification_required"
+    "payload_not_staged_to_immutable_store"
   ],
   "validation": {
-    "result": "not_reverified",
-    "validation_kind": "native-chalice-package",
+    "result": "passed",
+    "validation_kind": "native-chalice-routing-and-handler-execution",
     "chalice": "1.32.0",
-    "prior_source_validation": {
-      "result": "passed",
-      "aws_calls": "not_performed",
-      "deployment": "not_performed"
-    },
-    "current_candidate_native_verification": "not_run_after_offline_preview_hardening",
-    "required_next_validation": "rerun native Chalice package preview in approved offline runtime",
-    "hosted_workers_preview": "unavailable; Workers does not run Python subprocesses",
-    "publication_blocker": "native_reverification_required"
+    "aws_calls": "not_performed",
+    "deployment": "not_performed",
+    "application_execution": "local_synthetic_api_gateway_events",
+    "subprocesses": "not_used",
+    "credential_discovery": "no_sdk_client_created",
+    "hosted_workers_preview": "unavailable_pending_python_dependency_integration",
+    "route_count": 1,
+    "verification_count": 2,
+    "iam_authorization": "not_verified"
   }
 }

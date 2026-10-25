@@ -1,5 +1,7 @@
 # Sandbox package readiness — 2026-10-25
 
+This document records the initial package-writing checkpoint. See [the subsequent Cloudflare runtime integration update](PRIVATE_CLOUDFLARE_RUNTIME_PROGRESS_2026-10-25.md) and the refreshed JSON inventory for current results. Five new draft previews now execute privately in Workerd; no draft product has been activated by this branch.
+
 The 71 remaining sandbox-eligible products have authored release drafts. This is **not** a completed hosted rollout. The approved set remains exactly 72 products: the existing `agent-state-dynamodb-manifest` release plus these 71 drafts. No other product becomes sandbox eligible, and none of these drafts is activated by this change.
 
 ## Live buyer identity

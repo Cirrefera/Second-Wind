@@ -5,8 +5,8 @@
   "version": 2,
   "product_kind": "artifact-product",
   "service": "lambda",
-  "release_ref": "sha256:bf93cf45c5d11bf4ed7d182c3b9b7e911a8c20c5a1258f38fc22d92e7a19801d",
-  "content_hash": "bf93cf45c5d11bf4ed7d182c3b9b7e911a8c20c5a1258f38fc22d92e7a19801d",
+  "release_ref": "sha256:387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
+  "content_hash": "387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
   "hash_scope": "file-package-json-utf8",
   "mime_type": "application/json",
   "origin": "Second Wind",
@@ -20,17 +20,19 @@
     },
     "private_preview_entrypoint": "preview.py",
     "configuration_schema": "config.schema.json",
-    "side_effects": "local synthesis/package generation only; no AWS calls or deployment"
+    "side_effects": "Delivered Chalice route calls S3 GetObject when deployed and invoked by the buyer; the separate private preview performs only local source analysis."
   },
   "validation_contract": {
-    "kind": "native-chalice-framework-validation",
+    "kind": "native-chalice-offline-source-analysis",
     "language": "python",
     "framework_version": "Chalice 1.32.0",
     "aws_calls": "not_performed",
     "deployment": "not_performed",
     "hosted_preview": "unavailable",
-    "hosted_preview_reason": "The current Cloudflare Workers request runtime cannot load native CDK dependencies or execute Python subprocesses.",
-    "native_verification_status": "not_reverified"
+    "hosted_preview_reason": "Python dependencies and the private Python preview adapter are not yet integrated.",
+    "native_verification_status": "passed",
+    "credential_discovery": "not_used",
+    "subprocesses": "not_used"
   },
   "language_policy": {
     "mode": "configured",
@@ -82,8 +84,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "4d3818e15d2db1d4c93c63b2cacbf9cee80e771cf7a5ebd69f8c40f955c8f254",
-      "size_bytes": 1931,
+      "sha256": "28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890",
+      "size_bytes": 1506,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
@@ -100,8 +102,8 @@
     },
     {
       "path": "preview.py",
-      "sha256": "7cf3255558630cef215673ec2f3de108ade2ca2662bd44900550c3a75824a9f8",
-      "size_bytes": 3401,
+      "sha256": "36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140",
+      "size_bytes": 2889,
       "mime_type": "text/x-python"
     },
     {
@@ -118,14 +120,14 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "9c8d332825fd17d36ad6f7df0130e1946c3203b7d74ac5a6569e1a3177b95321",
-      "size_bytes": 3002,
+      "sha256": "8931a6171b93ab7525a0d6e1867d316a4cc7240e53dc2f21ea13593aed938ec3",
+      "size_bytes": 3344,
       "mime_type": "application/json"
     },
     {
       "path": "validation.json",
-      "sha256": "a6a9ed503e4c8520eb31faf2404c31251ac38ba7a5d7e9c0fc98d2fc50754759",
-      "size_bytes": 688,
+      "sha256": "fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128",
+      "size_bytes": 538,
       "mime_type": "application/json"
     }
   ],
@@ -133,24 +135,21 @@
   "publication_blockers": [
     "hosted_preview_runtime_unavailable",
     "trusted_publication_reviews_missing",
-    "payload_not_staged_to_immutable_store",
-    "native_reverification_required"
+    "payload_not_staged_to_immutable_store"
   ],
   "validation": {
-    "result": "not_reverified",
-    "validation_kind": "native-chalice-policy-generation",
+    "result": "passed",
+    "validation_kind": "native-chalice-offline-source-analysis",
     "chalice": "1.32.0",
     "boto3": "1.40.18",
-    "prior_source_validation": {
-      "result": "passed",
-      "policy_statement_count": 1,
-      "policy_action_count": 1,
-      "aws_calls": "not_performed",
-      "deployment": "not_performed"
-    },
-    "current_candidate_native_verification": "not_run_after_lazy_client_initialization_and_offline_preview_hardening",
-    "required_next_validation": "rerun native Chalice gen-policy preview in approved offline runtime",
-    "hosted_workers_preview": "unavailable; Workers does not run Python subprocesses",
-    "publication_blocker": "native_reverification_required"
+    "policy_count": 1,
+    "action_count": 1,
+    "aws_calls": "not_performed",
+    "deployment": "not_performed",
+    "application_execution": "not_performed",
+    "subprocesses": "not_used",
+    "credential_discovery": "disabled_by_explicit_inert_session_credentials",
+    "sdk_send_boundary": "before-send handler rejects all attempts",
+    "hosted_workers_preview": "unavailable_pending_python_dependency_integration"
   }
 }

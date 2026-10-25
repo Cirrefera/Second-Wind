@@ -4,7 +4,7 @@
   "sku": "AWS-0672",
   "slug": "chalice-rest-api-decorator-pattern",
   "version": 2,
-  "release_ref": "sha256:7a0221957a950dc325e6fe91a258f8be923c499fba4e95cf66322c3b74e841b3",
+  "release_ref": "sha256:5e827a51e5bef5de621843bbf74d2776d95fb30b449671b77829bd7a83073dc6",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "AWS Chalice route decorators with an IAM authorizer and bounded path validation.",

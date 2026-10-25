@@ -5,21 +5,21 @@
   "product_kind": "artifact-product",
   "required_files": [
     {
+      "path": "config.schema.json",
+      "sha256": "31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4",
+      "size_bytes": 458,
+      "mime_type": "application/json"
+    },
+    {
       "path": "LICENSE",
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
       "size_bytes": 11357,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
-      "path": "README.md",
-      "sha256": "45cb42002eb1148ae18a211356c880926d20c2e0c1eeaf07f38bea246db7ea64",
-      "size_bytes": 1922,
-      "mime_type": "text/plain; charset=utf-8"
-    },
-    {
-      "path": "config.schema.json",
-      "sha256": "31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4",
-      "size_bytes": 458,
+      "path": "package-lock.json",
+      "sha256": "6938b873bccb3c8b36ddb89f121168c474ee9bf7f9baaba773b1fc6b1302672a",
+      "size_bytes": 1938,
       "mime_type": "application/json"
     },
     {
@@ -30,14 +30,26 @@
     },
     {
       "path": "preview.mjs",
-      "sha256": "ae6dc19235b841e413e92baf7650926bf4685da946b5c11def3bdc4fa988fbd9",
-      "size_bytes": 1774,
+      "sha256": "2e6e1e29344928dadb4e29101bea69d286d0af4c926064c4f417b99862ccc4f8",
+      "size_bytes": 24675,
       "mime_type": "text/javascript"
     },
     {
+      "path": "preview.source.mjs",
+      "sha256": "1386d60e739b899aba4c0c62e73b34c67baaa0385052668228d2fc8f5dd45024",
+      "size_bytes": 1584,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "README.md",
+      "sha256": "821d8c19c2e228b1d28517140bd3655ce1d73719c7761ecd3c80b3fa83f7858a",
+      "size_bytes": 2030,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "source-provenance.json",
-      "sha256": "cbae8290f2d4d977d28bd3a2dd44bf5d11c2516bd2903b5808be4dd1d09b4db6",
-      "size_bytes": 1675,
+      "sha256": "158669bd0aba38c69cde8b010ddfc32d3f57d075fc5e8068bc6a9926ae2fdfc6",
+      "size_bytes": 3516,
       "mime_type": "application/json"
     },
     {
@@ -47,9 +59,15 @@
       "mime_type": "text/javascript"
     },
     {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "67259187f7cd1141b2210e33e72c05332f3fd5d95661872b76706977952421a6",
+      "size_bytes": 13052,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "validation.json",
-      "sha256": "56ba95e0894927b0567d39ced3bc9b6c01a8484e8c561d35adce6860814f87b4",
-      "size_bytes": 884,
+      "sha256": "7ab2a45529cae471a70dcecf3307c3780b8bde30777e15c5eb34401024ab0173",
+      "size_bytes": 953,
       "mime_type": "application/json"
     }
   ]

@@ -24,7 +24,7 @@ The package does not install Middy or an AWS service client for you. Use the ser
 
 ## Native private preview and boundary
 
-`preview.mjs` calls the actual Powertools Tracer middleware around a synthetic handler request and an in-memory X-Ray segment fixture. It verifies middleware open/close behavior only; the fixture does not create or send an AWS X-Ray trace. Hosted preview remains unavailable because the gateway Worker Loader does not provide the native Node/X-Ray runtime.
+The native Node.js preview runs the actual Powertools Tracer middleware with a real local `aws-xray-sdk-core` Segment in a synthetic Lambda context. It checks local middleware segment context only; it does not send or verify an AWS X-Ray trace. Hosted Worker preview is unavailable: creating an actual X-Ray segment unconditionally requires secure random bytes, which the current Code Mode global execution scope rejects. The package remains native-only and must fail before payment for hosted sandbox preview.
 
 ## Files and source
 

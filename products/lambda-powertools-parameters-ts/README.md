@@ -20,7 +20,7 @@ The default cache is in-process and does not coordinate across Lambda environmen
 
 ## Native private preview and boundary
 
-`preview.mjs` calls the actual Powertools SSM provider and JSON transform using an in-memory AWS SDK client fixture with one fixed synthetic parameter. It makes no AWS call and does not validate SSM credentials, permissions, service availability, or cache behavior in Lambda. Hosted preview remains unavailable because the gateway does not provide the native Node/AWS SDK runtime.
+`preview.mjs` calls the purchased `readSsmParameter` helper and actual Powertools `SSMProvider`, with a real AWS SDK SSM client whose `send` method is replaced by a fixed in-memory response. Powertools performs the SSM value parsing and JSON transform. The optional provider parameter exists for custom client/provider injection; omitting it preserves the default cached provider path. The preview makes no AWS call and does not validate credentials, IAM, service availability, or Lambda cache behavior. `local_fixture_only` marks this boundary.
 
 ## Files and source
 

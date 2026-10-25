@@ -2,11 +2,15 @@ import { executeCode } from './execution.js';
 import { prepareComponentSelection } from './scope.js';
 import { CommerceError, sha256 } from './contracts.js';
 import { isSandboxEligible } from './sandbox-policy.js';
+import { parse } from 'acorn';
 
 const ADAPTER = 'dynamodb-plan-summary-v1';
 const PRODUCT_ADAPTER = 'js-product-entrypoint-v1';
 const MAX_PREVIEW_FILES = 64;
 const MAX_PREVIEW_PACKAGE_BYTES = 512 * 1024;
+const PREVIEW_NODE_MODULES = new Set(['node:assert','node:async_hooks','node:buffer','node:console','node:crypto',
+  'node:dgram','node:diagnostics_channel','node:events','node:fs','node:http','node:https',
+  'node:os','node:path','node:querystring','node:stream','node:url','node:util','node:zlib']);
 const PRODUCT_RESULT_FIELDS = new Set(['ok','status','slug','resource_count',
   'operation_count','verification_count','route_count','action_count','model_count',
   'table_count','index_count','policy_count','permission_count','warning_count','error_count',
@@ -14,7 +18,8 @@ const PRODUCT_RESULT_FIELDS = new Set(['ok','status','slug','resource_count',
 const PRODUCT_STATUSES = new Set(['ready','valid','invalid','unavailable','warning','blocked','configured','complete','passed','failed']);
 const PRODUCT_DIAGNOSTIC_CODES = new Set(['configuration_invalid','credentials_required',
   'dependency_missing','dependency_unavailable','invalid_selection','preview_execution_failed',
-  'preview_result_invalid','runtime_unavailable','unsupported_runtime','validation_failed']);
+  'preview_result_invalid','runtime_unavailable','unsupported_runtime','validation_failed',
+  'local_fixture_only']);
 const PRODUCT_COUNT_FIELDS = new Set(['resource_count','operation_count','verification_count',
   'route_count','action_count','model_count','table_count','index_count','policy_count',
   'permission_count','warning_count','error_count']);
@@ -140,14 +145,27 @@ function resolveRelativeModule(fromPath, specifier) {
 
 function packageImports(source) {
   const imports = [];
-  // The preview package is intentionally simple ESM. Reject import forms we
-  // cannot prove complete instead of letting the Loader resolve ambient code.
-  const patterns = [/(?:\bimport\s*(?:[^'";]*?\sfrom\s*)?|\bexport\s+[^'";]*?\sfrom\s*)['"]([^'"]+)['"]/g,
-    /\bimport\s*\(\s*['"]([^'"]+)['"]\s*\)/g];
-  for (const pattern of patterns) {
-    for (const match of source.matchAll(pattern)) imports.push(match[1]);
+  // Parse actual module syntax: minification, comments and string escapes
+  // must not hide imports from the private package dependency check.
+  let program;
+  try { program = parse(source,{ecmaVersion:'latest',sourceType:'module'}); }
+  catch { return null; }
+  const pending = [program];
+  while (pending.length) {
+    const node = pending.pop();
+    if (node.type === 'ImportExpression') {
+      if (node.source.type !== 'Literal' || typeof node.source.value !== 'string') return null;
+      imports.push(node.source.value);
+    } else if (['ImportDeclaration','ExportNamedDeclaration','ExportAllDeclaration'].includes(node.type)
+        && node.source) {
+      imports.push(node.source.value);
+    }
+    for (const value of Object.values(node)) {
+      if (Array.isArray(value)) {
+        for (const child of value) if (child?.type) pending.push(child);
+      } else if (value?.type) pending.push(value);
+    }
   }
-  if (/\bimport\s*\(\s*(?!['"])/.test(source)) return null;
   return imports;
 }
 
@@ -225,6 +243,7 @@ async function productJavascriptPackage(release, selectedIds) {
     const imports = packageImports(source);
     if (!imports) fail('preview_package_invalid', 503);
     for (const specifier of imports) {
+      if (PREVIEW_NODE_MODULES.has(specifier)) continue;
       const resolved = resolveRelativeModule(name.slice('product/'.length), specifier);
       if (!resolved || !modules[`product/${resolved}`]) fail('preview_dependency_unavailable', 503);
       pending.push(`product/${resolved}`);
@@ -289,7 +308,7 @@ export async function runProductPreview(env,release,configuration,selectedIds,op
     };
     const code = `const {preview}=await import('./product/preview.mjs');\nreturn await preview({configuration:await codemode.configuration(),selected_components:await codemode.selectedComponents()});`;
     const execution = await executeCode(env, code, 'javascript', null, null, {
-      modules, providers, executorFactory: options.previewExecutorFactory,
+      modules, providers, privateProductPreview:true, executorFactory: options.previewExecutorFactory,
     });
     if (!execution?.ok) {
       return {ok:false, code:'preview_execution_failed', selected_components:selected.selected_components,

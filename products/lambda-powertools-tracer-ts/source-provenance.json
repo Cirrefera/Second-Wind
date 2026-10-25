@@ -17,16 +17,18 @@
   ],
   "original_file_hashes": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "README.md": "6eec10e4b6aae879bcda0ecb7186d23877dcbef0cefb0fdd2258de2663a6d9d1",
+    "README.md": "1116968f7740d6db6d30ee905a2c03507f0113016370494264ddf51c234d847f",
     "config.schema.json": "dbd30a6aa62dcf5a217e431985f76ab8f31099a35751f85cb2d0bc08cf5054c9",
     "package.json": "5534df795e8afbf6ecf9da644c2d2bd9a556af4d173562492715f876937ebbca",
-    "preview.mjs": "4abf0e465c2768011ae76163c9247c2ba41f28de5ab45613a4caa28f544ad555",
-    "src/tracer.mjs": "7c10a88b33c7476646d4f41125958d48f0bd8049b579d04913b38411793390e3"
+    "preview.mjs": "a80e13186c666f93d2fd7547d897361d59d251e8a8915e9ee80790d354a716ed",
+    "src/tracer.mjs": "7c10a88b33c7476646d4f41125958d48f0bd8049b579d04913b38411793390e3",
+    "package-lock.json": "12f543cac7fe92e7a2137fa8dc03ec07af06e553e15ef8bb6e29d7ddd0a2c30b",
+    "validation.json": "9b042c304174a340a81a8dcaaf02cc93e2004b13693d55e89bc6ec9a7aacb203"
   },
   "native_preview": {
     "entrypoint": "preview.mjs",
-    "runtime": "Node.js 20+",
+    "runtime": "Cloudflare Worker Loader compatibility date 2026-10-18",
     "aws_calls": "none",
-    "scope": "actual Powertools middleware runs against an in-memory segment fixture; not X-Ray service verification"
+    "scope": "A Node.js Lambda helper for Powertools Tracer. Native preview executes actual middleware with a local X-Ray segment fixture; hosted preview cannot create the secure segment ID in Code Mode and remains disabled."
   }
 }

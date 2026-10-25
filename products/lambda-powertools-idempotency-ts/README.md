@@ -25,7 +25,7 @@ Powertools stores the completed response in DynamoDB and can replay it for a dup
 
 ## Native private preview and boundary
 
-`preview.mjs` runs the real Powertools idempotency wrapper twice against a local in-memory cache fixture and confirms the handler runs once. This exercises the idempotency core, not the delivered DynamoDB persistence layer, durable state, or cross-Lambda coordination. Hosted preview remains unavailable because the gateway does not provide a native Node runtime or DynamoDB.
+`preview.mjs` runs the real Powertools DynamoDB persistence layer and idempotency wrapper twice using real AWS SDK command objects whose `send` method is replaced with a fixed in-memory DynamoDB command fixture. The fixture exercises local idempotency logic and duplicate replay; it does not contact or verify DynamoDB, durable storage, IAM, or cross-Lambda coordination. The result carries `local_fixture_only` for this reason.
 
 ## Files and source
 
