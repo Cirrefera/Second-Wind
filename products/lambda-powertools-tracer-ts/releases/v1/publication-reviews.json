@@ -1,0 +1,83 @@
+[
+  {
+    "kind": "service",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "contract",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "product",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "license",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "purchase-url",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "validation",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "language-adapters",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "sandbox-trial",
+    "subject_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "routing",
+    "subject_hash": "92044f14d991f71a3e227a8de1f311b99585c94f63c8efc4ed555e8fd1b173f8",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+    "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  }
+]

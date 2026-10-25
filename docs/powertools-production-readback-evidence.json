@@ -1,0 +1,110 @@
+[
+  {
+    "discovery": [
+      {
+        "slug": "agent-state-dynamodb-manifest",
+        "version": 4,
+        "eligible": true,
+        "available": true,
+        "trial_url": "/api/trials"
+      },
+      {
+        "slug": "lambda-powertools-logger-ts",
+        "version": 1,
+        "eligible": true,
+        "available": true,
+        "trial_url": "/api/trials"
+      },
+      {
+        "slug": "lambda-powertools-metrics-ts",
+        "version": 1,
+        "eligible": true,
+        "available": true,
+        "trial_url": "/api/trials"
+      },
+      {
+        "slug": "lambda-powertools-idempotency-ts",
+        "version": 1,
+        "eligible": true,
+        "available": true,
+        "trial_url": "/api/trials"
+      },
+      {
+        "slug": "lambda-powertools-parameters-ts",
+        "version": 1,
+        "eligible": true,
+        "available": true,
+        "trial_url": "/api/trials"
+      },
+      {
+        "slug": "lambda-powertools-batch-ts",
+        "version": 1,
+        "eligible": true,
+        "available": true,
+        "trial_url": "/api/trials"
+      },
+      {
+        "slug": "lambda-powertools-idempotency",
+        "version": 2,
+        "eligible": false,
+        "available": false
+      }
+    ],
+    "worker_version": "7143c0c0-f6a4-4cff-95f4-def6f42a5966"
+  },
+  {
+    "slug": "lambda-powertools-logger-ts",
+    "available": true,
+    "official_challenge": 402,
+    "admission_atomic": "10000",
+    "same_trial_acceptance_reused": true,
+    "unpaid_execution_denied": true,
+    "capnweb_agrees": true,
+    "funded_settlement": "not_performed"
+  },
+  {
+    "slug": "lambda-powertools-metrics-ts",
+    "available": true,
+    "official_challenge": 402,
+    "admission_atomic": "10000",
+    "same_trial_acceptance_reused": true,
+    "unpaid_execution_denied": true,
+    "capnweb_agrees": true,
+    "funded_settlement": "not_performed"
+  },
+  {
+    "slug": "lambda-powertools-idempotency-ts",
+    "available": true,
+    "official_challenge": 402,
+    "admission_atomic": "10000",
+    "same_trial_acceptance_reused": true,
+    "unpaid_execution_denied": true,
+    "capnweb_agrees": true,
+    "funded_settlement": "not_performed"
+  },
+  {
+    "slug": "lambda-powertools-parameters-ts",
+    "available": true,
+    "official_challenge": 402,
+    "admission_atomic": "10000",
+    "same_trial_acceptance_reused": true,
+    "unpaid_execution_denied": true,
+    "capnweb_agrees": true,
+    "funded_settlement": "not_performed"
+  },
+  {
+    "slug": "lambda-powertools-batch-ts",
+    "available": true,
+    "official_challenge": 402,
+    "admission_atomic": "10000",
+    "same_trial_acceptance_reused": true,
+    "unpaid_execution_denied": true,
+    "capnweb_agrees": true,
+    "funded_settlement": "not_performed"
+  },
+  {
+    "excluded_slug": "lambda-powertools-idempotency",
+    "status": 403,
+    "error": "sandbox_not_eligible"
+  }
+]

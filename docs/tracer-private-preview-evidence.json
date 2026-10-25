@@ -1,0 +1,33 @@
+[
+  {
+    "slug": "lambda-powertools-tracer-ts",
+    "manifest_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
+    "routing_hash": "92044f14d991f71a3e227a8de1f311b99585c94f63c8efc4ed555e8fd1b173f8",
+    "payload_hash": "8b7b406e9f7d51f1e783f148c6bfa8233fde91038b62dfb770cf1ead3526e6c9",
+    "private_preview_and_isolation": "passed",
+    "cases": [
+      {
+        "configuration": {
+          "language": "javascript",
+          "service_name": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+          "capture_response": false
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-tracer-ts",
+          "operation_count": 1,
+          "verification_count": 2,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      }
+    ]
+  }
+]

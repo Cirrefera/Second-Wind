@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+  "current_origin": "Original Second Wind integration code is Apache-2.0; private preview redistributes pinned Powertools/X-Ray and context dependencies under the included notices.",
   "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
   "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
   "upstream_package_path": "packages/tracer",
@@ -10,25 +10,127 @@
   "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
   "license": "MIT-0",
   "dependencies": {
-    "@aws-lambda-powertools/tracer": "2.36.0"
+    "@aws-lambda-powertools/tracer": "2.36.0",
+    "aws-xray-sdk-core": "3.12.0"
   },
   "source_interface_urls": [
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/tracer"
   ],
   "original_file_hashes": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "README.md": "1116968f7740d6db6d30ee905a2c03507f0113016370494264ddf51c234d847f",
+    "README.md": "62ccd4d54737f3ce1a197419c158bd521397e661353b9f75b852d2ae73fcfe44",
     "config.schema.json": "dbd30a6aa62dcf5a217e431985f76ab8f31099a35751f85cb2d0bc08cf5054c9",
-    "package.json": "5534df795e8afbf6ecf9da644c2d2bd9a556af4d173562492715f876937ebbca",
-    "preview.mjs": "a80e13186c666f93d2fd7547d897361d59d251e8a8915e9ee80790d354a716ed",
+    "package.json": "c5c60cea4f6a8b35b295c5263589b97c77ddb838d75380e21b71a398f7e346f3",
+    "preview.mjs": "37289f72624fa39f91ee1e5b2affaea54c6cf613fd1e854fff1f4623c243b312",
     "src/tracer.mjs": "7c10a88b33c7476646d4f41125958d48f0bd8049b579d04913b38411793390e3",
-    "package-lock.json": "12f543cac7fe92e7a2137fa8dc03ec07af06e553e15ef8bb6e29d7ddd0a2c30b",
-    "validation.json": "9b042c304174a340a81a8dcaaf02cc93e2004b13693d55e89bc6ec9a7aacb203"
+    "package-lock.json": "4ce99eb432bd9d75b7bf0c5f5d5e3e548e65a0158afa1958ed7170c45f11ef57",
+    "validation.json": "c605b5f748e4bcc6c61777bd058a7e6910ba110e31d017c4a91ed8ca397356b3",
+    "THIRD_PARTY_NOTICES.md": "c0c0a0013db92d941866189da8367a6c884ccbc3f8070d2533cd6010c3c6439e",
+    "preview.source.mjs": "63bc3e58c3a113c965b5d858ff8c8d8db37adb5430f83846d883abaf2a05d06c"
   },
   "native_preview": {
     "entrypoint": "preview.mjs",
     "runtime": "Cloudflare Worker Loader compatibility date 2026-10-18",
     "aws_calls": "none",
     "scope": "A Node.js Lambda helper for Powertools Tracer. Native preview executes actual middleware with a local X-Ray segment fixture; hosted preview cannot create the secure segment ID in Code Mode and remains disabled."
+  },
+  "bundled_preview": {
+    "build_tool": {
+      "name": "esbuild",
+      "version": "0.28.1"
+    },
+    "source": "preview.source.mjs",
+    "format": "CommonJS dependency closure inside a request-local ESM preview factory; exact real Node builtins resolved through a finite static import map",
+    "bundle_sha256": "37289f72624fa39f91ee1e5b2affaea54c6cf613fd1e854fff1f4623c243b312",
+    "bundle_bytes": 129771,
+    "included_packages": [
+      {
+        "name": "@aws-lambda-powertools/commons",
+        "version": "2.36.0",
+        "license": "MIT-0",
+        "integrity": "sha512-rYkMu22qpi9wVWCcj51qMj2eKIFyxzpG5Rsasckjq6MPNzafLk/0G/VhFUY536gjWsgwVKZDuM3jMOsdVJFChw==",
+        "license_files": []
+      },
+      {
+        "name": "@aws-lambda-powertools/tracer",
+        "version": "2.36.0",
+        "license": "MIT-0",
+        "integrity": "sha512-HWloHxjdAOYjAK6WmI8WiwNw+ke6vtJXTBnMRp8oCrcfne5Z+gmjNp24ls0NLKwnR+e8B160t9Nnjn98DAVK+g==",
+        "license_files": []
+      },
+      {
+        "name": "@aws/lambda-invoke-store",
+        "version": "0.3.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/service-error-classification",
+        "version": "2.1.5",
+        "license": "Apache-2.0",
+        "integrity": "sha512-uBDTIBBEdAQryvHdc5W8sS5YX7RQzF683XrHePVdFmAgKiMofU15FLSM0/HU03hKTnazdNRFa0YHS7+ArwoUSQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "atomic-batcher",
+        "version": "1.0.2",
+        "license": "MIT",
+        "integrity": "sha512-EFGCRj4kLX1dHv1cDzTk+xbjBFj1GnJDpui52YmEcxxHHEWjYyT6l51U7n6WQ28osZH4S9gSybxe56Vm7vB61Q==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "aws-xray-sdk-core",
+        "version": "3.12.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-lwalRdxXRy+Sn49/vN7W507qqmBRk5Fy2o0a9U6XTjL9IV+oR5PUiiptoBrOcaYCiVuGld8OEbNqhm6wvV3m6A==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "cls-hooked",
+        "version": "4.2.2",
+        "license": "BSD-2-Clause",
+        "integrity": "sha512-J4Xj5f5wq/4jAvcdgoGsL3G103BtWpZrMo8NEinRltN+xpTZdI+M38pyQqhuFU/P792xkMFvnKSf+Lm81U1bxw==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "emitter-listener",
+        "version": "1.1.2",
+        "license": "BSD-2-Clause",
+        "integrity": "sha512-Bt1sBAGFHY9DKY+4/2cV6izcKJUf5T7/gkdmkxzX/qv9CcGH8xSwVRW5mtX03SWJtRTWSOpzCuWN9rBFYZepZQ==",
+        "license_files": []
+      },
+      {
+        "name": "semver",
+        "version": "7.8.5",
+        "license": "ISC",
+        "integrity": "sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "shimmer",
+        "version": "1.2.1",
+        "license": "BSD-2-Clause",
+        "integrity": "sha512-sQTKC1Re/rM6XyFM6fIAGHRPVGvyXfgzIDvzoq608vM+jeyVD0Tu1E6Np0Kc2zAIFWIj963V2800iF/9LPieQw==",
+        "license_files": [
+          "LICENSE"
+        ]
+      }
+    ],
+    "aws_calls": "none",
+    "network": "disabled by Worker Loader globalOutbound:null",
+    "sampling": "unsampled fixture; no X-Ray daemon emission"
   }
 }

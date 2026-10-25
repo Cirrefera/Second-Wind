@@ -1,67 +1,15 @@
 {
   "schema_version": "1",
-  "review_report": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
-  "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+  "review_report": "docs/TRACER_PRIVATE_PREVIEW_REVIEW_2026-10-24.md",
+  "review_report_sha256": "6952c540f025c0c319c0876f88ded123499c0324eae068f5c4e7950d66fb6338",
   "releases": [
     {
-      "sku": "AWS-0550",
+      "sku": "AWS-0551",
       "version": 1,
-      "input": "products/lambda-powertools-logger-ts/releases/v1/release-input.json",
-      "input_sha256": "8000a91e5669541ef9860aa0318a6cb132524f1ce5b3238998f0976e5eb0516c",
-      "reviews": "products/lambda-powertools-logger-ts/releases/v1/publication-reviews.json",
-      "reviews_sha256": "50d69894f9a5a783df06a63f280016cf02f3198957ae988b59db7bcc276f397c",
-      "resolved_blockers": [
-        "trusted_product_and_contract_reviews_pending",
-        "trusted_license_and_provenance_review_pending",
-        "publication_approval_pending"
-      ]
-    },
-    {
-      "sku": "AWS-0552",
-      "version": 1,
-      "input": "products/lambda-powertools-metrics-ts/releases/v1/release-input.json",
-      "input_sha256": "3fc764ca06fe5886a1aee30c6c22c1c724d4a1434ffd7a82fe118371baecb81a",
-      "reviews": "products/lambda-powertools-metrics-ts/releases/v1/publication-reviews.json",
-      "reviews_sha256": "8ccee84dc31d8fe2fe5560223c15352731091dfa36753c2c01f412804d6520a4",
-      "resolved_blockers": [
-        "trusted_product_and_contract_reviews_pending",
-        "trusted_license_and_provenance_review_pending",
-        "publication_approval_pending"
-      ]
-    },
-    {
-      "sku": "AWS-0553",
-      "version": 1,
-      "input": "products/lambda-powertools-idempotency-ts/releases/v1/release-input.json",
-      "input_sha256": "0fe53e8f015aa5891de289bac8e2927204f176be1db6e4b29c072b32ecb26757",
-      "reviews": "products/lambda-powertools-idempotency-ts/releases/v1/publication-reviews.json",
-      "reviews_sha256": "1073103f2111263c205459f5e411df9c54179579ab088db72f8d32ca948c0ad6",
-      "resolved_blockers": [
-        "trusted_product_and_contract_reviews_pending",
-        "trusted_license_and_provenance_review_pending",
-        "publication_approval_pending"
-      ]
-    },
-    {
-      "sku": "AWS-0554",
-      "version": 1,
-      "input": "products/lambda-powertools-parameters-ts/releases/v1/release-input.json",
-      "input_sha256": "5d81b9090d49ec36008ef17fb1692d8ae9819d9b60614c5cb3b5d226a8491c20",
-      "reviews": "products/lambda-powertools-parameters-ts/releases/v1/publication-reviews.json",
-      "reviews_sha256": "e559a3c6a487e727d9d7b2432942250f3bcf10a5826f1257e59753f85cde914d",
-      "resolved_blockers": [
-        "trusted_product_and_contract_reviews_pending",
-        "trusted_license_and_provenance_review_pending",
-        "publication_approval_pending"
-      ]
-    },
-    {
-      "sku": "AWS-0555",
-      "version": 1,
-      "input": "products/lambda-powertools-batch-ts/releases/v1/release-input.json",
-      "input_sha256": "67fa9abaa560bac909a2d73f47e3f7640e4e7f26b8168233f28d4bc4f60ce429",
-      "reviews": "products/lambda-powertools-batch-ts/releases/v1/publication-reviews.json",
-      "reviews_sha256": "612a844da4411073039fec1c0103108e3fe4dc67b3c0a5a60f22e895119a71fb",
+      "input": "products/lambda-powertools-tracer-ts/releases/v1/release-input.json",
+      "input_sha256": "4d6b83bb542d6345bfc8297dde3bbe202b7a8982b2431622ddbeb7de030b2bf6",
+      "reviews": "products/lambda-powertools-tracer-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "838e5da8dae9ee8c3bfc4da0f30d6ee6d176c3dd46335aa00ae48895f4c895a6",
       "resolved_blockers": [
         "trusted_product_and_contract_reviews_pending",
         "trusted_license_and_provenance_review_pending",
