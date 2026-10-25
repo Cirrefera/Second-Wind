@@ -10,6 +10,12 @@ For sandbox-eligible products, a preview costs $0.01 through x402 for each new t
 
 ## Your interaction
 
+Clef-assisted routing, inventory classification and journey interpretation are
+deprecated as of October 25, 2026. The buyer flow uses Cap'n Web and the shared
+deterministic product service. Historical model evaluation code/evidence is
+retained; it is not an instruction to enable inference. See
+[the retirement record](docs/CLEF_DEPRECATION_2026-10-25.md).
+
 Discover products for free, describe your requirements, and clarify configuration through a bidirectional Cap’n Web session. Check each catalog entry’s `sandbox_eligible` and `sandbox_available` fields; eligibility is the approved SKU policy, while availability also requires an active compatible release. Generate and retain a `trial_id` and private `trial_token`, and submit the SKU, configuration, selected components, JavaScript code, and `language: "javascript"` to `prepareTrial` over Cap’n Web or `POST /api/trials/access`. HTTP returns a $0.01 x402 challenge; Cap’n Web returns a public acceptance with a payment URL. Authorize using that URL and `X-Recovery-Token` equal to your `trial_token`, then run the same trial with the same identity and inputs. The sandbox runs buyer code with only `codemode.preview()`, `codemode.components()`, and `codemode.configuration()`; product modules and files are private to the trusted preview adapter. A repeated or recovered trial does not incur another fee. The purchased package is bound to its selected release and configuration, with a hash for verifying the delivered bytes. Keep private recovery credentials so you can reconnect and retrieve a completed purchase.
 
 `codemode.preview()` returns only product-approved summary fields; it does not disclose product source, cookbook content, full generated plans, or product logs. Your buyer code controls its own result and logs. JavaScript is the sandbox execution language. A product may deliver Python source, but a JavaScript preview does not execute or validate Python runtime behavior. Preview and product purchase are separate paid actions. A successful sandbox execution does not establish that your application works in a separate AWS environment.

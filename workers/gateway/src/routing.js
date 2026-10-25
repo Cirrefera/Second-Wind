@@ -5,6 +5,8 @@ import {readCandidateAlignment,CLEF_REQUEST_SHAPE_MIN_CONFIDENCE} from './clef.j
 import {createJourneyContext,publicIntentDimensions,enqueueObservation} from './telemetry.js';
 
 export const ROUTING_VERSION='1';
+// Deprecated with Clef on 2026-10-25; retained for historical evaluations only.
+// Do not configure CLEF_ROUTING_ENABLED or add an AI binding for this path.
 // Provisional local policy; this is not a calibrated confidence guarantee.
 export const CLEF_ROUTING_MIN_CONFIDENCE=0.5;
 // Cookbook-inspired local thresholds; neither has been calibrated on live labels.
@@ -161,6 +163,8 @@ export async function resolveIntent(env,input,limit=10,{journey}={}) {
   // and the result limit. Missing configuration still blocks a complete match.
   // Exact identities and supplied structured constraints are already checked
   // in code. A semantic reading is useful only for an informative stated goal.
+  // Deprecated compatibility path. Production remains deterministic; see
+  // docs/CLEF_DEPRECATION_2026-10-25.md before changing any routing configuration.
   if(env.CLEF_ROUTING_ENABLED==='true'&&meaningful.length&&eligible.length) {
     const pool=eligible.slice(0,20);
     try {

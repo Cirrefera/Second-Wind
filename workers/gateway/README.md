@@ -200,7 +200,13 @@ price allocation, production R2/D1 registration and live acceptance remain outst
 The other catalog records retain the per-listing blockers in `review/`; source
 pointers alone are not ready deliverables.
 
-### Clef Flash in the routing workflow
+### Clef Flash — deprecated historical integration
+
+**Owner-retired October 25, 2026.** The integration described below is retained
+for historical evaluation compatibility. Do not enable `CLEF_ROUTING_ENABLED`,
+add its AI binding, or treat the model readers as required buyer-flow features.
+Cap'n Web and the shared deterministic product service remain the current flow.
+See [the retirement record](../../docs/CLEF_DEPRECATION_2026-10-25.md).
 
 The local integration was checked against Typesafe's
 [intent-routing pattern](https://docs.typesafe.ai/patterns/intent-routing),
@@ -233,8 +239,8 @@ Incompatible and uninformative requests do not invoke the model. Legacy
 `search(string)` retains its lexical array contract. The source tests use an
 injected AI fixture through the actual HTTP and Cap'n Web paths; they do not
 measure live model accuracy. This pass leaves the routing flag and AI binding
-unchanged. Live model verification and reviewed routing rows are prerequisites
-for enabling the workflow through the existing GitHub deployment process.
+unchanged. This historical verification does not authorize enabling the retired
+model-assisted path.
 
 The additional Typesafe cookbooks were reviewed through Exa against this source:
 

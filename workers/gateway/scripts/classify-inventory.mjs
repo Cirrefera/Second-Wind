@@ -1,3 +1,5 @@
+// DEPRECATED 2026-10-25: historical Clef evaluation tooling only.
+// Not part of the current product preparation or publication process.
 import {readFile,writeFile} from 'node:fs/promises';
 import {readInventoryKind} from '../src/clef.js';
 import {canonicalJson,sha256} from '../src/contracts.js';

@@ -1,3 +1,10 @@
+/**
+ * @deprecated Owner-retired on 2026-10-25. Retained only for historical
+ * evaluation compatibility. Do not enable this reader for Second Wind routing,
+ * inventory classification or journey analysis. Cap'n Web and the shared
+ * deterministic product service own the buyer interaction.
+ * See docs/CLEF_DEPRECATION_2026-10-25.md.
+ */
 import {canonicalJson,sha256} from './contracts.js';
 import {EVENT_REGISTRY} from './telemetry.js';
 

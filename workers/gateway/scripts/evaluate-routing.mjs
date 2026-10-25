@@ -1,3 +1,5 @@
+// DEPRECATED 2026-10-25: preserve prior model experiments and their evidence.
+// Live Clef/Jev routing evaluations are not a production enablement instruction.
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
