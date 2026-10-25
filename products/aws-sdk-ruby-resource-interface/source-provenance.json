@@ -1,0 +1,10 @@
+{
+  "sku": "AWS-0630",
+  "slug": "aws-sdk-ruby-resource-interface",
+  "provenance": "original-wrapper",
+  "upstream_repository": "https://github.com/aws/aws-sdk-ruby",
+  "primary_documentation": "https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html",
+  "upstream_license": "Apache-2.0",
+  "upstream_source_included": false,
+  "version": null
+}

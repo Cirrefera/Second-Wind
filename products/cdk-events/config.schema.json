@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "rule_name",
+    "mode"
+  ],
+  "properties": {
+    "rule_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+    },
+    "mode": {
+      "enum": [
+        "schedule",
+        "pattern"
+      ]
+    },
+    "schedule_expression": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "event_source": {
+      "type": "string",
+      "pattern": "^[a-z0-9.-]{1,256}$"
+    },
+    "detail_type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "language": {
+      "const": "javascript"
+    }
+  }
+}

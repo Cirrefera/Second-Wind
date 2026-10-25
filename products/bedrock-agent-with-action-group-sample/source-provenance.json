@@ -1,0 +1,57 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0685",
+    "slug": "bedrock-agent-with-action-group-sample",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws-samples/amazon-bedrock-samples",
+    "source_revision": "b5ad367ad897dc8dbb9af0f671b58129d4e19672",
+    "structured_pointer": "agents-and-function-calling/bedrock-agents/features-examples/",
+    "observed_deliverable": "artifact_pointer_without_product_assembly",
+    "pointer_inspection": {
+      "path": "agents-and-function-calling/bedrock-agents/features-examples",
+      "status": "found",
+      "git_object_sha": "c2da9fcacae4a45ffdb2c3441219f6b7f34c396e",
+      "object_type": "tree",
+      "descendant_file_count": 114,
+      "url": "https://github.com/aws-samples/amazon-bedrock-samples/tree/b5ad367ad897dc8dbb9af0f671b58129d4e19672/agents-and-function-calling/bedrock-agents/features-examples"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/boto/boto3",
+  "interface_sources": [
+    "https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html",
+    "https://docs.aws.amazon.com/bedrock/latest/userguide/agents-invoke-agent.html",
+    "https://docs.aws.amazon.com/bedrock/latest/userguide/agents-action-add.html"
+  ],
+  "dependencies": {
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "b72da1c0ad026ee5638b4ec426799026ac849b325432c72569fc616871ce15f6",
+    "agent_action_group.py": "85d4942fee13fe56722fc1a2ca9cf92838acfba642f613b8191a14581e02ccad",
+    "README.md": "e532446f5d58adda634bf9413be6113ff594d19d2c85676e6a703a0c440fa478",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "8183cc201dae0ac0064feaf0fffcc8fb349ab8f309488fb64e6c5528ed2a8c5e",
+    "preview.py": "5076787900ba76428450cc55f2992e602df762a68f9a9e149ee1a84b9d4819e0"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "agent_action_group.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

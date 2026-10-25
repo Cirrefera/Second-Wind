@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "javascript"
+    },
+    "runtime": {
+      "type": "string",
+      "const": "nodejs18"
+    }
+  },
+  "required": [
+    "language",
+    "runtime"
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0685",
+  "slug": "bedrock-agent-with-action-group-sample",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "bedrock",
+  "release_ref": "sha256:59cd48908a9b84d3e203c9dcf9b7524688aa1800a17c109c5994756cb189e96a",
+  "content_hash": "59cd48908a9b84d3e203c9dcf9b7524688aa1800a17c109c5994756cb189e96a",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Boto3 sample for Bedrock Agent creation, Lambda-backed function action group registration, and runtime InvokeAgent streaming response; all operations use real AWS APIs.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "agent_action_group.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "python"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "Creating an action group and invoking the agent require buyer Bedrock resources, IAM permissions, model access, and AWS credentials; creation has account side effects. The hosted adapter has no Python runtime or customer credentials.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "bedrock",
+    "python",
+    "bedrock-agent-with-action-group-sample"
+  ],
+  "supported_boundary": "Python 3.11+ boto3 1.43.114, Bedrock Agents-supported Region, configured model access, IAM service role/Lambda permissions, and buyer AWS credentials. Creates billable/account resources and is not run in hosted preview.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "Creating an action group and invoking the agent require buyer Bedrock resources, IAM permissions, model access, and AWS credentials; creation has account side effects. The hosted adapter has no Python runtime or customer credentials.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "b72da1c0ad026ee5638b4ec426799026ac849b325432c72569fc616871ce15f6",
+      "size_bytes": 16,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "agent_action_group.py",
+      "sha256": "85d4942fee13fe56722fc1a2ca9cf92838acfba642f613b8191a14581e02ccad",
+      "size_bytes": 965,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "e532446f5d58adda634bf9413be6113ff594d19d2c85676e6a703a0c440fa478",
+      "size_bytes": 3109,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "8183cc201dae0ac0064feaf0fffcc8fb349ab8f309488fb64e6c5528ed2a8c5e",
+      "size_bytes": 1235,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "5076787900ba76428450cc55f2992e602df762a68f9a9e149ee1a84b9d4819e0",
+      "size_bytes": 725,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "boto3": "1.43.114"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "agent_name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "foundation_model": {
+        "type": "string",
+        "minLength": 1
+      },
+      "instruction": {
+        "type": "string",
+        "minLength": 1
+      },
+      "role_arn": {
+        "type": "string",
+        "pattern": "^arn:"
+      },
+      "action_group_name": {
+        "type": "string"
+      },
+      "lambda_arn": {
+        "type": "string",
+        "pattern": "^arn:"
+      },
+      "agent_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "alias_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "session_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "prompt": {
+        "type": "string",
+        "minLength": 1
+      },
+      "region": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "language"
+    ],
+    "oneOf": [
+      {
+        "required": [
+          "agent_name",
+          "foundation_model",
+          "instruction",
+          "role_arn"
+        ]
+      },
+      {
+        "required": [
+          "agent_id",
+          "alias_id",
+          "session_id",
+          "prompt"
+        ]
+      }
+    ]
+  },
+  "status": "draft"
+}

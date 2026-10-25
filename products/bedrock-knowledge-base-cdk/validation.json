@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "validation_kind": "native-local-cdk-synthesis",
+  "runtime": "nodejs24",
+  "backends": {
+    "OpenSearchServerless": {
+      "result": "blocked",
+      "failure_code": "docker_unavailable_enoent",
+      "blocked_at": "OpenSearchIndexCRProvider asset bundling"
+    },
+    "Pinecone": {
+      "result": "passed",
+      "stack_count": 1,
+      "resource_count": 4,
+      "scope": "CDK template synthesis only; external Pinecone service and secret not contacted"
+    },
+    "AuroraPostgres": {
+      "result": "blocked",
+      "failure_code": "docker_unavailable_enoent",
+      "blocked_at": "AuroraPgVectorCRProvider asset bundling"
+    }
+  },
+  "aws_api_calls": "not-performed",
+  "cloudformation_deployment": "not-performed",
+  "hosted_preview": "unavailable",
+  "notes": "Actual AWS SDK/service behavior and deployment were not exercised. OpenSearch and Aurora require Docker for upstream custom-resource asset bundling in this environment."
+}

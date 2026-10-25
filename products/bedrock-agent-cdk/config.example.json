@@ -1,0 +1,7 @@
+{
+  "language": "javascript",
+  "agent_name": "sample-agent",
+  "foundation_model_id": "anthropic.claude-3-haiku-20240307-v1:0",
+  "instruction": "You answer questions about approved internal documentation and state clearly when supporting evidence is missing.",
+  "should_prepare_agent": false
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0551",
+  "sku": "AWS-0551",
+  "slug": "lambda-powertools-tracer-ts",
+  "version": 1,
+  "release_ref": "sha256:2cebe3a90bb2e93be874b397a433734254855b3bcb91a1bf649dd0644cface6e",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "Native Node.js preview runs actual Powertools Tracer middleware with a local X-Ray segment. Hosted preview is blocked because Code Mode rejects the secure randomness required to create an actual segment.",
+  "supported_boundary": "A Node.js Lambda helper for Powertools Tracer. Native preview executes actual middleware with a local X-Ray segment fixture; hosted preview cannot create the secure segment ID in Code Mode and remains disabled.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-tracer-ts",
+    "powertools-tracer",
+    "aws-lambda-powertools-tracer"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "tracer",
+    "x-ray",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.tracer"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.observability"
+  ],
+  "operations": [
+    "lambda-powertools-tracer-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "lambda-tracing"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "hosted-preview",
+    "aws-deployment",
+    "service-outcome-verification"
+  ]
+}

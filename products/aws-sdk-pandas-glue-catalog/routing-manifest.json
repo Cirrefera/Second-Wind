@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0683",
+  "sku": "AWS-0683",
+  "slug": "aws-sdk-pandas-glue-catalog",
+  "version": 1,
+  "release_ref": "sha256:3943b107f32f89938005d8e70d481e783b14aaa8dae922047c4a86b83cc85d23",
+  "service": "glue",
+  "product_kind": "artifact-product",
+  "route_summary": "Python awswrangler dataset writer that writes Parquet to S3 and creates or updates AWS Glue Catalog metadata through its real integrated API.",
+  "supported_boundary": "Python 3.11+, awswrangler 3.17.1 and buyer S3/Glue credentials. Writes remote data and catalog state only when invoked. Overwrite modes can replace data; hosted preview performs no AWS operation.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "glue",
+    "python",
+    "aws-sdk-pandas-glue-catalog"
+  ],
+  "taxonomy_ids": [
+    "aws.glue"
+  ],
+  "problem_family_ids": [
+    "glue-integration"
+  ],
+  "operations": [
+    "aws-sdk-pandas-glue-catalog"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-glue-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "glue-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0686",
+  "slug": "bedrock-rag-knowledge-base-sample",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "bedrock",
+  "release_ref": "sha256:bba0dd59367fe3d3cd6134ae9bd3cfee371eb9b540c6ce2e7e9bb263806e710f",
+  "content_hash": "bba0dd59367fe3d3cd6134ae9bd3cfee371eb9b540c6ce2e7e9bb263806e710f",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Boto3 Bedrock Knowledge Bases example with retrieve and retrieve-and-generate calls, bounded result selection, and unmodified response citations for caller display.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "knowledge_base.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "python"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "Knowledge Base retrieval requires a provisioned buyer Knowledge Base, model access for generation, IAM permissions, and AWS credentials; hosted runtime lacks the Python SDK and customer identity.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "bedrock",
+    "python",
+    "bedrock-rag-knowledge-base-sample"
+  ],
+  "supported_boundary": "Python 3.11+ boto3 1.43.114, provisioned Knowledge Base/data source/vector store, permitted model, and buyer account credentials. Calls can incur retrieval/inference charges. Hosted preview does not make a remote request.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "Knowledge Base retrieval requires a provisioned buyer Knowledge Base, model access for generation, IAM permissions, and AWS credentials; hosted runtime lacks the Python SDK and customer identity.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "b72da1c0ad026ee5638b4ec426799026ac849b325432c72569fc616871ce15f6",
+      "size_bytes": 16,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "knowledge_base.py",
+      "sha256": "ec1256a351f14bc6455347e964f5ddbf28b48bf829f7c7a19ed6471619c1cd1f",
+      "size_bytes": 1012,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "43a4958391fcd6b96ded28ac8ccd537dae364d652c8d6d4d602c2aa6d093bafe",
+      "size_bytes": 3020,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "e8f2a7a1a80c41be481dce929224c248d28858ef33e4b81da923e92d440ff009",
+      "size_bytes": 562,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "6faa62fb995becf094f781ec39abff07fb9a418f4c2257c9f982cae69c93d78f",
+      "size_bytes": 579,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "boto3": "1.43.114"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "knowledge_base_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "query": {
+        "type": "string",
+        "minLength": 1
+      },
+      "model_arn": {
+        "type": "string",
+        "pattern": "^arn:"
+      },
+      "number_of_results": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 20
+      }
+    },
+    "required": [
+      "language",
+      "knowledge_base_id",
+      "query",
+      "model_arn"
+    ]
+  },
+  "status": "draft"
+}

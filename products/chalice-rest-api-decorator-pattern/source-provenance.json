@@ -1,0 +1,100 @@
+{
+  "slug": "chalice-rest-api-decorator-pattern",
+  "origin": "Original Second Wind contribution; no Chalice source copied.",
+  "upstream": {
+    "repository": "aws/chalice",
+    "revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+    "source_pointer": "src/chalice",
+    "api_reference": "https://aws.github.io/chalice/topics/authorizers.html"
+  },
+  "license": "Apache-2.0",
+  "source_revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+  "delivered_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "media_type": "application/octet-stream",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "README.md",
+      "sha256": "453e92d66d76a924b738b98da62e34e641fa410df17eadef06b790b97b5cf971",
+      "size_bytes": 1278,
+      "media_type": "text/markdown",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "app.py",
+      "sha256": "56c05b9eb6e7a6ee1f31f7e72d538d31025849bcbdb8ebec077f283153f21b5c",
+      "size_bytes": 392,
+      "media_type": "text/x-python",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c",
+      "size_bytes": 353,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "41c8918bc42000a21a93fa34d74acdb0256f8d59ed78876e34cf8753ad186210",
+      "size_bytes": 2675,
+      "media_type": "text/x-python",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "sha256": "d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a",
+      "size_bytes": 332,
+      "media_type": "text/plain",
+      "license": "dependency metadata only"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "6c812040cd51130184520c16a2417b03167eafeb3614867663270c8bf3f46a99",
+      "size_bytes": 16,
+      "media_type": "text/plain",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "652cf4bd0f7472b8db387fcd4f66928dcf2dc29ef3095fadc511ee4e8e9f8c45",
+      "size_bytes": 495,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    }
+  ],
+  "license_mapping": [
+    {
+      "paths": [
+        "LICENSE",
+        "README.md",
+        "app.py",
+        "config.schema.json",
+        "preview.py",
+        "requirements.txt",
+        "validation.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "authored original source; upstream code not copied; requires normal legal review"
+    },
+    {
+      "paths": [
+        "requirements.lock.txt"
+      ],
+      "license": "dependency metadata only",
+      "status": "version-pinned dependencies; third-party package licenses remain applicable"
+    }
+  ],
+  "runtime_blocker": "Python dependency packaging and private gateway runtime integration remain required; no subprocess is needed for this preview.",
+  "private_preview": {
+    "implementation": "Actual Chalice application routing and handler with two synthetic API Gateway events",
+    "credentials": "not_used",
+    "network": "no AWS client or API operation",
+    "application_execution": true
+  }
+}

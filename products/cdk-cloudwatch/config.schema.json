@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "namespace",
+    "metric_name",
+    "alarm_name",
+    "threshold"
+  ],
+  "properties": {
+    "namespace": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "metric_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "alarm_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,255}$"
+    },
+    "threshold": {
+      "type": "number"
+    },
+    "evaluation_periods": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "language": {
+      "const": "javascript"
+    }
+  }
+}

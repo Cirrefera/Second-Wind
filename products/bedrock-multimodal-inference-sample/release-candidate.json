@@ -1,0 +1,150 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0687",
+  "slug": "bedrock-multimodal-inference-sample",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "bedrock",
+  "release_ref": "sha256:e1425c4c580a3f7d86bc35429397aae0ee949124f01e249d7e4ad8d6c1f06936",
+  "content_hash": "e1425c4c580a3f7d86bc35429397aae0ee949124f01e249d7e4ad8d6c1f06936",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Boto3 Converse sample that sends a local image and prompt as typed multimodal content, then returns the actual model response and usage metadata.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "multimodal.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "python"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "Multimodal inference sends supplied image data to a buyer-selected Bedrock model and incurs remote inference. The hosted adapter has no Python SDK, buyer credentials, or consented image input.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "bedrock",
+    "python",
+    "bedrock-multimodal-inference-sample"
+  ],
+  "supported_boundary": "Python 3.11+ boto3 1.43.114, compatible vision-capable model and Region, model access, buyer credentials, supported image format and service limits. Sends image bytes to remote Bedrock and incurs inference charges; never executed by hosted preview.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "Multimodal inference sends supplied image data to a buyer-selected Bedrock model and incurs remote inference. The hosted adapter has no Python SDK, buyer credentials, or consented image input.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "b72da1c0ad026ee5638b4ec426799026ac849b325432c72569fc616871ce15f6",
+      "size_bytes": 16,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "multimodal.py",
+      "sha256": "eef3d0ba185f86f661a763b640b68332c476e98a51357219655b8d57c10d8a35",
+      "size_bytes": 807,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8c3325e8f0669cfa7d644a1206f165ad06bee1211efc8e644d1ad7051b145459",
+      "size_bytes": 2968,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "419dbd361cdb29a5b7c168fb8b8fdd726c6cff3f3f0662e2b4d3b317d76c0d8d",
+      "size_bytes": 513,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "6033ee0f58d5fc9849cbfca4e4b60f0908fec124662d09bc3017c29fec81975e",
+      "size_bytes": 805,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "boto3": "1.43.114"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "image_path": {
+        "type": "string",
+        "minLength": 1
+      },
+      "prompt": {
+        "type": "string",
+        "minLength": 1
+      },
+      "model_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "region": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "language",
+      "image_path",
+      "prompt",
+      "model_id"
+    ]
+  },
+  "status": "draft"
+}

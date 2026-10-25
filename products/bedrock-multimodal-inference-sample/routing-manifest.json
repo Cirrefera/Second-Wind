@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0687",
+  "sku": "AWS-0687",
+  "slug": "bedrock-multimodal-inference-sample",
+  "version": 1,
+  "release_ref": "sha256:e1425c4c580a3f7d86bc35429397aae0ee949124f01e249d7e4ad8d6c1f06936",
+  "service": "bedrock",
+  "product_kind": "artifact-product",
+  "route_summary": "Boto3 Converse sample that sends a local image and prompt as typed multimodal content, then returns the actual model response and usage metadata.",
+  "supported_boundary": "Python 3.11+ boto3 1.43.114, compatible vision-capable model and Region, model access, buyer credentials, supported image format and service limits. Sends image bytes to remote Bedrock and incurs inference charges; never executed by hosted preview.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "bedrock",
+    "python",
+    "bedrock-multimodal-inference-sample"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock"
+  ],
+  "problem_family_ids": [
+    "bedrock-integration"
+  ],
+  "operations": [
+    "bedrock-multimodal-inference-sample"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-bedrock-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "bedrock-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

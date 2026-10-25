@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "vector_store",
+    "knowledge_base_name",
+    "instruction"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "vector_store": {
+      "enum": [
+        "OpenSearchServerless",
+        "Pinecone",
+        "AuroraPostgres"
+      ]
+    },
+    "knowledge_base_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    },
+    "instruction": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "s3_bucket_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
+    },
+    "connection_string": {
+      "type": "string",
+      "pattern": "^https://[^/]+\\.pinecone\\.io(?:/.*)?$"
+    },
+    "credentials_secret_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:secretsmanager:[^:]+:\\d{12}:secret:.+$"
+    },
+    "namespace": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "text_field": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "metadata_field": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "vector_store": {
+            "const": "Pinecone"
+          }
+        },
+        "required": [
+          "vector_store"
+        ]
+      },
+      "then": {
+        "required": [
+          "connection_string",
+          "credentials_secret_arn",
+          "text_field",
+          "metadata_field"
+        ]
+      }
+    }
+  ]
+}

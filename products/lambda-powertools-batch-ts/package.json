@@ -1,0 +1,15 @@
+{
+  "name": "@secondwind/lambda-powertools-batch-ts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "A Node.js Lambda helper that runs an asynchronous SQS batch handler through the actual Powertools BatchProcessor and returns its partial failure response.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-lambda-powertools/batch": "2.36.0",
+    "@standard-schema/spec": "1.1.0"
+  }
+}

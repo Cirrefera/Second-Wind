@@ -1,0 +1,21 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0559",
+  "slug": "cloudwatch-monitoring-facade",
+  "version": 1,
+  "release_ref": "sha256:eba1e902b2401ada2e3e43c8918c82bf8362ea5dee187a65f11a9d97f2f8a77f",
+  "content_hash": "eba1e902b2401ada2e3e43c8918c82bf8362ea5dee187a65f11a9d97f2f8a77f",
+  "status": "draft",
+  "product_kind": "artifact-product",
+  "service": "cloudwatch",
+  "hosted_trial_supported": false,
+  "native_synthesis": "passed",
+  "resource_count": 1,
+  "aws_api_calls": "not-performed",
+  "aws_deployment": "not-performed",
+  "publication_blockers": [
+    "hosted_private_preview_unavailable",
+    "trusted_source_review_pending",
+    "publication_approval_pending"
+  ]
+}

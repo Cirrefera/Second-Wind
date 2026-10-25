@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0643",
+  "sku": "AWS-0643",
+  "slug": "cdk-kms",
+  "version": 2,
+  "service": "kms",
+  "product_kind": "artifact-product",
+  "route_summary": "KMS key, key rotation, alias, and scoped grants for encryption clients.",
+  "supported_boundary": "Local CDK synthesis for AWS Key Management Service. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "kms"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "kms",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.kms"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "kms-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:f5ec808af565af7d656e1c74519576f54ccc6e5cd6a94e900b3f42205c1332b1"
+}

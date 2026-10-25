@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0552",
+  "sku": "AWS-0552",
+  "slug": "lambda-powertools-metrics-ts",
+  "version": 1,
+  "release_ref": "sha256:8c27c1758cf331a9136c358cb3e1be3b99a32db403aac3997b0b3708ac9ae475",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A private Worker preview runs actual Powertools Metrics, parses generated EMF, and checks configured namespace and dimensions; it makes no AWS calls.",
+  "supported_boundary": "A Node.js Lambda helper for EMF count metrics. Private preview executes actual Powertools Metrics and validates its local EMF namespace and dimensions; no CloudWatch ingestion or AWS call is verified.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-metrics-ts",
+    "powertools-metrics",
+    "aws-lambda-powertools-metrics"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "metrics",
+    "cloudwatch",
+    "emf"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.metrics"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.observability"
+  ],
+  "operations": [
+    "lambda-powertools-metrics-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "embedded-metric-format"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "hosted-preview",
+    "aws-deployment",
+    "service-outcome-verification"
+  ]
+}

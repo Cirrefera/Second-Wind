@@ -1,0 +1,389 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0673",
+    "slug": "chalice-automatic-iam-policy-generator",
+    "name": "chalice-automatic-iam-policy-generator",
+    "kind": "tool",
+    "service": "lambda",
+    "summary": "Chalice gen-policy workflow that derives IAM actions from boto3 source analysis.",
+    "guidance": "# chalice-automatic-iam-policy-generator\n\nUse Chalice’s own source analyzer to derive deployment permissions: `chalice gen-policy` reads the application and writes `.chalice/policy.json`; inspect every generated action and resource before deployment. This product does not claim that static source analysis proves runtime least privilege.\n\nThis package contains `app.py` as the product entrypoint, a strict configuration schema, pinned Python dependencies, and a separate private `preview.py`. Set the explicit `language` configuration to `python`. Run the preview in an isolated environment after installing `requirements.txt`; provide one JSON configuration object on stdin, for example `{\"language\":\"python\"}`. It invokes `chalice gen-policy` against a temporary copy with AWS credentials and SDK configuration removed and IMDS disabled. It returns only bounded policy statement/action counts and stable diagnostic codes; generated policy and source are never returned. It does not call AWS or deploy.\n\nThe current Workers sandbox cannot execute Python subprocesses, so the preview is unavailable there and is not advertised as a supported paid sandbox preview. The product entrypoint is `app.py`; run `chalice gen-policy` in the application directory to produce a policy for review. The private preview reads a JSON configuration from stdin, runs that command in a temporary directory with a minimal environment, and returns only policy action and statement counts. The product workflow requires a Python runtime with Chalice installed.\n\nUpstream: https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819\n\nUse Chalice’s own source analyzer to derive deployment permissions: `chalice gen-policy` reads the application and writes `.chalice/policy.json`; inspect every generated action and resource before deployment. This product does not claim that static source analysis proves runtime least privilege.\n",
+    "price_usd": 1,
+    "invoke_kind": "resolve",
+    "invoke_key": "",
+    "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"properties\":{\"stage\":{\"type\":\"string\",\"pattern\":\"^[a-z][a-z0-9-]{0,31}$\"},\"language\":{\"type\":\"string\",\"enum\":[\"python\"]}},\"additionalProperties\":false,\"required\":[\"language\"]}",
+    "input_example": "{\"language\":\"python\"}",
+    "mime_type": "application/json",
+    "source_repo": "aws/chalice",
+    "source_path": "chalice/policy.py",
+    "source_url": "https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819/chalice/policy.py",
+    "license_spdx": "Apache-2.0",
+    "provenance": "github",
+    "content_hash": "387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
+    "status": "draft",
+    "version": 2
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0673",
+    "slug": "chalice-automatic-iam-policy-generator",
+    "version": 2,
+    "product_kind": "artifact-product",
+    "service": "lambda",
+    "release_ref": "sha256:387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
+    "content_hash": "387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "Original Second Wind service-specific framework source, bounded private preview entrypoint, configuration schema, dependency pins, and validation record. Upstream API implementations are not copied.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "python": "app.py"
+      },
+      "private_preview_entrypoint": "preview.py",
+      "configuration_schema": "config.schema.json",
+      "side_effects": "Delivered Chalice route calls S3 GetObject when deployed and invoked by the buyer; the separate private preview performs only local source analysis."
+    },
+    "validation_contract": {
+      "kind": "native-chalice-offline-source-analysis",
+      "language": "python",
+      "framework_version": "Chalice 1.32.0",
+      "aws_calls": "not_performed",
+      "deployment": "not_performed",
+      "hosted_preview": "unavailable",
+      "hosted_preview_reason": "Python dependencies and the private Python preview adapter are not yet integrated.",
+      "native_verification_status": "passed",
+      "credential_discovery": "not_used",
+      "subprocesses": "not_used"
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "python"
+      ]
+    },
+    "pricing": {
+      "mode": "whole-product",
+      "max_amount_atomic": "1000000",
+      "asset": "USDC",
+      "network": "eip155:8453"
+    },
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "stage": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,31}$"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "language"
+      ]
+    },
+    "tags": [
+      "lambda",
+      "infrastructure-as-code",
+      "python",
+      "bounded-preview"
+    ],
+    "supported_boundary": "Chalice gen-policy workflow that derives IAM actions from boto3 source analysis. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+    "required_files": [
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "README.md",
+        "sha256": "28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890",
+        "size_bytes": 1506,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "app.py",
+        "sha256": "c1900a796e6b2ab429b791532f2e572938d1172c3a9f4ca41164c71685466638",
+        "size_bytes": 432,
+        "mime_type": "text/x-python"
+      },
+      {
+        "path": "config.schema.json",
+        "sha256": "4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c",
+        "size_bytes": 353,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "preview.py",
+        "sha256": "36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140",
+        "size_bytes": 2889,
+        "mime_type": "text/x-python"
+      },
+      {
+        "path": "requirements.lock.txt",
+        "sha256": "d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a",
+        "size_bytes": 332,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "28faa0a2a9c8043d0384b0e16cec201051e4b11fd8f78be95c82b8cd8241aff5",
+        "size_bytes": 31,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "source-provenance.json",
+        "sha256": "8931a6171b93ab7525a0d6e1867d316a4cc7240e53dc2f21ea13593aed938ec3",
+        "size_bytes": 3344,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "validation.json",
+        "sha256": "fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128",
+        "size_bytes": 538,
+        "mime_type": "application/json"
+      }
+    ]
+  },
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0673",
+    "sku": "AWS-0673",
+    "slug": "chalice-automatic-iam-policy-generator",
+    "version": 2,
+    "release_ref": "sha256:387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
+    "service": "lambda",
+    "product_kind": "artifact-product",
+    "route_summary": "Chalice gen-policy workflow that derives IAM actions from boto3 source analysis.",
+    "supported_boundary": "Chalice gen-policy workflow that derives IAM actions from boto3 source analysis. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+    "language_policy": "explicit",
+    "aliases": [
+      "chalice-automatic-iam-policy-generator"
+    ],
+    "tags": [
+      "lambda",
+      "infrastructure-as-code",
+      "python",
+      "bounded-preview"
+    ],
+    "taxonomy_ids": [
+      "aws.lambda"
+    ],
+    "problem_family_ids": [
+      "infrastructure-as-code"
+    ],
+    "operations": [
+      "analyze-chalice-app"
+    ],
+    "environments": [
+      "aws-chalice"
+    ],
+    "desired_outcomes": [
+      "chalice-deployment-policy"
+    ],
+    "input_kinds": [
+      "chalice-python-app"
+    ],
+    "failure_signatures": [],
+    "languages": [
+      "python"
+    ],
+    "runtimes": [
+      "python3.12"
+    ],
+    "required_evidence": [],
+    "exclusions": [
+      "aws-deployment",
+      "template-delivery-in-preview",
+      "source-delivery-in-preview"
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE",
+      "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "content": "# chalice-automatic-iam-policy-generator\n\nUse Chalice's source analyzer to derive deployment permissions. Run `chalice gen-policy > .chalice/policy.json` in the application directory and review every generated action and resource before deployment. Static source analysis does not establish runtime least privilege.\n\nThis package contains `app.py` as the product entrypoint, a strict configuration schema, pinned Python dependencies, and a separate private `preview.py`. Set `language` to `python`. After installing `requirements.txt` in an isolated environment, provide the preview one JSON configuration on stdin, for example `{\"language\":\"python\"}`.\n\nThe preview calls the same real Chalice analyzer and policy builder used by `chalice gen-policy`, without starting a subprocess or executing `app.py`. It supplies an isolated Botocore session with inert offline credential placeholders, disables SDK configuration/credential files, and rejects attempted SDK sends. The SDK is used only for local method-to-API metadata. No AWS API call, account credential, deployment, or application execution is involved.\n\nOnly policy/action counts and stable diagnostic codes are returned. Application source and the generated policy remain private. Hosted Python dependency integration is still required before this preview can be offered as a paid trial; local native execution alone does not make it available in the gateway.\n\nUpstream: https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819\n",
+      "sha256": "28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890",
+      "size_bytes": 1506,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "app.py",
+      "content": "import os\nimport boto3\nfrom chalice import Chalice\n\napp = Chalice(app_name=\"policy-analysis\")\n\n@app.route(\"/objects/{key}\", methods=[\"GET\"], cors=False)\ndef get_object(key):\n    bucket = os.environ[\"ASSET_BUCKET\"]\n    s3 = boto3.client(\"s3\")\n    response = s3.get_object(Bucket=bucket, Key=key)\n    return {\"content_type\": response.get(\"ContentType\", \"application/octet-stream\"), \"content_length\": response.get(\"ContentLength\", 0)}\n",
+      "sha256": "c1900a796e6b2ab429b791532f2e572938d1172c3a9f4ca41164c71685466638",
+      "size_bytes": 432,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "config.schema.json",
+      "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"stage\": {\n      \"type\": \"string\",\n      \"pattern\": \"^[a-z][a-z0-9-]{0,31}$\"\n    },\n    \"language\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"python\"\n      ]\n    }\n  },\n  \"additionalProperties\": false,\n  \"required\": [\n    \"language\"\n  ]\n}\n",
+      "sha256": "4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c",
+      "size_bytes": 353,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "content": "\"\"\"Private offline Chalice analysis; never execute the application or call AWS.\"\"\"\nimport json\nimport os\nimport re\nimport sys\nfrom pathlib import Path\n\nROOT = Path(__file__).resolve().parent\nSLUG = 'chalice-automatic-iam-policy-generator'\n\n\ndef _reject_send(**kwargs):\n    raise RuntimeError('offline_preview_network_forbidden')\n\n\ndef preview(configuration=None, selected_components=None):\n    if (not isinstance(configuration, dict)\n            or set(configuration) - {'language', 'stage'}\n            or configuration.get('language') != 'python'\n            or not re.fullmatch(r'[a-z][a-z0-9-]{0,31}', configuration.get('stage', 'dev'))\n            or selected_components not in (None, [])):\n        return {'slug': SLUG, 'ok': False, 'status': 'invalid',\n                'diagnostic_codes': ['configuration_invalid']}\n    try:\n        import botocore.session\n        from chalice.analyzer import get_client_calls_for_app\n        from chalice.policy import PolicyBuilder\n    except ImportError:\n        return {'slug': SLUG, 'ok': False, 'status': 'unavailable',\n                'diagnostic_codes': ['dependency_unavailable']}\n\n    # Chalice's CLI uses this same analyzer and PolicyBuilder. Supply an\n    # isolated SDK session because the builder constructs clients solely to\n    # inspect their method/API metadata. These are inert placeholders, never\n    # account credentials; no credential provider or profile is needed.\n    session = botocore.session.Session()\n    session.set_config_variable('config_file', os.devnull)\n    session.set_config_variable('credentials_file', os.devnull)\n    session.set_config_variable('profile', None)\n    session.set_credentials('offline-preview', 'offline-preview')\n    session.register('before-send.*.*', _reject_send)\n    source = (ROOT / 'app.py').read_text(encoding='utf-8')\n    calls = get_client_calls_for_app(source)\n    policy = PolicyBuilder(session=session).build_policy_from_api_calls(calls)\n    statements = policy['Statement']\n    action_count = sum(len(statement.get('Action', [])) for statement in statements)\n    return {'slug': SLUG, 'ok': True, 'status': 'valid',\n            'policy_count': len(statements), 'action_count': action_count,\n            'diagnostic_codes': []}\n\n\ndef main():\n    try:\n        result = preview(json.loads(sys.stdin.read()), [])\n    except (ValueError, TypeError):\n        result = {'slug': SLUG, 'ok': False, 'status': 'invalid',\n                  'diagnostic_codes': ['configuration_invalid']}\n    except Exception:\n        # This is the private result boundary: never expose source or raw SDK\n        # exceptions to a buyer. Local analysis errors are not service results.\n        result = {'slug': SLUG, 'ok': False, 'status': 'unavailable',\n                  'diagnostic_codes': ['validation_failed']}\n    print(json.dumps(result, separators=(',', ':')))\n\n\nif __name__ == '__main__':\n    main()\n",
+      "sha256": "36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140",
+      "size_bytes": 2889,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "content": "PyYAML==6.0.3\nblessed==1.52.0\nboto3==1.40.18\nbotocore==1.40.76\nchalice==1.32.0\nclick==8.5.0\neditor==2.0.1\ninquirer==3.4.1\njinxed==2.1.0\njmespath==1.1.0\npackaging==26.3\npython-dateutil==2.9.0.post0\nreadchar==4.2.2\nruns==1.3.0\ns3transfer==0.13.1\nsetuptools==84.2.1\nsix==1.17.0\nurllib3==2.8.0\nwcwidth==0.9.4\nwheel==0.48.0\nxmod==1.10.0\n",
+      "sha256": "d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a",
+      "size_bytes": 332,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "requirements.txt",
+      "content": "chalice==1.32.0\nboto3==1.40.18\n",
+      "sha256": "28faa0a2a9c8043d0384b0e16cec201051e4b11fd8f78be95c82b8cd8241aff5",
+      "size_bytes": 31,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "source-provenance.json",
+      "content": "{\n  \"slug\": \"chalice-automatic-iam-policy-generator\",\n  \"origin\": \"Original Second Wind contribution; no Chalice source copied.\",\n  \"upstream\": {\n    \"repository\": \"aws/chalice\",\n    \"revision\": \"702dc5e198b8c84ce09b08dc8409130b57d50819\",\n    \"source_pointer\": \"chalice/policy.py\",\n    \"api_reference\": \"https://aws.github.io/chalice/topics/configfile/\"\n  },\n  \"license\": \"Apache-2.0\",\n  \"source_revision\": \"702dc5e198b8c84ce09b08dc8409130b57d50819\",\n  \"delivered_files\": [\n    {\n      \"path\": \"LICENSE\",\n      \"sha256\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n      \"size_bytes\": 11357,\n      \"media_type\": \"application/octet-stream\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"README.md\",\n      \"sha256\": \"28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890\",\n      \"size_bytes\": 1506,\n      \"media_type\": \"text/markdown\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"app.py\",\n      \"sha256\": \"c1900a796e6b2ab429b791532f2e572938d1172c3a9f4ca41164c71685466638\",\n      \"size_bytes\": 432,\n      \"media_type\": \"text/x-python\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"config.schema.json\",\n      \"sha256\": \"4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c\",\n      \"size_bytes\": 353,\n      \"media_type\": \"application/json\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"preview.py\",\n      \"sha256\": \"36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140\",\n      \"size_bytes\": 2889,\n      \"media_type\": \"text/x-python\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"requirements.lock.txt\",\n      \"sha256\": \"d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a\",\n      \"size_bytes\": 332,\n      \"media_type\": \"text/plain\",\n      \"license\": \"dependency metadata only\"\n    },\n    {\n      \"path\": \"requirements.txt\",\n      \"sha256\": \"28faa0a2a9c8043d0384b0e16cec201051e4b11fd8f78be95c82b8cd8241aff5\",\n      \"size_bytes\": 31,\n      \"media_type\": \"text/plain\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"validation.json\",\n      \"sha256\": \"fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128\",\n      \"size_bytes\": 538,\n      \"media_type\": \"application/json\",\n      \"license\": \"Apache-2.0\"\n    }\n  ],\n  \"license_mapping\": [\n    {\n      \"paths\": [\n        \"LICENSE\",\n        \"README.md\",\n        \"app.py\",\n        \"config.schema.json\",\n        \"preview.py\",\n        \"requirements.txt\",\n        \"validation.json\"\n      ],\n      \"license\": \"Apache-2.0\",\n      \"license_file\": \"LICENSE\",\n      \"status\": \"authored original source; upstream code not copied; requires normal legal review\"\n    },\n    {\n      \"paths\": [\n        \"requirements.lock.txt\"\n      ],\n      \"license\": \"dependency metadata only\",\n      \"status\": \"version-pinned dependencies; third-party package licenses remain applicable\"\n    }\n  ],\n  \"runtime_blocker\": \"Python dependency packaging and private gateway runtime integration remain required; no subprocess is needed for this preview.\",\n  \"private_preview\": {\n    \"implementation\": \"Chalice get_client_calls_for_app and PolicyBuilder over actual product app.py\",\n    \"credentials\": \"inert isolated offline session only; no account credentials or provider chain\",\n    \"network\": \"SDK before-send handler rejects requests\",\n    \"application_execution\": false\n  }\n}\n",
+      "sha256": "8931a6171b93ab7525a0d6e1867d316a4cc7240e53dc2f21ea13593aed938ec3",
+      "size_bytes": 3344,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "validation.json",
+      "content": "{\n  \"result\": \"passed\",\n  \"validation_kind\": \"native-chalice-offline-source-analysis\",\n  \"chalice\": \"1.32.0\",\n  \"boto3\": \"1.40.18\",\n  \"policy_count\": 1,\n  \"action_count\": 1,\n  \"aws_calls\": \"not_performed\",\n  \"deployment\": \"not_performed\",\n  \"application_execution\": \"not_performed\",\n  \"subprocesses\": \"not_used\",\n  \"credential_discovery\": \"disabled_by_explicit_inert_session_credentials\",\n  \"sdk_send_boundary\": \"before-send handler rejects all attempts\",\n  \"hosted_workers_preview\": \"unavailable_pending_python_dependency_integration\"\n}\n",
+      "sha256": "fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128",
+      "size_bytes": 538,
+      "mime_type": "application/json"
+    }
+  ],
+  "payload": {
+    "content": "{\"schema_version\":\"1\",\"sku\":\"AWS-0673\",\"version\":2,\"files\":[{\"path\":\"LICENSE\",\"content\":\"                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \\\"License\\\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \\\"Licensor\\\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \\\"Legal Entity\\\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \\\"control\\\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \\\"You\\\" (or \\\"Your\\\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \\\"Source\\\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \\\"Object\\\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \\\"Work\\\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \\\"Derivative Works\\\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \\\"Contribution\\\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \\\"submitted\\\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \\\"Not a Contribution.\\\"\\n\\n      \\\"Contributor\\\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \\\"NOTICE\\\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \\\"AS IS\\\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \\\"[]\\\"\\n      replaced with your own identifying information. (Don't include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \\\"printed page\\\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \\\"License\\\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n\",\"sha256\":\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\"size_bytes\":11357,\"mime_type\":\"text/plain; charset=utf-8\"},{\"path\":\"README.md\",\"content\":\"# chalice-automatic-iam-policy-generator\\n\\nUse Chalice's source analyzer to derive deployment permissions. Run `chalice gen-policy > .chalice/policy.json` in the application directory and review every generated action and resource before deployment. Static source analysis does not establish runtime least privilege.\\n\\nThis package contains `app.py` as the product entrypoint, a strict configuration schema, pinned Python dependencies, and a separate private `preview.py`. Set `language` to `python`. After installing `requirements.txt` in an isolated environment, provide the preview one JSON configuration on stdin, for example `{\\\"language\\\":\\\"python\\\"}`.\\n\\nThe preview calls the same real Chalice analyzer and policy builder used by `chalice gen-policy`, without starting a subprocess or executing `app.py`. It supplies an isolated Botocore session with inert offline credential placeholders, disables SDK configuration/credential files, and rejects attempted SDK sends. The SDK is used only for local method-to-API metadata. No AWS API call, account credential, deployment, or application execution is involved.\\n\\nOnly policy/action counts and stable diagnostic codes are returned. Application source and the generated policy remain private. Hosted Python dependency integration is still required before this preview can be offered as a paid trial; local native execution alone does not make it available in the gateway.\\n\\nUpstream: https://github.com/aws/chalice/tree/702dc5e198b8c84ce09b08dc8409130b57d50819\\n\",\"sha256\":\"28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890\",\"size_bytes\":1506,\"mime_type\":\"text/plain; charset=utf-8\"},{\"path\":\"app.py\",\"content\":\"import os\\nimport boto3\\nfrom chalice import Chalice\\n\\napp = Chalice(app_name=\\\"policy-analysis\\\")\\n\\n@app.route(\\\"/objects/{key}\\\", methods=[\\\"GET\\\"], cors=False)\\ndef get_object(key):\\n    bucket = os.environ[\\\"ASSET_BUCKET\\\"]\\n    s3 = boto3.client(\\\"s3\\\")\\n    response = s3.get_object(Bucket=bucket, Key=key)\\n    return {\\\"content_type\\\": response.get(\\\"ContentType\\\", \\\"application/octet-stream\\\"), \\\"content_length\\\": response.get(\\\"ContentLength\\\", 0)}\\n\",\"sha256\":\"c1900a796e6b2ab429b791532f2e572938d1172c3a9f4ca41164c71685466638\",\"size_bytes\":432,\"mime_type\":\"text/x-python\"},{\"path\":\"config.schema.json\",\"content\":\"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"properties\\\": {\\n    \\\"stage\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"pattern\\\": \\\"^[a-z][a-z0-9-]{0,31}$\\\"\\n    },\\n    \\\"language\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"enum\\\": [\\n        \\\"python\\\"\\n      ]\\n    }\\n  },\\n  \\\"additionalProperties\\\": false,\\n  \\\"required\\\": [\\n    \\\"language\\\"\\n  ]\\n}\\n\",\"sha256\":\"4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c\",\"size_bytes\":353,\"mime_type\":\"application/json\"},{\"path\":\"preview.py\",\"content\":\"\\\"\\\"\\\"Private offline Chalice analysis; never execute the application or call AWS.\\\"\\\"\\\"\\nimport json\\nimport os\\nimport re\\nimport sys\\nfrom pathlib import Path\\n\\nROOT = Path(__file__).resolve().parent\\nSLUG = 'chalice-automatic-iam-policy-generator'\\n\\n\\ndef _reject_send(**kwargs):\\n    raise RuntimeError('offline_preview_network_forbidden')\\n\\n\\ndef preview(configuration=None, selected_components=None):\\n    if (not isinstance(configuration, dict)\\n            or set(configuration) - {'language', 'stage'}\\n            or configuration.get('language') != 'python'\\n            or not re.fullmatch(r'[a-z][a-z0-9-]{0,31}', configuration.get('stage', 'dev'))\\n            or selected_components not in (None, [])):\\n        return {'slug': SLUG, 'ok': False, 'status': 'invalid',\\n                'diagnostic_codes': ['configuration_invalid']}\\n    try:\\n        import botocore.session\\n        from chalice.analyzer import get_client_calls_for_app\\n        from chalice.policy import PolicyBuilder\\n    except ImportError:\\n        return {'slug': SLUG, 'ok': False, 'status': 'unavailable',\\n                'diagnostic_codes': ['dependency_unavailable']}\\n\\n    # Chalice's CLI uses this same analyzer and PolicyBuilder. Supply an\\n    # isolated SDK session because the builder constructs clients solely to\\n    # inspect their method/API metadata. These are inert placeholders, never\\n    # account credentials; no credential provider or profile is needed.\\n    session = botocore.session.Session()\\n    session.set_config_variable('config_file', os.devnull)\\n    session.set_config_variable('credentials_file', os.devnull)\\n    session.set_config_variable('profile', None)\\n    session.set_credentials('offline-preview', 'offline-preview')\\n    session.register('before-send.*.*', _reject_send)\\n    source = (ROOT / 'app.py').read_text(encoding='utf-8')\\n    calls = get_client_calls_for_app(source)\\n    policy = PolicyBuilder(session=session).build_policy_from_api_calls(calls)\\n    statements = policy['Statement']\\n    action_count = sum(len(statement.get('Action', [])) for statement in statements)\\n    return {'slug': SLUG, 'ok': True, 'status': 'valid',\\n            'policy_count': len(statements), 'action_count': action_count,\\n            'diagnostic_codes': []}\\n\\n\\ndef main():\\n    try:\\n        result = preview(json.loads(sys.stdin.read()), [])\\n    except (ValueError, TypeError):\\n        result = {'slug': SLUG, 'ok': False, 'status': 'invalid',\\n                  'diagnostic_codes': ['configuration_invalid']}\\n    except Exception:\\n        # This is the private result boundary: never expose source or raw SDK\\n        # exceptions to a buyer. Local analysis errors are not service results.\\n        result = {'slug': SLUG, 'ok': False, 'status': 'unavailable',\\n                  'diagnostic_codes': ['validation_failed']}\\n    print(json.dumps(result, separators=(',', ':')))\\n\\n\\nif __name__ == '__main__':\\n    main()\\n\",\"sha256\":\"36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140\",\"size_bytes\":2889,\"mime_type\":\"text/x-python\"},{\"path\":\"requirements.lock.txt\",\"content\":\"PyYAML==6.0.3\\nblessed==1.52.0\\nboto3==1.40.18\\nbotocore==1.40.76\\nchalice==1.32.0\\nclick==8.5.0\\neditor==2.0.1\\ninquirer==3.4.1\\njinxed==2.1.0\\njmespath==1.1.0\\npackaging==26.3\\npython-dateutil==2.9.0.post0\\nreadchar==4.2.2\\nruns==1.3.0\\ns3transfer==0.13.1\\nsetuptools==84.2.1\\nsix==1.17.0\\nurllib3==2.8.0\\nwcwidth==0.9.4\\nwheel==0.48.0\\nxmod==1.10.0\\n\",\"sha256\":\"d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a\",\"size_bytes\":332,\"mime_type\":\"text/plain; charset=utf-8\"},{\"path\":\"requirements.txt\",\"content\":\"chalice==1.32.0\\nboto3==1.40.18\\n\",\"sha256\":\"28faa0a2a9c8043d0384b0e16cec201051e4b11fd8f78be95c82b8cd8241aff5\",\"size_bytes\":31,\"mime_type\":\"text/plain; charset=utf-8\"},{\"path\":\"source-provenance.json\",\"content\":\"{\\n  \\\"slug\\\": \\\"chalice-automatic-iam-policy-generator\\\",\\n  \\\"origin\\\": \\\"Original Second Wind contribution; no Chalice source copied.\\\",\\n  \\\"upstream\\\": {\\n    \\\"repository\\\": \\\"aws/chalice\\\",\\n    \\\"revision\\\": \\\"702dc5e198b8c84ce09b08dc8409130b57d50819\\\",\\n    \\\"source_pointer\\\": \\\"chalice/policy.py\\\",\\n    \\\"api_reference\\\": \\\"https://aws.github.io/chalice/topics/configfile/\\\"\\n  },\\n  \\\"license\\\": \\\"Apache-2.0\\\",\\n  \\\"source_revision\\\": \\\"702dc5e198b8c84ce09b08dc8409130b57d50819\\\",\\n  \\\"delivered_files\\\": [\\n    {\\n      \\\"path\\\": \\\"LICENSE\\\",\\n      \\\"sha256\\\": \\\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\\\",\\n      \\\"size_bytes\\\": 11357,\\n      \\\"media_type\\\": \\\"application/octet-stream\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"README.md\\\",\\n      \\\"sha256\\\": \\\"28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890\\\",\\n      \\\"size_bytes\\\": 1506,\\n      \\\"media_type\\\": \\\"text/markdown\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"app.py\\\",\\n      \\\"sha256\\\": \\\"c1900a796e6b2ab429b791532f2e572938d1172c3a9f4ca41164c71685466638\\\",\\n      \\\"size_bytes\\\": 432,\\n      \\\"media_type\\\": \\\"text/x-python\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"config.schema.json\\\",\\n      \\\"sha256\\\": \\\"4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c\\\",\\n      \\\"size_bytes\\\": 353,\\n      \\\"media_type\\\": \\\"application/json\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"preview.py\\\",\\n      \\\"sha256\\\": \\\"36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140\\\",\\n      \\\"size_bytes\\\": 2889,\\n      \\\"media_type\\\": \\\"text/x-python\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"requirements.lock.txt\\\",\\n      \\\"sha256\\\": \\\"d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a\\\",\\n      \\\"size_bytes\\\": 332,\\n      \\\"media_type\\\": \\\"text/plain\\\",\\n      \\\"license\\\": \\\"dependency metadata only\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"requirements.txt\\\",\\n      \\\"sha256\\\": \\\"28faa0a2a9c8043d0384b0e16cec201051e4b11fd8f78be95c82b8cd8241aff5\\\",\\n      \\\"size_bytes\\\": 31,\\n      \\\"media_type\\\": \\\"text/plain\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"validation.json\\\",\\n      \\\"sha256\\\": \\\"fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128\\\",\\n      \\\"size_bytes\\\": 538,\\n      \\\"media_type\\\": \\\"application/json\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    }\\n  ],\\n  \\\"license_mapping\\\": [\\n    {\\n      \\\"paths\\\": [\\n        \\\"LICENSE\\\",\\n        \\\"README.md\\\",\\n        \\\"app.py\\\",\\n        \\\"config.schema.json\\\",\\n        \\\"preview.py\\\",\\n        \\\"requirements.txt\\\",\\n        \\\"validation.json\\\"\\n      ],\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"license_file\\\": \\\"LICENSE\\\",\\n      \\\"status\\\": \\\"authored original source; upstream code not copied; requires normal legal review\\\"\\n    },\\n    {\\n      \\\"paths\\\": [\\n        \\\"requirements.lock.txt\\\"\\n      ],\\n      \\\"license\\\": \\\"dependency metadata only\\\",\\n      \\\"status\\\": \\\"version-pinned dependencies; third-party package licenses remain applicable\\\"\\n    }\\n  ],\\n  \\\"runtime_blocker\\\": \\\"Python dependency packaging and private gateway runtime integration remain required; no subprocess is needed for this preview.\\\",\\n  \\\"private_preview\\\": {\\n    \\\"implementation\\\": \\\"Chalice get_client_calls_for_app and PolicyBuilder over actual product app.py\\\",\\n    \\\"credentials\\\": \\\"inert isolated offline session only; no account credentials or provider chain\\\",\\n    \\\"network\\\": \\\"SDK before-send handler rejects requests\\\",\\n    \\\"application_execution\\\": false\\n  }\\n}\\n\",\"sha256\":\"8931a6171b93ab7525a0d6e1867d316a4cc7240e53dc2f21ea13593aed938ec3\",\"size_bytes\":3344,\"mime_type\":\"application/json\"},{\"path\":\"validation.json\",\"content\":\"{\\n  \\\"result\\\": \\\"passed\\\",\\n  \\\"validation_kind\\\": \\\"native-chalice-offline-source-analysis\\\",\\n  \\\"chalice\\\": \\\"1.32.0\\\",\\n  \\\"boto3\\\": \\\"1.40.18\\\",\\n  \\\"policy_count\\\": 1,\\n  \\\"action_count\\\": 1,\\n  \\\"aws_calls\\\": \\\"not_performed\\\",\\n  \\\"deployment\\\": \\\"not_performed\\\",\\n  \\\"application_execution\\\": \\\"not_performed\\\",\\n  \\\"subprocesses\\\": \\\"not_used\\\",\\n  \\\"credential_discovery\\\": \\\"disabled_by_explicit_inert_session_credentials\\\",\\n  \\\"sdk_send_boundary\\\": \\\"before-send handler rejects all attempts\\\",\\n  \\\"hosted_workers_preview\\\": \\\"unavailable_pending_python_dependency_integration\\\"\\n}\\n\",\"sha256\":\"fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128\",\"size_bytes\":538,\"mime_type\":\"application/json\"}]}",
+    "sha256": "387335830703ead2ef650d8703c3e283ba14866809205b94eceb3f3bd3f39664",
+    "size_bytes": 23187,
+    "mime_type": "application/json"
+  },
+  "source_provenance": {
+    "slug": "chalice-automatic-iam-policy-generator",
+    "origin": "Original Second Wind contribution; no Chalice source copied.",
+    "upstream": {
+      "repository": "aws/chalice",
+      "revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+      "source_pointer": "chalice/policy.py",
+      "api_reference": "https://aws.github.io/chalice/topics/configfile/"
+    },
+    "license": "Apache-2.0",
+    "source_revision": "702dc5e198b8c84ce09b08dc8409130b57d50819",
+    "delivered_files": [
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "media_type": "application/octet-stream",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "README.md",
+        "sha256": "28bb09ae65b204250baef8aaf5d53a48c5dc0959bdb6792ccb5164baad6b1890",
+        "size_bytes": 1506,
+        "media_type": "text/markdown",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "app.py",
+        "sha256": "c1900a796e6b2ab429b791532f2e572938d1172c3a9f4ca41164c71685466638",
+        "size_bytes": 432,
+        "media_type": "text/x-python",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "config.schema.json",
+        "sha256": "4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c",
+        "size_bytes": 353,
+        "media_type": "application/json",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "preview.py",
+        "sha256": "36542b50a8d76f753330da0bb8e2630bf32f8c80774ef065bf5f4bf14f230140",
+        "size_bytes": 2889,
+        "media_type": "text/x-python",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "requirements.lock.txt",
+        "sha256": "d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a",
+        "size_bytes": 332,
+        "media_type": "text/plain",
+        "license": "dependency metadata only"
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "28faa0a2a9c8043d0384b0e16cec201051e4b11fd8f78be95c82b8cd8241aff5",
+        "size_bytes": 31,
+        "media_type": "text/plain",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "validation.json",
+        "sha256": "fcc73270e407726b3b92d30552d0e1ce1004a711b7e474dafb62a1115b65f128",
+        "size_bytes": 538,
+        "media_type": "application/json",
+        "license": "Apache-2.0"
+      }
+    ],
+    "license_mapping": [
+      {
+        "paths": [
+          "LICENSE",
+          "README.md",
+          "app.py",
+          "config.schema.json",
+          "preview.py",
+          "requirements.txt",
+          "validation.json"
+        ],
+        "license": "Apache-2.0",
+        "license_file": "LICENSE",
+        "status": "authored original source; upstream code not copied; requires normal legal review"
+      },
+      {
+        "paths": [
+          "requirements.lock.txt"
+        ],
+        "license": "dependency metadata only",
+        "status": "version-pinned dependencies; third-party package licenses remain applicable"
+      }
+    ],
+    "runtime_blocker": "Python dependency packaging and private gateway runtime integration remain required; no subprocess is needed for this preview.",
+    "private_preview": {
+      "implementation": "Chalice get_client_calls_for_app and PolicyBuilder over actual product app.py",
+      "credentials": "inert isolated offline session only; no account credentials or provider chain",
+      "network": "SDK before-send handler rejects requests",
+      "application_execution": false
+    }
+  },
+  "blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_publication_reviews_missing",
+    "payload_not_staged_to_immutable_store"
+  ]
+}

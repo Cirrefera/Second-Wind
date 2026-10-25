@@ -1,0 +1,30 @@
+{
+  "sku": "AWS-0630",
+  "slug": "aws-sdk-ruby-resource-interface",
+  "name": "Ruby AWS SDK resource interface",
+  "kind": "tool",
+  "service": "aws-sdk",
+  "summary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters.",
+  "source_repo": "https://github.com/aws/aws-sdk-ruby",
+  "source_url": "https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html",
+  "license_spdx": "Apache-2.0",
+  "invoke_kind": "resolve",
+  "mime_type": "application/json",
+  "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"title\":\"Ruby AWS SDK resource interface configuration\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"service\"],\"properties\":{\"language\":{\"const\":\"ruby\"},\"service\":{\"enum\":[\"s3\",\"dynamodb\",\"bedrock-runtime\"]},\"region\":{\"type\":\"string\",\"default\":\"us-east-1\"},\"bucket\":{\"type\":\"string\",\"minLength\":3},\"key\":{\"type\":\"string\",\"minLength\":1},\"body\":{\"type\":\"string\"},\"table_name\":{\"type\":\"string\",\"minLength\":3},\"key_name\":{\"type\":\"string\",\"minLength\":1},\"key_value\":{\"type\":\"string\"},\"model_id\":{\"type\":\"string\",\"minLength\":1}},\"oneOf\":[{\"properties\":{\"service\":{\"const\":\"s3\"},\"bucket\":{\"type\":\"string\",\"minLength\":3},\"key\":{\"type\":\"string\",\"minLength\":1},\"body\":{\"type\":\"string\"}},\"required\":[\"bucket\",\"key\",\"body\"]},{\"properties\":{\"service\":{\"const\":\"dynamodb\"},\"table_name\":{\"type\":\"string\",\"minLength\":3},\"key_name\":{\"type\":\"string\",\"minLength\":1},\"key_value\":{\"type\":\"string\"}},\"required\":[\"table_name\",\"key_name\",\"key_value\"]},{\"properties\":{\"service\":{\"const\":\"bedrock-runtime\"},\"model_id\":{\"type\":\"string\",\"minLength\":1},\"body\":{\"type\":\"string\",\"minLength\":1}},\"required\":[\"model_id\",\"body\"]}]}",
+  "input_example": "{\"language\":\"ruby\",\"service\":\"s3\",\"bucket\":\"example-bucket\",\"key\":\"report.txt\",\"body\":\"example\"}",
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "ruby",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "delivery_entrypoint": "client.rb",
+  "exports": [
+    "client_for",
+    "put_object",
+    "get_item",
+    "invoke_model",
+    "build_request"
+  ]
+}

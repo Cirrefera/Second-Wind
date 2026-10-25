@@ -1,0 +1,7 @@
+{
+  "adapter": "native-dependency-runtime-required",
+  "mode": "unavailable",
+  "execution_language": "python",
+  "availability": "runtime-not-installed",
+  "allowed_result_fields": []
+}

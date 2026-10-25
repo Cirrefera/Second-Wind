@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0642",
+  "slug": "cdk-iam",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "iam",
+  "release_ref": "sha256:12558134e6fc8f7b6f20a9272621c35c16ff487d711028a4e381cdef40646b6e",
+  "content_hash": "12558134e6fc8f7b6f20a9272621c35c16ff487d711028a4e381cdef40646b6e",
+  "hash_scope": "file-package-json-utf8",
+  "gateway_preview_available": false,
+  "local_native_preview_status": "verified",
+  "source_review_status": "pending",
+  "publication_status": "draft",
+  "blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending"
+  ]
+}

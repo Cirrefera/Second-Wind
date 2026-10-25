@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0672",
+  "sku": "AWS-0672",
+  "slug": "chalice-rest-api-decorator-pattern",
+  "version": 2,
+  "release_ref": "sha256:5e827a51e5bef5de621843bbf74d2776d95fb30b449671b77829bd7a83073dc6",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "AWS Chalice route decorators with an IAM authorizer and bounded path validation.",
+  "supported_boundary": "AWS Chalice route decorators with an IAM authorizer and bounded path validation. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "chalice-rest-api-decorator-pattern"
+  ],
+  "tags": [
+    "lambda",
+    "infrastructure-as-code",
+    "python",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "analyze-chalice-app"
+  ],
+  "environments": [
+    "aws-chalice"
+  ],
+  "desired_outcomes": [
+    "chalice-deployment-policy"
+  ],
+  "input_kinds": [
+    "chalice-python-app"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.12"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

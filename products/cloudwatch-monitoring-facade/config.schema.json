@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "dashboard_name",
+    "lambda_function_arn",
+    "table_name"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "dashboard_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    },
+    "lambda_function_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:lambda:[^:]*:\\d{12}:function:.+$"
+    },
+    "table_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]{3,255}$"
+    }
+  }
+}

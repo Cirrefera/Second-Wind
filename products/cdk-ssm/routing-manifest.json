@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0645",
+  "sku": "AWS-0645",
+  "slug": "cdk-ssm",
+  "version": 2,
+  "service": "ssm",
+  "product_kind": "artifact-product",
+  "route_summary": "Systems Manager Parameter Store string or string-list parameter with explicit tier and read grant example.",
+  "supported_boundary": "Local CDK synthesis for AWS Systems Manager Parameter Store. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "ssm"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "ssm",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.ssm"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "ssm-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:b81a532f7e9b3a4cf4769d0a179d36e082b5e315d123a769d4a186db63899b22"
+}

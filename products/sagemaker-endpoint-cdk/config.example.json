@@ -1,0 +1,26 @@
+{
+  "language": "javascript",
+  "mode": "jumpstart",
+  "model_id": "HUGGINGFACE_ASR_WHISPER_BASE_3_0_20",
+  "account": "123456789012",
+  "region": "us-east-1",
+  "execution_role_arn": "arn:aws:iam::123456789012:role/SageMakerJumpStartExecutionRole",
+  "endpoint_name": "whisper-base-endpoint",
+  "instance_type": "ml.g5.2xlarge",
+  "vpc_config": {
+    "security_group_ids": ["sg-0123456789abcdef0"],
+    "subnets": ["subnet-0123456789abcdef0"]
+  },
+  "endpoint_config": {
+    "production_variants": [
+      {
+        "instance_type": "ml.g5.2xlarge",
+        "initial_instance_count": 1,
+        "variant_name": "AllTraffic",
+        "initial_variant_weight": 1,
+        "container_startup_health_check_timeout_seconds": 900
+      }
+    ],
+    "enable_network_isolation": true
+  }
+}

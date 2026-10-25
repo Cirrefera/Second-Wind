@@ -1,0 +1,34 @@
+{
+  "schema_version": "1",
+  "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+  "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
+  "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
+  "upstream_package_path": "packages/tracer",
+  "npm_package": "@aws-lambda-powertools/tracer",
+  "npm_package_version": "2.36.0",
+  "npm_tarball_integrity": "sha512-HWloHxjdAOYjAK6WmI8WiwNw+ke6vtJXTBnMRp8oCrcfne5Z+gmjNp24ls0NLKwnR+e8B160t9Nnjn98DAVK+g==",
+  "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
+  "license": "MIT-0",
+  "dependencies": {
+    "@aws-lambda-powertools/tracer": "2.36.0"
+  },
+  "source_interface_urls": [
+    "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/tracer"
+  ],
+  "original_file_hashes": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "1116968f7740d6db6d30ee905a2c03507f0113016370494264ddf51c234d847f",
+    "config.schema.json": "dbd30a6aa62dcf5a217e431985f76ab8f31099a35751f85cb2d0bc08cf5054c9",
+    "package.json": "5534df795e8afbf6ecf9da644c2d2bd9a556af4d173562492715f876937ebbca",
+    "preview.mjs": "a80e13186c666f93d2fd7547d897361d59d251e8a8915e9ee80790d354a716ed",
+    "src/tracer.mjs": "7c10a88b33c7476646d4f41125958d48f0bd8049b579d04913b38411793390e3",
+    "package-lock.json": "12f543cac7fe92e7a2137fa8dc03ec07af06e553e15ef8bb6e29d7ddd0a2c30b",
+    "validation.json": "9b042c304174a340a81a8dcaaf02cc93e2004b13693d55e89bc6ec9a7aacb203"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Cloudflare Worker Loader compatibility date 2026-10-18",
+    "aws_calls": "none",
+    "scope": "A Node.js Lambda helper for Powertools Tracer. Native preview executes actual middleware with a local X-Ray segment fixture; hosted preview cannot create the secure segment ID in Code Mode and remains disabled."
+  }
+}

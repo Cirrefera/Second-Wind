@@ -1,0 +1,162 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0663",
+  "slug": "cdk-backup",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "service": "backup",
+  "release_ref": "sha256:1d0cbb51861d4d56b2d9ef6ff2de1c7a9f767bfee84e3ad02974328c5e84d945",
+  "content_hash": "1d0cbb51861d4d56b2d9ef6ff2de1c7a9f767bfee84e3ad02974328c5e84d945",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original Second Wind service-specific framework source, bounded private preview entrypoint, configuration schema, dependency pins, and validation record. Upstream API implementations are not copied.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "javascript": "stack.mjs"
+    },
+    "private_preview_entrypoint": "preview.mjs",
+    "configuration_schema": "config.schema.json",
+    "side_effects": "local synthesis/package generation only; no AWS calls or deployment"
+  },
+  "validation_contract": {
+    "kind": "native-cdk-synthesis",
+    "language": "javascript",
+    "framework_version": "aws-cdk-lib 2.274.0",
+    "aws_calls": "not_performed",
+    "deployment": "not_performed",
+    "hosted_preview": "unavailable",
+    "hosted_preview_reason": "The current Cloudflare Workers request runtime cannot load native CDK dependencies or execute Python subprocesses.",
+    "native_verification_status": "passed"
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "javascript"
+    ]
+  },
+  "pricing": {
+    "mode": "whole-product",
+    "max_amount_atomic": "1000000",
+    "asset": "USDC",
+    "network": "eip155:8453"
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "env": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "pattern": "^[0-9]{12}$"
+          },
+          "region": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "vaultName": {
+        "type": "string"
+      },
+      "language": {
+        "type": "string",
+        "enum": [
+          "javascript"
+        ]
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "language"
+    ]
+  },
+  "tags": [
+    "backup",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "supported_boundary": "Encrypted AWS Backup vault and scheduled backup plan with 35-day retention. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "285ce819a20f61f97d567c4b7705ce54b94532dff272590ae10421f33cf08267",
+      "size_bytes": 1299,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "33b592cefeb1d2f2b6b35a42de12ddfbf2b9cb8de56811ceec1c059a27f0af8f",
+      "size_bytes": 607,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "33e01ed4d1c1a728a93613e03f6c2ba95fcb5830c4fba19a3d0eb2ab93efe534",
+      "size_bytes": 7987,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "d14eaaa68a9d4083391d1987ec9f136bf05a5271f09ce004d1eff1cba021ee45",
+      "size_bytes": 160,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "7c7ea35b38312c41cdaa8dbffa64ea09204b3ca178d58b27f0375b7da73ade27",
+      "size_bytes": 1500,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "b826055353b8d7b7c79dae4549ad8c7c02d6a225f389f85fd37dd5f922c202ae",
+      "size_bytes": 3170,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "stack.mjs",
+      "sha256": "d14c13a39425ae566a86a9cea2306f0884236d543ea83381d753e48fa1d689a1",
+      "size_bytes": 877,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "964cf1050aa517239dc64b9c43ed77308cd6e5a0777ccbbf6b97d627f9955983",
+      "size_bytes": 371,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_publication_reviews_missing",
+    "payload_not_staged_to_immutable_store"
+  ],
+  "validation": {
+    "result": "passed",
+    "validation_kind": "native-aws-cdk-synthesis",
+    "aws_cdk_lib": "2.274.0",
+    "constructs": "10.8.1",
+    "resource_count": 3,
+    "preview_execution": "real App.synth(); resource counts only",
+    "aws_calls": "not performed",
+    "deployment": "not performed",
+    "hosted_workers_preview": "unavailable; Workers does not resolve external CDK modules"
+  }
+}

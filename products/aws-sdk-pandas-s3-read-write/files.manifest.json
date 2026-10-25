@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0682",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "238c046fee89bddc80a7a314e7f9f68d2fedf76f9932ee89ed9014fe0bf89d82",
+      "size_bytes": 50,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "s3_frames.py",
+      "sha256": "efda0f2a0971c363db98a3d354ec0e23f95537650e046dbe2bde9854a9c5e482",
+      "size_bytes": 451,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "9abdc481be3c64a618b8a9a2c6d99a7ecdf6213c0fea34bf6bcac4fb093c3b5b",
+      "size_bytes": 2858,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "f267f0921b80e7acd5772f0fa29adbd614e7f7eef089a44b9f672d8857e5ab12",
+      "size_bytes": 425,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "a4553a59801cc1d62227297a48df273692a467b48b20c0ce2dd1ff67891836c7",
+      "size_bytes": 465,
+      "mime_type": "text/x-python"
+    }
+  ]
+}

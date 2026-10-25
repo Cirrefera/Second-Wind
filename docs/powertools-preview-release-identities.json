@@ -1,0 +1,111 @@
+{
+  "review_report": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+  "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+  "releases": [
+    {
+      "sku": "AWS-0550",
+      "slug": "lambda-powertools-logger-ts",
+      "version": 1,
+      "input": "products/lambda-powertools-logger-ts/releases/v1/release-input.json",
+      "input_sha256": "8000a91e5669541ef9860aa0318a6cb132524f1ce5b3238998f0976e5eb0516c",
+      "manifest_hash": "710c0b8520dc1d28661254213e2e60d14753f382ba0777e68839ea44c19bb14e",
+      "routing_hash": "4d0503aab72ada6a4553e47046fce81d916cbd4b80c65926cdc2dbc898a83646",
+      "payload_hash": "953238e380c5c012e38d2766390e9e804dcb05fe88b0688d4488f770ce6adbc9",
+      "preview_sha256": "2e6e1e29344928dadb4e29101bea69d286d0af4c926064c4f417b99862ccc4f8",
+      "preview_bytes": 24675,
+      "private_configuration_cases": 4,
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ],
+      "measured_manifest_hash": "1e1d549a2117f67a7cd14d099afa3fe4ed14d4aebf33a52a3b4f5700b89bf55e",
+      "reviews": "products/lambda-powertools-logger-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "50d69894f9a5a783df06a63f280016cf02f3198957ae988b59db7bcc276f397c"
+    },
+    {
+      "sku": "AWS-0552",
+      "slug": "lambda-powertools-metrics-ts",
+      "version": 1,
+      "input": "products/lambda-powertools-metrics-ts/releases/v1/release-input.json",
+      "input_sha256": "3fc764ca06fe5886a1aee30c6c22c1c724d4a1434ffd7a82fe118371baecb81a",
+      "manifest_hash": "b7e6085aff7a4b729908d0f6e220d519fc5157ebd91b8080a3f6687ca9076b80",
+      "routing_hash": "a35e45e9ea053e5fe0c6af863688336008944f900cf82fc5582652716ab5c0dc",
+      "payload_hash": "8c27c1758cf331a9136c358cb3e1be3b99a32db403aac3997b0b3708ac9ae475",
+      "preview_sha256": "fbea6d81a4f6824a8ea5f5bd7c7994e53d6734ecbe52be1b2db3b7092e0b4e0e",
+      "preview_bytes": 17957,
+      "private_configuration_cases": 2,
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ],
+      "measured_manifest_hash": "e6ebdcaab9802c904b954f6d468b085d984af3743f55e6730a9d9174b1b83890",
+      "reviews": "products/lambda-powertools-metrics-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "8ccee84dc31d8fe2fe5560223c15352731091dfa36753c2c01f412804d6520a4"
+    },
+    {
+      "sku": "AWS-0553",
+      "slug": "lambda-powertools-idempotency-ts",
+      "version": 1,
+      "input": "products/lambda-powertools-idempotency-ts/releases/v1/release-input.json",
+      "input_sha256": "0fe53e8f015aa5891de289bac8e2927204f176be1db6e4b29c072b32ecb26757",
+      "manifest_hash": "39391d447dd6d5b988d0b008b1bb944875b002fdf2ea451e38497ae064956661",
+      "routing_hash": "33da21e74d9e9e7a92f8e241651a21061c67edf806a5602fb1541d6ae5857d7f",
+      "payload_hash": "66703bbb31e0e8809fc3baa7240a8436caebd7fdf0c18bd55f560d6bda7ba835",
+      "preview_sha256": "fed59011e25dca2f9599ea13872bcb1442fc53dc325b4591b10193be4f406992",
+      "preview_bytes": 226455,
+      "private_configuration_cases": 2,
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ],
+      "measured_manifest_hash": "137ea919004f1e504d28d4ff85fd895b522c42f226d85493328ca63c1ac67dbf",
+      "reviews": "products/lambda-powertools-idempotency-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "1073103f2111263c205459f5e411df9c54179579ab088db72f8d32ca948c0ad6"
+    },
+    {
+      "sku": "AWS-0554",
+      "slug": "lambda-powertools-parameters-ts",
+      "version": 1,
+      "input": "products/lambda-powertools-parameters-ts/releases/v1/release-input.json",
+      "input_sha256": "5d81b9090d49ec36008ef17fb1692d8ae9819d9b60614c5cb3b5d226a8491c20",
+      "manifest_hash": "0e3fdde15920497d0f53d7108f5ce48bf3320cb7a20d64a48ff48c8b56202e65",
+      "routing_hash": "12742cd69caaf5461a425be60b9722ef31f80dc49e32a0a2c55b6ffaa834c7c6",
+      "payload_hash": "5baee78268e47cdd7e3b7acee90e6a7895095137ad0b94d8f2866e4510359e8d",
+      "preview_sha256": "e9e6081d71dac1baaf1e26a49a84f8786144ee9823649f1b257bbf986f322bd7",
+      "preview_bytes": 240849,
+      "private_configuration_cases": 3,
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ],
+      "measured_manifest_hash": "4e86978724fd99ae044ddd06cad71afd86300108530d45da542be15b7221c29a",
+      "reviews": "products/lambda-powertools-parameters-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "e559a3c6a487e727d9d7b2432942250f3bcf10a5826f1257e59753f85cde914d"
+    },
+    {
+      "sku": "AWS-0555",
+      "slug": "lambda-powertools-batch-ts",
+      "version": 1,
+      "input": "products/lambda-powertools-batch-ts/releases/v1/release-input.json",
+      "input_sha256": "67fa9abaa560bac909a2d73f47e3f7640e4e7f26b8168233f28d4bc4f60ce429",
+      "manifest_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+      "routing_hash": "51c30ff9df991196583e3d96c4229f5776a23d475d73753d8f9386eb4b629631",
+      "payload_hash": "fb62928abc4e0cb8af20329dc84b0d0a36936f671914a2005d02a57f86fb6d0d",
+      "preview_sha256": "4102eaa57bf5380566e4606dea00df660de7b4fd7f683729f3c33eefca01cf15",
+      "preview_bytes": 9232,
+      "private_configuration_cases": 1,
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ],
+      "measured_manifest_hash": "7348093219ab1c888c62dda0b443fbe903e7927fd46150bcfa9b67306ca84587",
+      "reviews": "products/lambda-powertools-batch-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "612a844da4411073039fec1c0103108e3fe4dc67b3c0a5a60f22e895119a71fb"
+    }
+  ]
+}

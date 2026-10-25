@@ -1,0 +1,211 @@
+{
+  "schema_version": "1",
+  "current_origin": "Original Second Wind integration source is Apache-2.0. The private preview bundle redistributes the actual pinned dependency closure under the license notices included with this package.",
+  "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
+  "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
+  "upstream_package_path": "packages/idempotency",
+  "npm_package": "@aws-lambda-powertools/idempotency",
+  "npm_package_version": "2.36.0",
+  "npm_tarball_integrity": "sha512-TRL5Jcg+ufrnrAPqWJcsNRbBWTN+TJEXEg11jDD4b2hlVA8Jp3zE09o2p8sl7tmd+qJUMNlWguSyslWP/GYBSg==",
+  "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
+  "license": "MIT-0",
+  "dependencies": {
+    "@aws-lambda-powertools/idempotency": "2.36.0",
+    "@aws-sdk/client-dynamodb": "3.1156.0",
+    "@aws-sdk/util-dynamodb": "3.996.9"
+  },
+  "source_interface_urls": [
+    "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/idempotency"
+  ],
+  "original_file_hashes": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "1b683912342023539b73631f716a4b14176e213b8f9c96940a62f1c4981d9d72",
+    "config.schema.json": "d46a09eba514bfb5797c18cd637cea41b0759427e942ef53417b9312d16294ab",
+    "package.json": "3642249a4316d951f3b27841b3c71dfb91137298c4d7f1a760392cb69d113f16",
+    "preview.mjs": "fed59011e25dca2f9599ea13872bcb1442fc53dc325b4591b10193be4f406992",
+    "src/idempotency.mjs": "d1fdabd9a695d7446b6cbc5578aa63dc4f3f11ae86dc31109416df133c464c4d",
+    "preview.source.mjs": "a32bb157a0462d73550570faba987b5df2254d42300658cba78466f0336f47e8",
+    "package-lock.json": "6115776d4ffa74913cf7e838b5821f3d9921509f0b9f5731d1d7af3c3dc22488",
+    "THIRD_PARTY_NOTICES.md": "5c733b8fbf60002204ae242f3ccc370041a85c7db4654ea94a45a0f5c875ca21",
+    "validation.json": "a53a95ac8c4218c0bf12daccc1746bc4e7987cd64ef61af2d263523c0a7928d3"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Cloudflare Worker Loader compatibility date 2026-10-18",
+    "aws_calls": "none",
+    "scope": "A Node.js Lambda helper using the actual Powertools DynamoDB persistence layer. Private preview runs it against a fixed in-memory AWS SDK command fixture; no DynamoDB or AWS behavior is verified."
+  },
+  "bundled_preview": {
+    "build_tool": {
+      "name": "esbuild",
+      "version": "0.28.1"
+    },
+    "entrypoint": "preview.source.mjs",
+    "bundle_bytes": 226455,
+    "bundle_sha256": "fed59011e25dca2f9599ea13872bcb1442fc53dc325b4591b10193be4f406992",
+    "external_node_imports": [
+      "node:crypto",
+      "node:zlib"
+    ],
+    "metafile_input_count": 541,
+    "included_packages": [
+      {
+        "name": "@aws-lambda-powertools/commons",
+        "version": "2.36.0",
+        "license": "MIT-0",
+        "integrity": "sha512-rYkMu22qpi9wVWCcj51qMj2eKIFyxzpG5Rsasckjq6MPNzafLk/0G/VhFUY536gjWsgwVKZDuM3jMOsdVJFChw==",
+        "license_files": []
+      },
+      {
+        "name": "@aws-lambda-powertools/idempotency",
+        "version": "2.36.0",
+        "license": "MIT-0",
+        "integrity": "sha512-TRL5Jcg+ufrnrAPqWJcsNRbBWTN+TJEXEg11jDD4b2hlVA8Jp3zE09o2p8sl7tmd+qJUMNlWguSyslWP/GYBSg==",
+        "license_files": []
+      },
+      {
+        "name": "@aws-lambda-powertools/jmespath",
+        "version": "2.36.0",
+        "license": "MIT-0",
+        "integrity": "sha512-Zs0gZDamR59Yf5Hf2B3p5QPXeR8/Z7yjSHkU8C3Oc3xpISJIltZCZZ9VLNCzn6EQWegPPnIR/m7oDS+8hmRzsQ==",
+        "license_files": []
+      },
+      {
+        "name": "@aws-sdk/client-dynamodb",
+        "version": "3.1156.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-K7wOerEfbVIMHxssmqXPKw/TtrKl9D7jDv1f8AtCr0S1jh040HChaV1vgDtzU2tmbCFlVvLQrG6vvZbHrTwacw==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/core",
+        "version": "3.978.5",
+        "license": "Apache-2.0",
+        "integrity": "sha512-ruI0AWqcrfL20XDS6SwZIJFPOBZ6N0ADa9nLzWlBhxk1aoUjbUX3JkTR9vEmk7o35XpAHi68ahZ4T6RE2U9XyA==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/dynamodb-codec",
+        "version": "3.973.50",
+        "license": "Apache-2.0",
+        "integrity": "sha512-1jn3q2Ik/qUjPw1su5Abu6nzeDutzYbNUYKt+AqUh+45rb+MVWhgP1QWarTuxrm4MJKcSLVHLCrvi0rY5jmJZw==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/endpoint-cache",
+        "version": "3.972.11",
+        "license": "Apache-2.0",
+        "integrity": "sha512-8q1ICxcDjHId3bBryuu/j+1L9y5/3uQnwzLDt5j2ElcjZSoWmFtymdJy7OjLrluSMe0Z4mq5bcH4fxBXvlEHfw==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/middleware-endpoint-discovery",
+        "version": "3.972.34",
+        "license": "Apache-2.0",
+        "integrity": "sha512-hwPWSvttg+bEpcM9e8HdVJF/oz79xInjnou23+GdsbDv75DVDLGhn2XhIbuNghp5SqyjtngXEI+K22Vq3VvSxw==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/util-dynamodb",
+        "version": "3.996.9",
+        "license": "Apache-2.0",
+        "integrity": "sha512-16x2tRvl7OYpZ0W/DdFJieFriD13+RvuRBDbe5sj/tCEfK86HSGd7I2s5j0ivz8p6KWGkS+5wKRO9OliJkjUOQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/xml-builder",
+        "version": "3.972.41",
+        "license": "Apache-2.0",
+        "integrity": "sha512-ctjVSyCMegrWfXlx6VqzSBFI6UqmQ5ZlnfMhdLIiWmhoH8UAQxSCP5N3OpG7X3k4LnS7ou74C4mt20+bfTW2aQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws/lambda-invoke-store",
+        "version": "0.3.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/core",
+        "version": "3.36.2",
+        "license": "Apache-2.0",
+        "integrity": "sha512-oRw0rB9QSUiCZfEs23G5F4Af+b2rQt1lItIICWu5IejFNd+uPM8SWqiKLMpQ6bX1Q7slsLbjuoE2niErFtkVPQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/fetch-http-handler",
+        "version": "5.8.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-ycSJu3tFAQ4v04CBB0agqFMVsSQ1iG3yw+SpgxRqKfaURpQD4CZ8Wn0zPMmSnOuTpTh65Vz+EA0rMrw089wvkA==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/signature-v4",
+        "version": "5.7.4",
+        "license": "Apache-2.0",
+        "integrity": "sha512-tHy0K0VtqNd5Y7Y41h0a0Lhh0L1GzC08dTWg0F7vRJWFtTENg7IZikf3wQkanYIRdb7ngoIPMTmqgUi401fEeQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/types",
+        "version": "4.19.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-r7jh49VJxGerfAcTQA6gXcKc+98zOp/tqRwzYjgOE+iSQsP6cEU1hq2QzbuipmP68QtYdY9wKEhiCQZIzHgZ4Q==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "bowser",
+        "version": "2.14.1",
+        "license": "MIT",
+        "integrity": "sha512-tzPjzCxygAKWFOJP011oxFHs57HzIhOEracIgAePE4pqB3LikALKnSzUyU4MGs9/iCEUuHlAJTjTc5M+u7YEGg==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "mnemonist",
+        "version": "0.38.3",
+        "license": "MIT",
+        "integrity": "sha512-2K9QYubXx/NAjv4VLq1d1Ly8pWNC5L3BrixtdkyTegXWJIqY+zLNDhhX/A+ZwWt70tB1S8H4BE8FLYEFyNoOBw==",
+        "license_files": [
+          "LICENSE.txt"
+        ]
+      },
+      {
+        "name": "obliterator",
+        "version": "1.6.1",
+        "license": "MIT",
+        "integrity": "sha512-9WXswnqINnnhOG/5SLimUlzuU1hFJUc8zkwyD59Sd+dPOMf05PmnYG/d6Q7HZ+KmgkZJa1PxRso6QdM3sTNHig==",
+        "license_files": [
+          "LICENSE.txt"
+        ]
+      }
+    ],
+    "notice_file": "THIRD_PARTY_NOTICES.md"
+  }
+}

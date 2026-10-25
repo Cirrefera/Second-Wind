@@ -1,0 +1,58 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0681",
+    "slug": "aws-sdk-pandas-athena-to-dataframe",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws/aws-sdk-pandas",
+    "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+    "structured_pointer": "awswrangler/athena/_read.py",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "awswrangler/athena/_read.py",
+      "status": "found",
+      "git_object_sha": "1a81b47c0491027dda468ab3ea270a11c59cf265",
+      "object_type": "blob",
+      "descendant_file_count": 0,
+      "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/athena/_read.py"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/aws/aws-sdk-pandas",
+  "interface_sources": [
+    "https://aws-sdk-pandas.readthedocs.io/en/stable/api.html",
+    "https://docs.aws.amazon.com/athena/latest/APIReference/API_StartQueryExecution.html"
+  ],
+  "dependencies": {
+    "awswrangler": "3.17.1",
+    "pandas": "2.2.3",
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "238c046fee89bddc80a7a314e7f9f68d2fedf76f9932ee89ed9014fe0bf89d82",
+    "athena_query.py": "ac1a687ed3890d862029acbfadae9e4c17c984434c48a846319d91bc84617b21",
+    "README.md": "ee3802e04f0121c65cf2ff88e034f53b6e015b91b41cfcf4f5e11ef38f3c2e8b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "d6fb6c33fc37253dd162f214f61bb9138d7b550e693f65e8c4ffefd220eba440",
+    "preview.py": "77c5c16a108127420ade8b710c43480aabe691e1b1f6f03112761ab0b49ddc45"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "athena_query.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

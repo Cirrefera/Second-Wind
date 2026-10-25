@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0664",
+  "sku": "AWS-0664",
+  "slug": "cdk-ec2",
+  "version": 2,
+  "release_ref": "sha256:d97c505db9cfbec1478e0b0e5a586d885f05a979d9d4a3e2046eadc8e6a0c798",
+  "service": "ec2",
+  "product_kind": "artifact-product",
+  "route_summary": "Private Linux instance in a VPC with encrypted EBS and IMDSv2.",
+  "supported_boundary": "Private Linux instance in a VPC with encrypted EBS and IMDSv2. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-ec2"
+  ],
+  "tags": [
+    "ec2",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.ec2"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

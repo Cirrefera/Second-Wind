@@ -1,0 +1,58 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0684",
+    "slug": "aws-sdk-pandas-redshift-connection",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws/aws-sdk-pandas",
+    "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+    "structured_pointer": "awswrangler/redshift/_utils.py",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "awswrangler/redshift/_utils.py",
+      "status": "found",
+      "git_object_sha": "c5f3b9c024c1060f91b283d8a0f60db9605a54aa",
+      "object_type": "blob",
+      "descendant_file_count": 0,
+      "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/redshift/_utils.py"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/aws/aws-sdk-pandas",
+  "interface_sources": [
+    "https://aws-sdk-pandas.readthedocs.io/en/stable/api.html",
+    "https://github.com/aws/aws-sdk-pandas"
+  ],
+  "dependencies": {
+    "awswrangler": "3.17.1",
+    "pandas": "2.2.3",
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "579bd9042c277bdea7049f6dc5623d83722d96958737e60c16546385b74737f1",
+    "redshift.py": "20bc1aabdee0d5bf1d3b7c3a1ed17dbc49bebb5720b8bd025ee9d2fbdefd151d",
+    "README.md": "84c6eb61945efb09fbdd80302be0a3fa4cfdb345d790ab0978a4ef29d4173d50",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "fad98f80119a793083d82e0e229ba8d63410454a6739f1b71092af24491fdd8e",
+    "preview.py": "84ac2acaa71ab30053c490c6744b53b63b18becf9e4f2ab78675981af150daf0"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "redshift.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

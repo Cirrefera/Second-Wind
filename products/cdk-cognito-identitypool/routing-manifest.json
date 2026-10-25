@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0668",
+  "sku": "AWS-0668",
+  "slug": "cdk-cognito-identitypool",
+  "version": 2,
+  "release_ref": "sha256:dc5a14386e960d1272ead4fc2cce8cc7e492bdfa2748c6c448de6e1ea88455f6",
+  "service": "cognito",
+  "product_kind": "artifact-product",
+  "route_summary": "Cognito identity pool with unauthenticated access disabled and an authenticated role.",
+  "supported_boundary": "Cognito identity pool with unauthenticated access disabled and an authenticated role. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-cognito-identitypool"
+  ],
+  "tags": [
+    "cognito",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.cognito"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

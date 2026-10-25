@@ -1,0 +1,21 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0556",
+  "slug": "bedrock-agent-cdk",
+  "version": 1,
+  "release_ref": "sha256:3f53504af6ae32d8508babbbef7bb9c517e1a333113d06448ea10a6bdaf3a24e",
+  "content_hash": "3f53504af6ae32d8508babbbef7bb9c517e1a333113d06448ea10a6bdaf3a24e",
+  "status": "draft",
+  "product_kind": "artifact-product",
+  "service": "bedrock",
+  "hosted_trial_supported": false,
+  "native_synthesis": "passed",
+  "resource_count": 3,
+  "aws_api_calls": "not-performed",
+  "aws_deployment": "not-performed",
+  "publication_blockers": [
+    "hosted_private_preview_unavailable",
+    "trusted_source_review_pending",
+    "publication_approval_pending"
+  ]
+}

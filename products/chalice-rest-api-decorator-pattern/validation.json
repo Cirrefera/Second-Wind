@@ -1,0 +1,14 @@
+{
+  "result": "passed",
+  "validation_kind": "native-chalice-routing-and-handler-execution",
+  "chalice": "1.32.0",
+  "aws_calls": "not_performed",
+  "deployment": "not_performed",
+  "application_execution": "local_synthetic_api_gateway_events",
+  "subprocesses": "not_used",
+  "credential_discovery": "no_sdk_client_created",
+  "hosted_workers_preview": "unavailable_pending_python_dependency_integration",
+  "route_count": 1,
+  "verification_count": 2,
+  "iam_authorization": "not_verified"
+}

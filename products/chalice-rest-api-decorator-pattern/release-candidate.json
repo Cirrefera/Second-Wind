@@ -1,0 +1,154 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0672",
+  "slug": "chalice-rest-api-decorator-pattern",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:5e827a51e5bef5de621843bbf74d2776d95fb30b449671b77829bd7a83073dc6",
+  "content_hash": "5e827a51e5bef5de621843bbf74d2776d95fb30b449671b77829bd7a83073dc6",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original Second Wind service-specific framework source, bounded private preview entrypoint, configuration schema, dependency pins, and validation record. Upstream API implementations are not copied.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "app.py"
+    },
+    "private_preview_entrypoint": "preview.py",
+    "configuration_schema": "config.schema.json",
+    "side_effects": "Delivered Chalice route handles requests after buyer deployment; the private preview executes routing and handler code locally without AWS calls."
+  },
+  "validation_contract": {
+    "kind": "native-chalice-routing-and-handler-execution",
+    "language": "python",
+    "framework_version": "Chalice 1.32.0",
+    "aws_calls": "not_performed",
+    "deployment": "not_performed",
+    "hosted_preview": "unavailable",
+    "hosted_preview_reason": "Python dependencies and the private Python preview adapter are not yet integrated.",
+    "native_verification_status": "passed",
+    "credential_discovery": "not_used",
+    "subprocesses": "not_used"
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "pricing": {
+    "mode": "whole-product",
+    "max_amount_atomic": "500000",
+    "asset": "USDC",
+    "network": "eip155:8453"
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "stage": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]{0,31}$"
+      },
+      "language": {
+        "type": "string",
+        "enum": [
+          "python"
+        ]
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "language"
+    ]
+  },
+  "tags": [
+    "lambda",
+    "infrastructure-as-code",
+    "python",
+    "bounded-preview"
+  ],
+  "supported_boundary": "AWS Chalice route decorators with an IAM authorizer and bounded path validation. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "453e92d66d76a924b738b98da62e34e641fa410df17eadef06b790b97b5cf971",
+      "size_bytes": 1278,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "app.py",
+      "sha256": "56c05b9eb6e7a6ee1f31f7e72d538d31025849bcbdb8ebec077f283153f21b5c",
+      "size_bytes": 392,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c",
+      "size_bytes": 353,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "41c8918bc42000a21a93fa34d74acdb0256f8d59ed78876e34cf8753ad186210",
+      "size_bytes": 2675,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "sha256": "d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a",
+      "size_bytes": 332,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "6c812040cd51130184520c16a2417b03167eafeb3614867663270c8bf3f46a99",
+      "size_bytes": 16,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "176f1885a42275a7ba1981698f2ce9e61758dec20e70de47f20d07d434dc4d11",
+      "size_bytes": 3266,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "652cf4bd0f7472b8db387fcd4f66928dcf2dc29ef3095fadc511ee4e8e9f8c45",
+      "size_bytes": 495,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_publication_reviews_missing",
+    "payload_not_staged_to_immutable_store"
+  ],
+  "validation": {
+    "result": "passed",
+    "validation_kind": "native-chalice-routing-and-handler-execution",
+    "chalice": "1.32.0",
+    "aws_calls": "not_performed",
+    "deployment": "not_performed",
+    "application_execution": "local_synthetic_api_gateway_events",
+    "subprocesses": "not_used",
+    "credential_discovery": "no_sdk_client_created",
+    "hosted_workers_preview": "unavailable_pending_python_dependency_integration",
+    "route_count": 1,
+    "verification_count": 2,
+    "iam_authorization": "not_verified"
+  }
+}

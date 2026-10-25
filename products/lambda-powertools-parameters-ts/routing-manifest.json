@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0554",
+  "sku": "AWS-0554",
+  "slug": "lambda-powertools-parameters-ts",
+  "version": 1,
+  "release_ref": "sha256:5baee78268e47cdd7e3b7acee90e6a7895095137ad0b94d8f2866e4510359e8d",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A private Worker preview runs the purchased Powertools SSM read helper/provider with a fixed local AWS SDK fixture; it makes no AWS calls.",
+  "supported_boundary": "A Node.js Lambda helper for Powertools SSM and Secrets Manager reads with cache controls. Private preview runs the actual SSM helper/provider against a local fixture only; no AWS call, credentials, IAM, or service behavior is verified.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-parameters-ts",
+    "powertools-parameters",
+    "aws-lambda-powertools-parameters"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "parameters",
+    "ssm",
+    "secrets-manager"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.parameters"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.configuration"
+  ],
+  "operations": [
+    "lambda-powertools-parameters-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "parameter-caching"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "hosted-preview",
+    "aws-deployment",
+    "service-outcome-verification"
+  ]
+}

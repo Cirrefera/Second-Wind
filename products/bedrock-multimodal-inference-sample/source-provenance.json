@@ -1,0 +1,56 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0687",
+    "slug": "bedrock-multimodal-inference-sample",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws-samples/amazon-bedrock-samples",
+    "source_revision": "b5ad367ad897dc8dbb9af0f671b58129d4e19672",
+    "structured_pointer": "introduction-to-bedrock/",
+    "observed_deliverable": "artifact_pointer_without_product_assembly",
+    "pointer_inspection": {
+      "path": "introduction-to-bedrock",
+      "status": "found",
+      "git_object_sha": "98649d2b450b21702d04f6d20095860e7256d05e",
+      "object_type": "tree",
+      "descendant_file_count": 54,
+      "url": "https://github.com/aws-samples/amazon-bedrock-samples/tree/b5ad367ad897dc8dbb9af0f671b58129d4e19672/introduction-to-bedrock"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/boto/boto3",
+  "interface_sources": [
+    "https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html",
+    "https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html"
+  ],
+  "dependencies": {
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "b72da1c0ad026ee5638b4ec426799026ac849b325432c72569fc616871ce15f6",
+    "multimodal.py": "eef3d0ba185f86f661a763b640b68332c476e98a51357219655b8d57c10d8a35",
+    "README.md": "8c3325e8f0669cfa7d644a1206f165ad06bee1211efc8e644d1ad7051b145459",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "419dbd361cdb29a5b7c168fb8b8fdd726c6cff3f3f0662e2b4d3b317d76c0d8d",
+    "preview.py": "6033ee0f58d5fc9849cbfca4e4b60f0908fec124662d09bc3017c29fec81975e"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "multimodal.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

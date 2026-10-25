@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "table_name",
+    "event_key_jmespath"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "table_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]{3,255}$"
+    },
+    "event_key_jmespath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "expires_after_seconds": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 31536000
+    },
+    "payload_validation_jmespath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    }
+  }
+}

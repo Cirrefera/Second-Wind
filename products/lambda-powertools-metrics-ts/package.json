@@ -1,0 +1,14 @@
+{
+  "name": "@secondwind/lambda-powertools-metrics-ts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "A Node.js Lambda helper that records bounded count metrics and flushes the actual Powertools Metrics EMF document to standard output.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-lambda-powertools/metrics": "2.36.0"
+  }
+}

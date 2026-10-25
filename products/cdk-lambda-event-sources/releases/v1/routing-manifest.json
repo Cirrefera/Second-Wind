@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0633",
+  "sku": "AWS-0633",
+  "slug": "cdk-lambda-event-sources",
+  "version": 1,
+  "release_ref": "sha256:ebec97fc668906130fe5a5597079ecacac70d6cbb46abfd30bb6e733d57142d4",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "Connect Lambda functions to SQS and DynamoDB Streams using supported CDK event source constructs.",
+  "supported_boundary": "Connect Lambda functions to SQS and DynamoDB Streams using supported CDK event source constructs. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-lambda-event-sources",
+    "lambda",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda"
+  ],
+  "problem_family_ids": [
+    "aws-lambda-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "lambda-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

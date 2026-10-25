@@ -1,0 +1,28 @@
+{
+  "sku": "AWS-0642",
+  "slug": "cdk-iam",
+  "name": "AWS CDK IAM constructs",
+  "kind": "artifact",
+  "service": "iam",
+  "summary": "Define a Lambda-assumable role and a narrow policy statement with explicit resource scoping.",
+  "source_repo": "https://github.com/aws/aws-cdk",
+  "source_url": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_iam-readme.html",
+  "license_spdx": "Apache-2.0",
+  "invoke_kind": "resolve",
+  "mime_type": "application/json",
+  "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"title\":\"AWS CDK IAM constructs configuration\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\"],\"properties\":{\"language\":{\"const\":\"typescript\"}}}",
+  "input_example": "{\"language\":\"typescript\"}",
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "typescript",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "delivery_entrypoint": "product.ts",
+  "application_entrypoint": "app.ts",
+  "preview_entrypoint": "preview.ts",
+  "exports": [
+    "buildStack"
+  ]
+}

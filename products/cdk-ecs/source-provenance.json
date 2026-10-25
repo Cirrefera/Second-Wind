@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0655",
+  "slug": "cdk-ecs",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "source_repo": "https://github.com/aws/aws-cdk",
+  "source_revision": "aws-cdk-lib-v2.274.0",
+  "supersedes_catalog_version": 1,
+  "relationship": "Uses the published aws-cdk-lib API. No upstream implementation files are copied.",
+  "dependency_pins": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.5.0"
+  },
+  "documentation": [
+    "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib-readme.html",
+    "https://docs.aws.amazon.com/cdk/v2/guide/"
+  ],
+  "source_hashes": {
+    "product.mjs": "1f2c1b6af7b7057d485de2d3f014d6b044a2d49322bcc2e85abc72cba4e04e87",
+    "preview.mjs": "0a19e359ce120f408536d44b5c8098a6979edac295883f3edf274a4c6624a8e9",
+    "config.schema.json": "6d66a173dcfefdf2c3afe443510dffdb2683e199444b9287a7e216ffa3e5ecb4",
+    "selection.schema.json": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+    "package.json": "e370fa74c2258d1b32fae61a64990f00fa01e27ebc02bddf8aa7d47cf32cf98f",
+    "package-lock.json": "68f9113e9650c3fb85454466feac3aebbba1d6d1e52356714370ec52e9402b2d",
+    "README.md": "986f645efe54dda0ef6076ec9d5c889a3bb7ae20f5a6f29b853974c4893855af",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "review_status": "proposed",
+  "license_mapping": [
+    {
+      "paths": [
+        "product.mjs",
+        "preview.mjs",
+        "config.schema.json",
+        "selection.schema.json",
+        "package.json",
+        "package-lock.json",
+        "README.md",
+        "LICENSE"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "proposed original-source mapping awaiting trusted review"
+    }
+  ]
+}

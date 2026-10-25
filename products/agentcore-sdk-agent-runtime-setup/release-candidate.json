@@ -1,0 +1,141 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0688",
+  "slug": "agentcore-sdk-agent-runtime-setup",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "bedrock-agentcore",
+  "release_ref": "sha256:1dd5031023af5ee8894a8ad1b5827bdd9cbb0fe277c00a45ca5830b7b1deb2c3",
+  "content_hash": "1dd5031023af5ee8894a8ad1b5827bdd9cbb0fe277c00a45ca5830b7b1deb2c3",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "AgentCore Runtime application entrypoint using the official Python SDK decorator, with input contract and local server startup; model/provider logic remains an explicit application integration.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "agent_app.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "python"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "A real AgentCore Runtime test requires the Python SDK, a deployed runtime, model permissions, and buyer AWS credentials; deployment creates account resources. None is available in the hosted adapter.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "bedrock-agentcore",
+    "python",
+    "agentcore-sdk-agent-runtime-setup"
+  ],
+  "supported_boundary": "Python 3.11+, bedrock-agentcore 1.24.2 and Strands Agents 1.16.0, Docker/runtime deployment tooling and buyer AWS account. Hosted preview cannot run this SDK or deploy the runtime; sample handler does not claim model inference.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "A real AgentCore Runtime test requires the Python SDK, a deployed runtime, model permissions, and buyer AWS credentials; deployment creates account resources. None is available in the hosted adapter.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "972df85ccc956fe45169d3e6bd48a9db9c0b6c631e519850363e6bd0ec204056",
+      "size_bytes": 65,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "agent_app.py",
+      "sha256": "7b534b03876fa87978b970d299fcf63c9980e5345c51c695ec2b64fe0e1e3a75",
+      "size_bytes": 388,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "d43f8e7d03d179d63901dfa265d91e381eca09238749678be9eab2a493f251dd",
+      "size_bytes": 3015,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "b0697ba8add2f2c15123b16ba5efe4f3bddb3b26f81357ad556bc7e6426781e0",
+      "size_bytes": 350,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "4a2c53b66cb86a8f6963d25daf0f07903d8589148a1ad2f20c5f928cc1af8520",
+      "size_bytes": 566,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "bedrock-agentcore": "1.24.2",
+    "strands-agents": "1.16.0"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "prompt": {
+        "type": "string",
+        "minLength": 1
+      },
+      "agent_framework": {
+        "type": "string",
+        "const": "strands"
+      }
+    },
+    "required": [
+      "language",
+      "prompt"
+    ]
+  },
+  "status": "draft"
+}

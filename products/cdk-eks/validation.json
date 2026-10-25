@@ -1,0 +1,12 @@
+{
+  "result": "passed",
+  "validation_kind": "native-aws-cdk-synthesis",
+  "aws_cdk_lib": "2.274.0",
+  "constructs": "10.8.1",
+  "resource_count": 37,
+  "preview_execution": "real App.synth(); resource counts only",
+  "aws_calls": "not performed",
+  "deployment": "not performed",
+  "hosted_workers_preview": "unavailable; Workers does not resolve external CDK modules",
+  "@aws-cdk/lambda-layer-kubectl-v32": "2.1.0"
+}

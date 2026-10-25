@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "docker-compose"
+    },
+    "service": {
+      "type": "string",
+      "const": "minio"
+    },
+    "api_port": {
+      "type": "integer",
+      "const": 9000
+    },
+    "console_port": {
+      "type": "integer",
+      "const": 9001
+    }
+  },
+  "required": [
+    "language",
+    "service",
+    "api_port",
+    "console_port"
+  ]
+}

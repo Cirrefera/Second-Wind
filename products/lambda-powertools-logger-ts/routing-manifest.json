@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0550",
+  "sku": "AWS-0550",
+  "slug": "lambda-powertools-logger-ts",
+  "version": 1,
+  "release_ref": "sha256:953238e380c5c012e38d2766390e9e804dcb05fe88b0688d4488f770ce6adbc9",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A private Worker preview runs the actual Powertools Logger helper with a synthetic request ID and honors configured log level; it makes no AWS calls.",
+  "supported_boundary": "A Node.js Lambda helper for structured logs. Private preview executes the actual Powertools logger with synthetic context and honors configured suppression; no caller event is logged and no AWS call is made.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-logger-ts",
+    "powertools-logger",
+    "aws-lambda-powertools-logger"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "logger",
+    "observability",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.logger"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.observability"
+  ],
+  "operations": [
+    "lambda-powertools-logger-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "structured-logs"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "hosted-preview",
+    "aws-deployment",
+    "service-outcome-verification"
+  ]
+}

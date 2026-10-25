@@ -1,0 +1,14 @@
+{
+  "name": "@secondwind/lambda-powertools-tracer-ts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "A Node.js Lambda integration that configures Powertools Tracer, exposes handler middleware with response capture disabled, and wraps an AWS SDK v3 client.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-lambda-powertools/tracer": "2.36.0"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0684",
+  "slug": "aws-sdk-pandas-redshift-connection",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "redshift",
+  "release_ref": "sha256:c904f56597f835eca6586a55c7a7f496106ea99d85e5bb7a51f0b51f539e7834",
+  "content_hash": "c904f56597f835eca6586a55c7a7f496106ea99d85e5bb7a51f0b51f539e7834",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Python awswrangler Redshift connection helper using a buyer-managed password from environment and the real Redshift connector/DataFrame query path.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "redshift.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "python"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "The Redshift helper requires Python, a database driver, network access, and buyer credentials for an actual query. The hosted adapter has no Python runtime or database connection.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "redshift",
+    "python",
+    "aws-sdk-pandas-redshift-connection"
+  ],
+  "supported_boundary": "Python 3.11+, awswrangler 3.17.1 and compatible database-driver dependencies, reachable Redshift endpoint, network access and buyer credentials. Query execution is remote and not hosted-previewed.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The Redshift helper requires Python, a database driver, network access, and buyer credentials for an actual query. The hosted adapter has no Python runtime or database connection.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "579bd9042c277bdea7049f6dc5623d83722d96958737e60c16546385b74737f1",
+      "size_bytes": 76,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "redshift.py",
+      "sha256": "20bc1aabdee0d5bf1d3b7c3a1ed17dbc49bebb5720b8bd025ee9d2fbdefd151d",
+      "size_bytes": 661,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "84c6eb61945efb09fbdd80302be0a3fa4cfdb345d790ab0978a4ef29d4173d50",
+      "size_bytes": 2828,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "fad98f80119a793083d82e0e229ba8d63410454a6739f1b71092af24491fdd8e",
+      "size_bytes": 594,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "84ac2acaa71ab30053c490c6744b53b63b18becf9e4f2ab78675981af150daf0",
+      "size_bytes": 606,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "awswrangler": "3.17.1",
+    "pandas": "2.2.3",
+    "boto3": "1.43.114"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "host": {
+        "type": "string",
+        "minLength": 1
+      },
+      "database": {
+        "type": "string",
+        "minLength": 1
+      },
+      "user": {
+        "type": "string",
+        "minLength": 1
+      },
+      "port": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      "sql": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "language",
+      "host",
+      "database",
+      "user",
+      "sql"
+    ]
+  },
+  "status": "draft"
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0558",
+  "slug": "sagemaker-endpoint-cdk",
+  "version": 1,
+  "release_ref": "sha256:9ab4f4c42818134b1249ee56e8682c69941df1370f888d2d8d66240664e109c7",
+  "content_hash": "9ab4f4c42818134b1249ee56e8682c69941df1370f888d2d8d66240664e109c7",
+  "status": "draft",
+  "product_kind": "artifact-product",
+  "service": "sagemaker",
+  "hosted_trial_supported": false,
+  "native_synthesis": "passed-jumpstart-and-custom",
+  "contract_equivalence": "implemented-with-explicit-jumpstart-catalog-and-custom-model-boundaries",
+  "publication_blockers": [
+    "hosted_private_preview_unavailable",
+    "trusted_source_review_pending",
+    "publication_approval_pending"
+  ]
+}

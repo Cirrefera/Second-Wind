@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AWS CDK Lambda constructs configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language"
+  ],
+  "properties": {
+    "language": {
+      "const": "typescript"
+    },
+    "timeoutSeconds": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 900
+    }
+  }
+}

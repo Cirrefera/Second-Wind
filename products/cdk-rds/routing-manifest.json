@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0658",
+  "sku": "AWS-0658",
+  "slug": "cdk-rds",
+  "version": 2,
+  "release_ref": "sha256:d8248102266a2bef4a9f6f9f37eaf84d12a4973659ebe7cfff1270da57349904",
+  "service": "rds",
+  "product_kind": "artifact-product",
+  "route_summary": "Private encrypted PostgreSQL database instance with managed credentials and snapshot retention.",
+  "supported_boundary": "Private encrypted PostgreSQL database instance with managed credentials and snapshot retention. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-rds"
+  ],
+  "tags": [
+    "rds",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.rds"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

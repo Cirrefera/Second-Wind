@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "pattern",
+    "service_name",
+    "image"
+  ],
+  "properties": {
+    "pattern": {
+      "enum": [
+        "load-balanced",
+        "queue-processing",
+        "scheduled"
+      ]
+    },
+    "service_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,255}$"
+    },
+    "image": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "schedule_expression": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "language": {
+      "const": "javascript"
+    }
+  }
+}

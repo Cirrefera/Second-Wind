@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0650",
+  "sku": "AWS-0650",
+  "slug": "cdk-stepfunctions",
+  "version": 2,
+  "service": "states",
+  "product_kind": "artifact-product",
+  "route_summary": "Step Functions Standard or Express state machine with Pass, Choice, Wait, Parallel, Map, and Fail states.",
+  "supported_boundary": "Local CDK synthesis for AWS Step Functions. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "stepfunctions"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "states",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.states"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "states-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:70c58d6b262b4e4556660fc5da34de989988b72e366e3c7503c1a4003e31d024"
+}

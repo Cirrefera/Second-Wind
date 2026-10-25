@@ -1,0 +1,56 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0630",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "Gemfile",
+      "sha256": "84ba745fb2b077f7729858d4dd8a1b08596c0554140a1797cc6e88764ae39fa0",
+      "size_bytes": 137,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "d6951daa5910c65585d117a38035bf1fe2fd23e86d20a5edd60754a7b9db5f72",
+      "size_bytes": 621,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "22fdd392077369a1a34d2d42e2088261169d64204861e141bbc0b589c2ad4d11",
+      "size_bytes": 2084,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "client.rb",
+      "sha256": "cb7bdc0d49278f0389552dbc8e6272ab72e09a881d6fae4119acf1816e8bd36e",
+      "size_bytes": 2128,
+      "mime_type": "text/x-ruby"
+    },
+    {
+      "path": "configuration.schema.json",
+      "sha256": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+      "size_bytes": 2105,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "input.schema.json",
+      "sha256": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+      "size_bytes": 2105,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview-contract.json",
+      "sha256": "7d4e7eeb7ce4f2c26eb1d5c862633bee88d730dee69efd781fe0224aa022239d",
+      "size_bytes": 185,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "e0914f6cbc750e576ce757dddc1acf30953ec3714993cc0db61ad3e76d991e5c",
+      "size_bytes": 372,
+      "mime_type": "application/json"
+    }
+  ]
+}

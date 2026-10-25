@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "validation_kind": "native-local-cdk-synthesis",
+  "runtime": "nodejs24",
+  "result": "passed",
+  "stack_count": 1,
+  "resource_count": 41,
+  "aws_api_calls": "not-performed",
+  "cloudformation_deployment": "not-performed",
+  "hosted_preview": "unavailable",
+  "observed_via": "trusted preview.mjs entrypoint executed locally with config.example.json and selection [\"stack\"]"
+}

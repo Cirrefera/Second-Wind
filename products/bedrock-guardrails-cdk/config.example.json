@@ -1,0 +1,15 @@
+{
+  "language": "javascript",
+  "guardrail_name": "sample-guardrail",
+  "description": "Block configured categories on inputs and model outputs.",
+  "categories": [
+    {
+      "type": "VIOLENCE",
+      "strength": "HIGH"
+    },
+    {
+      "type": "HATE",
+      "strength": "MEDIUM"
+    }
+  ]
+}

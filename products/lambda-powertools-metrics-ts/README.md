@@ -1,0 +1,30 @@
+# Powertools Metrics for Lambda (TypeScript/JavaScript)
+
+Record count metrics with the actual Powertools Metrics implementation and flush them as CloudWatch Embedded Metric Format (EMF) JSON. CloudWatch extracts EMF asynchronously from the Lambda log stream; this helper does not call `PutMetricData`.
+
+## Install and use
+
+Install `@aws-lambda-powertools/metrics` at exactly 2.36.0 and run in Node.js 20 or newer in Lambda.
+
+```js
+import { createMetrics, recordCount, flushMetrics } from './src/metrics.mjs';
+const metrics = createMetrics({ namespace: 'Payments', service_name: 'capture' });
+export const handler = async (event) => {
+  try {
+    recordCount(metrics, 'PaymentAccepted');
+    return { statusCode: 200 };
+  } finally {
+    flushMetrics(metrics);
+  }
+};
+```
+
+Use low-cardinality dimensions such as environment or service. Do not put customer IDs, request IDs, or other high-cardinality values in dimensions; use metadata when appropriate. Powertools enforces EMF metric and dimension limits. `publishStoredMetrics()` writes to stdout; it is not proof CloudWatch has ingested the document.
+
+## Native private preview and boundary
+
+The private preview runs the actual Powertools Metrics API, captures its generated EMF JSON, and checks the configured namespace, service and custom dimensions, and count before returning bounded diagnostics. A preview-only `node:console` alias implements only the `Console.log` method that this pinned Metrics path calls and forwards the real generated line to the local output sink. The Worker profile has no CloudWatch ingestion; `local_fixture_only` means no AWS call or service-side success is asserted.
+
+## Files and source
+
+Original integration code is Apache-2.0. Powertools Metrics 2.36.0 is MIT-0; its pinned repository revision and published tarball integrity are recorded in `source-provenance.json`.

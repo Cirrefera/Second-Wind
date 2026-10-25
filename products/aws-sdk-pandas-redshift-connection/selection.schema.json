@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "python"
+    },
+    "host": {
+      "type": "string",
+      "minLength": 1
+    },
+    "database": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user": {
+      "type": "string",
+      "minLength": 1
+    },
+    "port": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "sql": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "language",
+    "host",
+    "database",
+    "user",
+    "sql"
+  ]
+}

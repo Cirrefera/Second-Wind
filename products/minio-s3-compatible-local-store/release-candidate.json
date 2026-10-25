@@ -1,0 +1,147 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0679",
+  "slug": "minio-s3-compatible-local-store",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "s3",
+  "release_ref": "sha256:949310b7f4c2f44fa8b5be257ee310e1b74d3fe6de4505a45c7805a02b2d7b44",
+  "content_hash": "949310b7f4c2f44fa8b5be257ee310e1b74d3fe6de4505a45c7805a02b2d7b44",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Docker Compose definition for a loopback-only local MinIO S3-compatible service with persistent local volume, required operator-provided credentials.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "docker-compose": "compose.yaml"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "docker-compose"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "The service is a Docker Compose deployment. The hosted adapter cannot start a Docker Engine or MinIO container, so there is no service preview.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "docker-compose"
+    ]
+  },
+  "tags": [
+    "s3",
+    "docker-compose",
+    "minio-s3-compatible-local-store"
+  ],
+  "supported_boundary": "Requires Docker Compose v2 and local Docker runtime. Starts only when buyer runs compose up; hosted sandbox cannot start a container or claim S3-compatible service availability. MinIO is not AWS S3 and endpoint behavior should be tested for the chosen SDK.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The service is a Docker Compose deployment. The hosted adapter cannot start a Docker Engine or MinIO container, so there is no service preview.",
+  "publication_blockers": [
+    "upstream_archived_dependency_review_pending",
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "compose.yaml",
+      "sha256": "16ceb5ff52ce74446678b681c208608a9599c7a48526c536463c583d99d2ef8a",
+      "size_bytes": 435,
+      "mime_type": "text/yaml"
+    },
+    {
+      "path": "minio.env.example",
+      "sha256": "037a6e3c4b8f6c87a9c2a50990c7171f52e6c1acd4bc90e4be41e63f3dbf49d2",
+      "size_bytes": 94,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8b3b0f06eb9e65d9eeb27fc21a66363a3240067b3c49100ad3aa241825d13104",
+      "size_bytes": 3055,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "6c08eee696078846c1ce2f0c93f7eecc2f9fe2b562e1fb1555dca4a591e0be2c",
+      "size_bytes": 461,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "c6b78940c7546d8cf550e503da1535208c81121bddf0376c8f2cdf2d8311fe58",
+      "size_bytes": 716,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "image": "minio/minio:RELEASE.2025-04-22T22-12-26Z"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "docker-compose"
+      },
+      "service": {
+        "type": "string",
+        "const": "minio"
+      },
+      "api_port": {
+        "type": "integer",
+        "const": 9000
+      },
+      "console_port": {
+        "type": "integer",
+        "const": 9001
+      }
+    },
+    "required": [
+      "language",
+      "service",
+      "api_port",
+      "console_port"
+    ]
+  },
+  "status": "draft"
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0688",
+  "sku": "AWS-0688",
+  "slug": "agentcore-sdk-agent-runtime-setup",
+  "version": 1,
+  "release_ref": "sha256:1dd5031023af5ee8894a8ad1b5827bdd9cbb0fe277c00a45ca5830b7b1deb2c3",
+  "service": "bedrock-agentcore",
+  "product_kind": "artifact-product",
+  "route_summary": "AgentCore Runtime application entrypoint using the official Python SDK decorator, with input contract and local server startup; model/provider logic remains an explicit application integration.",
+  "supported_boundary": "Python 3.11+, bedrock-agentcore 1.24.2 and Strands Agents 1.16.0, Docker/runtime deployment tooling and buyer AWS account. Hosted preview cannot run this SDK or deploy the runtime; sample handler does not claim model inference.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "bedrock-agentcore",
+    "python",
+    "agentcore-sdk-agent-runtime-setup"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock-agentcore"
+  ],
+  "problem_family_ids": [
+    "bedrock-agentcore-integration"
+  ],
+  "operations": [
+    "agentcore-sdk-agent-runtime-setup"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-bedrock-agentcore-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "bedrock-agentcore-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

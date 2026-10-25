@@ -1,0 +1,83 @@
+[
+  {
+    "kind": "service",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "contract",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "product",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "license",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "purchase-url",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "validation",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "language-adapters",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "sandbox-trial",
+    "subject_hash": "c89d60b0a6f7559ddea82b6a6780e4e6eb61391e92ce557cf3da4c9178b20b47",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  },
+  {
+    "kind": "routing",
+    "subject_hash": "51c30ff9df991196583e3d96c4229f5776a23d475d73753d8f9386eb4b629631",
+    "reviewed_by": "codex-source-and-evidence-review-2026-10-24",
+    "reference": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+    "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
+    "reviewer_type": "ai-source-and-evidence-review",
+    "observed_date": "2026-10-24"
+  }
+]

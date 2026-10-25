@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "name": "orders-api",
+    "role": "orders-api-executor",
+    "timeout": 15,
+    "memory": 256
+  },
+  "api": {
+    "id": "REPLACE_WITH_API_ID"
+  }
+}

@@ -79,7 +79,13 @@ export async function executeCode(env, code, language, grant, onProgress, option
     // Preserve the product's .mjs paths and bytes with an explicit ES module type.
     const modules=Object.fromEntries(Object.entries(options.modules || {}).map(([name,source])=>
       [name,name.endsWith('.mjs')&&typeof source==='string'?{js:source}:source]));
-    const settings = { loader: env.LOADER, timeout, globalOutbound: null, bindings: {}, modules };
+    // Code Mode 0.5.4 pins child Workers to 2025-06-01. Trusted product
+    // previews need the gateway's Node compatibility date (including its
+    // request-local filesystem); buyer-authored execution keeps its settings.
+    const loader = options.privateProductPreview
+      ? {load: definition => env.LOADER.load({...definition,compatibilityDate:'2026-10-18'})}
+      : env.LOADER;
+    const settings = { loader, timeout, globalOutbound: null, bindings: {}, modules };
     const executor = options.executorFactory
       ? await options.executorFactory(settings)
       : new (await import("@cloudflare/codemode")).DynamicWorkerExecutor(settings);

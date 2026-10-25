@@ -1,0 +1,54 @@
+{
+  "sku": "AWS-0637",
+  "slug": "cdk-bedrock",
+  "version": 1,
+  "current_origin": "original Second Wind wrapper; upstream implementation not included",
+  "upstream_repository": "https://github.com/aws/aws-cdk",
+  "primary_documentation": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_bedrock-readme.html",
+  "upstream_license": "Apache-2.0",
+  "dependency_runtime": "typescript",
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "typescript",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "files": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "9b25b0e53d1edfd054a8698c6117d1611084a8479b0e6d478902685c015a7f85",
+    "app.ts": "08485fd8a2a5c8e070c24150338f9604f2b439409f97619b6169d641fc576a0f",
+    "cdk.json": "40c24a321efb0976c32ffdec919056bb2c432a2167c6ccf6fa8c59e7b9126a41",
+    "configuration.schema.json": "00713c8721f242fc3550c9f179e1dbd8402154e7c52b168b7f7f50b14693ec16",
+    "input.schema.json": "00713c8721f242fc3550c9f179e1dbd8402154e7c52b168b7f7f50b14693ec16",
+    "package-lock.json": "0e645670f8f98c80334247e65ffdd0d66445641edaf41a460f5c8751815046c5",
+    "package.json": "6f6c4cdcca21d43e99e04feb2632a9d9afddbe6dc35617e8ac02328e4b1808e9",
+    "preview-contract.json": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
+    "preview-runner.ts": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
+    "preview.ts": "ae0a06a01380c1b3d3b28d59b9558e69bc9c8d4a5cd6f9c00c24e696d049fe7a",
+    "product.ts": "7cfd3e2fee357cd2d4c76e96e849ecc2b17d2a68421db86d72da45a0e9cb3b30",
+    "source-provenance.json": "8716f49050e33cf6db4d396e3844a9f1a8402c72dcde26321b6a7ecba725f5a6"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "LICENSE",
+        "README.md",
+        "app.ts",
+        "cdk.json",
+        "configuration.schema.json",
+        "input.schema.json",
+        "package-lock.json",
+        "package.json",
+        "preview-contract.json",
+        "preview-runner.ts",
+        "preview.ts",
+        "product.ts",
+        "source-provenance.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "declared package license; not an independent legal certification"
+    }
+  ]
+}

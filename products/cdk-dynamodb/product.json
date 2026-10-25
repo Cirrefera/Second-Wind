@@ -1,0 +1,28 @@
+{
+  "sku": "AWS-0634",
+  "slug": "cdk-dynamodb",
+  "name": "AWS CDK DynamoDB constructs",
+  "kind": "artifact",
+  "service": "dynamodb",
+  "summary": "Define an on-demand DynamoDB table with keys, encryption, and a selected global secondary index.",
+  "source_repo": "https://github.com/aws/aws-cdk",
+  "source_url": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_dynamodb-readme.html",
+  "license_spdx": "Apache-2.0",
+  "invoke_kind": "resolve",
+  "mime_type": "application/json",
+  "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"title\":\"AWS CDK DynamoDB constructs configuration\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\"],\"properties\":{\"language\":{\"const\":\"typescript\"}}}",
+  "input_example": "{\"language\":\"typescript\"}",
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "typescript",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "delivery_entrypoint": "product.ts",
+  "application_entrypoint": "app.ts",
+  "preview_entrypoint": "preview.ts",
+  "exports": [
+    "buildStack"
+  ]
+}

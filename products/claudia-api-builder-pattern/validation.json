@@ -1,0 +1,7 @@
+{
+  "status": "not-run",
+  "reason": "Native entrypoint written but not run; hosted execution unsupported because npm dependencies are unavailable.",
+  "native_private_preview_entrypoint": "preview.js",
+  "hosted_preview_available": false,
+  "aws_deployment": "not-performed"
+}

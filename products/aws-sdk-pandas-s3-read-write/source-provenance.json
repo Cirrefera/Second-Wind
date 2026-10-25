@@ -1,0 +1,58 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0682",
+    "slug": "aws-sdk-pandas-s3-read-write",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws/aws-sdk-pandas",
+    "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+    "structured_pointer": "awswrangler/s3/_read_parquet.py",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "awswrangler/s3/_read_parquet.py",
+      "status": "found",
+      "git_object_sha": "04325877bf12731e57b3572ceb1a284ff0c659e9",
+      "object_type": "blob",
+      "descendant_file_count": 0,
+      "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/s3/_read_parquet.py"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/aws/aws-sdk-pandas",
+  "interface_sources": [
+    "https://aws-sdk-pandas.readthedocs.io/en/stable/api.html",
+    "https://github.com/aws/aws-sdk-pandas"
+  ],
+  "dependencies": {
+    "awswrangler": "3.17.1",
+    "pandas": "2.2.3",
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "238c046fee89bddc80a7a314e7f9f68d2fedf76f9932ee89ed9014fe0bf89d82",
+    "s3_frames.py": "efda0f2a0971c363db98a3d354ec0e23f95537650e046dbe2bde9854a9c5e482",
+    "README.md": "9abdc481be3c64a618b8a9a2c6d99a7ecdf6213c0fea34bf6bcac4fb093c3b5b",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "f267f0921b80e7acd5772f0fa29adbd614e7f7eef089a44b9f672d8857e5ab12",
+    "preview.py": "a4553a59801cc1d62227297a48df273692a467b48b20c0ce2dd1ff67891836c7"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "s3_frames.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0630",
+  "slug": "aws-sdk-ruby-resource-interface",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "aws-sdk",
+  "release_ref": "sha256:064b732c4dfe48eeb415ead74693cdbc3b2c6551fa448050a116371309af0ba0",
+  "content_hash": "064b732c4dfe48eeb415ead74693cdbc3b2c6551fa448050a116371309af0ba0",
+  "hash_scope": "file-package-json-utf8",
+  "gateway_preview_available": false,
+  "local_native_preview_status": "runtime-not-installed",
+  "source_review_status": "pending",
+  "publication_status": "draft",
+  "blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending",
+    "native_preview_execution_not_verified"
+  ]
+}

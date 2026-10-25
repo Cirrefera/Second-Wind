@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0632",
+  "slug": "cdk-lambda-nodejs",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:17d0504637184ba61ece3d132a887748632ca7813bb61d323ec8fe5a91862cbb",
+  "content_hash": "17d0504637184ba61ece3d132a887748632ca7813bb61d323ec8fe5a91862cbb",
+  "hash_scope": "file-package-json-utf8",
+  "gateway_preview_available": false,
+  "local_native_preview_status": "verified",
+  "source_review_status": "pending",
+  "publication_status": "draft",
+  "blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending"
+  ]
+}

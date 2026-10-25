@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0679",
+  "sku": "AWS-0679",
+  "slug": "minio-s3-compatible-local-store",
+  "version": 1,
+  "release_ref": "sha256:949310b7f4c2f44fa8b5be257ee310e1b74d3fe6de4505a45c7805a02b2d7b44",
+  "service": "s3",
+  "product_kind": "artifact-product",
+  "route_summary": "Docker Compose definition for a loopback-only local MinIO S3-compatible service with persistent local volume, required operator-provided credentials.",
+  "supported_boundary": "Requires Docker Compose v2 and local Docker runtime. Starts only when buyer runs compose up; hosted sandbox cannot start a container or claim S3-compatible service availability. MinIO is not AWS S3 and endpoint behavior should be tested for the chosen SDK.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "s3",
+    "docker-compose",
+    "minio-s3-compatible-local-store"
+  ],
+  "taxonomy_ids": [
+    "aws.s3"
+  ],
+  "problem_family_ids": [
+    "s3-integration"
+  ],
+  "operations": [
+    "minio-s3-compatible-local-store"
+  ],
+  "environments": [
+    "docker-compose"
+  ],
+  "desired_outcomes": [
+    "working-s3-integration"
+  ],
+  "input_kinds": [
+    "native-docker-compose-input"
+  ],
+  "failure_signatures": [
+    "s3-request-failure"
+  ],
+  "languages": [
+    "docker-compose"
+  ],
+  "runtimes": [
+    "docker-compose-v2"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

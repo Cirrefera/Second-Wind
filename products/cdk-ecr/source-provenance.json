@@ -1,0 +1,94 @@
+{
+  "slug": "cdk-ecr",
+  "origin": "Original Second Wind contribution, authored against the AWS CDK v2 public construct API. No AWS CDK upstream source copied.",
+  "upstream": {
+    "repository": "aws/aws-cdk",
+    "revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+    "module": "aws-ecr",
+    "api_reference": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.@aws-cdk-lib.aws_ecr-readme.html"
+  },
+  "license": "Apache-2.0",
+  "runtime_blocker": "CDK synthesis requires aws-cdk-lib and constructs Node modules, which the current Workers request sandbox cannot resolve. Product preview remains unavailable until a reviewed isolated runtime is provided.",
+  "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+  "delivered_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "media_type": "application/octet-stream",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "README.md",
+      "sha256": "a0caae8bf22c945c3856bed55840d11ae23dfcd80e2ed7a29929c97a43482424",
+      "size_bytes": 1304,
+      "media_type": "text/markdown",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "e8a3bd55eb6af8389f3ba958d07ffd705405cc36a07c2fa130149bc9e40dfa35",
+      "size_bytes": 612,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "32624f5ff2c9cebe73d2fd78232c98f187cfb0c5abcc8d93e09f075563f615d4",
+      "size_bytes": 7981,
+      "media_type": "application/json",
+      "license": "dependency metadata only"
+    },
+    {
+      "path": "package.json",
+      "sha256": "c5b7c7f968ccfafd4b07fa8b24b333427992e0c0b141097a816b793115ba6830",
+      "size_bytes": 157,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "85b88c67a34ef6cc6b36f10b5b46b2465f1fa5766e6bd64fd38110376116a4cb",
+      "size_bytes": 1502,
+      "media_type": "text/javascript",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "stack.mjs",
+      "sha256": "ed190a8a05fcee2123930adbf4a63ea64f9597c0bab2e4a53d634f7599da7f7f",
+      "size_bytes": 562,
+      "media_type": "text/javascript",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "cbf07a09cd9e5fe4fb79983e554e511186a019ad0e27e6eec0eb6f3cc653c755",
+      "size_bytes": 371,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    }
+  ],
+  "license_mapping": [
+    {
+      "paths": [
+        "LICENSE",
+        "README.md",
+        "config.schema.json",
+        "package.json",
+        "preview.mjs",
+        "stack.mjs",
+        "validation.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "authored original source; upstream code not copied; requires normal legal review"
+    },
+    {
+      "paths": [
+        "package-lock.json"
+      ],
+      "license": "dependency metadata only",
+      "status": "version-pinned dependencies; third-party package licenses remain applicable"
+    }
+  ]
+}

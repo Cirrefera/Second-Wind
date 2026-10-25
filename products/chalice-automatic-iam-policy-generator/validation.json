@@ -1,0 +1,15 @@
+{
+  "result": "passed",
+  "validation_kind": "native-chalice-offline-source-analysis",
+  "chalice": "1.32.0",
+  "boto3": "1.40.18",
+  "policy_count": 1,
+  "action_count": 1,
+  "aws_calls": "not_performed",
+  "deployment": "not_performed",
+  "application_execution": "not_performed",
+  "subprocesses": "not_used",
+  "credential_discovery": "disabled_by_explicit_inert_session_credentials",
+  "sdk_send_boundary": "before-send handler rejects all attempts",
+  "hosted_workers_preview": "unavailable_pending_python_dependency_integration"
+}

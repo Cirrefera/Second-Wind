@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0678",
+  "sku": "AWS-0678",
+  "slug": "aws-s3-ruby-client",
+  "version": 1,
+  "release_ref": "sha256:2b5cf2addb1ead899571665ce3dc5f8a5be0202628c3ba424c129854ae0201c7",
+  "service": "s3",
+  "product_kind": "artifact-product",
+  "route_summary": "Ruby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.",
+  "supported_boundary": "Ruby 3.2+ and aws-sdk-s3 1.233.0. Calls S3 only when invoked with buyer credentials and a bucket. Never embeds credentials; not a replacement HTTP/signature implementation.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "s3",
+    "ruby",
+    "aws-s3-ruby-client"
+  ],
+  "taxonomy_ids": [
+    "aws.s3"
+  ],
+  "problem_family_ids": [
+    "s3-integration"
+  ],
+  "operations": [
+    "aws-s3-ruby-client"
+  ],
+  "environments": [
+    "ruby"
+  ],
+  "desired_outcomes": [
+    "working-s3-integration"
+  ],
+  "input_kinds": [
+    "native-ruby-input"
+  ],
+  "failure_signatures": [
+    "s3-request-failure"
+  ],
+  "languages": [
+    "ruby"
+  ],
+  "runtimes": [
+    "ruby3.2"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

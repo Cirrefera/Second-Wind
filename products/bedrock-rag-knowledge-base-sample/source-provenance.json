@@ -1,0 +1,56 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0686",
+    "slug": "bedrock-rag-knowledge-base-sample",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws-samples/amazon-bedrock-samples",
+    "source_revision": "b5ad367ad897dc8dbb9af0f671b58129d4e19672",
+    "structured_pointer": "rag-solutions/",
+    "observed_deliverable": "artifact_pointer_without_product_assembly",
+    "pointer_inspection": {
+      "path": "rag-solutions",
+      "status": "not_found_in_pinned_tree",
+      "git_object_sha": null,
+      "object_type": null,
+      "descendant_file_count": 0,
+      "url": "https://github.com/aws-samples/amazon-bedrock-samples/tree/b5ad367ad897dc8dbb9af0f671b58129d4e19672/rag-solutions"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/boto/boto3",
+  "interface_sources": [
+    "https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html",
+    "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-retrieve.html"
+  ],
+  "dependencies": {
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "b72da1c0ad026ee5638b4ec426799026ac849b325432c72569fc616871ce15f6",
+    "knowledge_base.py": "ec1256a351f14bc6455347e964f5ddbf28b48bf829f7c7a19ed6471619c1cd1f",
+    "README.md": "43a4958391fcd6b96ded28ac8ccd537dae364d652c8d6d4d602c2aa6d093bafe",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "e8f2a7a1a80c41be481dce929224c248d28858ef33e4b81da923e92d440ff009",
+    "preview.py": "6faa62fb995becf094f781ec39abff07fb9a418f4c2257c9f982cae69c93d78f"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "knowledge_base.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

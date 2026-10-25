@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "current_origin": "Original Second Wind integration source is Apache-2.0. The private preview bundle redistributes the actual pinned dependency closure under the license notices included with this package.",
+  "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
+  "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
+  "upstream_package_path": "packages/batch",
+  "npm_package": "@aws-lambda-powertools/batch",
+  "npm_package_version": "2.36.0",
+  "npm_tarball_integrity": "sha512-FXflvdV+rSzuP57LZg4JGUyZacSeVXuY82TpDKASYdFpaGBI8eJ1pYR6XYsdW+tcV/wykIzHI6kjY5Fyt3Z9fQ==",
+  "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
+  "license": "MIT-0",
+  "dependencies": {
+    "@aws-lambda-powertools/batch": "2.36.0",
+    "@standard-schema/spec": "1.1.0"
+  },
+  "source_interface_urls": [
+    "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/batch"
+  ],
+  "original_file_hashes": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "LICENSE-Powertools-MIT-0": "4045b29c5dcda6eac95d2bf6f97657f97f379f8cba052b6e9e820ee82b3fdae3",
+    "README.md": "30d78b6d58fea017eb59bfa51dae865cc0903eb2c6aacb4d85eb908955de426c",
+    "config.schema.json": "b53dc157d711076e5093efed606c5e043e9a72e7a794de659283f654b54f9409",
+    "package.json": "729ad5fde45568e76ff9f4b94e5e289a36d45789f2c836af538ece6160df6956",
+    "preview.mjs": "4102eaa57bf5380566e4606dea00df660de7b4fd7f683729f3c33eefca01cf15",
+    "src/batch.mjs": "5b4caed334762405d188c868ccba957070bcde6221326db5e4dc71fcdf227a51",
+    "validation.json": "0610119080c70d52c6392be4c6582c84117f7f4a5e11eca9b8752d1c3c41ec34"
+  },
+  "preview_bundle": {
+    "entrypoint": "preview.mjs",
+    "build": "esbuild browser/Worker bundle of the purchased src/batch.mjs integration and its exact pinned dependencies; optional Node multi-concurrency AsyncLocalStorage branch fixed to single-invocation mode",
+    "tested_runtime": "Cloudflare Code Mode / Workerd with compatibility date 2025-06-01 and nodejs_compat",
+    "aws_calls": "none",
+    "bundle_sha256": "4102eaa57bf5380566e4606dea00df660de7b4fd7f683729f3c33eefca01cf15",
+    "bundle_size_bytes": 9232,
+    "dependency_license": "MIT-0; LICENSE-Powertools-MIT-0 included"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Node.js 20+",
+    "aws_calls": "none",
+    "scope": "actual purchased createSqsBatchHandler runs the actual Powertools partial batch processor against synthetic SQS-shaped records"
+  }
+}

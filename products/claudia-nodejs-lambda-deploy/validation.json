@@ -1,0 +1,7 @@
+{
+  "status": "not-run",
+  "reason": "Native private entrypoint is written but not run because the real runtime, service or buyer credentials are unavailable; hosted preview remains disabled.",
+  "native_private_preview_entrypoint": "preview.sh",
+  "hosted_preview_available": false,
+  "aws_deployment": "not-performed"
+}

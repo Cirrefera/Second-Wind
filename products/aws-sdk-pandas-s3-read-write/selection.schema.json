@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "python"
+    },
+    "s3_uri": {
+      "type": "string",
+      "pattern": "^s3://"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "parquet"
+      ]
+    },
+    "dataset": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "language",
+    "s3_uri",
+    "format"
+  ]
+}

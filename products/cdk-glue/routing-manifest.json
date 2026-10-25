@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0667",
+  "sku": "AWS-0667",
+  "slug": "cdk-glue",
+  "version": 2,
+  "release_ref": "sha256:a35a7c6404cb2e92544e81a70635471ce19f41a5529cc3fc0f5db97b5226d3fc",
+  "service": "glue",
+  "product_kind": "artifact-product",
+  "route_summary": "Glue Data Catalog database and encrypted S3 crawler target.",
+  "supported_boundary": "Glue Data Catalog database and encrypted S3 crawler target. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-glue"
+  ],
+  "tags": [
+    "glue",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.glue"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

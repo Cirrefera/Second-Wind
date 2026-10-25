@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0651",
+  "sku": "AWS-0651",
+  "slug": "cdk-stepfunctions-tasks",
+  "version": 2,
+  "service": "states",
+  "product_kind": "artifact-product",
+  "route_summary": "Step Functions service integration tasks for Lambda, DynamoDB, SNS, SQS, Bedrock InvokeModel, and SageMaker training.",
+  "supported_boundary": "Local CDK synthesis for AWS Step Functions service integrations. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "stepfunctions-tasks"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "states",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.states"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "states-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:6354671b4a63dd847092e44969b7fc649bb487ca603b0aa275d26e479ec86082"
+}

@@ -1,0 +1,156 @@
+{
+  "schema_version": "1",
+  "current_origin": "Original Second Wind integration source is Apache-2.0. The private preview bundle redistributes the actual pinned dependency closure under the license notices included with this package.",
+  "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
+  "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
+  "upstream_package_path": "packages/parameters",
+  "npm_package": "@aws-lambda-powertools/parameters",
+  "npm_package_version": "2.36.0",
+  "npm_tarball_integrity": "sha512-345x5em64yHy/7qFWqDa1aY5dESyNhz4xFOjfMcdXS3UIopNt7zSkfpzfszbp3kgLUeLtcYU6akkB9NBbYHRUQ==",
+  "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
+  "license": "MIT-0",
+  "dependencies": {
+    "@aws-lambda-powertools/parameters": "2.36.0",
+    "@aws-sdk/client-ssm": "3.1154.0",
+    "@aws-sdk/client-secrets-manager": "3.1156.0"
+  },
+  "source_interface_urls": [
+    "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/parameters"
+  ],
+  "original_file_hashes": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "0464aeb4ec1a0dddde4d4407b75d8e3f755e51a05468d77eadd7040c2ecf1668",
+    "config.schema.json": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
+    "package.json": "1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c",
+    "preview.mjs": "e9e6081d71dac1baaf1e26a49a84f8786144ee9823649f1b257bbf986f322bd7",
+    "src/parameters.mjs": "82499cce5df1da5e17821fbe0e4d8b97fe1be7c0f27fea990e5648c0d0fd30ad",
+    "preview.source.mjs": "75204e3fa162aa354a2516e0524d5ec5161c9c774078de83503c920f58226139",
+    "package-lock.json": "2107bcbfd55c54ee9ce3a8713f13d56d35f9914ed0ba84eff1c01684dcb672d4",
+    "THIRD_PARTY_NOTICES.md": "af0d948f043d3779b30948330f390fab918ee58ba4e52f7e06e3588c8b8f9a38",
+    "validation.json": "025f43c5eff76c4d5bb1047c032ee51ced163c195051ef617a7846f506f3bcfd"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Cloudflare Worker Loader compatibility date 2026-10-18",
+    "aws_calls": "none",
+    "scope": "A Node.js Lambda helper for Powertools SSM and Secrets Manager reads with cache controls. Private preview runs the actual SSM helper/provider against a local fixture only; no AWS call, credentials, IAM, or service behavior is verified."
+  },
+  "bundled_preview": {
+    "build_tool": {
+      "name": "esbuild",
+      "version": "0.28.1"
+    },
+    "entrypoint": "preview.source.mjs",
+    "bundle_bytes": 240849,
+    "bundle_sha256": "e9e6081d71dac1baaf1e26a49a84f8786144ee9823649f1b257bbf986f322bd7",
+    "external_node_imports": [],
+    "metafile_input_count": 689,
+    "included_packages": [
+      {
+        "name": "@aws-lambda-powertools/commons",
+        "version": "2.36.0",
+        "license": "MIT-0",
+        "integrity": "sha512-rYkMu22qpi9wVWCcj51qMj2eKIFyxzpG5Rsasckjq6MPNzafLk/0G/VhFUY536gjWsgwVKZDuM3jMOsdVJFChw==",
+        "license_files": []
+      },
+      {
+        "name": "@aws-lambda-powertools/parameters",
+        "version": "2.36.0",
+        "license": "MIT-0",
+        "integrity": "sha512-345x5em64yHy/7qFWqDa1aY5dESyNhz4xFOjfMcdXS3UIopNt7zSkfpzfszbp3kgLUeLtcYU6akkB9NBbYHRUQ==",
+        "license_files": []
+      },
+      {
+        "name": "@aws-sdk/client-secrets-manager",
+        "version": "3.1156.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-poP++IuNmZZ6e79fesFn9qTy/IScNiH9I9bCWyevlOFQMI+ZfZQ0Sfz3dsc+c0uMtYVpofRIAd1WO7lCAKhxxg==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/client-ssm",
+        "version": "3.1154.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-/oEcRbd5DAWuP3XRljie5HOJ5yfuDh93g8kBRiQ890sA7nWXPv6RWVOhEUhzlduIY7gsFBSdB/csJyHezZ3BMg==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/core",
+        "version": "3.978.5",
+        "license": "Apache-2.0",
+        "integrity": "sha512-ruI0AWqcrfL20XDS6SwZIJFPOBZ6N0ADa9nLzWlBhxk1aoUjbUX3JkTR9vEmk7o35XpAHi68ahZ4T6RE2U9XyA==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws-sdk/xml-builder",
+        "version": "3.972.41",
+        "license": "Apache-2.0",
+        "integrity": "sha512-ctjVSyCMegrWfXlx6VqzSBFI6UqmQ5ZlnfMhdLIiWmhoH8UAQxSCP5N3OpG7X3k4LnS7ou74C4mt20+bfTW2aQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@aws/lambda-invoke-store",
+        "version": "0.3.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/core",
+        "version": "3.36.2",
+        "license": "Apache-2.0",
+        "integrity": "sha512-oRw0rB9QSUiCZfEs23G5F4Af+b2rQt1lItIICWu5IejFNd+uPM8SWqiKLMpQ6bX1Q7slsLbjuoE2niErFtkVPQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/fetch-http-handler",
+        "version": "5.8.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-ycSJu3tFAQ4v04CBB0agqFMVsSQ1iG3yw+SpgxRqKfaURpQD4CZ8Wn0zPMmSnOuTpTh65Vz+EA0rMrw089wvkA==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/signature-v4",
+        "version": "5.7.4",
+        "license": "Apache-2.0",
+        "integrity": "sha512-tHy0K0VtqNd5Y7Y41h0a0Lhh0L1GzC08dTWg0F7vRJWFtTENg7IZikf3wQkanYIRdb7ngoIPMTmqgUi401fEeQ==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "@smithy/types",
+        "version": "4.19.0",
+        "license": "Apache-2.0",
+        "integrity": "sha512-r7jh49VJxGerfAcTQA6gXcKc+98zOp/tqRwzYjgOE+iSQsP6cEU1hq2QzbuipmP68QtYdY9wKEhiCQZIzHgZ4Q==",
+        "license_files": [
+          "LICENSE"
+        ]
+      },
+      {
+        "name": "bowser",
+        "version": "2.14.1",
+        "license": "MIT",
+        "integrity": "sha512-tzPjzCxygAKWFOJP011oxFHs57HzIhOEracIgAePE4pqB3LikALKnSzUyU4MGs9/iCEUuHlAJTjTc5M+u7YEGg==",
+        "license_files": [
+          "LICENSE"
+        ]
+      }
+    ],
+    "notice_file": "THIRD_PARTY_NOTICES.md"
+  }
+}

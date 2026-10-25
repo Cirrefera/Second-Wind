@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "python"
+    },
+    "sql": {
+      "type": "string",
+      "minLength": 1
+    },
+    "database": {
+      "type": "string",
+      "minLength": 1
+    },
+    "s3_output": {
+      "type": "string",
+      "pattern": "^s3://"
+    },
+    "workgroup": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "language",
+    "sql",
+    "database",
+    "s3_output"
+  ]
+}

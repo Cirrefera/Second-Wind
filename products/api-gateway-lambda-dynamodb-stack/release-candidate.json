@@ -1,0 +1,21 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0560",
+  "slug": "api-gateway-lambda-dynamodb-stack",
+  "version": 1,
+  "release_ref": "sha256:10d76600649628c271754379db195c47c0175d91bc614e4bfc673fb0de287787",
+  "content_hash": "10d76600649628c271754379db195c47c0175d91bc614e4bfc673fb0de287787",
+  "status": "draft",
+  "product_kind": "artifact-product",
+  "service": "apigateway",
+  "hosted_trial_supported": false,
+  "native_synthesis": "passed",
+  "resource_count": 41,
+  "aws_api_calls": "not-performed",
+  "aws_deployment": "not-performed",
+  "publication_blockers": [
+    "hosted_private_preview_unavailable",
+    "trusted_source_review_pending",
+    "publication_approval_pending"
+  ]
+}

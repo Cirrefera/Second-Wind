@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0641",
+  "slug": "cdk-apigatewayv2-integrations",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "api-gateway",
+  "release_ref": "sha256:1695de3ab0635b6ff097dac28064bcc7026e4f0d544e6a97db25d1bb426201da",
+  "content_hash": "1695de3ab0635b6ff097dac28064bcc7026e4f0d544e6a97db25d1bb426201da",
+  "hash_scope": "file-package-json-utf8",
+  "gateway_preview_available": false,
+  "local_native_preview_status": "verified",
+  "source_review_status": "pending",
+  "publication_status": "draft",
+  "blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending"
+  ]
+}

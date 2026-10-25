@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0689",
+  "sku": "AWS-0689",
+  "slug": "agentcore-sdk-memory-management",
+  "version": 1,
+  "release_ref": "sha256:77850315076eea684872c233643d07e4567f276459c90d0018c930d15445770d",
+  "service": "bedrock-agentcore",
+  "product_kind": "artifact-product",
+  "route_summary": "AgentCore Memory lifecycle sample using AWS SDK control/runtime clients to create a memory, record a conversation event, and retrieve relevant memory records.",
+  "supported_boundary": "Python 3.11+ boto3 version with AgentCore Memory service model, AgentCore-enabled Region, IAM permissions, and buyer account. Memory operations persist user content remotely and are never executed by hosted preview.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "bedrock-agentcore",
+    "python",
+    "agentcore-sdk-memory-management"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock-agentcore"
+  ],
+  "problem_family_ids": [
+    "bedrock-agentcore-integration"
+  ],
+  "operations": [
+    "agentcore-sdk-memory-management"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-bedrock-agentcore-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "bedrock-agentcore-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

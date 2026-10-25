@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0684",
+  "sku": "AWS-0684",
+  "slug": "aws-sdk-pandas-redshift-connection",
+  "version": 1,
+  "release_ref": "sha256:c904f56597f835eca6586a55c7a7f496106ea99d85e5bb7a51f0b51f539e7834",
+  "service": "redshift",
+  "product_kind": "artifact-product",
+  "route_summary": "Python awswrangler Redshift connection helper using a buyer-managed password from environment and the real Redshift connector/DataFrame query path.",
+  "supported_boundary": "Python 3.11+, awswrangler 3.17.1 and compatible database-driver dependencies, reachable Redshift endpoint, network access and buyer credentials. Query execution is remote and not hosted-previewed.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "redshift",
+    "python",
+    "aws-sdk-pandas-redshift-connection"
+  ],
+  "taxonomy_ids": [
+    "aws.redshift"
+  ],
+  "problem_family_ids": [
+    "redshift-integration"
+  ],
+  "operations": [
+    "aws-sdk-pandas-redshift-connection"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-redshift-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "redshift-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

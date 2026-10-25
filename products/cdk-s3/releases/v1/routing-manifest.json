@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0635",
+  "sku": "AWS-0635",
+  "slug": "cdk-s3",
+  "version": 1,
+  "release_ref": "sha256:9e2cbf846e62204cc6eb77131d95529b15a10e35ff77d7acd0ec3035bce9c44e",
+  "service": "s3",
+  "product_kind": "artifact-product",
+  "route_summary": "Define a private S3 bucket with encryption, versioning, and lifecycle configuration.",
+  "supported_boundary": "Define a private S3 bucket with encryption, versioning, and lifecycle configuration. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-s3",
+    "s3",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.s3"
+  ],
+  "problem_family_ids": [
+    "aws-s3-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "s3-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}
