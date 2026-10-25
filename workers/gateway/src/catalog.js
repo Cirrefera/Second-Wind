@@ -46,12 +46,14 @@ async function publicProduct(row) {
   }
   product.sandbox_available=Boolean(product.sandbox_eligible && _component_pricing
     && release && await previewAvailable(release));
-  if(product.sandbox_available) product.sandbox_access_url='/api/trials/access';
+  if(product.sandbox_available) {
+    product.sandbox_access_url='/api/trials/access';
+    product.trial_url='/api/trials';
+  }
   if (_component_pricing) {
     product.price_role='maximum';
     product.pricing_mode='proportional-components';
     product.components_url=`/api/products/${encodeURIComponent(product.slug)}/components`;
-    product.trial_url='/api/trials';
     product.pricing_status=release?.pricing ? 'configured' : 'not_configured';
     if (!release?.pricing) { product.price_role='historical-unconfirmed'; delete product.max_amount_atomic; }
   }

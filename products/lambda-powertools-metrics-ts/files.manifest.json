@@ -54,8 +54,8 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "27d06f226ca494b4d0079ca0ed36e986651de0132893a0e58ecb094af2f87730",
-      "size_bytes": 3563,
+      "sha256": "5b78b3e11229e16043408e6cdf81aa6af2ef61a938f79e479a3c8a7c100a9157",
+      "size_bytes": 3659,
       "mime_type": "application/json"
     },
     {

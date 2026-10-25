@@ -4,7 +4,7 @@
   "sku": "AWS-0552",
   "slug": "lambda-powertools-metrics-ts",
   "version": 1,
-  "release_ref": "sha256:50c05aefefa4070db2ad9f51d8331d3acb7576d6dd6f374f96bc861d39f0de29",
+  "release_ref": "sha256:8c27c1758cf331a9136c358cb3e1be3b99a32db403aac3997b0b3708ac9ae475",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "A private Worker preview runs actual Powertools Metrics, parses generated EMF, and checks configured namespace and dimensions; it makes no AWS calls.",

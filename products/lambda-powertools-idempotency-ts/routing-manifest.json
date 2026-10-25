@@ -4,7 +4,7 @@
   "sku": "AWS-0553",
   "slug": "lambda-powertools-idempotency-ts",
   "version": 1,
-  "release_ref": "sha256:fabe1726798e0258efa04664ef66d1502b769de9adfa8f148b028294e7f9d098",
+  "release_ref": "sha256:66703bbb31e0e8809fc3baa7240a8436caebd7fdf0c18bd55f560d6bda7ba835",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "A private Worker preview runs the actual Powertools idempotency helper with a local AWS SDK DynamoDB command fixture; it makes no AWS calls.",

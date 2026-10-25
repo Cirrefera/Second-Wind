@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+  "current_origin": "Original Second Wind integration source is Apache-2.0. The private preview bundle redistributes the actual pinned dependency closure under the license notices included with this package.",
   "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
   "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
   "upstream_package_path": "packages/idempotency",
@@ -11,7 +11,8 @@
   "license": "MIT-0",
   "dependencies": {
     "@aws-lambda-powertools/idempotency": "2.36.0",
-    "@aws-sdk/client-dynamodb": "3.1156.0"
+    "@aws-sdk/client-dynamodb": "3.1156.0",
+    "@aws-sdk/util-dynamodb": "3.996.9"
   },
   "source_interface_urls": [
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/idempotency"
@@ -26,7 +27,7 @@
     "preview.source.mjs": "a32bb157a0462d73550570faba987b5df2254d42300658cba78466f0336f47e8",
     "package-lock.json": "6115776d4ffa74913cf7e838b5821f3d9921509f0b9f5731d1d7af3c3dc22488",
     "THIRD_PARTY_NOTICES.md": "5c733b8fbf60002204ae242f3ccc370041a85c7db4654ea94a45a0f5c875ca21",
-    "validation.json": "15773b9eb1c0b430bcf8d0b454a8184e6c17c459302c5d098b0c92777cf5da02"
+    "validation.json": "a53a95ac8c4218c0bf12daccc1746bc4e7987cd64ef61af2d263523c0a7928d3"
   },
   "native_preview": {
     "entrypoint": "preview.mjs",

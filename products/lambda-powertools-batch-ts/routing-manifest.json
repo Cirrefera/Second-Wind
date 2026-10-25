@@ -4,11 +4,11 @@
   "sku": "AWS-0555",
   "slug": "lambda-powertools-batch-ts",
   "version": 1,
-  "release_ref": "sha256:194edc6e141f4038aac0d69dc267c4509a0546d2f76c76554a8b2f1b3cf0b062",
+  "release_ref": "sha256:fb62928abc4e0cb8af20329dc84b0d0a36936f671914a2005d02a57f86fb6d0d",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "A Node.js Lambda helper that runs an asynchronous SQS batch handler through the actual Powertools BatchProcessor and returns its partial failure response. Protected preview executes the real processor on synthetic records only.",
-  "supported_boundary": "A Node.js Lambda helper that runs an asynchronous SQS batch handler through the actual Powertools BatchProcessor and returns its partial failure response. Protected preview executes the real processor on synthetic records only. Protected preview executes the purchased handler module on synthetic records only; it does not invoke Lambda, SQS, or AWS.",
+  "supported_boundary": "A Node.js Lambda helper using the actual Powertools BatchProcessor for standard SQS partial-batch responses. Private preview executes the purchased helper on two synthetic records and reports one deliberate failure; it makes no Lambda, SQS, or AWS call.",
   "language_policy": "explicit",
   "aliases": [
     "lambda-powertools-batch-ts",

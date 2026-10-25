@@ -42,8 +42,8 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "dab07599c83f56f4a1095b3212417f7f793915d3917904ea310a72d36fa06f85",
-      "size_bytes": 2505,
+      "sha256": "c809f2b5da0819861b5a353c112f3da10f45e7d9ca022bc205b40a1999ab53c6",
+      "size_bytes": 2639,
       "mime_type": "application/json"
     },
     {
@@ -54,8 +54,8 @@
     },
     {
       "path": "validation.json",
-      "sha256": "2c17df664ad94c7d3ecc12c5521f32340a9fcc06d2b278e50083db99501dcdbd",
-      "size_bytes": 1311,
+      "sha256": "0610119080c70d52c6392be4c6582c84117f7f4a5e11eca9b8752d1c3c41ec34",
+      "size_bytes": 1337,
       "mime_type": "application/json"
     }
   ]

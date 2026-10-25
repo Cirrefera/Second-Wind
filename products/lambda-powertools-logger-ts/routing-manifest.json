@@ -4,7 +4,7 @@
   "sku": "AWS-0550",
   "slug": "lambda-powertools-logger-ts",
   "version": 1,
-  "release_ref": "sha256:c337a248d26e7e3c74008c0c4fd4a4657f7554d7ba0c2293ac97fd1fb8a080f4",
+  "release_ref": "sha256:953238e380c5c012e38d2766390e9e804dcb05fe88b0688d4488f770ce6adbc9",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "A private Worker preview runs the actual Powertools Logger helper with a synthetic request ID and honors configured log level; it makes no AWS calls.",

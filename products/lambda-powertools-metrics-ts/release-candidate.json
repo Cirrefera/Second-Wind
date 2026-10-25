@@ -5,8 +5,8 @@
   "version": 1,
   "product_kind": "artifact-product",
   "service": "lambda",
-  "release_ref": "sha256:50c05aefefa4070db2ad9f51d8331d3acb7576d6dd6f374f96bc861d39f0de29",
-  "content_hash": "50c05aefefa4070db2ad9f51d8331d3acb7576d6dd6f374f96bc861d39f0de29",
+  "release_ref": "sha256:8c27c1758cf331a9136c358cb3e1be3b99a32db403aac3997b0b3708ac9ae475",
+  "content_hash": "8c27c1758cf331a9136c358cb3e1be3b99a32db403aac3997b0b3708ac9ae475",
   "hash_scope": "file-package-json-utf8",
   "mime_type": "application/json",
   "origin": "Second Wind",
@@ -143,8 +143,8 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "27d06f226ca494b4d0079ca0ed36e986651de0132893a0e58ecb094af2f87730",
-      "size_bytes": 3563,
+      "sha256": "5b78b3e11229e16043408e6cdf81aa6af2ef61a938f79e479a3c8a7c100a9157",
+      "size_bytes": 3659,
       "mime_type": "application/json"
     },
     {
@@ -230,11 +230,11 @@
           "size_bytes": 1856
         },
         {
-          "content": "{\n  \"schema_version\": \"1\",\n  \"current_origin\": \"Original Second Wind integration code; no upstream implementation source is redistributed.\",\n  \"upstream_repository\": \"https://github.com/aws-powertools/powertools-lambda-typescript\",\n  \"source_revision\": \"0595159ed90c72cc9a004a98923b9778b876726a\",\n  \"upstream_package_path\": \"packages/metrics\",\n  \"npm_package\": \"@aws-lambda-powertools/metrics\",\n  \"npm_package_version\": \"2.36.0\",\n  \"npm_tarball_integrity\": \"sha512-Y2+c406USCVjJPmJ6zOiZjbqdJUp683yPWVqbQoNCNVSBq5WzhpUpJ9puUY6tokwY1wC79K4xitpU/85yMqJqw==\",\n  \"npm_integrity_check\": \"verified against the exact cached published tarball using SHA-512\",\n  \"license\": \"MIT-0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/metrics\": \"2.36.0\"\n  },\n  \"source_interface_urls\": [\n    \"https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/metrics\"\n  ],\n  \"original_file_hashes\": {\n    \"LICENSE\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n    \"README.md\": \"ed3e103aadf2fa4648c82c3f8fad67fd6a69caed9d71f4965b3cca53a870f619\",\n    \"config.schema.json\": \"189cb0c62ac3047f15c72cba62733e44d7f0c9f8d8606907da6d0263fc4e61ea\",\n    \"package.json\": \"186e9f248c8c8c487df794b4bac25723c68cc55b8754106f84eb46d21d633467\",\n    \"preview.mjs\": \"fbea6d81a4f6824a8ea5f5bd7c7994e53d6734ecbe52be1b2db3b7092e0b4e0e\",\n    \"src/metrics.mjs\": \"389b61ecf8f1b5a5d4932900d9522a415077d30c26bb184782f91b0afdea7b6f\",\n    \"preview.source.mjs\": \"936eb34891dc18e41b5f962be7994e478e66609a55a2d990d52e094086f711f6\",\n    \"package-lock.json\": \"5f81930e37299f4a75ef1db65f53582fe898a0e45ab021e5a7b85297f4d0d6b4\",\n    \"preview-console.mjs\": \"dfb52783b7e7183c4bb7498379b28a3d586f9bffb09c31cafa482923d573c530\",\n    \"THIRD_PARTY_NOTICES.md\": \"f957c956d3fcbba1be6b70bcda94d157f2c0737de15fbe831df1729ee3c56b04\",\n    \"validation.json\": \"0c1226c8fa2d292556807b73e17aa110fb0a6c06df9678b61d49b23d9974d07c\"\n  },\n  \"native_preview\": {\n    \"entrypoint\": \"preview.mjs\",\n    \"runtime\": \"Cloudflare Worker Loader compatibility date 2026-10-18\",\n    \"aws_calls\": \"none\",\n    \"scope\": \"A Node.js Lambda helper for EMF count metrics. Private preview executes actual Powertools Metrics and validates its local EMF namespace and dimensions; no CloudWatch ingestion or AWS call is verified.\"\n  },\n  \"bundled_preview\": {\n    \"build_tool\": {\n      \"name\": \"esbuild\",\n      \"version\": \"0.28.1\"\n    },\n    \"entrypoint\": \"preview.source.mjs\",\n    \"bundle_bytes\": 17957,\n    \"bundle_sha256\": \"fbea6d81a4f6824a8ea5f5bd7c7994e53d6734ecbe52be1b2db3b7092e0b4e0e\",\n    \"external_node_imports\": [],\n    \"metafile_input_count\": 21,\n    \"included_packages\": [\n      {\n        \"name\": \"@aws-lambda-powertools/commons\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-rYkMu22qpi9wVWCcj51qMj2eKIFyxzpG5Rsasckjq6MPNzafLk/0G/VhFUY536gjWsgwVKZDuM3jMOsdVJFChw==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws-lambda-powertools/metrics\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-Y2+c406USCVjJPmJ6zOiZjbqdJUp683yPWVqbQoNCNVSBq5WzhpUpJ9puUY6tokwY1wC79K4xitpU/85yMqJqw==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws/lambda-invoke-store\",\n        \"version\": \"0.3.0\",\n        \"license\": \"Apache-2.0\",\n        \"integrity\": \"sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==\",\n        \"license_files\": [\n          \"LICENSE\"\n        ]\n      }\n    ],\n    \"notice_file\": \"THIRD_PARTY_NOTICES.md\"\n  }\n}\n",
+          "content": "{\n  \"schema_version\": \"1\",\n  \"current_origin\": \"Original Second Wind integration source is Apache-2.0. The private preview bundle redistributes the actual pinned dependency closure under the license notices included with this package.\",\n  \"upstream_repository\": \"https://github.com/aws-powertools/powertools-lambda-typescript\",\n  \"source_revision\": \"0595159ed90c72cc9a004a98923b9778b876726a\",\n  \"upstream_package_path\": \"packages/metrics\",\n  \"npm_package\": \"@aws-lambda-powertools/metrics\",\n  \"npm_package_version\": \"2.36.0\",\n  \"npm_tarball_integrity\": \"sha512-Y2+c406USCVjJPmJ6zOiZjbqdJUp683yPWVqbQoNCNVSBq5WzhpUpJ9puUY6tokwY1wC79K4xitpU/85yMqJqw==\",\n  \"npm_integrity_check\": \"verified against the exact cached published tarball using SHA-512\",\n  \"license\": \"MIT-0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/metrics\": \"2.36.0\"\n  },\n  \"source_interface_urls\": [\n    \"https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/metrics\"\n  ],\n  \"original_file_hashes\": {\n    \"LICENSE\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n    \"README.md\": \"ed3e103aadf2fa4648c82c3f8fad67fd6a69caed9d71f4965b3cca53a870f619\",\n    \"config.schema.json\": \"189cb0c62ac3047f15c72cba62733e44d7f0c9f8d8606907da6d0263fc4e61ea\",\n    \"package.json\": \"186e9f248c8c8c487df794b4bac25723c68cc55b8754106f84eb46d21d633467\",\n    \"preview.mjs\": \"fbea6d81a4f6824a8ea5f5bd7c7994e53d6734ecbe52be1b2db3b7092e0b4e0e\",\n    \"src/metrics.mjs\": \"389b61ecf8f1b5a5d4932900d9522a415077d30c26bb184782f91b0afdea7b6f\",\n    \"preview.source.mjs\": \"936eb34891dc18e41b5f962be7994e478e66609a55a2d990d52e094086f711f6\",\n    \"package-lock.json\": \"5f81930e37299f4a75ef1db65f53582fe898a0e45ab021e5a7b85297f4d0d6b4\",\n    \"preview-console.mjs\": \"dfb52783b7e7183c4bb7498379b28a3d586f9bffb09c31cafa482923d573c530\",\n    \"THIRD_PARTY_NOTICES.md\": \"f957c956d3fcbba1be6b70bcda94d157f2c0737de15fbe831df1729ee3c56b04\",\n    \"validation.json\": \"2d60fda0a9725412061b39d588a9aedbdaa8d5f554aa472eb5979a9ebec44bad\"\n  },\n  \"native_preview\": {\n    \"entrypoint\": \"preview.mjs\",\n    \"runtime\": \"Cloudflare Worker Loader compatibility date 2026-10-18\",\n    \"aws_calls\": \"none\",\n    \"scope\": \"A Node.js Lambda helper for EMF count metrics. Private preview executes actual Powertools Metrics and validates its local EMF namespace and dimensions; no CloudWatch ingestion or AWS call is verified.\"\n  },\n  \"bundled_preview\": {\n    \"build_tool\": {\n      \"name\": \"esbuild\",\n      \"version\": \"0.28.1\"\n    },\n    \"entrypoint\": \"preview.source.mjs\",\n    \"bundle_bytes\": 17957,\n    \"bundle_sha256\": \"fbea6d81a4f6824a8ea5f5bd7c7994e53d6734ecbe52be1b2db3b7092e0b4e0e\",\n    \"external_node_imports\": [],\n    \"metafile_input_count\": 21,\n    \"included_packages\": [\n      {\n        \"name\": \"@aws-lambda-powertools/commons\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-rYkMu22qpi9wVWCcj51qMj2eKIFyxzpG5Rsasckjq6MPNzafLk/0G/VhFUY536gjWsgwVKZDuM3jMOsdVJFChw==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws-lambda-powertools/metrics\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-Y2+c406USCVjJPmJ6zOiZjbqdJUp683yPWVqbQoNCNVSBq5WzhpUpJ9puUY6tokwY1wC79K4xitpU/85yMqJqw==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws/lambda-invoke-store\",\n        \"version\": \"0.3.0\",\n        \"license\": \"Apache-2.0\",\n        \"integrity\": \"sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==\",\n        \"license_files\": [\n          \"LICENSE\"\n        ]\n      }\n    ],\n    \"notice_file\": \"THIRD_PARTY_NOTICES.md\"\n  }\n}\n",
           "mime_type": "application/json",
           "path": "source-provenance.json",
-          "sha256": "27d06f226ca494b4d0079ca0ed36e986651de0132893a0e58ecb094af2f87730",
-          "size_bytes": 3563
+          "sha256": "5b78b3e11229e16043408e6cdf81aa6af2ef61a938f79e479a3c8a7c100a9157",
+          "size_bytes": 3659
         },
         {
           "content": "import { Metrics, MetricUnit } from '@aws-lambda-powertools/metrics';\n\nconst SERVICE = /^[A-Za-z0-9_.-]{1,64}$/;\nconst METRIC = /^[A-Za-z][A-Za-z0-9_.-]{0,254}$/;\n\nexport function createMetrics({ namespace, service_name, default_dimensions = {} } = {}) {\n  if (typeof namespace !== 'string' || !namespace.trim() || namespace.length > 255) throw new Error('invalid_namespace');\n  if (typeof service_name !== 'string' || !SERVICE.test(service_name)) throw new Error('invalid_service_name');\n  if (!default_dimensions || Array.isArray(default_dimensions) || typeof default_dimensions !== 'object'\n      || Object.keys(default_dimensions).length > 8\n      || Object.values(default_dimensions).some(value => typeof value !== 'string' || value.length > 250)) {\n    throw new Error('invalid_default_dimensions');\n  }\n  return new Metrics({ namespace, serviceName: service_name, defaultDimensions: default_dimensions });\n}\n\nexport function recordCount(metrics, name, value = 1) {\n  if (!metrics || typeof metrics.addMetric !== 'function') throw new Error('metrics_instance_required');\n  if (typeof name !== 'string' || !METRIC.test(name)) throw new Error('invalid_metric_name');\n  if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) throw new Error('invalid_metric_value');\n  metrics.addMetric(name, MetricUnit.Count, value);\n}\n\n/** Emits an EMF JSON document to stdout; CloudWatch ingestion is asynchronous. */\nexport function flushMetrics(metrics) {\n  if (!metrics || typeof metrics.publishStoredMetrics !== 'function') throw new Error('metrics_instance_required');\n  metrics.publishStoredMetrics();\n}\n",
@@ -296,5 +296,28 @@
       "diagnostic_codes",
       "selected_components"
     ]
+  },
+  "validation": {
+    "sku": "AWS-0552",
+    "version": 1,
+    "status": "draft",
+    "native_runtime": "Node.js Lambda 20+",
+    "package_execution": "not_performed_in_gateway",
+    "aws_calls": "not_performed",
+    "hosted_preview_available": true,
+    "hosted_preview_blocker": "",
+    "checks": [
+      "published npm package integrity verified",
+      "package API shape inspected at pinned 2.36.0",
+      "delivered JavaScript syntax checked",
+      "native private preview entrypoint executed the real pinned Powertools API with synthetic input or a local fixture"
+    ],
+    "independent_product_review": "pending",
+    "publication_approval": "pending",
+    "native_preview_entrypoint": "preview.mjs",
+    "native_preview_status": "private_worker_preview_passed",
+    "native_preview_aws_calls": "none",
+    "private_preview_bundle_sha256": "fbea6d81a4f6824a8ea5f5bd7c7994e53d6734ecbe52be1b2db3b7092e0b4e0e",
+    "private_preview_runtime": "Worker Loader compatibility date 2026-10-18; no AWS calls"
   }
 }

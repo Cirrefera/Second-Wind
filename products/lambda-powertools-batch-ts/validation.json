@@ -3,7 +3,7 @@
   "version": 1,
   "status": "draft",
   "native_runtime": "Node.js Lambda 20+",
-  "package_execution": "not_performed_in_gateway",
+  "package_execution": "actual_private_preview_executed_locally_in_Workerd",
   "aws_calls": "not_performed",
   "hosted_preview_available": true,
   "hosted_preview_blocker": null,

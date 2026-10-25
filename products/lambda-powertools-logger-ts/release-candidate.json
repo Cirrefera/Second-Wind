@@ -5,8 +5,8 @@
   "version": 1,
   "product_kind": "artifact-product",
   "service": "lambda",
-  "release_ref": "sha256:c337a248d26e7e3c74008c0c4fd4a4657f7554d7ba0c2293ac97fd1fb8a080f4",
-  "content_hash": "c337a248d26e7e3c74008c0c4fd4a4657f7554d7ba0c2293ac97fd1fb8a080f4",
+  "release_ref": "sha256:953238e380c5c012e38d2766390e9e804dcb05fe88b0688d4488f770ce6adbc9",
+  "content_hash": "953238e380c5c012e38d2766390e9e804dcb05fe88b0688d4488f770ce6adbc9",
   "hash_scope": "file-package-json-utf8",
   "mime_type": "application/json",
   "origin": "Second Wind",
@@ -131,8 +131,8 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "158669bd0aba38c69cde8b010ddfc32d3f57d075fc5e8068bc6a9926ae2fdfc6",
-      "size_bytes": 3516,
+      "sha256": "9d3dc719710539984b32439eeb904b3ede969cae54986830b46cb16b2d1b8e5e",
+      "size_bytes": 3612,
       "mime_type": "application/json"
     },
     {
@@ -211,11 +211,11 @@
           "size_bytes": 2030
         },
         {
-          "content": "{\n  \"schema_version\": \"1\",\n  \"current_origin\": \"Original Second Wind integration code; no upstream implementation source is redistributed.\",\n  \"upstream_repository\": \"https://github.com/aws-powertools/powertools-lambda-typescript\",\n  \"source_revision\": \"0595159ed90c72cc9a004a98923b9778b876726a\",\n  \"upstream_package_path\": \"packages/logger\",\n  \"npm_package\": \"@aws-lambda-powertools/logger\",\n  \"npm_package_version\": \"2.36.0\",\n  \"npm_tarball_integrity\": \"sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==\",\n  \"npm_integrity_check\": \"verified against the exact cached published tarball using SHA-512\",\n  \"license\": \"MIT-0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/logger\": \"2.36.0\"\n  },\n  \"source_interface_urls\": [\n    \"https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/logger\"\n  ],\n  \"original_file_hashes\": {\n    \"LICENSE\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n    \"README.md\": \"821d8c19c2e228b1d28517140bd3655ce1d73719c7761ecd3c80b3fa83f7858a\",\n    \"config.schema.json\": \"31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4\",\n    \"package.json\": \"420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811\",\n    \"preview.mjs\": \"2e6e1e29344928dadb4e29101bea69d286d0af4c926064c4f417b99862ccc4f8\",\n    \"src/logger.mjs\": \"c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54\",\n    \"preview.source.mjs\": \"1386d60e739b899aba4c0c62e73b34c67baaa0385052668228d2fc8f5dd45024\",\n    \"package-lock.json\": \"6938b873bccb3c8b36ddb89f121168c474ee9bf7f9baaba773b1fc6b1302672a\",\n    \"THIRD_PARTY_NOTICES.md\": \"67259187f7cd1141b2210e33e72c05332f3fd5d95661872b76706977952421a6\",\n    \"validation.json\": \"56ba95e0894927b0567d39ced3bc9b6c01a8484e8c561d35adce6860814f87b4\"\n  },\n  \"native_preview\": {\n    \"entrypoint\": \"preview.mjs\",\n    \"runtime\": \"Cloudflare Worker Loader compatibility date 2026-10-18\",\n    \"aws_calls\": \"none\",\n    \"scope\": \"A Node.js Lambda helper for structured logs. Private preview executes the actual Powertools logger with synthetic context and honors configured suppression; no caller event is logged and no AWS call is made.\"\n  },\n  \"bundled_preview\": {\n    \"build_tool\": {\n      \"name\": \"esbuild\",\n      \"version\": \"0.28.1\"\n    },\n    \"entrypoint\": \"preview.source.mjs\",\n    \"bundle_bytes\": 24675,\n    \"bundle_sha256\": \"2e6e1e29344928dadb4e29101bea69d286d0af4c926064c4f417b99862ccc4f8\",\n    \"external_node_imports\": [\n      \"node:console\",\n      \"node:crypto\"\n    ],\n    \"metafile_input_count\": 23,\n    \"included_packages\": [\n      {\n        \"name\": \"@aws-lambda-powertools/commons\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-rYkMu22qpi9wVWCcj51qMj2eKIFyxzpG5Rsasckjq6MPNzafLk/0G/VhFUY536gjWsgwVKZDuM3jMOsdVJFChw==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws-lambda-powertools/logger\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws/lambda-invoke-store\",\n        \"version\": \"0.3.0\",\n        \"license\": \"Apache-2.0\",\n        \"integrity\": \"sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==\",\n        \"license_files\": [\n          \"LICENSE\"\n        ]\n      }\n    ],\n    \"notice_file\": \"THIRD_PARTY_NOTICES.md\"\n  }\n}\n",
+          "content": "{\n  \"schema_version\": \"1\",\n  \"current_origin\": \"Original Second Wind integration source is Apache-2.0. The private preview bundle redistributes the actual pinned dependency closure under the license notices included with this package.\",\n  \"upstream_repository\": \"https://github.com/aws-powertools/powertools-lambda-typescript\",\n  \"source_revision\": \"0595159ed90c72cc9a004a98923b9778b876726a\",\n  \"upstream_package_path\": \"packages/logger\",\n  \"npm_package\": \"@aws-lambda-powertools/logger\",\n  \"npm_package_version\": \"2.36.0\",\n  \"npm_tarball_integrity\": \"sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==\",\n  \"npm_integrity_check\": \"verified against the exact cached published tarball using SHA-512\",\n  \"license\": \"MIT-0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/logger\": \"2.36.0\"\n  },\n  \"source_interface_urls\": [\n    \"https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/logger\"\n  ],\n  \"original_file_hashes\": {\n    \"LICENSE\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n    \"README.md\": \"821d8c19c2e228b1d28517140bd3655ce1d73719c7761ecd3c80b3fa83f7858a\",\n    \"config.schema.json\": \"31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4\",\n    \"package.json\": \"420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811\",\n    \"preview.mjs\": \"2e6e1e29344928dadb4e29101bea69d286d0af4c926064c4f417b99862ccc4f8\",\n    \"src/logger.mjs\": \"c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54\",\n    \"preview.source.mjs\": \"1386d60e739b899aba4c0c62e73b34c67baaa0385052668228d2fc8f5dd45024\",\n    \"package-lock.json\": \"6938b873bccb3c8b36ddb89f121168c474ee9bf7f9baaba773b1fc6b1302672a\",\n    \"THIRD_PARTY_NOTICES.md\": \"67259187f7cd1141b2210e33e72c05332f3fd5d95661872b76706977952421a6\",\n    \"validation.json\": \"7ab2a45529cae471a70dcecf3307c3780b8bde30777e15c5eb34401024ab0173\"\n  },\n  \"native_preview\": {\n    \"entrypoint\": \"preview.mjs\",\n    \"runtime\": \"Cloudflare Worker Loader compatibility date 2026-10-18\",\n    \"aws_calls\": \"none\",\n    \"scope\": \"A Node.js Lambda helper for structured logs. Private preview executes the actual Powertools logger with synthetic context and honors configured suppression; no caller event is logged and no AWS call is made.\"\n  },\n  \"bundled_preview\": {\n    \"build_tool\": {\n      \"name\": \"esbuild\",\n      \"version\": \"0.28.1\"\n    },\n    \"entrypoint\": \"preview.source.mjs\",\n    \"bundle_bytes\": 24675,\n    \"bundle_sha256\": \"2e6e1e29344928dadb4e29101bea69d286d0af4c926064c4f417b99862ccc4f8\",\n    \"external_node_imports\": [\n      \"node:console\",\n      \"node:crypto\"\n    ],\n    \"metafile_input_count\": 23,\n    \"included_packages\": [\n      {\n        \"name\": \"@aws-lambda-powertools/commons\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-rYkMu22qpi9wVWCcj51qMj2eKIFyxzpG5Rsasckjq6MPNzafLk/0G/VhFUY536gjWsgwVKZDuM3jMOsdVJFChw==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws-lambda-powertools/logger\",\n        \"version\": \"2.36.0\",\n        \"license\": \"MIT-0\",\n        \"integrity\": \"sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==\",\n        \"license_files\": []\n      },\n      {\n        \"name\": \"@aws/lambda-invoke-store\",\n        \"version\": \"0.3.0\",\n        \"license\": \"Apache-2.0\",\n        \"integrity\": \"sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==\",\n        \"license_files\": [\n          \"LICENSE\"\n        ]\n      }\n    ],\n    \"notice_file\": \"THIRD_PARTY_NOTICES.md\"\n  }\n}\n",
           "mime_type": "application/json",
           "path": "source-provenance.json",
-          "sha256": "158669bd0aba38c69cde8b010ddfc32d3f57d075fc5e8068bc6a9926ae2fdfc6",
-          "size_bytes": 3516
+          "sha256": "9d3dc719710539984b32439eeb904b3ede969cae54986830b46cb16b2d1b8e5e",
+          "size_bytes": 3612
         },
         {
           "content": "import { Logger } from '@aws-lambda-powertools/logger';\n\nconst LEVELS = new Set(['DEBUG', 'INFO', 'WARN', 'ERROR']);\nconst SERVICE = /^[A-Za-z0-9_.-]{1,64}$/;\n\nexport function createRequestLogger({ service_name, log_level = 'INFO' } = {}) {\n  if (typeof service_name !== 'string' || !SERVICE.test(service_name)) throw new Error('invalid_service_name');\n  if (!LEVELS.has(log_level)) throw new Error('invalid_log_level');\n  return new Logger({ serviceName: service_name, logLevel: log_level });\n}\n\n/** Add only stable Lambda request metadata; never serialize the whole event. */\nexport function logRequest(logger, context, outcome = 'started') {\n  if (!logger || typeof logger.appendKeys !== 'function' || typeof logger.info !== 'function') throw new Error('logger_required');\n  if (!context || typeof context.awsRequestId !== 'string') throw new Error('lambda_context_required');\n  logger.appendKeys({ aws_request_id: context.awsRequestId });\n  logger.info('lambda_request', { outcome });\n}\n",
@@ -277,5 +277,28 @@
       "diagnostic_codes",
       "selected_components"
     ]
+  },
+  "validation": {
+    "sku": "AWS-0550",
+    "version": 1,
+    "status": "draft",
+    "native_runtime": "Node.js Lambda 20+",
+    "package_execution": "not_performed_in_gateway",
+    "aws_calls": "not_performed",
+    "hosted_preview_available": true,
+    "hosted_preview_blocker": "",
+    "checks": [
+      "published npm package integrity verified",
+      "package API shape inspected at pinned 2.36.0",
+      "delivered JavaScript syntax checked",
+      "native private preview entrypoint executed the real pinned Powertools API with synthetic input or a local fixture"
+    ],
+    "independent_product_review": "pending",
+    "publication_approval": "pending",
+    "native_preview_entrypoint": "preview.mjs",
+    "native_preview_status": "private_worker_preview_passed",
+    "native_preview_aws_calls": "none",
+    "private_preview_bundle_sha256": "2e6e1e29344928dadb4e29101bea69d286d0af4c926064c4f417b99862ccc4f8",
+    "private_preview_runtime": "Worker Loader compatibility date 2026-10-18; no AWS calls"
   }
 }

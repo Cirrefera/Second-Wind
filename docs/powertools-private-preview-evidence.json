@@ -1,0 +1,298 @@
+[
+  {
+    "slug": "lambda-powertools-logger-ts",
+    "manifest_hash": "1e1d549a2117f67a7cd14d099afa3fe4ed14d4aebf33a52a3b4f5700b89bf55e",
+    "routing_hash": "b59f9ef13dea516b39b0fa84c5cf16fef1f1d72f028eac599c5921d4eb8919d9",
+    "payload_hash": "371cce544c8ef12907e6684e8b5ad40bd7e36195785aa88c7afdda6c20fd2d0f",
+    "private_preview_and_isolation": "passed",
+    "cases": [
+      {
+        "configuration": {
+          "language": "javascript",
+          "service_name": "orders",
+          "log_level": "DEBUG"
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-logger-ts",
+          "operation_count": 1,
+          "diagnostic_codes": [],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      },
+      {
+        "configuration": {
+          "language": "javascript",
+          "service_name": "orders",
+          "log_level": "INFO"
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-logger-ts",
+          "operation_count": 1,
+          "diagnostic_codes": [],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      },
+      {
+        "configuration": {
+          "language": "javascript",
+          "service_name": "orders",
+          "log_level": "WARN"
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-logger-ts",
+          "operation_count": 0,
+          "diagnostic_codes": [],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      },
+      {
+        "configuration": {
+          "language": "javascript",
+          "service_name": "orders",
+          "log_level": "ERROR"
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-logger-ts",
+          "operation_count": 0,
+          "diagnostic_codes": [],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      }
+    ]
+  },
+  {
+    "slug": "lambda-powertools-metrics-ts",
+    "manifest_hash": "e6ebdcaab9802c904b954f6d468b085d984af3743f55e6730a9d9174b1b83890",
+    "routing_hash": "bd1571be09af0ab6d0fd26673cf690018cf4da96d11fda59e8e83c78156df5eb",
+    "payload_hash": "52f82e543847b319871753f687ef83d4d9c2f86424c1f0250cff6afdb62bb6bb",
+    "private_preview_and_isolation": "passed",
+    "cases": [
+      {
+        "configuration": {
+          "language": "javascript",
+          "namespace": "Orders",
+          "service_name": "orders"
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-metrics-ts",
+          "operation_count": 1,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      },
+      {
+        "configuration": {
+          "language": "javascript",
+          "namespace": "Orders",
+          "service_name": "orders",
+          "default_dimensions": {
+            "environment": "preview",
+            "region": "fixture"
+          }
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-metrics-ts",
+          "operation_count": 1,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      }
+    ]
+  },
+  {
+    "slug": "lambda-powertools-idempotency-ts",
+    "manifest_hash": "137ea919004f1e504d28d4ff85fd895b522c42f226d85493328ca63c1ac67dbf",
+    "routing_hash": "9cad9fea10f6d7dad8e291134e4f41f2f0624393cfde1d2a06c5d512c8496413",
+    "payload_hash": "3f2bbb4f4b8139fcb70f1005dd08a970c399d7d56fe0b0bde7f687533d920535",
+    "private_preview_and_isolation": "passed",
+    "cases": [
+      {
+        "configuration": {
+          "language": "javascript",
+          "table_name": "preview-table",
+          "event_key_jmespath": "body.orderId"
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-idempotency-ts",
+          "operation_count": 1,
+          "verification_count": 1,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      },
+      {
+        "configuration": {
+          "language": "javascript",
+          "table_name": "preview-table",
+          "event_key_jmespath": "body.orderId",
+          "expires_after_seconds": 60,
+          "payload_validation_jmespath": "body.orderId"
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-idempotency-ts",
+          "operation_count": 1,
+          "verification_count": 1,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      }
+    ]
+  },
+  {
+    "slug": "lambda-powertools-parameters-ts",
+    "manifest_hash": "4e86978724fd99ae044ddd06cad71afd86300108530d45da542be15b7221c29a",
+    "routing_hash": "7a7e340995f8eae283206810c37426c6be1680e4c24248f7d7abe7f9a7bea138",
+    "payload_hash": "229c7067501fc854b66d403ce423c5d696e8e354fce55a3d72f23a869bec6a8b",
+    "private_preview_and_isolation": "passed",
+    "cases": [
+      {
+        "configuration": {
+          "language": "javascript",
+          "max_age_seconds": 0
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-parameters-ts",
+          "operation_count": 1,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      },
+      {
+        "configuration": {
+          "language": "javascript",
+          "max_age_seconds": 30
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-parameters-ts",
+          "operation_count": 1,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      },
+      {
+        "configuration": {
+          "language": "javascript",
+          "max_age_seconds": 86400
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-parameters-ts",
+          "operation_count": 1,
+          "diagnostic_codes": [
+            "local_fixture_only"
+          ],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      }
+    ]
+  },
+  {
+    "slug": "lambda-powertools-batch-ts",
+    "manifest_hash": "7348093219ab1c888c62dda0b443fbe903e7927fd46150bcfa9b67306ca84587",
+    "routing_hash": "f1bdca2b6356bd6d867b4ce06ac902128353668a08ac4b8cd289ade39e9df164",
+    "payload_hash": "c2f4c3813dd7983606097ec0054c9d2a6cf7bfa007bd9756387aba06433166cb",
+    "private_preview_and_isolation": "passed",
+    "cases": [
+      {
+        "configuration": {
+          "language": "javascript",
+          "event_source": "sqs",
+          "report_batch_item_failures": true
+        },
+        "result": {
+          "ok": true,
+          "status": "valid",
+          "slug": "lambda-powertools-batch-ts",
+          "error_count": 1,
+          "diagnostic_codes": [],
+          "selected_components": [
+            "base"
+          ],
+          "runtime_supported": true,
+          "execution_language": "javascript"
+        }
+      }
+    ]
+  },
+  {
+    "policy": "72 fixed eligible identities; excluded component product has no trial/access URL and cannot create HTTP service or Capn Web sandbox acceptance",
+    "result": "passed"
+  }
+]

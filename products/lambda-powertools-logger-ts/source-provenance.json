@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+  "current_origin": "Original Second Wind integration source is Apache-2.0. The private preview bundle redistributes the actual pinned dependency closure under the license notices included with this package.",
   "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
   "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
   "upstream_package_path": "packages/logger",
@@ -25,7 +25,7 @@
     "preview.source.mjs": "1386d60e739b899aba4c0c62e73b34c67baaa0385052668228d2fc8f5dd45024",
     "package-lock.json": "6938b873bccb3c8b36ddb89f121168c474ee9bf7f9baaba773b1fc6b1302672a",
     "THIRD_PARTY_NOTICES.md": "67259187f7cd1141b2210e33e72c05332f3fd5d95661872b76706977952421a6",
-    "validation.json": "56ba95e0894927b0567d39ced3bc9b6c01a8484e8c561d35adce6860814f87b4"
+    "validation.json": "7ab2a45529cae471a70dcecf3307c3780b8bde30777e15c5eb34401024ab0173"
   },
   "native_preview": {
     "entrypoint": "preview.mjs",

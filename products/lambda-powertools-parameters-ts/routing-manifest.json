@@ -4,7 +4,7 @@
   "sku": "AWS-0554",
   "slug": "lambda-powertools-parameters-ts",
   "version": 1,
-  "release_ref": "sha256:274f4d7d3a2efdf5640b9c2d8a112eb931f51bff9e6d62f33255c1e42e7f7c02",
+  "release_ref": "sha256:5baee78268e47cdd7e3b7acee90e6a7895095137ad0b94d8f2866e4510359e8d",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "A private Worker preview runs the purchased Powertools SSM read helper/provider with a fixed local AWS SDK fixture; it makes no AWS calls.",
