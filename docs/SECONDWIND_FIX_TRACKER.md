@@ -1,5 +1,14 @@
 # Second Wind — canonical fix tracker
 
+**October 25 retirement:** the owner retired Clef-assisted routing, inventory
+classification and journey interpretation. That source is explicitly deprecated;
+older inference-enablement instructions below are historical. Fifteen obsolete
+sink destinations were removed after preserving a running raw landing path;
+four sinks remain. Seventeen catalog table drops remain blocked on catalog-capable
+access; all 29 tables remain intact. See
+[the retirement record](CLEF_DEPRECATION_2026-10-25.md) for the exact scope and
+verification. This instruction does not authorize new workflows or unrelated fixes.
+
 Last updated: 2026-10-24 (America/New_York).
 
 Repository: https://github.com/Cirrefera/Second-Wind
