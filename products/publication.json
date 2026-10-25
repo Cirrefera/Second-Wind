@@ -1,21 +1,71 @@
 {
   "schema_version": "1",
-  "review_report": "docs/AWS0568_V4_PREVIEW_REVIEW_2026-10-24.md",
-  "review_report_sha256": "0ad71271a5fd05eae83c9be282afc4b0e6c8fc9204ac1993b86d894d8d0295a2",
+  "review_report": "docs/POWERTOOLS_PREVIEW_RELEASE_REVIEW_2026-10-24.md",
+  "review_report_sha256": "93e63e93ed064ebc4290e9d6b6a94458a83a6447c0eec858b9c21439a6e05249",
   "releases": [
     {
-      "sku": "AWS-0568",
-      "version": 4,
-      "input": "products/agent-state-dynamodb-manifest/releases/v4/release-input.json",
-      "input_sha256": "cf46075ac113a1b83bb850763fb13fbc960441139ef1cb3aa2d12f4151b54827",
-      "reviews": "products/agent-state-dynamodb-manifest/releases/v4/publication-reviews.json",
-      "reviews_sha256": "64f4997ea48d83b295278a24f0aaf9fcf0ed6b264bee986c828232ba5b090bcb",
+      "sku": "AWS-0550",
+      "version": 1,
+      "input": "products/lambda-powertools-logger-ts/releases/v1/release-input.json",
+      "input_sha256": "8000a91e5669541ef9860aa0318a6cb132524f1ce5b3238998f0976e5eb0516c",
+      "reviews": "products/lambda-powertools-logger-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "50d69894f9a5a783df06a63f280016cf02f3198957ae988b59db7bcc276f397c",
       "resolved_blockers": [
-        "bounded_preview_contract_requires_review",
-        "language_scoped_candidate_requires_review",
-        "publication_approval_pending",
+        "trusted_product_and_contract_reviews_pending",
         "trusted_license_and_provenance_review_pending",
-        "trusted_product_and_contract_reviews_pending"
+        "publication_approval_pending"
+      ]
+    },
+    {
+      "sku": "AWS-0552",
+      "version": 1,
+      "input": "products/lambda-powertools-metrics-ts/releases/v1/release-input.json",
+      "input_sha256": "3fc764ca06fe5886a1aee30c6c22c1c724d4a1434ffd7a82fe118371baecb81a",
+      "reviews": "products/lambda-powertools-metrics-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "8ccee84dc31d8fe2fe5560223c15352731091dfa36753c2c01f412804d6520a4",
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ]
+    },
+    {
+      "sku": "AWS-0553",
+      "version": 1,
+      "input": "products/lambda-powertools-idempotency-ts/releases/v1/release-input.json",
+      "input_sha256": "0fe53e8f015aa5891de289bac8e2927204f176be1db6e4b29c072b32ecb26757",
+      "reviews": "products/lambda-powertools-idempotency-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "1073103f2111263c205459f5e411df9c54179579ab088db72f8d32ca948c0ad6",
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ]
+    },
+    {
+      "sku": "AWS-0554",
+      "version": 1,
+      "input": "products/lambda-powertools-parameters-ts/releases/v1/release-input.json",
+      "input_sha256": "5d81b9090d49ec36008ef17fb1692d8ae9819d9b60614c5cb3b5d226a8491c20",
+      "reviews": "products/lambda-powertools-parameters-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "e559a3c6a487e727d9d7b2432942250f3bcf10a5826f1257e59753f85cde914d",
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
+      ]
+    },
+    {
+      "sku": "AWS-0555",
+      "version": 1,
+      "input": "products/lambda-powertools-batch-ts/releases/v1/release-input.json",
+      "input_sha256": "67fa9abaa560bac909a2d73f47e3f7640e4e7f26b8168233f28d4bc4f60ce429",
+      "reviews": "products/lambda-powertools-batch-ts/releases/v1/publication-reviews.json",
+      "reviews_sha256": "612a844da4411073039fec1c0103108e3fe4dc67b3c0a5a60f22e895119a71fb",
+      "resolved_blockers": [
+        "trusted_product_and_contract_reviews_pending",
+        "trusted_license_and_provenance_review_pending",
+        "publication_approval_pending"
       ]
     }
   ],
