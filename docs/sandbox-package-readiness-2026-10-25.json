@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "scope": "71 unpublished drafts; Cloudflare private local demonstrations; not AWS hosted execution",
+  "scope": "71 new package candidates: five published; Tracer additionally reviewed and locally compatible; other 65 need runtime integration",
   "products": [
     {
       "sku": "AWS-0550",
@@ -18,8 +18,8 @@
       "maximum_price_usdc": 1,
       "price_matches": true,
       "private_adapter_compatible": true,
-      "published": false,
-      "blocker": "publication_review_and_activation_pending"
+      "published": true,
+      "blocker": null
     },
     {
       "sku": "AWS-0551",
@@ -27,7 +27,7 @@
       "family": "Powertools",
       "release_input": "products/lambda-powertools-tracer-ts/release-input.json",
       "version": 1,
-      "manifest_hash": "8f580a9dfa8c25a7d85a3b9e0527637171bf3963cdeab700cd4d6c8a299bea6f",
+      "manifest_hash": "0960f650580210987a70d48b65e0adfc8a0153bbcb910bb50a74d251f9a3466e",
       "source_ready": true,
       "source_blockers": [],
       "input_example_valid": true,
@@ -36,9 +36,9 @@
       "source_file_errors": [],
       "maximum_price_usdc": 1,
       "price_matches": true,
-      "private_adapter_compatible": false,
+      "private_adapter_compatible": true,
       "published": false,
-      "blocker": "native_node_runtime_not_integrated"
+      "blocker": "publication_review_and_activation_pending"
     },
     {
       "sku": "AWS-0552",
@@ -56,8 +56,8 @@
       "maximum_price_usdc": 1,
       "price_matches": true,
       "private_adapter_compatible": true,
-      "published": false,
-      "blocker": "publication_review_and_activation_pending"
+      "published": true,
+      "blocker": null
     },
     {
       "sku": "AWS-0553",
@@ -75,8 +75,8 @@
       "maximum_price_usdc": 1,
       "price_matches": true,
       "private_adapter_compatible": true,
-      "published": false,
-      "blocker": "publication_review_and_activation_pending"
+      "published": true,
+      "blocker": null
     },
     {
       "sku": "AWS-0554",
@@ -94,8 +94,8 @@
       "maximum_price_usdc": 1,
       "price_matches": true,
       "private_adapter_compatible": true,
-      "published": false,
-      "blocker": "publication_review_and_activation_pending"
+      "published": true,
+      "blocker": null
     },
     {
       "sku": "AWS-0555",
@@ -113,8 +113,8 @@
       "maximum_price_usdc": 1,
       "price_matches": true,
       "private_adapter_compatible": true,
-      "published": false,
-      "blocker": "publication_review_and_activation_pending"
+      "published": true,
+      "blocker": null
     },
     {
       "sku": "AWS-0556",

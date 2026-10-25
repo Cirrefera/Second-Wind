@@ -24,7 +24,9 @@ The package does not install Middy or an AWS service client for you. Use the ser
 
 ## Native private preview and boundary
 
-The native Node.js preview runs the actual Powertools Tracer middleware with a real local `aws-xray-sdk-core` Segment in a synthetic Lambda context. It checks local middleware segment context only; it does not send or verify an AWS X-Ray trace. Hosted Worker preview is unavailable: creating an actual X-Ray segment unconditionally requires secure random bytes, which the current Code Mode global execution scope rejects. The package remains native-only and must fail before payment for hosted sandbox preview.
+The private preview.mjs bundle runs the purchased createTracing helper, the pinned Powertools handler middleware, and real X-Ray Segment/Subsegment objects on a synthetic, unsampled request. It verifies that the configured service annotation is attached, the handler subsegment closes and restores its parent, and response capture remains disabled. Readable preview.source.mjs contains the fixture source. A request-local CommonJS factory defers X-Ray dependency initialization until a Worker request exists; the dependency logic and real Node builtins are preserved.
+
+The middleware hooks in this pinned version are synchronous, so their complete lifecycle stays inside the real CLS namespace run scope. The fixture's segment is unsampled and no trace is sent to a daemon, Lambda or AWS. This does not verify live AWS SDK instrumentation, X-Ray ingestion, credentials, IAM, or Lambda behavior. The bounded result carries local_fixture_only.
 
 ## Files and source
 

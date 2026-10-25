@@ -1,0 +1,35 @@
+{
+  "bundle_bytes": 129771,
+  "external_imports": [
+    "node:util",
+    "node:assert",
+    "node:async_hooks",
+    "node:crypto",
+    "node:dgram",
+    "node:fs",
+    "node:http",
+    "node:os",
+    "node:querystring",
+    "node:url",
+    "node:events",
+    "node:diagnostics_channel",
+    "node:https"
+  ],
+  "result": {
+    "ok": true,
+    "result": {
+      "ok": true,
+      "status": "valid",
+      "slug": "lambda-powertools-tracer-ts",
+      "operation_count": 1,
+      "verification_count": 2,
+      "diagnostic_codes": [
+        "local_fixture_only"
+      ],
+      "selected_components": [
+        "base"
+      ]
+    },
+    "logs": []
+  }
+}

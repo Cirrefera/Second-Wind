@@ -4,11 +4,11 @@
   "sku": "AWS-0551",
   "slug": "lambda-powertools-tracer-ts",
   "version": 1,
-  "release_ref": "sha256:2cebe3a90bb2e93be874b397a433734254855b3bcb91a1bf649dd0644cface6e",
+  "release_ref": "sha256:8b7b406e9f7d51f1e783f148c6bfa8233fde91038b62dfb770cf1ead3526e6c9",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "Native Node.js preview runs actual Powertools Tracer middleware with a local X-Ray segment. Hosted preview is blocked because Code Mode rejects the secure randomness required to create an actual segment.",
-  "supported_boundary": "A Node.js Lambda helper for Powertools Tracer. Native preview executes actual middleware with a local X-Ray segment fixture; hosted preview cannot create the secure segment ID in Code Mode and remains disabled.",
+  "supported_boundary": "A Node.js Lambda integration using actual Powertools Tracer and handler middleware with response capture disabled. Private Worker preview checks local unsampled segment lifecycle and service annotation; it makes no AWS call and does not verify X-Ray ingestion.",
   "language_policy": "explicit",
   "aliases": [
     "lambda-powertools-tracer-ts",
