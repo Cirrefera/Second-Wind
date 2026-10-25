@@ -8,7 +8,15 @@ This package contains original Second Wind configuration and preview glue around
 
 ## Run locally
 
-Create a virtual environment, install `requirements.lock.txt` for a fully pinned local environment (or `requirements.txt` for only the direct dependency), then run `python -c "from preview import preview; print(preview({'language':'python','template': open('template.yaml').read()}))"`. Supply template contents, not a caller-selected filesystem path. cfn-lint may need network access on first schema load.
+Create a virtual environment and install `requirements.lock.txt`. `validate_template(configuration)` invokes cfn-lint and returns normalized rule IDs, messages, and source locations. `preview(configuration)` is the separate bounded summary used by the protected sandbox.
+
+```python
+from preview import validate_template
+result = validate_template({"language": "python", "template": "Resources: {}\n"})
+print(result["diagnostics"])
+```
+
+Supply template contents, not a caller-selected filesystem path. cfn-lint may need network access on first schema load.
 
 ## Configuration
 
@@ -22,4 +30,4 @@ See [`configuration.schema.json`](./configuration.schema.json). The root `input.
 - This package's original wrapper files are licensed under Apache-2.0. No upstream source files are vendored.
 - Upstream SDK/library version: 1.58.0
 
-The generated stack or request preview is a local structural check only. It does not prove service availability, permissions, successful deployment, or runtime behavior in AWS. Review synthesized IAM and resource properties before deployment.
+The linter validates template structure and rules. It does not deploy AWS resources or guarantee that a future deployment will succeed.

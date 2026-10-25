@@ -22,4 +22,4 @@ See [`configuration.schema.json`](./configuration.schema.json). The root `input.
 - This package's original wrapper files are licensed under Apache-2.0. No upstream source files are vendored.
 - Upstream SDK/library version: Ruby SDK v3 service gem; version constrained in Gemfile
 
-The generated stack or request preview is a local structural check only. It does not prove service availability, permissions, successful deployment, or runtime behavior in AWS. Review synthesized IAM and resource properties before deployment.
+Real client operations require valid AWS credentials and may read, write, or invoke billable services. `build_request` uses response stubs and does not make AWS calls.

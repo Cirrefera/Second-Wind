@@ -23,9 +23,9 @@ export const handler = makeDynamoIdempotent(chargeOrder, {
 
 Powertools stores the completed response in DynamoDB and can replay it for a duplicate. It cannot make an external payment provider atomic with DynamoDB. If the provider succeeds and Lambda fails before the idempotency result is persisted, a retry may call the provider again. Pass the same business key to a provider that supports idempotency and reconcile uncertain outcomes.
 
-## Hosted preview and boundary
+## Native private preview and boundary
 
-Hosted preview is unavailable because this product requires the Node.js Lambda runtime and real DynamoDB persistence. The gateway has neither the Powertools dependency graph nor a DynamoDB persistence environment. No idempotency table access or payment protection is claimed by hosted preview.
+`preview.mjs` runs the real Powertools idempotency wrapper twice against a local in-memory cache fixture and confirms the handler runs once. This exercises the idempotency core, not the delivered DynamoDB persistence layer, durable state, or cross-Lambda coordination. Hosted preview remains unavailable because the gateway does not provide a native Node runtime or DynamoDB.
 
 ## Files and source
 

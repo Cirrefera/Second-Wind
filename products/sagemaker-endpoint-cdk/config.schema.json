@@ -2,56 +2,69 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "language",
-    "account",
-    "region",
-    "execution_role_arn",
-    "image_uri",
-    "model_data_url",
-    "endpoint_name",
-    "instance_type"
-  ],
+  "required": ["language", "mode", "model_id", "account", "region", "execution_role_arn", "endpoint_name", "instance_type", "endpoint_config"],
   "properties": {
-    "language": {
-      "const": "javascript"
+    "language": { "const": "javascript" },
+    "mode": { "enum": ["jumpstart", "custom"] },
+    "model_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,180}$" },
+    "account": { "type": "string", "pattern": "^\\d{12}$" },
+    "region": { "type": "string", "pattern": "^[a-z]{2}(-gov)?-[a-z]+-\\d$" },
+    "execution_role_arn": { "type": "string", "pattern": "^arn:[^:]+:iam::\\d{12}:role/.+$" },
+    "endpoint_name": { "type": "string", "pattern": "^[A-Za-z0-9-]{1,63}$" },
+    "instance_type": { "type": "string", "pattern": "^ml\\.[a-z0-9.]+$" },
+    "accept_eula": { "type": "boolean" },
+    "image_uri": { "type": "string", "pattern": "^\\d{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.amazonaws\\.com/.+$" },
+    "model_data_url": { "type": "string", "pattern": "^s3://[^/]+/.+$" },
+    "vpc_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["security_group_ids", "subnets"],
+      "properties": {
+        "security_group_ids": { "type": "array", "items": { "type": "string", "pattern": "^sg-[0-9a-f]{8,17}$" }, "minItems": 1, "uniqueItems": true },
+        "subnets": { "type": "array", "items": { "type": "string", "pattern": "^subnet-[0-9a-f]{8,17}$" }, "minItems": 1, "uniqueItems": true }
+      }
     },
-    "account": {
-      "type": "string",
-      "pattern": "^\\d{12}$"
-    },
-    "region": {
-      "type": "string",
-      "pattern": "^[a-z]{2}(-gov)?-[a-z]+-\\d$"
-    },
-    "execution_role_arn": {
-      "type": "string",
-      "pattern": "^arn:[^:]+:iam::\\d{12}:role/.+$"
-    },
-    "image_uri": {
-      "type": "string",
-      "pattern": "^\\d{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.amazonaws\\.com/.+$"
-    },
-    "model_data_url": {
-      "type": "string",
-      "pattern": "^s3://[^/]+/.+$"
-    },
-    "endpoint_name": {
-      "type": "string",
-      "pattern": "^[A-Za-z0-9-]{1,63}$"
-    },
-    "instance_type": {
-      "type": "string",
-      "pattern": "^ml\\.[a-z0-9.]+$"
-    },
-    "initial_instance_count": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 10
-    },
-    "variant_name": {
-      "type": "string",
-      "pattern": "^[A-Za-z0-9_-]{1,63}$"
+    "endpoint_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["production_variants"],
+      "properties": {
+        "production_variants": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["instance_type", "initial_instance_count", "variant_name"],
+            "properties": {
+              "instance_type": { "type": "string", "pattern": "^ml\\.[a-z0-9.]+$" },
+              "initial_instance_count": { "type": "integer", "minimum": 1, "maximum": 10 },
+              "variant_name": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,63}$" },
+              "initial_variant_weight": { "type": "number", "minimum": 0, "maximum": 1 },
+              "volume_size_in_gb": { "type": "integer", "minimum": 1, "maximum": 1024 },
+              "model_data_download_timeout_seconds": { "type": "integer", "minimum": 60, "maximum": 3600 },
+              "container_startup_health_check_timeout_seconds": { "type": "integer", "minimum": 60, "maximum": 3600 }
+            }
+          }
+        },
+        "kms_key_id": { "type": "string", "minLength": 1, "maxLength": 2048 },
+        "enable_network_isolation": { "type": "boolean" }
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "mode": { "const": "custom" } }, "required": ["mode"] },
+      "then": { "required": ["image_uri", "model_data_url"] }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "jumpstart" } }, "required": ["mode"] },
+      "then": { "not": { "anyOf": [{ "required": ["image_uri"] }, { "required": ["model_data_url"] }] } }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "custom" } }, "required": ["mode"] },
+      "then": { "properties": { "model_id": { "type": "string", "maxLength": 63, "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,62})$" } } }
+    }
+  ]
 }

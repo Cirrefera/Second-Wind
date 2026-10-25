@@ -16,16 +16,18 @@
   },
   "files": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "README.md": "011978aecf1e2f0e8a9c3d99a4a368608614dae5d84d659402502fbc11783d28",
-    "cdk.json": "17db83338652917d1ec37b5bba1d10b08c45f92d6e83944ff5a776cc741d367e",
+    "README.md": "c6796f7b05d6486ab8ba0b2157c7e332e8067863dc76c13d1bf707a72f5d09c3",
+    "app.ts": "61c1bb579ecfa85ffee93cd860fad2062394f37893beb1f06003ee1f50edb1b4",
+    "cdk.json": "40c24a321efb0976c32ffdec919056bb2c432a2167c6ccf6fa8c59e7b9126a41",
     "configuration.schema.json": "03280715a689ace2527b53166ebf843a27dbefac167c98081ad742dcf71da732",
     "handler.ts": "26912f687727d3fec9ef865852f07791dd74cfd506754ef13c14594fba6d3d8d",
     "input.schema.json": "03280715a689ace2527b53166ebf843a27dbefac167c98081ad742dcf71da732",
-    "package-lock.json": "4adf52384d7964930d8a45a7f854a6725e601ab005d1eedfe4edbdb02c34274c",
-    "package.json": "beaa37eca486f5c0381c4cafaaa27db3751d87661cb301dcc4c19fb3710772aa",
+    "package-lock.json": "0c6b5404091a7f63638110eadfd1a229d41c5a7209550c979675fdc064fc65d1",
+    "package.json": "efdd5640340712d02728dbc5d897bd6318ca0aba4325b1fddedd4141f432c406",
     "preview-contract.json": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
     "preview-runner.ts": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
-    "preview.ts": "af25edecf0b71c365df03d8d2b186a7929e99becb4f4cfdf74fae7fb67b4365b",
+    "preview.ts": "5984760ba3b6ad36eae88d5756578d7e0fd5023b49c240ea50c769c846c51456",
+    "product.ts": "0d47f09e150cf772ff10e70e8e009d2cfc5dd14ed58a529098f4618a9436a36b",
     "source-provenance.json": "e736da006f03bddb7bec22374844876828e78b7cbd5e0820ae100f58cd6ec69f"
   },
   "license_mapping": [
@@ -33,6 +35,7 @@
       "paths": [
         "LICENSE",
         "README.md",
+        "app.ts",
         "cdk.json",
         "configuration.schema.json",
         "handler.ts",
@@ -42,6 +45,7 @@
         "preview-contract.json",
         "preview-runner.ts",
         "preview.ts",
+        "product.ts",
         "source-provenance.json"
       ],
       "license": "Apache-2.0",

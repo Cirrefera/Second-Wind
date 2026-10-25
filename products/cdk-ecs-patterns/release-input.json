@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "ecs",
     "summary": "CDK ECS patterns for an application load balancer, queue-backed worker, or scheduled Fargate task.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"pattern\",\"service_name\",\"image\"],\"properties\":{\"pattern\":{\"enum\":[\"load-balanced\",\"queue-processing\",\"scheduled\"]},\"service_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_-]{1,255}$\"},\"image\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":255},\"schedule_expression\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":256},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"pattern\":\"load-balanced\",\"service_name\":\"example-agent-web\",\"image\":\"public.ecr.aws/docker/library/nginx:latest\"}"
   },
   "manifest": {
     "schema_version": "1",

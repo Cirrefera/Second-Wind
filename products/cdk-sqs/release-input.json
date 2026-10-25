@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "sqs",
     "summary": "Encrypted SQS queue with optional FIFO dead-letter queue and explicit cross-account queue policy.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"queue_name\"],\"properties\":{\"queue_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_-]{1,75}(.fifo)?$\"},\"fifo\":{\"type\":\"boolean\"},\"visibility_timeout_seconds\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":43200},\"dead_letter_queue\":{\"type\":\"boolean\"},\"cross_account_id\":{\"type\":\"string\",\"pattern\":\"^[0-9]{12}$\"},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"queue_name\":\"example-agent-queue\",\"visibility_timeout_seconds\":30}"
   },
   "manifest": {
     "schema_version": "1",

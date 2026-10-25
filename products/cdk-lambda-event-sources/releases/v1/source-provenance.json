@@ -16,15 +16,17 @@
   },
   "files": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "README.md": "f4e68c0afe655166cd54e66f09f7c7edde501cc71d4a714eb43e178b48ba8b25",
-    "cdk.json": "17db83338652917d1ec37b5bba1d10b08c45f92d6e83944ff5a776cc741d367e",
+    "README.md": "24e2a4ba83637b449f7eda2c0edda3fef3dc6a4a65e5f9fde633b626f41e763f",
+    "app.ts": "79e419557ea1e4e614d7257eb5caedfe668bcdd97d9a154b005121f6b1282a80",
+    "cdk.json": "40c24a321efb0976c32ffdec919056bb2c432a2167c6ccf6fa8c59e7b9126a41",
     "configuration.schema.json": "7f30f2f155c950b30ca0c52381dd30bd1822af43ed21f4539bb9bd472ae1bea3",
     "input.schema.json": "7f30f2f155c950b30ca0c52381dd30bd1822af43ed21f4539bb9bd472ae1bea3",
-    "package-lock.json": "7c28f73028e75ed0489ebb6fb66ece33a53c776b16ff0d69946127a4015cab46",
-    "package.json": "52e4b86cdf07412cad71efebde0a6aeddfaac5355f7897f038101dcd5b2f01c4",
+    "package-lock.json": "fb95402250939f9e96c761ddfb0d9e071c0cabe4160b04c1161a89bd457b5816",
+    "package.json": "01f7a8d214e34e0dfb5cd96bce15c8792b8b908ccb52602b16e26a6b89da3d98",
     "preview-contract.json": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
     "preview-runner.ts": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
-    "preview.ts": "598827b80a97d48778bfbc96f6ff9f5039ee5e2dc43e45ee3c403c2933aad40d",
+    "preview.ts": "e5453c80ba251aaa5bb28f5d58812fb95b1aa78a787ee3cb38ec50061d6345b9",
+    "product.ts": "f5788179e977545224cfa690ac9923b5bf2ec902bac0356d7a82c6788e2a24be",
     "source-provenance.json": "d5ad390ee1f3ac5bf19b75a3677ddacdd987bd178be3c7e73bcc7a6335001f93"
   },
   "license_mapping": [
@@ -32,6 +34,7 @@
       "paths": [
         "LICENSE",
         "README.md",
+        "app.ts",
         "cdk.json",
         "configuration.schema.json",
         "input.schema.json",
@@ -40,6 +43,7 @@
         "preview-contract.json",
         "preview-runner.ts",
         "preview.ts",
+        "product.ts",
         "source-provenance.json"
       ],
       "license": "Apache-2.0",

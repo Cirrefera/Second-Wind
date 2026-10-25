@@ -1,5 +1,5 @@
 import { App, Stack } from 'aws-cdk-lib';
-import { Guardrail, ContentFilterStrength, ContentFilterType, GuardrailAction } from '@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock';
+import { Guardrail, ContentFilterStrength, ContentFilterType, GuardrailAction } from '@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock/index.js';
 
 export function createStack(app, { configuration: c }) {
   if (!c || typeof c.guardrail_name !== 'string' || !Array.isArray(c.categories) || !c.categories.length) {

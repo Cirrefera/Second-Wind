@@ -18,9 +18,9 @@ const signingKey = await readSecret('orders/signing-key', { max_age_seconds: 5 }
 
 The default cache is in-process and does not coordinate across Lambda environments. A fleet of cold starts can still make concurrent service calls. Choose a cache age that fits the value's rotation and consistency needs. Do not log the returned secret.
 
-## Hosted preview and boundary
+## Native private preview and boundary
 
-Hosted preview is unavailable because the gateway cannot execute this package's native Powertools/AWS SDK dependencies with an AWS identity. It does not fetch from SSM or Secrets Manager or claim cache hits.
+`preview.mjs` calls the actual Powertools SSM provider and JSON transform using an in-memory AWS SDK client fixture with one fixed synthetic parameter. It makes no AWS call and does not validate SSM credentials, permissions, service availability, or cache behavior in Lambda. Hosted preview remains unavailable because the gateway does not provide the native Node/AWS SDK runtime.
 
 ## Files and source
 

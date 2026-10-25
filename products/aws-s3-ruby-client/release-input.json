@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"ruby\",\"bucket\":\"example-bucket\",\"key\":\"preview/example.txt\",\"region\":\"us-east-1\",\"endpoint\":\"http://127.0.0.1:9000\"}"
   },
   "manifest": {
     "schema_version": "1",

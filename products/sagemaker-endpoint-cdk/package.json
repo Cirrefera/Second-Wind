@@ -10,6 +10,7 @@
     "synth": "node ./synth.mjs"
   },
   "dependencies": {
+    "@cdklabs/generative-ai-cdk-constructs": "0.1.320",
     "aws-cdk-lib": "2.274.0",
     "constructs": "10.8.1"
   }

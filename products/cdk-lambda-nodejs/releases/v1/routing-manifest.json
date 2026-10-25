@@ -4,7 +4,7 @@
   "sku": "AWS-0632",
   "slug": "cdk-lambda-nodejs",
   "version": 1,
-  "release_ref": "sha256:6961c2e4e7657c74e36e640b30ef93f6fed95ed540ec6bf22c4c03160e6678a4",
+  "release_ref": "sha256:17d0504637184ba61ece3d132a887748632ca7813bb61d323ec8fe5a91862cbb",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "Define a NodejsFunction with local esbuild bundling and explicit runtime and entrypoint.",

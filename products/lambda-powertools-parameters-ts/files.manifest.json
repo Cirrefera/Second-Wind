@@ -12,8 +12,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20",
-      "size_bytes": 1561,
+      "sha256": "9c4a49b1605969e48b2aa5cb870077c7c54291eee2c50788b420490c027b372d",
+      "size_bytes": 1742,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
@@ -29,9 +29,15 @@
       "mime_type": "application/json"
     },
     {
+      "path": "preview.mjs",
+      "sha256": "327870b735bbe8b63f92308168c34ffef346855387781f9e7c1d3ecbabe17631",
+      "size_bytes": 1873,
+      "mime_type": "text/javascript"
+    },
+    {
       "path": "source-provenance.json",
-      "sha256": "5ebdbbcea3ff1c4e43af36a1ee8b14c63be17c4ca6eaecf82cfeeec4c8fec86a",
-      "size_bytes": 1489,
+      "sha256": "263808b44d6d9f69f7350e6af75072588a808f94b86d3de5a4a3c0ad386c7a89",
+      "size_bytes": 1822,
       "mime_type": "application/json"
     },
     {
@@ -42,8 +48,8 @@
     },
     {
       "path": "validation.json",
-      "sha256": "0acdfb337ea6126f56ff6818fcc5b62083a2753a733e44a31f2402b4931c00a0",
-      "size_bytes": 611,
+      "sha256": "2fa40fbe190907d6ea7c353410d30de0a4078ef3d6874d2b5abc471854c15604",
+      "size_bytes": 884,
       "mime_type": "application/json"
     }
   ]

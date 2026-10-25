@@ -8,7 +8,7 @@
   "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
   "source_path": "src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts",
   "source_sha256": "ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df",
-  "relationship": "Original Second Wind wiring around pinned published APIs; no upstream implementation files are copied into this package. The upstream VectorKnowledgeBase default store is OpenSearch Serverless; creating it on deployment can incur AWS charges.",
+  "relationship": "Original Second Wind wiring around the pinned VectorKnowledgeBase API with its OpenSearch Serverless default, Pinecone adapter, and Aurora PostgreSQL adapter. No upstream implementation source is copied.",
   "dependency_pins": {
     "aws-cdk-lib": "2.274.0",
     "constructs": "10.8.1",
@@ -23,7 +23,28 @@
       "sha256": "ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df",
       "repository": "https://github.com/awslabs/generative-ai-cdk-constructs",
       "revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
-      "relationship": "API/construct behavior inspected; no upstream implementation file copied."
+      "relationship": "Upstream implementation/API behavior inspected; no source copied."
+    },
+    {
+      "path": "src/cdk-lib/bedrock/knowledge-bases/README.md",
+      "sha256": "2faaca836d5f4103d81600685c02b8a45b777afc925f0e51918bfe5ba773ef7d",
+      "repository": "https://github.com/awslabs/generative-ai-cdk-constructs",
+      "revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "relationship": "Upstream backend guide inspected; no source copied."
+    },
+    {
+      "path": "lib/cdk-lib/pinecone/pinecone-vector-store.d.ts",
+      "sha256": "8f4fb1339cce3a0b8e32b169d626135157559c3c81e54717a683cc440bf724e6",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "Published API declaration inspected; no source copied."
+    },
+    {
+      "path": "lib/cdk-lib/amazonaurora/aurora-vector-store.d.ts",
+      "sha256": "bafe67aa55e3af2b87591b0a8be317d76fed7915dfd24fa90078c05449fb0588",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "Published API declaration inspected; no source copied."
     }
   ],
   "runtime_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
@@ -42,18 +63,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc",
-      "size_bytes": 1572
+      "sha256": "000078356829d77f519027bdb40b708113b0fa1e8aad0274cf330e6914e5b503",
+      "size_bytes": 2858
     },
     {
       "path": "config.example.json",
-      "sha256": "4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab",
-      "size_bytes": 157
+      "sha256": "fb812dae16429a19ba2490768414fe66bce7046e1f5b0ad569ab0dd2e1cad96c",
+      "size_bytes": 199
     },
     {
       "path": "config.schema.json",
-      "sha256": "bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55",
-      "size_bytes": 597
+      "sha256": "a7aac08e87303cdf0c2c140d9a6bec59b20a31d997f42d77cf4d721c9bd79654",
+      "size_bytes": 1655
     },
     {
       "path": "package-lock.json",
@@ -72,8 +93,8 @@
     },
     {
       "path": "product.mjs",
-      "sha256": "780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91",
-      "size_bytes": 1004
+      "sha256": "41e90cc82e599cbb768bd481db11d5cb3b00b5d92370f8070cca556db73be899",
+      "size_bytes": 2123
     },
     {
       "path": "selection.schema.json",
@@ -84,6 +105,29 @@
       "path": "synth.mjs",
       "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
       "size_bytes": 313
+    },
+    {
+      "path": "validation.json",
+      "sha256": "3671b203f890be313dff3f039dddc9f72b31673e41bfb2037511eb092bc1057d",
+      "size_bytes": 974
     }
-  ]
+  ],
+  "notes": "OpenSearch Serverless uses the upstream default collection/index and Docker-bundled custom-resource provider. Pinecone references an existing endpoint and a buyer-managed Secrets Manager API-key secret; synthesis makes no Pinecone request. AuroraPostgres uses the upstream default Aurora Serverless v2 cluster and a Docker-bundled pgvector provider. In local checks, Pinecone synthesis completed; OpenSearch and Aurora were blocked by missing Docker.",
+  "local_native_synthesis": {
+    "status": "partial",
+    "runtime": "nodejs24",
+    "backends": {
+      "OpenSearchServerless": "blocked_docker_unavailable",
+      "Pinecone": "passed_4_resources",
+      "AuroraPostgres": "blocked_docker_unavailable"
+    },
+    "aws_api_calls": "not-performed",
+    "cloudformation_deployment": "not-performed"
+  },
+  "supported_vector_stores": [
+    "OpenSearchServerless",
+    "Pinecone",
+    "AuroraPostgres"
+  ],
+  "implementation_boundary": "All three original backends are wired to the pinned APIs. Pinecone synthesis passed locally. OpenSearch Serverless and Aurora require Docker-backed custom-resource bundling and were blocked when Docker was unavailable; no AWS calls or deployments were attempted."
 }

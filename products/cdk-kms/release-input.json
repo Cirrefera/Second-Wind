@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "kms",
     "summary": "KMS key, key rotation, alias, and scoped grants for encryption clients.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"key_alias\"],\"properties\":{\"key_alias\":{\"type\":\"string\",\"pattern\":\"^alias/[A-Za-z0-9/_-]{1,250}$\"},\"description\":{\"type\":\"string\",\"maxLength\":256},\"enable_key_rotation\":{\"type\":\"boolean\"},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"key_alias\":\"alias/example\",\"enable_key_rotation\":true}"
   },
   "manifest": {
     "schema_version": "1",

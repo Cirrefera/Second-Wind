@@ -1,26 +1,27 @@
 # sagemaker-endpoint-cdk
 
-Creates a generic real-time SageMaker model, endpoint configuration, and endpoint from an ECR inference image, S3 model artifact, execution role, instance type, and endpoint name. The current source package does not expose the generic construct path cited by the intake; this uses AWS CDK L1 SageMaker resources and does not accept modelId.
+Synthesizes a SageMaker endpoint from either a verified JumpStart catalog model or a custom SageMaker model. Both modes configure one or more production variants that point to the generated SageMaker model, accept VPC subnet and security group IDs, and export the deployed endpoint name and ARN as CloudFormation outputs.
 
-## Runtime and synthesis
+## Model modes
 
-Requires Node.js 20 or later and the exact npm dependencies in `package.json` and `package-lock.json`. Run `npm ci`, then `npm run synth -- ./config.json` (or omit the argument to use the example configuration). This performs local AWS CDK synthesis only; it does not call AWS or deploy resources. A later deployment runs in your AWS account and may create billable resources. Review the template, account, Region, IAM scope, quotas, data retention, networking, and cost before deployment.
+`mode: "jumpstart"` uses the pinned `@cdklabs/generative-ai-cdk-constructs` 0.1.320 `JumpStartModel` and `JumpStartSageMakerEndpoint` APIs. `model_id` must be an exact key in the package's bundled JumpStart catalog, such as `HUGGINGFACE_ASR_WHISPER_BASE_3_0_20`; it is not an arbitrary SageMaker or Hugging Face model identifier. The construct checks whether the selected instance type is in that model's supported list and whether the model is available in the configured Region. Models requiring a license agreement are rejected unless `accept_eula` is explicitly true. The caller-provided execution role must allow SageMaker to read the selected JumpStart model artifact.
 
-Hosted bounded preview is unavailable for this product because the private Worker runtime cannot load external CDK/npm modules or native Node APIs. Trial access must be rejected before charge.
+`mode: "custom"` creates an `AWS::SageMaker::Model` from the supplied ECR image and S3 artifact. Here `model_id` is the SageMaker model resource name and must satisfy SageMaker's 63-character name limit. The execution role must permit SageMaker to access the image and artifact. This mode does not turn a Hugging Face model identifier into a deployed model; callers must provide a compatible inference image and model artifact.
 
-## Configuration
+## Serialized CDK configuration
 
-`config.schema.json` defines accepted fields; `config.example.json` is a starting point. Select the single `stack` component in `selection.schema.json`.
+The original API uses CDK values (`modelId`, `instanceType`, `EndpointConfig`, and `IVpc`), which cannot be serialized directly as JSON. The exported `createJumpStartEndpoint(scope, props)` accepts the exact JumpStart catalog key, instance type, CDK `IVpc`, role construct, and full `CfnEndpointConfigProps`. `createCustomModelEndpoint(scope, props)` accepts a SageMaker model name, custom image/artifact, `IVpc`, execution-role ARN, and full `CfnEndpointConfigProps`. Both builders replace each supplied production variant's model name with the generated model reference before synthesis.
 
-## Product files
+`config.schema.json` defines the JSON adapter used by the local preview: `model_id`, `instance_type`, `endpoint_config.production_variants`, and `vpc_config` containing existing subnet and security group IDs. That JSON adapter supports production-variant settings, KMS key ID, and network isolation; advanced CloudFormation endpoint-config properties such as data capture, async inference, explainers, metrics, shadow variants, and tags are available through the exported CDK builders, but are not serialized by the preview configuration.
 
-- `product.mjs` constructs the real AWS CDK resources.
-- `synth.mjs` runs local synthesis.
-- `package.json` and `package-lock.json` pin dependencies.
-- `source-provenance.json` records upstream references and adaptations.
+The example configuration uses a JumpStart Whisper catalog key and illustrative VPC identifiers. Replace them with IDs from your VPC before deployment. `config.schema.json` defines all accepted fields; `selection.schema.json` selects the single `stack` component.
 
-## Provenance and license
+## Runtime and deployment
 
-Source correction: the cited generative-ai-cdk-constructs SageMaker path is absent in the current package. This package uses AWS CDK L1 SageMaker CfnModel/CfnEndpointConfig/CfnEndpoint to preserve generic endpoint functionality, without Bedrock modelId support.
+Requires Node.js 20 or later, Docker if required by the pinned CDK dependency, and the exact dependencies in `package.json` and `package-lock.json`. Run `npm ci`, then `npm run synth -- ./config.json` (or omit the argument to use the JumpStart example). Synthesis is local and makes no AWS API calls. Deploying the resulting stack creates a SageMaker endpoint and billable compute resources in your AWS account; review instance cost, quota, IAM permissions, networking, and the selected model license before deployment.
 
-Apache-2.0 terms are included in `LICENSE`.
+The current hosted private preview adapter cannot load this product's CDK and JumpStart dependency closure, so hosted trial access is unavailable and must be rejected before charge. `preview.mjs` is a trusted native Node entrypoint that synthesizes the same product locally and returns only bounded status and resource-count diagnostics; it does not expose the template or contact AWS.
+
+## Source and license
+
+The JavaScript wiring is original Second Wind code over pinned AWS CDK L1 SageMaker resources and the published JumpStart constructs. Upstream implementation files are not copied into this package. The pinned construct package is Apache-2.0; its license and this package's license are included.

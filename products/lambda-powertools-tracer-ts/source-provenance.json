@@ -16,10 +16,17 @@
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/tracer"
   ],
   "original_file_hashes": {
-    "src/tracer.mjs": "7c10a88b33c7476646d4f41125958d48f0bd8049b579d04913b38411793390e3",
-    "README.md": "1ed11112bd0d62bafe3e85eb5e2015c01a8229cc753d99a15f4b81c69af4c589",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "6eec10e4b6aae879bcda0ecb7186d23877dcbef0cefb0fdd2258de2663a6d9d1",
     "config.schema.json": "dbd30a6aa62dcf5a217e431985f76ab8f31099a35751f85cb2d0bc08cf5054c9",
-    "package.json": "5534df795e8afbf6ecf9da644c2d2bd9a556af4d173562492715f876937ebbca"
+    "package.json": "5534df795e8afbf6ecf9da644c2d2bd9a556af4d173562492715f876937ebbca",
+    "preview.mjs": "4abf0e465c2768011ae76163c9247c2ba41f28de5ab45613a4caa28f544ad555",
+    "src/tracer.mjs": "7c10a88b33c7476646d4f41125958d48f0bd8049b579d04913b38411793390e3"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Node.js 20+",
+    "aws_calls": "none",
+    "scope": "actual Powertools middleware runs against an in-memory segment fixture; not X-Ray service verification"
   }
 }

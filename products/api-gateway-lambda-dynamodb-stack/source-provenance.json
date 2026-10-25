@@ -67,8 +67,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "4727bcf45549ec69c3118278e50685f6a67bcb333563c7732fd66c4055b6f9e5",
-      "size_bytes": 1770
+      "sha256": "d5e2a7f4b49a79cbbe74403874993e94ad9e0ea354ad8720baf9f5659c4c9f1c",
+      "size_bytes": 2070
     },
     {
       "path": "config.example.json",
@@ -139,6 +139,19 @@
       "path": "synth.mjs",
       "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
       "size_bytes": 313
+    },
+    {
+      "path": "validation.json",
+      "sha256": "80173dfe07e0a70d85d3cae73aaeba187606948a8784a4ad3194f492e466e4c0",
+      "size_bytes": 409
     }
-  ]
+  ],
+  "local_native_synthesis": {
+    "status": "passed",
+    "runtime": "nodejs24",
+    "stack_count": 1,
+    "resource_count": 41,
+    "aws_api_calls": "not-performed",
+    "cloudformation_deployment": "not-performed"
+  }
 }

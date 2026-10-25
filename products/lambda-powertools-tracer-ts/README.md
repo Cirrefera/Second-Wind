@@ -22,9 +22,9 @@ export { handler };
 
 The package does not install Middy or an AWS service client for you. Use the service-specific SDK client you already need and pin it in your application lockfile. Do not add secrets, full payloads, or personal data as X-Ray annotations. Tracing is not enabled until Lambda active tracing and IAM are configured.
 
-## Hosted preview and boundary
+## Native private preview and boundary
 
-Hosted preview is unavailable. The gateway has no installed Powertools/X-Ray dependencies, Lambda runtime context, or X-Ray daemon/segment service. This release does not claim a trace was created or sent.
+`preview.mjs` calls the actual Powertools Tracer middleware around a synthetic handler request and an in-memory X-Ray segment fixture. It verifies middleware open/close behavior only; the fixture does not create or send an AWS X-Ray trace. Hosted preview remains unavailable because the gateway Worker Loader does not provide the native Node/X-Ray runtime.
 
 ## Files and source
 

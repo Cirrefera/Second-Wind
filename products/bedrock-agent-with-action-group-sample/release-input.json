@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"python\",\"agent_id\":\"example-agent-id\",\"alias_id\":\"example-alias-id\",\"session_id\":\"example-session-preview\",\"prompt\":\"Reply with a short readiness confirmation.\",\"region\":\"us-east-1\"}"
   },
   "manifest": {
     "schema_version": "1",

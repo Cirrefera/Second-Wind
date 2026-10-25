@@ -12,8 +12,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "bd77235555b5ff7af6f84aa087caa956e1913f2523a270b2f846110f6aa68058",
-      "size_bytes": 1539,
+      "sha256": "e022a5def3aa3ac08e89dd54676b2e0c3d1b2001abc5b56cde070924effaf191",
+      "size_bytes": 1839,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
@@ -60,8 +60,8 @@
     },
     {
       "path": "source-provenance.json",
-      "sha256": "3f9d64fec275fdbf51dff5301913f5b4d9d7a62b8aef033229130ce2e6fbcda9",
-      "size_bytes": 2989,
+      "sha256": "e682ada0340cdfbbf83cc671e25d14537d01c73b9dfe84b8f50aabb05203b9e1",
+      "size_bytes": 3363,
       "mime_type": "application/json"
     },
     {
@@ -69,6 +69,12 @@
       "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
       "size_bytes": 313,
       "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "eb4df8689d5af0f9e1655fd62d9416dc5df3fc3914855c15487e78afa2d085af",
+      "size_bytes": 408,
+      "mime_type": "application/json"
     }
   ]
 }

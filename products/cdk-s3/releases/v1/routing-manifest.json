@@ -4,7 +4,7 @@
   "sku": "AWS-0635",
   "slug": "cdk-s3",
   "version": 1,
-  "release_ref": "sha256:a0e5e767f1ebe012c6533f031d3999279b7f240c9c9bd3d2373dbe1526e4eb7e",
+  "release_ref": "sha256:9e2cbf846e62204cc6eb77131d95529b15a10e35ff77d7acd0ec3035bce9c44e",
   "service": "s3",
   "product_kind": "artifact-product",
   "route_summary": "Define a private S3 bucket with encryption, versioning, and lifecycle configuration.",

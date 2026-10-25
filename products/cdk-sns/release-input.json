@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "sns",
     "summary": "SNS topic with optional FIFO mode, managed encryption, and explicit email subscription.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"topic_name\"],\"properties\":{\"topic_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_-]{1,256}(.fifo)?$\"},\"fifo\":{\"type\":\"boolean\"},\"email_subscription\":{\"type\":\"string\",\"format\":\"email\"},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"topic_name\":\"example-agent-events\"}"
   },
   "manifest": {
     "schema_version": "1",

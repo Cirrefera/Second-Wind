@@ -4,7 +4,8 @@
   "additionalProperties": false,
   "required": [
     "language",
-    "event_source"
+    "event_source",
+    "report_batch_item_failures"
   ],
   "properties": {
     "language": {

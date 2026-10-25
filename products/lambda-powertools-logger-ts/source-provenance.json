@@ -16,10 +16,17 @@
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/logger"
   ],
   "original_file_hashes": {
-    "src/logger.mjs": "c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54",
-    "README.md": "c48939fcb3c43d0eb38c5feae2838a5a472a08836d6e44eea2e34904f1b83396",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "45cb42002eb1148ae18a211356c880926d20c2e0c1eeaf07f38bea246db7ea64",
     "config.schema.json": "31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4",
-    "package.json": "420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811"
+    "package.json": "420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811",
+    "preview.mjs": "ae6dc19235b841e413e92baf7650926bf4685da946b5c11def3bdc4fa988fbd9",
+    "src/logger.mjs": "c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Node.js 20+",
+    "aws_calls": "none",
+    "scope": "actual Powertools Logger emits one JSON line with a fixed synthetic request ID"
   }
 }

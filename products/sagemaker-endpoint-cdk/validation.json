@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "validation_kind": "native-local-cdk-synthesis",
+  "runtime": "nodejs24",
+  "status": "passed-for-both-configured-modes",
+  "modes": {
+    "jumpstart": {
+      "example": "config.example.json",
+      "catalog_key": "HUGGINGFACE_ASR_WHISPER_BASE_3_0_20",
+      "stack_count": 1,
+      "resource_count": 3,
+      "checks": [
+        "pinned JumpStart key resolved to model specification",
+        "configured instance type accepted by pinned model specification",
+        "VpcConfig emitted on SageMaker model",
+        "caller production variant emitted with generated model-name reference",
+        "optional KMS key and network isolation emitted on endpoint configuration",
+        "endpoint name and ARN outputs emitted"
+      ]
+    },
+    "custom": {
+      "example": "config.custom.example.json",
+      "model_name": "custom-inference-model",
+      "stack_count": 1,
+      "resource_count": 3,
+      "checks": [
+        "custom SageMaker model emitted from ECR image and S3 artifact",
+        "VpcConfig emitted on SageMaker model",
+        "caller production variant emitted with generated model-name reference",
+        "optional KMS key and network isolation emitted on endpoint configuration",
+        "endpoint name and ARN outputs emitted"
+      ]
+    }
+  },
+  "configuration_schema": {
+    "examples_validated": true,
+    "custom_model_name_over_63_characters_rejected": true
+  },
+  "aws_api_calls": "not-performed",
+  "model_execution": "not-performed",
+  "cloudformation_deployment": "not-performed",
+  "hosted_preview": "unavailable",
+  "notes": "The CDK templates were synthesized locally from the product's examples and inspected for resources, model references, VPC properties, endpoint configuration, and outputs. This is not SageMaker service validation or deployment evidence."
+}

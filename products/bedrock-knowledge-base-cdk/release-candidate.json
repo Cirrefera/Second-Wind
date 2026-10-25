@@ -3,20 +3,19 @@
   "sku": "AWS-0557",
   "slug": "bedrock-knowledge-base-cdk",
   "version": 1,
-  "release_ref": "sha256:637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+  "release_ref": "sha256:0653f893ac5efe03396c7d55f5a0f8b7d7fafe4b326fa8e10b23c04310d67e47",
+  "content_hash": "0653f893ac5efe03396c7d55f5a0f8b7d7fafe4b326fa8e10b23c04310d67e47",
   "status": "draft",
   "product_kind": "artifact-product",
   "service": "bedrock",
-  "content_hash": "637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
-  "hash_scope": "file-package-json-utf8",
   "hosted_trial_supported": false,
-  "native_synthesis": "not-run",
-  "aws_api_calls": "not-performed",
-  "aws_deployment": "not-performed",
+  "native_synthesis": "blocked-docker",
+  "contract_equivalence": "complete-for-three-documented-vector-store-options",
   "publication_blockers": [
+    "aurora_and_opensearch_docker_synthesis_not_verified",
+    "native_synthesis_blocked_docker",
     "hosted_private_preview_unavailable",
     "trusted_source_review_pending",
-    "native_synthesis_evidence_pending",
     "publication_approval_pending"
   ]
 }

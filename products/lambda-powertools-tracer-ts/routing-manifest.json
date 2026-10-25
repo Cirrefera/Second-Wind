@@ -4,15 +4,16 @@
   "sku": "AWS-0551",
   "slug": "lambda-powertools-tracer-ts",
   "version": 1,
-  "release_ref": "sha256:cbc6d97b4a204a227cacfd24243bcdc89983dab9d9232faa0ca4971ec27178ad",
+  "release_ref": "sha256:00fdf87060869d14cce4d45012cbb2bafb468553267d28cce54b999cced65a71",
   "service": "lambda",
   "product_kind": "artifact-product",
-  "route_summary": "A Node.js Lambda integration that configures Powertools Tracer, exposes handler middleware with response capture disabled, and wraps an AWS SDK v3 client.",
+  "route_summary": "A Node.js Lambda integration that configures Powertools Tracer, exposes handler middleware with response capture disabled, and wraps an AWS SDK v3 client. Hosted preview is unavailable; the private adapter does not execute this product.",
   "supported_boundary": "A Node.js Lambda integration that configures Powertools Tracer, exposes handler middleware with response capture disabled, and wraps an AWS SDK v3 client. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
   "language_policy": "explicit",
   "aliases": [
     "lambda-powertools-tracer-ts",
-    "powertools-lambda-powertools-tracer"
+    "powertools-tracer",
+    "aws-lambda-powertools-tracer"
   ],
   "tags": [
     "lambda",
@@ -36,7 +37,7 @@
     "nodejs22.x"
   ],
   "desired_outcomes": [
-    "aws-xray-tracing"
+    "lambda-tracing"
   ],
   "input_kinds": [
     "configuration",
@@ -58,12 +59,11 @@
   ],
   "required_evidence": [
     "dependency-installation",
-    "iam-review",
     "unit-validation"
   ],
   "exclusions": [
-    "aws-deployment",
     "hosted-preview",
+    "aws-deployment",
     "service-outcome-verification"
   ]
 }

@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "states",
     "summary": "Step Functions service integration tasks for Lambda, DynamoDB, SNS, SQS, Bedrock InvokeModel, and SageMaker training.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"state_machine_name\",\"task_type\"],\"properties\":{\"state_machine_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_-]{1,80}$\"},\"task_type\":{\"enum\":[\"lambda-invoke\",\"dynamodb-get\",\"dynamodb-put\",\"sns-publish\",\"sqs-send\",\"bedrock-invoke\",\"sagemaker-training\"]},\"target_arn\":{\"type\":\"string\",\"pattern\":\"^arn:[^:]+:[^:]+:[^:]*:[0-9]{12}:.+$\"},\"artifacts_bucket\":{\"type\":\"string\",\"pattern\":\"^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$\"},\"artifacts_prefix\":{\"type\":\"string\",\"maxLength\":1024},\"language\":{\"const\":\"javascript\"}},\"allOf\":[{\"if\":{\"properties\":{\"task_type\":{\"enum\":[\"lambda-invoke\",\"dynamodb-get\",\"dynamodb-put\",\"sns-publish\",\"sqs-send\"]}},\"required\":[\"task_type\"]},\"then\":{\"required\":[\"target_arn\"]}},{\"if\":{\"properties\":{\"task_type\":{\"const\":\"sagemaker-training\"}},\"required\":[\"task_type\"]},\"then\":{\"required\":[\"artifacts_bucket\"]}}]}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"state_machine_name\":\"ExampleTaskWorkflow\",\"task_type\":\"lambda-invoke\",\"target_arn\":\"arn:aws:lambda:us-east-1:123456789012:function:example\"}"
   },
   "manifest": {
     "schema_version": "1",

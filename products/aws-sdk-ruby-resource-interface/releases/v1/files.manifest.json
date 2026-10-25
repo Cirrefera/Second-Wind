@@ -18,26 +18,26 @@
     },
     {
       "path": "README.md",
-      "sha256": "769fcc06200a017c25b0faeb03dfa473d0a45708a2eb4ee0972c9fb86c8f09d3",
-      "size_bytes": 2010,
+      "sha256": "22fdd392077369a1a34d2d42e2088261169d64204861e141bbc0b589c2ad4d11",
+      "size_bytes": 2084,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
       "path": "client.rb",
-      "sha256": "a815cd3518d767ff9dd08167e3c174a0e1db49480cdf149a122d3b78e86ce52f",
-      "size_bytes": 1888,
+      "sha256": "cb7bdc0d49278f0389552dbc8e6272ab72e09a881d6fae4119acf1816e8bd36e",
+      "size_bytes": 2128,
       "mime_type": "text/x-ruby"
     },
     {
       "path": "configuration.schema.json",
-      "sha256": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
-      "size_bytes": 1667,
+      "sha256": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+      "size_bytes": 2105,
       "mime_type": "application/json"
     },
     {
       "path": "input.schema.json",
-      "sha256": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
-      "size_bytes": 1667,
+      "sha256": "62c03d46a247e07ec32d41793d2a73e3efd29f212a5639bb209d45583ade3ca3",
+      "size_bytes": 2105,
       "mime_type": "application/json"
     },
     {

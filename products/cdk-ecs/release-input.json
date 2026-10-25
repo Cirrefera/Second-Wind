@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "ecs",
     "summary": "ECS Fargate service with explicit image, task sizing, VPC placement, cluster, task role, and log retention.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"service_name\",\"image\"],\"properties\":{\"service_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_-]{1,255}$\"},\"image\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":255},\"cpu\":{\"enum\":[256,512,1024,2048,4096]},\"memory_mib\":{\"type\":\"integer\",\"minimum\":512,\"maximum\":30720},\"desired_count\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":10},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"service_name\":\"example-agent-service\",\"image\":\"public.ecr.aws/docker/library/nginx:latest\",\"cpu\":256,\"memory_mib\":512,\"desired_count\":1}"
   },
   "manifest": {
     "schema_version": "1",

@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"python\",\"knowledge_base_id\":\"EXAMPLEKBID\",\"query\":\"Example retrieval query\",\"model_arn\":\"arn:aws:bedrock:us-east-1:123456789012:inference-profile/example-profile\",\"number_of_results\":3}"
   },
   "manifest": {
     "schema_version": "1",

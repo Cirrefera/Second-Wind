@@ -5,7 +5,7 @@ import { buildStack } from './product.js';
 export function preview(configuration: Record<string, unknown> = {}) {
   try {
     const app = new App();
-    const stack = buildStack(app, 'ProtectedPreviewStack', configuration as never);
+    const stack = buildStack(app, 'ProtectedPreviewStack');
     const resources = Object.values((Template.fromStack(stack).toJSON().Resources ?? {}) as Record<string, any>);
     return { ok: true, resource_count: resources.length, http_apis: resources.filter((resource: any) => resource.Type === 'AWS::ApiGatewayV2::Api').length };
   } catch {

@@ -10,8 +10,12 @@
   "checks": [
     "published npm package integrity verified",
     "package API shape inspected at pinned 2.36.0",
-    "delivered JavaScript syntax checked"
+    "delivered JavaScript syntax checked",
+    "native private preview entrypoint executed the real pinned Powertools API with synthetic input or a local fixture"
   ],
   "independent_product_review": "pending",
-  "publication_approval": "pending"
+  "publication_approval": "pending",
+  "native_preview_entrypoint": "preview.mjs",
+  "native_preview_status": "executed_locally_with_bounded_fixture",
+  "native_preview_aws_calls": "none"
 }

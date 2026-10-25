@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "states",
     "summary": "Step Functions Standard or Express state machine with Pass, Choice, Wait, Parallel, Map, and Fail states.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"state_machine_name\"],\"properties\":{\"state_machine_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_-]{1,80}$\"},\"workflow_type\":{\"enum\":[\"STANDARD\",\"EXPRESS\"]},\"wait_seconds\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":300},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"state_machine_name\":\"ExampleWorkflow\",\"workflow_type\":\"STANDARD\",\"wait_seconds\":5}"
   },
   "manifest": {
     "schema_version": "1",

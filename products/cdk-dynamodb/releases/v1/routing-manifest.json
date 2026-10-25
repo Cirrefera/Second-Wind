@@ -4,7 +4,7 @@
   "sku": "AWS-0634",
   "slug": "cdk-dynamodb",
   "version": 1,
-  "release_ref": "sha256:5bb1735804747e1f9aad47aaf1f3d59a0c80649980aa2b384045b39ee6b81157",
+  "release_ref": "sha256:ad8c84ffd1ebe3bbff7c3b558ede7dafec1de44bac08c9dca4aee7455de8ecca",
   "service": "dynamodb",
   "product_kind": "artifact-product",
   "route_summary": "Define an on-demand DynamoDB table with keys, encryption, and a selected global secondary index.",

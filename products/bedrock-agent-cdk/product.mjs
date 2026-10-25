@@ -1,5 +1,5 @@
 import { App, Stack } from 'aws-cdk-lib';
-import { Agent, BedrockFoundationModel } from '@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock';
+import { Agent, BedrockFoundationModel } from '@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock/index.js';
 
 export function createStack(app, { configuration: c }) {
   if (!c || typeof c.agent_name !== 'string' || typeof c.instruction !== 'string'

@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"python\",\"path\":\"s3://example-data-bucket/preview/catalogued/\",\"database\":\"example_database\",\"table\":\"preview_table\",\"mode\":\"append\",\"rows\":[{\"id\":1,\"label\":\"example\"}]}"
   },
   "manifest": {
     "schema_version": "1",

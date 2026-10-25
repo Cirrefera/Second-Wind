@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "secretsmanager",
     "summary": "Secrets Manager secret with generated value and an optional customer supplied rotation Lambda schedule.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"secret_name\"],\"properties\":{\"secret_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9/_+=.@-]{1,512}$\"},\"rotation_lambda_arn\":{\"type\":\"string\",\"pattern\":\"^arn:[^:]+:lambda:[^:]+:[0-9]{12}:function:[A-Za-z0-9_-]+(:[A-Za-z0-9_-]+)?$\"},\"rotation_days\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":1000},\"exclude_punctuation\":{\"type\":\"boolean\"},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"secret_name\":\"example/agent-credentials\"}"
   },
   "manifest": {
     "schema_version": "1",

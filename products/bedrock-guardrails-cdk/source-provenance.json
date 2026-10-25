@@ -42,8 +42,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "d8294649f46970b5fb3285e240b40dee58eac2c1a51302218f400ecc8155f399",
-      "size_bytes": 1512
+      "sha256": "91e6b21c460690a9e400199f42ead2456d8e18e9ace945ea4c4eb3f52bdce9e4",
+      "size_bytes": 1812
     },
     {
       "path": "config.example.json",
@@ -72,8 +72,8 @@
     },
     {
       "path": "product.mjs",
-      "sha256": "6e1d537d2581872884a0e439a283b77e6e675dcec20734dfad9b732dc556bf96",
-      "size_bytes": 1354
+      "sha256": "415f943921dc0762e2b19963a3ab557c440368e7b0b92e9cbd59fbfc0181e91f",
+      "size_bytes": 1363
     },
     {
       "path": "selection.schema.json",
@@ -84,6 +84,19 @@
       "path": "synth.mjs",
       "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
       "size_bytes": 313
+    },
+    {
+      "path": "validation.json",
+      "sha256": "eb4df8689d5af0f9e1655fd62d9416dc5df3fc3914855c15487e78afa2d085af",
+      "size_bytes": 408
     }
-  ]
+  ],
+  "local_native_synthesis": {
+    "status": "passed",
+    "runtime": "nodejs24",
+    "stack_count": 1,
+    "resource_count": 1,
+    "aws_api_calls": "not-performed",
+    "cloudformation_deployment": "not-performed"
+  }
 }

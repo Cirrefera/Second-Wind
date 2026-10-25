@@ -18,9 +18,9 @@ export const handler = async (_event, context) => {
 
 The helper never logs the complete event or response. Do not pass secrets or personal data in `outcome`. Powertools Logger emits structured logs to the Lambda runtime's output stream; it does not configure CloudWatch retention, access policy, or redaction for fields you explicitly log.
 
-## Hosted preview and boundary
+## Native private preview and boundary
 
-Hosted preview is unavailable for this release. The gateway does not have the exact Powertools transitive dependency graph staged for its private Worker Loader, and this package has not been run as a real hosted preview. The delivered module runs in the Node.js Lambda runtime after installing its pinned dependency. It does not create a function, deploy a Lambda, or configure CloudWatch.
+`preview.mjs` runs the actual Powertools Logger helper in Node.js with a synthetic Lambda request ID and captures the emitted JSON line before returning bounded counts. It does not log a caller event or send data to CloudWatch. Hosted preview remains unavailable because the gateway Worker Loader does not provide this package's native dependency runtime; the preview does not prove Lambda behavior.
 
 ## Files and source
 

@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"python\",\"s3_uri\":\"s3://example-data-bucket/preview/sample.parquet\",\"format\":\"parquet\",\"dataset\":false}"
   },
   "manifest": {
     "schema_version": "1",

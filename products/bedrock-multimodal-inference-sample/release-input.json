@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"python\",\"image_path\":\"./sample-image.png\",\"prompt\":\"Describe the image briefly.\",\"model_id\":\"example-vision-model-id\",\"region\":\"us-east-1\"}"
   },
   "manifest": {
     "schema_version": "1",

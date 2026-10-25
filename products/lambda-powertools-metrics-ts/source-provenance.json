@@ -16,10 +16,17 @@
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/metrics"
   ],
   "original_file_hashes": {
-    "src/metrics.mjs": "389b61ecf8f1b5a5d4932900d9522a415077d30c26bb184782f91b0afdea7b6f",
-    "README.md": "a07984bae1ee20e0bd76aeb8ca221120170c9686ae8777159dac86d9b4551d5b",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "4dea8a4826e1d07ef0ab2439dc248b1060c9513f15d2bcaefe134605edd49ba5",
     "config.schema.json": "189cb0c62ac3047f15c72cba62733e44d7f0c9f8d8606907da6d0263fc4e61ea",
-    "package.json": "186e9f248c8c8c487df794b4bac25723c68cc55b8754106f84eb46d21d633467"
+    "package.json": "186e9f248c8c8c487df794b4bac25723c68cc55b8754106f84eb46d21d633467",
+    "preview.mjs": "e757949063812f94d1780a703673f56c1344182778ad577ab7d9d29b7526b1e7",
+    "src/metrics.mjs": "389b61ecf8f1b5a5d4932900d9522a415077d30c26bb184782f91b0afdea7b6f"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Node.js 20+",
+    "aws_calls": "none",
+    "scope": "actual Powertools Metrics emits and parses local EMF output; not CloudWatch ingestion"
   }
 }

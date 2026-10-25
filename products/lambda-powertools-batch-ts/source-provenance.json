@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+  "current_origin": "Original Second Wind integration code plus a bounded Worker Loader preview bundle built from the exact published Powertools dependency closure.",
   "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
   "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
   "upstream_package_path": "packages/batch",
@@ -17,10 +17,27 @@
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/batch"
   ],
   "original_file_hashes": {
-    "src/batch.mjs": "5b4caed334762405d188c868ccba957070bcde6221326db5e4dc71fcdf227a51",
-    "README.md": "8397d7c25dc7afd91705fa11a09f77b8453abd70405414acf67c12a3a4df5171",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "config.schema.json": "f041b7153a78435014289cb6804ed2cafe3332cf55c7230f19297f0f62d6e9a9",
-    "package.json": "729ad5fde45568e76ff9f4b94e5e289a36d45789f2c836af538ece6160df6956"
+    "LICENSE-Powertools-MIT-0": "4045b29c5dcda6eac95d2bf6f97657f97f379f8cba052b6e9e820ee82b3fdae3",
+    "README.md": "30d78b6d58fea017eb59bfa51dae865cc0903eb2c6aacb4d85eb908955de426c",
+    "config.schema.json": "b53dc157d711076e5093efed606c5e043e9a72e7a794de659283f654b54f9409",
+    "package.json": "729ad5fde45568e76ff9f4b94e5e289a36d45789f2c836af538ece6160df6956",
+    "preview.mjs": "4102eaa57bf5380566e4606dea00df660de7b4fd7f683729f3c33eefca01cf15",
+    "src/batch.mjs": "5b4caed334762405d188c868ccba957070bcde6221326db5e4dc71fcdf227a51"
+  },
+  "preview_bundle": {
+    "entrypoint": "preview.mjs",
+    "build": "esbuild browser/Worker bundle of the purchased src/batch.mjs integration and its exact pinned dependencies; optional Node multi-concurrency AsyncLocalStorage branch fixed to single-invocation mode",
+    "tested_runtime": "Cloudflare Code Mode / Workerd with compatibility date 2025-06-01 and nodejs_compat",
+    "aws_calls": "none",
+    "bundle_sha256": "4102eaa57bf5380566e4606dea00df660de7b4fd7f683729f3c33eefca01cf15",
+    "bundle_size_bytes": 9232,
+    "dependency_license": "MIT-0; LICENSE-Powertools-MIT-0 included"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Node.js 20+",
+    "aws_calls": "none",
+    "scope": "actual purchased createSqsBatchHandler runs the actual Powertools partial batch processor against synthetic SQS-shaped records"
   }
 }

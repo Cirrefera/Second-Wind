@@ -4,7 +4,7 @@
   "sku": "AWS-0639",
   "slug": "cdk-apigateway",
   "version": 1,
-  "release_ref": "sha256:efddcd9b153f893c57aa7c3ee83d11bf1c2c82a4d6085eeaea34300e813f7780",
+  "release_ref": "sha256:eb526cf24993f90a879d2a310aedea341f4e8945b8764b81e96a1712a0185c26",
   "service": "apigateway",
   "product_kind": "artifact-product",
   "route_summary": "Define a REST API backed by Lambda with an explicit deployment stage.",

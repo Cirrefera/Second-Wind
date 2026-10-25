@@ -4,7 +4,7 @@
   "sku": "AWS-0637",
   "slug": "cdk-bedrock",
   "version": 1,
-  "release_ref": "sha256:a0021ba2ee510d50da4e882dc796bf4d70eb076949f6392732ca171f1e0614d3",
+  "release_ref": "sha256:704e2117f4bf8a2274c2b9788b6f3d08badada01764b5889b92338ecb5a87452",
   "service": "bedrock",
   "product_kind": "artifact-product",
   "route_summary": "Define a Bedrock Guardrail with explicit user-facing blocked-content messages.",

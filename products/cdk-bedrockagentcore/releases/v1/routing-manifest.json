@@ -4,7 +4,7 @@
   "sku": "AWS-0638",
   "slug": "cdk-bedrockagentcore",
   "version": 1,
-  "release_ref": "sha256:c6df0ba7023d9e1dc0b63765bb57121d7bdf211432142bba4f514521de50660e",
+  "release_ref": "sha256:6d1617d6b8fdec3f9c497d02f4fe8f6921c4208e3d1336739aa55be2a668b4d6",
   "service": "bedrock",
   "product_kind": "artifact-product",
   "route_summary": "Define AgentCore memory using the current CDK L2 Memory construct and inspect synthesized resources.",

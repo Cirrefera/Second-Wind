@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"javascript\",\"runtime\":\"nodejs18\"}"
   },
   "manifest": {
     "schema_version": "1",

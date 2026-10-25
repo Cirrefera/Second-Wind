@@ -21,9 +21,9 @@ export const handler = async (event) => {
 
 Use low-cardinality dimensions such as environment or service. Do not put customer IDs, request IDs, or other high-cardinality values in dimensions; use metadata when appropriate. Powertools enforces EMF metric and dimension limits. `publishStoredMetrics()` writes to stdout; it is not proof CloudWatch has ingested the document.
 
-## Hosted preview and boundary
+## Native private preview and boundary
 
-Hosted preview is unavailable. The gateway package has no exact Powertools Commons dependency graph and the library's Node console output behavior has not been exercised in the private Workerd sandbox. No hosted result claims EMF emission or CloudWatch ingestion.
+`preview.mjs` runs the actual Powertools Metrics API in Node.js, captures and parses its local EMF JSON output, and returns only bounded counts. It does not publish to CloudWatch; a local log line does not prove CloudWatch ingestion. Hosted preview remains unavailable because the Worker Loader uses a compatibility date before the `node:console` module supported by this library.
 
 ## Files and source
 

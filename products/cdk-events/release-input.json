@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "events",
     "summary": "EventBridge rule configured as either a schedule or a source/detail-type event pattern.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"rule_name\",\"mode\"],\"properties\":{\"rule_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_.-]{1,64}$\"},\"mode\":{\"enum\":[\"schedule\",\"pattern\"]},\"schedule_expression\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":256},\"event_source\":{\"type\":\"string\",\"pattern\":\"^[a-z0-9.-]{1,256}$\"},\"detail_type\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":128},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"rule_name\":\"example-rule\",\"mode\":\"pattern\",\"event_source\":\"example.service\",\"detail_type\":\"change\"}"
   },
   "manifest": {
     "schema_version": "1",

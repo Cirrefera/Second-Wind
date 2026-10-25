@@ -17,7 +17,8 @@
     "license_spdx": "Apache-2.0",
     "provenance": "original",
     "status": "draft",
-    "version": 1
+    "version": 1,
+    "input_example": "{\"language\":\"python\",\"runtime_arn\":\"arn:aws:bedrock-agentcore:us-east-1:123456789012:runtime/example-runtime\",\"session_id\":\"example-session-id-00000000000000000000000000000000\",\"payload\":{\"prompt\":\"Reply with a short readiness confirmation.\"}}"
   },
   "manifest": {
     "schema_version": "1",

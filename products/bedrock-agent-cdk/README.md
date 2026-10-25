@@ -15,7 +15,9 @@ Hosted bounded preview is unavailable for this product because the private Worke
 ## Product files
 
 - `product.mjs` constructs the real AWS CDK resources.
+- `preview.mjs` runs that construct through a trusted native Node synthesizer and returns only status, selected component, and resource count; it is not supported by the hosted Worker runtime.
 - `synth.mjs` runs local synthesis.
+- `validation.json` records one local synthesis result; it does not attest to AWS execution or deployment.
 - `package.json` and `package-lock.json` pin dependencies.
 - `source-provenance.json` records upstream references and adaptations.
 

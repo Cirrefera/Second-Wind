@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "ssm",
     "summary": "Systems Manager Parameter Store string or string-list parameter with explicit tier and read grant example.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"parameter_name\",\"value\"],\"properties\":{\"parameter_name\":{\"type\":\"string\",\"pattern\":\"^/[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*$\",\"maxLength\":1011},\"value\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":4096},\"parameter_type\":{\"enum\":[\"String\",\"StringList\"]},\"tier\":{\"enum\":[\"Standard\",\"Advanced\"]},\"language\":{\"const\":\"javascript\"}}}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"parameter_name\":\"/agents/config\",\"value\":\"safe-example\",\"parameter_type\":\"String\",\"tier\":\"Standard\"}"
   },
   "manifest": {
     "schema_version": "1",

@@ -11,15 +11,21 @@
       "mime_type": "text/plain; charset=utf-8"
     },
     {
+      "path": "LICENSE-Powertools-MIT-0",
+      "sha256": "4045b29c5dcda6eac95d2bf6f97657f97f379f8cba052b6e9e820ee82b3fdae3",
+      "size_bytes": 878,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
       "path": "README.md",
-      "sha256": "8397d7c25dc7afd91705fa11a09f77b8453abd70405414acf67c12a3a4df5171",
-      "size_bytes": 1578,
+      "sha256": "30d78b6d58fea017eb59bfa51dae865cc0903eb2c6aacb4d85eb908955de426c",
+      "size_bytes": 2039,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
       "path": "config.schema.json",
-      "sha256": "f041b7153a78435014289cb6804ed2cafe3332cf55c7230f19297f0f62d6e9a9",
-      "size_bytes": 361,
+      "sha256": "b53dc157d711076e5093efed606c5e043e9a72e7a794de659283f654b54f9409",
+      "size_bytes": 395,
       "mime_type": "application/json"
     },
     {
@@ -29,9 +35,15 @@
       "mime_type": "application/json"
     },
     {
+      "path": "preview.mjs",
+      "sha256": "4102eaa57bf5380566e4606dea00df660de7b4fd7f683729f3c33eefca01cf15",
+      "size_bytes": 9232,
+      "mime_type": "text/javascript"
+    },
+    {
       "path": "source-provenance.json",
-      "sha256": "a07fc479cb88ad62e7ea32fdb0bda0bcda2224ab9e84dcc55ad2a6c9988b0c66",
-      "size_bytes": 1412,
+      "sha256": "dab07599c83f56f4a1095b3212417f7f793915d3917904ea310a72d36fa06f85",
+      "size_bytes": 2505,
       "mime_type": "application/json"
     },
     {
@@ -42,8 +54,8 @@
     },
     {
       "path": "validation.json",
-      "sha256": "9bf939e5ec90d89ae1ca9114ba65ab107f18c9cace743d856ee593eaa497017d",
-      "size_bytes": 611,
+      "sha256": "2c17df664ad94c7d3ecc12c5521f32340a9fcc06d2b278e50083db99501dcdbd",
+      "size_bytes": 1311,
       "mime_type": "application/json"
     }
   ]

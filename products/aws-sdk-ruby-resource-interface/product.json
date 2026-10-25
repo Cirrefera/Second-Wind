@@ -18,5 +18,13 @@
     "execution_language": "ruby",
     "availability": "runtime-not-installed",
     "allowed_result_fields": []
-  }
+  },
+  "delivery_entrypoint": "client.rb",
+  "exports": [
+    "client_for",
+    "put_object",
+    "get_item",
+    "invoke_model",
+    "build_request"
+  ]
 }

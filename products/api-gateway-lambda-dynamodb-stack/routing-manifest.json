@@ -4,7 +4,7 @@
   "sku": "AWS-0560",
   "slug": "api-gateway-lambda-dynamodb-stack",
   "version": 1,
-  "release_ref": "sha256:8cb5012226295ee9a1489560ae8fd5db8700aa8b171fe075d942c1b785217360",
+  "release_ref": "sha256:10d76600649628c271754379db195c47c0175d91bc614e4bfc673fb0de287787",
   "service": "apigateway",
   "product_kind": "artifact-product",
   "route_summary": "REST CRUD API with five Lambda handlers, origin-scoped CORS and a retained DynamoDB table.",

@@ -5,8 +5,8 @@
   "version": 1,
   "product_kind": "artifact-product",
   "service": "lambda",
-  "release_ref": "sha256:74f9740ceb94798b69fbcd903ef1fe9abc807835716365eeb4dc75b2c3a013b4",
-  "content_hash": "74f9740ceb94798b69fbcd903ef1fe9abc807835716365eeb4dc75b2c3a013b4",
+  "release_ref": "sha256:a33d57bc61d2ff8d5448408f6665ee1fcb7755f2224f907b250b623e7a96312f",
+  "content_hash": "a33d57bc61d2ff8d5448408f6665ee1fcb7755f2224f907b250b623e7a96312f",
   "hash_scope": "file-package-json-utf8",
   "mime_type": "application/json",
   "origin": "Second Wind",
@@ -94,8 +94,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "c48939fcb3c43d0eb38c5feae2838a5a472a08836d6e44eea2e34904f1b83396",
-      "size_bytes": 1904,
+      "sha256": "45cb42002eb1148ae18a211356c880926d20c2e0c1eeaf07f38bea246db7ea64",
+      "size_bytes": 1922,
       "mime_type": "text/plain; charset=utf-8"
     },
     {
@@ -111,9 +111,15 @@
       "mime_type": "application/json"
     },
     {
+      "path": "preview.mjs",
+      "sha256": "ae6dc19235b841e413e92baf7650926bf4685da946b5c11def3bdc4fa988fbd9",
+      "size_bytes": 1774,
+      "mime_type": "text/javascript"
+    },
+    {
       "path": "source-provenance.json",
-      "sha256": "7c05fb9158098f806e88befdcf2bbfc45eba83a5328bcfd073a5266174f1593a",
-      "size_bytes": 1379,
+      "sha256": "cbae8290f2d4d977d28bd3a2dd44bf5d11c2516bd2903b5808be4dd1d09b4db6",
+      "size_bytes": 1675,
       "mime_type": "application/json"
     },
     {
@@ -124,8 +130,8 @@
     },
     {
       "path": "validation.json",
-      "sha256": "60b2658e9e09c95230fa5157fddbf7a4764b2698e6d98c6b343518e6b987e618",
-      "size_bytes": 611,
+      "sha256": "56ba95e0894927b0567d39ced3bc9b6c01a8484e8c561d35adce6860814f87b4",
+      "size_bytes": 884,
       "mime_type": "application/json"
     }
   ],
@@ -135,5 +141,93 @@
     "npm_integrity": "sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==",
     "aws_execution": "not_performed",
     "hosted_preview": "unavailable"
-  }
+  },
+  "components": [
+    {
+      "id": "base",
+      "name": "Structured logging helper",
+      "requires": [],
+      "share_bps": 10000,
+      "files": [
+        {
+          "path": "LICENSE",
+          "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "mime_type": "text/plain; charset=utf-8"
+        },
+        {
+          "path": "README.md",
+          "content": "# Powertools Logger for Lambda (TypeScript/JavaScript)\n\nCreate a structured JSON logger with a stable service name and bind only the AWS Lambda request ID to a log event. The integration uses the actual `@aws-lambda-powertools/logger` package; it does not implement a substitute logger.\n\n## Install and use\n\nInstall the exact direct dependency with `npm install`. The upstream package brings its pinned `@aws-lambda-powertools/commons` dependency. Use Node.js 20 or newer in AWS Lambda.\n\n```js\nimport { createRequestLogger, logRequest } from './src/logger.mjs';\n\nconst logger = createRequestLogger({ service_name: 'payments-api', log_level: 'INFO' });\nexport const handler = async (_event, context) => {\n  logRequest(logger, context);\n  return { statusCode: 200 };\n};\n```\n\nThe helper never logs the complete event or response. Do not pass secrets or personal data in `outcome`. Powertools Logger emits structured logs to the Lambda runtime's output stream; it does not configure CloudWatch retention, access policy, or redaction for fields you explicitly log.\n\n## Native private preview and boundary\n\n`preview.mjs` runs the actual Powertools Logger helper in Node.js with a synthetic Lambda request ID and captures the emitted JSON line before returning bounded counts. It does not log a caller event or send data to CloudWatch. Hosted preview remains unavailable because the gateway Worker Loader does not provide this package's native dependency runtime; the preview does not prove Lambda behavior.\n\n## Files and source\n\nSee `config.schema.json` and `package.json`. Original Second Wind integration code is Apache-2.0. It imports Powertools Logger 2.36.0, MIT-0, from [the pinned upstream repository revision](https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/logger). The exact published npm tarball integrity is recorded in `source-provenance.json`.\n",
+          "sha256": "45cb42002eb1148ae18a211356c880926d20c2e0c1eeaf07f38bea246db7ea64",
+          "size_bytes": 1922,
+          "mime_type": "text/plain; charset=utf-8"
+        },
+        {
+          "path": "config.schema.json",
+          "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"language\",\n    \"service_name\"\n  ],\n  \"properties\": {\n    \"language\": {\n      \"const\": \"javascript\"\n    },\n    \"service_name\": {\n      \"type\": \"string\",\n      \"pattern\": \"^[A-Za-z0-9_.-]{1,64}$\"\n    },\n    \"log_level\": {\n      \"enum\": [\n        \"DEBUG\",\n        \"INFO\",\n        \"WARN\",\n        \"ERROR\"\n      ]\n    }\n  }\n}\n",
+          "sha256": "31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4",
+          "size_bytes": 458,
+          "mime_type": "application/json"
+        },
+        {
+          "path": "package.json",
+          "content": "{\n  \"name\": \"@secondwind/lambda-powertools-logger-ts\",\n  \"version\": \"1.0.0\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"engines\": {\n    \"node\": \">=20\"\n  },\n  \"description\": \"A small TypeScript/JavaScript Lambda module that configures Powertools Logger, binds the AWS request ID, and logs a safe request event without copying the full event.\",\n  \"license\": \"Apache-2.0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/logger\": \"2.36.0\"\n  }\n}\n",
+          "sha256": "420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811",
+          "size_bytes": 441,
+          "mime_type": "application/json"
+        },
+        {
+          "path": "preview.mjs",
+          "content": "import { createRequestLogger, logRequest } from './src/logger.mjs';\n\nconst SLUG = 'lambda-powertools-logger-ts';\n\n/** Native Node preview: exercise Powertools Logger with synthetic context only. */\nexport async function preview({ configuration, selected_components } = {}) {\n  if (!configuration || configuration.language !== 'javascript'\n      || typeof configuration.service_name !== 'string'\n      || !Array.isArray(selected_components) || selected_components.length !== 1\n      || selected_components[0] !== 'base') {\n    return { ok: false, status: 'invalid', slug: SLUG, operation_count: 0, diagnostic_codes: ['configuration_invalid'] };\n  }\n  const captured = [];\n  const originals = Object.fromEntries(['log', 'info', 'warn', 'error', 'debug'].map(key => [key, console[key]]));\n  const originalWrite = process.stdout.write;\n  try {\n    for (const key of Object.keys(originals)) console[key] = (...args) => { captured.push(args.map(String).join(' ')); };\n    process.stdout.write = (chunk, encoding, callback) => { captured.push(String(chunk)); if (typeof encoding === 'function') encoding(); else if (callback) callback(); return true; };\n    const logger = createRequestLogger(configuration);\n    logRequest(logger, { awsRequestId: 'protected-preview' }, 'preview');\n    if (captured.length < 1) throw new Error('logger_output_missing');\n    return { ok: true, status: 'valid', slug: SLUG, operation_count: 1, diagnostic_codes: ['synthetic_lambda_context'], selected_components };\n  } catch {\n    return { ok: false, status: 'unavailable', slug: SLUG, operation_count: 0, diagnostic_codes: ['runtime_unavailable'] };\n  } finally {\n    process.stdout.write = originalWrite;\n    for (const [key, original] of Object.entries(originals)) console[key] = original;\n  }\n}\n",
+          "sha256": "ae6dc19235b841e413e92baf7650926bf4685da946b5c11def3bdc4fa988fbd9",
+          "size_bytes": 1774,
+          "mime_type": "text/javascript"
+        },
+        {
+          "path": "source-provenance.json",
+          "content": "{\n  \"schema_version\": \"1\",\n  \"current_origin\": \"Original Second Wind integration code; no upstream implementation source is redistributed.\",\n  \"upstream_repository\": \"https://github.com/aws-powertools/powertools-lambda-typescript\",\n  \"source_revision\": \"0595159ed90c72cc9a004a98923b9778b876726a\",\n  \"upstream_package_path\": \"packages/logger\",\n  \"npm_package\": \"@aws-lambda-powertools/logger\",\n  \"npm_package_version\": \"2.36.0\",\n  \"npm_tarball_integrity\": \"sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==\",\n  \"npm_integrity_check\": \"verified against the exact cached published tarball using SHA-512\",\n  \"license\": \"MIT-0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/logger\": \"2.36.0\"\n  },\n  \"source_interface_urls\": [\n    \"https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/logger\"\n  ],\n  \"original_file_hashes\": {\n    \"LICENSE\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n    \"README.md\": \"45cb42002eb1148ae18a211356c880926d20c2e0c1eeaf07f38bea246db7ea64\",\n    \"config.schema.json\": \"31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4\",\n    \"package.json\": \"420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811\",\n    \"preview.mjs\": \"ae6dc19235b841e413e92baf7650926bf4685da946b5c11def3bdc4fa988fbd9\",\n    \"src/logger.mjs\": \"c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54\"\n  },\n  \"native_preview\": {\n    \"entrypoint\": \"preview.mjs\",\n    \"runtime\": \"Node.js 20+\",\n    \"aws_calls\": \"none\",\n    \"scope\": \"actual Powertools Logger emits one JSON line with a fixed synthetic request ID\"\n  }\n}\n",
+          "sha256": "cbae8290f2d4d977d28bd3a2dd44bf5d11c2516bd2903b5808be4dd1d09b4db6",
+          "size_bytes": 1675,
+          "mime_type": "application/json"
+        },
+        {
+          "path": "src/logger.mjs",
+          "content": "import { Logger } from '@aws-lambda-powertools/logger';\n\nconst LEVELS = new Set(['DEBUG', 'INFO', 'WARN', 'ERROR']);\nconst SERVICE = /^[A-Za-z0-9_.-]{1,64}$/;\n\nexport function createRequestLogger({ service_name, log_level = 'INFO' } = {}) {\n  if (typeof service_name !== 'string' || !SERVICE.test(service_name)) throw new Error('invalid_service_name');\n  if (!LEVELS.has(log_level)) throw new Error('invalid_log_level');\n  return new Logger({ serviceName: service_name, logLevel: log_level });\n}\n\n/** Add only stable Lambda request metadata; never serialize the whole event. */\nexport function logRequest(logger, context, outcome = 'started') {\n  if (!logger || typeof logger.appendKeys !== 'function' || typeof logger.info !== 'function') throw new Error('logger_required');\n  if (!context || typeof context.awsRequestId !== 'string') throw new Error('lambda_context_required');\n  logger.appendKeys({ aws_request_id: context.awsRequestId });\n  logger.info('lambda_request', { outcome });\n}\n",
+          "sha256": "c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54",
+          "size_bytes": 991,
+          "mime_type": "text/javascript"
+        },
+        {
+          "path": "validation.json",
+          "content": "{\n  \"sku\": \"AWS-0550\",\n  \"version\": 1,\n  \"status\": \"draft\",\n  \"native_runtime\": \"Node.js Lambda 20+\",\n  \"package_execution\": \"not_performed_in_gateway\",\n  \"aws_calls\": \"not_performed\",\n  \"hosted_preview_available\": false,\n  \"hosted_preview_blocker\": \"Powertools dependency graph and native Lambda or AWS service runtime are not available in the hosted Worker Loader.\",\n  \"checks\": [\n    \"published npm package integrity verified\",\n    \"package API shape inspected at pinned 2.36.0\",\n    \"delivered JavaScript syntax checked\",\n    \"native private preview entrypoint executed the real pinned Powertools API with synthetic input or a local fixture\"\n  ],\n  \"independent_product_review\": \"pending\",\n  \"publication_approval\": \"pending\",\n  \"native_preview_entrypoint\": \"preview.mjs\",\n  \"native_preview_status\": \"executed_locally_with_bounded_fixture\",\n  \"native_preview_aws_calls\": \"none\"\n}\n",
+          "sha256": "56ba95e0894927b0567d39ced3bc9b6c01a8484e8c561d35adce6860814f87b4",
+          "size_bytes": 884,
+          "mime_type": "application/json"
+        }
+      ]
+    }
+  ],
+  "pricing": {
+    "mode": "proportional-components",
+    "max_amount_atomic": "1000000",
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bda02913",
+    "network": "eip155:8453"
+  },
+  "selection_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "base"
+      ]
+    },
+    "minItems": 1,
+    "maxItems": 1,
+    "uniqueItems": true
+  },
+  "hosted_trial_supported": false,
+  "native_preview_entrypoint": "preview.mjs",
+  "native_preview_scope": "actual Powertools Logger emits one JSON line with a fixed synthetic request ID"
 }

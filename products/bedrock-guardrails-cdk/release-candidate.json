@@ -3,20 +3,19 @@
   "sku": "AWS-0561",
   "slug": "bedrock-guardrails-cdk",
   "version": 1,
-  "release_ref": "sha256:1bb57772f69c3f63afc98170af77272ed055cbde4ba198c94c5648bfe668484e",
+  "release_ref": "sha256:3e71c3a6f01c20251440e304d4913c58fc40feb9d9aa985e277bbcaae0cebc13",
+  "content_hash": "3e71c3a6f01c20251440e304d4913c58fc40feb9d9aa985e277bbcaae0cebc13",
   "status": "draft",
   "product_kind": "artifact-product",
   "service": "bedrock",
-  "content_hash": "1bb57772f69c3f63afc98170af77272ed055cbde4ba198c94c5648bfe668484e",
-  "hash_scope": "file-package-json-utf8",
   "hosted_trial_supported": false,
-  "native_synthesis": "not-run",
+  "native_synthesis": "passed",
+  "resource_count": 1,
   "aws_api_calls": "not-performed",
   "aws_deployment": "not-performed",
   "publication_blockers": [
     "hosted_private_preview_unavailable",
     "trusted_source_review_pending",
-    "native_synthesis_evidence_pending",
     "publication_approval_pending"
   ]
 }

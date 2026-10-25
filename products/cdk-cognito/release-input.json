@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "cognito",
     "summary": "Cognito user pool, client, domain, and optional Google identity provider using Secrets Manager references.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"pool_name\",\"domain_prefix\"],\"properties\":{\"pool_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_-]{1,128}$\"},\"domain_prefix\":{\"type\":\"string\",\"pattern\":\"^[a-z0-9-]{1,63}$\"},\"google_client_id\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":256},\"google_client_secret_name\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":512},\"callback_url\":{\"type\":\"string\",\"pattern\":\"^https://[^\\\\s]+$\"},\"language\":{\"const\":\"javascript\"}},\"allOf\":[{\"if\":{\"properties\":{\"google_client_id\":{\"type\":\"string\"}},\"required\":[\"google_client_id\"]},\"then\":{\"required\":[\"google_client_secret_name\",\"callback_url\"]}}]}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"pool_name\":\"ExampleAgentUsers\",\"domain_prefix\":\"example-agent-users\"}"
   },
   "manifest": {
     "schema_version": "1",

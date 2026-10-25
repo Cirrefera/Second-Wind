@@ -3,20 +3,19 @@
   "sku": "AWS-0556",
   "slug": "bedrock-agent-cdk",
   "version": 1,
-  "release_ref": "sha256:a8959ea27ba0be7246f3d13ba2384aa98e3c6ca8ef56229353359805597dcc03",
+  "release_ref": "sha256:3f53504af6ae32d8508babbbef7bb9c517e1a333113d06448ea10a6bdaf3a24e",
+  "content_hash": "3f53504af6ae32d8508babbbef7bb9c517e1a333113d06448ea10a6bdaf3a24e",
   "status": "draft",
   "product_kind": "artifact-product",
   "service": "bedrock",
-  "content_hash": "a8959ea27ba0be7246f3d13ba2384aa98e3c6ca8ef56229353359805597dcc03",
-  "hash_scope": "file-package-json-utf8",
   "hosted_trial_supported": false,
-  "native_synthesis": "not-run",
+  "native_synthesis": "passed",
+  "resource_count": 3,
   "aws_api_calls": "not-performed",
   "aws_deployment": "not-performed",
   "publication_blockers": [
     "hosted_private_preview_unavailable",
     "trusted_source_review_pending",
-    "native_synthesis_evidence_pending",
     "publication_approval_pending"
   ]
 }

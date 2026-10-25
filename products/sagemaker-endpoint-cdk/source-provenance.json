@@ -4,26 +4,71 @@
   "slug": "sagemaker-endpoint-cdk",
   "origin": "Second Wind",
   "license": "Apache-2.0",
-  "source_repo": "https://github.com/aws/aws-cdk",
-  "source_revision": "aws-cdk-lib-v2.274.0",
-  "source_path": "aws-cdk-lib/aws-sagemaker",
-  "source_sha256": null,
-  "relationship": "Source correction: the intake-cited path `src/cdk-lib/sagemaker` is absent from current @cdklabs/generative-ai-cdk-constructs@0.1.320. Its current SageMaker patterns are specialized custom, HuggingFace and JumpStart endpoints. This package uses AWS CDK L1 CfnModel/CfnEndpointConfig/CfnEndpoint to preserve the generic endpoint purpose; no Bedrock modelId input is supported.",
+  "source_repo": "https://github.com/awslabs/generative-ai-cdk-constructs",
+  "source_revision": "npm:@cdklabs/generative-ai-cdk-constructs@0.1.320",
+  "source_path": "lib/patterns/gen-ai/aws-model-deployment-sagemaker/jumpstart-sagemaker-endpoint.js",
+  "source_sha256": "2905602f0edf4b44d20ad04cb80e765822c9054294e15843c101347e639174e5",
+  "relationship": "Original Second Wind JavaScript wrapping pinned AWS CDK L1 SageMaker resources and the published JumpStart endpoint construct. It provides JumpStart catalog-key and custom-container modes, VPC configuration, caller endpoint-config properties, model-linked variants, and endpoint outputs. No upstream implementation source is copied.",
   "dependency_pins": {
+    "@cdklabs/generative-ai-cdk-constructs": "0.1.320",
     "aws-cdk-lib": "2.274.0",
     "constructs": "10.8.1"
   },
   "dependency_integrity": {
+    "@cdklabs/generative-ai-cdk-constructs": "sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg==",
     "aws-cdk-lib": "sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg=="
   },
-  "upstream_source_files": [],
-  "runtime_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+  "upstream_source_files": [
+    {
+      "path": "lib/patterns/gen-ai/aws-model-deployment-sagemaker/jumpstart-model.js",
+      "sha256": "40316abaa75dbab5f051e4ccd66e215086135ff812b3ed0c6861d0eee4369b41",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "JumpStart key lookup behavior inspected; exact model catalog key names are required."
+    },
+    {
+      "path": "lib/patterns/gen-ai/aws-model-deployment-sagemaker/jumpstart-model.d.ts",
+      "sha256": "78ae14f2ef409813ae866ce85e68304dac6ef0c9637490157988e1a3c0d19682",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "Published JumpStart model API declaration inspected."
+    },
+    {
+      "path": "lib/patterns/gen-ai/aws-model-deployment-sagemaker/jumpstart-sagemaker-endpoint.js",
+      "sha256": "2905602f0edf4b44d20ad04cb80e765822c9054294e15843c101347e639174e5",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "Published endpoint construct implementation inspected for model artifact, VPC, EULA, instance validation, and linked endpoint resources."
+    },
+    {
+      "path": "lib/patterns/gen-ai/aws-model-deployment-sagemaker/jumpstart-sagemaker-endpoint.d.ts",
+      "sha256": "eb41de8e5b6cd0db31ee126e2d4254e8dcbcbef77e483f003807b88d3ab2cbe5",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "Published endpoint construct API declaration inspected."
+    },
+    {
+      "path": "lib/patterns/gen-ai/aws-model-deployment-sagemaker/sagemaker-instance-type.js",
+      "sha256": "252577b7a657de178d7b1607b483475135a12bf7ba9bac5d0203874cafba3efa",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "Instance-type wrapper API inspected."
+    },
+    {
+      "path": "lib/patterns/gen-ai/aws-model-deployment-sagemaker/sagemaker-instance-type.d.ts",
+      "sha256": "4e30cc14bef8d628d12c46f32eb8f3289ce2b9e87bff116270b86e1c4504bb5d",
+      "repository": "npm:@cdklabs/generative-ai-cdk-constructs",
+      "revision": "0.1.320",
+      "relationship": "Instance-type wrapper declaration inspected."
+    }
+  ],
+  "runtime_boundary": "Native Node.js local CDK synthesis; no AWS API calls, model invocation, or deployment. Hosted private preview remains unavailable for this dependency closure.",
   "preview_contract": null,
-  "review_status": "draft; trusted source and product review pending",
+  "review_status": "draft; product, runtime, license, and publication review pending",
   "license_mapping": {
     "first_party_files": "Apache-2.0",
     "upstream_dependency_license": "Apache-2.0",
-    "dependency_license_source": "npm package metadata and package LICENSE"
+    "dependency_license_source": "pinned npm package metadata and included package LICENSE"
   },
   "local_files": [
     {
@@ -33,28 +78,33 @@
     },
     {
       "path": "README.md",
-      "sha256": "4e11938b558cc98ec98f68b60ee2ee3caf1c4791b14d75da1156b5bdd4e35080",
-      "size_bytes": 1826
+      "sha256": "b925c608eeebd8eb8179ab0703458a12cae775aa1a76d8c380bd38bb6b8b4aa6",
+      "size_bytes": 4152
     },
     {
       "path": "config.example.json",
-      "sha256": "f61b5aa2926f90c6cd50e3861f952fa746d76fbada7472e942752904a613bb28",
-      "size_bytes": 380
+      "sha256": "091ac207f43ba63ffee311a605461e2850b076464398c649a2e66c322a10c568",
+      "size_bytes": 783
+    },
+    {
+      "path": "config.custom.example.json",
+      "sha256": "8faf680862468febffdbac8f4053985f0c7cd0d8f4cb9a7311b117833e4e7864",
+      "size_bytes": 876
     },
     {
       "path": "config.schema.json",
-      "sha256": "df5ca97031a9ebb71ea6ddf3f33843b43ccb39deb0db30d91661281703005517",
-      "size_bytes": 1245
+      "sha256": "fb78e914217e39b5ae18e722264df20d46aafbde7eec5f07d5984a3d90db931e",
+      "size_bytes": 3479
     },
     {
       "path": "package-lock.json",
-      "sha256": "b4f0ecf8eef7b118d5b5ca18b75c6abf20de76d65d343d6b21069a6db79150da",
-      "size_bytes": 8110
+      "sha256": "88896a1bb0696354af4984e9fc63f58a7a28af2b09808852239300a175576327",
+      "size_bytes": 9998
     },
     {
       "path": "package.json",
-      "sha256": "b1e1dfd39ef256b30fa23663bf2c48dea9b16bf9329a991b025f8f68df6ae79e",
-      "size_bytes": 285
+      "sha256": "5046f8d0a8a55daecf0c782d054649d0a75fdd97452d95370d202a9b57d7abfb",
+      "size_bytes": 341
     },
     {
       "path": "preview.mjs",
@@ -63,8 +113,8 @@
     },
     {
       "path": "product.mjs",
-      "sha256": "986f8a68d5be1feeeb6b5f9754ed739326ed15e68d64c81b8e3c39926e35f6df",
-      "size_bytes": 1477
+      "sha256": "0f76a89e2db2706964ee9ba8aa3593c6dcf12bc49f6374cd7f6d1393eb53dc09",
+      "size_bytes": 11497
     },
     {
       "path": "selection.schema.json",
@@ -75,6 +125,41 @@
       "path": "synth.mjs",
       "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
       "size_bytes": 313
+    },
+    {
+      "path": "validation.json",
+      "sha256": "6058ebdb33ed7ade8c72e66855bca9a7f90a2c15396b2397bf370a488d955bae",
+      "size_bytes": 1829
     }
+  ],
+  "local_native_synthesis": {
+    "status": "passed_for_jumpstart_and_custom_modes",
+    "runtime": "nodejs24",
+    "modes": {
+      "jumpstart": {
+        "example": "config.example.json",
+        "catalog_key": "HUGGINGFACE_ASR_WHISPER_BASE_3_0_20",
+        "resource_count": 3
+      },
+      "custom": {
+        "example": "config.custom.example.json",
+        "resource_count": 3
+      }
+    },
+    "aws_api_calls": "not-performed",
+    "model_execution": "not-performed",
+    "cloudformation_deployment": "not-performed"
+  },
+  "supported_api": {
+    "jumpstart": "Pinned package catalog key, supported instance type, role, optional CDK IVpc, explicit EULA opt-in, and full CfnEndpointConfigProps; every production variant is linked to the generated model.",
+    "custom": "Named SageMaker model from ECR image and S3 artifact, execution role, optional CDK IVpc, and full CfnEndpointConfigProps; every production variant is linked to the generated model.",
+    "serialized_preview": "JSON preview supports production variants, KMS key ID, network isolation, and existing VPC subnet/security-group IDs; it does not serialize advanced CfnEndpointConfigProps."
+  },
+  "implementation_limitations": [
+    "JumpStart model_id must be an exact key in the pinned package catalog; arbitrary model IDs are not translated.",
+    "JumpStart model/Region/instance availability is constrained by the pinned catalog and construct.",
+    "Custom mode deploys a SageMaker model from a caller-provided inference image and S3 artifact; it does not resolve third-party model IDs.",
+    "The JSON preview adapter omits advanced endpoint config fields; the exported CDK builders accept the full CfnEndpointConfigProps.",
+    "Local synthesis does not verify AWS permissions, model licensing acceptance, quotas, pricing, service-side validation, model execution, or deployment."
   ]
 }

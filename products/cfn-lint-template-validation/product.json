@@ -18,5 +18,10 @@
     "execution_language": "python",
     "availability": "runtime-not-installed",
     "allowed_result_fields": []
-  }
+  },
+  "delivery_entrypoint": "preview.py",
+  "exports": [
+    "validate_template",
+    "preview"
+  ]
 }

@@ -4,7 +4,7 @@
   "sku": "AWS-0633",
   "slug": "cdk-lambda-event-sources",
   "version": 1,
-  "release_ref": "sha256:6b1aa57d24f8ee03851c603499c14e93b265c6e7391c8e8d6853a1a3bbe8ec22",
+  "release_ref": "sha256:ebec97fc668906130fe5a5597079ecacac70d6cbb46abfd30bb6e733d57142d4",
   "service": "lambda",
   "product_kind": "artifact-product",
   "route_summary": "Connect Lambda functions to SQS and DynamoDB Streams using supported CDK event source constructs.",

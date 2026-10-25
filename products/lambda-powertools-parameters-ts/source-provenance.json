@@ -18,10 +18,17 @@
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/parameters"
   ],
   "original_file_hashes": {
-    "src/parameters.mjs": "26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402",
-    "README.md": "bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "9c4a49b1605969e48b2aa5cb870077c7c54291eee2c50788b420490c027b372d",
     "config.schema.json": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
-    "package.json": "1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c"
+    "package.json": "1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c",
+    "preview.mjs": "327870b735bbe8b63f92308168c34ffef346855387781f9e7c1d3ecbabe17631",
+    "src/parameters.mjs": "26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Node.js 20+",
+    "aws_calls": "none",
+    "scope": "actual Powertools SSM provider transforms a fixed value returned by a local AWS SDK client fixture; not an AWS call"
   }
 }

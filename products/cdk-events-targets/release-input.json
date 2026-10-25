@@ -7,13 +7,14 @@
     "kind": "artifact",
     "service": "events",
     "summary": "EventBridge rule connected to imported Lambda, SQS, SNS, Step Functions, or ECS task targets.",
-    "price_usd": 1.0,
+    "price_usd": 1,
     "status": "draft",
     "version": 2,
     "mime_type": "application/json",
     "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"rule_name\",\"target_type\"],\"properties\":{\"rule_name\":{\"type\":\"string\",\"pattern\":\"^[A-Za-z0-9_.-]{1,64}$\"},\"target_type\":{\"enum\":[\"lambda\",\"sqs\",\"sns\",\"stepfunctions\",\"ecs\"]},\"target_arn\":{\"type\":\"string\",\"pattern\":\"^arn:[^:]+:[^:]+:[^:]*:[0-9]{12}:.+$\"},\"image\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":255},\"event_source\":{\"type\":\"string\",\"pattern\":\"^[a-z0-9.-]{1,256}$\"},\"detail_type\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":128},\"language\":{\"const\":\"javascript\"}},\"allOf\":[{\"if\":{\"properties\":{\"target_type\":{\"const\":\"lambda\"}},\"required\":[\"target_type\"]},\"then\":{\"required\":[\"target_arn\"]}},{\"if\":{\"properties\":{\"target_type\":{\"const\":\"sqs\"}},\"required\":[\"target_type\"]},\"then\":{\"required\":[\"target_arn\"]}},{\"if\":{\"properties\":{\"target_type\":{\"const\":\"sns\"}},\"required\":[\"target_type\"]},\"then\":{\"required\":[\"target_arn\"]}},{\"if\":{\"properties\":{\"target_type\":{\"const\":\"stepfunctions\"}},\"required\":[\"target_type\"]},\"then\":{\"required\":[\"target_arn\"]}},{\"if\":{\"properties\":{\"target_type\":{\"const\":\"ecs\"}},\"required\":[\"target_type\"]},\"then\":{\"required\":[\"image\"]}}]}",
     "license_spdx": "Apache-2.0",
-    "provenance": "original"
+    "provenance": "original",
+    "input_example": "{\"language\":\"javascript\",\"rule_name\":\"example-target-rule\",\"target_type\":\"lambda\",\"target_arn\":\"arn:aws:lambda:us-east-1:123456789012:function:example\",\"event_source\":\"example.service\",\"detail_type\":\"change\"}"
   },
   "manifest": {
     "schema_version": "1",

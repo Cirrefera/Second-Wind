@@ -4,7 +4,7 @@
   "sku": "AWS-0629",
   "slug": "cfn-lint-template-validation",
   "version": 1,
-  "release_ref": "sha256:8dd04357d9a4c02fd75a1c178bc56836ac3d47c6db8c6592bc3eb48ab4293cb2",
+  "release_ref": "sha256:df49523476da328b4e3d51e7fbd0e1792dfe958c1b7401f066b4ac0d21069425",
   "service": "cloudformation",
   "product_kind": "artifact-product",
   "route_summary": "Validate CloudFormation and SAM templates against AWS resource provider schemas and cfn-lint rules.",

@@ -4,7 +4,7 @@
   "sku": "AWS-0640",
   "slug": "cdk-apigatewayv2",
   "version": 1,
-  "release_ref": "sha256:40ad4f8ed75ec3fdb6593a461d05718b49d0f933887f0ed0f5c245f527059ecc",
+  "release_ref": "sha256:db8252b43415a60dc39b8bf67b7d1559f4870b535dbbe13f421e570d023a2903",
   "service": "apigateway",
   "product_kind": "artifact-product",
   "route_summary": "Define an API Gateway v2 HTTP API and Lambda proxy route.",

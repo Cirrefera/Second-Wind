@@ -4,7 +4,7 @@
   "sku": "AWS-0641",
   "slug": "cdk-apigatewayv2-integrations",
   "version": 1,
-  "release_ref": "sha256:dead870c354d1cacaecf8b3068c31f89ad2399cd76aa2f6d739aa41087a541c8",
+  "release_ref": "sha256:1695de3ab0635b6ff097dac28064bcc7026e4f0d544e6a97db25d1bb426201da",
   "service": "apigateway",
   "product_kind": "artifact-product",
   "route_summary": "Define an HTTP API route with an explicit Lambda integration using the dedicated integrations library.",

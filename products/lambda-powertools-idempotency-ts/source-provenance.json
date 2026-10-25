@@ -17,10 +17,17 @@
     "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/idempotency"
   ],
   "original_file_hashes": {
-    "src/idempotency.mjs": "750573bf749f869dd9d6113a734936061a93e7797299dda728107952048a59ac",
-    "README.md": "8a0fc992e4ae307974c576bd9bf0f7bd894b7478bfd2c48bd6ef4506d35f3642",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "91f23e06d3078e6453856de8f672e5907e0738624b5d32359d6a3ee5f2189e8a",
     "config.schema.json": "d46a09eba514bfb5797c18cd637cea41b0759427e942ef53417b9312d16294ab",
-    "package.json": "214df92d96690076b1d2d9bf6d035495c431cf51ec4ed4829134b5f7fa47968e"
+    "package.json": "214df92d96690076b1d2d9bf6d035495c431cf51ec4ed4829134b5f7fa47968e",
+    "preview.mjs": "42942a8079154b0b2c2ec73f2b1ce79f3941dc360760998e5d1e39493d38d519",
+    "src/idempotency.mjs": "750573bf749f869dd9d6113a734936061a93e7797299dda728107952048a59ac"
+  },
+  "native_preview": {
+    "entrypoint": "preview.mjs",
+    "runtime": "Node.js 20+",
+    "aws_calls": "none",
+    "scope": "actual Powertools idempotency wrapper runs against an in-memory CachePersistenceLayer fixture; not DynamoDB durability"
   }
 }

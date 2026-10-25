@@ -16,15 +16,17 @@
   },
   "files": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "README.md": "9cf9d815582feb479da2caad433370275db6882c3e24c5c723513ab78dbea8cd",
-    "cdk.json": "17db83338652917d1ec37b5bba1d10b08c45f92d6e83944ff5a776cc741d367e",
+    "README.md": "e6a121f73d98773d22ca0dcdd3753830948f04b8b9f0a33f89235708071b968e",
+    "app.ts": "7be21479d873876d781addd4214b6709e9321bc115d195345ceba77818f693b4",
+    "cdk.json": "40c24a321efb0976c32ffdec919056bb2c432a2167c6ccf6fa8c59e7b9126a41",
     "configuration.schema.json": "5b23c247d3fa192bf3076bbae59e2fc8d7bb246d196e721e48f4ba088d883008",
     "input.schema.json": "5b23c247d3fa192bf3076bbae59e2fc8d7bb246d196e721e48f4ba088d883008",
-    "package-lock.json": "09a9642b5571028887a690e360215c7e965162306ab6100affabcb1fdb65e4f3",
-    "package.json": "b4c3b9827cfdce51091c095f1ecd72874502c0ed40b3a60d0b4dea7e724376be",
+    "package-lock.json": "fb84e67968151549e04e3dd5408cd2663b78efe7a9d2b3ac8d3b85352d2a01f4",
+    "package.json": "4238f85f44ce1926cffdc87709a79a1413226fbff172b0779e57a8813ccd0600",
     "preview-contract.json": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
     "preview-runner.ts": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
-    "preview.ts": "d2f9be33593d1641be9e788949befeae5df85925a99141974d7af56058b36450",
+    "preview.ts": "f894f7bee72bec578cb91d066c071e2cb5e8b6fffd2edb27f2027d0dc9d057a7",
+    "product.ts": "7c28550dcee2c165bf20dfe85010a9b18184b139f8dd7db48b23afb6998c5fbf",
     "site/index.html": "78a69d87df8942d5c4e9acf3f495bce8515081efdfc48f3e48198ef7eca99912",
     "source-provenance.json": "e9bfaddb225380c8827f68f5b48340cabf81dc61505601bdc7099c5bf19a6537"
   },
@@ -33,6 +35,7 @@
       "paths": [
         "LICENSE",
         "README.md",
+        "app.ts",
         "cdk.json",
         "configuration.schema.json",
         "input.schema.json",
@@ -41,6 +44,7 @@
         "preview-contract.json",
         "preview-runner.ts",
         "preview.ts",
+        "product.ts",
         "site/index.html",
         "source-provenance.json"
       ],
