@@ -1,0 +1,329 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0554",
+    "slug": "lambda-powertools-parameters-ts",
+    "name": "cache AWS parameters with Powertools Parameters",
+    "kind": "artifact",
+    "service": "lambda",
+    "summary": "A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime. Hosted preview is unavailable; the private adapter does not execute this product.",
+    "price_usd": 1,
+    "invoke_kind": "resolve",
+    "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"max_age_seconds\"],\"properties\":{\"language\":{\"const\":\"javascript\"},\"max_age_seconds\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":86400}}}",
+    "input_example": "{\"language\":\"javascript\"}",
+    "mime_type": "application/json",
+    "source_repo": "https://github.com/aws-powertools/powertools-lambda-typescript",
+    "source_path": "packages/parameters",
+    "source_url": "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/parameters",
+    "license_spdx": "Apache-2.0",
+    "provenance": "original",
+    "content_hash": "70ffeb7a2458d6f8",
+    "status": "draft",
+    "version": 1
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0554",
+    "slug": "lambda-powertools-parameters-ts",
+    "version": 1,
+    "product_kind": "artifact-product",
+    "service": "lambda",
+    "release_ref": "sha256:70ffeb7a2458d6f841f0c7e13313ca20a0071de7b34a82679213fde676652048",
+    "content_hash": "70ffeb7a2458d6f841f0c7e13313ca20a0071de7b34a82679213fde676652048",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "Original, focused Node.js Lambda integration module for Cached Parameter Store and Secrets Manager reads using the pinned AWS Powertools TypeScript package.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "javascript": "src/parameters.mjs"
+      },
+      "configuration_schema": "config.schema.json",
+      "side_effects": "depends on the installed Powertools library and may emit logs, telemetry, or call AWS services when invoked"
+    },
+    "validation_contract": {
+      "kind": "native-runtime-required",
+      "languages": [
+        "javascript"
+      ],
+      "runtime": "Node.js 20+ AWS Lambda",
+      "hosted_preview": "unavailable",
+      "private_worker_loader_preview": "not verified; no preview_contract",
+      "aws_deployment": "not-performed",
+      "reason": "native_library_or_AWS_runtime_required"
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "javascript"
+      ]
+    },
+    "tags": [
+      "lambda",
+      "powertools",
+      "parameters",
+      "ssm",
+      "secrets-manager"
+    ],
+    "supported_boundary": "A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+    "hosted_preview_available": false,
+    "native_preview_blocker": "The complete Powertools dependency closure and matching Lambda/AWS service runtime are not available in the hosted private Worker Loader.",
+    "publication_blockers": [
+      "hosted_preview_runtime_unavailable",
+      "trusted_product_and_contract_reviews_pending",
+      "trusted_license_and_provenance_review_pending",
+      "publication_approval_pending"
+    ],
+    "dependencies": {
+      "@aws-lambda-powertools/parameters": "2.36.0",
+      "@aws-sdk/client-ssm": "3.1154.0",
+      "@aws-sdk/client-secrets-manager": "3.1156.0"
+    },
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "max_age_seconds"
+      ],
+      "properties": {
+        "language": {
+          "const": "javascript"
+        },
+        "max_age_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400
+        }
+      }
+    },
+    "required_files": [
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "README.md",
+        "sha256": "bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20",
+        "size_bytes": 1561,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "config.schema.json",
+        "sha256": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
+        "size_bytes": 351,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "package.json",
+        "sha256": "1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c",
+        "size_bytes": 501,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "source-provenance.json",
+        "sha256": "5ebdbbcea3ff1c4e43af36a1ee8b14c63be17c4ca6eaecf82cfeeec4c8fec86a",
+        "size_bytes": 1489,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "src/parameters.mjs",
+        "sha256": "26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402",
+        "size_bytes": 1098,
+        "mime_type": "text/javascript"
+      },
+      {
+        "path": "validation.json",
+        "sha256": "0acdfb337ea6126f56ff6818fcc5b62083a2753a733e44a31f2402b4931c00a0",
+        "size_bytes": 611,
+        "mime_type": "application/json"
+      }
+    ]
+  },
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0554",
+    "sku": "AWS-0554",
+    "slug": "lambda-powertools-parameters-ts",
+    "version": 1,
+    "release_ref": "sha256:70ffeb7a2458d6f841f0c7e13313ca20a0071de7b34a82679213fde676652048",
+    "service": "lambda",
+    "product_kind": "artifact-product",
+    "route_summary": "A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime.",
+    "supported_boundary": "A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+    "language_policy": "explicit",
+    "aliases": [
+      "lambda-powertools-parameters-ts",
+      "powertools-lambda-powertools-parameters"
+    ],
+    "tags": [
+      "lambda",
+      "powertools",
+      "parameters",
+      "ssm",
+      "secrets-manager"
+    ],
+    "taxonomy_ids": [
+      "aws.lambda.parameters"
+    ],
+    "problem_family_ids": [
+      "aws.lambda.configuration"
+    ],
+    "operations": [
+      "lambda-powertools-parameters-ts"
+    ],
+    "environments": [
+      "lambda",
+      "nodejs20.x",
+      "nodejs22.x"
+    ],
+    "desired_outcomes": [
+      "cached-aws-parameters"
+    ],
+    "input_kinds": [
+      "configuration",
+      "javascript-package",
+      "lambda-event"
+    ],
+    "failure_signatures": [
+      "aws-access-denied",
+      "invalid-configuration",
+      "missing-dependency",
+      "runtime-error"
+    ],
+    "languages": [
+      "javascript"
+    ],
+    "runtimes": [
+      "nodejs20.x",
+      "nodejs22.x"
+    ],
+    "required_evidence": [
+      "dependency-installation",
+      "iam-review",
+      "unit-validation"
+    ],
+    "exclusions": [
+      "aws-deployment",
+      "hosted-preview",
+      "service-outcome-verification"
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE",
+      "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "content": "# Powertools Parameters for Lambda (TypeScript/JavaScript)\n\nFetch SSM Parameter Store values or Secrets Manager secrets through the actual Powertools Parameters providers, with an explicit per-container cache age.\n\n## Install and use\n\nInstall exact direct versions from `package.json`, then run Node.js 20 or newer in Lambda. Powertools Parameters requires the corresponding AWS SDK v3 service clients. The Lambda execution role needs the least-privilege `ssm:GetParameter` and/or `secretsmanager:GetSecretValue` actions; SecureString also needs the applicable KMS decrypt permission.\n\n```js\nimport { readSsmParameter, readSecret } from './src/parameters.mjs';\n\nconst featureFlags = await readSsmParameter('/orders/feature-flags', {\n  max_age_seconds: 30,\n  transform: 'json',\n});\nconst signingKey = await readSecret('orders/signing-key', { max_age_seconds: 5 });\n```\n\nThe default cache is in-process and does not coordinate across Lambda environments. A fleet of cold starts can still make concurrent service calls. Choose a cache age that fits the value's rotation and consistency needs. Do not log the returned secret.\n\n## Hosted preview and boundary\n\nHosted preview is unavailable because the gateway cannot execute this package's native Powertools/AWS SDK dependencies with an AWS identity. It does not fetch from SSM or Secrets Manager or claim cache hits.\n\n## Files and source\n\nOriginal integration code is Apache-2.0. Powertools Parameters 2.36.0 is MIT-0; the pinned repository revision and published package integrity are in `source-provenance.json`.\n",
+      "sha256": "bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20",
+      "size_bytes": 1561,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"language\",\n    \"max_age_seconds\"\n  ],\n  \"properties\": {\n    \"language\": {\n      \"const\": \"javascript\"\n    },\n    \"max_age_seconds\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"maximum\": 86400\n    }\n  }\n}\n",
+      "sha256": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
+      "size_bytes": 351,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "content": "{\n  \"name\": \"@secondwind/lambda-powertools-parameters-ts\",\n  \"version\": \"1.0.0\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"engines\": {\n    \"node\": \">=20\"\n  },\n  \"description\": \"A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime.\",\n  \"license\": \"Apache-2.0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/parameters\": \"2.36.0\",\n    \"@aws-sdk/client-ssm\": \"3.1154.0\",\n    \"@aws-sdk/client-secrets-manager\": \"3.1156.0\"\n  }\n}\n",
+      "sha256": "1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c",
+      "size_bytes": 501,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "content": "{\n  \"schema_version\": \"1\",\n  \"current_origin\": \"Original Second Wind integration code; no upstream implementation source is redistributed.\",\n  \"upstream_repository\": \"https://github.com/aws-powertools/powertools-lambda-typescript\",\n  \"source_revision\": \"0595159ed90c72cc9a004a98923b9778b876726a\",\n  \"upstream_package_path\": \"packages/parameters\",\n  \"npm_package\": \"@aws-lambda-powertools/parameters\",\n  \"npm_package_version\": \"2.36.0\",\n  \"npm_tarball_integrity\": \"sha512-345x5em64yHy/7qFWqDa1aY5dESyNhz4xFOjfMcdXS3UIopNt7zSkfpzfszbp3kgLUeLtcYU6akkB9NBbYHRUQ==\",\n  \"npm_integrity_check\": \"verified against the exact cached published tarball using SHA-512\",\n  \"license\": \"MIT-0\",\n  \"dependencies\": {\n    \"@aws-lambda-powertools/parameters\": \"2.36.0\",\n    \"@aws-sdk/client-ssm\": \"3.1154.0\",\n    \"@aws-sdk/client-secrets-manager\": \"3.1156.0\"\n  },\n  \"source_interface_urls\": [\n    \"https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/parameters\"\n  ],\n  \"original_file_hashes\": {\n    \"src/parameters.mjs\": \"26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402\",\n    \"README.md\": \"bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20\",\n    \"LICENSE\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n    \"config.schema.json\": \"528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35\",\n    \"package.json\": \"1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c\"\n  }\n}\n",
+      "sha256": "5ebdbbcea3ff1c4e43af36a1ee8b14c63be17c4ca6eaecf82cfeeec4c8fec86a",
+      "size_bytes": 1489,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "src/parameters.mjs",
+      "content": "import { getParameter } from '@aws-lambda-powertools/parameters/ssm';\nimport { getSecret } from '@aws-lambda-powertools/parameters/secrets';\n\nfunction validateName(name) {\n  if (typeof name !== 'string' || !name.trim() || name.length > 2048) throw new Error('parameter_name_required');\n  return name;\n}\nfunction validateAge(max_age_seconds) {\n  if (!Number.isSafeInteger(max_age_seconds) || max_age_seconds < 0 || max_age_seconds > 86400) {\n    throw new Error('invalid_max_age');\n  }\n  return max_age_seconds;\n}\n\nexport async function readSsmParameter(name, { max_age_seconds = 5, decrypt = true, transform } = {}) {\n  validateAge(max_age_seconds);\n  if (typeof decrypt !== 'boolean') throw new Error('invalid_decrypt_option');\n  return getParameter(validateName(name), {\n    maxAge: max_age_seconds,\n    decrypt,\n    ...(transform ? { transform } : {}),\n  });\n}\n\nexport async function readSecret(name, { max_age_seconds = 5, transform } = {}) {\n  validateAge(max_age_seconds);\n  return getSecret(validateName(name), {\n    maxAge: max_age_seconds,\n    ...(transform ? { transform } : {}),\n  });\n}\n",
+      "sha256": "26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402",
+      "size_bytes": 1098,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "content": "{\n  \"sku\": \"AWS-0554\",\n  \"version\": 1,\n  \"status\": \"draft\",\n  \"native_runtime\": \"Node.js Lambda 20+\",\n  \"package_execution\": \"not_performed_in_gateway\",\n  \"aws_calls\": \"not_performed\",\n  \"hosted_preview_available\": false,\n  \"hosted_preview_blocker\": \"Powertools dependency graph and native Lambda or AWS service runtime are not available in the hosted Worker Loader.\",\n  \"checks\": [\n    \"published npm package integrity verified\",\n    \"package API shape inspected at pinned 2.36.0\",\n    \"delivered JavaScript syntax checked\"\n  ],\n  \"independent_product_review\": \"pending\",\n  \"publication_approval\": \"pending\"\n}\n",
+      "sha256": "0acdfb337ea6126f56ff6818fcc5b62083a2753a733e44a31f2402b4931c00a0",
+      "size_bytes": 611,
+      "mime_type": "application/json"
+    }
+  ],
+  "configuration_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language",
+      "max_age_seconds"
+    ],
+    "properties": {
+      "language": {
+        "const": "javascript"
+      },
+      "max_age_seconds": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 86400
+      }
+    }
+  },
+  "source_provenance": {
+    "schema_version": "1",
+    "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+    "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
+    "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
+    "upstream_package_path": "packages/parameters",
+    "npm_package": "@aws-lambda-powertools/parameters",
+    "npm_package_version": "2.36.0",
+    "npm_tarball_integrity": "sha512-345x5em64yHy/7qFWqDa1aY5dESyNhz4xFOjfMcdXS3UIopNt7zSkfpzfszbp3kgLUeLtcYU6akkB9NBbYHRUQ==",
+    "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
+    "license": "MIT-0",
+    "dependencies": {
+      "@aws-lambda-powertools/parameters": "2.36.0",
+      "@aws-sdk/client-ssm": "3.1154.0",
+      "@aws-sdk/client-secrets-manager": "3.1156.0"
+    },
+    "source_interface_urls": [
+      "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/parameters"
+    ],
+    "original_file_hashes": {
+      "src/parameters.mjs": "26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402",
+      "README.md": "bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20",
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "config.schema.json": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
+      "package.json": "1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c"
+    }
+  },
+  "blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ],
+  "payload": {
+    "content": "{\"files\":[{\"content\":\"                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \\\"License\\\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \\\"Licensor\\\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \\\"Legal Entity\\\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \\\"control\\\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \\\"You\\\" (or \\\"Your\\\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \\\"Source\\\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \\\"Object\\\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \\\"Work\\\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \\\"Derivative Works\\\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \\\"Contribution\\\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \\\"submitted\\\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \\\"Not a Contribution.\\\"\\n\\n      \\\"Contributor\\\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \\\"NOTICE\\\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \\\"AS IS\\\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \\\"[]\\\"\\n      replaced with your own identifying information. (Don't include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \\\"printed page\\\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \\\"License\\\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"LICENSE\",\"sha256\":\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\"size_bytes\":11357},{\"content\":\"# Powertools Parameters for Lambda (TypeScript/JavaScript)\\n\\nFetch SSM Parameter Store values or Secrets Manager secrets through the actual Powertools Parameters providers, with an explicit per-container cache age.\\n\\n## Install and use\\n\\nInstall exact direct versions from `package.json`, then run Node.js 20 or newer in Lambda. Powertools Parameters requires the corresponding AWS SDK v3 service clients. The Lambda execution role needs the least-privilege `ssm:GetParameter` and/or `secretsmanager:GetSecretValue` actions; SecureString also needs the applicable KMS decrypt permission.\\n\\n```js\\nimport { readSsmParameter, readSecret } from './src/parameters.mjs';\\n\\nconst featureFlags = await readSsmParameter('/orders/feature-flags', {\\n  max_age_seconds: 30,\\n  transform: 'json',\\n});\\nconst signingKey = await readSecret('orders/signing-key', { max_age_seconds: 5 });\\n```\\n\\nThe default cache is in-process and does not coordinate across Lambda environments. A fleet of cold starts can still make concurrent service calls. Choose a cache age that fits the value's rotation and consistency needs. Do not log the returned secret.\\n\\n## Hosted preview and boundary\\n\\nHosted preview is unavailable because the gateway cannot execute this package's native Powertools/AWS SDK dependencies with an AWS identity. It does not fetch from SSM or Secrets Manager or claim cache hits.\\n\\n## Files and source\\n\\nOriginal integration code is Apache-2.0. Powertools Parameters 2.36.0 is MIT-0; the pinned repository revision and published package integrity are in `source-provenance.json`.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"README.md\",\"sha256\":\"bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20\",\"size_bytes\":1561},{\"content\":\"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"required\\\": [\\n    \\\"language\\\",\\n    \\\"max_age_seconds\\\"\\n  ],\\n  \\\"properties\\\": {\\n    \\\"language\\\": {\\n      \\\"const\\\": \\\"javascript\\\"\\n    },\\n    \\\"max_age_seconds\\\": {\\n      \\\"type\\\": \\\"integer\\\",\\n      \\\"minimum\\\": 0,\\n      \\\"maximum\\\": 86400\\n    }\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"config.schema.json\",\"sha256\":\"528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35\",\"size_bytes\":351},{\"content\":\"{\\n  \\\"name\\\": \\\"@secondwind/lambda-powertools-parameters-ts\\\",\\n  \\\"version\\\": \\\"1.0.0\\\",\\n  \\\"private\\\": true,\\n  \\\"type\\\": \\\"module\\\",\\n  \\\"engines\\\": {\\n    \\\"node\\\": \\\">=20\\\"\\n  },\\n  \\\"description\\\": \\\"A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime.\\\",\\n  \\\"license\\\": \\\"Apache-2.0\\\",\\n  \\\"dependencies\\\": {\\n    \\\"@aws-lambda-powertools/parameters\\\": \\\"2.36.0\\\",\\n    \\\"@aws-sdk/client-ssm\\\": \\\"3.1154.0\\\",\\n    \\\"@aws-sdk/client-secrets-manager\\\": \\\"3.1156.0\\\"\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"package.json\",\"sha256\":\"1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c\",\"size_bytes\":501},{\"content\":\"{\\n  \\\"schema_version\\\": \\\"1\\\",\\n  \\\"current_origin\\\": \\\"Original Second Wind integration code; no upstream implementation source is redistributed.\\\",\\n  \\\"upstream_repository\\\": \\\"https://github.com/aws-powertools/powertools-lambda-typescript\\\",\\n  \\\"source_revision\\\": \\\"0595159ed90c72cc9a004a98923b9778b876726a\\\",\\n  \\\"upstream_package_path\\\": \\\"packages/parameters\\\",\\n  \\\"npm_package\\\": \\\"@aws-lambda-powertools/parameters\\\",\\n  \\\"npm_package_version\\\": \\\"2.36.0\\\",\\n  \\\"npm_tarball_integrity\\\": \\\"sha512-345x5em64yHy/7qFWqDa1aY5dESyNhz4xFOjfMcdXS3UIopNt7zSkfpzfszbp3kgLUeLtcYU6akkB9NBbYHRUQ==\\\",\\n  \\\"npm_integrity_check\\\": \\\"verified against the exact cached published tarball using SHA-512\\\",\\n  \\\"license\\\": \\\"MIT-0\\\",\\n  \\\"dependencies\\\": {\\n    \\\"@aws-lambda-powertools/parameters\\\": \\\"2.36.0\\\",\\n    \\\"@aws-sdk/client-ssm\\\": \\\"3.1154.0\\\",\\n    \\\"@aws-sdk/client-secrets-manager\\\": \\\"3.1156.0\\\"\\n  },\\n  \\\"source_interface_urls\\\": [\\n    \\\"https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/parameters\\\"\\n  ],\\n  \\\"original_file_hashes\\\": {\\n    \\\"src/parameters.mjs\\\": \\\"26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402\\\",\\n    \\\"README.md\\\": \\\"bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20\\\",\\n    \\\"LICENSE\\\": \\\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\\\",\\n    \\\"config.schema.json\\\": \\\"528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35\\\",\\n    \\\"package.json\\\": \\\"1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c\\\"\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"source-provenance.json\",\"sha256\":\"5ebdbbcea3ff1c4e43af36a1ee8b14c63be17c4ca6eaecf82cfeeec4c8fec86a\",\"size_bytes\":1489},{\"content\":\"import { getParameter } from '@aws-lambda-powertools/parameters/ssm';\\nimport { getSecret } from '@aws-lambda-powertools/parameters/secrets';\\n\\nfunction validateName(name) {\\n  if (typeof name !== 'string' || !name.trim() || name.length > 2048) throw new Error('parameter_name_required');\\n  return name;\\n}\\nfunction validateAge(max_age_seconds) {\\n  if (!Number.isSafeInteger(max_age_seconds) || max_age_seconds < 0 || max_age_seconds > 86400) {\\n    throw new Error('invalid_max_age');\\n  }\\n  return max_age_seconds;\\n}\\n\\nexport async function readSsmParameter(name, { max_age_seconds = 5, decrypt = true, transform } = {}) {\\n  validateAge(max_age_seconds);\\n  if (typeof decrypt !== 'boolean') throw new Error('invalid_decrypt_option');\\n  return getParameter(validateName(name), {\\n    maxAge: max_age_seconds,\\n    decrypt,\\n    ...(transform ? { transform } : {}),\\n  });\\n}\\n\\nexport async function readSecret(name, { max_age_seconds = 5, transform } = {}) {\\n  validateAge(max_age_seconds);\\n  return getSecret(validateName(name), {\\n    maxAge: max_age_seconds,\\n    ...(transform ? { transform } : {}),\\n  });\\n}\\n\",\"mime_type\":\"text/javascript\",\"path\":\"src/parameters.mjs\",\"sha256\":\"26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402\",\"size_bytes\":1098},{\"content\":\"{\\n  \\\"sku\\\": \\\"AWS-0554\\\",\\n  \\\"version\\\": 1,\\n  \\\"status\\\": \\\"draft\\\",\\n  \\\"native_runtime\\\": \\\"Node.js Lambda 20+\\\",\\n  \\\"package_execution\\\": \\\"not_performed_in_gateway\\\",\\n  \\\"aws_calls\\\": \\\"not_performed\\\",\\n  \\\"hosted_preview_available\\\": false,\\n  \\\"hosted_preview_blocker\\\": \\\"Powertools dependency graph and native Lambda or AWS service runtime are not available in the hosted Worker Loader.\\\",\\n  \\\"checks\\\": [\\n    \\\"published npm package integrity verified\\\",\\n    \\\"package API shape inspected at pinned 2.36.0\\\",\\n    \\\"delivered JavaScript syntax checked\\\"\\n  ],\\n  \\\"independent_product_review\\\": \\\"pending\\\",\\n  \\\"publication_approval\\\": \\\"pending\\\"\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"validation.json\",\"sha256\":\"0acdfb337ea6126f56ff6818fcc5b62083a2753a733e44a31f2402b4931c00a0\",\"size_bytes\":611}],\"schema_version\":\"1\",\"sku\":\"AWS-0554\",\"version\":1}",
+    "sha256": "70ffeb7a2458d6f841f0c7e13313ca20a0071de7b34a82679213fde676652048",
+    "size_bytes": 18773,
+    "mime_type": "application/json"
+  }
+}

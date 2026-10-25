@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0690",
+  "sku": "AWS-0690",
+  "slug": "agentcore-sdk-session-handling",
+  "version": 1,
+  "release_ref": "sha256:714da306d88bacb2fc52700eed2c4fcc3e466b7cbf43df11a9390bcb2f8d3c2a",
+  "service": "bedrock-agentcore",
+  "product_kind": "artifact-product",
+  "route_summary": "Boto3 AgentCore Runtime session helper that persists a caller-managed runtimeSessionId across invocations, streams real invocation responses, and explicitly stops sessions.",
+  "supported_boundary": "Python 3.11+ boto3 with AgentCore runtime model, deployed runtime ARN, compatible Region and buyer credentials. Each invocation can incur runtime/model cost; state and lifecycle are remote. Hosted preview does not execute or claim sessions.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "bedrock-agentcore",
+    "python",
+    "agentcore-sdk-session-handling"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock-agentcore"
+  ],
+  "problem_family_ids": [
+    "bedrock-agentcore-integration"
+  ],
+  "operations": [
+    "agentcore-sdk-session-handling"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-bedrock-agentcore-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "bedrock-agentcore-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

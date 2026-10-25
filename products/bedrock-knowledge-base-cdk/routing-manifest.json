@@ -1,0 +1,55 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0557",
+  "sku": "AWS-0557",
+  "slug": "bedrock-knowledge-base-cdk",
+  "version": 1,
+  "release_ref": "sha256:637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+  "service": "bedrock",
+  "product_kind": "artifact-product",
+  "route_summary": "Bedrock vector knowledge base using Titan embeddings, OpenSearch Serverless, and an optional imported S3 data source.",
+  "supported_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "bedrock",
+    "bedrock-knowledge-base-cdk"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock.cdk"
+  ],
+  "problem_family_ids": [
+    "infrastructure.synthesis"
+  ],
+  "operations": [
+    "cdk-synth"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "infrastructure-plan"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [
+    "synthesis-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [
+    "native-node-synthesis"
+  ],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-preview-unavailable"
+  ]
+}

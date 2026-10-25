@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0661",
+  "sku": "AWS-0661",
+  "slug": "cdk-cloudfront",
+  "version": 2,
+  "release_ref": "sha256:d2cef56d1bb8726c9eaac3865eb397b1436ea44392d2b79734050591e2786a3a",
+  "service": "cloudfront",
+  "product_kind": "artifact-product",
+  "route_summary": "CloudFront distribution backed by a private S3 origin and TLS-only viewer access.",
+  "supported_boundary": "CloudFront distribution backed by a private S3 origin and TLS-only viewer access. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-cloudfront"
+  ],
+  "tags": [
+    "cloudfront",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.cloudfront"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

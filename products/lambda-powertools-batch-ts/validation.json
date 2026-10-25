@@ -1,0 +1,17 @@
+{
+  "sku": "AWS-0555",
+  "version": 1,
+  "status": "draft",
+  "native_runtime": "Node.js Lambda 20+",
+  "package_execution": "not_performed_in_gateway",
+  "aws_calls": "not_performed",
+  "hosted_preview_available": false,
+  "hosted_preview_blocker": "Powertools dependency graph and native Lambda or AWS service runtime are not available in the hosted Worker Loader.",
+  "checks": [
+    "published npm package integrity verified",
+    "package API shape inspected at pinned 2.36.0",
+    "delivered JavaScript syntax checked"
+  ],
+  "independent_product_review": "pending",
+  "publication_approval": "pending"
+}

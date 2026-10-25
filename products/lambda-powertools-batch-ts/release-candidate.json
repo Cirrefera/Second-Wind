@@ -1,0 +1,134 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0555",
+  "slug": "lambda-powertools-batch-ts",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:ea6ee11ec286fd37223d03842235833315e5507e8f0a1921c10b77e030237c7b",
+  "content_hash": "ea6ee11ec286fd37223d03842235833315e5507e8f0a1921c10b77e030237c7b",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original, focused Node.js Lambda integration module for SQS partial-batch failure reporting using the pinned AWS Powertools TypeScript package.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "javascript": "src/batch.mjs"
+    },
+    "configuration_schema": "config.schema.json",
+    "side_effects": "depends on the installed Powertools library and may emit logs, telemetry, or call AWS services when invoked"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "javascript"
+    ],
+    "runtime": "Node.js 20+ AWS Lambda",
+    "hosted_preview": "unavailable",
+    "private_worker_loader_preview": "not verified; no preview_contract",
+    "aws_deployment": "not-performed",
+    "reason": "native_library_or_AWS_runtime_required"
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "javascript"
+    ]
+  },
+  "tags": [
+    "lambda",
+    "powertools",
+    "batch",
+    "sqs",
+    "partial-failure"
+  ],
+  "supported_boundary": "A Node.js Lambda helper that runs an asynchronous SQS batch handler through the actual Powertools BatchProcessor and returns its partial failure response. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The complete Powertools dependency closure and matching Lambda/AWS service runtime are not available in the hosted private Worker Loader.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ],
+  "dependencies": {
+    "@aws-lambda-powertools/batch": "2.36.0",
+    "@standard-schema/spec": "1.1.0"
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language",
+      "event_source"
+    ],
+    "properties": {
+      "language": {
+        "const": "javascript"
+      },
+      "event_source": {
+        "const": "sqs"
+      },
+      "report_batch_item_failures": {
+        "const": true
+      }
+    }
+  },
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8397d7c25dc7afd91705fa11a09f77b8453abd70405414acf67c12a3a4df5171",
+      "size_bytes": 1578,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "f041b7153a78435014289cb6804ed2cafe3332cf55c7230f19297f0f62d6e9a9",
+      "size_bytes": 361,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "729ad5fde45568e76ff9f4b94e5e289a36d45789f2c836af538ece6160df6956",
+      "size_bytes": 465,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "a07fc479cb88ad62e7ea32fdb0bda0bcda2224ab9e84dcc55ad2a6c9988b0c66",
+      "size_bytes": 1412,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "src/batch.mjs",
+      "sha256": "5b4caed334762405d188c868ccba957070bcde6221326db5e4dc71fcdf227a51",
+      "size_bytes": 773,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "9bf939e5ec90d89ae1ca9114ba65ab107f18c9cace743d856ee593eaa497017d",
+      "size_bytes": 611,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "validation": {
+    "basis": "pinned published Powertools package API inspection and local syntax checks",
+    "npm_integrity": "sha512-FXflvdV+rSzuP57LZg4JGUyZacSeVXuY82TpDKASYdFpaGBI8eJ1pYR6XYsdW+tcV/wykIzHI6kjY5Fyt3Z9fQ==",
+    "aws_execution": "not_performed",
+    "hosted_preview": "unavailable"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0681",
+  "sku": "AWS-0681",
+  "slug": "aws-sdk-pandas-athena-to-dataframe",
+  "version": 1,
+  "release_ref": "sha256:88c3a6a9230f9036fd71ed033f97d7a8a4141d56190f2c9c3fd5d5dd1c8828e0",
+  "service": "athena",
+  "product_kind": "artifact-product",
+  "route_summary": "Python awswrangler Athena query helper that executes a caller-provided SELECT/WITH query and returns the actual pandas DataFrame using explicit database, result bucket, and workgroup.",
+  "supported_boundary": "Python 3.11+, awswrangler 3.17.1, pandas 2.2.3, boto3 1.43.114, valid AWS credentials, Athena workgroup, Glue catalog database, and S3 query-results location. Invocation can run billable remote queries; hosted preview does not execute them.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "athena",
+    "python",
+    "aws-sdk-pandas-athena-to-dataframe"
+  ],
+  "taxonomy_ids": [
+    "aws.athena"
+  ],
+  "problem_family_ids": [
+    "athena-integration"
+  ],
+  "operations": [
+    "aws-sdk-pandas-athena-to-dataframe"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-athena-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "athena-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

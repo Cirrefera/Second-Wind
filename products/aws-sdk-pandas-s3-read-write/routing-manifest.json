@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0682",
+  "sku": "AWS-0682",
+  "slug": "aws-sdk-pandas-s3-read-write",
+  "version": 1,
+  "release_ref": "sha256:fbd13b3f38161e5ad465ce8d6f96442f0db58fbb026954f03da8457125e0bf46",
+  "service": "s3",
+  "product_kind": "artifact-product",
+  "route_summary": "Python awswrangler S3 helpers that write pandas DataFrames as Parquet and read them back through the real S3 integration, preserving awswrangler metadata return values.",
+  "supported_boundary": "Python 3.11+, awswrangler 3.17.1, pandas 2.2.3, boto3 1.43.114 and buyer AWS credentials with required S3 access. Real S3 I/O only occurs when called; no hosted cloud call.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "s3",
+    "python",
+    "aws-sdk-pandas-s3-read-write"
+  ],
+  "taxonomy_ids": [
+    "aws.s3"
+  ],
+  "problem_family_ids": [
+    "s3-integration"
+  ],
+  "operations": [
+    "aws-sdk-pandas-s3-read-write"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-s3-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "s3-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

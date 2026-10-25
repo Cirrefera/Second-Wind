@@ -1,0 +1,430 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0557",
+    "slug": "bedrock-knowledge-base-cdk",
+    "name": "Bedrock Knowledge Base CDK",
+    "kind": "tool",
+    "service": "bedrock",
+    "summary": "Bedrock vector knowledge base using Titan embeddings, OpenSearch Serverless, and an optional imported S3 data source.",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1,
+    "invoke_kind": "resolve",
+    "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"properties\":{\"instruction\":{\"maxLength\":2000,\"minLength\":1,\"type\":\"string\"},\"knowledge_base_name\":{\"pattern\":\"^[A-Za-z0-9_-]{1,100}$\",\"type\":\"string\"},\"language\":{\"const\":\"javascript\"},\"s3_bucket_arn\":{\"pattern\":\"^arn:[^:]+:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$\",\"type\":\"string\"}},\"required\":[\"language\",\"knowledge_base_name\",\"instruction\"],\"type\":\"object\"}",
+    "input_example": "{\"instruction\":\"Retrieve relevant documents and cite their source for every answer.\",\"knowledge_base_name\":\"sample-kb\",\"language\":\"javascript\"}",
+    "mime_type": "application/json",
+    "source_repo": "https://github.com/awslabs/generative-ai-cdk-constructs",
+    "source_path": "src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts",
+    "source_url": "https://github.com/awslabs/generative-ai-cdk-constructs",
+    "license_spdx": "Apache-2.0",
+    "provenance": "original"
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0557",
+    "slug": "bedrock-knowledge-base-cdk",
+    "version": 1,
+    "product_kind": "artifact-product",
+    "service": "bedrock",
+    "release_ref": "sha256:637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+    "content_hash": "637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "Bedrock vector knowledge base using Titan embeddings, OpenSearch Serverless, and an optional imported S3 data source.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "javascript": "product.mjs"
+      },
+      "configuration_schema": "config.schema.json",
+      "side_effects": "local-cdk-synthesis-only"
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "javascript"
+      ]
+    },
+    "supported_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "knowledge_base_name",
+        "instruction"
+      ],
+      "properties": {
+        "language": {
+          "const": "javascript"
+        },
+        "knowledge_base_name": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,100}$"
+        },
+        "instruction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "s3_bucket_arn": {
+          "type": "string",
+          "pattern": "^arn:[^:]+:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
+        }
+      }
+    },
+    "selection_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "stack"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 1,
+      "uniqueItems": true
+    },
+    "required_files": [
+      {
+        "path": "LICENSE",
+        "sha256": "499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3",
+        "size_bytes": 640,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "README.md",
+        "sha256": "3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc",
+        "size_bytes": 1572,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "config.example.json",
+        "sha256": "4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab",
+        "size_bytes": 157,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "config.schema.json",
+        "sha256": "bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55",
+        "size_bytes": 597,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99",
+        "size_bytes": 10006,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "package.json",
+        "sha256": "7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991",
+        "size_bytes": 345,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "preview.mjs",
+        "sha256": "35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c",
+        "size_bytes": 1844,
+        "mime_type": "text/javascript"
+      },
+      {
+        "path": "product.mjs",
+        "sha256": "780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91",
+        "size_bytes": 1004,
+        "mime_type": "text/javascript"
+      },
+      {
+        "path": "selection.schema.json",
+        "sha256": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+        "size_bytes": 214,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "source-provenance.json",
+        "sha256": "3debd272d2a2f1c4ce3544c82798d1ceac9a3d3719391dc6b3188ce8940e5a50",
+        "size_bytes": 3549,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "synth.mjs",
+        "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
+        "size_bytes": 313,
+        "mime_type": "text/javascript"
+      }
+    ],
+    "components": [
+      {
+        "id": "stack",
+        "name": "CDK stack source",
+        "requires": [],
+        "share_bps": 10000,
+        "files": [
+          {
+            "path": "LICENSE",
+            "sha256": "499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3",
+            "size_bytes": 640,
+            "mime_type": "text/plain; charset=utf-8",
+            "content": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nCopyright 2026 Second Wind contributors.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n"
+          },
+          {
+            "path": "README.md",
+            "sha256": "3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc",
+            "size_bytes": 1572,
+            "mime_type": "text/plain; charset=utf-8",
+            "content": "# bedrock-knowledge-base-cdk\n\nCreates a Bedrock vector knowledge base using Titan Text Embeddings V2 (1024 dimensions) and the upstream construct default OpenSearch Serverless vector store. An optional imported S3 bucket is attached as a data source.\n\n## Runtime and synthesis\n\nRequires Node.js 20 or later and the exact npm dependencies in `package.json` and `package-lock.json`. Run `npm ci`, then `npm run synth -- ./config.json` (or omit the argument to use the example configuration). This performs local AWS CDK synthesis only; it does not call AWS or deploy resources. A later deployment runs in your AWS account and may create billable resources. Review the template, account, Region, IAM scope, quotas, data retention, networking, and cost before deployment.\n\nHosted bounded preview is unavailable for this product because the private Worker runtime cannot load external CDK/npm modules or native Node APIs. Trial access must be rejected before charge.\n\n## Configuration\n\n`config.schema.json` defines accepted fields; `config.example.json` is a starting point. Select the single `stack` component in `selection.schema.json`.\n\n## Product files\n\n- `product.mjs` constructs the real AWS CDK resources.\n- `synth.mjs` runs local synthesis.\n- `package.json` and `package-lock.json` pin dependencies.\n- `source-provenance.json` records upstream references and adaptations.\n\n## Provenance and license\n\nOriginal Second Wind construct wiring around published APIs; no upstream implementation source is copied into this package.\n\nApache-2.0 terms are included in `LICENSE`.\n"
+          },
+          {
+            "path": "config.example.json",
+            "sha256": "4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab",
+            "size_bytes": 157,
+            "mime_type": "application/json",
+            "content": "{\n  \"language\": \"javascript\",\n  \"knowledge_base_name\": \"sample-kb\",\n  \"instruction\": \"Retrieve relevant documents and cite their source for every answer.\"\n}\n"
+          },
+          {
+            "path": "config.schema.json",
+            "sha256": "bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55",
+            "size_bytes": 597,
+            "mime_type": "application/json",
+            "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"language\",\n    \"knowledge_base_name\",\n    \"instruction\"\n  ],\n  \"properties\": {\n    \"language\": {\n      \"const\": \"javascript\"\n    },\n    \"knowledge_base_name\": {\n      \"type\": \"string\",\n      \"pattern\": \"^[A-Za-z0-9_-]{1,100}$\"\n    },\n    \"instruction\": {\n      \"type\": \"string\",\n      \"minLength\": 1,\n      \"maxLength\": 2000\n    },\n    \"s3_bucket_arn\": {\n      \"type\": \"string\",\n      \"pattern\": \"^arn:[^:]+:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$\"\n    }\n  }\n}\n"
+          },
+          {
+            "path": "package-lock.json",
+            "sha256": "a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99",
+            "size_bytes": 10006,
+            "mime_type": "application/json",
+            "content": "{\n  \"name\": \"@secondwind/bedrock-knowledge-base-cdk\",\n  \"version\": \"1.0.0\",\n  \"lockfileVersion\": 3,\n  \"requires\": true,\n  \"packages\": {\n    \"\": {\n      \"name\": \"@secondwind/bedrock-knowledge-base-cdk\",\n      \"version\": \"1.0.0\",\n      \"dependencies\": {\n        \"@cdklabs/generative-ai-cdk-constructs\": \"0.1.320\",\n        \"aws-cdk-lib\": \"2.274.0\",\n        \"constructs\": \"10.8.1\"\n      },\n      \"engines\": {\n        \"node\": \">=20\"\n      }\n    },\n    \"node_modules/@aws-cdk/asset-awscli-v1\": {\n      \"version\": \"2.2.292\",\n      \"resolved\": \"https://registry.npmjs.org/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.292.tgz\",\n      \"integrity\": \"sha512-d4aMFsAFj19FtxVyw8IzlUKv5Zu4sIvgnEjI2IU6IWBJgVbJ4aFnadANqYa+6MwB1CQbGOg0jh8WE77M+Nb/9A==\",\n      \"license\": \"Apache-2.0\"\n    },\n    \"node_modules/@aws-cdk/asset-node-proxy-agent-v6\": {\n      \"version\": \"2.1.3\",\n      \"resolved\": \"https://registry.npmjs.org/@aws-cdk/asset-node-proxy-agent-v6/-/asset-node-proxy-agent-v6-2.1.3.tgz\",\n      \"integrity\": \"sha512-98We1QWfin9vtuuQtNFhIIAEWb8CreyYTAP0Vn8HqSBoNiFJM9nZgifJeQawT9Wq0NX1HCNFlxCyTccIrK1PSA==\",\n      \"license\": \"Apache-2.0\"\n    },\n    \"node_modules/@aws-cdk/cloud-assembly-schema\": {\n      \"version\": \"55.2.0\",\n      \"resolved\": \"https://registry.npmjs.org/@aws-cdk/cloud-assembly-schema/-/cloud-assembly-schema-55.2.0.tgz\",\n      \"integrity\": \"sha512-DHfYrZdyJZwWlI5sOK97X7SDc5Ow+uH3w3/qnB/ZYtY530lEsLObOoq/Z8BcJM6bAwJI6ozIgg9VYg2ot+A1jQ==\",\n      \"bundleDependencies\": [\n        \"jsonschema\",\n        \"semver\"\n      ],\n      \"license\": \"Apache-2.0\",\n      \"dependencies\": {\n        \"jsonschema\": \"^1.5.0\",\n        \"semver\": \"^7.8.5\"\n      },\n      \"engines\": {\n        \"node\": \">= 18.0.0\"\n      }\n    },\n    \"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/jsonschema\": {\n      \"version\": \"1.5.0\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \"*\"\n      }\n    },\n    \"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/semver\": {\n      \"version\": \"7.8.5\",\n      \"inBundle\": true,\n      \"license\": \"ISC\",\n      \"bin\": {\n        \"semver\": \"bin/semver.js\"\n      },\n      \"engines\": {\n        \"node\": \">=10\"\n      }\n    },\n    \"node_modules/@cdklabs/generative-ai-cdk-constructs\": {\n      \"version\": \"0.1.320\",\n      \"resolved\": \"https://registry.npmjs.org/@cdklabs/generative-ai-cdk-constructs/-/generative-ai-cdk-constructs-0.1.320.tgz\",\n      \"integrity\": \"sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg==\",\n      \"bundleDependencies\": [\n        \"@aws-cdk/aws-lambda-python-alpha\",\n        \"deepmerge\"\n      ],\n      \"license\": \"Apache-2.0\",\n      \"dependencies\": {\n        \"@aws-cdk/aws-lambda-python-alpha\": \"2.267.0-alpha.0\",\n        \"cdk-nag\": \"^2.38.2\",\n        \"deepmerge\": \"^4.3.1\"\n      },\n      \"engines\": {\n        \"node\": \">= 20.x <= 25.x\"\n      },\n      \"peerDependencies\": {\n        \"aws-cdk-lib\": \"^2.267.0\",\n        \"constructs\": \"^10.6.0\"\n      }\n    },\n    \"node_modules/@cdklabs/generative-ai-cdk-constructs/node_modules/@aws-cdk/aws-lambda-python-alpha\": {\n      \"version\": \"2.267.0-alpha.0\",\n      \"inBundle\": true,\n      \"license\": \"Apache-2.0\",\n      \"engines\": {\n        \"node\": \">= 20.0.0\"\n      },\n      \"peerDependencies\": {\n        \"aws-cdk-lib\": \"^2.267.0\",\n        \"constructs\": \"^10.5.0\"\n      }\n    },\n    \"node_modules/@cdklabs/generative-ai-cdk-constructs/node_modules/deepmerge\": {\n      \"version\": \"4.3.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">=0.10.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib\": {\n      \"version\": \"2.274.0\",\n      \"resolved\": \"https://registry.npmjs.org/aws-cdk-lib/-/aws-cdk-lib-2.274.0.tgz\",\n      \"integrity\": \"sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg==\",\n      \"bundleDependencies\": [\n        \"@aws/cloudformation-validate\",\n        \"@balena/dockerignore\",\n        \"@aws-cdk/cloud-assembly-api\",\n        \"case\",\n        \"fs-extra\",\n        \"ignore\",\n        \"jsonschema\",\n        \"minimatch\",\n        \"punycode\",\n        \"semver\",\n        \"yaml\",\n        \"mime-types\"\n      ],\n      \"license\": \"Apache-2.0\",\n      \"dependencies\": {\n        \"@aws-cdk/asset-awscli-v1\": \"2.2.292\",\n        \"@aws-cdk/asset-node-proxy-agent-v6\": \"^2.1.3\",\n        \"@aws-cdk/cloud-assembly-api\": \"^2.5.0\",\n        \"@aws-cdk/cloud-assembly-schema\": \"^55.0.0\",\n        \"@aws/cloudformation-validate\": \"1.12.1\",\n        \"@balena/dockerignore\": \"^1.0.2\",\n        \"case\": \"1.6.3\",\n        \"fs-extra\": \"^11.4.1\",\n        \"ignore\": \"^5.3.2\",\n        \"jsonschema\": \"^1.5.0\",\n        \"mime-types\": \"^2.1.35\",\n        \"minimatch\": \"^10.2.6\",\n        \"punycode\": \"^2.3.1\",\n        \"semver\": \"^7.8.5\",\n        \"yaml\": \"1.10.3\"\n      },\n      \"engines\": {\n        \"node\": \">= 20.0.0\"\n      },\n      \"peerDependencies\": {\n        \"constructs\": \"^10.5.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/@aws-cdk/cloud-assembly-api\": {\n      \"version\": \"2.5.0\",\n      \"inBundle\": true,\n      \"license\": \"Apache-2.0\",\n      \"dependencies\": {\n        \"json-source-map\": \"^0.6.1\",\n        \"jsonschema\": \"^1.5.0\",\n        \"semver\": \"^7.8.5\"\n      },\n      \"engines\": {\n        \"node\": \">= 18.0.0\"\n      },\n      \"peerDependencies\": {\n        \"@aws-cdk/cloud-assembly-schema\": \">=55.0.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/@aws/cloudformation-validate\": {\n      \"version\": \"1.12.1\",\n      \"inBundle\": true,\n      \"license\": \"Apache-2.0\",\n      \"engines\": {\n        \"node\": \">=20.0.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/@balena/dockerignore\": {\n      \"version\": \"1.0.2\",\n      \"inBundle\": true,\n      \"license\": \"Apache-2.0\"\n    },\n    \"node_modules/aws-cdk-lib/node_modules/balanced-match\": {\n      \"version\": \"4.0.4\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \"18 || 20 || >=22\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/brace-expansion\": {\n      \"version\": \"5.0.12\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"balanced-match\": \"^4.0.2\"\n      },\n      \"engines\": {\n        \"node\": \"20 || >=22\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/case\": {\n      \"version\": \"1.6.3\",\n      \"inBundle\": true,\n      \"license\": \"(MIT OR GPL-3.0-or-later)\",\n      \"engines\": {\n        \"node\": \">= 0.8.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/fs-extra\": {\n      \"version\": \"11.4.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"graceful-fs\": \"^4.2.0\",\n        \"jsonfile\": \"^6.0.1\",\n        \"universalify\": \"^2.0.0\"\n      },\n      \"engines\": {\n        \"node\": \">=14.14\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/graceful-fs\": {\n      \"version\": \"4.2.11\",\n      \"inBundle\": true,\n      \"license\": \"ISC\"\n    },\n    \"node_modules/aws-cdk-lib/node_modules/ignore\": {\n      \"version\": \"5.3.2\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">= 4\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/json-source-map\": {\n      \"version\": \"0.6.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\"\n    },\n    \"node_modules/aws-cdk-lib/node_modules/jsonfile\": {\n      \"version\": \"6.2.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"universalify\": \"^2.0.0\"\n      },\n      \"optionalDependencies\": {\n        \"graceful-fs\": \"^4.1.6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/jsonschema\": {\n      \"version\": \"1.5.0\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \"*\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/mime-db\": {\n      \"version\": \"1.52.0\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">= 0.6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/mime-types\": {\n      \"version\": \"2.1.35\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"mime-db\": \"1.52.0\"\n      },\n      \"engines\": {\n        \"node\": \">= 0.6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/minimatch\": {\n      \"version\": \"10.2.6\",\n      \"inBundle\": true,\n      \"license\": \"BlueOak-1.0.0\",\n      \"dependencies\": {\n        \"brace-expansion\": \"^5.0.8\"\n      },\n      \"engines\": {\n        \"node\": \"18 || 20 || >=22\"\n      },\n      \"funding\": {\n        \"url\": \"https://github.com/sponsors/isaacs\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/punycode\": {\n      \"version\": \"2.3.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">=6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/semver\": {\n      \"version\": \"7.8.5\",\n      \"inBundle\": true,\n      \"license\": \"ISC\",\n      \"bin\": {\n        \"semver\": \"bin/semver.js\"\n      },\n      \"engines\": {\n        \"node\": \">=10\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/universalify\": {\n      \"version\": \"2.0.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">= 10.0.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/yaml\": {\n      \"version\": \"1.10.3\",\n      \"inBundle\": true,\n      \"license\": \"ISC\",\n      \"engines\": {\n        \"node\": \">= 6\"\n      }\n    },\n    \"node_modules/cdk-nag\": {\n      \"version\": \"2.38.2\",\n      \"resolved\": \"https://registry.npmjs.org/cdk-nag/-/cdk-nag-2.38.2.tgz\",\n      \"integrity\": \"sha512-Ddim1r8IwAPQn95KB2owbHoU4YHveHg4PfM+k7TdcANqfVmoHem6cTFMpcIuoDM16BkQQ+xshxYxZgcAoeVKGw==\",\n      \"license\": \"Apache-2.0\",\n      \"engines\": {\n        \"node\": \">= 18.12.0\"\n      },\n      \"peerDependencies\": {\n        \"aws-cdk-lib\": \"^2.176.0\",\n        \"constructs\": \"^10.5.1\"\n      }\n    },\n    \"node_modules/constructs\": {\n      \"version\": \"10.8.1\",\n      \"resolved\": \"https://registry.npmjs.org/constructs/-/constructs-10.8.1.tgz\",\n      \"integrity\": \"sha512-98yGXYyhePqPYh3cYu8nzBERmAhC0DONe3UD03okK0nehZ7hYP4wgZuf02a04+uOWxnTJ5Rpp5m0GRNpwyLGGA==\",\n      \"license\": \"Apache-2.0\"\n    }\n  }\n}\n"
+          },
+          {
+            "path": "package.json",
+            "sha256": "7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991",
+            "size_bytes": 345,
+            "mime_type": "application/json",
+            "content": "{\n  \"name\": \"@secondwind/bedrock-knowledge-base-cdk\",\n  \"version\": \"1.0.0\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"engines\": {\n    \"node\": \">=20\"\n  },\n  \"scripts\": {\n    \"synth\": \"node ./synth.mjs\"\n  },\n  \"dependencies\": {\n    \"aws-cdk-lib\": \"2.274.0\",\n    \"constructs\": \"10.8.1\",\n    \"@cdklabs/generative-ai-cdk-constructs\": \"0.1.320\"\n  }\n}\n"
+          },
+          {
+            "path": "preview.mjs",
+            "sha256": "35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c",
+            "size_bytes": 1844,
+            "mime_type": "text/javascript",
+            "content": "import { mkdtempSync, rmSync } from 'node:fs';\nimport { tmpdir } from 'node:os';\nimport { join } from 'node:path';\nimport { App } from 'aws-cdk-lib';\nimport { createStack } from './product.mjs';\n\n// Trusted, private native Node preview. It synthesizes the actual product stack\n// locally and returns only bounded counts; no CloudFormation template or AWS\n// API call leaves this module. The gateway Worker currently cannot execute it.\nexport async function preview({ configuration, selected_components }) {\n  let outdir;\n  try {\n    if (!Array.isArray(selected_components) || selected_components.length !== 1 || selected_components[0] !== 'stack') {\n      return { ok: false, status: 'invalid', slug: 'bedrock-knowledge-base-cdk', selected_components: [], resource_count: 0, diagnostic_codes: ['invalid_selection'] };\n    }\n    if (!configuration || configuration.language !== 'javascript') {\n      return { ok: false, status: 'invalid', slug: 'bedrock-knowledge-base-cdk', selected_components: ['stack'], resource_count: 0, diagnostic_codes: ['configuration_invalid'] };\n    }\n    outdir = mkdtempSync(join(tmpdir(), 'secondwind-private-cdk-preview-'));\n    const app = new App({ outdir, analyticsReporting: false });\n    createStack(app, { configuration, selected_components });\n    const assembly = app.synth();\n    const resource_count = assembly.stacks.reduce((sum, stack) => sum + Object.keys(stack.template?.Resources || {}).length, 0);\n    return { ok: true, status: 'complete', slug: 'bedrock-knowledge-base-cdk', selected_components: ['stack'], resource_count };\n  } catch {\n    return { ok: false, status: 'invalid', slug: 'bedrock-knowledge-base-cdk', selected_components: ['stack'], resource_count: 0, diagnostic_codes: ['validation_failed'] };\n  } finally {\n    if (outdir) rmSync(outdir, { recursive: true, force: true });\n  }\n}\n"
+          },
+          {
+            "path": "product.mjs",
+            "sha256": "780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91",
+            "size_bytes": 1004,
+            "mime_type": "text/javascript",
+            "content": "import { App, Stack } from 'aws-cdk-lib';\nimport * as s3 from 'aws-cdk-lib/aws-s3';\nimport { BedrockFoundationModel, VectorKnowledgeBase } from '@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock';\n\nexport function createStack(app, { configuration: c }) {\n  if (!c || typeof c.knowledge_base_name !== 'string' || typeof c.instruction !== 'string') {\n    throw new Error('invalid_configuration');\n  }\n  const stack = new Stack(app, 'BedrockKnowledgeBaseStack');\n  const knowledgeBase = new VectorKnowledgeBase(stack, 'KnowledgeBase', {\n    name: c.knowledge_base_name,\n    instruction: c.instruction,\n    embeddingsModel: BedrockFoundationModel.TITAN_EMBED_TEXT_V2_1024,\n  });\n  if (c.s3_bucket_arn) {\n    knowledgeBase.addS3DataSource({ bucket: s3.Bucket.fromBucketArn(stack, 'SourceBucket', c.s3_bucket_arn) });\n  }\n  return stack;\n}\n\nexport function synthesize(configuration) {\n  const app = new App({ analyticsReporting: false });\n  createStack(app, { configuration });\n  return app.synth();\n}\n"
+          },
+          {
+            "path": "selection.schema.json",
+            "sha256": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+            "size_bytes": 214,
+            "mime_type": "application/json",
+            "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"string\",\n    \"enum\": [\n      \"stack\"\n    ]\n  },\n  \"minItems\": 1,\n  \"maxItems\": 1,\n  \"uniqueItems\": true\n}\n"
+          },
+          {
+            "path": "source-provenance.json",
+            "sha256": "3debd272d2a2f1c4ce3544c82798d1ceac9a3d3719391dc6b3188ce8940e5a50",
+            "size_bytes": 3549,
+            "mime_type": "application/json",
+            "content": "{\n  \"schema_version\": \"1\",\n  \"sku\": \"AWS-0557\",\n  \"slug\": \"bedrock-knowledge-base-cdk\",\n  \"origin\": \"Second Wind\",\n  \"license\": \"Apache-2.0\",\n  \"source_repo\": \"https://github.com/awslabs/generative-ai-cdk-constructs\",\n  \"source_revision\": \"2cbb52febd5e076bdd7c1f08782c9811d32363b4\",\n  \"source_path\": \"src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts\",\n  \"source_sha256\": \"ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df\",\n  \"relationship\": \"Original Second Wind wiring around pinned published APIs; no upstream implementation files are copied into this package. The upstream VectorKnowledgeBase default store is OpenSearch Serverless; creating it on deployment can incur AWS charges.\",\n  \"dependency_pins\": {\n    \"aws-cdk-lib\": \"2.274.0\",\n    \"constructs\": \"10.8.1\",\n    \"@cdklabs/generative-ai-cdk-constructs\": \"0.1.320\"\n  },\n  \"dependency_integrity\": {\n    \"@cdklabs/generative-ai-cdk-constructs\": \"sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg==\"\n  },\n  \"upstream_source_files\": [\n    {\n      \"path\": \"src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts\",\n      \"sha256\": \"ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df\",\n      \"repository\": \"https://github.com/awslabs/generative-ai-cdk-constructs\",\n      \"revision\": \"2cbb52febd5e076bdd7c1f08782c9811d32363b4\",\n      \"relationship\": \"API/construct behavior inspected; no upstream implementation file copied.\"\n    }\n  ],\n  \"runtime_boundary\": \"Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.\",\n  \"preview_contract\": null,\n  \"review_status\": \"draft; trusted source and product review pending\",\n  \"license_mapping\": {\n    \"first_party_files\": \"Apache-2.0\",\n    \"upstream_dependency_license\": \"Apache-2.0\",\n    \"dependency_license_source\": \"npm package metadata and package LICENSE\"\n  },\n  \"local_files\": [\n    {\n      \"path\": \"LICENSE\",\n      \"sha256\": \"499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3\",\n      \"size_bytes\": 640\n    },\n    {\n      \"path\": \"README.md\",\n      \"sha256\": \"3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc\",\n      \"size_bytes\": 1572\n    },\n    {\n      \"path\": \"config.example.json\",\n      \"sha256\": \"4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab\",\n      \"size_bytes\": 157\n    },\n    {\n      \"path\": \"config.schema.json\",\n      \"sha256\": \"bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55\",\n      \"size_bytes\": 597\n    },\n    {\n      \"path\": \"package-lock.json\",\n      \"sha256\": \"a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99\",\n      \"size_bytes\": 10006\n    },\n    {\n      \"path\": \"package.json\",\n      \"sha256\": \"7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991\",\n      \"size_bytes\": 345\n    },\n    {\n      \"path\": \"preview.mjs\",\n      \"sha256\": \"35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c\",\n      \"size_bytes\": 1844\n    },\n    {\n      \"path\": \"product.mjs\",\n      \"sha256\": \"780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91\",\n      \"size_bytes\": 1004\n    },\n    {\n      \"path\": \"selection.schema.json\",\n      \"sha256\": \"84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883\",\n      \"size_bytes\": 214\n    },\n    {\n      \"path\": \"synth.mjs\",\n      \"sha256\": \"cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8\",\n      \"size_bytes\": 313\n    }\n  ]\n}\n"
+          },
+          {
+            "path": "synth.mjs",
+            "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
+            "size_bytes": 313,
+            "mime_type": "text/javascript",
+            "content": "import { synthesize } from './product.mjs';\nimport { readFileSync } from 'node:fs';\nconst config = JSON.parse(readFileSync(process.argv[2] || './config.example.json', 'utf8'));\nconst assembly = synthesize(config);\nprocess.stdout.write(`Synthesized ${assembly.stacks.length} stack(s) to ${assembly.directory}\\n`);\n"
+          }
+        ]
+      }
+    ],
+    "pricing": {
+      "mode": "proportional-components",
+      "max_amount_atomic": "500000",
+      "asset": "0x83359fCD6eDb6E08f4c7C32D4f71b54bda02913",
+      "network": "eip155:8453"
+    },
+    "validation_contract": {
+      "kind": "native-node-cdk-synthesis",
+      "runtime": "nodejs20",
+      "aws_api_calls": "not-performed",
+      "cloudformation_deployment": "not-performed",
+      "result": "not-run"
+    },
+    "tags": [
+      "aws",
+      "aws-cdk",
+      "bedrock",
+      "bedrock-knowledge-base-cdk",
+      "native-synthesis"
+    ],
+    "trial_adapter": "javascript-isolate"
+  },
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0557",
+    "sku": "AWS-0557",
+    "slug": "bedrock-knowledge-base-cdk",
+    "version": 1,
+    "release_ref": "sha256:637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+    "service": "bedrock",
+    "product_kind": "artifact-product",
+    "route_summary": "Bedrock vector knowledge base using Titan embeddings, OpenSearch Serverless, and an optional imported S3 data source.",
+    "supported_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+    "language_policy": "explicit",
+    "aliases": [],
+    "tags": [
+      "aws",
+      "aws-cdk",
+      "bedrock",
+      "bedrock-knowledge-base-cdk"
+    ],
+    "taxonomy_ids": [
+      "aws.bedrock.cdk"
+    ],
+    "problem_family_ids": [
+      "infrastructure.synthesis"
+    ],
+    "operations": [
+      "cdk-synth"
+    ],
+    "environments": [
+      "aws-cdk"
+    ],
+    "desired_outcomes": [
+      "infrastructure-plan"
+    ],
+    "input_kinds": [
+      "configuration"
+    ],
+    "failure_signatures": [
+      "synthesis-error"
+    ],
+    "languages": [
+      "javascript"
+    ],
+    "runtimes": [
+      "nodejs20"
+    ],
+    "required_evidence": [
+      "native-node-synthesis"
+    ],
+    "exclusions": [
+      "aws-api-calls",
+      "aws-deployment",
+      "hosted-preview-unavailable"
+    ]
+  },
+  "payload": {
+    "content": "{\"files\":[{\"content\":\"Apache License\\nVersion 2.0, January 2004\\nhttp://www.apache.org/licenses/\\n\\nCopyright 2026 Second Wind contributors.\\n\\nLicensed under the Apache License, Version 2.0 (the \\\"License\\\");\\nyou may not use this file except in compliance with the License.\\nYou may obtain a copy of the License at\\n\\n    http://www.apache.org/licenses/LICENSE-2.0\\n\\nUnless required by applicable law or agreed to in writing, software\\ndistributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\nSee the License for the specific language governing permissions and\\nlimitations under the License.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"LICENSE\",\"sha256\":\"499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3\",\"size_bytes\":640},{\"content\":\"# bedrock-knowledge-base-cdk\\n\\nCreates a Bedrock vector knowledge base using Titan Text Embeddings V2 (1024 dimensions) and the upstream construct default OpenSearch Serverless vector store. An optional imported S3 bucket is attached as a data source.\\n\\n## Runtime and synthesis\\n\\nRequires Node.js 20 or later and the exact npm dependencies in `package.json` and `package-lock.json`. Run `npm ci`, then `npm run synth -- ./config.json` (or omit the argument to use the example configuration). This performs local AWS CDK synthesis only; it does not call AWS or deploy resources. A later deployment runs in your AWS account and may create billable resources. Review the template, account, Region, IAM scope, quotas, data retention, networking, and cost before deployment.\\n\\nHosted bounded preview is unavailable for this product because the private Worker runtime cannot load external CDK/npm modules or native Node APIs. Trial access must be rejected before charge.\\n\\n## Configuration\\n\\n`config.schema.json` defines accepted fields; `config.example.json` is a starting point. Select the single `stack` component in `selection.schema.json`.\\n\\n## Product files\\n\\n- `product.mjs` constructs the real AWS CDK resources.\\n- `synth.mjs` runs local synthesis.\\n- `package.json` and `package-lock.json` pin dependencies.\\n- `source-provenance.json` records upstream references and adaptations.\\n\\n## Provenance and license\\n\\nOriginal Second Wind construct wiring around published APIs; no upstream implementation source is copied into this package.\\n\\nApache-2.0 terms are included in `LICENSE`.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"README.md\",\"sha256\":\"3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc\",\"size_bytes\":1572},{\"content\":\"{\\n  \\\"language\\\": \\\"javascript\\\",\\n  \\\"knowledge_base_name\\\": \\\"sample-kb\\\",\\n  \\\"instruction\\\": \\\"Retrieve relevant documents and cite their source for every answer.\\\"\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"config.example.json\",\"sha256\":\"4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab\",\"size_bytes\":157},{\"content\":\"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"required\\\": [\\n    \\\"language\\\",\\n    \\\"knowledge_base_name\\\",\\n    \\\"instruction\\\"\\n  ],\\n  \\\"properties\\\": {\\n    \\\"language\\\": {\\n      \\\"const\\\": \\\"javascript\\\"\\n    },\\n    \\\"knowledge_base_name\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"pattern\\\": \\\"^[A-Za-z0-9_-]{1,100}$\\\"\\n    },\\n    \\\"instruction\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1,\\n      \\\"maxLength\\\": 2000\\n    },\\n    \\\"s3_bucket_arn\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"pattern\\\": \\\"^arn:[^:]+:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$\\\"\\n    }\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"config.schema.json\",\"sha256\":\"bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55\",\"size_bytes\":597},{\"content\":\"{\\n  \\\"name\\\": \\\"@secondwind/bedrock-knowledge-base-cdk\\\",\\n  \\\"version\\\": \\\"1.0.0\\\",\\n  \\\"lockfileVersion\\\": 3,\\n  \\\"requires\\\": true,\\n  \\\"packages\\\": {\\n    \\\"\\\": {\\n      \\\"name\\\": \\\"@secondwind/bedrock-knowledge-base-cdk\\\",\\n      \\\"version\\\": \\\"1.0.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"@cdklabs/generative-ai-cdk-constructs\\\": \\\"0.1.320\\\",\\n        \\\"aws-cdk-lib\\\": \\\"2.274.0\\\",\\n        \\\"constructs\\\": \\\"10.8.1\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=20\\\"\\n      }\\n    },\\n    \\\"node_modules/@aws-cdk/asset-awscli-v1\\\": {\\n      \\\"version\\\": \\\"2.2.292\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.292.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-d4aMFsAFj19FtxVyw8IzlUKv5Zu4sIvgnEjI2IU6IWBJgVbJ4aFnadANqYa+6MwB1CQbGOg0jh8WE77M+Nb/9A==\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    \\\"node_modules/@aws-cdk/asset-node-proxy-agent-v6\\\": {\\n      \\\"version\\\": \\\"2.1.3\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/@aws-cdk/asset-node-proxy-agent-v6/-/asset-node-proxy-agent-v6-2.1.3.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-98We1QWfin9vtuuQtNFhIIAEWb8CreyYTAP0Vn8HqSBoNiFJM9nZgifJeQawT9Wq0NX1HCNFlxCyTccIrK1PSA==\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    \\\"node_modules/@aws-cdk/cloud-assembly-schema\\\": {\\n      \\\"version\\\": \\\"55.2.0\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/@aws-cdk/cloud-assembly-schema/-/cloud-assembly-schema-55.2.0.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-DHfYrZdyJZwWlI5sOK97X7SDc5Ow+uH3w3/qnB/ZYtY530lEsLObOoq/Z8BcJM6bAwJI6ozIgg9VYg2ot+A1jQ==\\\",\\n      \\\"bundleDependencies\\\": [\\n        \\\"jsonschema\\\",\\n        \\\"semver\\\"\\n      ],\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"jsonschema\\\": \\\"^1.5.0\\\",\\n        \\\"semver\\\": \\\"^7.8.5\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 18.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/jsonschema\\\": {\\n      \\\"version\\\": \\\"1.5.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"*\\\"\\n      }\\n    },\\n    \\\"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/semver\\\": {\\n      \\\"version\\\": \\\"7.8.5\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\",\\n      \\\"bin\\\": {\\n        \\\"semver\\\": \\\"bin/semver.js\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=10\\\"\\n      }\\n    },\\n    \\\"node_modules/@cdklabs/generative-ai-cdk-constructs\\\": {\\n      \\\"version\\\": \\\"0.1.320\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/@cdklabs/generative-ai-cdk-constructs/-/generative-ai-cdk-constructs-0.1.320.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg==\\\",\\n      \\\"bundleDependencies\\\": [\\n        \\\"@aws-cdk/aws-lambda-python-alpha\\\",\\n        \\\"deepmerge\\\"\\n      ],\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"@aws-cdk/aws-lambda-python-alpha\\\": \\\"2.267.0-alpha.0\\\",\\n        \\\"cdk-nag\\\": \\\"^2.38.2\\\",\\n        \\\"deepmerge\\\": \\\"^4.3.1\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 20.x <= 25.x\\\"\\n      },\\n      \\\"peerDependencies\\\": {\\n        \\\"aws-cdk-lib\\\": \\\"^2.267.0\\\",\\n        \\\"constructs\\\": \\\"^10.6.0\\\"\\n      }\\n    },\\n    \\\"node_modules/@cdklabs/generative-ai-cdk-constructs/node_modules/@aws-cdk/aws-lambda-python-alpha\\\": {\\n      \\\"version\\\": \\\"2.267.0-alpha.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 20.0.0\\\"\\n      },\\n      \\\"peerDependencies\\\": {\\n        \\\"aws-cdk-lib\\\": \\\"^2.267.0\\\",\\n        \\\"constructs\\\": \\\"^10.5.0\\\"\\n      }\\n    },\\n    \\\"node_modules/@cdklabs/generative-ai-cdk-constructs/node_modules/deepmerge\\\": {\\n      \\\"version\\\": \\\"4.3.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=0.10.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib\\\": {\\n      \\\"version\\\": \\\"2.274.0\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/aws-cdk-lib/-/aws-cdk-lib-2.274.0.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg==\\\",\\n      \\\"bundleDependencies\\\": [\\n        \\\"@aws/cloudformation-validate\\\",\\n        \\\"@balena/dockerignore\\\",\\n        \\\"@aws-cdk/cloud-assembly-api\\\",\\n        \\\"case\\\",\\n        \\\"fs-extra\\\",\\n        \\\"ignore\\\",\\n        \\\"jsonschema\\\",\\n        \\\"minimatch\\\",\\n        \\\"punycode\\\",\\n        \\\"semver\\\",\\n        \\\"yaml\\\",\\n        \\\"mime-types\\\"\\n      ],\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"@aws-cdk/asset-awscli-v1\\\": \\\"2.2.292\\\",\\n        \\\"@aws-cdk/asset-node-proxy-agent-v6\\\": \\\"^2.1.3\\\",\\n        \\\"@aws-cdk/cloud-assembly-api\\\": \\\"^2.5.0\\\",\\n        \\\"@aws-cdk/cloud-assembly-schema\\\": \\\"^55.0.0\\\",\\n        \\\"@aws/cloudformation-validate\\\": \\\"1.12.1\\\",\\n        \\\"@balena/dockerignore\\\": \\\"^1.0.2\\\",\\n        \\\"case\\\": \\\"1.6.3\\\",\\n        \\\"fs-extra\\\": \\\"^11.4.1\\\",\\n        \\\"ignore\\\": \\\"^5.3.2\\\",\\n        \\\"jsonschema\\\": \\\"^1.5.0\\\",\\n        \\\"mime-types\\\": \\\"^2.1.35\\\",\\n        \\\"minimatch\\\": \\\"^10.2.6\\\",\\n        \\\"punycode\\\": \\\"^2.3.1\\\",\\n        \\\"semver\\\": \\\"^7.8.5\\\",\\n        \\\"yaml\\\": \\\"1.10.3\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 20.0.0\\\"\\n      },\\n      \\\"peerDependencies\\\": {\\n        \\\"constructs\\\": \\\"^10.5.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/@aws-cdk/cloud-assembly-api\\\": {\\n      \\\"version\\\": \\\"2.5.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"json-source-map\\\": \\\"^0.6.1\\\",\\n        \\\"jsonschema\\\": \\\"^1.5.0\\\",\\n        \\\"semver\\\": \\\"^7.8.5\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 18.0.0\\\"\\n      },\\n      \\\"peerDependencies\\\": {\\n        \\\"@aws-cdk/cloud-assembly-schema\\\": \\\">=55.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/@aws/cloudformation-validate\\\": {\\n      \\\"version\\\": \\\"1.12.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=20.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/@balena/dockerignore\\\": {\\n      \\\"version\\\": \\\"1.0.2\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/balanced-match\\\": {\\n      \\\"version\\\": \\\"4.0.4\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"18 || 20 || >=22\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/brace-expansion\\\": {\\n      \\\"version\\\": \\\"5.0.12\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"balanced-match\\\": \\\"^4.0.2\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"20 || >=22\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/case\\\": {\\n      \\\"version\\\": \\\"1.6.3\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"(MIT OR GPL-3.0-or-later)\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 0.8.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/fs-extra\\\": {\\n      \\\"version\\\": \\\"11.4.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"graceful-fs\\\": \\\"^4.2.0\\\",\\n        \\\"jsonfile\\\": \\\"^6.0.1\\\",\\n        \\\"universalify\\\": \\\"^2.0.0\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=14.14\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/graceful-fs\\\": {\\n      \\\"version\\\": \\\"4.2.11\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\"\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/ignore\\\": {\\n      \\\"version\\\": \\\"5.3.2\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 4\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/json-source-map\\\": {\\n      \\\"version\\\": \\\"0.6.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\"\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/jsonfile\\\": {\\n      \\\"version\\\": \\\"6.2.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"universalify\\\": \\\"^2.0.0\\\"\\n      },\\n      \\\"optionalDependencies\\\": {\\n        \\\"graceful-fs\\\": \\\"^4.1.6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/jsonschema\\\": {\\n      \\\"version\\\": \\\"1.5.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"*\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/mime-db\\\": {\\n      \\\"version\\\": \\\"1.52.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 0.6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/mime-types\\\": {\\n      \\\"version\\\": \\\"2.1.35\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"mime-db\\\": \\\"1.52.0\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 0.6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/minimatch\\\": {\\n      \\\"version\\\": \\\"10.2.6\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"BlueOak-1.0.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"brace-expansion\\\": \\\"^5.0.8\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"18 || 20 || >=22\\\"\\n      },\\n      \\\"funding\\\": {\\n        \\\"url\\\": \\\"https://github.com/sponsors/isaacs\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/punycode\\\": {\\n      \\\"version\\\": \\\"2.3.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/semver\\\": {\\n      \\\"version\\\": \\\"7.8.5\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\",\\n      \\\"bin\\\": {\\n        \\\"semver\\\": \\\"bin/semver.js\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=10\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/universalify\\\": {\\n      \\\"version\\\": \\\"2.0.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 10.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/yaml\\\": {\\n      \\\"version\\\": \\\"1.10.3\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 6\\\"\\n      }\\n    },\\n    \\\"node_modules/cdk-nag\\\": {\\n      \\\"version\\\": \\\"2.38.2\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/cdk-nag/-/cdk-nag-2.38.2.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-Ddim1r8IwAPQn95KB2owbHoU4YHveHg4PfM+k7TdcANqfVmoHem6cTFMpcIuoDM16BkQQ+xshxYxZgcAoeVKGw==\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 18.12.0\\\"\\n      },\\n      \\\"peerDependencies\\\": {\\n        \\\"aws-cdk-lib\\\": \\\"^2.176.0\\\",\\n        \\\"constructs\\\": \\\"^10.5.1\\\"\\n      }\\n    },\\n    \\\"node_modules/constructs\\\": {\\n      \\\"version\\\": \\\"10.8.1\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/constructs/-/constructs-10.8.1.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-98yGXYyhePqPYh3cYu8nzBERmAhC0DONe3UD03okK0nehZ7hYP4wgZuf02a04+uOWxnTJ5Rpp5m0GRNpwyLGGA==\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    }\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"package-lock.json\",\"sha256\":\"a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99\",\"size_bytes\":10006},{\"content\":\"{\\n  \\\"name\\\": \\\"@secondwind/bedrock-knowledge-base-cdk\\\",\\n  \\\"version\\\": \\\"1.0.0\\\",\\n  \\\"private\\\": true,\\n  \\\"type\\\": \\\"module\\\",\\n  \\\"engines\\\": {\\n    \\\"node\\\": \\\">=20\\\"\\n  },\\n  \\\"scripts\\\": {\\n    \\\"synth\\\": \\\"node ./synth.mjs\\\"\\n  },\\n  \\\"dependencies\\\": {\\n    \\\"aws-cdk-lib\\\": \\\"2.274.0\\\",\\n    \\\"constructs\\\": \\\"10.8.1\\\",\\n    \\\"@cdklabs/generative-ai-cdk-constructs\\\": \\\"0.1.320\\\"\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"package.json\",\"sha256\":\"7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991\",\"size_bytes\":345},{\"content\":\"import { mkdtempSync, rmSync } from 'node:fs';\\nimport { tmpdir } from 'node:os';\\nimport { join } from 'node:path';\\nimport { App } from 'aws-cdk-lib';\\nimport { createStack } from './product.mjs';\\n\\n// Trusted, private native Node preview. It synthesizes the actual product stack\\n// locally and returns only bounded counts; no CloudFormation template or AWS\\n// API call leaves this module. The gateway Worker currently cannot execute it.\\nexport async function preview({ configuration, selected_components }) {\\n  let outdir;\\n  try {\\n    if (!Array.isArray(selected_components) || selected_components.length !== 1 || selected_components[0] !== 'stack') {\\n      return { ok: false, status: 'invalid', slug: 'bedrock-knowledge-base-cdk', selected_components: [], resource_count: 0, diagnostic_codes: ['invalid_selection'] };\\n    }\\n    if (!configuration || configuration.language !== 'javascript') {\\n      return { ok: false, status: 'invalid', slug: 'bedrock-knowledge-base-cdk', selected_components: ['stack'], resource_count: 0, diagnostic_codes: ['configuration_invalid'] };\\n    }\\n    outdir = mkdtempSync(join(tmpdir(), 'secondwind-private-cdk-preview-'));\\n    const app = new App({ outdir, analyticsReporting: false });\\n    createStack(app, { configuration, selected_components });\\n    const assembly = app.synth();\\n    const resource_count = assembly.stacks.reduce((sum, stack) => sum + Object.keys(stack.template?.Resources || {}).length, 0);\\n    return { ok: true, status: 'complete', slug: 'bedrock-knowledge-base-cdk', selected_components: ['stack'], resource_count };\\n  } catch {\\n    return { ok: false, status: 'invalid', slug: 'bedrock-knowledge-base-cdk', selected_components: ['stack'], resource_count: 0, diagnostic_codes: ['validation_failed'] };\\n  } finally {\\n    if (outdir) rmSync(outdir, { recursive: true, force: true });\\n  }\\n}\\n\",\"mime_type\":\"text/javascript\",\"path\":\"preview.mjs\",\"sha256\":\"35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c\",\"size_bytes\":1844},{\"content\":\"import { App, Stack } from 'aws-cdk-lib';\\nimport * as s3 from 'aws-cdk-lib/aws-s3';\\nimport { BedrockFoundationModel, VectorKnowledgeBase } from '@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock';\\n\\nexport function createStack(app, { configuration: c }) {\\n  if (!c || typeof c.knowledge_base_name !== 'string' || typeof c.instruction !== 'string') {\\n    throw new Error('invalid_configuration');\\n  }\\n  const stack = new Stack(app, 'BedrockKnowledgeBaseStack');\\n  const knowledgeBase = new VectorKnowledgeBase(stack, 'KnowledgeBase', {\\n    name: c.knowledge_base_name,\\n    instruction: c.instruction,\\n    embeddingsModel: BedrockFoundationModel.TITAN_EMBED_TEXT_V2_1024,\\n  });\\n  if (c.s3_bucket_arn) {\\n    knowledgeBase.addS3DataSource({ bucket: s3.Bucket.fromBucketArn(stack, 'SourceBucket', c.s3_bucket_arn) });\\n  }\\n  return stack;\\n}\\n\\nexport function synthesize(configuration) {\\n  const app = new App({ analyticsReporting: false });\\n  createStack(app, { configuration });\\n  return app.synth();\\n}\\n\",\"mime_type\":\"text/javascript\",\"path\":\"product.mjs\",\"sha256\":\"780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91\",\"size_bytes\":1004},{\"content\":\"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"type\\\": \\\"array\\\",\\n  \\\"items\\\": {\\n    \\\"type\\\": \\\"string\\\",\\n    \\\"enum\\\": [\\n      \\\"stack\\\"\\n    ]\\n  },\\n  \\\"minItems\\\": 1,\\n  \\\"maxItems\\\": 1,\\n  \\\"uniqueItems\\\": true\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"selection.schema.json\",\"sha256\":\"84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883\",\"size_bytes\":214},{\"content\":\"{\\n  \\\"schema_version\\\": \\\"1\\\",\\n  \\\"sku\\\": \\\"AWS-0557\\\",\\n  \\\"slug\\\": \\\"bedrock-knowledge-base-cdk\\\",\\n  \\\"origin\\\": \\\"Second Wind\\\",\\n  \\\"license\\\": \\\"Apache-2.0\\\",\\n  \\\"source_repo\\\": \\\"https://github.com/awslabs/generative-ai-cdk-constructs\\\",\\n  \\\"source_revision\\\": \\\"2cbb52febd5e076bdd7c1f08782c9811d32363b4\\\",\\n  \\\"source_path\\\": \\\"src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts\\\",\\n  \\\"source_sha256\\\": \\\"ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df\\\",\\n  \\\"relationship\\\": \\\"Original Second Wind wiring around pinned published APIs; no upstream implementation files are copied into this package. The upstream VectorKnowledgeBase default store is OpenSearch Serverless; creating it on deployment can incur AWS charges.\\\",\\n  \\\"dependency_pins\\\": {\\n    \\\"aws-cdk-lib\\\": \\\"2.274.0\\\",\\n    \\\"constructs\\\": \\\"10.8.1\\\",\\n    \\\"@cdklabs/generative-ai-cdk-constructs\\\": \\\"0.1.320\\\"\\n  },\\n  \\\"dependency_integrity\\\": {\\n    \\\"@cdklabs/generative-ai-cdk-constructs\\\": \\\"sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg==\\\"\\n  },\\n  \\\"upstream_source_files\\\": [\\n    {\\n      \\\"path\\\": \\\"src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts\\\",\\n      \\\"sha256\\\": \\\"ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df\\\",\\n      \\\"repository\\\": \\\"https://github.com/awslabs/generative-ai-cdk-constructs\\\",\\n      \\\"revision\\\": \\\"2cbb52febd5e076bdd7c1f08782c9811d32363b4\\\",\\n      \\\"relationship\\\": \\\"API/construct behavior inspected; no upstream implementation file copied.\\\"\\n    }\\n  ],\\n  \\\"runtime_boundary\\\": \\\"Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.\\\",\\n  \\\"preview_contract\\\": null,\\n  \\\"review_status\\\": \\\"draft; trusted source and product review pending\\\",\\n  \\\"license_mapping\\\": {\\n    \\\"first_party_files\\\": \\\"Apache-2.0\\\",\\n    \\\"upstream_dependency_license\\\": \\\"Apache-2.0\\\",\\n    \\\"dependency_license_source\\\": \\\"npm package metadata and package LICENSE\\\"\\n  },\\n  \\\"local_files\\\": [\\n    {\\n      \\\"path\\\": \\\"LICENSE\\\",\\n      \\\"sha256\\\": \\\"499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3\\\",\\n      \\\"size_bytes\\\": 640\\n    },\\n    {\\n      \\\"path\\\": \\\"README.md\\\",\\n      \\\"sha256\\\": \\\"3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc\\\",\\n      \\\"size_bytes\\\": 1572\\n    },\\n    {\\n      \\\"path\\\": \\\"config.example.json\\\",\\n      \\\"sha256\\\": \\\"4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab\\\",\\n      \\\"size_bytes\\\": 157\\n    },\\n    {\\n      \\\"path\\\": \\\"config.schema.json\\\",\\n      \\\"sha256\\\": \\\"bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55\\\",\\n      \\\"size_bytes\\\": 597\\n    },\\n    {\\n      \\\"path\\\": \\\"package-lock.json\\\",\\n      \\\"sha256\\\": \\\"a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99\\\",\\n      \\\"size_bytes\\\": 10006\\n    },\\n    {\\n      \\\"path\\\": \\\"package.json\\\",\\n      \\\"sha256\\\": \\\"7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991\\\",\\n      \\\"size_bytes\\\": 345\\n    },\\n    {\\n      \\\"path\\\": \\\"preview.mjs\\\",\\n      \\\"sha256\\\": \\\"35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c\\\",\\n      \\\"size_bytes\\\": 1844\\n    },\\n    {\\n      \\\"path\\\": \\\"product.mjs\\\",\\n      \\\"sha256\\\": \\\"780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91\\\",\\n      \\\"size_bytes\\\": 1004\\n    },\\n    {\\n      \\\"path\\\": \\\"selection.schema.json\\\",\\n      \\\"sha256\\\": \\\"84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883\\\",\\n      \\\"size_bytes\\\": 214\\n    },\\n    {\\n      \\\"path\\\": \\\"synth.mjs\\\",\\n      \\\"sha256\\\": \\\"cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8\\\",\\n      \\\"size_bytes\\\": 313\\n    }\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"source-provenance.json\",\"sha256\":\"3debd272d2a2f1c4ce3544c82798d1ceac9a3d3719391dc6b3188ce8940e5a50\",\"size_bytes\":3549},{\"content\":\"import { synthesize } from './product.mjs';\\nimport { readFileSync } from 'node:fs';\\nconst config = JSON.parse(readFileSync(process.argv[2] || './config.example.json', 'utf8'));\\nconst assembly = synthesize(config);\\nprocess.stdout.write(`Synthesized ${assembly.stacks.length} stack(s) to ${assembly.directory}\\\\n`);\\n\",\"mime_type\":\"text/javascript\",\"path\":\"synth.mjs\",\"sha256\":\"cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8\",\"size_bytes\":313}],\"schema_version\":\"1\",\"sku\":\"AWS-0557\",\"version\":1}",
+    "sha256": "637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+    "size_bytes": 23890,
+    "mime_type": "application/json"
+  },
+  "files": [],
+  "source_provenance": {
+    "schema_version": "1",
+    "sku": "AWS-0557",
+    "slug": "bedrock-knowledge-base-cdk",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "source_repo": "https://github.com/awslabs/generative-ai-cdk-constructs",
+    "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+    "source_path": "src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts",
+    "source_sha256": "ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df",
+    "relationship": "Original Second Wind wiring around pinned published APIs; no upstream implementation files are copied into this package. The upstream VectorKnowledgeBase default store is OpenSearch Serverless; creating it on deployment can incur AWS charges.",
+    "dependency_pins": {
+      "aws-cdk-lib": "2.274.0",
+      "constructs": "10.8.1",
+      "@cdklabs/generative-ai-cdk-constructs": "0.1.320"
+    },
+    "dependency_integrity": {
+      "@cdklabs/generative-ai-cdk-constructs": "sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg=="
+    },
+    "upstream_source_files": [
+      {
+        "path": "src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts",
+        "sha256": "ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df",
+        "repository": "https://github.com/awslabs/generative-ai-cdk-constructs",
+        "revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+        "relationship": "API/construct behavior inspected; no upstream implementation file copied."
+      }
+    ],
+    "runtime_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+    "preview_contract": null,
+    "review_status": "draft; trusted source and product review pending",
+    "license_mapping": {
+      "first_party_files": "Apache-2.0",
+      "upstream_dependency_license": "Apache-2.0",
+      "dependency_license_source": "npm package metadata and package LICENSE"
+    },
+    "local_files": [
+      {
+        "path": "LICENSE",
+        "sha256": "499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3",
+        "size_bytes": 640
+      },
+      {
+        "path": "README.md",
+        "sha256": "3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc",
+        "size_bytes": 1572
+      },
+      {
+        "path": "config.example.json",
+        "sha256": "4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab",
+        "size_bytes": 157
+      },
+      {
+        "path": "config.schema.json",
+        "sha256": "bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55",
+        "size_bytes": 597
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99",
+        "size_bytes": 10006
+      },
+      {
+        "path": "package.json",
+        "sha256": "7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991",
+        "size_bytes": 345
+      },
+      {
+        "path": "preview.mjs",
+        "sha256": "35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c",
+        "size_bytes": 1844
+      },
+      {
+        "path": "product.mjs",
+        "sha256": "780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91",
+        "size_bytes": 1004
+      },
+      {
+        "path": "selection.schema.json",
+        "sha256": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+        "size_bytes": 214
+      },
+      {
+        "path": "synth.mjs",
+        "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
+        "size_bytes": 313
+      }
+    ]
+  },
+  "blockers": [
+    "hosted_private_preview_unavailable",
+    "trusted_source_review_pending",
+    "native_synthesis_evidence_pending",
+    "publication_approval_pending"
+  ]
+}

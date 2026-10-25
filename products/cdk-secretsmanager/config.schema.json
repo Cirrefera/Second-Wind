@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "secret_name"
+  ],
+  "properties": {
+    "secret_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9/_+=.@-]{1,512}$"
+    },
+    "rotation_lambda_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:lambda:[^:]+:[0-9]{12}:function:[A-Za-z0-9_-]+(:[A-Za-z0-9_-]+)?$"
+    },
+    "rotation_days": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "exclude_punctuation": {
+      "type": "boolean"
+    },
+    "language": {
+      "const": "javascript"
+    }
+  }
+}

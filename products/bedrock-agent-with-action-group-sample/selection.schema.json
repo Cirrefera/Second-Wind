@@ -1,0 +1,74 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "python"
+    },
+    "agent_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "foundation_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instruction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role_arn": {
+      "type": "string",
+      "pattern": "^arn:"
+    },
+    "action_group_name": {
+      "type": "string"
+    },
+    "lambda_arn": {
+      "type": "string",
+      "pattern": "^arn:"
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alias_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "region": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "language"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "agent_name",
+        "foundation_model",
+        "instruction",
+        "role_arn"
+      ]
+    },
+    {
+      "required": [
+        "agent_id",
+        "alias_id",
+        "session_id",
+        "prompt"
+      ]
+    }
+  ]
+}

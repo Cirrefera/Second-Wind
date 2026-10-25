@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0554",
+  "sku": "AWS-0554",
+  "slug": "lambda-powertools-parameters-ts",
+  "version": 1,
+  "release_ref": "sha256:70ffeb7a2458d6f841f0c7e13313ca20a0071de7b34a82679213fde676652048",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime.",
+  "supported_boundary": "A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-parameters-ts",
+    "powertools-lambda-powertools-parameters"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "parameters",
+    "ssm",
+    "secrets-manager"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.parameters"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.configuration"
+  ],
+  "operations": [
+    "lambda-powertools-parameters-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "cached-aws-parameters"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "iam-review",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "aws-deployment",
+    "hosted-preview",
+    "service-outcome-verification"
+  ]
+}

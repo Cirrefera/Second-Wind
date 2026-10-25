@@ -1,0 +1,11 @@
+{
+  "name": "claudia-lambda-deploy-example",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "claudia": "5.14.1"
+  }
+}

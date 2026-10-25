@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0662",
+  "sku": "AWS-0662",
+  "slug": "cdk-cloudtrail",
+  "version": 2,
+  "release_ref": "sha256:34955ffb12faaa3ae09e80c8ff42ef4544fbae53e96212a9d36038e45ea02e04",
+  "service": "cloudtrail",
+  "product_kind": "artifact-product",
+  "route_summary": "Multi-region CloudTrail with private encrypted S3 log storage.",
+  "supported_boundary": "Multi-region CloudTrail with private encrypted S3 log storage. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-cloudtrail"
+  ],
+  "tags": [
+    "cloudtrail",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.cloudtrail"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

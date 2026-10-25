@@ -1,0 +1,139 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0550",
+  "slug": "lambda-powertools-logger-ts",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:74f9740ceb94798b69fbcd903ef1fe9abc807835716365eeb4dc75b2c3a013b4",
+  "content_hash": "74f9740ceb94798b69fbcd903ef1fe9abc807835716365eeb4dc75b2c3a013b4",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original, focused Node.js Lambda integration module for Structured JSON logs with Lambda request context using the pinned AWS Powertools TypeScript package.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "javascript": "src/logger.mjs"
+    },
+    "configuration_schema": "config.schema.json",
+    "side_effects": "depends on the installed Powertools library and may emit logs, telemetry, or call AWS services when invoked"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "javascript"
+    ],
+    "runtime": "Node.js 20+ AWS Lambda",
+    "hosted_preview": "unavailable",
+    "private_worker_loader_preview": "not verified; no preview_contract",
+    "aws_deployment": "not-performed",
+    "reason": "native_library_or_AWS_runtime_required"
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "javascript"
+    ]
+  },
+  "tags": [
+    "lambda",
+    "powertools",
+    "logger",
+    "observability",
+    "typescript"
+  ],
+  "supported_boundary": "A small TypeScript/JavaScript Lambda module that configures Powertools Logger, binds the AWS request ID, and logs a safe request event without copying the full event. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The complete Powertools dependency closure and matching Lambda/AWS service runtime are not available in the hosted private Worker Loader.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ],
+  "dependencies": {
+    "@aws-lambda-powertools/logger": "2.36.0"
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language",
+      "service_name"
+    ],
+    "properties": {
+      "language": {
+        "const": "javascript"
+      },
+      "service_name": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+      },
+      "log_level": {
+        "enum": [
+          "DEBUG",
+          "INFO",
+          "WARN",
+          "ERROR"
+        ]
+      }
+    }
+  },
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "c48939fcb3c43d0eb38c5feae2838a5a472a08836d6e44eea2e34904f1b83396",
+      "size_bytes": 1904,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4",
+      "size_bytes": 458,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811",
+      "size_bytes": 441,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "7c05fb9158098f806e88befdcf2bbfc45eba83a5328bcfd073a5266174f1593a",
+      "size_bytes": 1379,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "src/logger.mjs",
+      "sha256": "c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54",
+      "size_bytes": 991,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "60b2658e9e09c95230fa5157fddbf7a4764b2698e6d98c6b343518e6b987e618",
+      "size_bytes": 611,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "validation": {
+    "basis": "pinned published Powertools package API inspection and local syntax checks",
+    "npm_integrity": "sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==",
+    "aws_execution": "not_performed",
+    "hosted_preview": "unavailable"
+  }
+}

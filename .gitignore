@@ -1,4 +1,4 @@
-node_modules/
+node_modules
 .wrangler/
 cdp-credentials.local.json
 *.local.json
@@ -10,3 +10,9 @@ public/_worker.js
 workers/gateway/dist/
 # local dev secrets
 .dev.vars
+
+# Generated native product verification files
+__pycache__/
+*.pyc
+.venv/
+cdk.out/

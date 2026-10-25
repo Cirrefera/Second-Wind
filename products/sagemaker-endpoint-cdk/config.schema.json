@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "account",
+    "region",
+    "execution_role_arn",
+    "image_uri",
+    "model_data_url",
+    "endpoint_name",
+    "instance_type"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "account": {
+      "type": "string",
+      "pattern": "^\\d{12}$"
+    },
+    "region": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-gov)?-[a-z]+-\\d$"
+    },
+    "execution_role_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:iam::\\d{12}:role/.+$"
+    },
+    "image_uri": {
+      "type": "string",
+      "pattern": "^\\d{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.amazonaws\\.com/.+$"
+    },
+    "model_data_url": {
+      "type": "string",
+      "pattern": "^s3://[^/]+/.+$"
+    },
+    "endpoint_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,63}$"
+    },
+    "instance_type": {
+      "type": "string",
+      "pattern": "^ml\\.[a-z0-9.]+$"
+    },
+    "initial_instance_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "variant_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,63}$"
+    }
+  }
+}

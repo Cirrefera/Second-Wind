@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0652",
+  "slug": "cdk-cloudwatch",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "source_repo": "https://github.com/aws/aws-cdk",
+  "source_revision": "aws-cdk-lib-v2.274.0",
+  "supersedes_catalog_version": 1,
+  "relationship": "Uses the published aws-cdk-lib API. No upstream implementation files are copied.",
+  "dependency_pins": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.5.0"
+  },
+  "documentation": [
+    "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib-readme.html",
+    "https://docs.aws.amazon.com/cdk/v2/guide/"
+  ],
+  "source_hashes": {
+    "product.mjs": "7942f71c292bf235a1a0f35f89fd1146cd9d60f82915db77bc37d8761acf043f",
+    "preview.mjs": "0a19e359ce120f408536d44b5c8098a6979edac295883f3edf274a4c6624a8e9",
+    "config.schema.json": "946d5b20a7e47947e0d15d917d91ececbc727d33e5fe1834c401f3d42b472265",
+    "selection.schema.json": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+    "package.json": "6cc5975630fcaea4378b4c525c53ec5d3f3cbe93c8e14a233f28833ada2563dc",
+    "package-lock.json": "c0261d84cd9e2435f3b03c6652f75c60ca7717083e19bd9972fbedc1771acbea",
+    "README.md": "00edc85bfaa1ef3a5c46b398865a367340d858b33d79de3589327a78590290d4",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "review_status": "proposed",
+  "license_mapping": [
+    {
+      "paths": [
+        "product.mjs",
+        "preview.mjs",
+        "config.schema.json",
+        "selection.schema.json",
+        "package.json",
+        "package-lock.json",
+        "README.md",
+        "LICENSE"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "proposed original-source mapping awaiting trusted review"
+    }
+  ]
+}

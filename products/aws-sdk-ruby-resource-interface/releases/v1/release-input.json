@@ -1,0 +1,352 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0630",
+    "slug": "aws-sdk-ruby-resource-interface",
+    "name": "Ruby AWS SDK resource interface",
+    "kind": "tool",
+    "service": "aws-sdk",
+    "summary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters.",
+    "guidance": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters.\n\nLocal preview uses the upstream native dependency and makes no AWS requests.",
+    "price_usd": 0.5,
+    "invoke_kind": "resolve",
+    "invoke_key": "",
+    "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"title\":\"Ruby AWS SDK resource interface configuration\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"service\"],\"properties\":{\"language\":{\"const\":\"ruby\"},\"service\":{\"enum\":[\"s3\",\"dynamodb\",\"bedrock-runtime\"]},\"region\":{\"type\":\"string\",\"default\":\"us-east-1\"}},\"oneOf\":[{\"properties\":{\"service\":{\"const\":\"s3\"},\"bucket\":{\"type\":\"string\",\"minLength\":3},\"key\":{\"type\":\"string\",\"minLength\":1},\"body\":{\"type\":\"string\"}},\"required\":[\"bucket\",\"key\",\"body\"]},{\"properties\":{\"service\":{\"const\":\"dynamodb\"},\"table_name\":{\"type\":\"string\",\"minLength\":3},\"key_name\":{\"type\":\"string\",\"minLength\":1},\"key_value\":{\"type\":\"string\"}},\"required\":[\"table_name\",\"key_name\",\"key_value\"]},{\"properties\":{\"service\":{\"const\":\"bedrock-runtime\"},\"model_id\":{\"type\":\"string\",\"minLength\":1},\"body\":{\"type\":\"string\",\"minLength\":1}},\"required\":[\"model_id\",\"body\"]}]}",
+    "input_example": "{\"language\":\"ruby\",\"service\":\"s3\",\"bucket\":\"example-bucket\",\"key\":\"report.txt\",\"body\":\"example\"}",
+    "mime_type": "application/json",
+    "source_repo": "https://github.com/aws/aws-sdk-ruby",
+    "source_url": "https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html",
+    "license_spdx": "Apache-2.0",
+    "provenance": "original-wrapper",
+    "content_hash": "4c6e73ddaaa89683b42d498ec71c66993c715f29573e193aa9f2aa436c8d5070",
+    "version": 1
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0630",
+    "slug": "aws-sdk-ruby-resource-interface",
+    "version": 1,
+    "product_kind": "artifact-product",
+    "service": "aws-sdk",
+    "release_ref": "sha256:4c6e73ddaaa89683b42d498ec71c66993c715f29573e193aa9f2aa436c8d5070",
+    "content_hash": "4c6e73ddaaa89683b42d498ec71c66993c715f29573e193aa9f2aa436c8d5070",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "Original Second Wind package wrapper, configuration schema, local preview adapter, provenance and usage guidance around https://github.com/aws/aws-sdk-ruby; no upstream implementation source is included.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "ruby": "client.rb"
+      },
+      "configuration_schema": "input.schema.json",
+      "side_effects": "local preview only; no AWS API calls"
+    },
+    "validation_contract": {
+      "kind": "local-native-dependency-validation",
+      "language": "ruby",
+      "dependency_runtime": "required",
+      "preview_execution": "blocked-runtime-not-installed",
+      "validation_evidence": "ruby and bundler are not installed in this workspace",
+      "aws_deployment": "not-performed",
+      "gateway_preview": "unavailable-until-native-runtime-support"
+    },
+    "preview_contract": {
+      "adapter": "native-dependency-runtime-required",
+      "mode": "unavailable",
+      "execution_language": "ruby",
+      "availability": "runtime-not-installed",
+      "allowed_result_fields": []
+    },
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Ruby AWS SDK resource interface configuration",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "service"
+      ],
+      "properties": {
+        "language": {
+          "const": "ruby"
+        },
+        "service": {
+          "enum": [
+            "s3",
+            "dynamodb",
+            "bedrock-runtime"
+          ]
+        },
+        "region": {
+          "type": "string",
+          "default": "us-east-1"
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "service": {
+              "const": "s3"
+            },
+            "bucket": {
+              "type": "string",
+              "minLength": 3
+            },
+            "key": {
+              "type": "string",
+              "minLength": 1
+            },
+            "body": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "bucket",
+            "key",
+            "body"
+          ]
+        },
+        {
+          "properties": {
+            "service": {
+              "const": "dynamodb"
+            },
+            "table_name": {
+              "type": "string",
+              "minLength": 3
+            },
+            "key_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "key_value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "table_name",
+            "key_name",
+            "key_value"
+          ]
+        },
+        {
+          "properties": {
+            "service": {
+              "const": "bedrock-runtime"
+            },
+            "model_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "body": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "model_id",
+            "body"
+          ]
+        }
+      ]
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "ruby"
+      ]
+    },
+    "tags": [
+      "aws-sdk-ruby-resource-interface",
+      "aws-sdk",
+      "ruby",
+      "aws"
+    ],
+    "supported_boundary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters. The package runs locally with the pinned native Ruby dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+    "required_files": [
+      {
+        "path": "Gemfile",
+        "sha256": "84ba745fb2b077f7729858d4dd8a1b08596c0554140a1797cc6e88764ae39fa0",
+        "size_bytes": 137,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "d6951daa5910c65585d117a38035bf1fe2fd23e86d20a5edd60754a7b9db5f72",
+        "size_bytes": 621,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "README.md",
+        "sha256": "769fcc06200a017c25b0faeb03dfa473d0a45708a2eb4ee0972c9fb86c8f09d3",
+        "size_bytes": 2010,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "client.rb",
+        "sha256": "a815cd3518d767ff9dd08167e3c174a0e1db49480cdf149a122d3b78e86ce52f",
+        "size_bytes": 1888,
+        "mime_type": "text/x-ruby"
+      },
+      {
+        "path": "configuration.schema.json",
+        "sha256": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
+        "size_bytes": 1667,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "input.schema.json",
+        "sha256": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
+        "size_bytes": 1667,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "preview-contract.json",
+        "sha256": "7d4e7eeb7ce4f2c26eb1d5c862633bee88d730dee69efd781fe0224aa022239d",
+        "size_bytes": 185,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "source-provenance.json",
+        "sha256": "e0914f6cbc750e576ce757dddc1acf30953ec3714993cc0db61ad3e76d991e5c",
+        "size_bytes": 372,
+        "mime_type": "application/json"
+      }
+    ]
+  },
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0630",
+    "sku": "AWS-0630",
+    "slug": "aws-sdk-ruby-resource-interface",
+    "version": 1,
+    "release_ref": "sha256:4c6e73ddaaa89683b42d498ec71c66993c715f29573e193aa9f2aa436c8d5070",
+    "service": "aws-sdk",
+    "product_kind": "artifact-product",
+    "route_summary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters.",
+    "supported_boundary": "Use modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters. The package runs locally with the pinned native Ruby dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+    "language_policy": "explicit",
+    "aliases": [],
+    "tags": [
+      "aws-sdk-ruby-resource-interface",
+      "aws-sdk",
+      "ruby"
+    ],
+    "taxonomy_ids": [
+      "aws.aws-sdk"
+    ],
+    "problem_family_ids": [
+      "aws-aws-sdk-configuration"
+    ],
+    "operations": [
+      "local-preview"
+    ],
+    "environments": [
+      "local-ruby"
+    ],
+    "desired_outcomes": [
+      "aws-sdk-configuration"
+    ],
+    "input_kinds": [
+      "configuration"
+    ],
+    "failure_signatures": [],
+    "languages": [
+      "ruby"
+    ],
+    "runtimes": [
+      "ruby3"
+    ],
+    "required_evidence": [],
+    "exclusions": [
+      "aws-deployment",
+      "gateway-native-runtime-preview"
+    ]
+  },
+  "payload": {
+    "content": "{\"files\":[{\"content\":\"source 'https://rubygems.org'\\ngem 'aws-sdk-s3', '= 1.233.2'\\ngem 'aws-sdk-dynamodb', '= 1.178.0'\\ngem 'aws-sdk-bedrockruntime', '= 1.85.0'\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"Gemfile\",\"sha256\":\"84ba745fb2b077f7729858d4dd8a1b08596c0554140a1797cc6e88764ae39fa0\",\"size_bytes\":137},{\"content\":\"Apache License\\nVersion 2.0, January 2004\\nhttp://www.apache.org/licenses/\\n\\nCopyright 2026 Second Wind\\n\\nLicensed under the Apache License, Version 2.0 (the \\\"License\\\");\\nyou may not use this file except in compliance with the License.\\nYou may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0\\n\\nUnless required by applicable law or agreed to in writing, software\\ndistributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\nSee the License for the specific language governing permissions and\\nlimitations under the License.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"LICENSE\",\"sha256\":\"d6951daa5910c65585d117a38035bf1fe2fd23e86d20a5edd60754a7b9db5f72\",\"size_bytes\":621},{\"content\":\"# Ruby AWS SDK resource interface\\n\\n**Catalog item:** `AWS-0630` · **Price:** $0.50\\n\\nUse modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters.\\n\\nThis package contains original Second Wind configuration and preview glue around the named upstream library/tool. It does not deploy AWS resources. The preview contract is deliberately unavailable in the current gateway because its private runner does not install or execute native ruby dependencies. The local entrypoint uses the actual upstream dependency when run in an environment with the required toolchain; it does not substitute generic checks for upstream behavior.\\n\\n## Run locally\\n\\nRun `bundle install`; then call `build_request(configuration)` from `client.rb`. The sample supports S3 PutObject, DynamoDB GetItem, and Bedrock Runtime InvokeModel using the official modular service gems. Each client uses SDK response stubbing and builds a real SDK request without contacting AWS. Direct gem versions are pinned in `Gemfile`; generate and review a platform-appropriate `Gemfile.lock` with Bundler before using this package in a production build.\\n\\n## Configuration\\n\\nSee [`configuration.schema.json`](./configuration.schema.json). The root `input.schema.json` mirrors the buyer configuration shape; no filesystem paths or arbitrary source-code inputs are accepted.\\n\\n## Provenance\\n\\n- Upstream: https://github.com/aws/aws-sdk-ruby\\n- Primary documentation: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html\\n- Upstream license: Apache-2.0\\n- This package's original wrapper files are licensed under Apache-2.0. No upstream source files are vendored.\\n- Upstream SDK/library version: Ruby SDK v3 service gem; version constrained in Gemfile\\n\\nThe generated stack or request preview is a local structural check only. It does not prove service availability, permissions, successful deployment, or runtime behavior in AWS. Review synthesized IAM and resource properties before deployment.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"README.md\",\"sha256\":\"769fcc06200a017c25b0faeb03dfa473d0a45708a2eb4ee0972c9fb86c8f09d3\",\"size_bytes\":2010},{\"content\":\"require 'aws-sdk-s3'\\nrequire 'aws-sdk-dynamodb'\\nrequire 'aws-sdk-bedrockruntime'\\n\\n# Builds actual SDK operations using response stubs; no AWS request is sent.\\ndef build_request(configuration)\\n  raise ArgumentError, 'configuration_required' unless configuration.is_a?(Hash)\\n  region = configuration.fetch('region', 'us-east-1')\\n  case configuration.fetch('service')\\n  when 's3'\\n    required = %w[bucket key body]\\n    raise ArgumentError, 'missing_required_fields' unless required.all? { |key| configuration[key].is_a?(String) && !configuration[key].empty? }\\n    client = Aws::S3::Client.new(region: region, stub_responses: true)\\n    client.put_object(bucket: configuration.fetch('bucket'), key: configuration.fetch('key'), body: configuration.fetch('body'))\\n    { operation: 'PutObject', service: 's3', request_built: true }\\n  when 'dynamodb'\\n    raise ArgumentError, 'missing_required_fields' unless %w[table_name key_name key_value].all? { |key| configuration[key].is_a?(String) && !configuration[key].empty? }\\n    client = Aws::DynamoDB::Client.new(region: region, stub_responses: true)\\n    client.get_item(table_name: configuration.fetch('table_name'), key: { configuration.fetch('key_name') => { 'S' => configuration.fetch('key_value') } })\\n    { operation: 'GetItem', service: 'dynamodb', request_built: true }\\n  when 'bedrock-runtime'\\n    raise ArgumentError, 'missing_required_fields' unless %w[model_id body].all? { |key| configuration[key].is_a?(String) && !configuration[key].empty? }\\n    client = Aws::BedrockRuntime::Client.new(region: region, stub_responses: true)\\n    client.invoke_model(model_id: configuration.fetch('model_id'), body: configuration.fetch('body'), content_type: 'application/json', accept: 'application/json')\\n    { operation: 'InvokeModel', service: 'bedrock-runtime', request_built: true }\\n  else\\n    raise ArgumentError, 'unsupported_service'\\n  end\\nend\\n\",\"mime_type\":\"text/x-ruby\",\"path\":\"client.rb\",\"sha256\":\"a815cd3518d767ff9dd08167e3c174a0e1db49480cdf149a122d3b78e86ce52f\",\"size_bytes\":1888},{\"content\":\"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"title\\\": \\\"Ruby AWS SDK resource interface configuration\\\",\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"required\\\": [\\n    \\\"language\\\",\\n    \\\"service\\\"\\n  ],\\n  \\\"properties\\\": {\\n    \\\"language\\\": {\\n      \\\"const\\\": \\\"ruby\\\"\\n    },\\n    \\\"service\\\": {\\n      \\\"enum\\\": [\\n        \\\"s3\\\",\\n        \\\"dynamodb\\\",\\n        \\\"bedrock-runtime\\\"\\n      ]\\n    },\\n    \\\"region\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"default\\\": \\\"us-east-1\\\"\\n    }\\n  },\\n  \\\"oneOf\\\": [\\n    {\\n      \\\"properties\\\": {\\n        \\\"service\\\": {\\n          \\\"const\\\": \\\"s3\\\"\\n        },\\n        \\\"bucket\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 3\\n        },\\n        \\\"key\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        },\\n        \\\"body\\\": {\\n          \\\"type\\\": \\\"string\\\"\\n        }\\n      },\\n      \\\"required\\\": [\\n        \\\"bucket\\\",\\n        \\\"key\\\",\\n        \\\"body\\\"\\n      ]\\n    },\\n    {\\n      \\\"properties\\\": {\\n        \\\"service\\\": {\\n          \\\"const\\\": \\\"dynamodb\\\"\\n        },\\n        \\\"table_name\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 3\\n        },\\n        \\\"key_name\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        },\\n        \\\"key_value\\\": {\\n          \\\"type\\\": \\\"string\\\"\\n        }\\n      },\\n      \\\"required\\\": [\\n        \\\"table_name\\\",\\n        \\\"key_name\\\",\\n        \\\"key_value\\\"\\n      ]\\n    },\\n    {\\n      \\\"properties\\\": {\\n        \\\"service\\\": {\\n          \\\"const\\\": \\\"bedrock-runtime\\\"\\n        },\\n        \\\"model_id\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        },\\n        \\\"body\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        }\\n      },\\n      \\\"required\\\": [\\n        \\\"model_id\\\",\\n        \\\"body\\\"\\n      ]\\n    }\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"configuration.schema.json\",\"sha256\":\"95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90\",\"size_bytes\":1667},{\"content\":\"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"title\\\": \\\"Ruby AWS SDK resource interface configuration\\\",\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"required\\\": [\\n    \\\"language\\\",\\n    \\\"service\\\"\\n  ],\\n  \\\"properties\\\": {\\n    \\\"language\\\": {\\n      \\\"const\\\": \\\"ruby\\\"\\n    },\\n    \\\"service\\\": {\\n      \\\"enum\\\": [\\n        \\\"s3\\\",\\n        \\\"dynamodb\\\",\\n        \\\"bedrock-runtime\\\"\\n      ]\\n    },\\n    \\\"region\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"default\\\": \\\"us-east-1\\\"\\n    }\\n  },\\n  \\\"oneOf\\\": [\\n    {\\n      \\\"properties\\\": {\\n        \\\"service\\\": {\\n          \\\"const\\\": \\\"s3\\\"\\n        },\\n        \\\"bucket\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 3\\n        },\\n        \\\"key\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        },\\n        \\\"body\\\": {\\n          \\\"type\\\": \\\"string\\\"\\n        }\\n      },\\n      \\\"required\\\": [\\n        \\\"bucket\\\",\\n        \\\"key\\\",\\n        \\\"body\\\"\\n      ]\\n    },\\n    {\\n      \\\"properties\\\": {\\n        \\\"service\\\": {\\n          \\\"const\\\": \\\"dynamodb\\\"\\n        },\\n        \\\"table_name\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 3\\n        },\\n        \\\"key_name\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        },\\n        \\\"key_value\\\": {\\n          \\\"type\\\": \\\"string\\\"\\n        }\\n      },\\n      \\\"required\\\": [\\n        \\\"table_name\\\",\\n        \\\"key_name\\\",\\n        \\\"key_value\\\"\\n      ]\\n    },\\n    {\\n      \\\"properties\\\": {\\n        \\\"service\\\": {\\n          \\\"const\\\": \\\"bedrock-runtime\\\"\\n        },\\n        \\\"model_id\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        },\\n        \\\"body\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        }\\n      },\\n      \\\"required\\\": [\\n        \\\"model_id\\\",\\n        \\\"body\\\"\\n      ]\\n    }\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"input.schema.json\",\"sha256\":\"95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90\",\"size_bytes\":1667},{\"content\":\"{\\n  \\\"adapter\\\": \\\"native-dependency-runtime-required\\\",\\n  \\\"mode\\\": \\\"unavailable\\\",\\n  \\\"execution_language\\\": \\\"ruby\\\",\\n  \\\"availability\\\": \\\"runtime-not-installed\\\",\\n  \\\"allowed_result_fields\\\": []\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"preview-contract.json\",\"sha256\":\"7d4e7eeb7ce4f2c26eb1d5c862633bee88d730dee69efd781fe0224aa022239d\",\"size_bytes\":185},{\"content\":\"{\\n  \\\"sku\\\": \\\"AWS-0630\\\",\\n  \\\"slug\\\": \\\"aws-sdk-ruby-resource-interface\\\",\\n  \\\"provenance\\\": \\\"original-wrapper\\\",\\n  \\\"upstream_repository\\\": \\\"https://github.com/aws/aws-sdk-ruby\\\",\\n  \\\"primary_documentation\\\": \\\"https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html\\\",\\n  \\\"upstream_license\\\": \\\"Apache-2.0\\\",\\n  \\\"upstream_source_included\\\": false,\\n  \\\"version\\\": null\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"source-provenance.json\",\"sha256\":\"e0914f6cbc750e576ce757dddc1acf30953ec3714993cc0db61ad3e76d991e5c\",\"size_bytes\":372}],\"schema_version\":\"1\",\"sku\":\"AWS-0630\",\"version\":1}",
+    "sha256": "4c6e73ddaaa89683b42d498ec71c66993c715f29573e193aa9f2aa436c8d5070",
+    "size_bytes": 10581,
+    "mime_type": "application/json"
+  },
+  "files": [
+    {
+      "path": "Gemfile",
+      "content": "source 'https://rubygems.org'\ngem 'aws-sdk-s3', '= 1.233.2'\ngem 'aws-sdk-dynamodb', '= 1.178.0'\ngem 'aws-sdk-bedrockruntime', '= 1.85.0'\n",
+      "sha256": "84ba745fb2b077f7729858d4dd8a1b08596c0554140a1797cc6e88764ae39fa0",
+      "size_bytes": 137,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "content": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nCopyright 2026 Second Wind\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+      "sha256": "d6951daa5910c65585d117a38035bf1fe2fd23e86d20a5edd60754a7b9db5f72",
+      "size_bytes": 621,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "content": "# Ruby AWS SDK resource interface\n\n**Catalog item:** `AWS-0630` · **Price:** $0.50\n\nUse modular AWS SDK for Ruby v3 service clients with explicit regions, credentials, and request parameters.\n\nThis package contains original Second Wind configuration and preview glue around the named upstream library/tool. It does not deploy AWS resources. The preview contract is deliberately unavailable in the current gateway because its private runner does not install or execute native ruby dependencies. The local entrypoint uses the actual upstream dependency when run in an environment with the required toolchain; it does not substitute generic checks for upstream behavior.\n\n## Run locally\n\nRun `bundle install`; then call `build_request(configuration)` from `client.rb`. The sample supports S3 PutObject, DynamoDB GetItem, and Bedrock Runtime InvokeModel using the official modular service gems. Each client uses SDK response stubbing and builds a real SDK request without contacting AWS. Direct gem versions are pinned in `Gemfile`; generate and review a platform-appropriate `Gemfile.lock` with Bundler before using this package in a production build.\n\n## Configuration\n\nSee [`configuration.schema.json`](./configuration.schema.json). The root `input.schema.json` mirrors the buyer configuration shape; no filesystem paths or arbitrary source-code inputs are accepted.\n\n## Provenance\n\n- Upstream: https://github.com/aws/aws-sdk-ruby\n- Primary documentation: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html\n- Upstream license: Apache-2.0\n- This package's original wrapper files are licensed under Apache-2.0. No upstream source files are vendored.\n- Upstream SDK/library version: Ruby SDK v3 service gem; version constrained in Gemfile\n\nThe generated stack or request preview is a local structural check only. It does not prove service availability, permissions, successful deployment, or runtime behavior in AWS. Review synthesized IAM and resource properties before deployment.\n",
+      "sha256": "769fcc06200a017c25b0faeb03dfa473d0a45708a2eb4ee0972c9fb86c8f09d3",
+      "size_bytes": 2010,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "client.rb",
+      "content": "require 'aws-sdk-s3'\nrequire 'aws-sdk-dynamodb'\nrequire 'aws-sdk-bedrockruntime'\n\n# Builds actual SDK operations using response stubs; no AWS request is sent.\ndef build_request(configuration)\n  raise ArgumentError, 'configuration_required' unless configuration.is_a?(Hash)\n  region = configuration.fetch('region', 'us-east-1')\n  case configuration.fetch('service')\n  when 's3'\n    required = %w[bucket key body]\n    raise ArgumentError, 'missing_required_fields' unless required.all? { |key| configuration[key].is_a?(String) && !configuration[key].empty? }\n    client = Aws::S3::Client.new(region: region, stub_responses: true)\n    client.put_object(bucket: configuration.fetch('bucket'), key: configuration.fetch('key'), body: configuration.fetch('body'))\n    { operation: 'PutObject', service: 's3', request_built: true }\n  when 'dynamodb'\n    raise ArgumentError, 'missing_required_fields' unless %w[table_name key_name key_value].all? { |key| configuration[key].is_a?(String) && !configuration[key].empty? }\n    client = Aws::DynamoDB::Client.new(region: region, stub_responses: true)\n    client.get_item(table_name: configuration.fetch('table_name'), key: { configuration.fetch('key_name') => { 'S' => configuration.fetch('key_value') } })\n    { operation: 'GetItem', service: 'dynamodb', request_built: true }\n  when 'bedrock-runtime'\n    raise ArgumentError, 'missing_required_fields' unless %w[model_id body].all? { |key| configuration[key].is_a?(String) && !configuration[key].empty? }\n    client = Aws::BedrockRuntime::Client.new(region: region, stub_responses: true)\n    client.invoke_model(model_id: configuration.fetch('model_id'), body: configuration.fetch('body'), content_type: 'application/json', accept: 'application/json')\n    { operation: 'InvokeModel', service: 'bedrock-runtime', request_built: true }\n  else\n    raise ArgumentError, 'unsupported_service'\n  end\nend\n",
+      "sha256": "a815cd3518d767ff9dd08167e3c174a0e1db49480cdf149a122d3b78e86ce52f",
+      "size_bytes": 1888,
+      "mime_type": "text/x-ruby"
+    },
+    {
+      "path": "configuration.schema.json",
+      "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"Ruby AWS SDK resource interface configuration\",\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"language\",\n    \"service\"\n  ],\n  \"properties\": {\n    \"language\": {\n      \"const\": \"ruby\"\n    },\n    \"service\": {\n      \"enum\": [\n        \"s3\",\n        \"dynamodb\",\n        \"bedrock-runtime\"\n      ]\n    },\n    \"region\": {\n      \"type\": \"string\",\n      \"default\": \"us-east-1\"\n    }\n  },\n  \"oneOf\": [\n    {\n      \"properties\": {\n        \"service\": {\n          \"const\": \"s3\"\n        },\n        \"bucket\": {\n          \"type\": \"string\",\n          \"minLength\": 3\n        },\n        \"key\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        },\n        \"body\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"bucket\",\n        \"key\",\n        \"body\"\n      ]\n    },\n    {\n      \"properties\": {\n        \"service\": {\n          \"const\": \"dynamodb\"\n        },\n        \"table_name\": {\n          \"type\": \"string\",\n          \"minLength\": 3\n        },\n        \"key_name\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        },\n        \"key_value\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"table_name\",\n        \"key_name\",\n        \"key_value\"\n      ]\n    },\n    {\n      \"properties\": {\n        \"service\": {\n          \"const\": \"bedrock-runtime\"\n        },\n        \"model_id\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        },\n        \"body\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        }\n      },\n      \"required\": [\n        \"model_id\",\n        \"body\"\n      ]\n    }\n  ]\n}\n",
+      "sha256": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
+      "size_bytes": 1667,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "input.schema.json",
+      "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"Ruby AWS SDK resource interface configuration\",\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"language\",\n    \"service\"\n  ],\n  \"properties\": {\n    \"language\": {\n      \"const\": \"ruby\"\n    },\n    \"service\": {\n      \"enum\": [\n        \"s3\",\n        \"dynamodb\",\n        \"bedrock-runtime\"\n      ]\n    },\n    \"region\": {\n      \"type\": \"string\",\n      \"default\": \"us-east-1\"\n    }\n  },\n  \"oneOf\": [\n    {\n      \"properties\": {\n        \"service\": {\n          \"const\": \"s3\"\n        },\n        \"bucket\": {\n          \"type\": \"string\",\n          \"minLength\": 3\n        },\n        \"key\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        },\n        \"body\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"bucket\",\n        \"key\",\n        \"body\"\n      ]\n    },\n    {\n      \"properties\": {\n        \"service\": {\n          \"const\": \"dynamodb\"\n        },\n        \"table_name\": {\n          \"type\": \"string\",\n          \"minLength\": 3\n        },\n        \"key_name\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        },\n        \"key_value\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"table_name\",\n        \"key_name\",\n        \"key_value\"\n      ]\n    },\n    {\n      \"properties\": {\n        \"service\": {\n          \"const\": \"bedrock-runtime\"\n        },\n        \"model_id\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        },\n        \"body\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        }\n      },\n      \"required\": [\n        \"model_id\",\n        \"body\"\n      ]\n    }\n  ]\n}\n",
+      "sha256": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
+      "size_bytes": 1667,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview-contract.json",
+      "content": "{\n  \"adapter\": \"native-dependency-runtime-required\",\n  \"mode\": \"unavailable\",\n  \"execution_language\": \"ruby\",\n  \"availability\": \"runtime-not-installed\",\n  \"allowed_result_fields\": []\n}\n",
+      "sha256": "7d4e7eeb7ce4f2c26eb1d5c862633bee88d730dee69efd781fe0224aa022239d",
+      "size_bytes": 185,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "content": "{\n  \"sku\": \"AWS-0630\",\n  \"slug\": \"aws-sdk-ruby-resource-interface\",\n  \"provenance\": \"original-wrapper\",\n  \"upstream_repository\": \"https://github.com/aws/aws-sdk-ruby\",\n  \"primary_documentation\": \"https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html\",\n  \"upstream_license\": \"Apache-2.0\",\n  \"upstream_source_included\": false,\n  \"version\": null\n}\n",
+      "sha256": "e0914f6cbc750e576ce757dddc1acf30953ec3714993cc0db61ad3e76d991e5c",
+      "size_bytes": 372,
+      "mime_type": "application/json"
+    }
+  ],
+  "source_provenance": {
+    "upstream_repository": "https://github.com/aws/aws-sdk-ruby",
+    "primary_documentation": "https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html",
+    "upstream_license": "Apache-2.0",
+    "upstream_source_included": false,
+    "provenance": "original-wrapper"
+  },
+  "blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending",
+    "native_preview_execution_not_verified"
+  ]
+}

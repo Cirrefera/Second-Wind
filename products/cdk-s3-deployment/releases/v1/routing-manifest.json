@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0636",
+  "sku": "AWS-0636",
+  "slug": "cdk-s3-deployment",
+  "version": 1,
+  "release_ref": "sha256:bfcee7cc57c4ea708eecb0b8b009ca198d65b4a71c1cfe35986516f859d7ca45",
+  "service": "s3",
+  "product_kind": "artifact-product",
+  "route_summary": "Stage local static assets and define a BucketDeployment to a private destination bucket.",
+  "supported_boundary": "Stage local static assets and define a BucketDeployment to a private destination bucket. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-s3-deployment",
+    "s3",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.s3"
+  ],
+  "problem_family_ids": [
+    "aws-s3-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "s3-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

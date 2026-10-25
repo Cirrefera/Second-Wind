@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "pool_name",
+    "domain_prefix"
+  ],
+  "properties": {
+    "pool_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,128}$"
+    },
+    "domain_prefix": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{1,63}$"
+    },
+    "google_client_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "google_client_secret_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "callback_url": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$"
+    },
+    "language": {
+      "const": "javascript"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "google_client_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "google_client_id"
+        ]
+      },
+      "then": {
+        "required": [
+          "google_client_secret_name",
+          "callback_url"
+        ]
+      }
+    }
+  ]
+}

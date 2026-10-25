@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0663",
+  "sku": "AWS-0663",
+  "slug": "cdk-backup",
+  "version": 2,
+  "release_ref": "sha256:1d0cbb51861d4d56b2d9ef6ff2de1c7a9f767bfee84e3ad02974328c5e84d945",
+  "service": "backup",
+  "product_kind": "artifact-product",
+  "route_summary": "Encrypted AWS Backup vault and scheduled backup plan with 35-day retention.",
+  "supported_boundary": "Encrypted AWS Backup vault and scheduled backup plan with 35-day retention. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-backup"
+  ],
+  "tags": [
+    "backup",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.backup"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

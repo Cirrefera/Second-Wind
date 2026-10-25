@@ -1,0 +1,61 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0676",
+    "slug": "claudia-nodejs-lambda-deploy",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "claudiajs/claudia",
+    "source_revision": "9d68ed4c62e123279b14b31b7dfbc34710f40689",
+    "structured_pointer": "src/commands/create.js",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "src/commands/create.js",
+      "status": "found",
+      "git_object_sha": "100a8229946bae280f88741f7b78142474d52c90",
+      "object_type": "blob",
+      "descendant_file_count": 0,
+      "url": "https://github.com/claudiajs/claudia/tree/9d68ed4c62e123279b14b31b7dfbc34710f40689/src/commands/create.js"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/claudiajs/claudia",
+  "interface_sources": [
+    "https://github.com/claudiajs/claudia",
+    "https://claudiajs.com/tutorials/installing.html",
+    "https://claudiajs.com/tutorials/deploying.html"
+  ],
+  "dependencies": {
+    "claudia": "5.14.1"
+  },
+  "original_file_hashes": {
+    "package.json": "22ca816a942e1be09eefdded8c7f3e74113d7bc93157f8cbb2147a4bce12e474",
+    "app.js": "7d85e4fc6883d2f827bd641f71c7a218257e9a2f97079780f83899c4317aba12",
+    "deploy.sh": "cc81fb99b23e6b6afe506cdb6c7e21967010fa79a4bc7d0317d869fcef4944d1",
+    "update.sh": "4d51245e388574f1609c1050963b1389eaae39640c893f35b367b3aaa24e48a5",
+    "README.md": "e7f9b5645b6e533000c7c9ff0db55580333f8e6563055a36380561be41770bc9",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "010da27a3726f942a52287148807276e81e1d305e8b7f7ece3ee40be0e111fd7",
+    "preview.sh": "f7ca8d1a54464fb753d1ea8adbe38b70be2c689e62f563ff6649f89b191b2860"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "package.json",
+        "app.js",
+        "deploy.sh",
+        "update.sh",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

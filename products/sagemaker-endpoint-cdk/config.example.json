@@ -1,0 +1,10 @@
+{
+  "language": "javascript",
+  "account": "123456789012",
+  "region": "us-east-1",
+  "execution_role_arn": "arn:aws:iam::123456789012:role/SageMakerExecutionRole",
+  "image_uri": "123456789012.dkr.ecr.us-east-1.amazonaws.com/inference:latest",
+  "model_data_url": "s3://example-model-bucket/model.tar.gz",
+  "endpoint_name": "sample-endpoint",
+  "instance_type": "ml.m5.large"
+}

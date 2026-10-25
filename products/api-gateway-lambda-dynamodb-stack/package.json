@@ -1,0 +1,18 @@
+{
+  "name": "@secondwind/api-gateway-lambda-dynamodb-stack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "synth": "node ./synth.mjs"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.8.1",
+    "@aws-sdk/client-dynamodb": "3.883.0",
+    "@aws-sdk/lib-dynamodb": "3.883.0"
+  }
+}

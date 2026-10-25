@@ -1,0 +1,147 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0690",
+  "slug": "agentcore-sdk-session-handling",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "bedrock-agentcore",
+  "release_ref": "sha256:714da306d88bacb2fc52700eed2c4fcc3e466b7cbf43df11a9390bcb2f8d3c2a",
+  "content_hash": "714da306d88bacb2fc52700eed2c4fcc3e466b7cbf43df11a9390bcb2f8d3c2a",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Boto3 AgentCore Runtime session helper that persists a caller-managed runtimeSessionId across invocations, streams real invocation responses, and explicitly stops sessions.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "sessions.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "python"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "Invoking an AgentCore session starts or uses a buyer runtime and can incur service/model charges. The hosted adapter has no Python runtime, deployed AgentCore endpoint, or buyer credentials.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "bedrock-agentcore",
+    "python",
+    "agentcore-sdk-session-handling"
+  ],
+  "supported_boundary": "Python 3.11+ boto3 with AgentCore runtime model, deployed runtime ARN, compatible Region and buyer credentials. Each invocation can incur runtime/model cost; state and lifecycle are remote. Hosted preview does not execute or claim sessions.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "Invoking an AgentCore session starts or uses a buyer runtime and can incur service/model charges. The hosted adapter has no Python runtime, deployed AgentCore endpoint, or buyer credentials.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "b72da1c0ad026ee5638b4ec426799026ac849b325432c72569fc616871ce15f6",
+      "size_bytes": 16,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "sessions.py",
+      "sha256": "f59381391a40f1a2fa1f086c9c2c4749422387519e8144bcd20d444d2fe3db8e",
+      "size_bytes": 927,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "5bdd5bd12e4b1e6a8b5b9dadac36bab4836d48511b098b86ec6f6afe9457f94b",
+      "size_bytes": 3014,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "6fdcd287802e242c569714fac12c57df19e971a6588695b3e18ddc89012662ac",
+      "size_bytes": 486,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "5b396fc567367e98d7ff14b4fdab235a91b62750eea15f96816e83c3dfd18874",
+      "size_bytes": 744,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "boto3": "1.43.114"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "runtime_arn": {
+        "type": "string",
+        "pattern": "^arn:"
+      },
+      "session_id": {
+        "type": "string",
+        "minLength": 33,
+        "maxLength": 256
+      },
+      "payload": {
+        "type": "object",
+        "minProperties": 1
+      }
+    },
+    "required": [
+      "language",
+      "runtime_arn",
+      "session_id",
+      "payload"
+    ]
+  },
+  "status": "draft"
+}

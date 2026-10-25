@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0684",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "579bd9042c277bdea7049f6dc5623d83722d96958737e60c16546385b74737f1",
+      "size_bytes": 76,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "redshift.py",
+      "sha256": "20bc1aabdee0d5bf1d3b7c3a1ed17dbc49bebb5720b8bd025ee9d2fbdefd151d",
+      "size_bytes": 661,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "84c6eb61945efb09fbdd80302be0a3fa4cfdb345d790ab0978a4ef29d4173d50",
+      "size_bytes": 2828,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "fad98f80119a793083d82e0e229ba8d63410454a6739f1b71092af24491fdd8e",
+      "size_bytes": 594,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "84ac2acaa71ab30053c490c6744b53b63b18becf9e4f2ab78675981af150daf0",
+      "size_bytes": 606,
+      "mime_type": "text/x-python"
+    }
+  ]
+}

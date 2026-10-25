@@ -1,0 +1,10 @@
+{
+  "sku": "AWS-0629",
+  "slug": "cfn-lint-template-validation",
+  "provenance": "original-wrapper",
+  "upstream_repository": "https://github.com/aws-cloudformation/cfn-lint",
+  "primary_documentation": "https://github.com/aws-cloudformation/cfn-lint",
+  "upstream_license": "MIT-0",
+  "upstream_source_included": false,
+  "version": "1.58.0"
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0629",
+  "slug": "cfn-lint-template-validation",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "cloudformation",
+  "release_ref": "sha256:8dd04357d9a4c02fd75a1c178bc56836ac3d47c6db8c6592bc3eb48ab4293cb2",
+  "content_hash": "8dd04357d9a4c02fd75a1c178bc56836ac3d47c6db8c6592bc3eb48ab4293cb2",
+  "hash_scope": "file-package-json-utf8",
+  "gateway_preview_available": false,
+  "local_native_preview_status": "verified",
+  "source_review_status": "pending",
+  "publication_status": "draft",
+  "blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending"
+  ]
+}

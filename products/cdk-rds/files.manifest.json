@@ -1,0 +1,62 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0658",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "ada6fbd1667799c2af53ad4bebb300aa366ddd31d97de443f26030ba93571ff5",
+      "size_bytes": 1318,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "ffc8f44e21e5576caeb4fbb2251f2260818a76249e60d7b31289287a3149fbc4",
+      "size_bytes": 610,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "858304c276d92b9ae6245173a47973451159cdd4c078c6b6a78c62dbecf3a1f0",
+      "size_bytes": 7981,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "0bf19cd1e6d42bfe317a2805507e9f2f5a12941e215e11e8520e80404e307471",
+      "size_bytes": 157,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "fa802e17fa18ebbe0094782f366f5da8cc6238b36b94ff473f11876c98dae14d",
+      "size_bytes": 1500,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "32484d92d4cbd5a266414c85cc0766964ed97e8c1618f52eb4ca13a447c7c038",
+      "size_bytes": 3161,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "stack.mjs",
+      "sha256": "54cd2ea0a4996217c8f0a03ceb86c5dd4d7db2e70a310cf2c4d731ee0c063a06",
+      "size_bytes": 897,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "7b05293dee1b76e054026c13b6d07b340880e539ddc7ed66ef334e050f69bb80",
+      "size_bytes": 372,
+      "mime_type": "application/json"
+    }
+  ]
+}

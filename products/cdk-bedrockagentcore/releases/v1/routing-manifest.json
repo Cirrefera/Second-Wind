@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0638",
+  "sku": "AWS-0638",
+  "slug": "cdk-bedrockagentcore",
+  "version": 1,
+  "release_ref": "sha256:c6df0ba7023d9e1dc0b63765bb57121d7bdf211432142bba4f514521de50660e",
+  "service": "bedrock",
+  "product_kind": "artifact-product",
+  "route_summary": "Define AgentCore memory using the current CDK L2 Memory construct and inspect synthesized resources.",
+  "supported_boundary": "Define AgentCore memory using the current CDK L2 Memory construct and inspect synthesized resources. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-bedrockagentcore",
+    "bedrock",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock"
+  ],
+  "problem_family_ids": [
+    "aws-bedrock-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "bedrock-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

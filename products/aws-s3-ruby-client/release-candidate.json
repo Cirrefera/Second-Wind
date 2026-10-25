@@ -1,0 +1,155 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0678",
+  "slug": "aws-s3-ruby-client",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "s3",
+  "release_ref": "sha256:2b5cf2addb1ead899571665ce3dc5f8a5be0202628c3ba424c129854ae0201c7",
+  "content_hash": "2b5cf2addb1ead899571665ce3dc5f8a5be0202628c3ba424c129854ae0201c7",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Ruby S3 client wrapper using the maintained AWS SDK for Ruby v3 with direct PutObject/GetObject/DeleteObject operations and optional S3-compatible endpoint settings.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "ruby": "lib/object_store.rb"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "ruby"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "The real S3 operations require Ruby, the aws-sdk-s3 gem, and a buyer S3 endpoint with credentials. The hosted adapter has no Ruby runtime or customer credentials.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.rb",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "ruby"
+    ]
+  },
+  "tags": [
+    "s3",
+    "ruby",
+    "aws-s3-ruby-client"
+  ],
+  "supported_boundary": "Ruby 3.2+ and aws-sdk-s3 1.233.0. Calls S3 only when invoked with buyer credentials and a bucket. Never embeds credentials; not a replacement HTTP/signature implementation.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The real S3 operations require Ruby, the aws-sdk-s3 gem, and a buyer S3 endpoint with credentials. The hosted adapter has no Ruby runtime or customer credentials.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "Gemfile",
+      "sha256": "7a9d2ed26f9421ebe9de9f49b5bcbbee8f5523ccf0551061ca66c7caa63c7941",
+      "size_bytes": 58,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "lib/object_store.rb",
+      "sha256": "65120f028e21194b3550385340cf18dfcab49ee6078dc5a3277ac51dd15ecd76",
+      "size_bytes": 800,
+      "mime_type": "text/x-ruby"
+    },
+    {
+      "path": "example.rb",
+      "sha256": "0a97101002fe7c3d21e3460e4516f06272d6113cad9c067c9f00b8e9f8966d34",
+      "size_bytes": 291,
+      "mime_type": "text/x-ruby"
+    },
+    {
+      "path": "README.md",
+      "sha256": "7c11f4902e36050b6e2498a6440efd17177b41816131fd6c3019fdf6c202f225",
+      "size_bytes": 2833,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "fe1f2d902a2a32b7085a2e21c0fedb7ea26f25998719f1f2506e50b45abb73e4",
+      "size_bytes": 482,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.rb",
+      "sha256": "ad2bf2649694c9f723fdaea3e02436a8b271d86f90c34cefd5534fc83050b69d",
+      "size_bytes": 738,
+      "mime_type": "text/x-ruby"
+    }
+  ],
+  "dependencies": {
+    "aws-sdk-s3": "1.233.0"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "ruby"
+      },
+      "bucket": {
+        "type": "string",
+        "minLength": 3
+      },
+      "key": {
+        "type": "string",
+        "minLength": 1
+      },
+      "region": {
+        "type": "string",
+        "minLength": 1
+      },
+      "endpoint": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "required": [
+      "language",
+      "bucket",
+      "key"
+    ]
+  },
+  "status": "draft"
+}

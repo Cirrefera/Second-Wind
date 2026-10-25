@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0555",
+  "sku": "AWS-0555",
+  "slug": "lambda-powertools-batch-ts",
+  "version": 1,
+  "release_ref": "sha256:ea6ee11ec286fd37223d03842235833315e5507e8f0a1921c10b77e030237c7b",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A Node.js Lambda helper that runs an asynchronous SQS batch handler through the actual Powertools BatchProcessor and returns its partial failure response.",
+  "supported_boundary": "A Node.js Lambda helper that runs an asynchronous SQS batch handler through the actual Powertools BatchProcessor and returns its partial failure response. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-batch-ts",
+    "powertools-lambda-powertools-batch"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "batch",
+    "sqs",
+    "partial-failure"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.batch"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.retries"
+  ],
+  "operations": [
+    "lambda-powertools-batch-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "partial-batch-failures"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "iam-review",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "aws-deployment",
+    "hosted-preview",
+    "service-outcome-verification"
+  ]
+}

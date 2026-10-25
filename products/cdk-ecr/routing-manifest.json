@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0665",
+  "sku": "AWS-0665",
+  "slug": "cdk-ecr",
+  "version": 2,
+  "release_ref": "sha256:a4f1a9c3e8437507e1cb50c9524402a1c5589f508c1cf5b96df3f5f1a74f5f97",
+  "service": "ecr",
+  "product_kind": "artifact-product",
+  "route_summary": "Private ECR repository with immutable tags, scan-on-push, and lifecycle cleanup.",
+  "supported_boundary": "Private ECR repository with immutable tags, scan-on-push, and lifecycle cleanup. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-ecr"
+  ],
+  "tags": [
+    "ecr",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.ecr"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0552",
+  "sku": "AWS-0552",
+  "slug": "lambda-powertools-metrics-ts",
+  "version": 1,
+  "release_ref": "sha256:b236688cd78f623950f1e92f11f02559595d1a2045fcdd0d6855da1bf76df17b",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A Node.js Lambda helper that records bounded count metrics and flushes the actual Powertools Metrics EMF document to standard output.",
+  "supported_boundary": "A Node.js Lambda helper that records bounded count metrics and flushes the actual Powertools Metrics EMF document to standard output. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-metrics-ts",
+    "powertools-lambda-powertools-metrics"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "metrics",
+    "cloudwatch",
+    "emf"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.metrics"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.observability"
+  ],
+  "operations": [
+    "lambda-powertools-metrics-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "embedded-metric-format"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "iam-review",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "aws-deployment",
+    "hosted-preview",
+    "service-outcome-verification"
+  ]
+}

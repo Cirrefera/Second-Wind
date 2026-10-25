@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0660",
+  "sku": "AWS-0660",
+  "slug": "cdk-kinesis",
+  "version": 2,
+  "release_ref": "sha256:b492e83bd757dd3d9547e170fe8a7833dea64348b8987bea2d1b36771abd910e",
+  "service": "kinesis",
+  "product_kind": "artifact-product",
+  "route_summary": "On-demand Kinesis data stream with managed encryption and bounded retention.",
+  "supported_boundary": "On-demand Kinesis data stream with managed encryption and bounded retention. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-kinesis"
+  ],
+  "tags": [
+    "kinesis",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.kinesis"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

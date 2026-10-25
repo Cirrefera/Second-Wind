@@ -1,0 +1,7 @@
+{
+  "deploy": {
+    "name": "resources-api",
+    "region": "us-east-1",
+    "apiModule": "api"
+  }
+}

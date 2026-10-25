@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0550",
+  "sku": "AWS-0550",
+  "slug": "lambda-powertools-logger-ts",
+  "version": 1,
+  "release_ref": "sha256:74f9740ceb94798b69fbcd903ef1fe9abc807835716365eeb4dc75b2c3a013b4",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A small TypeScript/JavaScript Lambda module that configures Powertools Logger, binds the AWS request ID, and logs a safe request event without copying the full event.",
+  "supported_boundary": "A small TypeScript/JavaScript Lambda module that configures Powertools Logger, binds the AWS request ID, and logs a safe request event without copying the full event. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-logger-ts",
+    "powertools-lambda-powertools-logger"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "logger",
+    "observability",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.logger"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.observability"
+  ],
+  "operations": [
+    "lambda-powertools-logger-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "structured-json-logs"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "iam-review",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "aws-deployment",
+    "hosted-preview",
+    "service-outcome-verification"
+  ]
+}

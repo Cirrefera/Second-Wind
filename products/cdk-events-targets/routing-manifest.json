@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0649",
+  "sku": "AWS-0649",
+  "slug": "cdk-events-targets",
+  "version": 2,
+  "service": "events",
+  "product_kind": "artifact-product",
+  "route_summary": "EventBridge rule connected to imported Lambda, SQS, SNS, Step Functions, or ECS task targets.",
+  "supported_boundary": "Local CDK synthesis for Amazon EventBridge Targets. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "events-targets"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "events",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.events"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "events-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:8e212bf431965fb532c0cde323f0e6fbabf6ee93a44f29a4e905a6657f10eab8"
+}

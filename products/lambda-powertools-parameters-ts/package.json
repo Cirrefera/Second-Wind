@@ -1,0 +1,16 @@
+{
+  "name": "@secondwind/lambda-powertools-parameters-ts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "A Node.js Lambda helper that uses actual Powertools SSM and Secrets Manager providers with an explicit in-memory cache lifetime.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-lambda-powertools/parameters": "2.36.0",
+    "@aws-sdk/client-ssm": "3.1154.0",
+    "@aws-sdk/client-secrets-manager": "3.1156.0"
+  }
+}

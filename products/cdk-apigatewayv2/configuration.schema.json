@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AWS CDK API Gateway v2 HTTP API configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language"
+  ],
+  "properties": {
+    "language": {
+      "const": "typescript"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "language": "javascript",
+  "stack_name": "ItemsApi",
+  "api_name": "Items API",
+  "allowed_origin": "https://app.example.com",
+  "account": "123456789012",
+  "region": "us-east-1"
+}

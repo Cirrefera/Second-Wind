@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "topic_name"
+  ],
+  "properties": {
+    "topic_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,256}(.fifo)?$"
+    },
+    "fifo": {
+      "type": "boolean"
+    },
+    "email_subscription": {
+      "type": "string",
+      "format": "email"
+    },
+    "language": {
+      "const": "javascript"
+    }
+  }
+}

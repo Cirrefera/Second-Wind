@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "log_group_name",
+    "retention_days"
+  ],
+  "properties": {
+    "log_group_name": {
+      "type": "string",
+      "pattern": "^/[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*$",
+      "maxLength": 512
+    },
+    "retention_days": {
+      "enum": [
+        1,
+        3,
+        5,
+        7,
+        14,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        365,
+        400,
+        545,
+        731,
+        1827,
+        3653
+      ]
+    },
+    "kms_key_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:kms:[^:]+:[0-9]{12}:key/.+$"
+    },
+    "subscription_lambda_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:lambda:[^:]+:[0-9]{12}:function:.+$"
+    },
+    "language": {
+      "const": "javascript"
+    }
+  }
+}

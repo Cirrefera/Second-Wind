@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0686",
+  "sku": "AWS-0686",
+  "slug": "bedrock-rag-knowledge-base-sample",
+  "version": 1,
+  "release_ref": "sha256:bba0dd59367fe3d3cd6134ae9bd3cfee371eb9b540c6ce2e7e9bb263806e710f",
+  "service": "bedrock",
+  "product_kind": "artifact-product",
+  "route_summary": "Boto3 Bedrock Knowledge Bases example with retrieve and retrieve-and-generate calls, bounded result selection, and unmodified response citations for caller display.",
+  "supported_boundary": "Python 3.11+ boto3 1.43.114, provisioned Knowledge Base/data source/vector store, permitted model, and buyer account credentials. Calls can incur retrieval/inference charges. Hosted preview does not make a remote request.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "bedrock",
+    "python",
+    "bedrock-rag-knowledge-base-sample"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock"
+  ],
+  "problem_family_ids": [
+    "bedrock-integration"
+  ],
+  "operations": [
+    "bedrock-rag-knowledge-base-sample"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-bedrock-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "bedrock-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

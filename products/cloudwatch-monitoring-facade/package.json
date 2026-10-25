@@ -1,0 +1,17 @@
+{
+  "name": "@secondwind/cloudwatch-monitoring-facade",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "synth": "node ./synth.mjs"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.8.1",
+    "cdk-monitoring-constructs": "10.3.2"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "result": "not_reverified",
+  "validation_kind": "native-chalice-policy-generation",
+  "chalice": "1.32.0",
+  "boto3": "1.40.18",
+  "prior_source_validation": {
+    "result": "passed",
+    "policy_statement_count": 1,
+    "policy_action_count": 1,
+    "aws_calls": "not_performed",
+    "deployment": "not_performed"
+  },
+  "current_candidate_native_verification": "not_run_after_lazy_client_initialization_and_offline_preview_hardening",
+  "required_next_validation": "rerun native Chalice gen-policy preview in approved offline runtime",
+  "hosted_workers_preview": "unavailable; Workers does not run Python subprocesses",
+  "publication_blocker": "native_reverification_required"
+}

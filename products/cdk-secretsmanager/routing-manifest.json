@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0644",
+  "sku": "AWS-0644",
+  "slug": "cdk-secretsmanager",
+  "version": 2,
+  "service": "secretsmanager",
+  "product_kind": "artifact-product",
+  "route_summary": "Secrets Manager secret with generated value and an optional customer supplied rotation Lambda schedule.",
+  "supported_boundary": "Local CDK synthesis for AWS Secrets Manager. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "secretsmanager"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "secretsmanager",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.secretsmanager"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "secretsmanager-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:439b1c22efbad68e329fdfd9357c9207753a6f5cab5d7740191eac3172a65810"
+}

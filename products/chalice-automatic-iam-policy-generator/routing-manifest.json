@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0673",
+  "sku": "AWS-0673",
+  "slug": "chalice-automatic-iam-policy-generator",
+  "version": 2,
+  "release_ref": "sha256:bf93cf45c5d11bf4ed7d182c3b9b7e911a8c20c5a1258f38fc22d92e7a19801d",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "Chalice gen-policy workflow that derives IAM actions from boto3 source analysis.",
+  "supported_boundary": "Chalice gen-policy workflow that derives IAM actions from boto3 source analysis. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "chalice-automatic-iam-policy-generator"
+  ],
+  "tags": [
+    "lambda",
+    "infrastructure-as-code",
+    "python",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "analyze-chalice-app"
+  ],
+  "environments": [
+    "aws-chalice"
+  ],
+  "desired_outcomes": [
+    "chalice-deployment-policy"
+  ],
+  "input_kinds": [
+    "chalice-python-app"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.12"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

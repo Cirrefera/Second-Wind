@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0647",
+  "sku": "AWS-0647",
+  "slug": "cdk-sns",
+  "version": 2,
+  "service": "sns",
+  "product_kind": "artifact-product",
+  "route_summary": "SNS topic with optional FIFO mode, managed encryption, and explicit email subscription.",
+  "supported_boundary": "Local CDK synthesis for Amazon Simple Notification Service. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "sns"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "sns",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.sns"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "sns-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:d3d77b85e63d0f4d95369f83d52ac35786b634a606b86f7daca4d5d77d48b9e4"
+}

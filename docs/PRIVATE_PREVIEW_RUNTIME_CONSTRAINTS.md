@@ -1,0 +1,19 @@
+# Private preview runtime constraints
+
+The gateway's private preview adapter is a JavaScript-only, fixed-entrypoint path. A release can use `js-product-entrypoint-v1` only when its SKU is in the explicit sandbox eligibility policy, its `preview_contract` matches the adapter, and the selected package contains a hash-verified `preview.mjs`. The gateway checks the size and digest of every selected JavaScript file, follows only local relative imports reachable from that fixed entrypoint, and rejects unresolved imports. The package is capped at 64 JavaScript modules and 512 KiB. It runs with outbound access disabled and returns only the contract's allowlisted fields, further constrained to status/slug enums, bounded integer counts, finite diagnostic codes, and the exact selected component IDs.
+
+This path executes the private preview before buyer-authored Code Mode. The buyer receives only the bounded preview result; it cannot import the product modules or read their files. A missing or unsupported adapter fails the pre-payment validation path. It is not enough for a draft manifest to declare an adapter: the product must also be in the sandbox policy and pass the existing release/publication review flow.
+
+The gateway package currently depends on `@cloudflare/codemode` and has a Worker Loader binding. It does not include CDK, Chalice, Claudia, AWS SDK for Python, `awswrangler`, Ruby gems, or a Python package installer. Dynamic Workers accept JavaScript and Python modules, but the current gateway execution contract validates buyer orchestration as JavaScript. No Python, Ruby, shell, container, or external runner is part of this adapter. Native products therefore remain unavailable for hosted preview unless a real compatible implementation is added and reviewed.
+
+Cloudflare documents `node:fs` as a memory-backed virtual filesystem: bundled files are read-only, `/tmp` is temporary and memory-limited, and it does not provide a host filesystem or subprocess environment. Cloudflare's Dynamic Worker Loader accepts module text and types, including JavaScript and Python, and can cut off outbound networking. Cloudflare's separate playground demonstrates npm dependency bundling with `@cloudflare/worker-bundler`; that package is not a gateway dependency and is not wired into this private preview adapter. Runtime dependency installation and native dependency execution are not claimed here.
+
+Evidence checked for this assessment:
+
+- Gateway dependencies and Worker Loader binding: [`workers/gateway/package.json`](../workers/gateway/package.json), [`workers/gateway/wrangler.toml`](../workers/gateway/wrangler.toml).
+- [Cloudflare `node:fs` documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/fs/) describes the VFS, read-only bundle, temporary `/tmp`, and memory limits.
+- [Cloudflare Dynamic Workers API reference](https://developers.cloudflare.com/dynamic-workers/api-reference/) documents Loader module types and `globalOutbound: null`.
+- [Cloudflare Dynamic Workers getting started](https://developers.cloudflare.com/dynamic-workers/getting-started/) documents the Loader binding and `load()` flow.
+- [Cloudflare Dynamic Workers Playground](https://developers.cloudflare.com/dynamic-workers/examples/dynamic-workers-playground/) describes a separate `@cloudflare/worker-bundler` flow for npm dependency resolution and TypeScript compilation.
+
+The gateway build and existing catalog/trial tests are the regression checks. A one-off Workerd smoke probe also loaded a hash-verified `preview.mjs` through the private adapter, computed a count from configuration, and returned only the bounded result. That probe verifies the adapter mechanics, not any product's behavior; a product is supported only after its own real entrypoint is exercised and reviewed.

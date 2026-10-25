@@ -1,0 +1,74 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0557",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3",
+      "size_bytes": 640,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc",
+      "size_bytes": 1572,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.example.json",
+      "sha256": "4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab",
+      "size_bytes": 157,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55",
+      "size_bytes": 597,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99",
+      "size_bytes": 10006,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991",
+      "size_bytes": 345,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c",
+      "size_bytes": 1844,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "product.mjs",
+      "sha256": "780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91",
+      "size_bytes": 1004,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+      "size_bytes": 214,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "3debd272d2a2f1c4ce3544c82798d1ceac9a3d3719391dc6b3188ce8940e5a50",
+      "size_bytes": 3549,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "synth.mjs",
+      "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
+      "size_bytes": 313,
+      "mime_type": "text/javascript"
+    }
+  ]
+}

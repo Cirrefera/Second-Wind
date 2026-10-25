@@ -1,0 +1,74 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0639",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b19c8f1ef9a95bc005b182b1743757ade3e6acddc4626a8efce05f0732282314",
+      "size_bytes": 1731,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "cdk.json",
+      "sha256": "17db83338652917d1ec37b5bba1d10b08c45f92d6e83944ff5a776cc741d367e",
+      "size_bytes": 103,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "configuration.schema.json",
+      "sha256": "10814e9629bb990f333b8aef8de2855bbaca9cc267db52f0a6df10830479d117",
+      "size_bytes": 285,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "input.schema.json",
+      "sha256": "10814e9629bb990f333b8aef8de2855bbaca9cc267db52f0a6df10830479d117",
+      "size_bytes": 285,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "1960492d3becbc1ed11335f8e065606c550fd633df54e66292f4ff192d733edf",
+      "size_bytes": 24509,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "278bde513bd84e6fa55fe9cf6b6a01f8b6f8f1e744cbe318c12828ba3229bd49",
+      "size_bytes": 338,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview-contract.json",
+      "sha256": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
+      "size_bytes": 191,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview-runner.ts",
+      "sha256": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
+      "size_bytes": 80,
+      "mime_type": "text/typescript"
+    },
+    {
+      "path": "preview.ts",
+      "sha256": "e50d0e86e65f319a0e45c4fb24488c6cf6910af73789f17dae713496d2ceefd3",
+      "size_bytes": 939,
+      "mime_type": "text/typescript"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "c01a15724881fe84e43735bc66506d48dd50fea09ff5e6d6cf22ea80ca4aaf69",
+      "size_bytes": 3374,
+      "mime_type": "application/json"
+    }
+  ]
+}

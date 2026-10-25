@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0553",
+  "sku": "AWS-0553",
+  "slug": "lambda-powertools-idempotency-ts",
+  "version": 1,
+  "release_ref": "sha256:acdd5b8d388b0ab7014260dceee773e28f261e24b171fa727856628074ee55db",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A Node.js Lambda wrapper that uses the actual Powertools IdempotencyConfig and DynamoDBPersistenceLayer around a business-keyed handler.",
+  "supported_boundary": "A Node.js Lambda wrapper that uses the actual Powertools IdempotencyConfig and DynamoDBPersistenceLayer around a business-keyed handler. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-idempotency-ts",
+    "powertools-lambda-powertools-idempotency"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "idempotency",
+    "dynamodb",
+    "retries"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.idempotency"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.retries"
+  ],
+  "operations": [
+    "lambda-powertools-idempotency-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "retry-safe-idempotency"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "iam-review",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "aws-deployment",
+    "hosted-preview",
+    "service-outcome-verification"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@secondwind/lambda-powertools-logger-ts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "A small TypeScript/JavaScript Lambda module that configures Powertools Logger, binds the AWS request ID, and logs a safe request event without copying the full event.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-lambda-powertools/logger": "2.36.0"
+  }
+}

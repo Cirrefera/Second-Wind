@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0685",
+  "sku": "AWS-0685",
+  "slug": "bedrock-agent-with-action-group-sample",
+  "version": 1,
+  "release_ref": "sha256:59cd48908a9b84d3e203c9dcf9b7524688aa1800a17c109c5994756cb189e96a",
+  "service": "bedrock",
+  "product_kind": "artifact-product",
+  "route_summary": "Boto3 sample for Bedrock Agent creation, Lambda-backed function action group registration, and runtime InvokeAgent streaming response; all operations use real AWS APIs.",
+  "supported_boundary": "Python 3.11+ boto3 1.43.114, Bedrock Agents-supported Region, configured model access, IAM service role/Lambda permissions, and buyer AWS credentials. Creates billable/account resources and is not run in hosted preview.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "bedrock",
+    "python",
+    "bedrock-agent-with-action-group-sample"
+  ],
+  "taxonomy_ids": [
+    "aws.bedrock"
+  ],
+  "problem_family_ids": [
+    "bedrock-integration"
+  ],
+  "operations": [
+    "bedrock-agent-with-action-group-sample"
+  ],
+  "environments": [
+    "python"
+  ],
+  "desired_outcomes": [
+    "working-bedrock-integration"
+  ],
+  "input_kinds": [
+    "native-python-input"
+  ],
+  "failure_signatures": [
+    "bedrock-request-failure"
+  ],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.11"
+  ],
+  "required_evidence": [],
+  "exclusions": []
+}

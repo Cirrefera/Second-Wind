@@ -1,0 +1,57 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0689",
+    "slug": "agentcore-sdk-memory-management",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws/bedrock-agentcore-sdk-python",
+    "source_revision": "b70e0b709f6c8ec897b28fe873c3364e17f5cfec",
+    "structured_pointer": "src/bedrock_agentcore/memory/",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "src/bedrock_agentcore/memory",
+      "status": "found",
+      "git_object_sha": "9550889a0e2c2fac2a5b70b2dfa7aa400550ba4b",
+      "object_type": "tree",
+      "descendant_file_count": 26,
+      "url": "https://github.com/aws/bedrock-agentcore-sdk-python/tree/b70e0b709f6c8ec897b28fe873c3364e17f5cfec/src/bedrock_agentcore/memory"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/aws/bedrock-agentcore-sdk-python",
+  "interface_sources": [
+    "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-customer-scenario.html",
+    "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-create-a-memory-store.html"
+  ],
+  "dependencies": {
+    "bedrock-agentcore": "1.24.2",
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "ae3bab989bad4c476366b629478b07466cf0c2d90b9241912b70dbde077ba6f7",
+    "memory.py": "e6015fe20c851a98236472593112df1f07a2db46adadb042abbda5eb55fb3065",
+    "README.md": "785f7c88a19737bc9111770a66196df11e808ffd1351cab1c561969f02e43e40",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "25eb87c335374d02fc75a4e8ba2d8c60cce010876e50194c86f3d1f213106499",
+    "preview.py": "e1f33dc31a624f6f602db37c46c9a2f5181987a4e6df4ff9c414cd6a3ef7a2a2"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "memory.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

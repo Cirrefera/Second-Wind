@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "python"
+    },
+    "runtime_arn": {
+      "type": "string",
+      "pattern": "^arn:"
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 33,
+      "maxLength": 256
+    },
+    "payload": {
+      "type": "object",
+      "minProperties": 1
+    }
+  },
+  "required": [
+    "language",
+    "runtime_arn",
+    "session_id",
+    "payload"
+  ]
+}

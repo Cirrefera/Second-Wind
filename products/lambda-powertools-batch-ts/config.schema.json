@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "event_source"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "event_source": {
+      "const": "sqs"
+    },
+    "report_batch_item_failures": {
+      "const": true
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "python"
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_framework": {
+      "type": "string",
+      "const": "strands"
+    }
+  },
+  "required": [
+    "language",
+    "prompt"
+  ]
+}

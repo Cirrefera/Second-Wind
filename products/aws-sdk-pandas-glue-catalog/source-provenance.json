@@ -1,0 +1,58 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0683",
+    "slug": "aws-sdk-pandas-glue-catalog",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws/aws-sdk-pandas",
+    "source_revision": "aa50a97c43fe843d02920d69663d0b159116e6bc",
+    "structured_pointer": "awswrangler/catalog/_get.py",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "awswrangler/catalog/_get.py",
+      "status": "found",
+      "git_object_sha": "b5fc5a443bf3089dff0f0973eb9df6de21966087",
+      "object_type": "blob",
+      "descendant_file_count": 0,
+      "url": "https://github.com/aws/aws-sdk-pandas/tree/aa50a97c43fe843d02920d69663d0b159116e6bc/awswrangler/catalog/_get.py"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/aws/aws-sdk-pandas",
+  "interface_sources": [
+    "https://aws-sdk-pandas.readthedocs.io/en/stable/api.html",
+    "https://docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html"
+  ],
+  "dependencies": {
+    "awswrangler": "3.17.1",
+    "pandas": "2.2.3",
+    "boto3": "1.43.114"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "238c046fee89bddc80a7a314e7f9f68d2fedf76f9932ee89ed9014fe0bf89d82",
+    "glue_catalog.py": "58acee99cf90c00287d5d675192505009ef6ad2773ad163efbd162d601ef6b6d",
+    "README.md": "9782f46d5cf8bd8474008ffe845733d3725aefa5b761e7a01dc249d611aace11",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "f321adb9e966bebe1a0ec902bba7385b6c29e1991ec44fae276fed7eeea6afbf",
+    "preview.py": "e32c3c0de7d0c73fefb1c212f3d4519c5d028ed39de13fa04571ff5a6881bc44"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "glue_catalog.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

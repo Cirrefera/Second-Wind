@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "javascript"
+    },
+    "api_module": {
+      "type": "string",
+      "default": "app"
+    },
+    "region": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "language",
+    "api_module"
+  ]
+}

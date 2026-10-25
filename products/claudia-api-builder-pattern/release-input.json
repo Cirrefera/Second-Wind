@@ -1,0 +1,320 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0677",
+    "slug": "claudia-api-builder-pattern",
+    "name": "build routes with Claudia API Builder",
+    "kind": "artifact",
+    "service": "lambda",
+    "summary": "Claudia API Builder route module using the real Express-style get/post API, with request validation and API Gateway-ready Lambda export.",
+    "guidance": "# build routes with Claudia API Builder\n\nClaudia API Builder route module using the real Express-style get/post API, with request validation and API Gateway-ready Lambda export.\n\nSelect `language: \"javascript\"` explicitly in the package configuration.\n\nHosted preview is blocked: The real route module requires Node.js and claudia-api-builder. The hosted adapter does not load npm packages or a local API Gateway emulator, so it cannot invoke the product module.\n\n## Runtime and boundary\n\nNode.js 18.x with claudia-api-builder 4.1.2. The route module must be bundled/deployed by Claudia in the buyer account; no live API or AWS deployment is supplied.\n\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\n\n## Files\n\n- `package.json`\n- `api.js`\n- `selection.schema.json`\n\n## Use\n\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\n\nThe sample routes are public unless the deployed API has an authorizer or resource policy. Add authentication, request limits, and application authorization before handling sensitive data.\n\n## Sources and provenance\n\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\n\n- https://github.com/claudiajs/claudia-api-builder\n- https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md\n\nUpstream repository: https://github.com/claudiajs/claudia-api-builder\n\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\n\n\n## Native preview entrypoint\n\nAfter installing the pinned npm dependencies, run `node preview.js`. It calls the actual Claudia API Builder `proxyRouter` with a local API Gateway-shaped GET request and emits only status and response byte count. It does not deploy to AWS. Hosted preview remains unavailable because its gateway cannot load npm packages.\n",
+    "price_usd": 0.5,
+    "invoke_kind": "resolve",
+    "input_schema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"language\":{\"type\":\"string\",\"const\":\"javascript\"},\"runtime\":{\"type\":\"string\",\"const\":\"nodejs18\"}},\"required\":[\"language\",\"runtime\"]}",
+    "mime_type": "application/json",
+    "source_repo": "https://github.com/claudiajs/claudia-api-builder",
+    "source_url": "https://github.com/claudiajs/claudia-api-builder",
+    "license_spdx": "Apache-2.0",
+    "provenance": "original",
+    "status": "draft",
+    "version": 1
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0677",
+    "slug": "claudia-api-builder-pattern",
+    "version": 1,
+    "product_kind": "artifact-product",
+    "service": "lambda",
+    "release_ref": "sha256:78c0a1f9fffce26af9e5e45e879a349fc716a0d96b162a3d24442994cd6fb77e",
+    "content_hash": "78c0a1f9fffce26af9e5e45e879a349fc716a0d96b162a3d24442994cd6fb77e",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "Claudia API Builder route module using the real Express-style get/post API, with request validation and API Gateway-ready Lambda export.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "javascript": "api.js"
+      },
+      "configuration_schema": "selection.schema.json",
+      "side_effects": "native calls may be remote or modify buyer-controlled resources"
+    },
+    "validation_contract": {
+      "kind": "native-runtime-required",
+      "languages": [
+        "javascript"
+      ],
+      "hosted_preview": "unavailable",
+      "private_native_preview": "available",
+      "preview_blocked_reason": "The real route module requires Node.js and claudia-api-builder. The hosted adapter does not load npm packages or a local API Gateway emulator, so it cannot invoke the product module.",
+      "aws_deployment": "not-performed",
+      "live_service_validation": "not-performed",
+      "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+      "private_native_preview_entrypoint": "preview.js"
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "javascript"
+      ]
+    },
+    "tags": [
+      "lambda",
+      "javascript",
+      "claudia-api-builder-pattern"
+    ],
+    "supported_boundary": "Node.js 18.x with claudia-api-builder 4.1.2. The route module must be bundled/deployed by Claudia in the buyer account; no live API or AWS deployment is supplied.",
+    "hosted_preview_available": false,
+    "native_preview_blocker": "The real route module requires Node.js and claudia-api-builder. The hosted adapter does not load npm packages or a local API Gateway emulator, so it cannot invoke the product module.",
+    "publication_blockers": [
+      "hosted_preview_runtime_unavailable",
+      "trusted_product_and_contract_reviews_pending",
+      "trusted_license_and_provenance_review_pending",
+      "publication_approval_pending",
+      "native_private_preview_requires_local_node_and_npm_dependencies"
+    ],
+    "required_files": [
+      {
+        "path": "package.json",
+        "sha256": "545ff6f54c4c7dcf97a920f48fdb39550b3da299aa80e1501854f3d8246cd3e3",
+        "size_bytes": 189,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "api.js",
+        "sha256": "9e0100557b5e2db90f149f0939ac6e93b9fe9d47abde20ef6fa825748ea59b71",
+        "size_bytes": 540,
+        "mime_type": "text/javascript"
+      },
+      {
+        "path": "README.md",
+        "sha256": "9fe1331ff8674527ec6aaae4f39505f701993f03a49716f2fd18ed4cc23df7ff",
+        "size_bytes": 2661,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "selection.schema.json",
+        "sha256": "6c351492ba93f38e07cb0e7706b1abbf7f63f2846fd422f8b997f668b79dafeb",
+        "size_bytes": 280,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "preview.js",
+        "mime_type": "text/javascript",
+        "sha256": "444ef2b2a5daa8432da657e7d8d60e3d64605f7c252d44c315f9aaa6ec06fa61",
+        "size_bytes": 899
+      }
+    ],
+    "dependencies": {
+      "claudia-api-builder": "4.1.2"
+    },
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "const": "javascript"
+        },
+        "runtime": {
+          "type": "string",
+          "const": "nodejs18"
+        }
+      },
+      "required": [
+        "language",
+        "runtime"
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "package.json",
+      "content": "{\n  \"name\": \"claudia-api-builder-resource-api\",\n  \"private\": true,\n  \"type\": \"commonjs\",\n  \"engines\": {\n    \"node\": \"18.x\"\n  },\n  \"dependencies\": {\n    \"claudia-api-builder\": \"4.1.2\"\n  }\n}\n",
+      "sha256": "545ff6f54c4c7dcf97a920f48fdb39550b3da299aa80e1501854f3d8246cd3e3",
+      "size_bytes": 189,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "api.js",
+      "content": "'use strict';\nconst ApiBuilder = require('claudia-api-builder');\nconst api = new ApiBuilder();\napi.get('/resources/{id}', async (request) => {\n  if (!request.pathParams.id) return {statusCode:400,body:{error:'id_required'}};\n  return {id:request.pathParams.id};\n});\napi.post('/resources', async (request) => {\n  const body=request.body;\n  if (!body || typeof body.name !== 'string' || !body.name.trim()) return {statusCode:400,body:{error:'name_required'}};\n  return {statusCode:201,body:{name:body.name.trim()}};\n});\nmodule.exports = api;\n",
+      "sha256": "9e0100557b5e2db90f149f0939ac6e93b9fe9d47abde20ef6fa825748ea59b71",
+      "size_bytes": 540,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "README.md",
+      "content": "# build routes with Claudia API Builder\n\nClaudia API Builder route module using the real Express-style get/post API, with request validation and API Gateway-ready Lambda export.\n\nSelect `language: \"javascript\"` explicitly in the package configuration.\n\nHosted preview is blocked: The real route module requires Node.js and claudia-api-builder. The hosted adapter does not load npm packages or a local API Gateway emulator, so it cannot invoke the product module.\n\n## Runtime and boundary\n\nNode.js 18.x with claudia-api-builder 4.2.0. The route module must be bundled/deployed by Claudia in the buyer account; no live API or AWS deployment is supplied.\n\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\n\n## Files\n\n- `package.json`\n- `api.js`\n- `selection.schema.json`\n\n## Use\n\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\n\nThe sample routes are public unless the deployed API has an authorizer or resource policy. Add authentication, request limits, and application authorization before handling sensitive data.\n\n## Sources and provenance\n\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\n\n- https://github.com/claudiajs/claudia-api-builder\n- https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md\n\nUpstream repository: https://github.com/claudiajs/claudia-api-builder\n\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\n\n\n## Native preview entrypoint\n\nAfter installing the pinned npm dependencies, run `node preview.js`. It calls the actual Claudia API Builder `proxyRouter` with a local API Gateway-shaped GET request and emits only status and response byte count. It does not deploy to AWS. Hosted preview remains unavailable because its gateway cannot load npm packages.\n",
+      "sha256": "9fe1331ff8674527ec6aaae4f39505f701993f03a49716f2fd18ed4cc23df7ff",
+      "size_bytes": 2661,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "content": "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"language\": {\n      \"type\": \"string\",\n      \"const\": \"javascript\"\n    },\n    \"runtime\": {\n      \"type\": \"string\",\n      \"const\": \"nodejs18\"\n    }\n  },\n  \"required\": [\n    \"language\",\n    \"runtime\"\n  ]\n}\n",
+      "sha256": "6c351492ba93f38e07cb0e7706b1abbf7f63f2846fd422f8b997f668b79dafeb",
+      "size_bytes": 280,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.js",
+      "content": "'use strict';\n// Runs the actual Claudia API Builder proxyRouter locally with an API Gateway-shaped request.\n// The response body is inspected only for its byte length and is never emitted.\nconst api = require('./api');\nconst request = {\n  requestContext: {resourcePath: '/resources/{id}', httpMethod: 'GET'},\n  pathParameters: {id: process.env.PREVIEW_RESOURCE_ID || 'preview'},\n  headers: {},\n};\napi.proxyRouter(request, {}).then((response) => {\n  const body = typeof response.body === 'string' ? response.body : JSON.stringify(response.body ?? null);\n  console.log(JSON.stringify({ok: response.statusCode === 200, status: 'route_invoked', response_bytes: Buffer.byteLength(body)}));\n  if (response.statusCode !== 200) process.exitCode = 2;\n}).catch(() => {\n  console.log(JSON.stringify({ok: false, status: 'blocked', diagnostic_codes: ['api_builder_route_failed']}));\n  process.exitCode = 2;\n});\n",
+      "mime_type": "text/javascript",
+      "sha256": "444ef2b2a5daa8432da657e7d8d60e3d64605f7c252d44c315f9aaa6ec06fa61",
+      "size_bytes": 899
+    }
+  ],
+  "configuration_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "javascript"
+      },
+      "runtime": {
+        "type": "string",
+        "const": "nodejs18"
+      }
+    },
+    "required": [
+      "language",
+      "runtime"
+    ]
+  },
+  "source_provenance": {
+    "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+    "historical_catalog_record": {
+      "sku": "AWS-0677",
+      "slug": "claudia-api-builder-pattern",
+      "kind": "artifact",
+      "price_usd": 0.5,
+      "status": "draft",
+      "version": 1
+    },
+    "upstream_inspection": {
+      "source_repository": "claudiajs/claudia",
+      "source_revision": "9d68ed4c62e123279b14b31b7dfbc34710f40689",
+      "structured_pointer": "src/util/convert-api-gw-proxy-request.js",
+      "observed_deliverable": "artifact_pointer_without_product_assembly",
+      "pointer_inspection": {
+        "path": "src/util/convert-api-gw-proxy-request.js",
+        "status": "not_found_in_pinned_tree",
+        "git_object_sha": null,
+        "object_type": null,
+        "descendant_file_count": 0,
+        "url": "https://github.com/claudiajs/claudia/tree/9d68ed4c62e123279b14b31b7dfbc34710f40689/src/util/convert-api-gw-proxy-request.js"
+      }
+    },
+    "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+    "upstream_repository": "https://github.com/claudiajs/claudia-api-builder",
+    "interface_sources": [
+      "https://github.com/claudiajs/claudia-api-builder",
+      "https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md"
+    ],
+    "dependencies": {
+      "claudia-api-builder": "4.1.2"
+    },
+    "original_file_hashes": {
+      "package.json": "545ff6f54c4c7dcf97a920f48fdb39550b3da299aa80e1501854f3d8246cd3e3",
+      "api.js": "9e0100557b5e2db90f149f0939ac6e93b9fe9d47abde20ef6fa825748ea59b71",
+      "README.md": "9fe1331ff8674527ec6aaae4f39505f701993f03a49716f2fd18ed4cc23df7ff",
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "selection.schema.json": "6c351492ba93f38e07cb0e7706b1abbf7f63f2846fd422f8b997f668b79dafeb",
+      "preview.js": "444ef2b2a5daa8432da657e7d8d60e3d64605f7c252d44c315f9aaa6ec06fa61"
+    },
+    "license_mapping": [
+      {
+        "paths": [
+          "package.json",
+          "api.js",
+          "README.md",
+          "LICENSE",
+          "selection.schema.json"
+        ],
+        "license": "Apache-2.0",
+        "license_file": "LICENSE",
+        "status": "source-level claim; independent review pending"
+      }
+    ]
+  },
+  "blockers": [
+    "native_private_preview_entrypoint_missing",
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ],
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0677",
+    "sku": "AWS-0677",
+    "slug": "claudia-api-builder-pattern",
+    "version": 1,
+    "release_ref": "sha256:78c0a1f9fffce26af9e5e45e879a349fc716a0d96b162a3d24442994cd6fb77e",
+    "service": "lambda",
+    "product_kind": "artifact-product",
+    "route_summary": "Claudia API Builder route module using the real Express-style get/post API, with request validation and API Gateway-ready Lambda export.",
+    "supported_boundary": "Node.js 18.x with claudia-api-builder 4.1.2. The route module must be bundled/deployed by Claudia in the buyer account; no live API or AWS deployment is supplied.",
+    "language_policy": "explicit",
+    "aliases": [],
+    "tags": [
+      "lambda",
+      "javascript",
+      "claudia-api-builder-pattern"
+    ],
+    "taxonomy_ids": [
+      "aws.lambda"
+    ],
+    "problem_family_ids": [
+      "lambda-integration"
+    ],
+    "operations": [
+      "claudia-api-builder-pattern"
+    ],
+    "environments": [
+      "javascript"
+    ],
+    "desired_outcomes": [
+      "working-lambda-integration"
+    ],
+    "input_kinds": [
+      "native-javascript-input"
+    ],
+    "failure_signatures": [
+      "lambda-request-failure"
+    ],
+    "languages": [
+      "javascript"
+    ],
+    "runtimes": [
+      "nodejs18"
+    ],
+    "required_evidence": [],
+    "exclusions": []
+  },
+  "payload": {
+    "content": "{\"files\":[{\"content\":\"{\\n  \\\"name\\\": \\\"claudia-api-builder-resource-api\\\",\\n  \\\"private\\\": true,\\n  \\\"type\\\": \\\"commonjs\\\",\\n  \\\"engines\\\": {\\n    \\\"node\\\": \\\"18.x\\\"\\n  },\\n  \\\"dependencies\\\": {\\n    \\\"claudia-api-builder\\\": \\\"4.1.2\\\"\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"package.json\",\"sha256\":\"545ff6f54c4c7dcf97a920f48fdb39550b3da299aa80e1501854f3d8246cd3e3\",\"size_bytes\":189},{\"content\":\"'use strict';\\nconst ApiBuilder = require('claudia-api-builder');\\nconst api = new ApiBuilder();\\napi.get('/resources/{id}', async (request) => {\\n  if (!request.pathParams.id) return {statusCode:400,body:{error:'id_required'}};\\n  return {id:request.pathParams.id};\\n});\\napi.post('/resources', async (request) => {\\n  const body=request.body;\\n  if (!body || typeof body.name !== 'string' || !body.name.trim()) return {statusCode:400,body:{error:'name_required'}};\\n  return {statusCode:201,body:{name:body.name.trim()}};\\n});\\nmodule.exports = api;\\n\",\"mime_type\":\"text/javascript\",\"path\":\"api.js\",\"sha256\":\"9e0100557b5e2db90f149f0939ac6e93b9fe9d47abde20ef6fa825748ea59b71\",\"size_bytes\":540},{\"content\":\"# build routes with Claudia API Builder\\n\\nClaudia API Builder route module using the real Express-style get/post API, with request validation and API Gateway-ready Lambda export.\\n\\nSelect `language: \\\"javascript\\\"` explicitly in the package configuration.\\n\\nHosted preview is blocked: The real route module requires Node.js and claudia-api-builder. The hosted adapter does not load npm packages or a local API Gateway emulator, so it cannot invoke the product module.\\n\\n## Runtime and boundary\\n\\nNode.js 18.x with claudia-api-builder 4.2.0. The route module must be bundled/deployed by Claudia in the buyer account; no live API or AWS deployment is supplied.\\n\\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\\n\\n## Files\\n\\n- `package.json`\\n- `api.js`\\n- `selection.schema.json`\\n\\n## Use\\n\\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\\n\\nThe sample routes are public unless the deployed API has an authorizer or resource policy. Add authentication, request limits, and application authorization before handling sensitive data.\\n\\n## Sources and provenance\\n\\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\\n\\n- https://github.com/claudiajs/claudia-api-builder\\n- https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md\\n\\nUpstream repository: https://github.com/claudiajs/claudia-api-builder\\n\\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\\n\\n\\n## Native preview entrypoint\\n\\nAfter installing the pinned npm dependencies, run `node preview.js`. It calls the actual Claudia API Builder `proxyRouter` with a local API Gateway-shaped GET request and emits only status and response byte count. It does not deploy to AWS. Hosted preview remains unavailable because its gateway cannot load npm packages.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"README.md\",\"sha256\":\"9fe1331ff8674527ec6aaae4f39505f701993f03a49716f2fd18ed4cc23df7ff\",\"size_bytes\":2661},{\"content\":\"                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \\\"License\\\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \\\"Licensor\\\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \\\"Legal Entity\\\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \\\"control\\\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \\\"You\\\" (or \\\"Your\\\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \\\"Source\\\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \\\"Object\\\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \\\"Work\\\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \\\"Derivative Works\\\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \\\"Contribution\\\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \\\"submitted\\\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \\\"Not a Contribution.\\\"\\n\\n      \\\"Contributor\\\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \\\"NOTICE\\\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \\\"AS IS\\\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \\\"[]\\\"\\n      replaced with your own identifying information. (Don't include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \\\"printed page\\\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \\\"License\\\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"LICENSE\",\"sha256\":\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\"size_bytes\":11357},{\"content\":\"{\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"properties\\\": {\\n    \\\"language\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"const\\\": \\\"javascript\\\"\\n    },\\n    \\\"runtime\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"const\\\": \\\"nodejs18\\\"\\n    }\\n  },\\n  \\\"required\\\": [\\n    \\\"language\\\",\\n    \\\"runtime\\\"\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"selection.schema.json\",\"sha256\":\"6c351492ba93f38e07cb0e7706b1abbf7f63f2846fd422f8b997f668b79dafeb\",\"size_bytes\":280},{\"content\":\"'use strict';\\n// Runs the actual Claudia API Builder proxyRouter locally with an API Gateway-shaped request.\\n// The response body is inspected only for its byte length and is never emitted.\\nconst api = require('./api');\\nconst request = {\\n  requestContext: {resourcePath: '/resources/{id}', httpMethod: 'GET'},\\n  pathParameters: {id: process.env.PREVIEW_RESOURCE_ID || 'preview'},\\n  headers: {},\\n};\\napi.proxyRouter(request, {}).then((response) => {\\n  const body = typeof response.body === 'string' ? response.body : JSON.stringify(response.body ?? null);\\n  console.log(JSON.stringify({ok: response.statusCode === 200, status: 'route_invoked', response_bytes: Buffer.byteLength(body)}));\\n  if (response.statusCode !== 200) process.exitCode = 2;\\n}).catch(() => {\\n  console.log(JSON.stringify({ok: false, status: 'blocked', diagnostic_codes: ['api_builder_route_failed']}));\\n  process.exitCode = 2;\\n});\\n\",\"mime_type\":\"text/javascript\",\"path\":\"preview.js\",\"sha256\":\"444ef2b2a5daa8432da657e7d8d60e3d64605f7c252d44c315f9aaa6ec06fa61\",\"size_bytes\":899}],\"schema_version\":\"1\",\"sku\":\"AWS-0677\",\"version\":1}",
+    "sha256": "78c0a1f9fffce26af9e5e45e879a349fc716a0d96b162a3d24442994cd6fb77e",
+    "size_bytes": 17364,
+    "mime_type": "application/json"
+  }
+}

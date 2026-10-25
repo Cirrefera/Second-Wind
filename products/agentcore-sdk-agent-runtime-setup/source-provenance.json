@@ -1,0 +1,57 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0688",
+    "slug": "agentcore-sdk-agent-runtime-setup",
+    "kind": "tool",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "aws/bedrock-agentcore-sdk-python",
+    "source_revision": "b70e0b709f6c8ec897b28fe873c3364e17f5cfec",
+    "structured_pointer": "src/bedrock_agentcore/",
+    "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+    "pointer_inspection": {
+      "path": "src/bedrock_agentcore",
+      "status": "found",
+      "git_object_sha": "4ebaa9d8f5499c9feb506e805f87b00f902845c4",
+      "object_type": "tree",
+      "descendant_file_count": 144,
+      "url": "https://github.com/aws/bedrock-agentcore-sdk-python/tree/b70e0b709f6c8ec897b28fe873c3364e17f5cfec/src/bedrock_agentcore"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/aws/bedrock-agentcore-sdk-python",
+  "interface_sources": [
+    "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html",
+    "https://github.com/aws/bedrock-agentcore-sdk-python"
+  ],
+  "dependencies": {
+    "bedrock-agentcore": "1.24.2",
+    "strands-agents": "1.16.0"
+  },
+  "original_file_hashes": {
+    "requirements.txt": "972df85ccc956fe45169d3e6bd48a9db9c0b6c631e519850363e6bd0ec204056",
+    "agent_app.py": "7b534b03876fa87978b970d299fcf63c9980e5345c51c695ec2b64fe0e1e3a75",
+    "README.md": "d43f8e7d03d179d63901dfa265d91e381eca09238749678be9eab2a493f251dd",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "b0697ba8add2f2c15123b16ba5efe4f3bddb3b26f81357ad556bc7e6426781e0",
+    "preview.py": "4a2c53b66cb86a8f6963d25daf0f07903d8589148a1ad2f20c5f928cc1af8520"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "requirements.txt",
+        "agent_app.py",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

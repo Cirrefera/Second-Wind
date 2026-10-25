@@ -1,0 +1,69 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0551",
+  "sku": "AWS-0551",
+  "slug": "lambda-powertools-tracer-ts",
+  "version": 1,
+  "release_ref": "sha256:cbc6d97b4a204a227cacfd24243bcdc89983dab9d9232faa0ca4971ec27178ad",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "A Node.js Lambda integration that configures Powertools Tracer, exposes handler middleware with response capture disabled, and wraps an AWS SDK v3 client.",
+  "supported_boundary": "A Node.js Lambda integration that configures Powertools Tracer, exposes handler middleware with response capture disabled, and wraps an AWS SDK v3 client. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "language_policy": "explicit",
+  "aliases": [
+    "lambda-powertools-tracer-ts",
+    "powertools-lambda-powertools-tracer"
+  ],
+  "tags": [
+    "lambda",
+    "powertools",
+    "tracer",
+    "x-ray",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda.tracer"
+  ],
+  "problem_family_ids": [
+    "aws.lambda.observability"
+  ],
+  "operations": [
+    "lambda-powertools-tracer-ts"
+  ],
+  "environments": [
+    "lambda",
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "desired_outcomes": [
+    "aws-xray-tracing"
+  ],
+  "input_kinds": [
+    "configuration",
+    "javascript-package",
+    "lambda-event"
+  ],
+  "failure_signatures": [
+    "aws-access-denied",
+    "invalid-configuration",
+    "missing-dependency",
+    "runtime-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20.x",
+    "nodejs22.x"
+  ],
+  "required_evidence": [
+    "dependency-installation",
+    "iam-review",
+    "unit-validation"
+  ],
+  "exclusions": [
+    "aws-deployment",
+    "hosted-preview",
+    "service-outcome-verification"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0558",
+  "sku": "AWS-0558",
+  "slug": "sagemaker-endpoint-cdk",
+  "version": 1,
+  "release_ref": "sha256:5198ffa65d3216f13ed9cd198a133dd4b1a9e3f67c9018a82331b5055eb22b96",
+  "service": "sagemaker",
+  "product_kind": "artifact-product",
+  "route_summary": "Generic SageMaker real-time endpoint from a model artifact, inference image, execution role and instance configuration.",
+  "supported_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "sagemaker",
+    "sagemaker-endpoint-cdk"
+  ],
+  "taxonomy_ids": [
+    "aws.sagemaker.cdk"
+  ],
+  "problem_family_ids": [
+    "infrastructure.synthesis"
+  ],
+  "operations": [
+    "cdk-synth"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "infrastructure-plan"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [
+    "synthesis-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [
+    "native-node-synthesis"
+  ],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-preview-unavailable"
+  ]
+}

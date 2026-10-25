@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0653",
+  "sku": "AWS-0653",
+  "slug": "cdk-logs",
+  "version": 2,
+  "service": "logs",
+  "product_kind": "artifact-product",
+  "route_summary": "CloudWatch Log Group with explicit retention, optional KMS encryption key and Lambda subscription filter.",
+  "supported_boundary": "Local CDK synthesis for Amazon CloudWatch Logs. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "logs"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "logs",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.logs"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "logs-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:1fd855384e283b1ad54a6df7db217f947b5d40dcbfa7dfc70467a51fd27d4f75"
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0672",
+  "version": 2,
+  "product_kind": "artifact-product",
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "86b5aba6da5b323313fe795f94e94bbd95e9e1b842b64679d4b6141853b0ab3c",
+      "size_bytes": 1574,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "app.py",
+      "sha256": "56c05b9eb6e7a6ee1f31f7e72d538d31025849bcbdb8ebec077f283153f21b5c",
+      "size_bytes": 392,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "4b934492e20f5780b80e1de6ae7aa694f35ab1648602ad92d60b38c4514cd62c",
+      "size_bytes": 353,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "666114d4b305f2cf90c7d292b2a58ee3ff15b88d0cc89437e873d6a4eaf64c02",
+      "size_bytes": 3267,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "requirements.lock.txt",
+      "sha256": "d2baccadc3a357061666722006a34d05238f1a58bfdb02e351e19a65750ed66a",
+      "size_bytes": 332,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "6c812040cd51130184520c16a2417b03167eafeb3614867663270c8bf3f46a99",
+      "size_bytes": 16,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "703adeffe167de022c29fa4833c9a84ee91dfe60ddc3bd65d87b44333266b998",
+      "size_bytes": 2997,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "f03435cf620d9eb5f6d88b9bada1d29777acba0de0c6ad5a2472a8bfdcd3173d",
+      "size_bytes": 559,
+      "mime_type": "application/json"
+    }
+  ]
+}

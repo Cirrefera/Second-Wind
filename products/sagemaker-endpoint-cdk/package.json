@@ -1,0 +1,16 @@
+{
+  "name": "@secondwind/sagemaker-endpoint-cdk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "synth": "node ./synth.mjs"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.8.1"
+  }
+}

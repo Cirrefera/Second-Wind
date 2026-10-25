@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0629",
+  "sku": "AWS-0629",
+  "slug": "cfn-lint-template-validation",
+  "version": 1,
+  "release_ref": "sha256:8dd04357d9a4c02fd75a1c178bc56836ac3d47c6db8c6592bc3eb48ab4293cb2",
+  "service": "cloudformation",
+  "product_kind": "artifact-product",
+  "route_summary": "Validate CloudFormation and SAM templates against AWS resource provider schemas and cfn-lint rules.",
+  "supported_boundary": "Validate CloudFormation and SAM templates against AWS resource provider schemas and cfn-lint rules. The package runs locally with the pinned native Python dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cfn-lint-template-validation",
+    "cloudformation",
+    "python"
+  ],
+  "taxonomy_ids": [
+    "aws.cloudformation"
+  ],
+  "problem_family_ids": [
+    "aws-cloudformation-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-python"
+  ],
+  "desired_outcomes": [
+    "cloudformation-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "python"
+  ],
+  "runtimes": [
+    "python3.12"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

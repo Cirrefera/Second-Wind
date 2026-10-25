@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0634",
+  "sku": "AWS-0634",
+  "slug": "cdk-dynamodb",
+  "version": 1,
+  "release_ref": "sha256:5bb1735804747e1f9aad47aaf1f3d59a0c80649980aa2b384045b39ee6b81157",
+  "service": "dynamodb",
+  "product_kind": "artifact-product",
+  "route_summary": "Define an on-demand DynamoDB table with keys, encryption, and a selected global secondary index.",
+  "supported_boundary": "Define an on-demand DynamoDB table with keys, encryption, and a selected global secondary index. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-dynamodb",
+    "dynamodb",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.dynamodb"
+  ],
+  "problem_family_ids": [
+    "aws-dynamodb-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "dynamodb-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

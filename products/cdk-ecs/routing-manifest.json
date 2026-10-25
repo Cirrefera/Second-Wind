@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0655",
+  "sku": "AWS-0655",
+  "slug": "cdk-ecs",
+  "version": 2,
+  "service": "ecs",
+  "product_kind": "artifact-product",
+  "route_summary": "ECS Fargate service with explicit image, task sizing, VPC placement, cluster, task role, and log retention.",
+  "supported_boundary": "Local CDK synthesis for Amazon Elastic Container Service. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "ecs"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "ecs",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.ecs"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "ecs-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:71c16aeeb3857a2bb4d811541ec6e81b8e950efe37b5d9b9e3103473934089da"
+}

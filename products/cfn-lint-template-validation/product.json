@@ -1,0 +1,22 @@
+{
+  "sku": "AWS-0629",
+  "slug": "cfn-lint-template-validation",
+  "name": "CloudFormation template validation with cfn-lint",
+  "kind": "tool",
+  "service": "cloudformation",
+  "summary": "Validate CloudFormation and SAM templates against AWS resource provider schemas and cfn-lint rules.",
+  "source_repo": "https://github.com/aws-cloudformation/cfn-lint",
+  "source_url": "https://github.com/aws-cloudformation/cfn-lint",
+  "license_spdx": "Apache-2.0",
+  "invoke_kind": "resolve",
+  "mime_type": "application/json",
+  "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"language\",\"template\"],\"properties\":{\"language\":{\"const\":\"python\"},\"template\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":262144},\"region\":{\"type\":\"string\",\"default\":\"us-east-1\"}}}",
+  "input_example": "{\"language\":\"python\",\"template\":\"Resources: {}\\n\",\"region\":\"us-east-1\"}",
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "python",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  }
+}

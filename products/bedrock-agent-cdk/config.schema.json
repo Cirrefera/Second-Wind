@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "agent_name",
+    "foundation_model_id",
+    "instruction"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "agent_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "foundation_model_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "instruction": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 4000
+    },
+    "should_prepare_agent": {
+      "type": "boolean"
+    },
+    "user_input_enabled": {
+      "type": "boolean"
+    },
+    "code_interpreter_enabled": {
+      "type": "boolean"
+    }
+  }
+}

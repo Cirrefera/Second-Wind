@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0631",
+  "sku": "AWS-0631",
+  "slug": "cdk-lambda",
+  "version": 1,
+  "release_ref": "sha256:12f6799f2ef9f83b79a6ebe1f68197113d8d0242b4fabd4bc4f5042d94977750",
+  "service": "lambda",
+  "product_kind": "artifact-product",
+  "route_summary": "Define Lambda functions, execution roles, and event source mappings with AWS CDK v2.",
+  "supported_boundary": "Define Lambda functions, execution roles, and event source mappings with AWS CDK v2. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-lambda",
+    "lambda",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.lambda"
+  ],
+  "problem_family_ids": [
+    "aws-lambda-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "lambda-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

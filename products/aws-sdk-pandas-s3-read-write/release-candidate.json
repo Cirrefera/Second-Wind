@@ -1,0 +1,148 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0682",
+  "slug": "aws-sdk-pandas-s3-read-write",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "s3",
+  "release_ref": "sha256:fbd13b3f38161e5ad465ce8d6f96442f0db58fbb026954f03da8457125e0bf46",
+  "content_hash": "fbd13b3f38161e5ad465ce8d6f96442f0db58fbb026954f03da8457125e0bf46",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Python awswrangler S3 helpers that write pandas DataFrames as Parquet and read them back through the real S3 integration, preserving awswrangler metadata return values.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "python": "s3_frames.py"
+    },
+    "configuration_schema": "selection.schema.json",
+    "side_effects": "native calls may be remote or modify buyer-controlled resources"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "python"
+    ],
+    "hosted_preview": "unavailable",
+    "private_native_preview": "available",
+    "preview_blocked_reason": "The S3 read/write helper requires Python, awswrangler, and buyer AWS credentials for the target object store. The hosted adapter has no Python runtime or customer cloud identity.",
+    "aws_deployment": "not-performed",
+    "live_service_validation": "not-performed",
+    "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+    "private_native_preview_entrypoint": "preview.py",
+    "native_preview_output_fields": [
+      "ok",
+      "status",
+      "diagnostic_codes",
+      "row_count",
+      "column_count",
+      "object_bytes",
+      "file_count",
+      "result_count",
+      "response_bytes",
+      "response_char_count",
+      "input_token_count",
+      "output_token_count",
+      "record_count",
+      "artifact_bytes"
+    ]
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "python"
+    ]
+  },
+  "tags": [
+    "s3",
+    "python",
+    "aws-sdk-pandas-s3-read-write"
+  ],
+  "supported_boundary": "Python 3.11+, awswrangler 3.17.1, pandas 2.2.3, boto3 1.43.114 and buyer AWS credentials with required S3 access. Real S3 I/O only occurs when called; no hosted cloud call.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The S3 read/write helper requires Python, awswrangler, and buyer AWS credentials for the target object store. The hosted adapter has no Python runtime or customer cloud identity.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending",
+    "native_private_preview_requires_native_runtime_or_service_identity"
+  ],
+  "required_files": [
+    {
+      "path": "requirements.txt",
+      "sha256": "238c046fee89bddc80a7a314e7f9f68d2fedf76f9932ee89ed9014fe0bf89d82",
+      "size_bytes": 50,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "s3_frames.py",
+      "sha256": "efda0f2a0971c363db98a3d354ec0e23f95537650e046dbe2bde9854a9c5e482",
+      "size_bytes": 451,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "sha256": "9abdc481be3c64a618b8a9a2c6d99a7ecdf6213c0fea34bf6bcac4fb093c3b5b",
+      "size_bytes": 2858,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "f267f0921b80e7acd5772f0fa29adbd614e7f7eef089a44b9f672d8857e5ab12",
+      "size_bytes": 425,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "sha256": "a4553a59801cc1d62227297a48df273692a467b48b20c0ce2dd1ff67891836c7",
+      "size_bytes": 465,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "dependencies": {
+    "awswrangler": "3.17.1",
+    "pandas": "2.2.3",
+    "boto3": "1.43.114"
+  },
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "s3_uri": {
+        "type": "string",
+        "pattern": "^s3://"
+      },
+      "format": {
+        "type": "string",
+        "enum": [
+          "parquet"
+        ]
+      },
+      "dataset": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "language",
+      "s3_uri",
+      "format"
+    ]
+  },
+  "status": "draft"
+}

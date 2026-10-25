@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AWS CDK S3 bucket constructs configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language"
+  ],
+  "properties": {
+    "language": {
+      "const": "typescript"
+    }
+  }
+}

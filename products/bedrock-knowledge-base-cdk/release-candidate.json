@@ -1,0 +1,22 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0557",
+  "slug": "bedrock-knowledge-base-cdk",
+  "version": 1,
+  "release_ref": "sha256:637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+  "status": "draft",
+  "product_kind": "artifact-product",
+  "service": "bedrock",
+  "content_hash": "637122251ab391daf7bc0d611cfe7ac3b81449e548661c36df10a1e76d333e5d",
+  "hash_scope": "file-package-json-utf8",
+  "hosted_trial_supported": false,
+  "native_synthesis": "not-run",
+  "aws_api_calls": "not-performed",
+  "aws_deployment": "not-performed",
+  "publication_blockers": [
+    "hosted_private_preview_unavailable",
+    "trusted_source_review_pending",
+    "native_synthesis_evidence_pending",
+    "publication_approval_pending"
+  ]
+}

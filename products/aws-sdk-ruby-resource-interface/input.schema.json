@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ruby AWS SDK resource interface configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "service"
+  ],
+  "properties": {
+    "language": {
+      "const": "ruby"
+    },
+    "service": {
+      "enum": [
+        "s3",
+        "dynamodb",
+        "bedrock-runtime"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "default": "us-east-1"
+    },
+    "bucket": {
+      "type": "string",
+      "minLength": 3
+    },
+    "key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "body": {
+      "type": "string"
+    },
+    "table_name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "key_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "key_value": {
+      "type": "string"
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "service": {
+          "const": "s3"
+        },
+        "bucket": {
+          "type": "string",
+          "minLength": 3
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "bucket",
+        "key",
+        "body"
+      ]
+    },
+    {
+      "properties": {
+        "service": {
+          "const": "dynamodb"
+        },
+        "table_name": {
+          "type": "string",
+          "minLength": 3
+        },
+        "key_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "key_value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "table_name",
+        "key_name",
+        "key_value"
+      ]
+    },
+    {
+      "properties": {
+        "service": {
+          "const": "bedrock-runtime"
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "model_id",
+        "body"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "sku": "AWS-0632",
+  "slug": "cdk-lambda-nodejs",
+  "provenance": "original-wrapper",
+  "upstream_repository": "https://github.com/aws/aws-cdk",
+  "primary_documentation": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda_nodejs-readme.html",
+  "upstream_license": "Apache-2.0",
+  "upstream_source_included": false,
+  "version": "2.274.0",
+  "license": "Apache-2.0",
+  "source_revision": null,
+  "delivered_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "media_type": "application/octet-stream",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "README.md",
+      "sha256": "011978aecf1e2f0e8a9c3d99a4a368608614dae5d84d659402502fbc11783d28",
+      "size_bytes": 1756,
+      "media_type": "text/markdown",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "cdk.json",
+      "sha256": "17db83338652917d1ec37b5bba1d10b08c45f92d6e83944ff5a776cc741d367e",
+      "size_bytes": 103,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "configuration.schema.json",
+      "sha256": "7d1634edbd4a19c9471aef9c0510554801f448857ff7394ec8a97e053adb3bc5",
+      "size_bytes": 294,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "handler.ts",
+      "sha256": "26912f687727d3fec9ef865852f07791dd74cfd506754ef13c14594fba6d3d8d",
+      "size_bytes": 76,
+      "media_type": "text/vnd.trolltech.linguist",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "input.schema.json",
+      "sha256": "034d48cdacd07f8a8796cd83c36ece8c396e78b45593dd85663501ff066c9f61",
+      "size_bytes": 282,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "4adf52384d7964930d8a45a7f854a6725e601ab005d1eedfe4edbdb02c34274c",
+      "size_bytes": 24031,
+      "media_type": "application/json",
+      "license": "dependency metadata only"
+    },
+    {
+      "path": "package.json",
+      "sha256": "1e1b212ab85c75da622bfcb64f5af4227f9e2427932b4f0bb5840be15783774b",
+      "size_bytes": 359,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "preview-contract.json",
+      "sha256": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
+      "size_bytes": 191,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "preview.ts",
+      "sha256": "6f98ab99ba2e3efc934857b31ec7f67c79c78b70fdfdf4e2d3a2c1e9e5a3d287",
+      "size_bytes": 876,
+      "media_type": "text/vnd.trolltech.linguist",
+      "license": "Apache-2.0"
+    },
+    {
+      "path": "product.json",
+      "sha256": "091e2d71e4e1042448b37b4497f4f6370e09988e0b627f5a742249dbb3d18143",
+      "size_bytes": 1009,
+      "media_type": "application/json",
+      "license": "Apache-2.0"
+    }
+  ],
+  "license_mapping": [
+    {
+      "paths": [
+        "LICENSE",
+        "README.md",
+        "cdk.json",
+        "configuration.schema.json",
+        "handler.ts",
+        "input.schema.json",
+        "package.json",
+        "preview-contract.json",
+        "preview.ts",
+        "product.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "authored original source; upstream code not copied; requires normal legal review"
+    },
+    {
+      "paths": [
+        "package-lock.json"
+      ],
+      "license": "dependency metadata only",
+      "status": "version-pinned dependencies; third-party package licenses remain applicable"
+    }
+  ]
+}

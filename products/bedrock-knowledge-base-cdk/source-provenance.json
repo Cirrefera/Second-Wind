@@ -1,0 +1,89 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0557",
+  "slug": "bedrock-knowledge-base-cdk",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "source_repo": "https://github.com/awslabs/generative-ai-cdk-constructs",
+  "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+  "source_path": "src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts",
+  "source_sha256": "ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df",
+  "relationship": "Original Second Wind wiring around pinned published APIs; no upstream implementation files are copied into this package. The upstream VectorKnowledgeBase default store is OpenSearch Serverless; creating it on deployment can incur AWS charges.",
+  "dependency_pins": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.8.1",
+    "@cdklabs/generative-ai-cdk-constructs": "0.1.320"
+  },
+  "dependency_integrity": {
+    "@cdklabs/generative-ai-cdk-constructs": "sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg=="
+  },
+  "upstream_source_files": [
+    {
+      "path": "src/cdk-lib/bedrock/knowledge-bases/vector-knowledge-base.ts",
+      "sha256": "ac4e64a51cc1ea3d949e06902e2d23bccb006fdf63950cbaf29f3edb727cd0df",
+      "repository": "https://github.com/awslabs/generative-ai-cdk-constructs",
+      "revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "relationship": "API/construct behavior inspected; no upstream implementation file copied."
+    }
+  ],
+  "runtime_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+  "preview_contract": null,
+  "review_status": "draft; trusted source and product review pending",
+  "license_mapping": {
+    "first_party_files": "Apache-2.0",
+    "upstream_dependency_license": "Apache-2.0",
+    "dependency_license_source": "npm package metadata and package LICENSE"
+  },
+  "local_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3",
+      "size_bytes": 640
+    },
+    {
+      "path": "README.md",
+      "sha256": "3c12f6f5950740187c309094ef81a5c672a065497c3bbf22993e5da2a08f01dc",
+      "size_bytes": 1572
+    },
+    {
+      "path": "config.example.json",
+      "sha256": "4f8d1a4944250f6a3785c8774c221a00fd33b80edd859033d05d548b837c5cab",
+      "size_bytes": 157
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "bf41789d6ea8583ccd36f5657cbc04fa54524ae9797b199afb1f081733cfbb55",
+      "size_bytes": 597
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "a28573ffbe02be689352f3eec7eaf966d21d249e7e81b2c252fc39a9b29dfd99",
+      "size_bytes": 10006
+    },
+    {
+      "path": "package.json",
+      "sha256": "7a82ccdc66c38ef3812aa232e574f261a98049da293a56a20b76621c8ce75991",
+      "size_bytes": 345
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "35cd8ae0ff981d2608e593ccec6b396d4a14d80c869ab96f244249765f79891c",
+      "size_bytes": 1844
+    },
+    {
+      "path": "product.mjs",
+      "sha256": "780c60fa35d5ea604ff61dc2cf646ba934683a6dc298d7f207a832f4727ccc91",
+      "size_bytes": 1004
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+      "size_bytes": 214
+    },
+    {
+      "path": "synth.mjs",
+      "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
+      "size_bytes": 313
+    }
+  ]
+}

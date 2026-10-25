@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0652",
+  "sku": "AWS-0652",
+  "slug": "cdk-cloudwatch",
+  "version": 2,
+  "service": "cloudwatch",
+  "product_kind": "artifact-product",
+  "route_summary": "CloudWatch metric, threshold alarm, dashboard widget, and composite alarm built from an explicit metric definition.",
+  "supported_boundary": "Local CDK synthesis for Amazon CloudWatch. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cloudwatch"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "cloudwatch",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.cloudwatch"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudwatch-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:cbcf521a93f8d5748e0fa9d60eb0cac71e60d522a0be3f2564b0736150b7c60e"
+}

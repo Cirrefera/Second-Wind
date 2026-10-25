@@ -1,0 +1,145 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0552",
+  "slug": "lambda-powertools-metrics-ts",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:b236688cd78f623950f1e92f11f02559595d1a2045fcdd0d6855da1bf76df17b",
+  "content_hash": "b236688cd78f623950f1e92f11f02559595d1a2045fcdd0d6855da1bf76df17b",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original, focused Node.js Lambda integration module for Embedded Metric Format business metrics using the pinned AWS Powertools TypeScript package.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "javascript": "src/metrics.mjs"
+    },
+    "configuration_schema": "config.schema.json",
+    "side_effects": "depends on the installed Powertools library and may emit logs, telemetry, or call AWS services when invoked"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "javascript"
+    ],
+    "runtime": "Node.js 20+ AWS Lambda",
+    "hosted_preview": "unavailable",
+    "private_worker_loader_preview": "not verified; no preview_contract",
+    "aws_deployment": "not-performed",
+    "reason": "native_library_or_AWS_runtime_required"
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "javascript"
+    ]
+  },
+  "tags": [
+    "lambda",
+    "powertools",
+    "metrics",
+    "cloudwatch",
+    "emf"
+  ],
+  "supported_boundary": "A Node.js Lambda helper that records bounded count metrics and flushes the actual Powertools Metrics EMF document to standard output. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The complete Powertools dependency closure and matching Lambda/AWS service runtime are not available in the hosted private Worker Loader.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ],
+  "dependencies": {
+    "@aws-lambda-powertools/metrics": "2.36.0"
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language",
+      "namespace",
+      "service_name"
+    ],
+    "properties": {
+      "language": {
+        "const": "javascript"
+      },
+      "namespace": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "service_name": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+      },
+      "default_dimensions": {
+        "type": "object",
+        "maxProperties": 8,
+        "additionalProperties": {
+          "type": "string",
+          "maxLength": 250
+        }
+      }
+    }
+  },
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "a07984bae1ee20e0bd76aeb8ca221120170c9686ae8777159dac86d9b4551d5b",
+      "size_bytes": 1603,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "189cb0c62ac3047f15c72cba62733e44d7f0c9f8d8606907da6d0263fc4e61ea",
+      "size_bytes": 631,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "186e9f248c8c8c487df794b4bac25723c68cc55b8754106f84eb46d21d633467",
+      "size_bytes": 410,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "8abbe89bfad653b42bb82fc15f3b855111865c3afdc6f112d07f2767ff84497f",
+      "size_bytes": 1384,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "src/metrics.mjs",
+      "sha256": "389b61ecf8f1b5a5d4932900d9522a415077d30c26bb184782f91b0afdea7b6f",
+      "size_bytes": 1615,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "d33ca08f3490de297b4814ee1660e8adad449bd0d0be32eab64e415b11e5cfbc",
+      "size_bytes": 611,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "validation": {
+    "basis": "pinned published Powertools package API inspection and local syntax checks",
+    "npm_integrity": "sha512-Y2+c406USCVjJPmJ6zOiZjbqdJUp683yPWVqbQoNCNVSBq5WzhpUpJ9puUY6tokwY1wC79K4xitpU/85yMqJqw==",
+    "aws_execution": "not_performed",
+    "hosted_preview": "unavailable"
+  }
+}

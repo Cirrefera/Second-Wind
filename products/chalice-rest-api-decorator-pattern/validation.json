@@ -1,0 +1,14 @@
+{
+  "result": "not_reverified",
+  "validation_kind": "native-chalice-package",
+  "chalice": "1.32.0",
+  "prior_source_validation": {
+    "result": "passed",
+    "aws_calls": "not_performed",
+    "deployment": "not_performed"
+  },
+  "current_candidate_native_verification": "not_run_after_offline_preview_hardening",
+  "required_next_validation": "rerun native Chalice package preview in approved offline runtime",
+  "hosted_workers_preview": "unavailable; Workers does not run Python subprocesses",
+  "publication_blocker": "native_reverification_required"
+}

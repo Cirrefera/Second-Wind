@@ -1,0 +1,148 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0553",
+  "slug": "lambda-powertools-idempotency-ts",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "lambda",
+  "release_ref": "sha256:acdd5b8d388b0ab7014260dceee773e28f261e24b171fa727856628074ee55db",
+  "content_hash": "acdd5b8d388b0ab7014260dceee773e28f261e24b171fa727856628074ee55db",
+  "hash_scope": "file-package-json-utf8",
+  "mime_type": "application/json",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "original_contribution": "Original, focused Node.js Lambda integration module for DynamoDB-backed idempotency for business events using the pinned AWS Powertools TypeScript package.",
+  "delivery_contract": {
+    "kind": "file-package",
+    "format": "self-contained JSON with exact UTF-8 file contents",
+    "entrypoints": {
+      "javascript": "src/idempotency.mjs"
+    },
+    "configuration_schema": "config.schema.json",
+    "side_effects": "depends on the installed Powertools library and may emit logs, telemetry, or call AWS services when invoked"
+  },
+  "validation_contract": {
+    "kind": "native-runtime-required",
+    "languages": [
+      "javascript"
+    ],
+    "runtime": "Node.js 20+ AWS Lambda",
+    "hosted_preview": "unavailable",
+    "private_worker_loader_preview": "not verified; no preview_contract",
+    "aws_deployment": "not-performed",
+    "reason": "native_library_or_AWS_runtime_required"
+  },
+  "language_policy": {
+    "mode": "configured",
+    "explicit_selection": true,
+    "configuration_field": "language",
+    "adapters": [
+      "javascript"
+    ]
+  },
+  "tags": [
+    "lambda",
+    "powertools",
+    "idempotency",
+    "dynamodb",
+    "retries"
+  ],
+  "supported_boundary": "A Node.js Lambda wrapper that uses the actual Powertools IdempotencyConfig and DynamoDBPersistenceLayer around a business-keyed handler. Native Node.js Lambda runtime only; no hosted preview, deployment, or service-side success assertion.",
+  "hosted_preview_available": false,
+  "native_preview_blocker": "The complete Powertools dependency closure and matching Lambda/AWS service runtime are not available in the hosted private Worker Loader.",
+  "publication_blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ],
+  "dependencies": {
+    "@aws-lambda-powertools/idempotency": "2.36.0",
+    "@aws-sdk/client-dynamodb": "3.1156.0"
+  },
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "language",
+      "table_name",
+      "event_key_jmespath"
+    ],
+    "properties": {
+      "language": {
+        "const": "javascript"
+      },
+      "table_name": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_.-]{3,255}$"
+      },
+      "event_key_jmespath": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "expires_after_seconds": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 31536000
+      },
+      "payload_validation_jmespath": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    }
+  },
+  "required_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8a0fc992e4ae307974c576bd9bf0f7bd894b7478bfd2c48bd6ef4506d35f3642",
+      "size_bytes": 2057,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "d46a09eba514bfb5797c18cd637cea41b0759427e942ef53417b9312d16294ab",
+      "size_bytes": 692,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "214df92d96690076b1d2d9bf6d035495c431cf51ec4ed4829134b5f7fa47968e",
+      "size_bytes": 465,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "source-provenance.json",
+      "sha256": "04310ccbd079516a200a911032d23dd9f8fa34f0bea29d84d032adeec31f273f",
+      "size_bytes": 1448,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "src/idempotency.mjs",
+      "sha256": "750573bf749f869dd9d6113a734936061a93e7797299dda728107952048a59ac",
+      "size_bytes": 1270,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "cce89ef7de5545a809d2709e6efa6e1f35be580a775258740f8d67856570b1cf",
+      "size_bytes": 611,
+      "mime_type": "application/json"
+    }
+  ],
+  "status": "draft",
+  "validation": {
+    "basis": "pinned published Powertools package API inspection and local syntax checks",
+    "npm_integrity": "sha512-TRL5Jcg+ufrnrAPqWJcsNRbBWTN+TJEXEg11jDD4b2hlVA8Jp3zE09o2p8sl7tmd+qJUMNlWguSyslWP/GYBSg==",
+    "aws_execution": "not_performed",
+    "hosted_preview": "unavailable"
+  }
+}

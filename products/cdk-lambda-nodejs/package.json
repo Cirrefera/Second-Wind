@@ -1,0 +1,22 @@
+{
+  "name": "cdk-lambda-nodejs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "tsx preview-runner.ts",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.8.1",
+    "esbuild": "0.28.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "aws-cdk": "2.1146.0"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "sku": "AWS-0630",
+  "slug": "aws-sdk-ruby-resource-interface",
+  "version": 1,
+  "current_origin": "original Second Wind wrapper; upstream implementation not included",
+  "upstream_repository": "https://github.com/aws/aws-sdk-ruby",
+  "primary_documentation": "https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/service-clients.html",
+  "upstream_license": "Apache-2.0",
+  "dependency_runtime": "ruby",
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "ruby",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "files": {
+    "Gemfile": "84ba745fb2b077f7729858d4dd8a1b08596c0554140a1797cc6e88764ae39fa0",
+    "LICENSE": "d6951daa5910c65585d117a38035bf1fe2fd23e86d20a5edd60754a7b9db5f72",
+    "README.md": "769fcc06200a017c25b0faeb03dfa473d0a45708a2eb4ee0972c9fb86c8f09d3",
+    "client.rb": "a815cd3518d767ff9dd08167e3c174a0e1db49480cdf149a122d3b78e86ce52f",
+    "configuration.schema.json": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
+    "input.schema.json": "95b4aba3ea504cb3a409c69ad5039079653d31808c854550e3237ec385289b90",
+    "preview-contract.json": "7d4e7eeb7ce4f2c26eb1d5c862633bee88d730dee69efd781fe0224aa022239d",
+    "source-provenance.json": "e0914f6cbc750e576ce757dddc1acf30953ec3714993cc0db61ad3e76d991e5c"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "Gemfile",
+        "LICENSE",
+        "README.md",
+        "client.rb",
+        "configuration.schema.json",
+        "input.schema.json",
+        "preview-contract.json",
+        "source-provenance.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "declared package license; not an independent legal certification"
+    }
+  ]
+}

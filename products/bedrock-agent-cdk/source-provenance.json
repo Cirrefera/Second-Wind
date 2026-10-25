@@ -1,0 +1,89 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0556",
+  "slug": "bedrock-agent-cdk",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "source_repo": "https://github.com/awslabs/generative-ai-cdk-constructs",
+  "source_revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+  "source_path": "src/cdk-lib/bedrock/agents/agent.ts",
+  "source_sha256": "b92bc3726c23634bb767675d3e2cb7dba46bc6f51eb11c940deb0917d8e57147",
+  "relationship": "Original Second Wind wiring around pinned published APIs; no upstream implementation files are copied into this package.",
+  "dependency_pins": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.8.1",
+    "@cdklabs/generative-ai-cdk-constructs": "0.1.320"
+  },
+  "dependency_integrity": {
+    "@cdklabs/generative-ai-cdk-constructs": "sha512-9C4pbGbr83gS9woaY+klsa4/6zSAHNW2+Si1DcjE/Dbx81vMgH1NDAmF0/S4Z0QClABl1EKR+dVq2SU9hBllrg=="
+  },
+  "upstream_source_files": [
+    {
+      "path": "src/cdk-lib/bedrock/agents/agent.ts",
+      "sha256": "b92bc3726c23634bb767675d3e2cb7dba46bc6f51eb11c940deb0917d8e57147",
+      "repository": "https://github.com/awslabs/generative-ai-cdk-constructs",
+      "revision": "2cbb52febd5e076bdd7c1f08782c9811d32363b4",
+      "relationship": "API/construct behavior inspected; no upstream implementation file copied."
+    }
+  ],
+  "runtime_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+  "preview_contract": null,
+  "review_status": "draft; trusted source and product review pending",
+  "license_mapping": {
+    "first_party_files": "Apache-2.0",
+    "upstream_dependency_license": "Apache-2.0",
+    "dependency_license_source": "npm package metadata and package LICENSE"
+  },
+  "local_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3",
+      "size_bytes": 640
+    },
+    {
+      "path": "README.md",
+      "sha256": "4f812612482c2597bda7d81ec2c1456345a737ead6b2a1922bbda14d01fc0616",
+      "size_bytes": 1586
+    },
+    {
+      "path": "config.example.json",
+      "sha256": "6988713b1a128efe40bd1394ccb3b9f1c399a83a506dd94af42f4dd158d6de35",
+      "size_bytes": 297
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "83048d0009cdfc1e99359613fae090032d8b87d1a632717ca965929f74af4a41",
+      "size_bytes": 777
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "8be5b8440bc5d31532306e7057ce53fb9b7ad206d161efa64afaafde11035ae4",
+      "size_bytes": 9988
+    },
+    {
+      "path": "package.json",
+      "sha256": "68c34a6aa525dd898ddcae62f14098b7a5cfe8a295f36dde84729bcb54f7e922",
+      "size_bytes": 336
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "e16274038916d99adb53e4815b185046501c151f4422f0a8c30ea1021bce8bfa",
+      "size_bytes": 1808
+    },
+    {
+      "path": "product.mjs",
+      "sha256": "80ff92a00cfa80e40915be16e479f0554878cac3454b62970be4f9d65842db80",
+      "size_bytes": 1089
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+      "size_bytes": 214
+    },
+    {
+      "path": "synth.mjs",
+      "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
+      "size_bytes": 313
+    }
+  ]
+}

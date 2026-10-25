@@ -1,0 +1,394 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0667",
+    "slug": "cdk-glue",
+    "name": "cdk-glue",
+    "kind": "artifact",
+    "service": "glue",
+    "summary": "Glue Data Catalog database and encrypted S3 crawler target.",
+    "guidance": "# cdk-glue\n\nGlue database and encrypted S3 data location with a least-privilege crawler role.\n\nThis is a focused original CDK v2 example for this AWS resource pattern. `stack.mjs` exports `createStack(app, configuration)`, the construct entrypoint to import into an AWS CDK application and synthesize a CloudFormation template. Pass the explicit `language: \"javascript\"` selection and any optional schema fields. Exact dependency versions and the lockfile are recorded in `package.json`; install them in an isolated build environment, then import `preview` from `preview.mjs` with the configuration schema in `config.schema.json`.\n\nThe private `preview.mjs` entrypoint calls AWS CDK's real `App.synth()` and returns only a bounded resource count and stable diagnostic codes. It does not return template contents, resource names, or source. The hosted Workers preview remains disabled because the current runtime cannot resolve `aws-cdk-lib`; the repository validation record documents local native synthesis.\n\nUpstream API reference: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_glue-readme.html\n\nReview the synthesized template, IAM permissions, costs, networking, and removal policies before deploying. Values are demonstration defaults and require environment-specific review.\n",
+    "price_usd": 1,
+    "invoke_kind": "resolve",
+    "invoke_key": "",
+    "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"properties\":{\"env\":{\"type\":\"object\",\"properties\":{\"account\":{\"type\":\"string\",\"pattern\":\"^[0-9]{12}$\"},\"region\":{\"type\":\"string\",\"minLength\":1}},\"additionalProperties\":false},\"databaseName\":{\"type\":\"string\"},\"language\":{\"type\":\"string\",\"enum\":[\"javascript\"]}},\"additionalProperties\":false,\"required\":[\"language\"]}",
+    "input_example": "{\"language\":\"javascript\"}",
+    "mime_type": "application/json",
+    "source_repo": "aws/aws-cdk",
+    "source_path": "packages/aws-cdk-lib/aws-glue",
+    "source_url": "https://github.com/aws/aws-cdk/tree/f6ad73c83a95a4b8fa5775b85585b104787a5ddc/packages/aws-cdk-lib/aws-glue",
+    "license_spdx": "Apache-2.0",
+    "provenance": "github",
+    "content_hash": "c7f12102e7205f3b",
+    "status": "draft",
+    "version": 2
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0667",
+    "slug": "cdk-glue",
+    "version": 2,
+    "product_kind": "artifact-product",
+    "service": "glue",
+    "release_ref": "sha256:a35a7c6404cb2e92544e81a70635471ce19f41a5529cc3fc0f5db97b5226d3fc",
+    "content_hash": "a35a7c6404cb2e92544e81a70635471ce19f41a5529cc3fc0f5db97b5226d3fc",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "Original Second Wind service-specific framework source, bounded private preview entrypoint, configuration schema, dependency pins, and validation record. Upstream API implementations are not copied.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "javascript": "stack.mjs"
+      },
+      "private_preview_entrypoint": "preview.mjs",
+      "configuration_schema": "config.schema.json",
+      "side_effects": "local synthesis/package generation only; no AWS calls or deployment"
+    },
+    "validation_contract": {
+      "kind": "native-cdk-synthesis",
+      "language": "javascript",
+      "framework_version": "aws-cdk-lib 2.274.0",
+      "aws_calls": "not_performed",
+      "deployment": "not_performed",
+      "hosted_preview": "unavailable",
+      "hosted_preview_reason": "The current Cloudflare Workers request runtime cannot load native CDK dependencies or execute Python subprocesses.",
+      "native_verification_status": "passed"
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "javascript"
+      ]
+    },
+    "pricing": {
+      "mode": "whole-product",
+      "max_amount_atomic": "1000000",
+      "asset": "USDC",
+      "network": "eip155:8453"
+    },
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "env": {
+          "type": "object",
+          "properties": {
+            "account": {
+              "type": "string",
+              "pattern": "^[0-9]{12}$"
+            },
+            "region": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "javascript"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "language"
+      ]
+    },
+    "tags": [
+      "glue",
+      "infrastructure-as-code",
+      "javascript",
+      "bounded-preview"
+    ],
+    "supported_boundary": "Glue Data Catalog database and encrypted S3 crawler target. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+    "required_files": [
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "README.md",
+        "sha256": "cdcf1a0e51a754d80ad39a79304eedb3b5306c9ae052dae839d76bcc9e39e085",
+        "size_bytes": 1295,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "config.schema.json",
+        "sha256": "ffc8f44e21e5576caeb4fbb2251f2260818a76249e60d7b31289287a3149fbc4",
+        "size_bytes": 610,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "b186a13ead52f2411d5e8036285fe62680cba8c27d53986d65ca84ed9c883ad1",
+        "size_bytes": 7983,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "package.json",
+        "sha256": "7f143a1eb003d6fcfa6b82e1758719d5538a6bc1dddad5ebf899f6a45b72e992",
+        "size_bytes": 158,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "preview.mjs",
+        "sha256": "91e64ce282b82f9ceb32258ee554bbf99ef02eb3a99a3faf6fa827754ce526bf",
+        "size_bytes": 1501,
+        "mime_type": "text/javascript"
+      },
+      {
+        "path": "source-provenance.json",
+        "sha256": "88e3474c9c1e88a1a6e02df2fee299e4df545bbdaa71980ad067e570ce540b05",
+        "size_bytes": 3165,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "stack.mjs",
+        "sha256": "451f49782bf9c99444f7475eb7820fd344a26b0fe4c6bbd4d34ff9d63895ba27",
+        "size_bytes": 1115,
+        "mime_type": "text/javascript"
+      },
+      {
+        "path": "validation.json",
+        "sha256": "71b1870eb81ba0fb06b3ef222df9932dab920bae38ea6d8de38ac3c133c14d49",
+        "size_bytes": 371,
+        "mime_type": "application/json"
+      }
+    ]
+  },
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0667",
+    "sku": "AWS-0667",
+    "slug": "cdk-glue",
+    "version": 2,
+    "release_ref": "sha256:a35a7c6404cb2e92544e81a70635471ce19f41a5529cc3fc0f5db97b5226d3fc",
+    "service": "glue",
+    "product_kind": "artifact-product",
+    "route_summary": "Glue Data Catalog database and encrypted S3 crawler target.",
+    "supported_boundary": "Glue Data Catalog database and encrypted S3 crawler target. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+    "language_policy": "explicit",
+    "aliases": [
+      "cdk-glue"
+    ],
+    "tags": [
+      "glue",
+      "infrastructure-as-code",
+      "javascript",
+      "bounded-preview"
+    ],
+    "taxonomy_ids": [
+      "aws.glue"
+    ],
+    "problem_family_ids": [
+      "infrastructure-as-code"
+    ],
+    "operations": [
+      "synthesize-infrastructure"
+    ],
+    "environments": [
+      "aws-cdk"
+    ],
+    "desired_outcomes": [
+      "cloudformation-template"
+    ],
+    "input_kinds": [
+      "cdk-configuration"
+    ],
+    "failure_signatures": [],
+    "languages": [
+      "javascript"
+    ],
+    "runtimes": [
+      "nodejs22"
+    ],
+    "required_evidence": [],
+    "exclusions": [
+      "aws-deployment",
+      "template-delivery-in-preview",
+      "source-delivery-in-preview"
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE",
+      "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "README.md",
+      "content": "# cdk-glue\n\nGlue database and encrypted S3 data location with a least-privilege crawler role.\n\nThis is a focused original CDK v2 example for this AWS resource pattern. `stack.mjs` exports `createStack(app, configuration)`, the construct entrypoint to import into an AWS CDK application and synthesize a CloudFormation template. Pass the explicit `language: \"javascript\"` selection and any optional schema fields. Exact dependency versions and the lockfile are recorded in `package.json`; install them in an isolated build environment, then import `preview` from `preview.mjs` with the configuration schema in `config.schema.json`.\n\nThe private `preview.mjs` entrypoint calls AWS CDK's real `App.synth()` and returns only a bounded resource count and stable diagnostic codes. It does not return template contents, resource names, or source. The hosted Workers preview remains disabled because the current runtime cannot resolve `aws-cdk-lib`; the repository validation record documents local native synthesis.\n\nUpstream API reference: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_glue-readme.html\n\nReview the synthesized template, IAM permissions, costs, networking, and removal policies before deploying. Values are demonstration defaults and require environment-specific review.\n",
+      "sha256": "cdcf1a0e51a754d80ad39a79304eedb3b5306c9ae052dae839d76bcc9e39e085",
+      "size_bytes": 1295,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "config.schema.json",
+      "content": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"env\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"account\": {\n          \"type\": \"string\",\n          \"pattern\": \"^[0-9]{12}$\"\n        },\n        \"region\": {\n          \"type\": \"string\",\n          \"minLength\": 1\n        }\n      },\n      \"additionalProperties\": false\n    },\n    \"databaseName\": {\n      \"type\": \"string\"\n    },\n    \"language\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"javascript\"\n      ]\n    }\n  },\n  \"additionalProperties\": false,\n  \"required\": [\n    \"language\"\n  ]\n}\n",
+      "sha256": "ffc8f44e21e5576caeb4fbb2251f2260818a76249e60d7b31289287a3149fbc4",
+      "size_bytes": 610,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package-lock.json",
+      "content": "{\n  \"name\": \"second-wind-cdk-glue\",\n  \"lockfileVersion\": 3,\n  \"requires\": true,\n  \"packages\": {\n    \"\": {\n      \"name\": \"second-wind-cdk-glue\",\n      \"dependencies\": {\n        \"aws-cdk-lib\": \"2.274.0\",\n        \"constructs\": \"10.8.1\"\n      }\n    },\n    \"node_modules/@aws-cdk/asset-awscli-v1\": {\n      \"version\": \"2.2.292\",\n      \"resolved\": \"https://registry.npmjs.org/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.292.tgz\",\n      \"integrity\": \"sha512-d4aMFsAFj19FtxVyw8IzlUKv5Zu4sIvgnEjI2IU6IWBJgVbJ4aFnadANqYa+6MwB1CQbGOg0jh8WE77M+Nb/9A==\",\n      \"license\": \"Apache-2.0\"\n    },\n    \"node_modules/@aws-cdk/asset-node-proxy-agent-v6\": {\n      \"version\": \"2.1.3\",\n      \"resolved\": \"https://registry.npmjs.org/@aws-cdk/asset-node-proxy-agent-v6/-/asset-node-proxy-agent-v6-2.1.3.tgz\",\n      \"integrity\": \"sha512-98We1QWfin9vtuuQtNFhIIAEWb8CreyYTAP0Vn8HqSBoNiFJM9nZgifJeQawT9Wq0NX1HCNFlxCyTccIrK1PSA==\",\n      \"license\": \"Apache-2.0\"\n    },\n    \"node_modules/@aws-cdk/cloud-assembly-schema\": {\n      \"version\": \"55.2.0\",\n      \"resolved\": \"https://registry.npmjs.org/@aws-cdk/cloud-assembly-schema/-/cloud-assembly-schema-55.2.0.tgz\",\n      \"integrity\": \"sha512-DHfYrZdyJZwWlI5sOK97X7SDc5Ow+uH3w3/qnB/ZYtY530lEsLObOoq/Z8BcJM6bAwJI6ozIgg9VYg2ot+A1jQ==\",\n      \"bundleDependencies\": [\n        \"jsonschema\",\n        \"semver\"\n      ],\n      \"license\": \"Apache-2.0\",\n      \"dependencies\": {\n        \"jsonschema\": \"^1.5.0\",\n        \"semver\": \"^7.8.5\"\n      },\n      \"engines\": {\n        \"node\": \">= 18.0.0\"\n      }\n    },\n    \"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/jsonschema\": {\n      \"version\": \"1.5.0\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \"*\"\n      }\n    },\n    \"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/semver\": {\n      \"version\": \"7.8.5\",\n      \"inBundle\": true,\n      \"license\": \"ISC\",\n      \"bin\": {\n        \"semver\": \"bin/semver.js\"\n      },\n      \"engines\": {\n        \"node\": \">=10\"\n      }\n    },\n    \"node_modules/aws-cdk-lib\": {\n      \"version\": \"2.274.0\",\n      \"resolved\": \"https://registry.npmjs.org/aws-cdk-lib/-/aws-cdk-lib-2.274.0.tgz\",\n      \"integrity\": \"sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg==\",\n      \"bundleDependencies\": [\n        \"@aws/cloudformation-validate\",\n        \"@balena/dockerignore\",\n        \"@aws-cdk/cloud-assembly-api\",\n        \"case\",\n        \"fs-extra\",\n        \"ignore\",\n        \"jsonschema\",\n        \"minimatch\",\n        \"punycode\",\n        \"semver\",\n        \"yaml\",\n        \"mime-types\"\n      ],\n      \"license\": \"Apache-2.0\",\n      \"dependencies\": {\n        \"@aws-cdk/asset-awscli-v1\": \"2.2.292\",\n        \"@aws-cdk/asset-node-proxy-agent-v6\": \"^2.1.3\",\n        \"@aws-cdk/cloud-assembly-api\": \"^2.5.0\",\n        \"@aws-cdk/cloud-assembly-schema\": \"^55.0.0\",\n        \"@aws/cloudformation-validate\": \"1.12.1\",\n        \"@balena/dockerignore\": \"^1.0.2\",\n        \"case\": \"1.6.3\",\n        \"fs-extra\": \"^11.4.1\",\n        \"ignore\": \"^5.3.2\",\n        \"jsonschema\": \"^1.5.0\",\n        \"mime-types\": \"^2.1.35\",\n        \"minimatch\": \"^10.2.6\",\n        \"punycode\": \"^2.3.1\",\n        \"semver\": \"^7.8.5\",\n        \"yaml\": \"1.10.3\"\n      },\n      \"engines\": {\n        \"node\": \">= 20.0.0\"\n      },\n      \"peerDependencies\": {\n        \"constructs\": \"^10.5.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/@aws-cdk/cloud-assembly-api\": {\n      \"version\": \"2.5.0\",\n      \"inBundle\": true,\n      \"license\": \"Apache-2.0\",\n      \"dependencies\": {\n        \"json-source-map\": \"^0.6.1\",\n        \"jsonschema\": \"^1.5.0\",\n        \"semver\": \"^7.8.5\"\n      },\n      \"engines\": {\n        \"node\": \">= 18.0.0\"\n      },\n      \"peerDependencies\": {\n        \"@aws-cdk/cloud-assembly-schema\": \">=55.0.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/@aws/cloudformation-validate\": {\n      \"version\": \"1.12.1\",\n      \"inBundle\": true,\n      \"license\": \"Apache-2.0\",\n      \"engines\": {\n        \"node\": \">=20.0.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/@balena/dockerignore\": {\n      \"version\": \"1.0.2\",\n      \"inBundle\": true,\n      \"license\": \"Apache-2.0\"\n    },\n    \"node_modules/aws-cdk-lib/node_modules/balanced-match\": {\n      \"version\": \"4.0.4\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \"18 || 20 || >=22\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/brace-expansion\": {\n      \"version\": \"5.0.12\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"balanced-match\": \"^4.0.2\"\n      },\n      \"engines\": {\n        \"node\": \"20 || >=22\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/case\": {\n      \"version\": \"1.6.3\",\n      \"inBundle\": true,\n      \"license\": \"(MIT OR GPL-3.0-or-later)\",\n      \"engines\": {\n        \"node\": \">= 0.8.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/fs-extra\": {\n      \"version\": \"11.4.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"graceful-fs\": \"^4.2.0\",\n        \"jsonfile\": \"^6.0.1\",\n        \"universalify\": \"^2.0.0\"\n      },\n      \"engines\": {\n        \"node\": \">=14.14\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/graceful-fs\": {\n      \"version\": \"4.2.11\",\n      \"inBundle\": true,\n      \"license\": \"ISC\"\n    },\n    \"node_modules/aws-cdk-lib/node_modules/ignore\": {\n      \"version\": \"5.3.2\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">= 4\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/json-source-map\": {\n      \"version\": \"0.6.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\"\n    },\n    \"node_modules/aws-cdk-lib/node_modules/jsonfile\": {\n      \"version\": \"6.2.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"universalify\": \"^2.0.0\"\n      },\n      \"optionalDependencies\": {\n        \"graceful-fs\": \"^4.1.6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/jsonschema\": {\n      \"version\": \"1.5.0\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \"*\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/mime-db\": {\n      \"version\": \"1.52.0\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">= 0.6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/mime-types\": {\n      \"version\": \"2.1.35\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"dependencies\": {\n        \"mime-db\": \"1.52.0\"\n      },\n      \"engines\": {\n        \"node\": \">= 0.6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/minimatch\": {\n      \"version\": \"10.2.6\",\n      \"inBundle\": true,\n      \"license\": \"BlueOak-1.0.0\",\n      \"dependencies\": {\n        \"brace-expansion\": \"^5.0.8\"\n      },\n      \"engines\": {\n        \"node\": \"18 || 20 || >=22\"\n      },\n      \"funding\": {\n        \"url\": \"https://github.com/sponsors/isaacs\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/punycode\": {\n      \"version\": \"2.3.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">=6\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/semver\": {\n      \"version\": \"7.8.5\",\n      \"inBundle\": true,\n      \"license\": \"ISC\",\n      \"bin\": {\n        \"semver\": \"bin/semver.js\"\n      },\n      \"engines\": {\n        \"node\": \">=10\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/universalify\": {\n      \"version\": \"2.0.1\",\n      \"inBundle\": true,\n      \"license\": \"MIT\",\n      \"engines\": {\n        \"node\": \">= 10.0.0\"\n      }\n    },\n    \"node_modules/aws-cdk-lib/node_modules/yaml\": {\n      \"version\": \"1.10.3\",\n      \"inBundle\": true,\n      \"license\": \"ISC\",\n      \"engines\": {\n        \"node\": \">= 6\"\n      }\n    },\n    \"node_modules/constructs\": {\n      \"version\": \"10.8.1\",\n      \"resolved\": \"https://registry.npmjs.org/constructs/-/constructs-10.8.1.tgz\",\n      \"integrity\": \"sha512-98yGXYyhePqPYh3cYu8nzBERmAhC0DONe3UD03okK0nehZ7hYP4wgZuf02a04+uOWxnTJ5Rpp5m0GRNpwyLGGA==\",\n      \"license\": \"Apache-2.0\"\n    }\n  }\n}\n",
+      "sha256": "b186a13ead52f2411d5e8036285fe62680cba8c27d53986d65ca84ed9c883ad1",
+      "size_bytes": 7983,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "package.json",
+      "content": "{\n  \"name\": \"second-wind-cdk-glue\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"dependencies\": {\n    \"aws-cdk-lib\": \"2.274.0\",\n    \"constructs\": \"10.8.1\"\n  }\n}\n",
+      "sha256": "7f143a1eb003d6fcfa6b82e1758719d5538a6bc1dddad5ebf899f6a45b72e992",
+      "size_bytes": 158,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.mjs",
+      "content": "const SLUG = 'cdk-glue';\nconst ALLOWED = new Set([\"databaseName\", \"language\"]);\nexport async function preview({ configuration = {}, selected_components = [] } = {}) {\n  if (!configuration || typeof configuration !== 'object' || Array.isArray(configuration) || configuration.language !== 'javascript' || Object.keys(configuration).some(k => !ALLOWED.has(k) && k !== 'env')) {\n    return { ok: false, status: 'invalid', slug: SLUG, resource_count: 0, diagnostic_codes: ['invalid_configuration'] };\n  }\n  if (!Array.isArray(selected_components) || selected_components.length !== 0) {\n    return { ok: false, status: 'invalid', slug: SLUG, resource_count: 0, diagnostic_codes: ['unsupported_components'] };\n  }\n  try {\n    const { App } = await import('aws-cdk-lib');\n    const { createStack } = await import('./stack.mjs');\n    const app = new App({ analyticsReporting: false });\n    const stack = createStack(app, configuration);\n    const template = app.synth().getStackArtifact(stack.artifactId).template;\n    const resource_count = Object.keys(template.Resources ?? {}).length;\n    return { ok: true, status: 'ok', slug: SLUG, resource_count, diagnostic_codes: [] };\n  } catch (error) {\n    const missing = /cannot find package|cannot find module|module not found/i.test(String(error?.message ?? error));\n    return { ok: false, status: missing ? 'unavailable' : 'error', slug: SLUG, resource_count: 0, diagnostic_codes: [missing ? 'runtime_dependency_unavailable' : 'cdk_synthesis_failed'] };\n  }\n}\n",
+      "sha256": "91e64ce282b82f9ceb32258ee554bbf99ef02eb3a99a3faf6fa827754ce526bf",
+      "size_bytes": 1501,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "source-provenance.json",
+      "content": "{\n  \"slug\": \"cdk-glue\",\n  \"origin\": \"Original Second Wind contribution, authored against the AWS CDK v2 public construct API. No AWS CDK upstream source copied.\",\n  \"upstream\": {\n    \"repository\": \"aws/aws-cdk\",\n    \"revision\": \"f6ad73c83a95a4b8fa5775b85585b104787a5ddc\",\n    \"module\": \"aws-glue\",\n    \"api_reference\": \"https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.@aws-cdk-lib.aws_glue-readme.html\"\n  },\n  \"license\": \"Apache-2.0\",\n  \"runtime_blocker\": \"CDK synthesis requires aws-cdk-lib and constructs Node modules, which the current Workers request sandbox cannot resolve. Product preview remains unavailable until a reviewed isolated runtime is provided.\",\n  \"source_revision\": \"f6ad73c83a95a4b8fa5775b85585b104787a5ddc\",\n  \"delivered_files\": [\n    {\n      \"path\": \"LICENSE\",\n      \"sha256\": \"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\n      \"size_bytes\": 11357,\n      \"media_type\": \"application/octet-stream\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"README.md\",\n      \"sha256\": \"cdcf1a0e51a754d80ad39a79304eedb3b5306c9ae052dae839d76bcc9e39e085\",\n      \"size_bytes\": 1295,\n      \"media_type\": \"text/markdown\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"config.schema.json\",\n      \"sha256\": \"ffc8f44e21e5576caeb4fbb2251f2260818a76249e60d7b31289287a3149fbc4\",\n      \"size_bytes\": 610,\n      \"media_type\": \"application/json\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"package-lock.json\",\n      \"sha256\": \"b186a13ead52f2411d5e8036285fe62680cba8c27d53986d65ca84ed9c883ad1\",\n      \"size_bytes\": 7983,\n      \"media_type\": \"application/json\",\n      \"license\": \"dependency metadata only\"\n    },\n    {\n      \"path\": \"package.json\",\n      \"sha256\": \"7f143a1eb003d6fcfa6b82e1758719d5538a6bc1dddad5ebf899f6a45b72e992\",\n      \"size_bytes\": 158,\n      \"media_type\": \"application/json\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"preview.mjs\",\n      \"sha256\": \"91e64ce282b82f9ceb32258ee554bbf99ef02eb3a99a3faf6fa827754ce526bf\",\n      \"size_bytes\": 1501,\n      \"media_type\": \"text/javascript\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"stack.mjs\",\n      \"sha256\": \"451f49782bf9c99444f7475eb7820fd344a26b0fe4c6bbd4d34ff9d63895ba27\",\n      \"size_bytes\": 1115,\n      \"media_type\": \"text/javascript\",\n      \"license\": \"Apache-2.0\"\n    },\n    {\n      \"path\": \"validation.json\",\n      \"sha256\": \"71b1870eb81ba0fb06b3ef222df9932dab920bae38ea6d8de38ac3c133c14d49\",\n      \"size_bytes\": 371,\n      \"media_type\": \"application/json\",\n      \"license\": \"Apache-2.0\"\n    }\n  ],\n  \"license_mapping\": [\n    {\n      \"paths\": [\n        \"LICENSE\",\n        \"README.md\",\n        \"config.schema.json\",\n        \"package.json\",\n        \"preview.mjs\",\n        \"stack.mjs\",\n        \"validation.json\"\n      ],\n      \"license\": \"Apache-2.0\",\n      \"license_file\": \"LICENSE\",\n      \"status\": \"authored original source; upstream code not copied; requires normal legal review\"\n    },\n    {\n      \"paths\": [\n        \"package-lock.json\"\n      ],\n      \"license\": \"dependency metadata only\",\n      \"status\": \"version-pinned dependencies; third-party package licenses remain applicable\"\n    }\n  ]\n}\n",
+      "sha256": "88e3474c9c1e88a1a6e02df2fee299e4df545bbdaa71980ad067e570ce540b05",
+      "size_bytes": 3165,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "stack.mjs",
+      "content": "import * as cdk from 'aws-cdk-lib';\nimport * as glue from 'aws-cdk-lib/aws-glue';\nimport * as s3 from 'aws-cdk-lib/aws-s3';\nimport * as iam from 'aws-cdk-lib/aws-iam';\n\nexport function createStack(app, config) {\n  const stack = new cdk.Stack(app, 'cdk-glue', { env: config.env });\n  const data = new s3.Bucket(stack, 'Data', { blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL, encryption: s3.BucketEncryption.S3_MANAGED, enforceSSL: true });\n  const database = new glue.CfnDatabase(stack, 'Database', { catalogId: cdk.Aws.ACCOUNT_ID, databaseInput: { name: config.databaseName ?? 'lake' } });\n  const role = new iam.Role(stack, 'CrawlerRole', { assumedBy: new iam.ServicePrincipal('glue.amazonaws.com'), managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSGlueServiceRole')] });\n  data.grantRead(role);\n  new glue.CfnCrawler(stack, 'Crawler', { name: 'data-catalog-crawler', role: role.roleArn, databaseName: database.ref, targets: { s3Targets: [{ path: data.s3UrlForObject() }] }, schemaChangePolicy: { updateBehavior: 'UPDATE_IN_DATABASE', deleteBehavior: 'LOG' } });\n  return stack;\n}\n",
+      "sha256": "451f49782bf9c99444f7475eb7820fd344a26b0fe4c6bbd4d34ff9d63895ba27",
+      "size_bytes": 1115,
+      "mime_type": "text/javascript"
+    },
+    {
+      "path": "validation.json",
+      "content": "{\n  \"result\": \"passed\",\n  \"validation_kind\": \"native-aws-cdk-synthesis\",\n  \"aws_cdk_lib\": \"2.274.0\",\n  \"constructs\": \"10.8.1\",\n  \"resource_count\": 6,\n  \"preview_execution\": \"real App.synth(); resource counts only\",\n  \"aws_calls\": \"not performed\",\n  \"deployment\": \"not performed\",\n  \"hosted_workers_preview\": \"unavailable; Workers does not resolve external CDK modules\"\n}\n",
+      "sha256": "71b1870eb81ba0fb06b3ef222df9932dab920bae38ea6d8de38ac3c133c14d49",
+      "size_bytes": 371,
+      "mime_type": "application/json"
+    }
+  ],
+  "payload": {
+    "content": "{\"files\":[{\"content\":\"                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \\\"License\\\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \\\"Licensor\\\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \\\"Legal Entity\\\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \\\"control\\\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \\\"You\\\" (or \\\"Your\\\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \\\"Source\\\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \\\"Object\\\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \\\"Work\\\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \\\"Derivative Works\\\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \\\"Contribution\\\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \\\"submitted\\\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \\\"Not a Contribution.\\\"\\n\\n      \\\"Contributor\\\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \\\"NOTICE\\\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \\\"AS IS\\\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \\\"[]\\\"\\n      replaced with your own identifying information. (Don't include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \\\"printed page\\\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \\\"License\\\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"LICENSE\",\"sha256\":\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\"size_bytes\":11357},{\"content\":\"# cdk-glue\\n\\nGlue database and encrypted S3 data location with a least-privilege crawler role.\\n\\nThis is a focused original CDK v2 example for this AWS resource pattern. `stack.mjs` exports `createStack(app, configuration)`, the construct entrypoint to import into an AWS CDK application and synthesize a CloudFormation template. Pass the explicit `language: \\\"javascript\\\"` selection and any optional schema fields. Exact dependency versions and the lockfile are recorded in `package.json`; install them in an isolated build environment, then import `preview` from `preview.mjs` with the configuration schema in `config.schema.json`.\\n\\nThe private `preview.mjs` entrypoint calls AWS CDK's real `App.synth()` and returns only a bounded resource count and stable diagnostic codes. It does not return template contents, resource names, or source. The hosted Workers preview remains disabled because the current runtime cannot resolve `aws-cdk-lib`; the repository validation record documents local native synthesis.\\n\\nUpstream API reference: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_glue-readme.html\\n\\nReview the synthesized template, IAM permissions, costs, networking, and removal policies before deploying. Values are demonstration defaults and require environment-specific review.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"README.md\",\"sha256\":\"cdcf1a0e51a754d80ad39a79304eedb3b5306c9ae052dae839d76bcc9e39e085\",\"size_bytes\":1295},{\"content\":\"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"properties\\\": {\\n    \\\"env\\\": {\\n      \\\"type\\\": \\\"object\\\",\\n      \\\"properties\\\": {\\n        \\\"account\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"pattern\\\": \\\"^[0-9]{12}$\\\"\\n        },\\n        \\\"region\\\": {\\n          \\\"type\\\": \\\"string\\\",\\n          \\\"minLength\\\": 1\\n        }\\n      },\\n      \\\"additionalProperties\\\": false\\n    },\\n    \\\"databaseName\\\": {\\n      \\\"type\\\": \\\"string\\\"\\n    },\\n    \\\"language\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"enum\\\": [\\n        \\\"javascript\\\"\\n      ]\\n    }\\n  },\\n  \\\"additionalProperties\\\": false,\\n  \\\"required\\\": [\\n    \\\"language\\\"\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"config.schema.json\",\"sha256\":\"ffc8f44e21e5576caeb4fbb2251f2260818a76249e60d7b31289287a3149fbc4\",\"size_bytes\":610},{\"content\":\"{\\n  \\\"name\\\": \\\"second-wind-cdk-glue\\\",\\n  \\\"lockfileVersion\\\": 3,\\n  \\\"requires\\\": true,\\n  \\\"packages\\\": {\\n    \\\"\\\": {\\n      \\\"name\\\": \\\"second-wind-cdk-glue\\\",\\n      \\\"dependencies\\\": {\\n        \\\"aws-cdk-lib\\\": \\\"2.274.0\\\",\\n        \\\"constructs\\\": \\\"10.8.1\\\"\\n      }\\n    },\\n    \\\"node_modules/@aws-cdk/asset-awscli-v1\\\": {\\n      \\\"version\\\": \\\"2.2.292\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.292.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-d4aMFsAFj19FtxVyw8IzlUKv5Zu4sIvgnEjI2IU6IWBJgVbJ4aFnadANqYa+6MwB1CQbGOg0jh8WE77M+Nb/9A==\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    \\\"node_modules/@aws-cdk/asset-node-proxy-agent-v6\\\": {\\n      \\\"version\\\": \\\"2.1.3\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/@aws-cdk/asset-node-proxy-agent-v6/-/asset-node-proxy-agent-v6-2.1.3.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-98We1QWfin9vtuuQtNFhIIAEWb8CreyYTAP0Vn8HqSBoNiFJM9nZgifJeQawT9Wq0NX1HCNFlxCyTccIrK1PSA==\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    \\\"node_modules/@aws-cdk/cloud-assembly-schema\\\": {\\n      \\\"version\\\": \\\"55.2.0\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/@aws-cdk/cloud-assembly-schema/-/cloud-assembly-schema-55.2.0.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-DHfYrZdyJZwWlI5sOK97X7SDc5Ow+uH3w3/qnB/ZYtY530lEsLObOoq/Z8BcJM6bAwJI6ozIgg9VYg2ot+A1jQ==\\\",\\n      \\\"bundleDependencies\\\": [\\n        \\\"jsonschema\\\",\\n        \\\"semver\\\"\\n      ],\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"jsonschema\\\": \\\"^1.5.0\\\",\\n        \\\"semver\\\": \\\"^7.8.5\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 18.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/jsonschema\\\": {\\n      \\\"version\\\": \\\"1.5.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"*\\\"\\n      }\\n    },\\n    \\\"node_modules/@aws-cdk/cloud-assembly-schema/node_modules/semver\\\": {\\n      \\\"version\\\": \\\"7.8.5\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\",\\n      \\\"bin\\\": {\\n        \\\"semver\\\": \\\"bin/semver.js\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=10\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib\\\": {\\n      \\\"version\\\": \\\"2.274.0\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/aws-cdk-lib/-/aws-cdk-lib-2.274.0.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg==\\\",\\n      \\\"bundleDependencies\\\": [\\n        \\\"@aws/cloudformation-validate\\\",\\n        \\\"@balena/dockerignore\\\",\\n        \\\"@aws-cdk/cloud-assembly-api\\\",\\n        \\\"case\\\",\\n        \\\"fs-extra\\\",\\n        \\\"ignore\\\",\\n        \\\"jsonschema\\\",\\n        \\\"minimatch\\\",\\n        \\\"punycode\\\",\\n        \\\"semver\\\",\\n        \\\"yaml\\\",\\n        \\\"mime-types\\\"\\n      ],\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"@aws-cdk/asset-awscli-v1\\\": \\\"2.2.292\\\",\\n        \\\"@aws-cdk/asset-node-proxy-agent-v6\\\": \\\"^2.1.3\\\",\\n        \\\"@aws-cdk/cloud-assembly-api\\\": \\\"^2.5.0\\\",\\n        \\\"@aws-cdk/cloud-assembly-schema\\\": \\\"^55.0.0\\\",\\n        \\\"@aws/cloudformation-validate\\\": \\\"1.12.1\\\",\\n        \\\"@balena/dockerignore\\\": \\\"^1.0.2\\\",\\n        \\\"case\\\": \\\"1.6.3\\\",\\n        \\\"fs-extra\\\": \\\"^11.4.1\\\",\\n        \\\"ignore\\\": \\\"^5.3.2\\\",\\n        \\\"jsonschema\\\": \\\"^1.5.0\\\",\\n        \\\"mime-types\\\": \\\"^2.1.35\\\",\\n        \\\"minimatch\\\": \\\"^10.2.6\\\",\\n        \\\"punycode\\\": \\\"^2.3.1\\\",\\n        \\\"semver\\\": \\\"^7.8.5\\\",\\n        \\\"yaml\\\": \\\"1.10.3\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 20.0.0\\\"\\n      },\\n      \\\"peerDependencies\\\": {\\n        \\\"constructs\\\": \\\"^10.5.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/@aws-cdk/cloud-assembly-api\\\": {\\n      \\\"version\\\": \\\"2.5.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"json-source-map\\\": \\\"^0.6.1\\\",\\n        \\\"jsonschema\\\": \\\"^1.5.0\\\",\\n        \\\"semver\\\": \\\"^7.8.5\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 18.0.0\\\"\\n      },\\n      \\\"peerDependencies\\\": {\\n        \\\"@aws-cdk/cloud-assembly-schema\\\": \\\">=55.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/@aws/cloudformation-validate\\\": {\\n      \\\"version\\\": \\\"1.12.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=20.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/@balena/dockerignore\\\": {\\n      \\\"version\\\": \\\"1.0.2\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/balanced-match\\\": {\\n      \\\"version\\\": \\\"4.0.4\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"18 || 20 || >=22\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/brace-expansion\\\": {\\n      \\\"version\\\": \\\"5.0.12\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"balanced-match\\\": \\\"^4.0.2\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"20 || >=22\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/case\\\": {\\n      \\\"version\\\": \\\"1.6.3\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"(MIT OR GPL-3.0-or-later)\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 0.8.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/fs-extra\\\": {\\n      \\\"version\\\": \\\"11.4.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"graceful-fs\\\": \\\"^4.2.0\\\",\\n        \\\"jsonfile\\\": \\\"^6.0.1\\\",\\n        \\\"universalify\\\": \\\"^2.0.0\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=14.14\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/graceful-fs\\\": {\\n      \\\"version\\\": \\\"4.2.11\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\"\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/ignore\\\": {\\n      \\\"version\\\": \\\"5.3.2\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 4\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/json-source-map\\\": {\\n      \\\"version\\\": \\\"0.6.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\"\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/jsonfile\\\": {\\n      \\\"version\\\": \\\"6.2.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"universalify\\\": \\\"^2.0.0\\\"\\n      },\\n      \\\"optionalDependencies\\\": {\\n        \\\"graceful-fs\\\": \\\"^4.1.6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/jsonschema\\\": {\\n      \\\"version\\\": \\\"1.5.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"*\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/mime-db\\\": {\\n      \\\"version\\\": \\\"1.52.0\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 0.6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/mime-types\\\": {\\n      \\\"version\\\": \\\"2.1.35\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"dependencies\\\": {\\n        \\\"mime-db\\\": \\\"1.52.0\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 0.6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/minimatch\\\": {\\n      \\\"version\\\": \\\"10.2.6\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"BlueOak-1.0.0\\\",\\n      \\\"dependencies\\\": {\\n        \\\"brace-expansion\\\": \\\"^5.0.8\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\"18 || 20 || >=22\\\"\\n      },\\n      \\\"funding\\\": {\\n        \\\"url\\\": \\\"https://github.com/sponsors/isaacs\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/punycode\\\": {\\n      \\\"version\\\": \\\"2.3.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=6\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/semver\\\": {\\n      \\\"version\\\": \\\"7.8.5\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\",\\n      \\\"bin\\\": {\\n        \\\"semver\\\": \\\"bin/semver.js\\\"\\n      },\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">=10\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/universalify\\\": {\\n      \\\"version\\\": \\\"2.0.1\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"MIT\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 10.0.0\\\"\\n      }\\n    },\\n    \\\"node_modules/aws-cdk-lib/node_modules/yaml\\\": {\\n      \\\"version\\\": \\\"1.10.3\\\",\\n      \\\"inBundle\\\": true,\\n      \\\"license\\\": \\\"ISC\\\",\\n      \\\"engines\\\": {\\n        \\\"node\\\": \\\">= 6\\\"\\n      }\\n    },\\n    \\\"node_modules/constructs\\\": {\\n      \\\"version\\\": \\\"10.8.1\\\",\\n      \\\"resolved\\\": \\\"https://registry.npmjs.org/constructs/-/constructs-10.8.1.tgz\\\",\\n      \\\"integrity\\\": \\\"sha512-98yGXYyhePqPYh3cYu8nzBERmAhC0DONe3UD03okK0nehZ7hYP4wgZuf02a04+uOWxnTJ5Rpp5m0GRNpwyLGGA==\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    }\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"package-lock.json\",\"sha256\":\"b186a13ead52f2411d5e8036285fe62680cba8c27d53986d65ca84ed9c883ad1\",\"size_bytes\":7983},{\"content\":\"{\\n  \\\"name\\\": \\\"second-wind-cdk-glue\\\",\\n  \\\"private\\\": true,\\n  \\\"type\\\": \\\"module\\\",\\n  \\\"dependencies\\\": {\\n    \\\"aws-cdk-lib\\\": \\\"2.274.0\\\",\\n    \\\"constructs\\\": \\\"10.8.1\\\"\\n  }\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"package.json\",\"sha256\":\"7f143a1eb003d6fcfa6b82e1758719d5538a6bc1dddad5ebf899f6a45b72e992\",\"size_bytes\":158},{\"content\":\"const SLUG = 'cdk-glue';\\nconst ALLOWED = new Set([\\\"databaseName\\\", \\\"language\\\"]);\\nexport async function preview({ configuration = {}, selected_components = [] } = {}) {\\n  if (!configuration || typeof configuration !== 'object' || Array.isArray(configuration) || configuration.language !== 'javascript' || Object.keys(configuration).some(k => !ALLOWED.has(k) && k !== 'env')) {\\n    return { ok: false, status: 'invalid', slug: SLUG, resource_count: 0, diagnostic_codes: ['invalid_configuration'] };\\n  }\\n  if (!Array.isArray(selected_components) || selected_components.length !== 0) {\\n    return { ok: false, status: 'invalid', slug: SLUG, resource_count: 0, diagnostic_codes: ['unsupported_components'] };\\n  }\\n  try {\\n    const { App } = await import('aws-cdk-lib');\\n    const { createStack } = await import('./stack.mjs');\\n    const app = new App({ analyticsReporting: false });\\n    const stack = createStack(app, configuration);\\n    const template = app.synth().getStackArtifact(stack.artifactId).template;\\n    const resource_count = Object.keys(template.Resources ?? {}).length;\\n    return { ok: true, status: 'ok', slug: SLUG, resource_count, diagnostic_codes: [] };\\n  } catch (error) {\\n    const missing = /cannot find package|cannot find module|module not found/i.test(String(error?.message ?? error));\\n    return { ok: false, status: missing ? 'unavailable' : 'error', slug: SLUG, resource_count: 0, diagnostic_codes: [missing ? 'runtime_dependency_unavailable' : 'cdk_synthesis_failed'] };\\n  }\\n}\\n\",\"mime_type\":\"text/javascript\",\"path\":\"preview.mjs\",\"sha256\":\"91e64ce282b82f9ceb32258ee554bbf99ef02eb3a99a3faf6fa827754ce526bf\",\"size_bytes\":1501},{\"content\":\"{\\n  \\\"slug\\\": \\\"cdk-glue\\\",\\n  \\\"origin\\\": \\\"Original Second Wind contribution, authored against the AWS CDK v2 public construct API. No AWS CDK upstream source copied.\\\",\\n  \\\"upstream\\\": {\\n    \\\"repository\\\": \\\"aws/aws-cdk\\\",\\n    \\\"revision\\\": \\\"f6ad73c83a95a4b8fa5775b85585b104787a5ddc\\\",\\n    \\\"module\\\": \\\"aws-glue\\\",\\n    \\\"api_reference\\\": \\\"https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.@aws-cdk-lib.aws_glue-readme.html\\\"\\n  },\\n  \\\"license\\\": \\\"Apache-2.0\\\",\\n  \\\"runtime_blocker\\\": \\\"CDK synthesis requires aws-cdk-lib and constructs Node modules, which the current Workers request sandbox cannot resolve. Product preview remains unavailable until a reviewed isolated runtime is provided.\\\",\\n  \\\"source_revision\\\": \\\"f6ad73c83a95a4b8fa5775b85585b104787a5ddc\\\",\\n  \\\"delivered_files\\\": [\\n    {\\n      \\\"path\\\": \\\"LICENSE\\\",\\n      \\\"sha256\\\": \\\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\\\",\\n      \\\"size_bytes\\\": 11357,\\n      \\\"media_type\\\": \\\"application/octet-stream\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"README.md\\\",\\n      \\\"sha256\\\": \\\"cdcf1a0e51a754d80ad39a79304eedb3b5306c9ae052dae839d76bcc9e39e085\\\",\\n      \\\"size_bytes\\\": 1295,\\n      \\\"media_type\\\": \\\"text/markdown\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"config.schema.json\\\",\\n      \\\"sha256\\\": \\\"ffc8f44e21e5576caeb4fbb2251f2260818a76249e60d7b31289287a3149fbc4\\\",\\n      \\\"size_bytes\\\": 610,\\n      \\\"media_type\\\": \\\"application/json\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"package-lock.json\\\",\\n      \\\"sha256\\\": \\\"b186a13ead52f2411d5e8036285fe62680cba8c27d53986d65ca84ed9c883ad1\\\",\\n      \\\"size_bytes\\\": 7983,\\n      \\\"media_type\\\": \\\"application/json\\\",\\n      \\\"license\\\": \\\"dependency metadata only\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"package.json\\\",\\n      \\\"sha256\\\": \\\"7f143a1eb003d6fcfa6b82e1758719d5538a6bc1dddad5ebf899f6a45b72e992\\\",\\n      \\\"size_bytes\\\": 158,\\n      \\\"media_type\\\": \\\"application/json\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"preview.mjs\\\",\\n      \\\"sha256\\\": \\\"91e64ce282b82f9ceb32258ee554bbf99ef02eb3a99a3faf6fa827754ce526bf\\\",\\n      \\\"size_bytes\\\": 1501,\\n      \\\"media_type\\\": \\\"text/javascript\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"stack.mjs\\\",\\n      \\\"sha256\\\": \\\"451f49782bf9c99444f7475eb7820fd344a26b0fe4c6bbd4d34ff9d63895ba27\\\",\\n      \\\"size_bytes\\\": 1115,\\n      \\\"media_type\\\": \\\"text/javascript\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"validation.json\\\",\\n      \\\"sha256\\\": \\\"71b1870eb81ba0fb06b3ef222df9932dab920bae38ea6d8de38ac3c133c14d49\\\",\\n      \\\"size_bytes\\\": 371,\\n      \\\"media_type\\\": \\\"application/json\\\",\\n      \\\"license\\\": \\\"Apache-2.0\\\"\\n    }\\n  ],\\n  \\\"license_mapping\\\": [\\n    {\\n      \\\"paths\\\": [\\n        \\\"LICENSE\\\",\\n        \\\"README.md\\\",\\n        \\\"config.schema.json\\\",\\n        \\\"package.json\\\",\\n        \\\"preview.mjs\\\",\\n        \\\"stack.mjs\\\",\\n        \\\"validation.json\\\"\\n      ],\\n      \\\"license\\\": \\\"Apache-2.0\\\",\\n      \\\"license_file\\\": \\\"LICENSE\\\",\\n      \\\"status\\\": \\\"authored original source; upstream code not copied; requires normal legal review\\\"\\n    },\\n    {\\n      \\\"paths\\\": [\\n        \\\"package-lock.json\\\"\\n      ],\\n      \\\"license\\\": \\\"dependency metadata only\\\",\\n      \\\"status\\\": \\\"version-pinned dependencies; third-party package licenses remain applicable\\\"\\n    }\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"source-provenance.json\",\"sha256\":\"88e3474c9c1e88a1a6e02df2fee299e4df545bbdaa71980ad067e570ce540b05\",\"size_bytes\":3165},{\"content\":\"import * as cdk from 'aws-cdk-lib';\\nimport * as glue from 'aws-cdk-lib/aws-glue';\\nimport * as s3 from 'aws-cdk-lib/aws-s3';\\nimport * as iam from 'aws-cdk-lib/aws-iam';\\n\\nexport function createStack(app, config) {\\n  const stack = new cdk.Stack(app, 'cdk-glue', { env: config.env });\\n  const data = new s3.Bucket(stack, 'Data', { blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL, encryption: s3.BucketEncryption.S3_MANAGED, enforceSSL: true });\\n  const database = new glue.CfnDatabase(stack, 'Database', { catalogId: cdk.Aws.ACCOUNT_ID, databaseInput: { name: config.databaseName ?? 'lake' } });\\n  const role = new iam.Role(stack, 'CrawlerRole', { assumedBy: new iam.ServicePrincipal('glue.amazonaws.com'), managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSGlueServiceRole')] });\\n  data.grantRead(role);\\n  new glue.CfnCrawler(stack, 'Crawler', { name: 'data-catalog-crawler', role: role.roleArn, databaseName: database.ref, targets: { s3Targets: [{ path: data.s3UrlForObject() }] }, schemaChangePolicy: { updateBehavior: 'UPDATE_IN_DATABASE', deleteBehavior: 'LOG' } });\\n  return stack;\\n}\\n\",\"mime_type\":\"text/javascript\",\"path\":\"stack.mjs\",\"sha256\":\"451f49782bf9c99444f7475eb7820fd344a26b0fe4c6bbd4d34ff9d63895ba27\",\"size_bytes\":1115},{\"content\":\"{\\n  \\\"result\\\": \\\"passed\\\",\\n  \\\"validation_kind\\\": \\\"native-aws-cdk-synthesis\\\",\\n  \\\"aws_cdk_lib\\\": \\\"2.274.0\\\",\\n  \\\"constructs\\\": \\\"10.8.1\\\",\\n  \\\"resource_count\\\": 6,\\n  \\\"preview_execution\\\": \\\"real App.synth(); resource counts only\\\",\\n  \\\"aws_calls\\\": \\\"not performed\\\",\\n  \\\"deployment\\\": \\\"not performed\\\",\\n  \\\"hosted_workers_preview\\\": \\\"unavailable; Workers does not resolve external CDK modules\\\"\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"validation.json\",\"sha256\":\"71b1870eb81ba0fb06b3ef222df9932dab920bae38ea6d8de38ac3c133c14d49\",\"size_bytes\":371}],\"schema_version\":\"1\",\"sku\":\"AWS-0667\",\"version\":2}",
+    "sha256": "a35a7c6404cb2e92544e81a70635471ce19f41a5529cc3fc0f5db97b5226d3fc",
+    "size_bytes": 30840,
+    "mime_type": "application/json"
+  },
+  "source_provenance": {
+    "slug": "cdk-glue",
+    "origin": "Original Second Wind contribution, authored against the AWS CDK v2 public construct API. No AWS CDK upstream source copied.",
+    "upstream": {
+      "repository": "aws/aws-cdk",
+      "revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+      "module": "aws-glue",
+      "api_reference": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.@aws-cdk-lib.aws_glue-readme.html"
+    },
+    "license": "Apache-2.0",
+    "runtime_blocker": "CDK synthesis requires aws-cdk-lib and constructs Node modules, which the current Workers request sandbox cannot resolve. Product preview remains unavailable until a reviewed isolated runtime is provided.",
+    "source_revision": "f6ad73c83a95a4b8fa5775b85585b104787a5ddc",
+    "delivered_files": [
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "media_type": "application/octet-stream",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "README.md",
+        "sha256": "cdcf1a0e51a754d80ad39a79304eedb3b5306c9ae052dae839d76bcc9e39e085",
+        "size_bytes": 1295,
+        "media_type": "text/markdown",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "config.schema.json",
+        "sha256": "ffc8f44e21e5576caeb4fbb2251f2260818a76249e60d7b31289287a3149fbc4",
+        "size_bytes": 610,
+        "media_type": "application/json",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "b186a13ead52f2411d5e8036285fe62680cba8c27d53986d65ca84ed9c883ad1",
+        "size_bytes": 7983,
+        "media_type": "application/json",
+        "license": "dependency metadata only"
+      },
+      {
+        "path": "package.json",
+        "sha256": "7f143a1eb003d6fcfa6b82e1758719d5538a6bc1dddad5ebf899f6a45b72e992",
+        "size_bytes": 158,
+        "media_type": "application/json",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "preview.mjs",
+        "sha256": "91e64ce282b82f9ceb32258ee554bbf99ef02eb3a99a3faf6fa827754ce526bf",
+        "size_bytes": 1501,
+        "media_type": "text/javascript",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "stack.mjs",
+        "sha256": "451f49782bf9c99444f7475eb7820fd344a26b0fe4c6bbd4d34ff9d63895ba27",
+        "size_bytes": 1115,
+        "media_type": "text/javascript",
+        "license": "Apache-2.0"
+      },
+      {
+        "path": "validation.json",
+        "sha256": "71b1870eb81ba0fb06b3ef222df9932dab920bae38ea6d8de38ac3c133c14d49",
+        "size_bytes": 371,
+        "media_type": "application/json",
+        "license": "Apache-2.0"
+      }
+    ],
+    "license_mapping": [
+      {
+        "paths": [
+          "LICENSE",
+          "README.md",
+          "config.schema.json",
+          "package.json",
+          "preview.mjs",
+          "stack.mjs",
+          "validation.json"
+        ],
+        "license": "Apache-2.0",
+        "license_file": "LICENSE",
+        "status": "authored original source; upstream code not copied; requires normal legal review"
+      },
+      {
+        "paths": [
+          "package-lock.json"
+        ],
+        "license": "dependency metadata only",
+        "status": "version-pinned dependencies; third-party package licenses remain applicable"
+      }
+    ]
+  },
+  "blockers": [
+    "hosted_preview_runtime_unavailable",
+    "trusted_publication_reviews_missing",
+    "payload_not_staged_to_immutable_store"
+  ]
+}

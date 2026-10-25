@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0671",
+  "sku": "AWS-0671",
+  "slug": "cdk-codepipeline-actions",
+  "version": 2,
+  "release_ref": "sha256:78f91cb82ca3bda36332603ebe503a6e3ab347a028c72e91db6d4fba313513bd",
+  "service": "codepipeline-actions",
+  "product_kind": "artifact-product",
+  "route_summary": "CodePipeline S3 source, CodeBuild, and manual approval actions with artifact flow.",
+  "supported_boundary": "CodePipeline S3 source, CodeBuild, and manual approval actions with artifact flow. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-codepipeline-actions"
+  ],
+  "tags": [
+    "codepipeline-actions",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.codepipeline-actions"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

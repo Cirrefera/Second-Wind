@@ -1,0 +1,80 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0558",
+  "slug": "sagemaker-endpoint-cdk",
+  "origin": "Second Wind",
+  "license": "Apache-2.0",
+  "source_repo": "https://github.com/aws/aws-cdk",
+  "source_revision": "aws-cdk-lib-v2.274.0",
+  "source_path": "aws-cdk-lib/aws-sagemaker",
+  "source_sha256": null,
+  "relationship": "Source correction: the intake-cited path `src/cdk-lib/sagemaker` is absent from current @cdklabs/generative-ai-cdk-constructs@0.1.320. Its current SageMaker patterns are specialized custom, HuggingFace and JumpStart endpoints. This package uses AWS CDK L1 CfnModel/CfnEndpointConfig/CfnEndpoint to preserve the generic endpoint purpose; no Bedrock modelId input is supported.",
+  "dependency_pins": {
+    "aws-cdk-lib": "2.274.0",
+    "constructs": "10.8.1"
+  },
+  "dependency_integrity": {
+    "aws-cdk-lib": "sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg=="
+  },
+  "upstream_source_files": [],
+  "runtime_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+  "preview_contract": null,
+  "review_status": "draft; trusted source and product review pending",
+  "license_mapping": {
+    "first_party_files": "Apache-2.0",
+    "upstream_dependency_license": "Apache-2.0",
+    "dependency_license_source": "npm package metadata and package LICENSE"
+  },
+  "local_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "499ef2af582bed2e8a16e75eeb55aa520c68fd6fdb95ee448467d6c44c663fc3",
+      "size_bytes": 640
+    },
+    {
+      "path": "README.md",
+      "sha256": "4e11938b558cc98ec98f68b60ee2ee3caf1c4791b14d75da1156b5bdd4e35080",
+      "size_bytes": 1826
+    },
+    {
+      "path": "config.example.json",
+      "sha256": "f61b5aa2926f90c6cd50e3861f952fa746d76fbada7472e942752904a613bb28",
+      "size_bytes": 380
+    },
+    {
+      "path": "config.schema.json",
+      "sha256": "df5ca97031a9ebb71ea6ddf3f33843b43ccb39deb0db30d91661281703005517",
+      "size_bytes": 1245
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "b4f0ecf8eef7b118d5b5ca18b75c6abf20de76d65d343d6b21069a6db79150da",
+      "size_bytes": 8110
+    },
+    {
+      "path": "package.json",
+      "sha256": "b1e1dfd39ef256b30fa23663bf2c48dea9b16bf9329a991b025f8f68df6ae79e",
+      "size_bytes": 285
+    },
+    {
+      "path": "preview.mjs",
+      "sha256": "f883ac0dcbbd27191e4107957fb8c1724485c00c9fea24e49e0544ace610dee8",
+      "size_bytes": 1828
+    },
+    {
+      "path": "product.mjs",
+      "sha256": "986f8a68d5be1feeeb6b5f9754ed739326ed15e68d64c81b8e3c39926e35f6df",
+      "size_bytes": 1477
+    },
+    {
+      "path": "selection.schema.json",
+      "sha256": "84438d9d8e37ea91be32713c717952a726a61646223e10c875502979edb61883",
+      "size_bytes": 214
+    },
+    {
+      "path": "synth.mjs",
+      "sha256": "cf3c140bd58638d5996d8c2a89ec8ede74b6c1e650eac31cdb4c8b7bc57cc2b8",
+      "size_bytes": 313
+    }
+  ]
+}

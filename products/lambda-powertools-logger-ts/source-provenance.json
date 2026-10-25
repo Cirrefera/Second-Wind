@@ -1,0 +1,25 @@
+{
+  "schema_version": "1",
+  "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+  "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
+  "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
+  "upstream_package_path": "packages/logger",
+  "npm_package": "@aws-lambda-powertools/logger",
+  "npm_package_version": "2.36.0",
+  "npm_tarball_integrity": "sha512-NQrZd6bJNw2CL7DlwU7ta6ktxGIbvyga8znuHRlIAAqRjkpC8pYtfXkYDUEQZGqhTeVS6+tU3YxszHuOB/1nkg==",
+  "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
+  "license": "MIT-0",
+  "dependencies": {
+    "@aws-lambda-powertools/logger": "2.36.0"
+  },
+  "source_interface_urls": [
+    "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/logger"
+  ],
+  "original_file_hashes": {
+    "src/logger.mjs": "c756abc58ba9875adb08f9ea870cb4aaa1bce6767e7e126443c02ec5a3429f54",
+    "README.md": "c48939fcb3c43d0eb38c5feae2838a5a472a08836d6e44eea2e34904f1b83396",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "config.schema.json": "31c43d46e4046b20f0eea42de878eb3b7dab9f1b54d9f52c9184f1f8564ecfe4",
+    "package.json": "420f79389d0c4e9a130b11531c3b49a6a0cbbed30fc4bfe07dda951bcfb79811"
+  }
+}

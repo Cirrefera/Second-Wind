@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "sku": "AWS-0638",
+  "slug": "cdk-bedrockagentcore",
+  "version": 1,
+  "product_kind": "artifact-product",
+  "service": "bedrock",
+  "release_ref": "sha256:c6df0ba7023d9e1dc0b63765bb57121d7bdf211432142bba4f514521de50660e",
+  "content_hash": "c6df0ba7023d9e1dc0b63765bb57121d7bdf211432142bba4f514521de50660e",
+  "hash_scope": "file-package-json-utf8",
+  "gateway_preview_available": false,
+  "local_native_preview_status": "verified",
+  "source_review_status": "pending",
+  "publication_status": "draft",
+  "blockers": [
+    "gateway_native_preview_runtime_unavailable",
+    "trusted_service_review_pending",
+    "trusted_contract_review_pending",
+    "trusted_product_review_pending",
+    "trusted_license_review_pending",
+    "trusted_purchase_url_review_pending",
+    "publication_approval_pending"
+  ]
+}

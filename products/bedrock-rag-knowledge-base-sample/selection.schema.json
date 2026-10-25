@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "const": "python"
+    },
+    "knowledge_base_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "query": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_arn": {
+      "type": "string",
+      "pattern": "^arn:"
+    },
+    "number_of_results": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20
+    }
+  },
+  "required": [
+    "language",
+    "knowledge_base_id",
+    "query",
+    "model_arn"
+  ]
+}

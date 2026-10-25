@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0646",
+  "sku": "AWS-0646",
+  "slug": "cdk-sqs",
+  "version": 2,
+  "service": "sqs",
+  "product_kind": "artifact-product",
+  "route_summary": "Encrypted SQS queue with optional FIFO dead-letter queue and explicit cross-account queue policy.",
+  "supported_boundary": "Local CDK synthesis for Amazon Simple Queue Service. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "sqs"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "sqs",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.sqs"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "sqs-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:36063c8798e72e49ba5cdc8fea86db05b80d603f840029ef4cf083590c04c75d"
+}

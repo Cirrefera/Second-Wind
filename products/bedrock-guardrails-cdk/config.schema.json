@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "guardrail_name",
+    "categories"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "guardrail_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "blocked_input_message": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "blocked_output_message": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "strength"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "SEXUAL",
+              "VIOLENCE",
+              "HATE",
+              "INSULTS",
+              "MISCONDUCT",
+              "PROMPT_ATTACK"
+            ]
+          },
+          "strength": {
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

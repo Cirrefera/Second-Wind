@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "key_alias"
+  ],
+  "properties": {
+    "key_alias": {
+      "type": "string",
+      "pattern": "^alias/[A-Za-z0-9/_-]{1,250}$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "enable_key_rotation": {
+      "type": "boolean"
+    },
+    "language": {
+      "const": "javascript"
+    }
+  }
+}

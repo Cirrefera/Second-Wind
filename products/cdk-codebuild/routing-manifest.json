@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0669",
+  "sku": "AWS-0669",
+  "slug": "cdk-codebuild",
+  "version": 2,
+  "release_ref": "sha256:d5b91a95c5fb5525e09d4f6b42d704a1048dc6dcff0bb5dc500ce21e334cb0c6",
+  "service": "codebuild",
+  "product_kind": "artifact-product",
+  "route_summary": "CodeBuild project with isolated logs and encrypted artifact storage.",
+  "supported_boundary": "CodeBuild project with isolated logs and encrypted artifact storage. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-codebuild"
+  ],
+  "tags": [
+    "codebuild",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.codebuild"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}

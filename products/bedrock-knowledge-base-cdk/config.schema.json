@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "language",
+    "knowledge_base_name",
+    "instruction"
+  ],
+  "properties": {
+    "language": {
+      "const": "javascript"
+    },
+    "knowledge_base_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,100}$"
+    },
+    "instruction": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "s3_bucket_arn": {
+      "type": "string",
+      "pattern": "^arn:[^:]+:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
+    }
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "schema_version": "1",
+  "item": {
+    "sku": "AWS-0689",
+    "slug": "agentcore-sdk-memory-management",
+    "name": "create and retrieve AgentCore memory",
+    "kind": "artifact",
+    "service": "bedrock-agentcore",
+    "summary": "AgentCore Memory lifecycle sample using AWS SDK control/runtime clients to create a memory, record a conversation event, and retrieve relevant memory records.",
+    "guidance": "# create and retrieve AgentCore memory\n\nAgentCore Memory lifecycle sample using AWS SDK control/runtime clients to create a memory, record a conversation event, and retrieve relevant memory records.\n\nSelect `language: \"python\"` explicitly in the package configuration.\n\nHosted preview is blocked: AgentCore Memory preview would create persistent buyer data and needs the Python SDK, an AgentCore Memory resource, IAM permissions, and AWS credentials. The hosted adapter has none of these.\n\n## Runtime and boundary\n\nPython 3.11+ boto3 version with AgentCore Memory service model, AgentCore-enabled Region, IAM permissions, and buyer account. Memory operations persist user content remotely and are never executed by hosted preview.\n\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\n\n## Files\n\n- `requirements.txt`\n- `memory.py`\n- `selection.schema.json`\n\n## Use\n\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\n\nConversation events are stored remotely; the sample sets a 30-day raw event expiry and configures a summary strategy. Choose retention and KMS settings for your data policy, and verify lifecycle status before writes.\n\n## Sources and provenance\n\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\n\n- https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-customer-scenario.html\n- https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-create-a-memory-store.html\n\nUpstream repository: https://github.com/aws/bedrock-agentcore-sdk-python\n\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\n\n\n## Native preview entrypoint\n\nRun `preview.py` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.\n",
+    "price_usd": 1,
+    "invoke_kind": "resolve",
+    "input_schema": "{\"type\":\"object\",\"additionalProperties\":false,\"properties\":{\"language\":{\"type\":\"string\",\"const\":\"python\"},\"memory_id\":{\"type\":\"string\",\"minLength\":1},\"actor_id\":{\"type\":\"string\",\"minLength\":1},\"session_id\":{\"type\":\"string\",\"minLength\":1},\"namespace\":{\"type\":\"string\",\"minLength\":1},\"query\":{\"type\":\"string\",\"minLength\":1}},\"required\":[\"language\",\"memory_id\",\"actor_id\",\"session_id\",\"namespace\",\"query\"]}",
+    "mime_type": "application/json",
+    "source_repo": "https://github.com/aws/bedrock-agentcore-sdk-python",
+    "source_url": "https://github.com/aws/bedrock-agentcore-sdk-python",
+    "license_spdx": "Apache-2.0",
+    "provenance": "original",
+    "status": "draft",
+    "version": 1
+  },
+  "manifest": {
+    "schema_version": "1",
+    "sku": "AWS-0689",
+    "slug": "agentcore-sdk-memory-management",
+    "version": 1,
+    "product_kind": "artifact-product",
+    "service": "bedrock-agentcore",
+    "release_ref": "sha256:77850315076eea684872c233643d07e4567f276459c90d0018c930d15445770d",
+    "content_hash": "77850315076eea684872c233643d07e4567f276459c90d0018c930d15445770d",
+    "hash_scope": "file-package-json-utf8",
+    "mime_type": "application/json",
+    "origin": "Second Wind",
+    "license": "Apache-2.0",
+    "original_contribution": "AgentCore Memory lifecycle sample using AWS SDK control/runtime clients to create a memory, record a conversation event, and retrieve relevant memory records.",
+    "delivery_contract": {
+      "kind": "file-package",
+      "format": "self-contained JSON with exact UTF-8 file contents",
+      "entrypoints": {
+        "python": "memory.py"
+      },
+      "configuration_schema": "selection.schema.json",
+      "side_effects": "native calls may be remote or modify buyer-controlled resources"
+    },
+    "validation_contract": {
+      "kind": "native-runtime-required",
+      "languages": [
+        "python"
+      ],
+      "hosted_preview": "unavailable",
+      "private_native_preview": "available",
+      "preview_blocked_reason": "AgentCore Memory preview would create persistent buyer data and needs the Python SDK, an AgentCore Memory resource, IAM permissions, and AWS credentials. The hosted adapter has none of these.",
+      "aws_deployment": "not-performed",
+      "live_service_validation": "not-performed",
+      "reason": "required_native_runtime_or_buyer_aws_account_unavailable",
+      "private_native_preview_entrypoint": "preview.py",
+      "native_preview_output_fields": [
+        "ok",
+        "status",
+        "diagnostic_codes",
+        "row_count",
+        "column_count",
+        "object_bytes",
+        "file_count",
+        "result_count",
+        "response_bytes",
+        "response_char_count",
+        "input_token_count",
+        "output_token_count",
+        "record_count",
+        "artifact_bytes"
+      ]
+    },
+    "language_policy": {
+      "mode": "configured",
+      "explicit_selection": true,
+      "configuration_field": "language",
+      "adapters": [
+        "python"
+      ]
+    },
+    "tags": [
+      "bedrock-agentcore",
+      "python",
+      "agentcore-sdk-memory-management"
+    ],
+    "supported_boundary": "Python 3.11+ boto3 version with AgentCore Memory service model, AgentCore-enabled Region, IAM permissions, and buyer account. Memory operations persist user content remotely and are never executed by hosted preview.",
+    "hosted_preview_available": false,
+    "native_preview_blocker": "AgentCore Memory preview would create persistent buyer data and needs the Python SDK, an AgentCore Memory resource, IAM permissions, and AWS credentials. The hosted adapter has none of these.",
+    "publication_blockers": [
+      "hosted_preview_runtime_unavailable",
+      "trusted_product_and_contract_reviews_pending",
+      "trusted_license_and_provenance_review_pending",
+      "publication_approval_pending",
+      "native_private_preview_requires_native_runtime_or_service_identity"
+    ],
+    "required_files": [
+      {
+        "path": "requirements.txt",
+        "sha256": "ae3bab989bad4c476366b629478b07466cf0c2d90b9241912b70dbde077ba6f7",
+        "size_bytes": 42,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "memory.py",
+        "sha256": "e6015fe20c851a98236472593112df1f07a2db46adadb042abbda5eb55fb3065",
+        "size_bytes": 1076,
+        "mime_type": "text/x-python"
+      },
+      {
+        "path": "README.md",
+        "sha256": "785f7c88a19737bc9111770a66196df11e808ffd1351cab1c561969f02e43e40",
+        "size_bytes": 3035,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357,
+        "mime_type": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "selection.schema.json",
+        "sha256": "25eb87c335374d02fc75a4e8ba2d8c60cce010876e50194c86f3d1f213106499",
+        "size_bytes": 619,
+        "mime_type": "application/json"
+      },
+      {
+        "path": "preview.py",
+        "sha256": "e1f33dc31a624f6f602db37c46c9a2f5181987a4e6df4ff9c414cd6a3ef7a2a2",
+        "size_bytes": 545,
+        "mime_type": "text/x-python"
+      }
+    ],
+    "dependencies": {
+      "bedrock-agentcore": "1.24.2",
+      "boto3": "1.43.114"
+    },
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "const": "python"
+        },
+        "memory_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "language",
+        "memory_id",
+        "actor_id",
+        "session_id",
+        "namespace",
+        "query"
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "requirements.txt",
+      "content": "bedrock-agentcore==1.24.2\nboto3==1.43.114\n",
+      "sha256": "ae3bab989bad4c476366b629478b07466cf0c2d90b9241912b70dbde077ba6f7",
+      "size_bytes": 42,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "memory.py",
+      "content": "import boto3\n\ndef create_memory(*, name, region=None):\n    client = boto3.client('bedrock-agentcore-control', region_name=region)\n    return client.create_memory(name=name, description='Agent conversation memory', eventExpiryDuration=30, memoryStrategies=[{'summaryMemoryStrategy': {'name':'SessionSummary','namespaceTemplates':['/summaries/{actorId}/{sessionId}/']}}])\n\ndef record_turn(*, memory_id, actor_id, session_id, messages, region=None):\n    client = boto3.client('bedrock-agentcore', region_name=region)\n    from datetime import datetime, timezone\n    normalized = [{'conversational': {'role': m['role'].upper(), 'content': {'text': m['text']}}} for m in messages]\n    return client.create_event(memoryId=memory_id, actorId=actor_id, sessionId=session_id, eventTimestamp=datetime.now(timezone.utc), payload=normalized)\n\ndef recall(*, memory_id, namespace, query, region=None):\n    client = boto3.client('bedrock-agentcore', region_name=region)\n    return client.retrieve_memory_records(memoryId=memory_id, namespace=namespace, searchCriteria={'searchQuery': query})\n",
+      "sha256": "e6015fe20c851a98236472593112df1f07a2db46adadb042abbda5eb55fb3065",
+      "size_bytes": 1076,
+      "mime_type": "text/x-python"
+    },
+    {
+      "path": "README.md",
+      "content": "# create and retrieve AgentCore memory\n\nAgentCore Memory lifecycle sample using AWS SDK control/runtime clients to create a memory, record a conversation event, and retrieve relevant memory records.\n\nSelect `language: \"python\"` explicitly in the package configuration.\n\nHosted preview is blocked: AgentCore Memory preview would create persistent buyer data and needs the Python SDK, an AgentCore Memory resource, IAM permissions, and AWS credentials. The hosted adapter has none of these.\n\n## Runtime and boundary\n\nPython 3.11+ boto3 version with AgentCore Memory service model, AgentCore-enabled Region, IAM permissions, and buyer account. Memory operations persist user content remotely and are never executed by hosted preview.\n\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\n\n## Files\n\n- `requirements.txt`\n- `memory.py`\n- `selection.schema.json`\n\n## Use\n\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\n\nConversation events are stored remotely; the sample sets a 30-day raw event expiry and configures a summary strategy. Choose retention and KMS settings for your data policy, and verify lifecycle status before writes.\n\n## Sources and provenance\n\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\n\n- https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-customer-scenario.html\n- https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-create-a-memory-store.html\n\nUpstream repository: https://github.com/aws/bedrock-agentcore-sdk-python\n\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\n\n\n## Native preview entrypoint\n\nRun `preview.py` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.\n",
+      "sha256": "785f7c88a19737bc9111770a66196df11e808ffd1351cab1c561969f02e43e40",
+      "size_bytes": 3035,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "LICENSE",
+      "content": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "mime_type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "selection.schema.json",
+      "content": "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"language\": {\n      \"type\": \"string\",\n      \"const\": \"python\"\n    },\n    \"memory_id\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"actor_id\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"session_id\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"namespace\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"query\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    }\n  },\n  \"required\": [\n    \"language\",\n    \"memory_id\",\n    \"actor_id\",\n    \"session_id\",\n    \"namespace\",\n    \"query\"\n  ]\n}\n",
+      "sha256": "25eb87c335374d02fc75a4e8ba2d8c60cce010876e50194c86f3d1f213106499",
+      "size_bytes": 619,
+      "mime_type": "application/json"
+    },
+    {
+      "path": "preview.py",
+      "content": "\"\"\"Query an existing AgentCore memory and emit only the number of matched records.\"\"\"\nimport json, sys\nfrom memory_lifecycle import recall\ntry:\n    c=json.load(sys.stdin); response=recall(memory_id=c['memory_id'],namespace=c['namespace'],query=c['query'],region=c.get('region'))\n    print(json.dumps({'ok':True,'status':'memory_retrieval_complete','record_count':len(response.get('memoryRecords',[]))}))\nexcept Exception:\n    print(json.dumps({'ok':False,'status':'blocked','diagnostic_codes':['memory_retrieval_failed']})); raise SystemExit(2)\n",
+      "sha256": "e1f33dc31a624f6f602db37c46c9a2f5181987a4e6df4ff9c414cd6a3ef7a2a2",
+      "size_bytes": 545,
+      "mime_type": "text/x-python"
+    }
+  ],
+  "configuration_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "language": {
+        "type": "string",
+        "const": "python"
+      },
+      "memory_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "actor_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "session_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "namespace": {
+        "type": "string",
+        "minLength": 1
+      },
+      "query": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "language",
+      "memory_id",
+      "actor_id",
+      "session_id",
+      "namespace",
+      "query"
+    ]
+  },
+  "source_provenance": {
+    "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+    "historical_catalog_record": {
+      "sku": "AWS-0689",
+      "slug": "agentcore-sdk-memory-management",
+      "kind": "tool",
+      "price_usd": 0.5,
+      "status": "draft",
+      "version": 1
+    },
+    "upstream_inspection": {
+      "source_repository": "aws/bedrock-agentcore-sdk-python",
+      "source_revision": "b70e0b709f6c8ec897b28fe873c3364e17f5cfec",
+      "structured_pointer": "src/bedrock_agentcore/memory/",
+      "observed_deliverable": "tool_pointer_without_resolved_invocation_implementation",
+      "pointer_inspection": {
+        "path": "src/bedrock_agentcore/memory",
+        "status": "found",
+        "git_object_sha": "9550889a0e2c2fac2a5b70b2dfa7aa400550ba4b",
+        "object_type": "tree",
+        "descendant_file_count": 26,
+        "url": "https://github.com/aws/bedrock-agentcore-sdk-python/tree/b70e0b709f6c8ec897b28fe873c3364e17f5cfec/src/bedrock_agentcore/memory"
+      }
+    },
+    "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+    "upstream_repository": "https://github.com/aws/bedrock-agentcore-sdk-python",
+    "interface_sources": [
+      "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-customer-scenario.html",
+      "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-create-a-memory-store.html"
+    ],
+    "dependencies": {
+      "bedrock-agentcore": "1.24.2",
+      "boto3": "1.43.114"
+    },
+    "original_file_hashes": {
+      "requirements.txt": "ae3bab989bad4c476366b629478b07466cf0c2d90b9241912b70dbde077ba6f7",
+      "memory.py": "e6015fe20c851a98236472593112df1f07a2db46adadb042abbda5eb55fb3065",
+      "README.md": "785f7c88a19737bc9111770a66196df11e808ffd1351cab1c561969f02e43e40",
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "selection.schema.json": "25eb87c335374d02fc75a4e8ba2d8c60cce010876e50194c86f3d1f213106499",
+      "preview.py": "e1f33dc31a624f6f602db37c46c9a2f5181987a4e6df4ff9c414cd6a3ef7a2a2"
+    },
+    "license_mapping": [
+      {
+        "paths": [
+          "requirements.txt",
+          "memory.py",
+          "README.md",
+          "LICENSE",
+          "selection.schema.json"
+        ],
+        "license": "Apache-2.0",
+        "license_file": "LICENSE",
+        "status": "source-level claim; independent review pending"
+      }
+    ]
+  },
+  "blockers": [
+    "native_private_preview_entrypoint_missing",
+    "hosted_preview_runtime_unavailable",
+    "trusted_product_and_contract_reviews_pending",
+    "trusted_license_and_provenance_review_pending",
+    "publication_approval_pending"
+  ],
+  "routing_manifest": {
+    "schema_version": "1",
+    "product_id": "AWS-0689",
+    "sku": "AWS-0689",
+    "slug": "agentcore-sdk-memory-management",
+    "version": 1,
+    "release_ref": "sha256:77850315076eea684872c233643d07e4567f276459c90d0018c930d15445770d",
+    "service": "bedrock-agentcore",
+    "product_kind": "artifact-product",
+    "route_summary": "AgentCore Memory lifecycle sample using AWS SDK control/runtime clients to create a memory, record a conversation event, and retrieve relevant memory records.",
+    "supported_boundary": "Python 3.11+ boto3 version with AgentCore Memory service model, AgentCore-enabled Region, IAM permissions, and buyer account. Memory operations persist user content remotely and are never executed by hosted preview.",
+    "language_policy": "explicit",
+    "aliases": [],
+    "tags": [
+      "bedrock-agentcore",
+      "python",
+      "agentcore-sdk-memory-management"
+    ],
+    "taxonomy_ids": [
+      "aws.bedrock-agentcore"
+    ],
+    "problem_family_ids": [
+      "bedrock-agentcore-integration"
+    ],
+    "operations": [
+      "agentcore-sdk-memory-management"
+    ],
+    "environments": [
+      "python"
+    ],
+    "desired_outcomes": [
+      "working-bedrock-agentcore-integration"
+    ],
+    "input_kinds": [
+      "native-python-input"
+    ],
+    "failure_signatures": [
+      "bedrock-agentcore-request-failure"
+    ],
+    "languages": [
+      "python"
+    ],
+    "runtimes": [
+      "python3.11"
+    ],
+    "required_evidence": [],
+    "exclusions": []
+  },
+  "payload": {
+    "content": "{\"files\":[{\"content\":\"bedrock-agentcore==1.24.2\\nboto3==1.43.114\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"requirements.txt\",\"sha256\":\"ae3bab989bad4c476366b629478b07466cf0c2d90b9241912b70dbde077ba6f7\",\"size_bytes\":42},{\"content\":\"import boto3\\n\\ndef create_memory(*, name, region=None):\\n    client = boto3.client('bedrock-agentcore-control', region_name=region)\\n    return client.create_memory(name=name, description='Agent conversation memory', eventExpiryDuration=30, memoryStrategies=[{'summaryMemoryStrategy': {'name':'SessionSummary','namespaceTemplates':['/summaries/{actorId}/{sessionId}/']}}])\\n\\ndef record_turn(*, memory_id, actor_id, session_id, messages, region=None):\\n    client = boto3.client('bedrock-agentcore', region_name=region)\\n    from datetime import datetime, timezone\\n    normalized = [{'conversational': {'role': m['role'].upper(), 'content': {'text': m['text']}}} for m in messages]\\n    return client.create_event(memoryId=memory_id, actorId=actor_id, sessionId=session_id, eventTimestamp=datetime.now(timezone.utc), payload=normalized)\\n\\ndef recall(*, memory_id, namespace, query, region=None):\\n    client = boto3.client('bedrock-agentcore', region_name=region)\\n    return client.retrieve_memory_records(memoryId=memory_id, namespace=namespace, searchCriteria={'searchQuery': query})\\n\",\"mime_type\":\"text/x-python\",\"path\":\"memory.py\",\"sha256\":\"e6015fe20c851a98236472593112df1f07a2db46adadb042abbda5eb55fb3065\",\"size_bytes\":1076},{\"content\":\"# create and retrieve AgentCore memory\\n\\nAgentCore Memory lifecycle sample using AWS SDK control/runtime clients to create a memory, record a conversation event, and retrieve relevant memory records.\\n\\nSelect `language: \\\"python\\\"` explicitly in the package configuration.\\n\\nHosted preview is blocked: AgentCore Memory preview would create persistent buyer data and needs the Python SDK, an AgentCore Memory resource, IAM permissions, and AWS credentials. The hosted adapter has none of these.\\n\\n## Runtime and boundary\\n\\nPython 3.11+ boto3 version with AgentCore Memory service model, AgentCore-enabled Region, IAM permissions, and buyer account. Memory operations persist user content remotely and are never executed by hosted preview.\\n\\nThis package contains native source for the described integration. The hosted sandbox does not currently have the required native runtime or service environment for this SKU. Hosted preview is unavailable and must fail before any trial payment. No hosted result should be interpreted as a deployment, query, write, inference, or session success.\\n\\n## Files\\n\\n- `requirements.txt`\\n- `memory.py`\\n- `selection.schema.json`\\n\\n## Use\\n\\nReview the files, install the pinned dependencies in the named native runtime, provide credentials through your normal AWS credential chain or local environment, and invoke the shown entrypoint yourself. Remote AWS calls may incur account charges or persist data. Review IAM scope, target account, Region, retention, and data handling before running. This package never stores credentials.\\n\\nConversation events are stored remotely; the sample sets a 30-day raw event expiry and configures a summary strategy. Choose retention and KMS settings for your data policy, and verify lifecycle status before writes.\\n\\n## Sources and provenance\\n\\nThe current package contains original Second Wind integration code and configuration based on the documented upstream interfaces; it does not redistribute upstream repository source.\\n\\n- https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-customer-scenario.html\\n- https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory-create-a-memory-store.html\\n\\nUpstream repository: https://github.com/aws/bedrock-agentcore-sdk-python\\n\\nDependency versions are pinned in the supplied manifest. The current package source has not been tested against a live AWS account. Hosted preview runtime integration, independent source/license review, and publication approval remain pending.\\n\\n\\n## Native preview entrypoint\\n\\nRun `preview.py` in the package directory using its documented native runtime. This entrypoint calls the product integration itself and emits only bounded status/count diagnostics. It requires a real local service or buyer AWS resources and credentials as stated above; it does not simulate success. It may perform remote reads, writes, inference, or session invocation as applicable, so review the operation and cost before running. The hosted gateway cannot execute this native runtime and remains unavailable.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"README.md\",\"sha256\":\"785f7c88a19737bc9111770a66196df11e808ffd1351cab1c561969f02e43e40\",\"size_bytes\":3035},{\"content\":\"                                 Apache License\\n                           Version 2.0, January 2004\\n                        http://www.apache.org/licenses/\\n\\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\\n\\n   1. Definitions.\\n\\n      \\\"License\\\" shall mean the terms and conditions for use, reproduction,\\n      and distribution as defined by Sections 1 through 9 of this document.\\n\\n      \\\"Licensor\\\" shall mean the copyright owner or entity authorized by\\n      the copyright owner that is granting the License.\\n\\n      \\\"Legal Entity\\\" shall mean the union of the acting entity and all\\n      other entities that control, are controlled by, or are under common\\n      control with that entity. For the purposes of this definition,\\n      \\\"control\\\" means (i) the power, direct or indirect, to cause the\\n      direction or management of such entity, whether by contract or\\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\\n      outstanding shares, or (iii) beneficial ownership of such entity.\\n\\n      \\\"You\\\" (or \\\"Your\\\") shall mean an individual or Legal Entity\\n      exercising permissions granted by this License.\\n\\n      \\\"Source\\\" form shall mean the preferred form for making modifications,\\n      including but not limited to software source code, documentation\\n      source, and configuration files.\\n\\n      \\\"Object\\\" form shall mean any form resulting from mechanical\\n      transformation or translation of a Source form, including but\\n      not limited to compiled object code, generated documentation,\\n      and conversions to other media types.\\n\\n      \\\"Work\\\" shall mean the work of authorship, whether in Source or\\n      Object form, made available under the License, as indicated by a\\n      copyright notice that is included in or attached to the work\\n      (an example is provided in the Appendix below).\\n\\n      \\\"Derivative Works\\\" shall mean any work, whether in Source or Object\\n      form, that is based on (or derived from) the Work and for which the\\n      editorial revisions, annotations, elaborations, or other modifications\\n      represent, as a whole, an original work of authorship. For the purposes\\n      of this License, Derivative Works shall not include works that remain\\n      separable from, or merely link (or bind by name) to the interfaces of,\\n      the Work and Derivative Works thereof.\\n\\n      \\\"Contribution\\\" shall mean any work of authorship, including\\n      the original version of the Work and any modifications or additions\\n      to that Work or Derivative Works thereof, that is intentionally\\n      submitted to Licensor for inclusion in the Work by the copyright owner\\n      or by an individual or Legal Entity authorized to submit on behalf of\\n      the copyright owner. For the purposes of this definition, \\\"submitted\\\"\\n      means any form of electronic, verbal, or written communication sent\\n      to the Licensor or its representatives, including but not limited to\\n      communication on electronic mailing lists, source code control systems,\\n      and issue tracking systems that are managed by, or on behalf of, the\\n      Licensor for the purpose of discussing and improving the Work, but\\n      excluding communication that is conspicuously marked or otherwise\\n      designated in writing by the copyright owner as \\\"Not a Contribution.\\\"\\n\\n      \\\"Contributor\\\" shall mean Licensor and any individual or Legal Entity\\n      on behalf of whom a Contribution has been received by Licensor and\\n      subsequently incorporated within the Work.\\n\\n   2. Grant of Copyright License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      copyright license to reproduce, prepare Derivative Works of,\\n      publicly display, publicly perform, sublicense, and distribute the\\n      Work and such Derivative Works in Source or Object form.\\n\\n   3. Grant of Patent License. Subject to the terms and conditions of\\n      this License, each Contributor hereby grants to You a perpetual,\\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\\n      (except as stated in this section) patent license to make, have made,\\n      use, offer to sell, sell, import, and otherwise transfer the Work,\\n      where such license applies only to those patent claims licensable\\n      by such Contributor that are necessarily infringed by their\\n      Contribution(s) alone or by combination of their Contribution(s)\\n      with the Work to which such Contribution(s) was submitted. If You\\n      institute patent litigation against any entity (including a\\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\\n      or a Contribution incorporated within the Work constitutes direct\\n      or contributory patent infringement, then any patent licenses\\n      granted to You under this License for that Work shall terminate\\n      as of the date such litigation is filed.\\n\\n   4. Redistribution. You may reproduce and distribute copies of the\\n      Work or Derivative Works thereof in any medium, with or without\\n      modifications, and in Source or Object form, provided that You\\n      meet the following conditions:\\n\\n      (a) You must give any other recipients of the Work or\\n          Derivative Works a copy of this License; and\\n\\n      (b) You must cause any modified files to carry prominent notices\\n          stating that You changed the files; and\\n\\n      (c) You must retain, in the Source form of any Derivative Works\\n          that You distribute, all copyright, patent, trademark, and\\n          attribution notices from the Source form of the Work,\\n          excluding those notices that do not pertain to any part of\\n          the Derivative Works; and\\n\\n      (d) If the Work includes a \\\"NOTICE\\\" text file as part of its\\n          distribution, then any Derivative Works that You distribute must\\n          include a readable copy of the attribution notices contained\\n          within such NOTICE file, excluding those notices that do not\\n          pertain to any part of the Derivative Works, in at least one\\n          of the following places: within a NOTICE text file distributed\\n          as part of the Derivative Works; within the Source form or\\n          documentation, if provided along with the Derivative Works; or,\\n          within a display generated by the Derivative Works, if and\\n          wherever such third-party notices normally appear. The contents\\n          of the NOTICE file are for informational purposes only and\\n          do not modify the License. You may add Your own attribution\\n          notices within Derivative Works that You distribute, alongside\\n          or as an addendum to the NOTICE text from the Work, provided\\n          that such additional attribution notices cannot be construed\\n          as modifying the License.\\n\\n      You may add Your own copyright statement to Your modifications and\\n      may provide additional or different license terms and conditions\\n      for use, reproduction, or distribution of Your modifications, or\\n      for any such Derivative Works as a whole, provided Your use,\\n      reproduction, and distribution of the Work otherwise complies with\\n      the conditions stated in this License.\\n\\n   5. Submission of Contributions. Unless You explicitly state otherwise,\\n      any Contribution intentionally submitted for inclusion in the Work\\n      by You to the Licensor shall be under the terms and conditions of\\n      this License, without any additional terms or conditions.\\n      Notwithstanding the above, nothing herein shall supersede or modify\\n      the terms of any separate license agreement you may have executed\\n      with Licensor regarding such Contributions.\\n\\n   6. Trademarks. This License does not grant permission to use the trade\\n      names, trademarks, service marks, or product names of the Licensor,\\n      except as required for reasonable and customary use in describing the\\n      origin of the Work and reproducing the content of the NOTICE file.\\n\\n   7. Disclaimer of Warranty. Unless required by applicable law or\\n      agreed to in writing, Licensor provides the Work (and each\\n      Contributor provides its Contributions) on an \\\"AS IS\\\" BASIS,\\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\\n      implied, including, without limitation, any warranties or conditions\\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\\n      PARTICULAR PURPOSE. You are solely responsible for determining the\\n      appropriateness of using or redistributing the Work and assume any\\n      risks associated with Your exercise of permissions under this License.\\n\\n   8. Limitation of Liability. In no event and under no legal theory,\\n      whether in tort (including negligence), contract, or otherwise,\\n      unless required by applicable law (such as deliberate and grossly\\n      negligent acts) or agreed to in writing, shall any Contributor be\\n      liable to You for damages, including any direct, indirect, special,\\n      incidental, or consequential damages of any character arising as a\\n      result of this License or out of the use or inability to use the\\n      Work (including but not limited to damages for loss of goodwill,\\n      work stoppage, computer failure or malfunction, or any and all\\n      other commercial damages or losses), even if such Contributor\\n      has been advised of the possibility of such damages.\\n\\n   9. Accepting Warranty or Additional Liability. While redistributing\\n      the Work or Derivative Works thereof, You may choose to offer,\\n      and charge a fee for, acceptance of support, warranty, indemnity,\\n      or other liability obligations and/or rights consistent with this\\n      License. However, in accepting such obligations, You may act only\\n      on Your own behalf and on Your sole responsibility, not on behalf\\n      of any other Contributor, and only if You agree to indemnify,\\n      defend, and hold each Contributor harmless for any liability\\n      incurred by, or claims asserted against, such Contributor by reason\\n      of your accepting any such warranty or additional liability.\\n\\n   END OF TERMS AND CONDITIONS\\n\\n   APPENDIX: How to apply the Apache License to your work.\\n\\n      To apply the Apache License to your work, attach the following\\n      boilerplate notice, with the fields enclosed by brackets \\\"[]\\\"\\n      replaced with your own identifying information. (Don't include\\n      the brackets!)  The text should be enclosed in the appropriate\\n      comment syntax for the file format. We also recommend that a\\n      file or class name and description of purpose be included on the\\n      same \\\"printed page\\\" as the copyright notice for easier\\n      identification within third-party archives.\\n\\n   Copyright [yyyy] [name of copyright owner]\\n\\n   Licensed under the Apache License, Version 2.0 (the \\\"License\\\");\\n   you may not use this file except in compliance with the License.\\n   You may obtain a copy of the License at\\n\\n       http://www.apache.org/licenses/LICENSE-2.0\\n\\n   Unless required by applicable law or agreed to in writing, software\\n   distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n   See the License for the specific language governing permissions and\\n   limitations under the License.\\n\",\"mime_type\":\"text/plain; charset=utf-8\",\"path\":\"LICENSE\",\"sha256\":\"c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4\",\"size_bytes\":11357},{\"content\":\"{\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"properties\\\": {\\n    \\\"language\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"const\\\": \\\"python\\\"\\n    },\\n    \\\"memory_id\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1\\n    },\\n    \\\"actor_id\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1\\n    },\\n    \\\"session_id\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1\\n    },\\n    \\\"namespace\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1\\n    },\\n    \\\"query\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"minLength\\\": 1\\n    }\\n  },\\n  \\\"required\\\": [\\n    \\\"language\\\",\\n    \\\"memory_id\\\",\\n    \\\"actor_id\\\",\\n    \\\"session_id\\\",\\n    \\\"namespace\\\",\\n    \\\"query\\\"\\n  ]\\n}\\n\",\"mime_type\":\"application/json\",\"path\":\"selection.schema.json\",\"sha256\":\"25eb87c335374d02fc75a4e8ba2d8c60cce010876e50194c86f3d1f213106499\",\"size_bytes\":619},{\"content\":\"\\\"\\\"\\\"Query an existing AgentCore memory and emit only the number of matched records.\\\"\\\"\\\"\\nimport json, sys\\nfrom memory_lifecycle import recall\\ntry:\\n    c=json.load(sys.stdin); response=recall(memory_id=c['memory_id'],namespace=c['namespace'],query=c['query'],region=c.get('region'))\\n    print(json.dumps({'ok':True,'status':'memory_retrieval_complete','record_count':len(response.get('memoryRecords',[]))}))\\nexcept Exception:\\n    print(json.dumps({'ok':False,'status':'blocked','diagnostic_codes':['memory_retrieval_failed']})); raise SystemExit(2)\\n\",\"mime_type\":\"text/x-python\",\"path\":\"preview.py\",\"sha256\":\"e1f33dc31a624f6f602db37c46c9a2f5181987a4e6df4ff9c414cd6a3ef7a2a2\",\"size_bytes\":545}],\"schema_version\":\"1\",\"sku\":\"AWS-0689\",\"version\":1}",
+    "sha256": "77850315076eea684872c233643d07e4567f276459c90d0018c930d15445770d",
+    "size_bytes": 18150,
+    "mime_type": "application/json"
+  }
+}

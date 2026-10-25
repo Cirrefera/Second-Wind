@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "env": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "pattern": "^[0-9]{12}$"
+        },
+        "region": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "workGroupName": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "javascript"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "language"
+  ]
+}

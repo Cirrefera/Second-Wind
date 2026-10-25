@@ -1,0 +1,5 @@
+{
+  "language": "javascript",
+  "knowledge_base_name": "sample-kb",
+  "instruction": "Retrieve relevant documents and cite their source for every answer."
+}

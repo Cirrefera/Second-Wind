@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0656",
+  "sku": "AWS-0656",
+  "slug": "cdk-ecs-patterns",
+  "version": 2,
+  "service": "ecs",
+  "product_kind": "artifact-product",
+  "route_summary": "CDK ECS patterns for an application load balancer, queue-backed worker, or scheduled Fargate task.",
+  "supported_boundary": "Local CDK synthesis for Amazon ECS patterns. No AWS execution or deployment. Hosted preview unavailable until a native Node runtime exists.",
+  "language_policy": "explicit",
+  "aliases": [
+    "ecs-patterns"
+  ],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "ecs",
+    "cdk-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.ecs"
+  ],
+  "problem_family_ids": [
+    "aws-infrastructure-synthesis"
+  ],
+  "operations": [
+    "cdk-synthesis"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "ecs-infrastructure"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-trial-unavailable"
+  ],
+  "release_ref": "sha256:66bb9650efc83a820a08b64baa22cb4a9843d59f130b37f5f5385dac5526e3a6"
+}

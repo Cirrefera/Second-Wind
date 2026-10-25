@@ -1,0 +1,55 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0560",
+  "sku": "AWS-0560",
+  "slug": "api-gateway-lambda-dynamodb-stack",
+  "version": 1,
+  "release_ref": "sha256:8cb5012226295ee9a1489560ae8fd5db8700aa8b171fe075d942c1b785217360",
+  "service": "apigateway",
+  "product_kind": "artifact-product",
+  "route_summary": "REST CRUD API with five Lambda handlers, origin-scoped CORS and a retained DynamoDB table.",
+  "supported_boundary": "Node.js 20+ local CDK synthesis only; no AWS API calls or deployment. Hosted private preview is unavailable because current Worker runtime cannot load native Node modules or external npm dependencies.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "apigateway",
+    "api-gateway-lambda-dynamodb-stack"
+  ],
+  "taxonomy_ids": [
+    "aws.apigateway.cdk"
+  ],
+  "problem_family_ids": [
+    "infrastructure.synthesis"
+  ],
+  "operations": [
+    "cdk-synth"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "infrastructure-plan"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [
+    "synthesis-error"
+  ],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs20"
+  ],
+  "required_evidence": [
+    "native-node-synthesis"
+  ],
+  "exclusions": [
+    "aws-api-calls",
+    "aws-deployment",
+    "hosted-preview-unavailable"
+  ]
+}

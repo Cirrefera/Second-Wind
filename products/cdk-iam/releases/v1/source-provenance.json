@@ -1,0 +1,50 @@
+{
+  "sku": "AWS-0642",
+  "slug": "cdk-iam",
+  "version": 1,
+  "current_origin": "original Second Wind wrapper; upstream implementation not included",
+  "upstream_repository": "https://github.com/aws/aws-cdk",
+  "primary_documentation": "https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_iam-readme.html",
+  "upstream_license": "Apache-2.0",
+  "dependency_runtime": "typescript",
+  "preview_contract": {
+    "adapter": "native-dependency-runtime-required",
+    "mode": "unavailable",
+    "execution_language": "typescript",
+    "availability": "runtime-not-installed",
+    "allowed_result_fields": []
+  },
+  "files": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "4d175f1b94c35e3f901a7b5f33a60698401759b072c62cc02a322f1045bc444c",
+    "cdk.json": "17db83338652917d1ec37b5bba1d10b08c45f92d6e83944ff5a776cc741d367e",
+    "configuration.schema.json": "f9d2129711bc9c31c460b635a92694290a919f8171be6068e2727ad3b191b619",
+    "input.schema.json": "f9d2129711bc9c31c460b635a92694290a919f8171be6068e2727ad3b191b619",
+    "package-lock.json": "797273d3763cd5f512b0934ad46c1826bef43b2aa54758020e7fff2403a489d2",
+    "package.json": "cc06a8e9dfc8bb87d7071c5f0b4ed0755008e39ba2fbe6bf92abf9ae376156d0",
+    "preview-contract.json": "8c7ba0687ca35d447f29b1e2ec1417386210b9cedb2dc018f6d985da8e7ac852",
+    "preview-runner.ts": "ce5a951c7025787ea3e6a85f71003fcd49df7ddadb4f4d1a20ebb2a11a52bc39",
+    "preview.ts": "22a45d6bcf7074f18f12ff5edc63ab19e1e8d91830ca4261f6513daffce00883",
+    "source-provenance.json": "426a3250753a330713f5713128518e2b5f861646848d6edf5b7764e3d9a49c97"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "LICENSE",
+        "README.md",
+        "cdk.json",
+        "configuration.schema.json",
+        "input.schema.json",
+        "package-lock.json",
+        "package.json",
+        "preview-contract.json",
+        "preview-runner.ts",
+        "preview.ts",
+        "source-provenance.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "declared package license; not an independent legal certification"
+    }
+  ]
+}

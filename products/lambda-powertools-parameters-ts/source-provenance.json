@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "current_origin": "Original Second Wind integration code; no upstream implementation source is redistributed.",
+  "upstream_repository": "https://github.com/aws-powertools/powertools-lambda-typescript",
+  "source_revision": "0595159ed90c72cc9a004a98923b9778b876726a",
+  "upstream_package_path": "packages/parameters",
+  "npm_package": "@aws-lambda-powertools/parameters",
+  "npm_package_version": "2.36.0",
+  "npm_tarball_integrity": "sha512-345x5em64yHy/7qFWqDa1aY5dESyNhz4xFOjfMcdXS3UIopNt7zSkfpzfszbp3kgLUeLtcYU6akkB9NBbYHRUQ==",
+  "npm_integrity_check": "verified against the exact cached published tarball using SHA-512",
+  "license": "MIT-0",
+  "dependencies": {
+    "@aws-lambda-powertools/parameters": "2.36.0",
+    "@aws-sdk/client-ssm": "3.1154.0",
+    "@aws-sdk/client-secrets-manager": "3.1156.0"
+  },
+  "source_interface_urls": [
+    "https://github.com/aws-powertools/powertools-lambda-typescript/tree/0595159ed90c72cc9a004a98923b9778b876726a/packages/parameters"
+  ],
+  "original_file_hashes": {
+    "src/parameters.mjs": "26365a591d1b41698efaa6a2b34556182d1042bdabd17b8c56d2b6a3cef42402",
+    "README.md": "bc0edaa00cb7e4e592ada19a53b6796516e52e2e4a8f9d3a5464f3f549773e20",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "config.schema.json": "528283ca44adec2c61dee24629200ffa20c6e61089adba06f757c4ee6f1f6d35",
+    "package.json": "1fa09f3a53e0854bc5052eee1fdd7b0e73966317a15fb1aa714846bd79626d7c"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0639",
+  "sku": "AWS-0639",
+  "slug": "cdk-apigateway",
+  "version": 1,
+  "release_ref": "sha256:efddcd9b153f893c57aa7c3ee83d11bf1c2c82a4d6085eeaea34300e813f7780",
+  "service": "apigateway",
+  "product_kind": "artifact-product",
+  "route_summary": "Define a REST API backed by Lambda with an explicit deployment stage.",
+  "supported_boundary": "Define a REST API backed by Lambda with an explicit deployment stage. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-apigateway",
+    "apigateway",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.apigateway"
+  ],
+  "problem_family_ids": [
+    "aws-api-gateway-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "apigateway-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

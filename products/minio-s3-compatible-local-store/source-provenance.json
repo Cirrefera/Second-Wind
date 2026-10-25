@@ -1,0 +1,63 @@
+{
+  "source_snapshot_sha256": "3c5c2b64f8ac3ad2869fd88493e3f8e622560a9715001cb7bb79dc40f6697e7a",
+  "historical_catalog_record": {
+    "sku": "AWS-0679",
+    "slug": "minio-s3-compatible-local-store",
+    "kind": "artifact",
+    "price_usd": 0.5,
+    "status": "draft",
+    "version": 1
+  },
+  "upstream_inspection": {
+    "source_repository": "minio/minio",
+    "source_revision": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+    "structured_pointer": "docs/docker/",
+    "observed_deliverable": "artifact_pointer_without_product_assembly",
+    "pointer_inspection": {
+      "path": "docs/docker",
+      "status": "found",
+      "git_object_sha": "cf85f4754790032641d785312c543df6519dd511",
+      "object_type": "tree",
+      "descendant_file_count": 1,
+      "url": "https://github.com/minio/minio/tree/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/docs/docker"
+    }
+  },
+  "current_origin": "Original Second Wind integration source; upstream interfaces documented, source code not redistributed.",
+  "upstream_repository": "https://github.com/minio/minio",
+  "interface_sources": [
+    "https://min.io/docs/minio/container/index.html",
+    "https://github.com/minio/minio",
+    "https://github.com/minio/minio/blob/master/LICENSE"
+  ],
+  "dependencies": {
+    "image": "minio/minio:RELEASE.2025-04-22T22-12-26Z"
+  },
+  "external_dependency_license": {
+    "name": "MinIO server",
+    "spdx": "AGPL-3.0",
+    "source": "https://github.com/minio/minio/blob/master/LICENSE",
+    "repository_status": "archived 2026-04-25"
+  },
+  "original_file_hashes": {
+    "compose.yaml": "16ceb5ff52ce74446678b681c208608a9599c7a48526c536463c583d99d2ef8a",
+    "minio.env.example": "037a6e3c4b8f6c87a9c2a50990c7171f52e6c1acd4bc90e4be41e63f3dbf49d2",
+    "README.md": "8b3b0f06eb9e65d9eeb27fc21a66363a3240067b3c49100ad3aa241825d13104",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "selection.schema.json": "6c08eee696078846c1ce2f0c93f7eecc2f9fe2b562e1fb1555dca4a591e0be2c",
+    "preview.py": "c6b78940c7546d8cf550e503da1535208c81121bddf0376c8f2cdf2d8311fe58"
+  },
+  "license_mapping": [
+    {
+      "paths": [
+        "compose.yaml",
+        "minio.env.example",
+        "README.md",
+        "LICENSE",
+        "selection.schema.json"
+      ],
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "status": "source-level claim; independent review pending"
+    }
+  ]
+}

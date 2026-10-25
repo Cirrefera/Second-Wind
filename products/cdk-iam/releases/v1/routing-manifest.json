@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0642",
+  "sku": "AWS-0642",
+  "slug": "cdk-iam",
+  "version": 1,
+  "release_ref": "sha256:a5d3c4a406a145c399c75c5e82c79b4879e9038c7f9296e3f7af05bc45f9483c",
+  "service": "iam",
+  "product_kind": "artifact-product",
+  "route_summary": "Define a Lambda-assumable role and a narrow policy statement with explicit resource scoping.",
+  "supported_boundary": "Define a Lambda-assumable role and a narrow policy statement with explicit resource scoping. The package runs locally with the pinned native TypeScript dependency; no AWS deployment or request is performed by preview. The gateway preview runtime does not yet support this dependency family.",
+  "language_policy": "explicit",
+  "aliases": [],
+  "tags": [
+    "cdk-iam",
+    "iam",
+    "typescript"
+  ],
+  "taxonomy_ids": [
+    "aws.iam"
+  ],
+  "problem_family_ids": [
+    "aws-iam-configuration"
+  ],
+  "operations": [
+    "local-preview"
+  ],
+  "environments": [
+    "local-typescript"
+  ],
+  "desired_outcomes": [
+    "iam-configuration"
+  ],
+  "input_kinds": [
+    "configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "typescript"
+  ],
+  "runtimes": [
+    "nodejs24"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "gateway-native-runtime-preview"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "product_id": "AWS-0659",
+  "sku": "AWS-0659",
+  "slug": "cdk-elasticache",
+  "version": 2,
+  "release_ref": "sha256:5d796034ac6a2d1b6f60a52a35ecda09741470f690b24d8797b88d77bfe16e55",
+  "service": "elasticache",
+  "product_kind": "artifact-product",
+  "route_summary": "Encrypted Redis replication group in private subnets with automatic failover.",
+  "supported_boundary": "Encrypted Redis replication group in private subnets with automatic failover. Preview performs native framework validation only. It does not make AWS calls, deploy resources, or return source or templates; hosted Workers preview is unavailable until its runtime supports the required framework dependencies.",
+  "language_policy": "explicit",
+  "aliases": [
+    "cdk-elasticache"
+  ],
+  "tags": [
+    "elasticache",
+    "infrastructure-as-code",
+    "javascript",
+    "bounded-preview"
+  ],
+  "taxonomy_ids": [
+    "aws.elasticache"
+  ],
+  "problem_family_ids": [
+    "infrastructure-as-code"
+  ],
+  "operations": [
+    "synthesize-infrastructure"
+  ],
+  "environments": [
+    "aws-cdk"
+  ],
+  "desired_outcomes": [
+    "cloudformation-template"
+  ],
+  "input_kinds": [
+    "cdk-configuration"
+  ],
+  "failure_signatures": [],
+  "languages": [
+    "javascript"
+  ],
+  "runtimes": [
+    "nodejs22"
+  ],
+  "required_evidence": [],
+  "exclusions": [
+    "aws-deployment",
+    "template-delivery-in-preview",
+    "source-delivery-in-preview"
+  ]
+}
