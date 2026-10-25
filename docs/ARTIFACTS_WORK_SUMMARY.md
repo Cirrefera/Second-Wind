@@ -65,35 +65,59 @@ This initial summary changes no runtime code, dependencies, schema, bindings,
 workflow, or build/deployment connection. It is on a documentation branch so it
 does not trigger the existing main-branch production deployment.
 
-## 2026-10-25 — Build command and fan-out review
+## 2026-10-25 — Documentation review (scope correction)
 
-- Reviewed Workers Builds configuration, monorepo guidance, and the Artifacts
-  integration with Cloudflare and Parallel Search. A build trigger checks out
-  one connected repository; it does not automatically traverse every repository
-  in an Artifacts namespace.
-- Fresh readback: `secondwind` still has zero repositories and the gateway has
-  zero build triggers. No build command or deployment setting was changed.
-- Validated six existing checks locally against source baseline
-  `f99410bb4057251f1764ff37a5f84136cdf4b88d`, with at most three concurrent jobs:
-  Pages/utilities, release-failure checks, gateway tests, isolated Dynamic Worker
-  runtime, gateway build, and Pages build. All six exited successfully.
-- This proves those existing commands can run together locally. It does not
-  prove execution in Workers Builds, funded payments, real AWS operations,
-  every product's behavior, or long-duration production stability.
-- Recommended next build shape: install both locked dependency sets; fan out
-  independent checks with bounded concurrency; collect every result; allow
-  deployment only after every required check succeeds. Use explicit timeouts
-  and report failures, skipped checks, and missing inputs clearly.
-- To avoid omissions, maintain a coverage list of required project inputs and
-  their validators/build steps. Pin exact commits for any additional source
-  repositories and reject unaccounted or unavailable required inputs. Documents
-  and specs need validation/publication steps rather than assumed compilation.
-  This coverage mechanism is proposed, not implemented.
-- Keep one coordinated production deployment after the checks, followed by live
-  acceptance and recorded recovery/rollback evidence. Resolve the existing
-  GitHub/Cloudflare deployment ownership conflict before enabling it.
-- Start with the existing project in one Artifacts source repository. Additional
-  CI Workers, container runners, or repo-per-file splits are not required for
-  the current six checks.
-- Configuration reference:
-  https://developers.cloudflare.com/workers/ci-cd/builds/configuration/
+The owner clarified that “fan out” meant reviewing Cloudflare documentation
+and subpages, not implementing parallel builds. The preceding interpretation
+was incorrect. Six existing checks were run locally and passed during that
+misinterpretation; no build command, build trigger, or production deployment
+was changed. Those results do not require a new build orchestrator.
+
+Five read-only reviews covered all **26 pages in the Artifacts documentation
+index**, all 15 assigned Workers Builds pages, and supporting preview,
+deployment, rollback, Pages, Queue, and Workflow references. Full documentation
+was fetched through Parallel Search and cross-checked against current Cloudflare
+references and the connector schema.
+
+### Findings that determine the build
+
+- Start with one complete source repository in `secondwind`, ordinary Git
+  edits/commits/pushes, native Workers Builds, explicit previews, and one
+  coordinated production release path. This is a recommendation, not an
+  implemented pipeline.
+- The binding reads committed content and manages repositories/tokens, but
+  content writes use Git. Older examples incorrectly deny native file reads
+  or use outdated metadata access shapes. Current API references take priority.
+- Use read-scoped access for reviewers and bounded task forks/branches for
+  implementations. Keep repo-write and deployment credentials out of buyer
+  Code Mode and Dynamic Worker execution.
+- The Artifacts integration currently uses `main` for production and has no
+  automatic configuration PR workflow. Source/configuration must be prepared
+  before connecting.
+- D1/R2/Pipeline resources need explicit preview separation. Service bindings
+  can reach a production Worker. Cron does not invoke preview scheduled
+  handlers, so Second Wind's scheduled outbox path needs separate verification.
+- Worker/Pages deployment and database changes are not one automatic atomic
+  release. Code rollback does not restore storage state. Resolve the existing
+  GitHub auto-deployer before enabling a competing production path.
+- The dashboard documents Artifacts build connections, but the current connector
+  provider enum does not include Artifacts. Use the supported dashboard path
+  or verify newer API instructions; do not invent a provider value.
+- ArtifactFS, Sandbox SDK, and custom @cloudflare/ci infrastructure are optional.
+  The current source checkout is small enough for ordinary Git.
+- Artifacts is paid/open beta. New repositories currently have a 1 GB limit;
+  keep dependency trees, build caches, and large delivery packages out of
+  source history.
+
+The detailed review records sources, documentation inconsistencies, remaining
+uncertainties, and a proposed implementation sequence. This review made no
+application or infrastructure changes. GitHub received only this documentation
+summary.
+
+Primary sources:
+- https://developers.cloudflare.com/artifacts/llms.txt
+- https://developers.cloudflare.com/artifacts/api/workers-binding/
+- https://developers.cloudflare.com/artifacts/concepts/best-practices/
+- https://developers.cloudflare.com/workers/ci-cd/builds/git-integration/artifacts-integration/
+- https://developers.cloudflare.com/workers/previews/resources/
+- https://developers.cloudflare.com/workers/versions-and-deployments/rollbacks/
