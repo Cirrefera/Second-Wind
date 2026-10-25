@@ -64,3 +64,36 @@ Distinguish planned, implemented, deployed, and verified work.
 This initial summary changes no runtime code, dependencies, schema, bindings,
 workflow, or build/deployment connection. It is on a documentation branch so it
 does not trigger the existing main-branch production deployment.
+
+## 2026-10-25 — Build command and fan-out review
+
+- Reviewed Workers Builds configuration, monorepo guidance, and the Artifacts
+  integration with Cloudflare and Parallel Search. A build trigger checks out
+  one connected repository; it does not automatically traverse every repository
+  in an Artifacts namespace.
+- Fresh readback: `secondwind` still has zero repositories and the gateway has
+  zero build triggers. No build command or deployment setting was changed.
+- Validated six existing checks locally against source baseline
+  `f99410bb4057251f1764ff37a5f84136cdf4b88d`, with at most three concurrent jobs:
+  Pages/utilities, release-failure checks, gateway tests, isolated Dynamic Worker
+  runtime, gateway build, and Pages build. All six exited successfully.
+- This proves those existing commands can run together locally. It does not
+  prove execution in Workers Builds, funded payments, real AWS operations,
+  every product's behavior, or long-duration production stability.
+- Recommended next build shape: install both locked dependency sets; fan out
+  independent checks with bounded concurrency; collect every result; allow
+  deployment only after every required check succeeds. Use explicit timeouts
+  and report failures, skipped checks, and missing inputs clearly.
+- To avoid omissions, maintain a coverage list of required project inputs and
+  their validators/build steps. Pin exact commits for any additional source
+  repositories and reject unaccounted or unavailable required inputs. Documents
+  and specs need validation/publication steps rather than assumed compilation.
+  This coverage mechanism is proposed, not implemented.
+- Keep one coordinated production deployment after the checks, followed by live
+  acceptance and recorded recovery/rollback evidence. Resolve the existing
+  GitHub/Cloudflare deployment ownership conflict before enabling it.
+- Start with the existing project in one Artifacts source repository. Additional
+  CI Workers, container runners, or repo-per-file splits are not required for
+  the current six checks.
+- Configuration reference:
+  https://developers.cloudflare.com/workers/ci-cd/builds/configuration/
