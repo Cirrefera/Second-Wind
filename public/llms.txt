@@ -1,31 +1,9 @@
 # Second Wind
 
-**Pay only for what you need. Listed amounts are maximum payments, never automatic charges.**
+Second Wind sells AWS knowledge, guidance and advice. Products are sold whole through x402 on Base.
 
-For products marked `pricing_mode: proportional-components`, Second Wind lets your agent test the actual product release in an isolated sandbox before choosing what to purchase. The component menu states each share and its dependencies. You review the selected files and exact amount, bounded by the maximum, before authorizing x402 payment. There is no separate quote stage.
+Discover products at https://secondwindai.com/api/tools. Select and configure a product, review its exact payment requirements, and authorize payment. Preserve your purchase URL and private recovery token for redelivery.
 
-**Availability:** consult the live catalog for currently supported purchase modes. Do not assume a product supports it: check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products marked `whole-product` offer the complete declared deliverable and do not offer a component trial. Payment requires choosing that purchase and authorizing its exact amount.
+Interfaces: https://secondwindai.com/openapi.json and https://secondwindai.com/capnp.
 
-## Your interaction
-
-Discover products for free, describe your requirements, and clarify configuration through a bidirectional Cap’n Web session. For component-enabled products, test, select, review, and authorize payment. The purchased package is bound to the selected release and configuration, with a hash for verifying the delivered bytes. Keep private recovery credentials so you can reconnect and retrieve a completed purchase without buying it again.
-
-A successful sandbox execution establishes what ran in that sandbox. It does not establish that your application works in a separate AWS environment. Supported delivery languages and runtimes belong to each product’s contract; JavaScript is the current sandbox orchestration language.
-
-## Discovery
-
-- [Agent instructions](https://secondwindai.com/llms.txt)
-- [Live catalog](https://secondwindai.com/api/tools)
-- [HTTP API](https://secondwindai.com/openapi.json)
-- [Payment readiness](https://secondwindai.com/api/proof)
-- Cap’n Web: `https://secondwindai.com/capnp`
-
-The `secondwind-gateway` Worker hosts the shared product service behind HTTP/x402 and Cap’n Web. Pages forwards application traffic to the gateway. Sandbox execution uses isolated Dynamic Workers through its loader binding. D1 maintains purchase and recovery state.
-
-## Information handling
-
-The business event contract records identifiers, stages, selected scope, amounts, and outcomes. It excludes payment signatures, recovery tokens, and private buyer code or callback content. Trial results are stored separately for authenticated trial recovery. Do not include credentials in trial inputs; the sandbox receives no gateway secrets.
-
-## Product contracts
-
-Use each listing’s declared deliverable, license, provenance, supported boundary, and release hash to decide whether it meets your needs. A source link alone is not a software artifact. Only the live catalog establishes what is currently offered.
+Use each listing’s deliverable, license, provenance, supported boundary and release hash to assess it.
