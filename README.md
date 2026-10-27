@@ -4,9 +4,7 @@
 
 Second Wind sells original, useful AWS payloads to autonomous agents. Publicly sourced AWS information and code are selected, combined, structured, and adapted into deliverables for specific tasks. Purchases use the [x402 protocol](https://github.com/x402-foundation/x402) with USDC settlement on Base.
 
-For sandbox-eligible products, a preview costs $0.01 through x402 for each new trial, even if you do not later buy the product. Recovering or retrying the same trial is free. This access fee is separate from product pricing. Product-specific contracts define the preview result and purchase options.
-
-**Availability is product-specific:** check the live [catalog](https://secondwindai.com/api/tools) and its component menu. Products marked `whole-product` offer the complete declared deliverable and do not offer a component trial. Payment requires choosing that purchase and authorizing its exact amount.
+Each product is sold as a complete deliverable. Check the live [catalog](https://secondwindai.com/api/tools) for its price, configuration and purchase method.
 
 ## Your interaction
 
@@ -16,9 +14,7 @@ deterministic product service. Historical model evaluation code/evidence is
 retained; it is not an instruction to enable inference. See
 [the retirement record](docs/CLEF_DEPRECATION_2026-10-25.md).
 
-Discover products for free, describe your requirements, and clarify configuration through a bidirectional Cap’n Web session. Check each catalog entry’s `sandbox_eligible` and `sandbox_available` fields; eligibility is the approved SKU policy, while availability also requires an active compatible release. Generate and retain a `trial_id` and private `trial_token`, and submit the SKU, configuration, selected components, JavaScript code, and `language: "javascript"` to `prepareTrial` over Cap’n Web or `POST /api/trials/access`. HTTP returns a $0.01 x402 challenge; Cap’n Web returns a public acceptance with a payment URL. Authorize using that URL and `X-Recovery-Token` equal to your `trial_token`, then run the same trial with the same identity and inputs. The sandbox runs buyer code with only `codemode.preview()`, `codemode.components()`, and `codemode.configuration()`; product modules and files are private to the trusted preview adapter. A repeated or recovered trial does not incur another fee. The purchased package is bound to its selected release and configuration, with a hash for verifying the delivered bytes. Keep private recovery credentials so you can reconnect and retrieve a completed purchase.
-
-`codemode.preview()` returns only product-approved summary fields; it does not disclose product source, cookbook content, full generated plans, or product logs. Your buyer code controls its own result and logs. JavaScript is the sandbox execution language. A product may deliver Python source, but a JavaScript preview does not execute or validate Python runtime behavior. Preview and product purchase are separate paid actions. A successful sandbox execution does not establish that your application works in a separate AWS environment.
+Discover products for free and choose the deliverable you need. Configure the product as required and authorize the exact x402 payment. Keep the purchase URL and recovery token to retrieve a completed purchase.
 
 ## Interfaces and implementation
 
@@ -28,11 +24,11 @@ Discover products for free, describe your requirements, and clarify configuratio
 - [Payment readiness](https://secondwindai.com/api/proof)
 - Cap’n Web: `https://secondwindai.com/capnp`
 
-The `secondwind-gateway` Worker hosts the shared product service behind HTTP/x402 and Cap’n Web. Pages forwards application traffic to the gateway. Sandbox execution uses isolated Dynamic Workers through its loader binding. D1 maintains purchase and recovery state.
+The `secondwind-gateway` Worker hosts the shared product service behind HTTP/x402 and Cap’n Web. Pages forwards application traffic to the gateway. D1 maintains purchase and recovery state.
 
 ## Information handling
 
-The business event contract records identifiers, stages, selected scope, amounts, and outcomes. It excludes payment signatures, recovery tokens, and private buyer code or callback content. Trial results are stored separately for authenticated trial recovery. Do not include credentials in trial inputs; the sandbox receives no gateway secrets.
+The business event contract records identifiers, stages, selected scope, amounts, and outcomes. It excludes payment signatures, recovery tokens, and private buyer code or callback content.
 
 ## Product contracts
 
